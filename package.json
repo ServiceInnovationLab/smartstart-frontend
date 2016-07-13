@@ -1,0 +1,48 @@
+{
+  "name": "boac-frontend",
+  "version": "1.0.0",
+  "description": "lef boac frontend",
+  "repository": "https://github.com/jenofdoom/react-webpack-es2015-scss-seed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/webpack --optimize-minimize --optimize-dedupe",
+    "start": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline",
+    "lint": "./node_modules/.bin/standard"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "babel",
+    "scss",
+    "es6",
+    "es2015"
+  ],
+  "author": "Catalyst",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "autoprefixer": "~6.3.7",
+    "babel-core": "~6.10.4",
+    "babel-eslint": "~6.1.2",
+    "babel-loader": "~6.2.4",
+    "babel-preset-es2015": "~6.9.0",
+    "babel-preset-react": "~6.11.1",
+    "css-loader": "~0.23.1",
+    "extract-text-webpack-plugin": "~1.0.1",
+    "file-loader": "~0.9.0",
+    "node-sass": "~3.8.0",
+    "postcss-loader": "~0.9.1",
+    "react": "~15.2.1",
+    "react-dom": "~15.2.1",
+    "sass-loader": "~4.0.0",
+    "standard": "~7.1.2",
+    "style-loader": "~0.13.1",
+    "webpack": "~1.13.1",
+    "webpack-dev-server": "~1.14.1",
+    "webpack-merge": "~0.14.0"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}

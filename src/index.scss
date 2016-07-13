@@ -1,0 +1,23 @@
+/*
+ * ONLY BASE PROJECT STYLES SHOULD GO IN HERE
+ * e.g. basic font setup, links etc.
+ *
+ * All other styles should go into individual component subfolders,
+ * and be included via an import statement from the component.
+ *
+ * The variables and mixins files should be included from every .scss file that
+ * has a dependency upon them, as load order beyond this base style
+ * file *cannot be guaranteed*. The variables and mixins files must not
+ * generate any actual CSS, so that this repetition is harmless.
+ *
+ * Utilities like clearfix should be included in this base file.
+ */
+
+// Do NOT include further imports unless the base styles have a direct dep
+@import 'static/variables';
+
+body {
+  background-color: $othertest;
+  font-size: 62.5%;
+  font-family: Courier;
+}
