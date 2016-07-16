@@ -3,7 +3,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
-const validate = require('webpack-validator')
 
 const sassLoaders = [
   'css-loader',
@@ -97,7 +96,7 @@ switch (process.env.npm_lifecycle_event) {
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {NODE_ENV: JSON.stringify('development')}
-        }),
+        })
       ]
     })
 }

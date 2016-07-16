@@ -2,9 +2,9 @@ import 'index.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Greeting from 'components/greeting/greeting'
+import Page from 'layouts/page/page'
 
 ReactDOM.render(
-  <Greeting name='World' />,
+  <Page />,
   document.getElementById('app')
 )

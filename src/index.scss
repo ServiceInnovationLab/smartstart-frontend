@@ -13,11 +13,25 @@
  * Utilities like clearfix should be included in this base file.
  */
 
-// Do NOT include further imports unless the base styles have a direct dep
 @import 'static/variables';
+@import '../node_modules/bulma/bulma'; // see http://bulma.io/documentation/
+// Do NOT include further imports unless the base styles have a direct dep
 
 body {
-  background-color: $othertest;
-  font-size: 62.5%;
-  font-family: Courier;
+  padding: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend .title;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    @extend .is-#{$i};
+  }
 }
