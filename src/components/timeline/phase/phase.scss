@@ -3,4 +3,9 @@
 .phase-number {
   display: inline-block;
   margin-right: 10px;
+  border: 1px solid $border-color;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  width: 2rem;
+  text-align: center;
 }
