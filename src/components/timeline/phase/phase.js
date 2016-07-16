@@ -3,7 +3,7 @@ import './phase.scss'
 import React from 'react'
 import Card from './card/card'
 
-export default React.createClass({
+class Phase extends React.Component {
   render () {
     return (
       <div className='phase'>
@@ -12,4 +12,6 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+export default Phase

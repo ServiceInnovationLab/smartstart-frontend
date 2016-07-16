@@ -3,7 +3,7 @@ import './timeline.scss'
 import React from 'react'
 import Phase from './phase/phase'
 
-export default React.createClass({
+class Timeline extends React.Component {
   render () {
     return (
       <div className='timeline'>
@@ -11,4 +11,6 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+export default Timeline

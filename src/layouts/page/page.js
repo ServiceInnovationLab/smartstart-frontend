@@ -1,7 +1,7 @@
 import React from 'react'
 import Timeline from '../../components/timeline/timeline'
 
-export default React.createClass({
+class Page extends React.Component {
   render () {
     return (
       <div className>
@@ -11,4 +11,6 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+export default Page

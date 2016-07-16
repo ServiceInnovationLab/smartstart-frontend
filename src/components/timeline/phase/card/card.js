@@ -2,7 +2,7 @@ import './card.scss'
 
 import React from 'react'
 
-export default React.createClass({
+class Card extends React.Component {
   render () {
     return (
       <div className='card'>
@@ -12,4 +12,6 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+export default Card
