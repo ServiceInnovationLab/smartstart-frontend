@@ -4,11 +4,14 @@ import React from 'react'
 
 class Card extends React.Component {
   render () {
+    const markup = {
+      __html: this.props.text
+    }
+
     return (
       <div className='card'>
-        <div className='card-content'>
-          <p>card</p>
-        </div>
+        <h3>{this.props.title}</h3>
+        <div className='card-text' dangerouslySetInnerHTML={markup} />
       </div>
     )
   }
