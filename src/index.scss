@@ -13,11 +13,10 @@
  * Utilities like clearfix should be included in this base file.
  */
 
-// Do NOT include further imports unless the base styles have a direct dep
 @import 'static/variables';
+// Do NOT include further imports unless the base styles have a direct dep
 
 body {
-  background-color: $othertest;
-  font-size: 62.5%;
-  font-family: Courier;
+  font-size:62.5%;
+  padding: 10px;
 }
