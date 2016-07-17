@@ -1,5 +1,6 @@
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
@@ -20,8 +21,7 @@ const common = {
   context: PATHS.src,
 
   entry: {
-    javascript: './index.js',
-    html: './index.html'
+    javascript: './index.js'
   },
 
   output: {
@@ -37,10 +37,6 @@ const common = {
         loaders: ['babel-loader']
       },
       {
-        test: /\.html$/,
-        loader: 'file?name=[name].[ext]'
-      },
-      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
       }
@@ -48,7 +44,11 @@ const common = {
   },
 
   plugins: [
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('app.css'),
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+      hash: true
+    })
   ],
 
   postcss: [
