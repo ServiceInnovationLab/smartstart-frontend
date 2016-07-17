@@ -2,7 +2,7 @@
   "name": "boac-frontend",
   "version": "1.0.0",
   "description": "lef boac frontend",
-  "repository": "https://github.com/jenofdoom/react-webpack-es2015-scss-seed",
+  "repository": "https://gitlab.wgtn.cat-it.co.nz/lef/boac-frontend.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
