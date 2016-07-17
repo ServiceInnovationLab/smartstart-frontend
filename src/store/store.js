@@ -36,6 +36,18 @@ const CardData = [
         order: 1
       }
     ]
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Phase 3',
+  //   cards: [
+  //     {
+  //       id: 5,
+  //       title: 'Get a car seat ready',
+  //       text: '<p>Before you can take your baby home from the hospital, you need to install the correct car seat.</p><h4>Choosing the right car seat</h4><p>It is recommended that your baby use a rear-facing car seat until they are 2 years old, or until they have outgrown their car seat. Make sure you have your car seat ready for when you leave the hospital after birth and prepare yourself with some important factors below.</p><ul><li>Rent or buy a baby car seat before your baby is born, as baby needs to be protected on every journey.</li><li>Try the car seat in your vehicle before you buy or hire it and follow the instruction manual to install it. The car seat must be fitted correctly for safety.</li><li>Always put your baby’s car seat rear-facing in the back seat with baby looking out the back window.</li><li>Never put your baby’s car seat in the front of a vehicle if it has an airbag. Airbags inflate with enough force to seriously injure a baby.</li><li>Use a car seat every time your baby is in a vehicle. Every journey on the road is a risk.</li><li>Don’t leave your baby asleep in their car seat if you are not in the vehicle. Some babies have breathing difficulties if their head falls forward.</li><li>Keep your baby in a rear-facing seat until they are around 2 years old, or have outgrown their car seat.</li><li>Check the label on the seat and move to another rear facing car seat if necessary, to keep your baby rear-facing longer.</li><li>A car seat must be appropriate for the weight and size of the baby.</li></ul>',
+  //       order: 0
+  //     }
+  //   ]
   }
 ]
 
