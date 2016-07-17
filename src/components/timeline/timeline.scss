@@ -1,6 +1,7 @@
 @import '../../static/variables';
 
 .timeline {
-  border-left: 1px solid $border-color;
-  padding-left: 20px;
+  position: relative;
+  margin: 30px;
+  border-left: $timeline-border-width solid $border-color;
 }

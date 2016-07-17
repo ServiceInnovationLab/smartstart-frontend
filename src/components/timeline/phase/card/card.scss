@@ -1,5 +1,9 @@
 @import '../../../../static/variables';
 
 .card {
-  border-bottom: 1px dashed $border-color;
+  border-bottom: $timeline-border-width dashed $border-color;
+
+  .phase > h2 + & {
+    border-top: $timeline-border-width dashed $border-color;
+  }
 }

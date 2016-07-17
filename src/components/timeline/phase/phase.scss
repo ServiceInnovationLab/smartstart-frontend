@@ -1,11 +1,20 @@
 @import '../../../static/variables';
 
+.phase {
+  padding-left: 30px;
+}
+
 .phase-number {
-  display: inline-block;
-  margin-right: 10px;
-  border: 1px solid $border-color;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  width: 2rem;
+  $phase-number-size: 3rem;
+  font-size: $phase-number-size - 1;
+  width: $phase-number-size;
+  height: $phase-number-size;
   text-align: center;
+  border: $timeline-border-width solid $border-color;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-block;
+  background-color: $background-color;
+  position: absolute;
+  left: 0 - ($phase-number-size / 2);
 }
