@@ -1,7 +1,7 @@
 import './phase.scss'
 
 import React from 'react'
-import Card from './card/card'
+import Card from '../../card/card'
 
 class Phase extends React.Component {
   render () {
@@ -13,7 +13,7 @@ class Phase extends React.Component {
         </h2>
 
         {this.props.cards.map(function (card) {
-          return <Card key={card.id} title={card.title} text={card.text} />
+          return <Card key={card.id} title={card.label} elements={card.elements} />
         })}
       </div>
     )
