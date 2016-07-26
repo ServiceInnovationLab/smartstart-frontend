@@ -8,9 +8,9 @@ class Timeline extends React.Component {
   render () {
     return (
       <div className='timeline'>
-        {CardData.map(function (phase, index) {
-          return <Phase key={phase.id} title={phase.title} cards={phase.cards} number={index} />
-        })}
+        {CardData.map((phase, index) =>
+          <Phase key={phase.id} title={phase.label} cards={phase.elements} number={index} />
+        )}
       </div>
     )
   }
