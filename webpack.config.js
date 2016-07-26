@@ -1,4 +1,5 @@
 const autoprefixer = require('autoprefixer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
@@ -44,6 +45,10 @@ const common = {
   },
 
   plugins: [
+    new CopyWebpackPlugin(
+      [{ from: PATHS.src + '/assets', to: 'assets' }],
+      { ignore: ['.gitkeep'] }
+    ),
     new ExtractTextPlugin('app.css'),
     new HtmlWebpackPlugin({
       template: 'index.html',
