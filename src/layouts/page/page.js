@@ -1,11 +1,12 @@
 import React from 'react'
-import Timeline from '../../components/timeline/timeline'
+import Header from 'layouts/header/header'
+import Timeline from 'components/timeline/timeline'
 
 class Page extends React.Component {
   render () {
     return (
       <div className>
-        {/* header component will go here */}
+        <Header />
         <Timeline />
         {/* footer component will go here */}
       </div>

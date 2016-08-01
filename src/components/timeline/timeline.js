@@ -1,8 +1,8 @@
 import './timeline.scss'
 
 import React from 'react'
-import Phase from './phase/phase'
-import CardData from '../../store/store'
+import Phase from 'components/timeline/phase/phase'
+import CardData from 'store/store' // TODO this needs to come from the store
 
 class Timeline extends React.Component {
   render () {

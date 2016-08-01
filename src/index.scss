@@ -52,6 +52,19 @@ video {
 }
 
 
+// FORM ELEMENTS
+
+button,
+.button {
+  cursor: pointer;
+  border: 1px solid $border-color;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: $text-color;
+}
+
+
 // HELPER CLASSES from HTML5 Boilerplate
 
 // Hide visually and from screen readers
