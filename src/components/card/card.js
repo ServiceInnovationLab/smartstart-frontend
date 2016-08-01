@@ -1,7 +1,7 @@
 import './card.scss'
 
 import React from 'react'
-import Richtext from '../richtext/richtext'
+import Richtext from 'components/richtext/richtext'
 
 class Card extends React.Component {
   render () {
