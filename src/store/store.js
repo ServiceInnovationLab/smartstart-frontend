@@ -8,15 +8,40 @@ const CardData = [
     elements: [
       {
         id: 2,
-        label: 'Find a lead maternity carer (LMC)',
+        label: 'Choose a lead maternity carer',
         tags: [],
         type: 'card',
-        elements: [{
-          id: 3,
-          tags: [],
-          type: 'richtext',
-          text: "<p>As soon as you know you're pregnant you need to choose an LMC. Most LMCs are registered midwives, but they can also be doctors who provide maternity care. Many people qualify for free or subsidised maternity care.</p><h4>Choosing an LMC</h4><p>You can usually choose to have either a midwife or an obstetrician (a doctor who specialises in pregnancy and childbirth) as your LMC. Midwife services are usually free, but you'll have to pay for a specialist doctor.</p>"
-        }]
+        elements: [
+          {
+            id: 3,
+            tags: [],
+            type: 'richtext',
+            label: 'This label is ignored',
+            text: "<p>As soon as you know you're pregnant, you need to choose a lead maternity carer (LMC). Most LMCs are registered midwives, but they can also be obstetricians — doctors who specialise in pregnancy and childbirth — or family doctors who provide maternity care.</p><p>If you're eligible, you'll get free or subsidised maternity care unless you to choose a specialist as your LMC.</p>"
+          },
+          {
+            id: 14,
+            tags: ['boac_presentation::auxilary'],
+            type: 'richtext',
+            label: 'Who can get free or subsidised maternity care',
+            text: "<p>You'll get access to free or subsidised maternity care if you, or your partner by de facto relationship, marriage or civil union, is:</p><ul><li>a New Zealand citizen or permanent resident</li><li>an Australian citizen or permanent resident who's lived, or intends to live, in New Zealand for 2 years or more</li><li>under 17 and your parent or guardian is eligible</li><li>a work visa holder who's eligible to be here for 2 years or more</li><li>an interim visa holder who was eligible just before you got the interim visa</li><li>a New Zealand Aid Programme student</li><li>a commonwealth scholarship student</li><li>a refugee or protected person, or in the process of applying or appealing for refugee or protection status</li><li>a victim of people trafficking.</li></ul>"
+          },
+          {
+            id: 15,
+            tags: ['boac_presentation::auxilary'],
+            type: 'richtext',
+            label: 'What an LMC does',
+            text: '<p>Your LMC will:</p><ul><li>provide care throughout your pregnancy</li><li>provide information about choices you can make, eg where to give birth</li><li>be with you when you give birth</li><li>provide care to you and your baby for 4-6 weeks after the birth</li><li>refer you or your baby to a specialist, if needed.</li></ul>'
+          },
+          {
+            id: 16,
+            tags: [],
+            type: 'url',
+            label: 'This label is ignored',
+            url: 'http://www.findyourmidwife.co.nz/',
+            linkLabel: 'Find your midwife'
+          }
+        ]
       },
       {
         id: 4,
