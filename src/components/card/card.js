@@ -7,9 +7,9 @@ import Url from 'components/url/url'
 class Card extends React.Component {
   elementType (element) {
     if (element.type === 'richtext') {
-      return (<Richtext key={element.id} text={element.content} />)
+      return (<Richtext key={element.id} id={element.id} text={element.content} tags={element.tags} title={element.label} />)
     } else if (element.type === 'url') {
-      return (<Url key={element.id} url={element.externalURL} linkLabel={element.linkText} label={element.label} />)
+      return (<Url key={element.id} url={element.externalURL} linkLabel={element.linkText} label={element.label} tags={element.tags} />)
     }
   }
 
