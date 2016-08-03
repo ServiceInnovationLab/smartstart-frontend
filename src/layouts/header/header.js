@@ -16,10 +16,6 @@ class Header extends React.Component {
     }
   }
 
-  componentDidMount () {
-    // TODO use whatwg-fetch to get api
-  }
-
   render () {
     let loggedIn = ''
     let loggedOut = ''

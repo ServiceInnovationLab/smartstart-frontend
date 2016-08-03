@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
+const yargs = require('yargs').argv
 
 const sassLoaders = [
   'css-loader',
@@ -15,6 +16,23 @@ const sassLoaders = [
 const PATHS = {
   src: path.join(__dirname, './src'),
   dist: path.join(__dirname, './dist')
+}
+
+const apiPaths = {
+  localTest: '/assets/test-data.json',
+  externalTest: 'https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all',
+  externalProd: null
+}
+
+// determine which api endpoint to use
+var API_PATH = apiPaths.externalTest // TODO update default endpoint to prod when available
+
+if (yargs.endpoint === 'local') {
+  API_PATH = apiPaths.localTest
+} else if (yargs.endpoint === 'test') {
+  API_PATH = apiPaths.externalTest
+} else if (yargs.endpoint === 'prod') {
+  API_PATH = apiPaths.externalProd
 }
 
 // config that is shared between all types of build
@@ -83,7 +101,8 @@ switch (process.env.npm_lifecycle_event) {
 
       plugins: [
         new webpack.DefinePlugin({
-          'process.env': {NODE_ENV: JSON.stringify('production')}
+          'process.env': {NODE_ENV: JSON.stringify('production')},
+          API_ENDPOINT: JSON.stringify(API_PATH)
         }),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
@@ -100,7 +119,8 @@ switch (process.env.npm_lifecycle_event) {
 
       plugins: [
         new webpack.DefinePlugin({
-          'process.env': {NODE_ENV: JSON.stringify('development')}
+          'process.env': {NODE_ENV: JSON.stringify('development')},
+          API_ENDPOINT: JSON.stringify(API_PATH)
         })
       ]
     })

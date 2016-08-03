@@ -12,7 +12,7 @@ class Phase extends React.Component {
           {this.props.title}
         </h2>
 
-        {this.props.cards.map(function (card) {
+        {this.props.cards.map(function (card) { // TODO what if there aren't any?
           return <Card key={card.id} title={card.label} elements={card.elements} />
         })}
       </div>
