@@ -1,1 +1,32 @@
 @import 'variables';
+
+.richtext {
+  .expandable-title {
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      content: '\232A';
+      margin-left: 15px;
+    }
+  }
+
+  &.expandable .content {
+    display: none;
+  }
+
+  &.is-expanded {
+    .expandable-title {
+      &::after {
+        transform: rotate(90deg);
+      }
+    }
+
+    .content {
+      display: block;
+    }
+  }
+}

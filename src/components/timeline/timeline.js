@@ -1,14 +1,44 @@
+/* globals fetch, API_ENDPOINT */
 import './timeline.scss'
 
 import React from 'react'
 import Phase from 'components/timeline/phase/phase'
-import CardData from 'store/store' // TODO this needs to come from the store
+import 'whatwg-fetch'
 
 class Timeline extends React.Component {
+  constructor (props) {
+    super(props)
+
+    // TODO this state should probably come in as props from further up the tree
+    this.state = {
+      CardData: { phases: [] }
+    }
+  }
+
+  componentWillMount () {
+    let component = this
+
+    fetch(API_ENDPOINT)
+    .then(function (response) {
+      // TODO handle 404 or 500 see https://github.com/github/fetch#handling-http-error-statuses
+      return response.json()
+    }).then(function (json) {
+      for (var phase of json.phases) {
+        if (!phase.elements) {
+          phase.elements = [] // TODO find a better way of handling missing required properties
+        }
+      }
+
+      component.setState({CardData: json})
+    }).catch(function (error) {
+      console.log('parsing failed', error)
+    })
+  }
+
   render () {
     return (
       <div className='timeline'>
-        {CardData.map((phase, index) =>
+        {this.state.CardData.phases.map((phase, index) => // TODO what if there aren't any?
           <Phase key={phase.id} title={phase.label} cards={phase.elements} number={index} />
         )}
       </div>

@@ -1,0 +1,142 @@
+{
+	"phases": [
+		{
+			"id": 10,
+			"type": "card",
+			"label": "first phase",
+			"elements": [
+				{
+					"id": 12,
+					"type": "card",
+					"label": "Choose a lead maternity carer",
+					"tags": ["topic::health"],
+					"elements": [
+	          {
+	            "id": 24,
+	            "tags": [],
+	            "type": "richtext",
+	            "label": "This label is ignored",
+	            "text": "<p>As soon as you know you're pregnant, you need to choose a lead maternity carer (LMC). Most LMCs are registered midwives, but they can also be obstetricians — doctors who specialise in pregnancy and childbirth — or family doctors who provide maternity care.</p><p>If you're eligible, you'll get free or subsidised maternity care unless you to choose a specialist as your LMC.</p>"
+	          },
+	          {
+	            "id": 25,
+	            "tags": ["boac_presentation::auxilary"],
+	            "type": "richtext",
+	            "label": "Who can get free or subsidised maternity care",
+	            "text": "<p>You'll get access to free or subsidised maternity care if you, or your partner by de facto relationship, marriage or civil union, is:</p><ul><li>a New Zealand citizen or permanent resident</li><li>an Australian citizen or permanent resident who's lived, or intends to live, in New Zealand for 2 years or more</li><li>under 17 and your parent or guardian is eligible</li><li>a work visa holder who's eligible to be here for 2 years or more</li><li>an interim visa holder who was eligible just before you got the interim visa</li><li>a New Zealand Aid Programme student</li><li>a commonwealth scholarship student</li><li>a refugee or protected person, or in the process of applying or appealing for refugee or protection status</li><li>a victim of people trafficking.</li></ul>"
+	          },
+	          {
+	            "id": 26,
+	            "tags": ["boac_presentation::auxilary"],
+	            "type": "richtext",
+	            "label": "What an LMC does",
+	            "text": "<p>Your LMC will:</p><ul><li>provide care throughout your pregnancy</li><li>provide information about choices you can make, eg where to give birth</li><li>be with you when you give birth</li><li>provide care to you and your baby for 4-6 weeks after the birth</li><li>refer you or your baby to a specialist, if needed.</li></ul>"
+	          },
+	          {
+	            "id": 27,
+	            "tags": [],
+	            "type": "url",
+	            "label": "This label is ignored",
+	            "url": "http://www.findyourmidwife.co.nz/",
+	            "linkLabel": "Find your midwife"
+	          }
+	        ]
+				},
+				{
+					"id": 13,
+					"type": "card",
+					"label": "Another interesting topic involving money",
+					"tags": ["topic::finance"],
+					"elements": [
+						{
+							"id": 20,
+							"type": "richtext",
+							"text": "<p>Some kind of summary that has <b>HTML</b>.</p>",
+							"tags": ["boac_presentation::summary"]
+						},
+						{
+							"id": 21,
+							"type": "url",
+							"url": "http://example.com",
+							"linkLabel": "Find advice",
+							"tags": ["boac_presentation::link-button"]
+						},
+						{
+							"id": 22,
+							"type": "richtext",
+							"label": "Have you found advice?",
+							"text": "This is a task. Should only the label be used?",
+							"tags": ["boac_presentation::task"]
+						},
+						{
+							"id": 23,
+							"type": "richtext",
+							"label": "Having troubles?",
+							"text": "<p>Here is some helpful text with a <a href=\"http://test.com\">link</a></p>",
+							"tags": ["boac_presentation::auxiliary"]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 11,
+			"type": "card",
+			"label": "second phase",
+			"elements": [
+				{
+					"id": 28,
+					"type": "card",
+					"label": "Another card",
+					"tags": ["topic::finance"],
+					"elements": [ {
+						"id": 29,
+						"type": "richtext",
+						"text": "<p>This is the summary on the card.</p>",
+						"tags": ["boac_presentation::summary"]
+					} ]
+				}
+			]
+		}
+	],
+	"tagGroups": [
+		{
+			"id": 1,
+			"title": "Card presentation",
+			"code": "boac_presentation",
+			"tags": [
+				{
+					"title": "Summary",
+					"code": "summary"
+				},
+				{
+					"title": "Auxiliary (e.g. accordion)",
+					"code": "auxiliary"
+				},
+				{
+					"title": "Task",
+					"code": "task"
+				},
+				{
+					"title": "Link button",
+					"code": "link-button"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"title": "Topics",
+			"code": "topic",
+			"tags": [
+				{
+					"title": "Health",
+					"code": "health"
+				},
+				{
+					"title": "Finance",
+					"code": "finance"
+				}
+			]
+		}
+	]
+}
