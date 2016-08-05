@@ -19,10 +19,11 @@ class Timeline extends React.Component {
     let component = this
 
     fetch(API_ENDPOINT)
-    .then(function (response) {
+    .then(response => {
       // TODO handle 404 or 500 see https://github.com/github/fetch#handling-http-error-statuses
       return response.json()
-    }).then(function (json) {
+    })
+    .then(json => {
       for (var phase of json.phases) {
         if (!phase.elements) {
           phase.elements = [] // TODO find a better way of handling missing required properties
@@ -30,7 +31,8 @@ class Timeline extends React.Component {
       }
 
       component.setState({CardData: json})
-    }).catch(function (error) {
+    })
+    .catch(error => {
       console.log('parsing failed', error)
     })
   }
