@@ -15,8 +15,8 @@ class Card extends React.Component {
 
   render () {
     return (
-      <div className='card'>
-        <h3>{this.props.title}</h3>
+      <div className='card' data-test='card'>
+        <h3 data-test='cardTitle'>{this.props.title}</h3>
         {this.props.elements.map(element =>
           this.elementType(element)
         )}

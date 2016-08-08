@@ -6,8 +6,8 @@ import Card from 'components/card/card'
 class Phase extends React.Component {
   render () {
     return (
-      <div className='phase'>
-        <h2>
+      <div className='phase' data-test='phase'>
+        <h2 data-test='phaseTitle'>
           <span className='phase-number'>{this.props.number + 1}</span>
           {this.props.title}
         </h2>

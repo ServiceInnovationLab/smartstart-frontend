@@ -33,7 +33,7 @@ class Timeline extends React.Component {
 
   render () {
     return (
-      <div className='timeline'>
+      <div className='timeline' data-test='timeline'>
         {this.state.CardData.phases.map((phase, index) => {
           if (!phase.elements) { phase.elements = [] } // a phase can be empty
           return <Phase key={phase.id} title={phase.label} cards={phase.elements} number={index} />
