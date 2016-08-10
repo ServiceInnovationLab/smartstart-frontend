@@ -23,4 +23,27 @@ syntax correctness by running:
 ## Creating and deploying a build
 
 You must have a clean git tree in order to make the build. To create the build,
-run `npm run build`. The build will be created in the `dist/` folder.
+run `npm run build`. The build will be created in the `dist/` folder. A
+`VERSION.txt` file will also be added, with the short hash of the most recent
+git commit.
+
+## Using local test data
+
+Alternatively, you can run a variant of these commands to use a local data
+fixture (as opposed to whatever the default API endpoint is).
+
+For the devserver:
+
+`npm start:local`
+
+For the build:
+
+`npm run build:local`
+
+## Running with the backend too
+
+You must use a cloud evenrinment to enable login and personalisation
+functionality. Follow the instructions in the `README.md` in the [ops
+repository](https://gitlab.catalyst.net.nz/lef/ops). Once ssh'd in to the
+frontend server you can do `cd project` and then if you would like to run the
+development server rather than the built version, run `run-dev`.

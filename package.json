@@ -6,9 +6,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./build.sh",
+    "build": "node build.js",
+    "build:local": "node build.js --endpoint local",
+    "build:test": "node build.js --endpoint test",
+    "build:prod": "node build.js --endpoint prod",
     "start": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline",
     "start:local": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --endpoint local",
+    "start:test": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --endpoint test",
+    "start:prod": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --endpoint prod",
     "lint": "./node_modules/.bin/standard"
   },
   "keywords": [
@@ -34,6 +39,7 @@
     "css-loader": "~0.23.1",
     "extract-text-webpack-plugin": "~1.0.1",
     "html-webpack-plugin": "~2.22.0",
+    "is-git-clean": "~1.0.0",
     "node-sass": "~3.8.0",
     "postcss-loader": "~0.9.1",
     "react": "~15.2.1",

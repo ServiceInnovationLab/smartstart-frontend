@@ -89,8 +89,12 @@ const common = {
 
 // build config from common plus custom config according to event trigger
 var config
+var runCommand = process.env.npm_lifecycle_event
 
-switch (process.env.npm_lifecycle_event) {
+// only use the run script invocation command up to the colon delimiter
+runCommand = runCommand.substr(0, runCommand.indexOf(':'))
+
+switch (runCommand) {
   case 'build':
     config = merge(common, {
       devtool: 'cheap-module-source-map',
