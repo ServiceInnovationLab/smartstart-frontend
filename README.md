@@ -42,7 +42,7 @@ For the build:
 
 ## Running with the backend too
 
-You must use a cloud evenrinment to enable login and personalisation
+You must use a cloud environment to enable login and personalisation
 functionality. Follow the instructions in the `README.md` in the [ops
 repository](https://gitlab.catalyst.net.nz/lef/ops). Once ssh'd in to the
 frontend server you can do `cd project` and then if you would like to run the
