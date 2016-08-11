@@ -34,7 +34,7 @@ fixture (as opposed to whatever the default API endpoint is).
 
 For the devserver:
 
-`npm start:local`
+`npm run start:local`
 
 For the build:
 
