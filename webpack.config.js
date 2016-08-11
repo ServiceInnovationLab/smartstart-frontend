@@ -92,7 +92,9 @@ var config
 var runCommand = process.env.npm_lifecycle_event
 
 // only use the run script invocation command up to the colon delimiter
-runCommand = runCommand.substr(0, runCommand.indexOf(':'))
+if (runCommand.indexOf(':') > -1) {
+  runCommand = runCommand.substr(0, runCommand.indexOf(':'))
+}
 
 switch (runCommand) {
   case 'build':
