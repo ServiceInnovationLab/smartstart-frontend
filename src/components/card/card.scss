@@ -1,9 +1,59 @@
 @import 'variables';
 
 .card {
-  border-bottom: $timeline-border-width dashed $border-color;
+  background-color: $card-background-color;
+  padding: $card-padding;
+  margin-bottom: 60px;
+  position: relative;
+  min-height: 80px;
 
-  .phase > h2 + & {
-    border-top: $timeline-border-width dashed $border-color;
+  @media #{$desktop-and-above} {
+    padding: $card-padding-desktop;
+    margin-bottom: 84px;
+  }
+
+  &::before {
+    content: "";
+    border-width: $card-arrow $card-arrow $card-arrow 0;
+    border-color: transparent $card-background-color transparent transparent;
+    border-style: solid;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 30px;
+    left: -$card-arrow;
+
+    @media #{$desktop-and-above} {
+      border-width: $card-arrow-desktop $card-arrow-desktop $card-arrow-desktop 0;
+      top: 40px;
+      left: -$card-arrow-desktop;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 60px;
+    background-color: $card-background-color;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    position: absolute;
+    left: 0;
+    bottom: -30px;
+    z-index: -1;
+
+    @media #{$desktop-and-above} {
+      height: 96px;
+      bottom: -48px;
+    }
+  }
+
+  h3:first-of-type {
+    margin-top: 0;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
   }
 }

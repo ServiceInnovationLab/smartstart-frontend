@@ -1,5 +1,39 @@
-$border-color: #666666;
-$background-color: #FFFFFF;
-$text-color:  #222222;
+// responsive breakpoints
+$tablet-and-above:     'only screen and (min-width: 768px)';
+$tablet-only:          'only screen and (min-width: 768px and max-width: 991px)';
+$desktop-and-above:    'only screen and (min-width: 992px)';
 
-$timeline-border-width: 2px;
+// brand colors
+$realme-dark-blue:     #3e4d5d;
+
+// base colors
+$background-color:     #ffffff;
+$text-color:           #4f4b46;
+$link-color:           #285a9b;
+$link-color-hover:     $realme-dark-blue;
+
+$border-color: #d2d2d2;
+
+// timeline
+$timeline-border-width:  2px;
+
+// phase
+$phase-background-color:#c1e0dd;
+
+// card
+$card-background-color: #eeeded;
+$card-padding:          15px;
+$card-padding-desktop:  30px;
+$card-arrow:            22px;
+$card-arrow-desktop:    30px;
+
+$card-accordion-color:      #dcdcdc;
+$card-accordion-open-color: $link-color;
+
+// icons
+$icon-accordian-close:  '\e900';
+$icon-accordian-open:   '\e901';
+$icon-external-link:    '\e902';
+$icon-personalise:      '\e903';
+$icon-theme-finance:    '\e904';
+$icon-theme-health:     '\e905';

@@ -1,15 +1,63 @@
 @import 'variables';
 
 .richtext {
+
+  &.expandable {
+    margin-left: 20px;
+  }
+
   .expandable-title {
     cursor: pointer;
     position: relative;
+    background-color: $card-accordion-color;
+    color: $link-color;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    padding: 8px 60px 8px 5px;
+    min-height: 60px;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: #fff;
+      background-color: $card-accordion-open-color;
+
+      &::before {
+        background-color: $card-accordion-open-color;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: 100%;
+      background-color: $card-accordion-color;
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+      left: -20px;
+      bottom: 0;
+      z-index: -1;
+    }
 
     &::after {
+      font-family: 'icomoon' !important;
+      content: $icon-accordian-open;
+      font-size: 20px;
+      line-height: 20px;
       display: inline-block;
       position: absolute;
-      content: '\232A';
-      margin-left: 15px;
+      right: 15px;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      margin-top: -10px; // half of icon height
+      transition: transform 0.2s ease;
     }
   }
 
@@ -19,13 +67,35 @@
 
   &.is-expanded {
     .expandable-title {
+      color: #fff;
+      background-color: $card-accordion-open-color;
+      margin-bottom: 0;
+
+      &::before {
+        background-color: $card-accordion-open-color;
+      }
+
       &::after {
-        transform: rotate(90deg);
+        transform: rotate(45deg);
+        transition: transform 0.2s ease;
       }
     }
 
     .content {
       display: block;
+      background-color: $card-accordion-color;
+      padding: $card-padding;
+
+      *:first-child {
+        margin-top: 0;
+      }
+      *:last-child {
+        margin-bottom: 0;
+      }
+
+      @media #{$desktop-and-above} {
+        padding: $card-padding-desktop;
+      }
     }
   }
 }
