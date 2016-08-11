@@ -1,6 +1,8 @@
 const autoprefixer = require('autoprefixer')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+require('babel-polyfill') // for Object.assign and Promise on IE11
+require('whatwg-fetch') // fetch polyfill for IE11
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
 const path = require('path')
@@ -40,7 +42,7 @@ const common = {
   context: PATHS.src,
 
   entry: {
-    javascript: './index.js'
+    javascript: ['whatwg-fetch', 'babel-polyfill', './index.js']
   },
 
   output: {

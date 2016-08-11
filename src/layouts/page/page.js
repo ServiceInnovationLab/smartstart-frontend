@@ -5,17 +5,25 @@ import Spinner from 'components/spinner/spinner'
 
 class Page extends React.Component {
   render () {
-    const { loading, phases } = this.props
+    const { phases } = this.props
+
+    let isLoading = ''
+    let isLoaded = 'hidden'
+
+    if (phases.length > 0) {
+      isLoading = 'hidden'
+      isLoaded = ''
+    }
 
     return (
       <div>
         <Header />
-        {loading &&
+        <div className={isLoading}>
           <Spinner />
-        }
-        {phases.length > 0 &&
+        </div>
+        <div className={isLoaded}>
           <Timeline phases={phases} />
-        }
+        </div>
         {/* footer component will go here */}
       </div>
     )
