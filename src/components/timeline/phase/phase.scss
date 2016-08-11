@@ -1,7 +1,58 @@
 @import 'variables';
 
 .phase {
-  padding-left: 30px;
+  margin-left: $card-arrow;
+
+  border-top: 204px solid $phase-background-color; // TODO
+
+  @media #{$desktop-and-above} {
+    padding-left: $card-arrow-desktop;
+    border-top-width: 340px; // TODO
+  }
+
+  > h2 {
+    position: relative;
+    text-align: center;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+    }
+    &::before {
+      background-color: #fff;
+      box-shadow: 0 0 18px 0 rgba(0,0,0,0.2);
+      width: 174px;
+      height: 174px;
+      margin-left: -87px; // half of width
+      top: -204px;
+
+      @media #{$desktop-and-above} {
+        width: 290px;
+        height: 290px;
+        margin-left: -145px; // half of width
+        top: -340px;
+      }
+    }
+    &::after {
+      background-color: red;
+      opacity: 0.2;
+      width: 204px;
+      height: 204px;
+      margin-left: -102px; // half of width
+      top: -219px;
+
+      @media #{$desktop-and-above} {
+        width: 340px;
+        height: 340px;
+        margin-left: -170px; // half of width
+        top: -365px;
+      }
+    }
+  }
 }
 
 .phase-number {
