@@ -30,11 +30,16 @@ class Header extends React.Component {
 
     return (
       <header className='page-header'>
-        <div className={loggedOut}>
-          <LoginButton />
-        </div>
-        <div className={loggedIn}>
-          Login was successful. <LogoutButton />
+        <div className='page-header-inner'>
+          <h1>
+            <a href="/">Bundle</a>
+          </h1>
+          <div className={loggedOut}>
+            <LoginButton />
+          </div>
+          <div className={loggedIn}>
+            Login was successful. <LogoutButton />
+          </div>
         </div>
       </header>
     )

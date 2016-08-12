@@ -1,6 +1,7 @@
 @import 'variables';
 
 .timeline {
+  clear: both;
   position: relative;
 
   &::before {
