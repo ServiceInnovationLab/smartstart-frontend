@@ -2,6 +2,19 @@
 
 .timeline {
   position: relative;
-  margin: 30px;
-  border-left: $timeline-border-width solid $border-color;
+
+  &::before {
+    content: "";
+    display: block;
+    width: $timeline-border-width;
+    height: 100%;
+    background-color: $border-color;
+    position: absolute;
+    left: 41px;
+
+    @media #{$desktop-and-above} {
+      left: 50%;
+      margin-left: -407px;
+    }
+  }
 }

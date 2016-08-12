@@ -6,10 +6,15 @@
   margin-bottom: 60px;
   position: relative;
   min-height: 80px;
+  margin-left: $timeline-spacing;
 
   @media #{$desktop-and-above} {
     padding: $card-padding-desktop;
     margin-bottom: 84px;
+
+    max-width: $phase-content-width-desktop;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &::before {
