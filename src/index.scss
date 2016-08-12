@@ -32,7 +32,16 @@
 @include font-face('fira-sans', 'fira-sans-italic', normal, italic);
 @include font-face('fira-sans', 'fira-sans-500', 500);
 @include font-face('fira-sans', 'fira-sans-700', 700);
-@include font-face('icomoon', 'icomoon');
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('/assets/fonts/icomoon.eot');
+    src:url('/assets/fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/icomoon.woff') format('woff'),
+        url('/assets/fonts/icomoon.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
