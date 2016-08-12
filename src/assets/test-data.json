@@ -16,7 +16,7 @@
               "tags": [],
               "type": "richtext",
               "label": "This label is ignored",
-              "content": "<p>As soon as you know you're pregnant, you need to choose a lead maternity carer (LMC). Most LMCs are registered midwives, but they can also be obstetricians — doctors who specialise in pregnancy and childbirth — or family doctors who provide maternity care.</p><p>If you're eligible, you'll get free or subsidised maternity care unless you to choose a specialist as your LMC.</p>"
+              "content": "<p>As soon as you know you're pregnant, you need to choose a lead maternity carer (LMC). Most LMCs are registered midwives, but they can also be obstetricians — doctors who specialise in pregnancy and childbirth — or family doctors who provide maternity care.</p><p>If you're eligible, you'll get free or subsidised maternity care unless you to choose a specialist as your LMC.</p>"
             },
             {
               "id": 25,
@@ -68,12 +68,30 @@
               "content": "This is a task. Should only the label be used?",
               "tags": ["boac_presentation::task"]
             },
+            {  "id": 220,
+              "type": "richtext",
+              "label": "Have you found advice?",
+              "content": "This is a task. Should only the label be used?",
+              "tags": ["boac_presentation::task"]
+            },
             {
               "id": 23,
               "type": "richtext",
               "label": "Having troubles?",
               "content": "<p>Here is some helpful text with a <a href=\"http://test.com\">link</a></p>",
               "tags": ["boac_presentation::auxiliary"]
+            },
+            {  "id": 221,
+              "type": "richtext",
+              "label": "Have you found advice?",
+              "content": "This is a task. Should only the label be used?",
+              "tags": ["boac_presentation::task"]
+            },
+            {  "id": 222,
+              "type": "richtext",
+              "label": "Have you found advice?",
+              "content": "This is a task. Should only the label be used?",
+              "tags": ["boac_presentation::task"]
             }
           ]
         }
@@ -94,21 +112,7 @@
             "type": "richtext",
             "content": "<p>This is the summary on the card.</p>",
             "tags": ["boac_presentation::summary"]
-            },
-            {
-              "id": 210,
-              "type": "url",
-              "externalURL": "http://example.com",
-              "linkText": "Immunisation in pregnancy promoted in Immunisation Week 2016",
-              "tags": ["boac_presentation::link-button"]
-            },{
-              "id": 211,
-              "type": "url",
-              "externalURL": "http://example.com",
-              "linkText": "EasyCheck - pregnancy test kit for use by health care professionals",
-              "tags": ["boac_presentation::link-button"]
-            }
-          ]
+          } ]
         }
       ]
     }
