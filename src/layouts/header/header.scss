@@ -1,6 +1,37 @@
 @import 'variables';
 
 .page-header {
-  margin: 20px 30px;
-  text-align: right;
+  background-color: $header-background-color;
+}
+
+.page-header-inner {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 20px;
+
+  @media #{$desktop-and-above} {
+    padding-left: 160px;
+  }
+}
+
+h1 {
+  font-size: 0;
+  margin: 0 15px 0 0;
+  display: inline-block;
+
+  a {
+    background-image: url('/assets/img/site-logo.svg');
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 45px;
+    background-size: 120px 45px;
+    display: block;
+
+    @media #{$desktop-and-above} {
+      width: 160px;
+      height: 60px;
+      background-size: 160px 60px;
+    }
+  }
 }
