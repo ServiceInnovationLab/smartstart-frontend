@@ -2,9 +2,13 @@ import 'index.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Page from 'layouts/page/page'
+import { Provider } from 'react-redux'
+import configureStore from 'store/store'
+import Container from 'containers/container'
+
+const store = configureStore()
 
 ReactDOM.render(
-  <Page />,
+  <Provider store={store}><Container /></Provider>,
   document.getElementById('app')
 )
