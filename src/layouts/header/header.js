@@ -8,15 +8,15 @@ class Header extends Component {
   render () {
     const { isLoggedIn } = this.props
 
-    let loggedIn = ''
-    let loggedOut = ''
+    let loggedIn = 'auth-controls'
+    let loggedOut = 'auth-controls'
 
     if (isLoggedIn) {
-      loggedIn = ''
-      loggedOut = 'hidden'
+      loggedIn = 'auth-controls'
+      loggedOut = 'hidden auth-controls'
     } else {
-      loggedIn = 'hidden'
-      loggedOut = ''
+      loggedIn = 'hidden auth-controls'
+      loggedOut = 'auth-controls'
     }
 
     return (
@@ -29,7 +29,7 @@ class Header extends Component {
             <LoginButton />
           </div>
           <div className={loggedIn}>
-            Login was successful. <LogoutButton />
+            <span className='user-logged-in-message'>Login was successful.</span> <LogoutButton />
           </div>
         </div>
       </header>

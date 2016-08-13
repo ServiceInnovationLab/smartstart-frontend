@@ -1,0 +1,11 @@
+@import 'variables';
+
+.logout {
+  color: #ffffff;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #ffffff;
+  }
+}

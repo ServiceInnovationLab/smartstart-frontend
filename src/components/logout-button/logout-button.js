@@ -1,9 +1,11 @@
+import './logout-button.scss'
+
 import React, { Component } from 'react'
 
 class LogoutButton extends Component {
   render () {
     return (
-      <a className='button' href='/logout/' data-test='logout'>
+      <a href='/logout/' className='logout' data-test='logout'>
         Logout
       </a>
     )
