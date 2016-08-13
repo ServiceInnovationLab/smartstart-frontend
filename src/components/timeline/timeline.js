@@ -1,9 +1,9 @@
 import './timeline.scss'
 
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import Phase from 'components/timeline/phase/phase'
 
-class Timeline extends React.Component {
+class Timeline extends Component {
   render () {
     const { phases } = this.props
 
@@ -16,6 +16,10 @@ class Timeline extends React.Component {
       </div>
     )
   }
+}
+
+Timeline.propTypes = {
+  phases: PropTypes.array.isRequired
 }
 
 export default Timeline

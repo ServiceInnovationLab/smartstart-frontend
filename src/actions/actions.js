@@ -34,7 +34,7 @@ function checkAuthentication (isLoggedIn) {
   }
 }
 
-function checkStatus(response) {
+function checkStatus (response) {
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
@@ -51,7 +51,7 @@ export function fetchContent () {
       .then(checkStatus)
       .then(response => response.json())
       .then(json => dispatch(receiveAPI(json)))
-      .catch(function(error) {
+      .catch(function (error) {
         dispatch(applicationError(error))
       })
   }
@@ -60,6 +60,7 @@ export function fetchContent () {
 export function checkAuthCookie () {
   return dispatch => {
     let authResult = Cookie.load('is_authenticated')
+    if (authResult == null) { authResult = false } // null or undefined
     dispatch(checkAuthentication(authResult))
   }
 }

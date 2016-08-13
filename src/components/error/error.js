@@ -1,8 +1,8 @@
 import './error.scss'
 
-import React from 'react'
+import React, { Component } from 'react'
 
-class Error extends React.Component {
+class Error extends Component {
   render () {
     return (
       <div className='app-error'>
@@ -11,5 +11,7 @@ class Error extends React.Component {
     )
   }
 }
+
+Error.propTypes = {}
 
 export default Error

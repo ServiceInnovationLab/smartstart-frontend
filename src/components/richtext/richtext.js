@@ -1,9 +1,9 @@
 import './richtext.scss'
 
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
 
-class Richtext extends React.Component {
+class Richtext extends Component {
   constructor (props) {
     super(props)
 
@@ -74,6 +74,13 @@ class Richtext extends React.Component {
       </div>
     )
   }
+}
+
+Richtext.propTypes = {
+  title: PropTypes.string, // isRequired only for expandable
+  text: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  tags: PropTypes.array
 }
 
 export default Richtext

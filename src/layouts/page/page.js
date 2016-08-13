@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import Header from 'layouts/header/header'
 import Timeline from 'components/timeline/timeline'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 
-class Page extends React.Component {
+class Page extends Component {
   render () {
     const { phases, isLoggedIn, appError } = this.props
 
@@ -38,6 +38,15 @@ class Page extends React.Component {
       </div>
     )
   }
+}
+
+Page.propTypes = {
+  phases: PropTypes.array.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  appError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ])
 }
 
 export default Page

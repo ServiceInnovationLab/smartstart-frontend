@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class LogoutButton extends React.Component {
+class LogoutButton extends Component {
   render () {
     return (
       <a className='button' href='/logout/' data-test='logout'>
@@ -9,5 +9,7 @@ class LogoutButton extends React.Component {
     )
   }
 }
+
+LogoutButton.propTypes = {}
 
 export default LogoutButton
