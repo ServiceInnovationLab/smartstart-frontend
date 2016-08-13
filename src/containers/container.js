@@ -11,36 +11,46 @@ class Container extends React.Component {
   }
 
   render () {
-    const { isFetching, phases, supplementary, isLoggedIn } = this.props
+    const { isFetching, phases, supplementary, isLoggedIn, error } = this.props
 
     return (
-      <Page phases={phases} supplementary={supplementary} loading={isFetching} isLoggedIn={isLoggedIn} />
+      <Page phases={phases} supplementary={supplementary} loading={isFetching} isLoggedIn={isLoggedIn} appError={error} />
     )
   }
 }
 
 function mapStateToProps (state) {
-  const { content, personalisation } = state
+  const {
+    contentActions,
+    personalisationActions,
+    applicationActions
+  } = state
   const {
     isFetching,
     phases,
     supplementary
-  } = content || {
+  } = contentActions || {
     isFetching: true,
     phases: [],
     supplementary: [],
   }
   const {
     isLoggedIn
-  } = personalisation || {
+  } = personalisationActions || {
     isLoggedIn: false
+  }
+  const {
+    error
+  } = applicationActions || {
+    error: false
   }
 
   return {
     isFetching,
     phases,
     supplementary,
-    isLoggedIn
+    isLoggedIn,
+    error
   }
 }
 

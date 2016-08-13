@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import { REQUEST_API, RECEIVE_API, CHECK_AUTHENTICATION } from 'actions/actions'
+import { REQUEST_API, RECEIVE_API, CHECK_AUTHENTICATION, APPLICATION_ERROR } from 'actions/actions'
 
-function content (state = {
+function contentActions (state = {
   isFetching: false,
   phases: [],
   supplementary: []
@@ -22,7 +22,7 @@ function content (state = {
   }
 }
 
-function personalisation (state = {
+function personalisationActions (state = {
   isLoggedIn: false
 }, action) {
   switch (action.type) {
@@ -35,9 +35,23 @@ function personalisation (state = {
   }
 }
 
+function applicationActions (state = {
+  error: false
+}, action) {
+  switch (action.type) {
+    case APPLICATION_ERROR:
+      return Object.assign({}, state, {
+        error: action.error
+      })
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
-  content,
-  personalisation
+  contentActions,
+  personalisationActions,
+  applicationActions
 })
 
 export default rootReducer
