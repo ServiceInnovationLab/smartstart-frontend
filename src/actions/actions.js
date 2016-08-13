@@ -1,7 +1,9 @@
 /* globals fetch, API_ENDPOINT  */
+import Cookie from 'react-cookie'
 
 export const REQUEST_API = 'REQUEST_API'
 export const RECEIVE_API = 'RECEIVE_API'
+export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION'
 
 function requestAPI () {
   return {
@@ -17,6 +19,13 @@ function receiveAPI (json) {
   }
 }
 
+function checkAuthentication (isLoggedIn) {
+  return {
+    type: CHECK_AUTHENTICATION,
+    isLoggedIn: isLoggedIn
+  }
+}
+
 export function fetchContent () {
   return dispatch => {
     dispatch(requestAPI())
@@ -24,5 +33,12 @@ export function fetchContent () {
       .then(response => response.json())
       .then(json => dispatch(receiveAPI(json)))
       // TODO handle errors
+  }
+}
+
+export function checkAuthCookie () {
+  return dispatch => {
+    let authResult = Cookie.load('is_authenticated')
+    dispatch(checkAuthentication(authResult))
   }
 }

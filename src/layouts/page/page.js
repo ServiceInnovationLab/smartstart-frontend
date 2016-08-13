@@ -5,7 +5,7 @@ import Spinner from 'components/spinner/spinner'
 
 class Page extends React.Component {
   render () {
-    const { phases } = this.props
+    const { phases, isLoggedIn } = this.props
 
     let isLoading = ''
     let isLoaded = 'hidden'
@@ -17,7 +17,7 @@ class Page extends React.Component {
 
     return (
       <div>
-        <Header />
+        <Header isLoggedIn={isLoggedIn} />
         <div className={isLoading}>
           <Spinner />
         </div>
