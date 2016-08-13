@@ -87,8 +87,9 @@
       height: 204px;
       margin-left: -102px; // half of width
       top: 0;
-      background-color: red;
-      opacity: 0.2;
+      // TODO illustration goes as background image here
+      // background-color: red;
+      // opacity: 0.2;
 
       @media #{$desktop-and-above} {
         width: 340px;
@@ -128,6 +129,10 @@
     padding: 20px 16px 0;
     top: -150px;
     left: -87px;
+  }
+
+  .timeline .phase:first-child & {
+    letter-spacing: 0.063em; // the number one needs a spacing tweak
   }
 
   &:after {

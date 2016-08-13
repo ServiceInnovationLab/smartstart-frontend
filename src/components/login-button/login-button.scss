@@ -1,0 +1,23 @@
+@import 'variables';
+
+@import 'realme.css';
+
+// normally stipulated as an inline style
+.realme_popup {
+  width: 420px;
+}
+
+// old style box model
+.realme_widget * {
+  box-sizing: content-box;
+}
+
+// turn off our normal external link icon
+.realme_widget a[href*="//"] {
+  padding-right: 0;
+
+  &::after {
+    content: '';
+    display: none;
+  }
+}
