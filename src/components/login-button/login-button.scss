@@ -2,6 +2,12 @@
 
 @import 'realme.css';
 
+.realme_popup_wrapper.show-help {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
 // normally stipulated as an inline style
 .realme_popup {
   width: 420px;
@@ -13,11 +19,21 @@
 }
 
 // turn off our normal external link icon
-.realme_widget a[href*="//"] {
-  padding-right: 0;
+.realme_widget {
+  a[href*="//"] {
+    padding-right: 0;
 
-  &::after {
-    content: '';
-    display: none;
+    &::after {
+      content: '';
+      display: none;
+    }
+
+    &.realme_find_out_more {
+      padding-right: 1em;
+    }
   }
+}
+
+#popup_trigger {
+  cursor: pointer;
 }

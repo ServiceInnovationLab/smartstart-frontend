@@ -29,7 +29,7 @@ class Header extends Component {
             <LoginButton />
           </div>
           <div className={loggedIn}>
-            Login was successful. <LogoutButton />
+            <span className='user-logged-in-message'>Login was successful.</span> <LogoutButton />
           </div>
         </div>
       </header>

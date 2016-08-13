@@ -366,9 +366,11 @@
 
 .realme_popup_title,
 .realme_popup h2 {
+  font-family: sans-serif;
   font-size: 1.07692em;
   color: #e1001e;
   margin-bottom: 0.5em;
+  margin-top: 11px;
 }
 
 .no_touch .whats_realme:hover + .realme_popup_wrapper,
