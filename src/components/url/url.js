@@ -1,9 +1,9 @@
 import './url.scss'
 
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
 
-class Url extends React.Component {
+class Url extends Component {
   constructor (props) {
     super(props)
 
@@ -31,6 +31,13 @@ class Url extends React.Component {
       <p><a className={urlClasses} href={this.props.url}>{linkText}</a></p>
     )
   }
+}
+
+Url.propTypes = {
+  label: PropTypes.string, // needs EITHER label or linkLabel
+  linkLabel: PropTypes.string,
+  url: PropTypes.string.isRequired,
+  tags: PropTypes.array
 }
 
 export default Url

@@ -1,9 +1,9 @@
 import './phase.scss'
 
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import Card from 'components/card/card'
 
-class Phase extends React.Component {
+class Phase extends Component {
   render () {
     return (
       <div className='phase' data-test='phase'>
@@ -19,6 +19,12 @@ class Phase extends React.Component {
       </div>
     )
   }
+}
+
+Phase.propTypes = {
+  title: PropTypes.string.isRequired,
+  cards: PropTypes.array.isRequired,
+  number: PropTypes.number.isRequired
 }
 
 export default Phase

@@ -1,8 +1,8 @@
 import './task.scss'
 
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 
-class Task extends React.Component {
+class Task extends Component {
   constructor (props) {
     super(props)
 
@@ -19,10 +19,10 @@ class Task extends React.Component {
     let labelText = ''
     let elementId = 'task-' + this.props.id
 
-    if (this.props.type === 'plaintext' && this.props.content) {
-      labelText = this.props.content
+    if (this.props.type === 'plaintext' && this.props.text) {
+      labelText = this.props.text
     } else {
-      // can't trust content will not have markup if not plaintext type, so use label
+      // can't trust text will not have markup if not plaintext type, so use label
       labelText = this.props.label
     }
 
@@ -36,6 +36,13 @@ class Task extends React.Component {
       </div>
     )
   }
+}
+
+Task.propTypes = {
+  label: PropTypes.string, // need EITHER label or text depending on type
+  text: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired
 }
 
 export default Task

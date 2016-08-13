@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class LoginButton extends React.Component {
+class LoginButton extends Component {
   render () {
     return (
       <a className='button' href='/login/' data-test='login'>
@@ -9,5 +9,7 @@ class LoginButton extends React.Component {
     )
   }
 }
+
+LoginButton.propTypes = {}
 
 export default LoginButton

@@ -1,0 +1,20 @@
+@import 'variables';
+
+// TODO this needs to be redone as per forthcoming design
+
+.app-error {
+  width: 80%;
+  text-align: center;
+  background-color: $card-background-color;
+  margin: 40px auto;
+  border-radius: $default-border-radius;
+  overflow: hidden; // force box context
+
+  * {
+    margin: 20px;
+  }
+
+  @media #{$desktop-and-above} {
+    max-width: $desktop-max-content-width;
+  }
+}

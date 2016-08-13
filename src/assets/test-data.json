@@ -88,9 +88,9 @@
               "tags": ["boac_presentation::task"]
             },
             {  "id": 222,
-              "type": "richtext",
-              "label": "Have you found advice?",
-              "content": "This is a task. Should only the label be used?",
+              "type": "plaintext",
+              "label": "Label is ignored",
+              "content": "This is a plaintext checkbox",
               "tags": ["boac_presentation::task"]
             }
           ]
@@ -113,8 +113,21 @@
             "content": "<p>This is the summary on the card.</p>",
             "tags": ["boac_presentation::summary"]
           } ]
+        },
+        {
+          "id": 281,
+          "type": "card",
+          "label": "Empty card",
+          "tags": [],
+          "elements": []
         }
       ]
+    },
+    {
+      "id": 111,
+      "type": "card",
+      "label": "Empty phase",
+      "elements": []
     }
   ],
   "tagGroups": [

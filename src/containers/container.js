@@ -1,40 +1,64 @@
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchContent } from 'actions/actions'
+import { fetchContent, checkAuthCookie } from 'actions/actions'
 import Page from 'layouts/page/page'
 
-class Container extends React.Component {
+class Container extends Component {
   componentDidMount () {
     const { dispatch } = this.props
-    dispatch(fetchContent())
+    dispatch(fetchContent()) // should only need to check on load
+    dispatch(checkAuthCookie()) // should only need to check on load
   }
 
   render () {
-    const { isFetching, phases, supplementary } = this.props
+    const { phases, supplementary, isLoggedIn, error } = this.props
 
     return (
-      <Page phases={phases} supplementary={supplementary} loading={isFetching} />
+      <Page phases={phases} supplementary={supplementary} isLoggedIn={isLoggedIn} appError={error} />
     )
   }
 }
 
 function mapStateToProps (state) {
-  const { content } = state
   const {
-    isFetching,
+    contentActions,
+    personalisationActions,
+    applicationActions
+  } = state
+  const {
     phases,
     supplementary
-  } = content || {
-    isFetching: true,
+  } = contentActions || {
     phases: [],
     supplementary: []
   }
+  const {
+    isLoggedIn
+  } = personalisationActions || {
+    isLoggedIn: false
+  }
+  const {
+    error
+  } = applicationActions || {
+    error: false
+  }
 
   return {
-    isFetching,
     phases,
-    supplementary
+    supplementary,
+    isLoggedIn,
+    error
   }
+}
+
+Container.propTypes = {
+  phases: PropTypes.array.isRequired,
+  supplementary: PropTypes.array,
+  isLoggedIn: PropTypes.bool.isRequired,
+  appError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ])
 }
 
 export default connect(mapStateToProps)(Container)
