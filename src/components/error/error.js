@@ -6,7 +6,7 @@ class Error extends Component {
   render () {
     return (
       <div className='app-error'>
-        <h3>Sorry, we are unable to retrieve the content at the moment. Please try again shortly.</h3>
+        <h4>Sorry, we are unable to retrieve the content at the moment.<br />Please try again shortly.</h4>
       </div>
     )
   }

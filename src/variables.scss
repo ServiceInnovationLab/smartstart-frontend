@@ -5,6 +5,7 @@ $desktop-and-above:    'only screen and (min-width: 992px)';
 
 // brand colors
 $realme-dark-blue:     #3e4d5d;
+$accent-color:         #c1e0dd;
 
 // base colors
 $background-color:     #ffffff;
@@ -20,13 +21,14 @@ $desktop-max-content-width: 1140px;
 
 // header
 $header-background-color: $realme-dark-blue;
+$header-desktop-padding-left: 160px;
 
 // timeline
 $timeline-border-width: 2px;
 $timeline-spacing:      65px;
 
 // phase
-$phase-background-color:      #c1e0dd;
+$phase-background-color:      $accent-color;
 $phase-content-width-desktop: 750px;
 
 // card

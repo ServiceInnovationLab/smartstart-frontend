@@ -11,7 +11,7 @@
   padding: 15px 20px;
 
   @media #{$desktop-and-above} {
-    padding-left: 160px;
+    padding-left: $header-desktop-padding-left;
   }
 }
 
