@@ -3,6 +3,7 @@
 .timeline {
   clear: both;
   position: relative;
+  min-width: $mobile-min-content-width;
 
   &::before {
     content: "";

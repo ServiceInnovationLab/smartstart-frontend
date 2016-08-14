@@ -1,4 +1,5 @@
 // responsive breakpoints
+$extra-small-devices:  'only screen and (max-width: 390px)';
 $tablet-and-above:     'only screen and (min-width: 768px)';
 $tablet-only:          'only screen and (min-width: 768px and max-width: 991px)';
 $desktop-and-above:    'only screen and (min-width: 992px)';
@@ -18,6 +19,7 @@ $border-color: #d2d2d2;
 // base dimensions
 $default-border-radius: 18px;
 $desktop-max-content-width: 1140px;
+$mobile-min-content-width: 320px;
 
 // header
 $header-background-color: $realme-dark-blue;
