@@ -14,8 +14,14 @@
 }
 
 // old style box model
+.realme_widget,
 .realme_widget * {
   box-sizing: content-box;
+}
+
+// make sure smaller devices don't split up the controls
+.realme_widget {
+  min-width: 146px;
 }
 
 // turn off our normal external link icon
@@ -36,4 +42,5 @@
 
 #popup_trigger {
   cursor: pointer;
+  padding-right: 0;
 }

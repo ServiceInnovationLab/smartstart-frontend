@@ -2,6 +2,7 @@
 
 .page-header {
   background-color: $header-background-color;
+  min-width: $mobile-min-content-width;
 }
 
 .page-header-inner {
@@ -28,13 +29,17 @@ h1 {
     background-repeat: no-repeat;
     width: 120px;
     height: 45px;
-    background-size: 120px 45px;
+    background-size: contain;
     display: block;
 
     @media #{$desktop-and-above} {
       width: 160px;
       height: 60px;
-      background-size: 160px 60px;
+    }
+
+    @media #{$extra-small-devices} {
+      width: 80px;
+      height: 30px;
     }
   }
 }
