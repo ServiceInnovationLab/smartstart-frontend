@@ -55,7 +55,7 @@ class Richtext extends Component {
     let contentId = 'content-' + this.props.id
 
     if (this.state.showExpandableHeader) {
-      expandableHeader = <h4
+      expandableHeader = <div className='expandable-wrapper'><h4
         className='expandable-title'
         aria-controls={contentId}
         onClick={this.expandableToggle.bind(this)}
@@ -64,7 +64,7 @@ class Richtext extends Component {
       >
         {this.props.title}
         <span className='visuallyhidden'> - {this.state.expandableVerb} this content</span>
-      </h4>
+      </h4></div>
     }
 
     return (

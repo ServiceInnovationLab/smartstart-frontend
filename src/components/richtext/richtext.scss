@@ -3,7 +3,13 @@
 .richtext {
 
   &.expandable {
-    margin-left: 20px;
+    margin: 15px 0 15px 20px;
+  }
+
+  .expandable-wrapper {
+    // this otherwise useless container is needed because of https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
+    display: flex;
+    width: 100%;
   }
 
   .expandable-title {
@@ -11,12 +17,12 @@
     position: relative;
     background-color: $card-accordion-color;
     color: $link-color;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin: 0; // margin has to be set on .expandable due to IE11 issue
     font-size: 16px;
     font-weight: 500;
     line-height: 22px;
     padding: 8px 60px 8px 5px;
+    width: 100%;
     min-height: 60px;
     z-index: 0;
     display: flex;
