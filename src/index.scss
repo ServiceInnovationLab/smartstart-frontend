@@ -164,6 +164,10 @@ ul {
       left: -20px;
     }
   }
+
+  p + & {
+    margin-top: -10px; // tighten up spacing between to 6px
+  }
 }
 
 ol {

@@ -3,7 +3,11 @@
 .richtext {
 
   &.expandable {
-    margin: 15px 0 15px 20px;
+    margin: 15px -#{$card-padding} 15px 20px;
+
+    @media #{$desktop-and-above} {
+      margin: 15px -#{$card-padding-desktop} 15px 20px;
+    }
   }
 
   .expandable-wrapper {
