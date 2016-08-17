@@ -94,6 +94,39 @@
               "tags": ["boac_presentation::task"]
             }
           ]
+        },
+        {
+          "id": 1300,
+          "type": "card",
+          "label": "Health information at top of phase",
+          "tags": ["topic::finance", "boac_presentation::top-of-phase"],
+          "elements": [
+            {
+              "id": 2000,
+              "type": "richtext",
+              "content": "<p>Normal card elements go in here.</p>",
+              "tags": ["boac_presentation::summary"]
+            },
+            {
+              "id": 2100,
+              "type": "url",
+              "externalURL": "http://example.com",
+              "linkText": "Here is a link with rather a long kind of a description indeed",
+              "tags": ["boac_presentation::link-button"]
+            },
+            {
+              "id": 2200,
+              "type": "richtext",
+              "label": "Here is a task that also has a rather overlong label, in fact it probably covers at least two lines",
+              "tags": ["boac_presentation::task"]
+            },
+            {  "id": 2201,
+              "type": "richtext",
+              "label": "And here is expandable content",
+              "content": "<p>It doesn't contain very much information, but is demonstrates that it <i>is possible</i> to have an expandable section within a health information top of phase card (which in itself acts as expandable content)</p>",
+              "tags": ["boac_presentation::auxiliary"]
+            }
+          ]
         }
       ]
     },
