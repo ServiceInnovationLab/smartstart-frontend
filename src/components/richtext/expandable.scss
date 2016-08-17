@@ -1,16 +1,19 @@
 @import 'variables';
 
-.richtext {
+.expandable {
 
-  &.expandable {
-    margin: 15px -#{$card-padding} 15px 20px;
-
-    @media #{$desktop-and-above} {
-      margin: 15px -#{$card-padding-desktop} 15px 20px;
-    }
+  .content {
+    display: none;
   }
 
-  .expandable-wrapper {
+  // pull them to the right of the card
+  margin: 15px -#{$card-padding} 15px 20px;
+
+  @media #{$desktop-and-above} {
+    margin: 15px -#{$card-padding-desktop} 15px 20px;
+  }
+
+  .expandable-title-wrapper {
     // this otherwise useless container is needed because of https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
     display: flex;
     width: 100%;
@@ -45,12 +48,12 @@
       content: "";
       display: block;
       position: absolute;
-      width: 40px;
+      width: $left-side-curve-width;
       height: 100%;
       background-color: $card-accordion-color;
       border-top-left-radius: 50%;
       border-bottom-left-radius: 50%;
-      left: -20px;
+      left: -($left-side-curve-width / 2);
       bottom: 0;
       z-index: -1;
     }
@@ -71,12 +74,8 @@
     }
   }
 
-  &.expandable .content {
-    display: none;
-  }
-
   &.is-expanded {
-    .expandable-title {
+    > .expandable-title {
       color: #fff;
       background-color: $card-accordion-open-color;
       margin-bottom: 0;
@@ -91,7 +90,7 @@
       }
     }
 
-    .content {
+    > .content {
       display: block;
       background-color: $card-accordion-color;
       padding: $card-padding;

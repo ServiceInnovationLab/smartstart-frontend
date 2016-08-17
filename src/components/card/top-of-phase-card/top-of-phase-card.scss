@@ -1,0 +1,27 @@
+@import 'variables';
+
+.top-of-phase.card.expandable {
+  background-color: transparent;
+  padding: 0;
+  margin-left: $timeline-spacing;
+  position: relative;
+  left: $left-side-curve-width / 2;
+
+  @media #{$desktop-and-above} {
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  > .expandable-title-wrapper,
+  > .content {
+    width: calc(100% - #{$left-side-curve-width / 2});
+  }
+
+  // TODO different colours
+}

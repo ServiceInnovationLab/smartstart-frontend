@@ -1,4 +1,4 @@
-import './richtext.scss'
+import './expandable.scss'
 
 import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
@@ -55,7 +55,7 @@ class Richtext extends Component {
     let contentId = 'content-' + this.props.id
 
     if (this.state.showExpandableHeader) {
-      expandableHeader = <div className='expandable-wrapper'><h4
+      expandableHeader = <div className='expandable-title-wrapper'><h4
         className='expandable-title'
         aria-controls={contentId}
         onClick={this.expandableToggle.bind(this)}
