@@ -20,6 +20,9 @@ var buildCommand = './node_modules/.bin/webpack --optimize-minimize --optimize-d
 if (yargs.endpoint) {
   buildCommand = buildCommand + ' --endpoint ' + yargs.endpoint
 }
+if (yargs.piwik) {
+  buildCommand = buildCommand + ' --piwik ' + yargs.piwik
+}
 commands.push(buildCommand)
 
 isGitClean().then(function (clean) {
