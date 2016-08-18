@@ -21,14 +21,17 @@ const piwikEnvs = {
   development: 2 // all dev envs share the same piwik instance
 }
 
+const piwikInstance = 'https://analytics.bundle.services.govt.nz/piwik.php'
+
 const defaults = {
-  apiPaths: 'testing', // TODO update default endpoint to externalProd when available
+  apiPaths: 'testing', // TODO update default endpoint to production when available
   piwikEnvs: 'development'
 }
 
 const config = {
   apiPaths: apiPaths,
   piwikEnvs: piwikEnvs,
+  piwikInstance: piwikInstance,
   defaults: defaults
 }
 

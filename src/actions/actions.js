@@ -1,10 +1,12 @@
-/* globals fetch, API_ENDPOINT  */
+/* globals fetch, API_ENDPOINT, PIWIK_INSTANCE  */
 import Cookie from 'react-cookie'
+import { piwikParams, createPiwikAction } from 'actions/piwik'
 
 export const REQUEST_API = 'REQUEST_API'
 export const RECEIVE_API = 'RECEIVE_API'
 export const APPLICATION_ERROR = 'APPLICATION_ERROR'
 export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION'
+export const PIWIK_TRACK = 'PIWIK_TRACK'
 
 function requestAPI () {
   return {
@@ -31,6 +33,12 @@ function checkAuthentication (isLoggedIn) {
   return {
     type: CHECK_AUTHENTICATION,
     isLoggedIn: isLoggedIn
+  }
+}
+
+function piwikTrack () {
+  return {
+    type: PIWIK_TRACK
   }
 }
 
@@ -62,5 +70,23 @@ export function checkAuthCookie () {
     let authResult = Cookie.load('is_authenticated')
     if (authResult == null) { authResult = false } // null or undefined
     dispatch(checkAuthentication(authResult))
+  }
+}
+
+export function piwikTrackPost (piwikAction) {
+  return dispatch => {
+    return fetch(PIWIK_INSTANCE, {
+      method: 'POST',
+      body: JSON.stringify({ 'requests': [
+        piwikParams(createPiwikAction(piwikAction))
+      ]})
+    })
+    .then(() => {
+      dispatch(piwikTrack())
+    })
+    .catch(() => {
+      // fail silently, pretend the action happened anyhow
+      dispatch(piwikTrack())
+    })
   }
 }

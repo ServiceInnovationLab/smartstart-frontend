@@ -107,7 +107,8 @@ switch (runCommand) {
         new webpack.DefinePlugin({
           'process.env': {NODE_ENV: JSON.stringify('production')},
           API_ENDPOINT: JSON.stringify(API_PATH),
-          PIWIK_SITE: JSON.stringify(PIWIK_SITE)
+          PIWIK_SITE: JSON.stringify(PIWIK_SITE),
+          PIWIK_INSTANCE: JSON.stringify(CONFIG.piwikInstance)
         }),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
@@ -126,7 +127,8 @@ switch (runCommand) {
         new webpack.DefinePlugin({
           'process.env': {NODE_ENV: JSON.stringify('development')},
           API_ENDPOINT: JSON.stringify(API_PATH),
-          PIWIK_SITE: JSON.stringify(PIWIK_SITE)
+          PIWIK_SITE: JSON.stringify(PIWIK_SITE),
+          PIWIK_INSTANCE: JSON.stringify(CONFIG.piwikInstance)
         })
       ]
     })
