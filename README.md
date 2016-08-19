@@ -40,6 +40,26 @@ For the build:
 
 `npm run build:local`
 
+## Changing which Piwik site is connected
+
+A `--piwik` command line argument can be supplied to switch between the
+different Piwik site environments, as specified in `config.js`. For example,
+`npm run build -- --piwik testing` (note that npm run requires an extra -- to
+delimit command line arguments) will build the site into`/dist` with the correct
+Piwik site ID for the `testing.bundle.services.govt.nz` instance.
+
+By default all builds will be connected to the `development` Piwik instance,
+which many environments are connected too. "Proper" environments like UAT and
+testing should have an exclusive relationship to a Piwik site ID.
+
+Development server instances should not need to override the default Piwik
+`development` site ID.
+
+### For ansible builds
+
+As a shortcut, to enable the correct Piwik ID when building
+`testing.bundle.services.govt.nz`, run the command `npm run build:testing`.
+
 ## Running with the backend too
 
 You must use a cloud environment to enable login and personalisation

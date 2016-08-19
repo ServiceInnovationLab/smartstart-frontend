@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchContent, checkAuthCookie } from 'actions/actions'
+import { fetchContent, checkAuthCookie, piwikTrackPost } from 'actions/actions'
 import Page from 'layouts/page/page'
 
 class Container extends Component {
@@ -8,6 +8,7 @@ class Container extends Component {
     const { dispatch } = this.props
     dispatch(fetchContent()) // should only need to check on load
     dispatch(checkAuthCookie()) // should only need to check on load
+    dispatch(piwikTrackPost('Timeline'))
   }
 
   render () {

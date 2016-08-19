@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { REQUEST_API, RECEIVE_API, CHECK_AUTHENTICATION, APPLICATION_ERROR } from 'actions/actions'
+import { REQUEST_API, RECEIVE_API, CHECK_AUTHENTICATION, APPLICATION_ERROR, PIWIK_TRACK } from 'actions/actions'
 
 function contentActions (state = {
   isFetching: false,
@@ -43,6 +43,7 @@ function applicationActions (state = {
       return Object.assign({}, state, {
         error: action.error
       })
+    case PIWIK_TRACK:
     default:
       return state
   }

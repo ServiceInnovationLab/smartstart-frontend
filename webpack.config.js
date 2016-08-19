@@ -8,6 +8,7 @@ const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
 const yargs = require('yargs').argv
+const CONFIG = require('./config.js')
 
 const sassLoaders = [
   'css-loader',
@@ -20,21 +21,16 @@ const PATHS = {
   dist: path.join(__dirname, './dist')
 }
 
-const apiPaths = {
-  localTest: '/assets/test-data.json',
-  externalTest: 'https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all',
-  externalProd: null
+// determine which api endpoint to use
+var API_PATH = CONFIG.apiPaths[CONFIG.defaults.apiPaths]
+if (yargs.endpoint && CONFIG.apiPaths.hasOwnProperty(yargs.endpoint)) {
+  API_PATH = CONFIG.apiPaths[yargs.endpoint]
 }
 
-// determine which api endpoint to use
-var API_PATH = apiPaths.externalTest // TODO update default endpoint to prod when available
-
-if (yargs.endpoint === 'local') {
-  API_PATH = apiPaths.localTest
-} else if (yargs.endpoint === 'test') {
-  API_PATH = apiPaths.externalTest
-} else if (yargs.endpoint === 'prod') {
-  API_PATH = apiPaths.externalProd
+// determine which piwik site to use
+var PIWIK_SITE = CONFIG.piwikEnvs[CONFIG.defaults.piwikEnvs]
+if (yargs.piwik && CONFIG.piwikEnvs.hasOwnProperty(yargs.piwik)) {
+  PIWIK_SITE = CONFIG.piwikEnvs[yargs.piwik]
 }
 
 // config that is shared between all types of build
@@ -110,7 +106,9 @@ switch (runCommand) {
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {NODE_ENV: JSON.stringify('production')},
-          API_ENDPOINT: JSON.stringify(API_PATH)
+          API_ENDPOINT: JSON.stringify(API_PATH),
+          PIWIK_SITE: JSON.stringify(PIWIK_SITE),
+          PIWIK_INSTANCE: JSON.stringify(CONFIG.piwikInstance)
         }),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
@@ -128,7 +126,9 @@ switch (runCommand) {
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {NODE_ENV: JSON.stringify('development')},
-          API_ENDPOINT: JSON.stringify(API_PATH)
+          API_ENDPOINT: JSON.stringify(API_PATH),
+          PIWIK_SITE: JSON.stringify(PIWIK_SITE),
+          PIWIK_INSTANCE: JSON.stringify(CONFIG.piwikInstance)
         })
       ]
     })
