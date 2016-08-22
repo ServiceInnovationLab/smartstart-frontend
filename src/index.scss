@@ -63,7 +63,7 @@
 
 html {
   box-sizing: border-box;
-  font-family: 'fira-sans', sans-serif;
+  font-family: $font-family-base;
 }
 
 *, *:before, *:after {
@@ -180,6 +180,7 @@ textarea {
 
 ::selection {
   text-shadow: none;
+  background: $accent-color;
 }
 
 audio,

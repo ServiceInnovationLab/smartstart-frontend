@@ -6,6 +6,7 @@
   margin-left: $timeline-spacing;
   position: relative;
   left: $left-side-curve-width / 2;
+  margin-bottom: 0;
 
   @media #{$desktop-and-above} {
     padding: 0;
@@ -23,5 +24,139 @@
     width: calc(100% - #{$left-side-curve-width / 2});
   }
 
-  // TODO different colours
+  // top level expandable
+  .expandable-title {
+    background-color: $top-of-phase-accordion-color;
+    color: $text-color;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: $top-of-phase-accordion-border-color;
+
+    @media #{$desktop-and-above} {
+      border-right-width: 1px;
+    }
+
+    &::before {
+      background-color: $top-of-phase-accordion-color;
+      border-width: 1px 0 1px 1px;
+      border-style: solid;
+      border-color: $top-of-phase-accordion-border-color;
+      box-sizing: content-box;
+      bottom: -1px;
+    }
+
+    &::after {
+      color: $accent-color-dark;
+
+      @media #{$desktop-and-above} {
+        right: $card-padding - 1px; // icon shift due to border
+      }
+    }
+
+    &:hover {
+      color: $text-color;
+      background-color: $top-of-phase-accordion-open-color;
+      border: none; //remove border
+
+      &::before {
+        background-color: $top-of-phase-accordion-open-color;
+        border: none; //remove border
+        bottom: 0;
+      }
+
+      &::after {
+        color: $text-color;
+
+        @media #{$desktop-and-above} {
+          right: $card-padding; // reset icon positioning
+        }
+      }
+    }
+  }
+
+  // nested expandable
+  .richtext.expandable .expandable-title {
+    background-color: $top-of-phase-nested-accordion-color;
+    border: none; //remove border
+
+    &::before {
+      background-color: $top-of-phase-nested-accordion-color;
+      border: none; //remove border
+      bottom: 0;
+    }
+
+    &::after {
+      color: $accent-color-dark;
+
+      @media #{$desktop-and-above} {
+        right: $card-padding; // reset icon positioning
+      }
+    }
+
+    &:hover {
+      background-color: $top-of-phase-nested-accordion-open-color;
+
+      &::before {
+        background-color: $top-of-phase-nested-accordion-open-color;
+      }
+
+      &::after {
+        color: $text-color;
+      }
+    }
+  }
+
+  // top level expandable - expanded
+  &.is-expanded > .expandable-title-wrapper > .expandable-title {
+    color: $text-color;
+    background-color: $top-of-phase-accordion-open-color;
+    border: none; //remove border
+
+    &::before {
+      background-color: $top-of-phase-accordion-open-color;
+      border: none; //remove border
+      bottom: 0;
+    }
+
+    &::after {
+      color: $text-color;
+
+      @media #{$desktop-and-above} {
+        right: $card-padding; // reset icon positioning
+      }
+    }
+  }
+
+  // nested expandable - expanded
+  .richtext.expandable.is-expanded > .expandable-title-wrapper > .expandable-title {
+    background-color: $top-of-phase-nested-accordion-open-color;
+
+    &::before {
+      background-color: $top-of-phase-nested-accordion-open-color;
+    }
+
+    &::after {
+      color: $text-color;
+    }
+  }
+
+  // content area
+  .content {
+    background-color: $top-of-phase-accordion-color;
+
+    &::after {
+      background-color: $top-of-phase-accordion-color;
+    }
+  }
+
+  // nested content area
+  .richtext.expandable .content {
+    background-color: $top-of-phase-nested-accordion-color;
+    margin-bottom: 60px;
+
+    &::after {
+      background-color: $top-of-phase-nested-accordion-color;
+    }
+  }
+
 }

@@ -7,12 +7,20 @@ class Task extends Component {
     super(props)
 
     this.state = {
-      checked: false
+      checked: false,
+      checkedClass: ''
     }
   }
 
   handleChange () {
-    this.setState({checked: !this.state.checked})
+    this.setState({checked: !this.state.checked}, function () {
+      // class change needs to occur as callback to ensure state change executed
+      if (this.state.checked) {
+        this.setState({checkedClass: 'checked'})
+      } else {
+        this.setState({checkedClass: ''})
+      }
+    })
   }
 
   render () {
@@ -29,7 +37,7 @@ class Task extends Component {
     return (
       <div className='task'>
         <p>
-          <label>
+          <label className={this.state.checkedClass}>
             <input id={elementId} type='checkbox' data-test='task' data-test-task={this.props.id} value={this.state.checked} onChange={this.handleChange.bind(this)} /> {labelText}
           </label>
         </p>

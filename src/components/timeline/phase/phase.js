@@ -28,8 +28,8 @@ class Phase extends Component {
           {title}
         </h2>
 
-        {topOfPhaseCards}
         {normalCards}
+        {topOfPhaseCards}
       </div>
     )
   }
