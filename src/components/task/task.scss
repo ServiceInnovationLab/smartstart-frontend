@@ -1,1 +1,93 @@
 @import 'variables';
+
+.task {
+  margin: 15px -#{$card-padding} 15px 20px;
+
+  @media #{$desktop-and-above} {
+    margin-right: -#{$card-padding-desktop};
+  }
+
+  p {
+    // this container is used because of https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
+    display: flex;
+    width: 100%;
+    margin: 0;
+  }
+
+  .task + & {
+    margin-top: -5px;
+  }
+
+  label {
+    font-weight: 500;
+    position: relative;
+    color: $link-color;
+    margin: 0; // margin has to be set on .task due to IE11 issue
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    padding: 8px $card-padding 8px 10px;
+    width: 100%;
+    min-height: 60px;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    border-width: 2px 0;
+    border-style: solid;
+    border-color: $task-border-color;
+
+    @media #{$desktop-and-above} {
+      padding-right: $card-padding-desktop;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: $left-side-curve-width;
+      height: 100%;
+      background-color: $task-end-color;
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+      left: -($left-side-curve-width / 2);
+      z-index: -1;
+      border-width: 2px 0 2px 2px;
+      border-style: solid;
+      border-color: $task-end-color;
+      box-sizing: content-box;
+      bottom: -2px;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 42px;
+      height: calc(100% + 4px);
+      background-color: $task-end-color;
+      z-index: -1;
+      box-sizing: content-box;
+      left: 0;
+      bottom: -2px;
+    }
+
+    &.checked {
+      &::before {
+        background-color: $task-end-checked-color;
+        border-color: $task-end-checked-color;
+      }
+
+      &::after {
+        background-color: $task-end-checked-color;
+      }
+    }
+  }
+
+  input {
+    margin: 0 30px 0 0;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+}

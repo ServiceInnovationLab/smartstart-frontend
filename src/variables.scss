@@ -4,9 +4,14 @@ $tablet-and-above:     'only screen and (min-width: 768px)';
 $tablet-only:          'only screen and (min-width: 768px and max-width: 991px)';
 $desktop-and-above:    'only screen and (min-width: 992px)';
 
+// font
+$font-family-base:     'fira-sans', sans-serif;
+
 // brand colors
 $realme-dark-blue:     #3e4d5d;
+$accent-color-dark:    #66b3aa;
 $accent-color:         #c1e0dd;
+$accent-color-light:   #d1e8e5;
 
 // base colors
 $background-color:     #ffffff;
@@ -42,6 +47,21 @@ $card-arrow-desktop:    30px;
 
 $card-accordion-color:      #dcdcdc;
 $card-accordion-open-color: $link-color;
+
+$top-of-phase-accordion-color:        #f5f4f4;
+$top-of-phase-accordion-open-color:   $accent-color-light;
+$top-of-phase-accordion-border-color: #d2d2d2;
+
+$top-of-phase-nested-accordion-color:      #e8e5e5;
+$top-of-phase-nested-accordion-open-color: $accent-color-light;
+
+// expandables and checkboxes
+$left-side-curve-width: 40px;
+
+// task
+$task-border-color:       #d2d2d2;
+$task-end-color:          #367bbf;
+$task-end-checked-color:  #d2d2d2;
 
 // icons
 $icon-accordian-close:  '\e900';

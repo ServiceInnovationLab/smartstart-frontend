@@ -1,3 +1,4 @@
+/* globals DocumentTouch  */
 import './login-button.scss'
 
 import React, { Component } from 'react'
