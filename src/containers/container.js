@@ -12,10 +12,10 @@ class Container extends Component {
   }
 
   render () {
-    const { phases, supplementary, isLoggedIn, error } = this.props
+    const { phases, supplementary, supplementaryID, isLoggedIn, error } = this.props
 
     return (
-      <Page phases={phases} supplementary={supplementary} isLoggedIn={isLoggedIn} appError={error} />
+      <Page phases={phases} supplementary={supplementary} supplementaryID={supplementaryID} isLoggedIn={isLoggedIn} appError={error} />
     )
   }
 }

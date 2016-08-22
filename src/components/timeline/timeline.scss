@@ -5,6 +5,7 @@
   position: relative;
   min-width: $mobile-min-content-width;
 
+  // line down the left hand side
   &::before {
     content: "";
     display: block;
@@ -12,11 +13,30 @@
     height: 100%;
     background-color: $border-color;
     position: absolute;
-    left: 41px;
+    left: $timeline-line-left-mobile;
 
     @media #{$desktop-and-above} {
       left: 50%;
-      margin-left: -407px;
+      margin-left: $timeline-line-left-desktop;
+    }
+  }
+
+  // circle that terminates the left hand line
+  &::after {
+    height: $timeline-terminator-size;
+    width: $timeline-terminator-size;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    content: "";
+    border-radius: 50%;
+    border: $timeline-border-width solid $border-color;
+    background-color: $background-color;
+    left: $timeline-line-left-mobile - floor(($timeline-terminator-size / 2));
+
+    @media #{$desktop-and-above} {
+      left: 50%;
+      margin-left: $timeline-line-left-desktop - floor(($timeline-terminator-size / 2));
     }
   }
 }

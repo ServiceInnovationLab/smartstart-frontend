@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { REQUEST_API, RECEIVE_API, CHECK_AUTHENTICATION, APPLICATION_ERROR, PIWIK_TRACK } from 'actions/actions'
+import { REQUEST_API, RECEIVE_API, CHECK_AUTHENTICATION, APPLICATION_ERROR, PIWIK_TRACK, SUPPLEMENTARY_OPEN } from 'actions/actions'
 
 function contentActions (state = {
   isFetching: false,
@@ -49,10 +49,24 @@ function applicationActions (state = {
   }
 }
 
+function supplementaryContentActions (state = {
+  supplementaryID: null
+}, action) {
+  switch (action.type) {
+    case SUPPLEMENTARY_OPEN:
+      return Object.assign({}, state, {
+        activeSupplementary: action.activeSupplementary
+      })
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   contentActions,
   personalisationActions,
-  applicationActions
+  applicationActions,
+  supplementaryContentActions
 })
 
 export default rootReducer

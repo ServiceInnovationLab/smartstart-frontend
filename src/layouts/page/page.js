@@ -1,37 +1,41 @@
 import React, { PropTypes, Component } from 'react'
 import Header from 'layouts/header/header'
 import Timeline from 'components/timeline/timeline'
+import Supplementary from 'components/supplementary/supplementary'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 
 class Page extends Component {
   render () {
-    const { phases, isLoggedIn, appError } = this.props
+    const { phases, supplementary, isLoggedIn, appError } = this.props
 
-    let isLoading = ''
-    let isLoaded = 'hidden'
-    let hasError = 'hidden'
+    let showWhenLoading = ''
+    let showWhenLoaded = 'hidden'
+    let showWhenHasError = 'hidden'
 
-    if (phases.length > 0) {
-      isLoading = 'hidden'
-      isLoaded = ''
+    if (phases.length > 0) { // assumes there will always be both supplementary and phases
+      showWhenLoading = 'hidden'
+      showWhenLoaded = ''
     }
 
     if (appError) {
-      hasError = ''
-      isLoading = 'hidden'
+      showWhenHasError = ''
+      showWhenLoading = 'hidden'
     }
 
     return (
       <div>
         <Header isLoggedIn={isLoggedIn} />
-        <div className={isLoading}>
+        <div className={showWhenLoading}>
           <Spinner />
         </div>
-        <div className={isLoaded}>
+        <div className={showWhenLoaded}>
           <Timeline phases={phases} />
         </div>
-        <div className={hasError}>
+        <div className={showWhenLoaded}>
+          <Supplementary cards={supplementary} />
+        </div>
+        <div className={showWhenHasError}>
           <Error />
         </div>
         {/* footer component will go here */}
@@ -45,7 +49,8 @@ Page.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   appError: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.string
+    PropTypes.string,
+    PropTypes.object
   ])
 }
 

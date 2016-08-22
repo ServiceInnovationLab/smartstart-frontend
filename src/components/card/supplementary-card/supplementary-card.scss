@@ -1,0 +1,18 @@
+@import 'variables';
+
+// supplementary topic cards
+.supplementary > .card {
+  background-color: $background-color;
+  margin-bottom: 0;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  > h3 {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+  }
+}

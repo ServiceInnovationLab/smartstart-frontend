@@ -1,0 +1,40 @@
+@import 'variables';
+
+.supplementary {
+  background-color: $supplementary-background-color;
+
+  > h2 {
+    position: relative;
+    background-color: $supplementary-header-color;
+    font-size: 26px;
+    font-weight: normal;
+    text-align: center;
+    padding: 40px 0;
+    margin-bottom: 30px + $supplementary-arrow;
+
+    @media #{$desktop-and-above} {
+      font-size: 38px;
+      margin-bottom: 60px + $supplementary-arrow-desktop;
+    }
+
+    // triangle pointer that points down
+    &::after {
+      content: "";
+      border-width: $supplementary-arrow $supplementary-arrow 0 $supplementary-arrow;
+      border-color: $supplementary-header-color transparent transparent transparent;
+      border-style: solid;
+      width: 0;
+      height: 0;
+      position: absolute;
+      bottom: -$supplementary-arrow;
+      left: calc(50% - #{($supplementary-arrow)});
+      z-index: 1;
+
+      @media #{$desktop-and-above} {
+        border-width: $supplementary-arrow-desktop $supplementary-arrow-desktop 0 $supplementary-arrow-desktop;
+        left: calc(50% - #{($supplementary-arrow-desktop)});
+        bottom: -$supplementary-arrow-desktop;
+      }
+    }
+  }
+}

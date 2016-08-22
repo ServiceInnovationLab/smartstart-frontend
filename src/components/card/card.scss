@@ -17,6 +17,7 @@
     margin-right: auto;
   }
 
+  // triangle pointer that links to timeline line
   &::before {
     content: "";
     border-width: $card-arrow $card-arrow $card-arrow 0;
@@ -35,6 +36,7 @@
     }
   }
 
+  // curved bottom
   &::after {
     content: "";
     display: block;
