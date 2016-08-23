@@ -94,6 +94,14 @@
       }
     }
 
+    // remove inner top and bottom margins from any expandable content areas
+    .content > :first-child {
+      margin-top: 0;
+    }
+    .content > :last-child {
+      margin-bottom: 0;
+    }
+
     > .content {
       display: block;
       background-color: $card-accordion-color;
@@ -101,13 +109,6 @@
       position: relative;
       margin-bottom: 60px;
       z-index: 0;
-
-      *:first-child {
-        margin-top: 0;
-      }
-      *:last-child {
-        margin-bottom: 0;
-      }
 
       &::after {
         content: "";
