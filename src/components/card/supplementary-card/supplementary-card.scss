@@ -1,0 +1,91 @@
+@import 'variables';
+
+// supplementary topic cards
+.supplementary > .card {
+  margin-bottom: 0;
+  margin-left: 0;
+  padding: 0;
+  min-height: 0;
+  border-top: 1px solid $supplimentary-accordian-border-color;
+
+  @media #{$desktop-and-above} {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $supplimentary-accordian-border-color;
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  > .expandable-title-wrapper > .expandable-title {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    padding-left: 20px;
+    background-color: $supplementary-background-color;
+    color: $text-color;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &.is-expanded > .expandable-title-wrapper > .expandable-title {
+    background-color: $supplementary-content-background-color;
+  }
+
+  // content once expanded
+  > .content {
+    background-color: $supplementary-content-background-color;
+    margin-bottom: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  // nested expandable
+  .richtext.expandable .expandable-title {
+    background-color: $supplementary-nested-accordion-color;
+    color: $text-color;
+
+    &::before {
+      background-color: $supplementary-nested-accordion-color;
+    }
+
+    &::after {
+      color: $text-color;
+    }
+
+    &:hover {
+      background-color: $supplementary-nested-accordion-open-color;
+
+      &::before {
+        background-color: $supplementary-nested-accordion-open-color;
+      }
+    }
+  }
+
+  // nested expandable - expanded
+  .expandable.richtext.is-expanded > .expandable-title-wrapper > .expandable-title {
+    background-color: $supplementary-nested-accordion-open-color;
+
+    &::before {
+      background-color: $supplementary-nested-accordion-open-color;
+    }
+  }
+
+  // nested content area
+  .expandable.richtext .content {
+    background-color: $supplementary-nested-content-background-color;
+
+    &::after {
+      background-color: $supplementary-nested-content-background-color;
+    }
+  }
+}

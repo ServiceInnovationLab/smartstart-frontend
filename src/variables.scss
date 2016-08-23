@@ -4,9 +4,6 @@ $tablet-and-above:     'only screen and (min-width: 768px)';
 $tablet-only:          'only screen and (min-width: 768px and max-width: 991px)';
 $desktop-and-above:    'only screen and (min-width: 992px)';
 
-// font
-$font-family-base:     'fira-sans', sans-serif;
-
 // brand colors
 $realme-dark-blue:     #3e4d5d;
 $accent-color-dark:    #66b3aa;
@@ -26,6 +23,12 @@ $default-border-radius: 18px;
 $desktop-max-content-width: 1140px;
 $mobile-min-content-width: 320px;
 
+// typography
+$font-size-base: 16px;
+$line-height-base: 1.625; // 26px for 16px base size
+$font-family-base: 'fira-sans', sans-serif;
+$font-family-headers: 'merriweather', serif;
+
 // header
 $header-background-color: $realme-dark-blue;
 $header-desktop-padding-left: 160px;
@@ -33,6 +36,9 @@ $header-desktop-padding-left: 160px;
 // timeline
 $timeline-border-width: 2px;
 $timeline-spacing:      65px;
+$timeline-line-left-mobile: 41px;
+$timeline-line-left-desktop: -407px;
+$timeline-terminator-size: 15px;
 
 // phase
 $phase-background-color:      $accent-color;
@@ -62,6 +68,18 @@ $left-side-curve-width: 40px;
 $task-border-color:       #d2d2d2;
 $task-end-color:          #367bbf;
 $task-end-checked-color:  #d2d2d2;
+
+// supplementary information section
+$supplementary-background-color:          #fef4e3;
+$supplementary-header-color:              #fde4bb;
+$supplementary-arrow:                     $card-arrow;
+$supplementary-arrow-desktop:             $card-arrow-desktop;
+$supplimentary-accordian-border-color:    #fcc977;
+$supplementary-content-background-color:  #fef9f1;
+
+$supplementary-nested-accordion-color:          #e8e5e5;
+$supplementary-nested-accordion-open-color:     $supplementary-header-color;
+$supplementary-nested-content-background-color: #feefd6;
 
 // icons
 $icon-accordian-close:  '\e900';

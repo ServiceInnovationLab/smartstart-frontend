@@ -7,6 +7,7 @@ export const RECEIVE_API = 'RECEIVE_API'
 export const APPLICATION_ERROR = 'APPLICATION_ERROR'
 export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION'
 export const PIWIK_TRACK = 'PIWIK_TRACK'
+export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
 
 function requestAPI () {
   return {
@@ -39,6 +40,13 @@ function checkAuthentication (isLoggedIn) {
 function piwikTrack () {
   return {
     type: PIWIK_TRACK
+  }
+}
+
+function activeSupplementary (supplementaryID) {
+  return {
+    type: SUPPLEMENTARY_OPEN,
+    activeSupplementary: supplementaryID
   }
 }
 
@@ -88,5 +96,11 @@ export function piwikTrackPost (piwikAction) {
       // fail silently, pretend the action happened anyhow
       dispatch(piwikTrack())
     })
+  }
+}
+
+export function activateSupplementary (id) {
+  return dispatch => {
+    dispatch(activeSupplementary(id))
   }
 }
