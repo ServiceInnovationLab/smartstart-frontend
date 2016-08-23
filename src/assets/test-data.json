@@ -6,6 +6,53 @@
       "label": "Weeks 0-12",
       "elements": [
         {
+            "lastEdited": "2016-08-17 17:52:54",
+            "created": "2016-08-08 10:44:06",
+            "label": "Decide what screening to have",
+            "version": 23,
+            "id": 141,
+            "containedElementIDs": ":142:143:144:",
+            "tags": [
+                "boac_presentation::top-of-phase"
+            ],
+            "elements": [
+                {
+                    "lastEdited": "2016-08-17 17:52:54",
+                    "created": "2016-08-08 10:47:00",
+                    "version": 20,
+                    "id": 142,
+                    "content": "<p>You'll be told about other screening you can get during your pregnancy, including screening for:</p><ul><li>Down Syndrome and other conditions</li><li>to check for twins</li><li>to estimate your due date.</li></ul><p>You may be charged for some of this screening.</p><p><a href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/antenatal-screening-down-syndrome-and-other-conditions\" data-mce-href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/antenatal-screening-down-syndrome-and-other-conditions\">Screening for Down Syndrome and other conditions</a></p>",
+                    "tags": [],
+                    "type": "richtext"
+                },
+                {
+                    "lastEdited": "2016-08-17 17:52:54",
+                    "created": "2016-08-08 10:50:28",
+                    "label": "The first free antenatal blood test",
+                    "version": 20,
+                    "id": 143,
+                    "content": "<p>The first test you can get is a free blood test. You can choose to test for:</p><ul><li>HIV</li><li>syphilis</li><li>diabetes or your risk of developing diabetes</li><li>your resistance to rubella</li><li>your blood type and antibodies.</li></ul><p>Your doctor or lead maternity carer can refer you for this test.</p><p><a href=\"https://www.nsu.govt.nz/resources/antenatal-blood-test-fact-sheet\" data-mce-href=\"https://www.nsu.govt.nz/resources/antenatal-blood-test-fact-sheet\">Antenatal blood tests</a></p><p><a href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/hiv-testing-pregnancy\" data-mce-href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/hiv-testing-pregnancy\">HIV screening</a></p>",
+                    "tags": [
+                        "boac_presentation::auxiliary"
+                    ],
+                    "type": "richtext"
+                },
+                {
+                    "lastEdited": "2016-08-17 17:52:54",
+                    "created": "2016-08-08 10:51:12",
+                    "label": "Further screening",
+                    "version": 20,
+                    "id": 144,
+                    "content": "<p>You'll be told about other screening you can get during your pregnancy, including screening for:</p><ul><li>Down Syndrome and other conditions</li><li>to check for twins</li><li>to estimate your due date.</li></ul><p>You may be charged for some of this screening.</p><p><a href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/antenatal-screening-down-syndrome-and-other-conditions\" data-mce-href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/antenatal-screening-down-syndrome-and-other-conditions\">Screening for Down Syndrome and other conditions</a></p>",
+                    "tags": [
+                        "boac_presentation::auxiliary"
+                    ],
+                    "type": "richtext"
+                }
+            ],
+            "type": "card"
+        },
+        {
           "id": 12,
           "type": "card",
           "label": "Choose a lead maternity carer",
@@ -163,44 +210,164 @@
       "elements": []
     }
   ],
-  "tagGroups": [
-    {
-      "id": 1,
-      "title": "Card presentation",
-      "code": "boac_presentation",
-      "tags": [
+    "tagGroups": [
         {
-          "title": "Summary",
-          "code": "summary"
+            "id": 15,
+            "title": "BOAC Special",
+            "code": "boac_special",
+            "allowMultiple": "0",
+            "isOrdered": null,
+            "tags": [
+                {
+                    "title": "All Phases",
+                    "code": "all_phases",
+                    "qualifiedCode": "boac_special::all_phases",
+                    "sort": 0,
+                    "description": "This is used to tag the parent card for all the phases for the event map."
+                },
+                {
+                    "title": "Supplementary info",
+                    "code": "supplementary",
+                    "qualifiedCode": "boac_special::supplementary",
+                    "sort": 0,
+                    "description": "Is used to tag the additional topics which aren't covered in the life event map."
+                },
+                {
+                    "title": "Privacy and copyright",
+                    "code": "about",
+                    "qualifiedCode": "boac_special::about",
+                    "sort": 0,
+                    "description": "Used to tag content about the site such as the privacy statement and copyright."
+                }
+            ]
         },
         {
-          "title": "Auxiliary (e.g. accordion)",
-          "code": "auxiliary"
-        },
-        {
-          "title": "Task",
-          "code": "task"
-        },
-        {
-          "title": "Link button",
-          "code": "link-button"
+            "id": 16,
+            "title": "BOAC presentation",
+            "code": "boac_presentation",
+            "allowMultiple": "0",
+            "isOrdered": null,
+            "tags": [
+                {
+                    "title": "Auxiliary",
+                    "code": "auxiliary",
+                    "qualifiedCode": "boac_presentation::auxiliary",
+                    "sort": 0,
+                    "description": "Auxiliary content, intended for a disclosure widget or similar"
+                },
+                {
+                    "title": "Task",
+                    "code": "task",
+                    "qualifiedCode": "boac_presentation::task",
+                    "sort": 0,
+                    "description": null
+                },
+                {
+                    "title": "Link button",
+                    "code": "link-button",
+                    "qualifiedCode": "boac_presentation::link-button",
+                    "sort": 0,
+                    "description": null
+                },
+                {
+                    "title": "Top of phase",
+                    "code": "top-of-phase",
+                    "qualifiedCode": "boac_presentation::top-of-phase",
+                    "sort": 0,
+                    "description": "Example to show health content out of context"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Topics",
-      "code": "topic",
-      "tags": [
+    ],
+    "supplementary": [
         {
-          "title": "Health",
-          "code": "health"
+            "lastEdited": "2016-08-12 11:05:02",
+            "created": "2016-08-08 11:38:23",
+            "label": "Your options about pregnancy",
+            "version": 3,
+            "id": 169,
+            "containedElementIDs": ":170:171:",
+            "tags": [],
+            "elements": [
+                {
+                    "lastEdited": "2016-08-12 11:05:02",
+                    "created": "2016-08-08 11:39:30",
+                    "label": "an expandable content section with quite a long name on it",
+                    "version": 1,
+                    "id": 170,
+                    "content": "<p>some content in here</p>",
+                    "tags": [
+                        "boac_presentation::auxiliary"
+                    ],
+                    "type": "richtext"
+                }
+            ],
+            "type": "card"
         },
         {
-          "title": "Finance",
-          "code": "finance"
+            "lastEdited": "2016-08-23 14:39:49",
+            "created": "2016-08-08 11:35:22",
+            "label": "Postnatal depression",
+            "version": 4,
+            "id": 166,
+            "containedElementIDs": ":167:",
+            "tags": [],
+            "elements": [
+                {
+                    "lastEdited": "2016-08-23 14:39:49",
+                    "created": "2016-08-08 11:36:46",
+                    "version": 3,
+                    "id": 167,
+                    "content": "<p>Postnatal depression affects some parents in the first year after having a baby.</p><h4>Signs</h4><p>It's normal to feel down, unsure or anxious in the first few weeks after having your baby. If these feelings last longer than a few weeks, they could be signs of postnatal depression.</p><p>Signs include:</p><ul><li>crying a lot</li><li>feeling hopeless, alone or guilty</li><li>feeling angry</li><li>not sleeping</li><li>feeling that you're a bad parent</li><li>thoughts of harming you or your baby.</li></ul><h4>Getting help</h4><p>Postnatal depression is treated with medication and therapy. Talk to your:</p><ul><li>midwife or obstetrician</li><li>Well Child Tamariki Ora nurse</li><li>family doctor or practice nurse.</li></ul><p>You can also call the depression or Plunket advice lines:</p><ul><li>Depression freephone: 0800 111 757</li><li>Plunketline freephone: 0800 933 922</li></ul>",
+                    "tags": [],
+                    "type": "richtext"
+                }
+            ],
+            "type": "card"
         }
-      ]
-    }
-  ]
+    ],
+    "about": [
+        {
+            "lastEdited": "2016-08-17 17:39:29",
+            "created": "2016-08-08 15:07:17",
+            "label": "Copyright and attribution",
+            "version": 4,
+            "id": 213,
+            "containedElementIDs": ":214:",
+            "tags": [],
+            "elements": [
+                {
+                    "lastEdited": "2016-08-17 17:39:29",
+                    "created": "2016-08-08 15:07:43",
+                    "version": 3,
+                    "id": 214,
+                    "content": "<p>Copyright in photographs on Bundle is not owned, or licensed to you, by the Crown. Unless otherwise stated in relation to specific photographs, you cannot copy, distribute or adapt any photograph without the agreement of the copyright owner.</p><p>The New Zealand Government logo, Coat of Arms and other logos, emblems and trade marks on Bundle are protected by law.&nbsp; You must not copy or use logo, emblem or trade mark without express permission and compliance with applicable laws. &nbsp;</p>",
+                    "tags": [],
+                    "type": "richtext"
+                }
+            ],
+            "type": "card"
+        },
+        {
+            "lastEdited": "2016-08-17 15:22:04",
+            "created": "2016-08-08 13:24:09",
+            "label": "Your privacy",
+            "version": 7,
+            "id": 187,
+            "containedElementIDs": ":188:",
+            "tags": [],
+            "elements": [
+                {
+                    "lastEdited": "2016-08-17 15:22:04",
+                    "created": "2016-08-08 13:44:20",
+                    "version": 6,
+                    "id": 188,
+                    "content": "<h2>Personal information submitted to the Department of Internal Affairs (Internal Affairs)</h2><p>Internal Affairs collects personal information in order to provide you with a variety of services (for example, in the provision of passports and birth certificates). You may browse and access information contained within this website without providing personal information, however, where you voluntarily provide personal information (e.g. through online forms or applications) we will keep and use that information for the purpose with which it was collected. If you want further information about Internal Affairs’ general privacy policy use the following link:</p><p><a href=\"https://www.dia.govt.nz/Legal-Privacy-Index\" data-mce-href=\"https://www.dia.govt.nz/Legal-Privacy-Index\">Learn more about general privacy issues and personal information related to the Internal Affairs’ services.</a></p>",
+                    "tags": [],
+                    "type": "richtext"
+                }
+            ],
+            "type": "card"
+        }
+    ]
 }

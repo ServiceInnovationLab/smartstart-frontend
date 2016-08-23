@@ -2,6 +2,11 @@
 
 .supplementary {
   background-color: $supplementary-background-color;
+  padding-bottom: 60px;
+
+  @media #{$desktop-and-above} {
+    padding-bottom: 80px;
+  }
 
   > h2 {
     position: relative;
