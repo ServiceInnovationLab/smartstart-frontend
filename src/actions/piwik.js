@@ -1,7 +1,10 @@
 /* globals PIWIK_SITE, URLSearchParams */
+/* exported URLSearchParams */
 /*
  * Additional utilities to facilitate Piwik actions
  */
+
+const URLSearchParams = require('url-search-params') // URLSearchParams polyfill
 
 let piwikDefaults = {
   idsite: PIWIK_SITE,
