@@ -20,50 +20,64 @@ syntax correctness by running:
 
 `npm lint`
 
-## Creating and deploying a build
-
-You must have a clean git tree in order to make the build. To create the build,
-run `npm run build`. The build will be created in the `dist/` folder. A
-`VERSION.txt` file will also be added, with the short hash of the most recent
-git commit.
-
 ## Using local test data
 
 Alternatively, you can run a variant of these commands to use a local data
-fixture (as opposed to whatever the default API endpoint is).
+fixture (as opposed to whatever the default API endpoint is):
 
-For the devserver:
+`npm run start:testdata`
 
-`npm run start:local`
+This is also a recent snapshot of the govt.nz content available locally by
+using:
 
-For the build:
+`npm run start:snapshot`
 
-`npm run build:local`
-
-## Changing which Piwik site is connected
-
-A `--piwik` command line argument can be supplied to switch between the
-different Piwik site environments, as specified in `config.js`. For example,
-`npm run build -- --piwik testing` (note that npm run requires an extra -- to
-delimit command line arguments) will build the site into`/dist` with the correct
-Piwik site ID for the `testing.bundle.services.govt.nz` instance.
-
-By default all builds will be connected to the `development` Piwik instance,
-which many environments are connected too. "Proper" environments like UAT and
-testing should have an exclusive relationship to a Piwik site ID.
-
-Development server instances should not need to override the default Piwik
-`development` site ID.
-
-### For ansible builds
-
-As a shortcut, to enable the correct Piwik ID when building
-`testing.bundle.services.govt.nz`, run the command `npm run build:testing`.
-
-## Running with the backend too
+## Developing with the backend too
 
 You must use a cloud environment to enable login and personalisation
 functionality. Follow the instructions in the `README.md` in the [ops
 repository](https://gitlab.catalyst.net.nz/lef/ops). Once ssh'd in to the
 frontend server you can do `cd project` and then if you would like to run the
 development server rather than the built version, run `run-dev`.
+
+## Creating a build for deployment
+
+You must have a clean git tree in order to make the build. To create the build,
+Ansible from the ops repository will run `npm run build`.
+
+The build will be created in the `dist/` folder. A `VERSION.txt` file will also
+be added, with the short hash of the most recent git commit.
+
+### Required command line arguments for the build
+
+There are two required command line arguements that must be provided with the
+`npm run build` command. A set of command line arguments specified to npm run
+needs a preceeding ` -- ` first.
+
+#### endpoint
+
+This specifies the path to the content API. It should be a local path, or an
+URL.
+
+For example for the govt.nz test API endpoint:
+
+`npm run build -- --endpoint https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all`
+
+#### piwik
+
+This stipulates which Piwik site ID number to use. It should be a numeric value.
+
+For example for the development servers Piwik ID number:
+
+`npm run build -- --piwik 2`
+
+#### A full example
+
+`npm run build -- --piwik 1 --endpoint /assets/test-data.json`
+
+### Building locally
+
+If you want to mimic the Ansible build process locally, there are two shortcut
+commands for common local configuration: `npm run build:testdata` and `npm run
+build:externaltest` which point to the local test data and govt.nz's test API
+respectively.

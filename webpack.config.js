@@ -8,7 +8,8 @@ const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
 const yargs = require('yargs').argv
-const CONFIG = require('./config.js')
+
+const piwikInstance = 'https://analytics.bundle.services.govt.nz/piwik.php'
 
 const sassLoaders = [
   'css-loader',
@@ -22,15 +23,17 @@ const PATHS = {
 }
 
 // determine which api endpoint to use
-var API_PATH = CONFIG.apiPaths[CONFIG.defaults.apiPaths]
-if (yargs.endpoint && CONFIG.apiPaths.hasOwnProperty(yargs.endpoint)) {
-  API_PATH = CONFIG.apiPaths[yargs.endpoint]
+if (yargs.endpoint) {
+  API_PATH = yargs.endpoint
+} else {
+  throw 'Error: API endpoint not specified'
 }
 
 // determine which piwik site to use
-var PIWIK_SITE = CONFIG.piwikEnvs[CONFIG.defaults.piwikEnvs]
-if (yargs.piwik && CONFIG.piwikEnvs.hasOwnProperty(yargs.piwik)) {
-  PIWIK_SITE = CONFIG.piwikEnvs[yargs.piwik]
+if (yargs.piwik) {
+  PIWIK_SITE = yargs.piwik
+} else {
+  throw 'Error: Piwik site ID not specified'
 }
 
 // config that is shared between all types of build
@@ -108,7 +111,7 @@ switch (runCommand) {
           'process.env': {NODE_ENV: JSON.stringify('production')},
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
-          PIWIK_INSTANCE: JSON.stringify(CONFIG.piwikInstance)
+          PIWIK_INSTANCE: JSON.stringify(piwikInstance)
         }),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
@@ -128,7 +131,7 @@ switch (runCommand) {
           'process.env': {NODE_ENV: JSON.stringify('development')},
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
-          PIWIK_INSTANCE: JSON.stringify(CONFIG.piwikInstance)
+          PIWIK_INSTANCE: JSON.stringify(piwikInstance)
         })
       ]
     })
