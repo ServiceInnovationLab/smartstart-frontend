@@ -1,3 +1,5 @@
+/* globals API_PATH:true, PIWIK_SITE:true */
+
 const autoprefixer = require('autoprefixer')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -26,14 +28,14 @@ const PATHS = {
 if (yargs.endpoint) {
   API_PATH = yargs.endpoint
 } else {
-  throw 'Error: API endpoint not specified'
+  throw new Error('API endpoint not specified')
 }
 
 // determine which piwik site to use
 if (yargs.piwik) {
   PIWIK_SITE = yargs.piwik
 } else {
-  throw 'Error: Piwik site ID not specified'
+  throw new Error('Piwik site ID not specified')
 }
 
 // config that is shared between all types of build

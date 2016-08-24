@@ -8,6 +8,7 @@ export const APPLICATION_ERROR = 'APPLICATION_ERROR'
 export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION'
 export const PIWIK_TRACK = 'PIWIK_TRACK'
 export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
+export const SET_DUE_DATE = 'SET_DUE_DATE'
 
 function requestAPI () {
   return {
@@ -47,6 +48,13 @@ function activeSupplementary (supplementaryID) {
   return {
     type: SUPPLEMENTARY_OPEN,
     activeSupplementary: supplementaryID
+  }
+}
+
+function setDueDate (date) {
+  return {
+    type: SET_DUE_DATE,
+    dueDate: date
   }
 }
 
@@ -102,5 +110,11 @@ export function piwikTrackPost (piwikAction) {
 export function activateSupplementary (id) {
   return dispatch => {
     dispatch(activeSupplementary(id))
+  }
+}
+
+export function addDueDate (date) {
+  return dispatch => {
+    dispatch(setDueDate(date))
   }
 }

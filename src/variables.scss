@@ -15,6 +15,7 @@ $background-color:     #ffffff;
 $text-color:           #4f4b46;
 $link-color:           #285a9b;
 $link-color-hover:     $realme-dark-blue;
+$error-color:          #E30013;
 
 $border-color: #d2d2d2;
 
@@ -32,6 +33,10 @@ $font-family-headers: 'merriweather', serif;
 // header
 $header-background-color: $realme-dark-blue;
 $header-desktop-padding-left: 160px;
+$header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
+
+// settings panel
+$settings-elements-color: #65717D;
 
 // timeline
 $timeline-border-width: 2px;
@@ -80,6 +85,11 @@ $supplementary-content-background-color:  #fef9f1;
 $supplementary-nested-accordion-color:          #e8e5e5;
 $supplementary-nested-accordion-open-color:     $supplementary-header-color;
 $supplementary-nested-content-background-color: #feefd6;
+
+// z-index index
+$z-index-header: 2;
+$z-index-settings-trigger: 1;
+$z-index-settings-pane: 1;
 
 // icons
 $icon-accordian-close:  '\e900';

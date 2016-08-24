@@ -11,7 +11,7 @@ class Timeline extends Component {
       <div className='timeline' data-test='timeline'>
         {phases.map((phase, index) => {
           if (!phase.elements) { phase.elements = [] } // a phase can be empty
-          return <Phase key={phase.id} title={phase.label} cards={phase.elements} number={index} />
+          return <Phase key={phase.id} title={phase.label} cards={phase.elements} number={index + 1} />
         })}
       </div>
     )

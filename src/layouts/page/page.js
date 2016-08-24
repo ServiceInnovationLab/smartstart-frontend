@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Header from 'layouts/header/header'
+import SettingsPane from 'components/settings-pane/settings-pane'
 import Timeline from 'components/timeline/timeline'
 import Supplementary from 'components/supplementary/supplementary'
 import Spinner from 'components/spinner/spinner'
@@ -30,9 +31,8 @@ class Page extends Component {
           <Spinner />
         </div>
         <div className={showWhenLoaded}>
+          <SettingsPane isLoggedIn={isLoggedIn} />
           <Timeline phases={phases} />
-        </div>
-        <div className={showWhenLoaded}>
           <Supplementary cards={supplementary} />
         </div>
         <div className={showWhenHasError}>

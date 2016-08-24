@@ -1,5 +1,13 @@
 import { combineReducers } from 'redux'
-import { REQUEST_API, RECEIVE_API, CHECK_AUTHENTICATION, APPLICATION_ERROR, PIWIK_TRACK, SUPPLEMENTARY_OPEN } from 'actions/actions'
+import {
+  REQUEST_API,
+  RECEIVE_API,
+  CHECK_AUTHENTICATION,
+  APPLICATION_ERROR,
+  PIWIK_TRACK,
+  SUPPLEMENTARY_OPEN,
+  SET_DUE_DATE
+} from 'actions/actions'
 
 function contentActions (state = {
   isFetching: false,
@@ -23,12 +31,17 @@ function contentActions (state = {
 }
 
 function personalisationActions (state = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  dueDate: null
 }, action) {
   switch (action.type) {
     case CHECK_AUTHENTICATION:
       return Object.assign({}, state, {
         isLoggedIn: action.isLoggedIn
+      })
+    case SET_DUE_DATE:
+      return Object.assign({}, state, {
+        dueDate: action.dueDate
       })
     default:
       return state

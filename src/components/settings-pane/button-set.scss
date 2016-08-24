@@ -1,0 +1,21 @@
+@import 'variables';
+
+.button-set {
+  border-top: 1px solid $header-background-color;
+  margin-top: 20px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+
+  .button,
+  button {
+    min-width: 0;
+    margin-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    &:first-child  {
+      margin-left: 0;
+    }
+  }
+}

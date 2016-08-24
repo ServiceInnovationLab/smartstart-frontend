@@ -53,11 +53,16 @@ class Richtext extends Component {
     )
     let expandableHeader = null
     let contentId = 'content-' + this.props.id
+    let contentProperties = {
+      id: contentId,
+      dangerouslySetInnerHTML: markup
+    }
 
     if (this.state.showExpandableHeader) {
       expandableHeader = <div className='expandable-title-wrapper'><h4
         className='expandable-title'
         aria-controls={contentId}
+        aria-expanded={this.state.isExpanded}
         onClick={this.expandableToggle.bind(this)}
         tabIndex='0'
         onKeyPress={this.expandableKeyPress.bind(this)}
@@ -67,10 +72,17 @@ class Richtext extends Component {
       </h4></div>
     }
 
+    if (this.state.isExpandable) {
+      contentProperties['aria-hidden'] = !this.state.isExpanded
+    }
+
     return (
       <div className={richtextClasses}>
         {expandableHeader}
-        <div id={contentId} className='content' dangerouslySetInnerHTML={markup} />
+        <div
+          {...contentProperties}
+          className='content'
+        />
       </div>
     )
   }
