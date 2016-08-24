@@ -2,20 +2,20 @@ import './phase.scss'
 
 import React, { PropTypes, Component } from 'react'
 import Card from 'components/card/card'
-import TopOfPhaseCard from 'components/card/top-of-phase-card/top-of-phase-card'
+import NonChronologicalCard from 'components/card/non-chronological-card/non-chronological-card'
 
 class Phase extends Component {
   render () {
     const { cards, number, title } = this.props
     let normalCards = []
-    let topOfPhaseCards = []
+    let nonChronologicalCards = []
 
     cards.map((card) => {
       if (!card.elements) { card.elements = [] } // a card can be empty
 
       // some cards need to be moved up to the top of the phase
-      if (card.tags.indexOf('boac_presentation::top-of-phase') >= 0) {
-        topOfPhaseCards.push(<TopOfPhaseCard key={card.id} id={card.id} title={card.label} elements={card.elements} />)
+      if (card.tags.indexOf('boac_presentation::non-chronological') >= 0) {
+        nonChronologicalCards.push(<NonChronologicalCard key={card.id} id={card.id} title={card.label} elements={card.elements} />)
       } else {
         normalCards.push(<Card key={card.id} title={card.label} elements={card.elements} />)
       }
@@ -29,7 +29,7 @@ class Phase extends Component {
         </h2>
 
         {normalCards}
-        {topOfPhaseCards}
+        {nonChronologicalCards}
       </div>
     )
   }

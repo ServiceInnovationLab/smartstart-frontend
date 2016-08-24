@@ -1,11 +1,11 @@
 import 'components/richtext/expandable.scss' // depends on the normal expandable styles
-import './top-of-phase-card.scss'
+import './non-chronological-card.scss'
 
 import React, { PropTypes } from 'react'
 import Card from 'components/card/card' // we subclass this component
 import classNames from 'classnames'
 
-class TopOfPhaseCard extends Card {
+class NonChronologicalCard extends Card {
   constructor (props) {
     super(props)
 
@@ -32,15 +32,15 @@ class TopOfPhaseCard extends Card {
   render () {
     const { id, title, elements } = this.props
     let contentId = 'content-' + id
-    let topofphaseClasses = classNames(
+    let nonchronologicalClasses = classNames(
       'card',
-      'top-of-phase',
+      'non-chronological',
       'expandable',
       { 'is-expanded': this.state.isExpanded }
     )
 
     return (
-      <div className={topofphaseClasses} data-test='top-of-phase-card'>
+      <div className={nonchronologicalClasses} data-test='non-chronological-card'>
         <div className='expandable-title-wrapper'><h3
           data-test='cardTitle'
           className='expandable-title'
@@ -63,9 +63,9 @@ class TopOfPhaseCard extends Card {
   }
 }
 
-TopOfPhaseCard.propTypes = {
+NonChronologicalCard.propTypes = {
   title: PropTypes.string.isRequired,
   elements: PropTypes.array.isRequired
 }
 
-export default TopOfPhaseCard
+export default NonChronologicalCard

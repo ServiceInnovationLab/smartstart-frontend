@@ -1,6 +1,6 @@
 @import 'variables';
 
-.top-of-phase.card.expandable {
+.non-chronological.card.expandable {
   background-color: transparent;
   padding: 0;
   margin-left: $timeline-spacing;
@@ -26,21 +26,21 @@
 
   // top level expandable
   .expandable-title {
-    background-color: $top-of-phase-accordion-color;
+    background-color: $non-chronological-accordion-color;
     color: $text-color;
     border-width: 1px 0;
     border-style: solid;
-    border-color: $top-of-phase-accordion-border-color;
+    border-color: $non-chronological-accordion-border-color;
 
     @media #{$desktop-and-above} {
       border-right-width: 1px;
     }
 
     &::before {
-      background-color: $top-of-phase-accordion-color;
+      background-color: $non-chronological-accordion-color;
       border-width: 1px 0 1px 1px;
       border-style: solid;
-      border-color: $top-of-phase-accordion-border-color;
+      border-color: $non-chronological-accordion-border-color;
       box-sizing: content-box;
       bottom: -1px;
     }
@@ -55,11 +55,11 @@
 
     &:hover {
       color: $text-color;
-      background-color: $top-of-phase-accordion-open-color;
+      background-color: $non-chronological-accordion-open-color;
       border: none; //remove border
 
       &::before {
-        background-color: $top-of-phase-accordion-open-color;
+        background-color: $non-chronological-accordion-open-color;
         border: none; //remove border
         bottom: 0;
       }
@@ -76,11 +76,11 @@
 
   // nested expandable
   .richtext.expandable .expandable-title {
-    background-color: $top-of-phase-nested-accordion-color;
+    background-color: $non-chronological-nested-accordion-color;
     border: none; //remove border
 
     &::before {
-      background-color: $top-of-phase-nested-accordion-color;
+      background-color: $non-chronological-nested-accordion-color;
       border: none; //remove border
       bottom: 0;
     }
@@ -94,10 +94,10 @@
     }
 
     &:hover {
-      background-color: $top-of-phase-nested-accordion-open-color;
+      background-color: $non-chronological-nested-accordion-open-color;
 
       &::before {
-        background-color: $top-of-phase-nested-accordion-open-color;
+        background-color: $non-chronological-nested-accordion-open-color;
       }
 
       &::after {
@@ -109,11 +109,11 @@
   // top level expandable - expanded
   &.is-expanded > .expandable-title-wrapper > .expandable-title {
     color: $text-color;
-    background-color: $top-of-phase-accordion-open-color;
+    background-color: $non-chronological-accordion-open-color;
     border: none; //remove border
 
     &::before {
-      background-color: $top-of-phase-accordion-open-color;
+      background-color: $non-chronological-accordion-open-color;
       border: none; //remove border
       bottom: 0;
     }
@@ -129,10 +129,10 @@
 
   // nested expandable - expanded
   .richtext.expandable.is-expanded > .expandable-title-wrapper > .expandable-title {
-    background-color: $top-of-phase-nested-accordion-open-color;
+    background-color: $non-chronological-nested-accordion-open-color;
 
     &::before {
-      background-color: $top-of-phase-nested-accordion-open-color;
+      background-color: $non-chronological-nested-accordion-open-color;
     }
 
     &::after {
@@ -142,20 +142,20 @@
 
   // content area
   .content {
-    background-color: $top-of-phase-accordion-color;
+    background-color: $non-chronological-accordion-color;
 
     &::after {
-      background-color: $top-of-phase-accordion-color;
+      background-color: $non-chronological-accordion-color;
     }
   }
 
   // nested content area
   .richtext.expandable .content {
-    background-color: $top-of-phase-nested-accordion-color;
+    background-color: $non-chronological-nested-accordion-color;
     margin-bottom: 60px;
 
     &::after {
-      background-color: $top-of-phase-nested-accordion-color;
+      background-color: $non-chronological-nested-accordion-color;
     }
   }
 

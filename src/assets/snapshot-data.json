@@ -17,7 +17,7 @@
                     "id": 141,
                     "containedElementIDs": ":142:143:144:",
                     "tags": [
-                        "boac_presentation::top-of-phase"
+                        "boac_presentation::non-chronological"
                     ],
                     "elements": [
                         {
@@ -64,7 +64,7 @@
                     "id": 145,
                     "containedElementIDs": ":146:",
                     "tags": [
-                        "boac_presentation::top-of-phase"
+                        "boac_presentation::non-chronological"
                     ],
                     "elements": [
                         {
@@ -945,8 +945,8 @@
                 },
                 {
                     "title": "Top of phase",
-                    "code": "top-of-phase",
-                    "qualifiedCode": "boac_presentation::top-of-phase",
+                    "code": "non-chronological",
+                    "qualifiedCode": "boac_presentation::non-chronological",
                     "sort": 0,
                     "description": "Example to show health content out of context"
                 }
