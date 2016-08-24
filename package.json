@@ -9,6 +9,8 @@
     "build": "node build.js",
     "build:local": "node build.js --endpoint local",
     "build:testing": "node build.js --piwik testing",
+    "build:demo": "node build.js --piwik demo --endpoint snapshot",
+    "build:test02": "node build.js --piwik test02 --endpoint test",
     "start": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline",
     "start:local": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --endpoint local",
     "start:test": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --endpoint testing",

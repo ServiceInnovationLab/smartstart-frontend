@@ -12,13 +12,19 @@
 
 const apiPaths = {
   local: '/assets/test-data.json',
+  snapshot: '/assets/snapshot-data.json',
   testing: 'https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all',
   production: null
 }
 
 const piwikEnvs = {
   testing: 1,
-  development: 2 // all dev envs share the same piwik instance
+  development: 2, // all dev envs share the same piwik instance
+  uat: 3,
+  demo: 4,
+  test01: 5,
+  test02: 6,
+  test03: 7
 }
 
 const piwikInstance = 'https://analytics.bundle.services.govt.nz/piwik.php'

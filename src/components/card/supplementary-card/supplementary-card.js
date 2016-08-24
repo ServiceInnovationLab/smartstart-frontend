@@ -17,9 +17,8 @@ class SupplementaryCard extends Card {
   }
 
   expandableToggle () {
-
     // if it's not yet the active card, but it has stale state
-    if ((this.props.activeSupplementary !== (this.props.id)) && this.state.isExpanded)  {
+    if ((this.props.activeSupplementary !== (this.props.id)) && this.state.isExpanded) {
       // it's already got the right state, just need to do dispatch
     } else { // otherwise perform the normal toggle
       this.setState({
