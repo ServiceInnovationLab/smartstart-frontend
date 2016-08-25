@@ -30,8 +30,6 @@
   &::after {
     width: 124%;
     height: 76px;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
     top: 85px;
     left: -12%;
     z-index: -1;
@@ -87,9 +85,11 @@
       height: 204px;
       margin-left: -102px; // half of width
       top: 0;
-      // TODO illustration goes as background image here
-      // background-color: red;
-      // opacity: 0.2;
+
+      // TODO change illustration for different phases
+      background-image: url(/assets/img/illustration-3.png);
+      background-repeat: no-repeat;
+      background-size: contain;
 
       @media #{$desktop-and-above} {
         width: 340px;
