@@ -10,7 +10,7 @@ class Phase extends Component {
     super(props)
 
     this.state = {
-      formattedDate: '1st October 2017' // TODO this should be null normally, hardcoding for testing
+      formattedDate: null
     }
   }
 
