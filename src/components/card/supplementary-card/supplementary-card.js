@@ -52,6 +52,7 @@ class SupplementaryCard extends Card {
           data-test='cardTitle'
           className='expandable-title'
           aria-controls={contentId}
+          aria-expanded={this.state.isExpanded}
           tabIndex='0'
           onClick={this.expandableToggle.bind(this)}
           onKeyPress={this.expandableKeyPress.bind(this)}
@@ -60,7 +61,7 @@ class SupplementaryCard extends Card {
           <span className='visuallyhidden'> - {this.state.expandableVerb} this content</span>
         </h3></div>
 
-        <div id={contentId} className='content'>
+        <div id={contentId} aria-hidden={!this.state.isExpanded} className='content'>
           {this.props.elements.map(element =>
             this.elementType(element)
           )}

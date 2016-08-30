@@ -2,11 +2,21 @@
 
 .phase {
   padding-top: 210px;
+  padding-bottom: 20px;
   position: relative;
   overflow-x: hidden;
 
   @media #{$desktop-and-above} {
     padding-top: 340px;
+    padding-bottom: 40px;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+
+    @media #{$desktop-and-above} {
+      padding-bottom: 0;
+    }
   }
 
   &::before,
@@ -25,6 +35,10 @@
     @media #{$desktop-and-above} {
       height: 220px;
     }
+  }
+
+  &:first-child::before {
+    box-shadow: $header-subtle-dropshadow;
   }
 
   &::after {
@@ -54,6 +68,7 @@
       padding-right: 0;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 60px;
       position: relative; // on desktop, illustrations and phase number poistioned to max-content width
     }
 
@@ -112,8 +127,8 @@
   line-height: $phase-number-size;
   text-align: center;
   width: $phase-number-size;
-  height: $phase-number-size - 2px; // compensate for extra top padding
-  padding: 10px 8px 0;
+  height: $phase-number-size;
+  padding: 8px 8px 0;
   box-sizing: content-box;
   background-color: $background-color;
   position: absolute;
@@ -125,8 +140,8 @@
     font-size: $phase-number-size-desktop / 2;
     line-height: $phase-number-size-desktop;
     width: $phase-number-size-desktop;
-    height: $phase-number-size-desktop - 4px; // compensate for extra top padding
-    padding: 20px 16px 0;
+    height: $phase-number-size-desktop;
+    padding: 16px 16px 0;
     top: -150px;
     left: -87px;
   }
@@ -153,5 +168,22 @@
       height: $phase-number-size-desktop;
       margin: 16px;
     }
+  }
+}
+
+.phase-date {
+  font-family: $font-family-headers;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  margin-top: -20px;
+  margin-bottom: 35px;
+  padding-left: $timeline-spacing;
+  padding-right: $timeline-spacing;
+
+  @media #{$desktop-and-above} {
+    font-size: 28px;
+    margin-top: -40px;
+    margin-bottom: 60px;
   }
 }

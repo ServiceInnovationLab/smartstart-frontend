@@ -1,0 +1,144 @@
+@import 'variables';
+
+.settings {
+  position: relative;
+  min-width: $mobile-min-content-width;
+  max-width: $desktop-max-content-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.settings-trigger {
+  position: absolute;
+  z-index: $z-index-settings-trigger;
+  top: 0;
+  right: 20px;
+  // TODO check all these values
+  border-radius: 0 0 5px 5px;
+  border: 0 none;
+  background-color: $background-color;
+  min-width: 0;
+  font-weight: normal;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  padding-left: 36px;
+  padding-right: 12px;
+  box-shadow: $header-subtle-dropshadow;
+
+  &::before {
+    font-family: 'icomoon' !important;
+    content: $icon-personalise;
+    display: inline-block;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    margin-top: -8px;
+  }
+}
+
+.settings-pane {
+  visibility: hidden;
+  position: absolute;
+  z-index: $z-index-settings-pane;
+  color: $background-color;
+  background-color: $realme-dark-blue;
+  box-shadow: $header-subtle-dropshadow;
+  padding: $card-padding-desktop;
+  margin-left: 15px;
+  margin-right: 15px;
+  transform: translateY(calc(-100% - 60px)); // add on curved bottom space too
+  transition: transform 0.5s ease, visibility 1s;
+
+  &.is-open {
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  @media #{$tablet-and-above} {
+    max-width: 555px;
+    right: 0;
+  }
+
+  // curved bottom
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 60px;
+    background-color: $realme-dark-blue;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    position: absolute;
+    left: 0;
+    bottom: -30px;
+    z-index: -1;
+
+    @media #{$desktop-and-above} {
+      height: 96px;
+      bottom: -48px;
+    }
+  }
+
+  > h4:first-child {
+    margin-top: 0;
+  }
+
+  a {
+    color: $background-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $background-color;
+    }
+  }
+
+  input {
+    background-color: $settings-elements-color;
+    color: $background-color;
+
+    &::placeholder {
+      color: #C5CACE;
+    }
+
+    &::selection {
+      background: $realme-dark-blue;
+    }
+  }
+
+  .button-set {
+    border-top-color: #8B949D;
+
+    .button,
+    button {
+      background-color: $background-color;
+      border-color: $background-color;
+      color: $realme-dark-blue;
+
+      &:active,
+      &:hover {
+        background-color: $background-color;
+        border-color: $background-color;
+        color: $realme-dark-blue;
+      }
+    }
+
+    .reset-button,
+    .reset-button:active,
+    .reset-button:hover {
+      margin-right: auto; // to override justify-content: flex-end
+      padding-left: 0;
+      padding-right: 0;
+      border-color: transparent;
+      background-color: transparent;
+      color: $background-color;
+    }
+
+    .cancel-button,
+    .cancel-button:active,
+    .cancel-button:hover {
+      background-color: transparent;
+      color: $background-color;
+    }
+  }
+}

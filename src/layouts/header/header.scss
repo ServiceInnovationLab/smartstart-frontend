@@ -3,6 +3,8 @@
 .page-header {
   background-color: $header-background-color;
   min-width: $mobile-min-content-width;
+  position: relative;
+  z-index: $z-index-header; // above .settings-pane
 }
 
 .page-header-inner {
