@@ -33,6 +33,7 @@ h1 {
     height: 45px;
     background-size: contain;
     display: block;
+    visibility: hidden; // TODO remove this once branding is confirmed
 
     @media #{$desktop-and-above} {
       width: 160px;
