@@ -23,9 +23,9 @@
   }
 
   > .expandable-title-wrapper > .expandable-title {
+    font-size: $expandable-larger-font-size;
+    line-height: $expandable-larger-line-height;
     font-family: $font-family-base;
-    font-size: $font-size-base;
-    line-height: $line-height-base;
     padding-left: 20px;
     background-color: $supplementary-background-color;
     color: $text-color;
