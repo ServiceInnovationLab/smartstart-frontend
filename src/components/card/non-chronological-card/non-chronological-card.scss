@@ -25,6 +25,10 @@
   }
 
   // top level expandable
+  > .expandable-title-wrapper > .expandable-title {
+    font-size: $expandable-larger-font-size;
+    line-height: $expandable-larger-line-height;
+  }
   .expandable-title {
     background-color: $non-chronological-accordion-color;
     color: $text-color;
