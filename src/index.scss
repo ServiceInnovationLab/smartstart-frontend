@@ -191,6 +191,31 @@ video {
   vertical-align: middle;
 }
 
+table {
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 10px 15px;
+    border-top: 1px solid $table-border-color;
+    border-bottom: 1px solid $table-border-color;
+  }
+
+  // table head style for <th> and first <tr> of tbody
+  th,
+  tr:first-child td {
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    font-weight: 500;
+  }
+
+  // remove first <tr> of <tbody> style if there is a <thead> present
+  thead + tbody tr:first-child td {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    font-weight: 400;
+  }
+}
 
 // FORM ELEMENTS
 
