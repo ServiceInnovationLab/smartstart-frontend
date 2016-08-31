@@ -2,6 +2,8 @@ import './settings-pane.scss'
 import './button-set.scss'
 
 import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
+import { addDueDate } from 'actions/actions'
 import classNames from 'classnames'
 
 class SettingsPane extends Component {
@@ -19,35 +21,32 @@ class SettingsPane extends Component {
     })
   }
 
-  paneClose () {
+  cancel () {
     this.setState({
       paneOpen: false
     })
   }
 
   updateSettings (event) {
-    event.preventDefault()
+    event.preventDefault() // prevent a form submit action
 
+    this.props.dispatch(addDueDate(this.dueDateField.value))
     this.setState({
       paneOpen: false
     })
-
-    // TODO dispatch this.dueDate.value
-    // connect to phase to update titles
-    // plumb in the date calculations (into actions?)
   }
 
   dueDateValidate () {
-    if (this.dueDate.validity.patternMismatch) {
-      this.dueDate.setCustomValidity('Please use the format yyyy-mm-dd')
+    if (this.dueDateField.validity.patternMismatch) {
+      this.dueDateField.setCustomValidity('Please use the format yyyy-mm-dd')
     } else {
-      this.dueDate.setCustomValidity('')
+      this.dueDateField.setCustomValidity('')
     }
   }
 
   reset () {
-    this.dueDate.value = ''
-    this.dueDate.setCustomValidity('')
+    this.dueDateField.value = ''
+    this.dueDateField.setCustomValidity('')
   }
 
   render () {
@@ -57,6 +56,11 @@ class SettingsPane extends Component {
       'settings-pane',
       { 'is-open': this.state.paneOpen }
     )
+
+    // TODO if dueDate in store changes because of a login
+    // action, update value here (story RM35006) if there
+    // was not a value added. If there is already a value
+    // here, we need to upadate the personalisation service.
 
     return (
       <div className='settings'>
@@ -79,13 +83,13 @@ class SettingsPane extends Component {
                 size='10'
                 placeholder='yyyy-mm-dd'
                 pattern='\d{4}-\d{2}-\d{2}'
-                ref={(ref) => { this.dueDate = ref }}
+                ref={(ref) => { this.dueDateField = ref }}
                 onKeyUp={this.dueDateValidate.bind(this)}
             />
             </label>
             <div className='button-set'>
-              <button onClick={this.reset.bind(this)} className='reset-button'>Reset</button>
-              <button onClick={this.paneClose.bind(this)} className='cancel-button'>Cancel</button>
+              <button type='button' onClick={this.reset.bind(this)} className='reset-button'>Reset</button>
+              <button type='button' onClick={this.cancel.bind(this)} className='cancel-button'>Cancel</button>
               <button type='submit'>Update</button>
             </div>
           </form>
@@ -95,8 +99,27 @@ class SettingsPane extends Component {
   }
 }
 
-SettingsPane.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
+function mapStateToProps (state) {
+  const {
+    personalisationActions
+  } = state
+  const {
+    isLoggedIn,
+    dueDate
+  } = personalisationActions || {
+    isLoggedIn: false,
+    dueDate: null
+  }
+
+  return {
+    isLoggedIn,
+    dueDate
+  }
 }
 
-export default SettingsPane
+SettingsPane.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  dueDate: PropTypes.object
+}
+
+export default connect(mapStateToProps)(SettingsPane)

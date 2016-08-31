@@ -31,7 +31,7 @@ class Page extends Component {
           <Spinner />
         </div>
         <div className={showWhenLoaded}>
-          <SettingsPane isLoggedIn={isLoggedIn} />
+          <SettingsPane />
           <Timeline phases={phases} />
           <Supplementary cards={supplementary} />
         </div>

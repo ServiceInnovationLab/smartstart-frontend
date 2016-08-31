@@ -115,6 +115,6 @@ export function activateSupplementary (id) {
 
 export function addDueDate (date) {
   return dispatch => {
-    dispatch(setDueDate(date))
+    dispatch(setDueDate(new Date(date)))
   }
 }

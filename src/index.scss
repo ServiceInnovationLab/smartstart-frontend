@@ -230,6 +230,8 @@ button,
   border-radius: $default-border-radius;
   min-width: 180px;
   font-weight: 500;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
   text-align: center;
 
   &:hover,
