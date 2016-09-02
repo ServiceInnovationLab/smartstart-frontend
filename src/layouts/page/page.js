@@ -14,7 +14,7 @@ class Page extends Component {
     let showWhenLoaded = 'hidden'
     let showWhenHasError = 'hidden'
 
-    if (phases.length > 0) { // assumes there will always be both supplementary and phases
+    if (phases.length > 0 & !appError) { // assumes there will always be both supplementary and phases
       showWhenLoading = 'hidden'
       showWhenLoaded = ''
     }

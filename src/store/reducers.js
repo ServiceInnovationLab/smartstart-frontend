@@ -6,7 +6,9 @@ import {
   APPLICATION_ERROR,
   PIWIK_TRACK,
   SUPPLEMENTARY_OPEN,
-  SET_DUE_DATE
+  SET_DUE_DATE,
+  REQUEST_PHASE_METADATA,
+  RECEIVE_PHASE_METADATA
 } from 'actions/actions'
 
 function contentActions (state = {
@@ -32,7 +34,9 @@ function contentActions (state = {
 
 function personalisationActions (state = {
   isLoggedIn: false,
-  dueDate: null
+  dueDate: null,
+  isFetchingPhaseMetadata: false,
+  phaseMetadata: []
 }, action) {
   switch (action.type) {
     case CHECK_AUTHENTICATION:
@@ -42,6 +46,15 @@ function personalisationActions (state = {
     case SET_DUE_DATE:
       return Object.assign({}, state, {
         dueDate: action.dueDate
+      })
+    case REQUEST_PHASE_METADATA:
+      return Object.assign({}, state, {
+        isFetchingPhaseMetadata: true
+      })
+    case RECEIVE_PHASE_METADATA:
+      return Object.assign({}, state, {
+        isFetchingPhaseMetadata: false,
+        phaseMetadata: action.phaseMetadata
       })
     default:
       return state

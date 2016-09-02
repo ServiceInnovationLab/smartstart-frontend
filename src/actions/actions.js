@@ -9,6 +9,10 @@ export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION'
 export const PIWIK_TRACK = 'PIWIK_TRACK'
 export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
 export const SET_DUE_DATE = 'SET_DUE_DATE'
+export const REQUEST_PHASE_METADATA = 'REQUEST_PHASE_METADATA'
+export const RECEIVE_PHASE_METADATA = 'RECEIVE_PHASE_METADATA'
+
+// Action types
 
 function requestAPI () {
   return {
@@ -57,6 +61,21 @@ function setDueDate (date) {
     dueDate: date
   }
 }
+
+function requestPhaseMetadata () {
+  return {
+    type: REQUEST_PHASE_METADATA
+  }
+}
+
+function receivePhaseMetadata (json) {
+  return {
+    type: RECEIVE_PHASE_METADATA,
+    phaseMetadata: json
+  }
+}
+
+// Action creators
 
 function checkStatus (response) {
   if (response.status >= 200 && response.status < 300) {
@@ -116,5 +135,20 @@ export function activateSupplementary (id) {
 export function addDueDate (date) {
   return dispatch => {
     dispatch(setDueDate(new Date(date)))
+  }
+}
+
+export function fetchPhaseMetadata () {
+  return dispatch => {
+    dispatch(requestPhaseMetadata())
+    return fetch('/api/phase-metadata/')
+      .then(checkStatus)
+      .then(response => response.json())
+      .then(json => dispatch(receivePhaseMetadata(json)))
+      .catch(function () {
+        // a failure here is not critical enough to throw
+        // an applicationError - fake an empty response
+        dispatch(receivePhaseMetadata([]))
+      })
   }
 }

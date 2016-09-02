@@ -28,7 +28,7 @@ class Phase extends Component {
         formattedDate = date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear()
       } else {
         // the three pre-birth phases need a calculated date adding when due date is set
-        formattedDate = this.calculateDateRange(this.props.number, date)
+        formattedDate = this.calculateDateRange(this.props.number, date, nextProps.phaseMetadata)
       }
 
       this.setState({
@@ -37,50 +37,39 @@ class Phase extends Component {
     }
   }
 
-  calculateDateRange (phase, date) {
+  calculateDateRange (phase, date, recievedPhaseMetadata) {
     const monthLookup = phase - 1 // months are 0 indexed
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-    // TODO grab the date matrix which is preloaded for this
-    const phaseMetadata = [
-      {
-        id: 1,
-        weeksStart: 0,
-        weeksEnd: 14
-      },
-      {
-        id: 2,
-        weeksStart: 15,
-        weeksEnd: 30
-      },
-      {
-        id: 3,
-        weeksStart: 31,
-        weeksEnd: 40
-      }
-    ]
-    const birthWeeks = phaseMetadata[2].weeksEnd // how many weeks is the max of the range
+    const phaseMetadata = recievedPhaseMetadata
 
-    let daysToSubtract = 0
-    let dateStep = null
-    let formattedDate = null
+    // if the metadata didn't load we can't do anything
+    if (phaseMetadata.length > 0) {
+      const birthWeeks = phaseMetadata[2].weeks_finish // how many weeks is the max of the range
 
-    // start of range
-    daysToSubtract = (birthWeeks - phaseMetadata[monthLookup].weeksStart) * 7
+      let daysToSubtract = 0
+      let dateStep = null
+      let formattedDate = null
 
-    dateStep = new Date(date.getTime())
-    dateStep.setDate(dateStep.getDate() - daysToSubtract)
+      // start of range
+      daysToSubtract = (birthWeeks - phaseMetadata[monthLookup].weeks_start) * 7
 
-    formattedDate = monthNames[dateStep.getMonth()]
+      dateStep = new Date(date.getTime())
+      dateStep.setDate(dateStep.getDate() - daysToSubtract)
 
-    // end of range
-    daysToSubtract = (birthWeeks - phaseMetadata[monthLookup].weeksEnd) * 7
+      formattedDate = monthNames[dateStep.getMonth()]
 
-    dateStep = new Date(date.getTime())
-    dateStep.setDate(dateStep.getDate() - daysToSubtract)
+      // end of range
+      daysToSubtract = (birthWeeks - phaseMetadata[monthLookup].weeks_finish) * 7
 
-    formattedDate += ' – ' + monthNames[dateStep.getMonth()]
+      dateStep = new Date(date.getTime())
+      dateStep.setDate(dateStep.getDate() - daysToSubtract)
 
-    return formattedDate
+      formattedDate += ' – ' + monthNames[dateStep.getMonth()]
+
+      return formattedDate
+    } else {
+      return ''
+    }
   }
 
   render () {
@@ -120,13 +109,16 @@ function mapStateToProps (state) {
     personalisationActions
   } = state
   const {
-    dueDate
+    dueDate,
+    phaseMetadata
   } = personalisationActions || {
-    dueDate: null
+    dueDate: null,
+    phaseMetadata: []
   }
 
   return {
-    dueDate
+    dueDate,
+    phaseMetadata
   }
 }
 
@@ -134,7 +126,8 @@ Phase.propTypes = {
   title: PropTypes.string.isRequired,
   cards: PropTypes.array.isRequired,
   number: PropTypes.number.isRequired,
-  dueDate: PropTypes.object
+  dueDate: PropTypes.object,
+  phaseMetadata: PropTypes.array
 }
 
 export default connect(mapStateToProps)(Phase)
