@@ -1,0 +1,37 @@
+@import 'variables';
+
+.realme-primary-login-button {
+  background-color: $realme-middle-blue;
+  border-color: $realme-middle-blue;
+  border-radius: 5px;
+  color: #ffffff;
+  text-align: left;
+  max-width: calc(100% - 60px); // allow for logo
+  width: 100%;
+  margin-left: 60px;
+  font-weight: normal;
+
+  @media #{$tablet-and-above} {
+    max-width: 300px;
+  }
+
+  &:hover,
+  &:active,
+  &:visited {
+    color: #ffffff;
+    border-color: $realme-middle-blue;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 44px;
+    background-image: url(/assets/img/realme/logo-highres.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: -60px;
+    top: -3px; // the image isn't cropped properly
+  }
+}

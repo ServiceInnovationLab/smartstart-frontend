@@ -5,6 +5,16 @@
   min-width: $mobile-min-content-width;
   position: relative;
   z-index: $z-index-header; // above .settings-pane
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    height: 16px;
+    width: 100%;
+    box-shadow: $header-subtle-dropshadow;
+    pointer-events: none;
+  }
 }
 
 .page-header-inner {

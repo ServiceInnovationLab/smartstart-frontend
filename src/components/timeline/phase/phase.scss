@@ -11,6 +11,14 @@
     padding-bottom: 40px;
   }
 
+  &:first-child {
+    padding-top: 230px; // extra 20px
+
+    @media #{$desktop-and-above} {
+      padding-top: 360px;
+    }
+  }
+
   &:last-child {
     padding-bottom: 0;
 
@@ -35,10 +43,6 @@
     @media #{$desktop-and-above} {
       height: 220px;
     }
-  }
-
-  &:first-child::before {
-    box-shadow: $header-subtle-dropshadow;
   }
 
   &::after {
