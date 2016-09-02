@@ -14,7 +14,30 @@ class SettingsPane extends Component {
 
     this.state = {
       paneOpen: false,
-      loginMessageShown: false
+      loginMessageShown: false,
+      fixedControls: false
+    }
+  }
+
+  componentDidMount () {
+    window.addEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
+  }
+
+  checkIfShouldBeFixed () {
+    const settingsPosition = this.settingsElement.getBoundingClientRect().top
+
+    if (!this.state.fixedControls && settingsPosition < 0) {
+      this.setState({
+        fixedControls: true
+      })
+    } else if (this.state.fixedControls && settingsPosition >= 0) {
+      this.setState({
+        fixedControls: false
+      })
     }
   }
 
@@ -61,6 +84,10 @@ class SettingsPane extends Component {
   }
 
   render () {
+    let paneWrapperClasses = classNames(
+      'settings-pane-wrapper',
+      { 'is-fixed': this.state.fixedControls }
+    )
     let paneClasses = classNames(
       'settings-pane',
       { 'is-open': this.state.paneOpen }
@@ -76,8 +103,8 @@ class SettingsPane extends Component {
     // here, we need to update the personalisation service.
 
     return (
-      <div className='settings'>
-        <div className='settings-pane-wrapper'>
+      <div className='settings' ref={(ref) => { this.settingsElement = ref }}>
+        <div className={paneWrapperClasses}>
           <button
             className='settings-trigger'
             aria-controls='settings'
@@ -111,7 +138,7 @@ class SettingsPane extends Component {
         </div>
         <div className='settings-messages'>
           <div className={loginMessageClasses}>
-            <h5>To save your profile for your next visit you need to log in with RealMe.</h5>
+            <h6>To save your profile for your next visit you need to log in with RealMe.</h6>
             <a className='button realme-primary-login-button ext-link-icon' href='/login/'>
               Login
             </a>
