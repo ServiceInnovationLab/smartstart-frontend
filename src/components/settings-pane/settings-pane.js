@@ -1,5 +1,7 @@
 import './settings-pane.scss'
 import './button-set.scss'
+import './messages.scss'
+import './realme-login-primary.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
@@ -11,7 +13,8 @@ class SettingsPane extends Component {
     super(props)
 
     this.state = {
-      paneOpen: false
+      paneOpen: false,
+      loginMessageShown: false
     }
   }
 
@@ -34,6 +37,14 @@ class SettingsPane extends Component {
     this.setState({
       paneOpen: false
     })
+
+    // if the user is not logged in, tell them they should to save
+    // login always requires a page reload, so no need to manually hide this message later
+    if (!this.props.isLoggedIn) {
+      this.setState({
+        loginMessageShown: true
+      })
+    }
   }
 
   dueDateValidate () {
@@ -50,49 +61,61 @@ class SettingsPane extends Component {
   }
 
   render () {
-    // TODO use isLoggedIn to conditionally show login message
-    // const { isLoggedIn } = this.props
     let paneClasses = classNames(
       'settings-pane',
       { 'is-open': this.state.paneOpen }
+    )
+    let loginMessageClasses = classNames(
+      'message',
+      { 'hidden': !this.state.loginMessageShown }
     )
 
     // TODO if dueDate in store changes because of a login
     // action, update value here (story RM35006) if there
     // was not a value added. If there is already a value
-    // here, we need to upadate the personalisation service.
+    // here, we need to update the personalisation service.
 
     return (
       <div className='settings'>
-        <button
-          className='settings-trigger'
-          aria-controls='settings'
-          aria-expanded={this.state.paneOpen}
-          onClick={this.paneToggle.bind(this)}
-        >Your profile</button>
-        <div id='settings' className={paneClasses} aria-hidden={!this.state.paneOpen}>
-          <form onSubmit={this.updateSettings.bind(this)}>
-            <h4>Personalise the timeline</h4>
-            <p>Make the information displayed in the timeline more relevant by answering these questions. You can answer as many or few as you wish. All your details are kept private (see <a href='#'>our privacy policy</a>).</p>
-            <label>
-              When is your baby due?
-              <br />
-              <input
-                type='date'
-                maxLength='10'
-                size='10'
-                placeholder='yyyy-mm-dd'
-                pattern='\d{4}-\d{2}-\d{2}'
-                ref={(ref) => { this.dueDateField = ref }}
-                onKeyUp={this.dueDateValidate.bind(this)}
-            />
-            </label>
-            <div className='button-set'>
-              <button type='button' onClick={this.reset.bind(this)} className='reset-button'>Reset</button>
-              <button type='button' onClick={this.cancel.bind(this)} className='cancel-button'>Cancel</button>
-              <button type='submit'>Update</button>
-            </div>
-          </form>
+        <div className='settings-pane-wrapper'>
+          <button
+            className='settings-trigger'
+            aria-controls='settings'
+            aria-expanded={this.state.paneOpen}
+            onClick={this.paneToggle.bind(this)}
+          >Your profile</button>
+          <div id='settings' className={paneClasses} aria-hidden={!this.state.paneOpen}>
+            <form onSubmit={this.updateSettings.bind(this)}>
+              <h4>Personalise the timeline</h4>
+              <p>Make the information displayed in the timeline more relevant by answering these questions. You can answer as many or few as you wish. All your details are kept private (see <a href='#'>our privacy policy</a>).</p>
+              <label>
+                When is your baby due?
+                <br />
+                <input
+                  type='date'
+                  maxLength='10'
+                  size='10'
+                  placeholder='yyyy-mm-dd'
+                  pattern='\d{4}-\d{2}-\d{2}'
+                  ref={(ref) => { this.dueDateField = ref }}
+                  onKeyUp={this.dueDateValidate.bind(this)}
+              />
+              </label>
+              <div className='button-set'>
+                <button type='button' onClick={this.reset.bind(this)} className='reset-button'>Reset</button>
+                <button type='button' onClick={this.cancel.bind(this)} className='cancel-button'>Cancel</button>
+                <button type='submit'>Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className='settings-messages'>
+          <div className={loginMessageClasses}>
+            <h5>To save your profile for your next visit you need to log in with RealMe.</h5>
+            <a className='button realme-primary-login-button ext-link-icon' href='/login/'>
+              Login
+            </a>
+          </div>
         </div>
       </div>
     )

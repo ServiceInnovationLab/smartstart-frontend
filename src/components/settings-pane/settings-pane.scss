@@ -1,11 +1,33 @@
 @import 'variables';
 
-.settings {
+.settings-pane-wrapper {
   position: relative;
   min-width: $mobile-min-content-width;
   max-width: $desktop-max-content-width;
   margin-left: auto;
   margin-right: auto;
+}
+
+.settings-messages {
+  min-width: calc(#{$mobile-min-content-width} + 30px);
+  background-color: $phase-background-color;
+  overflow: hidden; // force bfc
+
+  > * {
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: center;
+
+    @media #{$desktop-and-above} {
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &:first-child {
+      margin-top: 60px; // leave space for profile toggle button
+    }
+  }
 }
 
 .settings-trigger {
@@ -23,7 +45,6 @@
   padding-bottom: 10px;
   padding-left: 36px;
   padding-right: 12px;
-  box-shadow: $header-subtle-dropshadow;
 
   &::before {
     font-family: 'icomoon' !important;
@@ -42,7 +63,6 @@
   z-index: $z-index-settings-pane;
   color: $background-color;
   background-color: $realme-dark-blue;
-  box-shadow: $header-subtle-dropshadow;
   padding: $card-padding-desktop;
   margin-left: 15px;
   margin-right: 15px;

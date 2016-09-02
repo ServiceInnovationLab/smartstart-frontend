@@ -1,13 +1,18 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchContent, checkAuthCookie, piwikTrackPost } from 'actions/actions'
+import { fetchContent, checkAuthCookie, fetchPhaseMetadata, piwikTrackPost } from 'actions/actions'
 import Page from 'layouts/page/page'
 
 class Container extends Component {
   componentDidMount () {
     const { dispatch } = this.props
-    dispatch(fetchContent()) // should only need to check on load
-    dispatch(checkAuthCookie()) // should only need to check on load
+    // should only need to get once on load
+    dispatch(fetchContent())
+    dispatch(fetchPhaseMetadata())
+
+    // should only need to check on load
+    dispatch(checkAuthCookie())
+
     dispatch(piwikTrackPost('Timeline'))
   }
 

@@ -1,0 +1,11 @@
+@import 'variables';
+
+.message {
+  border: 2px solid $message-border-color;
+  border-radius: $default-border-radius;
+  padding: 25px 40px;
+
+  *:first-child {
+    margin-top: 0;
+  }
+}

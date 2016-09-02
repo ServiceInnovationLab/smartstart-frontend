@@ -134,7 +134,8 @@ a {
     color: $link-color-hover;
   }
 
-  &[href*="//"] {
+  &[href*="//"],
+  &.ext-link-icon {
     padding-right: 0.6em;
 
     &::after {
@@ -246,7 +247,8 @@ button,
     border-color: $link-color-hover;
   }
 
-  &[href*="//"] {
+  &[href*="//"],
+  &.ext-link-icon {
     padding-right: 20px;
 
     &::after {

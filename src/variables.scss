@@ -6,6 +6,7 @@ $desktop-and-above:    'only screen and (min-width: 992px)';
 
 // brand colors
 $realme-dark-blue:     #3e4d5d;
+$realme-middle-blue:   #125da3;
 $accent-color-dark:    #66b3aa;
 $accent-color:         #c1e0dd;
 $accent-color-light:   #d1e8e5;
@@ -18,7 +19,7 @@ $link-color-hover:     $realme-dark-blue;
 $error-color:          #E30013;
 
 $border-color: #d2d2d2;
-
+$message-border-color: $realme-middle-blue;
 $table-border-color: #959390;
 
 // base dimensions

@@ -15,6 +15,9 @@ built in development webserver to serve the project. To run this, do:
 
 `npm start`
 
+Note that some functionality requires that the backend server is there to talk
+to, see the 'Developing with the backend too' section.
+
 The web page should automatically reload as you make changes. You can also check
 syntax correctness by running:
 
