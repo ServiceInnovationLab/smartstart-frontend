@@ -4,28 +4,33 @@
   position: relative;
   min-width: $mobile-min-content-width;
   max-width: $desktop-max-content-width;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-}
 
-.settings-messages {
-  min-width: calc(#{$mobile-min-content-width} + 30px);
-  background-color: $phase-background-color;
-  overflow: hidden; // force bfc
+  &.is-fixed {
+    position: fixed;
+    z-index: $z-index-settings-pane-fixed;
+    top: 0;
+    left: 0;
+    right: 0; // need to set both left & right otherwise margin auto doesn't work
 
-  > * {
-    margin-left: 15px;
-    margin-right: 15px;
-    text-align: center;
+    // need to be able to scroll to see too-tall content
+    height: 100vh;
+    overflow-y: auto;
+    pointer-events: none;
 
-    @media #{$desktop-and-above} {
-      max-width: 580px;
-      margin-left: auto;
-      margin-right: auto;
+    .settings-trigger,
+    .settings-pane {
+      pointer-events: auto;
     }
 
-    &:first-child {
-      margin-top: 60px; // leave space for profile toggle button
+    .settings-pane {
+      box-shadow: $header-subtle-dropshadow;
+    }
+
+    .settings-trigger {
+      box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
     }
   }
 }
@@ -35,7 +40,6 @@
   z-index: $z-index-settings-trigger;
   top: 0;
   right: 20px;
-  // TODO check all these values
   border-radius: 0 0 5px 5px;
   border: 0 none;
   background-color: $background-color;
@@ -159,6 +163,33 @@
     .cancel-button:hover {
       background-color: transparent;
       color: $background-color;
+    }
+  }
+}
+
+.settings-messages {
+  min-width: calc(#{$mobile-min-content-width} + 30px);
+  background-color: $phase-background-color;
+  overflow: hidden; // force bfc
+
+  > * {
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: center;
+
+    @media #{$desktop-and-above} {
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &:first-child {
+      margin-top: 60px; // leave space for profile toggle button
+
+      @media #{$desktop-and-above} {
+        // but not on desktop
+        margin-top: 22px;
+      }
     }
   }
 }
