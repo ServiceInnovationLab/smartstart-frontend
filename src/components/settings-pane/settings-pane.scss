@@ -55,9 +55,8 @@
     content: $icon-personalise;
     display: inline-block;
     position: absolute;
-    left: 15px;
-    top: 50%;
-    margin-top: -8px;
+    left: 12px;
+    top: 12px;
   }
 }
 
@@ -150,7 +149,8 @@
     .reset-button,
     .reset-button:active,
     .reset-button:hover {
-      margin-right: auto; // to override justify-content: flex-end
+      position: absolute;
+      left: 0;
       padding-left: 0;
       padding-right: 0;
       border-color: transparent;
