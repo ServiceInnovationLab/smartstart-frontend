@@ -5,7 +5,7 @@ import './realme-login-primary.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { addDueDate } from 'actions/actions'
+import { addDueDate, savePersonalisationValues } from 'actions/actions'
 import classNames from 'classnames'
 
 class SettingsPane extends Component {
@@ -61,12 +61,22 @@ class SettingsPane extends Component {
       paneOpen: false
     })
 
+    // values to save to backend or cookie
+    let valuesToSave = [{
+      'group': 'settings',
+      'key': 'dd', // keep these non-descriptive for privacy reasons
+      'val': this.dueDateField.value
+    }]
+
     // if the user is not logged in, tell them they should to save
-    // login always requires a page reload, so no need to manually hide this message later
     if (!this.props.isLoggedIn) {
       this.setState({
-        loginMessageShown: true
+        loginMessageShown: true // login always requires a page reload, so no need to manually hide this message later
       })
+      // TODO #37457 save to a cookie here
+    } else {
+      // if they are logged in, save the new value(s) to the backend
+      this.props.dispatch(savePersonalisationValues(valuesToSave))
     }
   }
 
@@ -96,11 +106,6 @@ class SettingsPane extends Component {
       'message',
       { 'hidden': !this.state.loginMessageShown }
     )
-
-    // TODO if dueDate in store changes because of a login
-    // action, update value here (story RM35006) if there
-    // was not a value added. If there is already a value
-    // here, we need to update the personalisation service.
 
     return (
       <div className='settings' ref={(ref) => { this.settingsElement = ref }}>

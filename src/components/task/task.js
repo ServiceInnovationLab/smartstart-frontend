@@ -1,6 +1,8 @@
 import './task.scss'
 
 import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
+import { savePersonalisationValues } from 'actions/actions'
 
 class Task extends Component {
   constructor (props) {
@@ -14,11 +16,26 @@ class Task extends Component {
 
   handleChange () {
     this.setState({checked: !this.state.checked}, function () {
-      // class change needs to occur as callback to ensure state change executed
+      // further changes needs to occur as callback to ensure state change executed first
       if (this.state.checked) {
         this.setState({checkedClass: 'checked'})
       } else {
         this.setState({checkedClass: ''})
+      }
+
+      // values to save to backend or cookie
+      let valuesToSave = [{
+        'group': 'checkbox',
+        'key': this.props.id.toString(),
+        'val': this.state.checked.toString()
+      }]
+
+      if (!this.props.isLoggedIn) {
+        // TODO #36411 show login prompt
+        // TODO #37457 save to a cookie here
+      } else {
+        // they are logged in, save the checkbox value to the backend
+        this.props.dispatch(savePersonalisationValues(valuesToSave))
       }
     })
   }
@@ -46,11 +63,27 @@ class Task extends Component {
   }
 }
 
+function mapStateToProps (state) {
+  const {
+    personalisationActions
+  } = state
+  const {
+    isLoggedIn
+  } = personalisationActions || {
+    isLoggedIn: false
+  }
+
+  return {
+    isLoggedIn
+  }
+}
+
 Task.propTypes = {
   label: PropTypes.string, // need EITHER label or text depending on type
   text: PropTypes.string,
   id: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
 }
 
-export default Task
+export default connect(mapStateToProps)(Task)

@@ -13,6 +13,12 @@ class Container extends Component {
     // should only need to check on load
     dispatch(checkAuthCookie())
 
+    // TODO if logged in, fetch /users/me/ and update state as needed
+    // should the spinner keep going until we have a response? will
+    // be 403 if not logged in
+
+    // set up actions for 'update' and checkbox tick
+
     dispatch(piwikTrackPost('Timeline'))
   }
 

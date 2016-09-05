@@ -8,7 +8,8 @@ import {
   SUPPLEMENTARY_OPEN,
   SET_DUE_DATE,
   REQUEST_PHASE_METADATA,
-  RECEIVE_PHASE_METADATA
+  RECEIVE_PHASE_METADATA,
+  SAVE_PERSONALISATION
 } from 'actions/actions'
 
 function contentActions (state = {
@@ -36,7 +37,9 @@ function personalisationActions (state = {
   isLoggedIn: false,
   dueDate: null,
   isFetchingPhaseMetadata: false,
-  phaseMetadata: []
+  phaseMetadata: [],
+  personalisationValues: []
+
 }, action) {
   switch (action.type) {
     case CHECK_AUTHENTICATION:
@@ -55,6 +58,10 @@ function personalisationActions (state = {
       return Object.assign({}, state, {
         isFetchingPhaseMetadata: false,
         phaseMetadata: action.phaseMetadata
+      })
+    case SAVE_PERSONALISATION:
+      return Object.assign({}, state, {
+        personalisationValues: action.personalisationValues
       })
     default:
       return state

@@ -11,6 +11,7 @@ export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
 export const SET_DUE_DATE = 'SET_DUE_DATE'
 export const REQUEST_PHASE_METADATA = 'REQUEST_PHASE_METADATA'
 export const RECEIVE_PHASE_METADATA = 'RECEIVE_PHASE_METADATA'
+export const SAVE_PERSONALISATION = 'SAVE_PERSONALISATION'
 
 // Action types
 
@@ -72,6 +73,13 @@ function receivePhaseMetadata (json) {
   return {
     type: RECEIVE_PHASE_METADATA,
     phaseMetadata: json
+  }
+}
+
+function savePersonalisation (values) {
+  return {
+    type: SAVE_PERSONALISATION,
+    personalisationValues: values
   }
 }
 
@@ -156,5 +164,30 @@ export function fetchPhaseMetadata () {
         // an applicationError - fake an empty response
         dispatch(receivePhaseMetadata([]))
       })
+  }
+}
+
+export function savePersonalisationValues (values) {
+  const csrftoken = Cookie.load('csrftoken')
+
+  return dispatch => {
+    dispatch(savePersonalisation(values))
+    return fetch('/api/preferences/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(values)
+    })
+    .then(checkStatus)
+    // TODO we don't care about the response from this request?
+    .catch(function () {
+      // a failure here is not critical enough to throw
+      // an applicationError
+      // TODO throw some other kind of error?
+    })
   }
 }
