@@ -15,7 +15,27 @@ class SettingsPane extends Component {
     this.state = {
       paneOpen: false,
       loginMessageShown: false,
-      fixedControls: false
+      fixedControls: false,
+      dueDateFieldValue: ''
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    // need to use componentWillReceiveProps because this
+    // component renders before the b/e data is available
+    let settingsData = nextProps.personalisationValues.settings
+
+    if (settingsData) {
+      if (settingsData.dd) { // not false or undefined
+        // update the input
+        this.state = {
+          dueDateFieldValue: settingsData.dd
+        }
+
+        // update the timeline
+        // TODO can we assume this value is good?
+        this.props.dispatch(addDueDate(settingsData.dd))
+      }
     }
   }
 
@@ -56,7 +76,7 @@ class SettingsPane extends Component {
   updateSettings (event) {
     event.preventDefault() // prevent a form submit action
 
-    this.props.dispatch(addDueDate(this.dueDateField.value))
+    this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
     this.setState({
       paneOpen: false
     })
@@ -65,7 +85,7 @@ class SettingsPane extends Component {
     let valuesToSave = [{
       'group': 'settings',
       'key': 'dd', // keep these non-descriptive for privacy reasons
-      'val': this.dueDateField.value
+      'val': this.state.dueDateFieldValue
     }]
 
     // if the user is not logged in, tell them they should to save
@@ -88,8 +108,13 @@ class SettingsPane extends Component {
     }
   }
 
+  dueDateChange (event) {
+    // needed as per https://facebook.github.io/react/docs/forms.html#controlled-components
+    this.setState({ dueDateFieldValue: event.target.value })
+  }
+
   reset () {
-    this.dueDateField.value = ''
+    this.setState({ dueDateFieldValue: '' })
     this.dueDateField.setCustomValidity('')
   }
 
@@ -131,6 +156,8 @@ class SettingsPane extends Component {
                   pattern='\d{4}-\d{2}-\d{2}'
                   ref={(ref) => { this.dueDateField = ref }}
                   onKeyUp={this.dueDateValidate.bind(this)}
+                  onChange={this.dueDateChange.bind(this)}
+                  value={this.state.dueDateFieldValue}
               />
               </label>
               <div className='button-set'>
@@ -160,21 +187,21 @@ function mapStateToProps (state) {
   } = state
   const {
     isLoggedIn,
-    dueDate
+    personalisationValues
   } = personalisationActions || {
     isLoggedIn: false,
-    dueDate: null
+    personalisationValues: {}
   }
 
   return {
     isLoggedIn,
-    dueDate
+    personalisationValues
   }
 }
 
 SettingsPane.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  dueDate: PropTypes.object
+  personalisationValues: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps)(SettingsPane)
