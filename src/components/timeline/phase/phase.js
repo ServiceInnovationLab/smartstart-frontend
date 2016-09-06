@@ -30,11 +30,11 @@ class Phase extends Component {
         // the three pre-birth phases need a calculated date adding when due date is set
         formattedDate = this.calculateDateRange(this.props.number, date, nextProps.phaseMetadata)
       }
-
-      this.setState({
-        formattedDate: formattedDate
-      })
     }
+
+    this.setState({
+      formattedDate: formattedDate
+    })
   }
 
   calculateDateRange (phase, date, recievedPhaseMetadata) {

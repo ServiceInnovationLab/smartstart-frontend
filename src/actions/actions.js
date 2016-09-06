@@ -133,8 +133,14 @@ export function activateSupplementary (id) {
 }
 
 export function addDueDate (date) {
-  return dispatch => {
-    dispatch(setDueDate(new Date(date)))
+  if (date) {
+    return dispatch => {
+      dispatch(setDueDate(new Date(date)))
+    }
+  } else {
+    return dispatch => {
+      dispatch(setDueDate(null))
+    }
   }
 }
 
