@@ -25,7 +25,7 @@ class Task extends Component {
 
       // values to save to backend or cookie
       let valuesToSave = [{
-        'group': 'checkbox',
+        'group': 'checkboxes',
         'key': this.props.id.toString(),
         'val': this.state.checked.toString()
       }]

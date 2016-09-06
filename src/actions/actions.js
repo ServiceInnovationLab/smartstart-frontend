@@ -12,6 +12,8 @@ export const SET_DUE_DATE = 'SET_DUE_DATE'
 export const REQUEST_PHASE_METADATA = 'REQUEST_PHASE_METADATA'
 export const RECEIVE_PHASE_METADATA = 'RECEIVE_PHASE_METADATA'
 export const SAVE_PERSONALISATION = 'SAVE_PERSONALISATION'
+export const REQUEST_PERSONALISATION_DATA = 'REQUEST_PERSONALISATION_DATA'
+export const RECIEVE_PERSONALISATION_DATA = 'RECIEVE_PERSONALISATION_DATA'
 
 // Action types
 
@@ -76,10 +78,23 @@ function receivePhaseMetadata (json) {
   }
 }
 
-function savePersonalisation (values) {
+function savePersonalisation (object) {
   return {
     type: SAVE_PERSONALISATION,
-    personalisationValues: values
+    personalisationValues: object
+  }
+}
+
+function requestPersonalisationData () {
+  return {
+    type: REQUEST_PERSONALISATION_DATA
+  }
+}
+
+function receivePersonalisationData (preferences) {
+  return {
+    type: RECIEVE_PERSONALISATION_DATA,
+    personalisationValues: preferences
   }
 }
 
@@ -113,6 +128,7 @@ export function checkAuthCookie () {
     let authResult = Cookie.load('is_authenticated')
     if (authResult == null) { authResult = false } // null or undefined
     dispatch(checkAuthentication(authResult))
+    return Promise.resolve() // so we can chain other actions
   }
 }
 
@@ -170,8 +186,19 @@ export function fetchPhaseMetadata () {
 export function savePersonalisationValues (values) {
   const csrftoken = Cookie.load('csrftoken')
 
-  return dispatch => {
-    dispatch(savePersonalisation(values))
+  return (dispatch, getState) => {
+    const existingValues = getState().personalisationActions.personalisationValues
+    let newValues = Object.assign({}, existingValues)
+
+    // we need to merge the state of the old personalisationValues with the new values
+    values.forEach((object) => {
+      if (!newValues[object.group]) {
+        newValues[object.group] = {}
+      }
+      newValues[object.group][object.key] = object.val
+    })
+
+    dispatch(savePersonalisation(newValues))
     return fetch('/api/preferences/', {
       method: 'POST',
       headers: {
@@ -189,5 +216,22 @@ export function savePersonalisationValues (values) {
       // an applicationError
       // TODO throw some other kind of error?
     })
+  }
+}
+
+export function fetchPersonalisationValues () {
+  return (dispatch, getState) => {
+    if (getState().personalisationActions.isLoggedIn) {
+      dispatch(requestPersonalisationData())
+      return fetch('/api/users/me/', {
+        credentials: 'same-origin'
+      })
+      .then(checkStatus)
+      .then(response => response.json())
+      .then(json => dispatch(receivePersonalisationData(json.preferences)))
+      .catch(function (error) {
+        dispatch(applicationError(error))
+      })
+    }
   }
 }

@@ -9,7 +9,9 @@ import {
   SET_DUE_DATE,
   REQUEST_PHASE_METADATA,
   RECEIVE_PHASE_METADATA,
-  SAVE_PERSONALISATION
+  SAVE_PERSONALISATION,
+  REQUEST_PERSONALISATION_DATA,
+  RECIEVE_PERSONALISATION_DATA
 } from 'actions/actions'
 
 function contentActions (state = {
@@ -38,7 +40,8 @@ function personalisationActions (state = {
   dueDate: null,
   isFetchingPhaseMetadata: false,
   phaseMetadata: [],
-  personalisationValues: []
+  personalisationValues: {},
+  isFetchingPersonalisation: false
 
 }, action) {
   switch (action.type) {
@@ -61,6 +64,15 @@ function personalisationActions (state = {
       })
     case SAVE_PERSONALISATION:
       return Object.assign({}, state, {
+        personalisationValues: action.personalisationValues
+      })
+    case REQUEST_PERSONALISATION_DATA:
+      return Object.assign({}, state, {
+        isFetchingPersonalisation: true
+      })
+    case RECIEVE_PERSONALISATION_DATA:
+      return Object.assign({}, state, {
+        isFetchingPersonalisation: false,
         personalisationValues: action.personalisationValues
       })
     default:
