@@ -42,7 +42,6 @@ function personalisationActions (state = {
   phaseMetadata: [],
   personalisationValues: {},
   isFetchingPersonalisation: false
-
 }, action) {
   switch (action.type) {
     case CHECK_AUTHENTICATION:

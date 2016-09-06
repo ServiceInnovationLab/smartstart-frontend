@@ -209,13 +209,13 @@ export function savePersonalisationValues (values) {
       credentials: 'same-origin',
       body: JSON.stringify(values)
     })
-    .then(checkStatus)
-    // TODO we don't care about the response from this request?
-    .catch(function () {
-      // a failure here is not critical enough to throw
-      // an applicationError
-      // TODO throw some other kind of error?
-    })
+      .then(checkStatus)
+      // TODO we don't care about the response from this request?
+      .catch(function () {
+        // a failure here is not critical enough to throw
+        // an applicationError
+        // TODO throw some other kind of error?
+      })
   }
 }
 
@@ -226,12 +226,12 @@ export function fetchPersonalisationValues () {
       return fetch('/api/users/me/', {
         credentials: 'same-origin'
       })
-      .then(checkStatus)
-      .then(response => response.json())
-      .then(json => dispatch(receivePersonalisationData(json.preferences)))
-      .catch(function (error) {
-        dispatch(applicationError(error))
-      })
+        .then(checkStatus)
+        .then(response => response.json())
+        .then(json => dispatch(receivePersonalisationData(json.preferences)))
+        .catch(function (error) {
+          dispatch(applicationError(error))
+        })
     }
   }
 }
