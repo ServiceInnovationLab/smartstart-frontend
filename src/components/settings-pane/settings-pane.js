@@ -101,7 +101,7 @@ class SettingsPane extends Component {
   }
 
   dueDateValidate () {
-    if (this.dueDateField.validity.patternMismatch) {
+    if (this.dueDateField.validity.patternMismatch || !isValidDate(this.state.dueDateFieldValue)) {
       this.dueDateField.setCustomValidity('Please use the format yyyy-mm-dd')
     } else {
       this.dueDateField.setCustomValidity('')
