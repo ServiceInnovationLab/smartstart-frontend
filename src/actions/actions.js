@@ -1,6 +1,7 @@
 /* globals fetch, API_ENDPOINT, PIWIK_INSTANCE  */
 import Cookie from 'react-cookie'
 import { piwikParams, createPiwikAction } from 'actions/piwik'
+import { checkStatus } from 'utils'
 
 export const REQUEST_API = 'REQUEST_API'
 export const RECEIVE_API = 'RECEIVE_API'
@@ -99,16 +100,6 @@ function receivePersonalisationData (preferences) {
 }
 
 // Action creators
-
-function checkStatus (response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
-  } else {
-    var error = new Error(response.statusText)
-    error.response = response
-    throw error
-  }
-}
 
 export function fetchContent () {
   return dispatch => {

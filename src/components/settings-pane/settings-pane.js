@@ -7,6 +7,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { addDueDate, savePersonalisationValues } from 'actions/actions'
 import classNames from 'classnames'
+import { isValidDate } from 'utils'
 
 class SettingsPane extends Component {
   constructor (props) {
@@ -26,14 +27,13 @@ class SettingsPane extends Component {
     let settingsData = nextProps.personalisationValues.settings
 
     if (settingsData) {
-      if (settingsData.dd) { // TODO check it converts to a date OK
-        // update the input
+      if (settingsData.dd && isValidDate(settingsData.dd)) {
+        // update the input (only if it's a valid value)
         this.state = {
           dueDateFieldValue: settingsData.dd
         }
 
         // update the timeline
-        // TODO can we assume this value is good?
         this.props.dispatch(addDueDate(settingsData.dd))
       }
     }
