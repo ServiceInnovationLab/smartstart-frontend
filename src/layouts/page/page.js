@@ -8,13 +8,13 @@ import Error from 'components/error/error'
 
 class Page extends Component {
   render () {
-    const { phases, supplementary, isLoggedIn, appError } = this.props
+    const { phases, supplementary, isLoggedIn, appError, isFetchingPersonalisation } = this.props
 
     let showWhenLoading = ''
     let showWhenLoaded = 'hidden'
     let showWhenHasError = 'hidden'
 
-    if (phases.length > 0 & !appError) { // assumes there will always be both supplementary and phases
+    if (phases.length > 0 && !appError && isFetchingPersonalisation === false) { // assumes there will always be both supplementary and phases
       showWhenLoading = 'hidden'
       showWhenLoaded = ''
     }
@@ -47,6 +47,7 @@ class Page extends Component {
 Page.propTypes = {
   phases: PropTypes.array.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  isFetchingPersonalisation: PropTypes.bool.isRequired,
   appError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,

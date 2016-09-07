@@ -1,6 +1,7 @@
 /* globals fetch, API_ENDPOINT, PIWIK_INSTANCE  */
 import Cookie from 'react-cookie'
 import { piwikParams, createPiwikAction } from 'actions/piwik'
+import { checkStatus } from 'utils'
 
 export const REQUEST_API = 'REQUEST_API'
 export const RECEIVE_API = 'RECEIVE_API'
@@ -11,6 +12,9 @@ export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
 export const SET_DUE_DATE = 'SET_DUE_DATE'
 export const REQUEST_PHASE_METADATA = 'REQUEST_PHASE_METADATA'
 export const RECEIVE_PHASE_METADATA = 'RECEIVE_PHASE_METADATA'
+export const SAVE_PERSONALISATION = 'SAVE_PERSONALISATION'
+export const REQUEST_PERSONALISATION_DATA = 'REQUEST_PERSONALISATION_DATA'
+export const RECIEVE_PERSONALISATION_DATA = 'RECIEVE_PERSONALISATION_DATA'
 
 // Action types
 
@@ -75,17 +79,27 @@ function receivePhaseMetadata (json) {
   }
 }
 
-// Action creators
-
-function checkStatus (response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
-  } else {
-    var error = new Error(response.statusText)
-    error.response = response
-    throw error
+function savePersonalisation (object) {
+  return {
+    type: SAVE_PERSONALISATION,
+    personalisationValues: object
   }
 }
+
+function requestPersonalisationData () {
+  return {
+    type: REQUEST_PERSONALISATION_DATA
+  }
+}
+
+function receivePersonalisationData (preferences) {
+  return {
+    type: RECIEVE_PERSONALISATION_DATA,
+    personalisationValues: preferences
+  }
+}
+
+// Action creators
 
 export function fetchContent () {
   return dispatch => {
@@ -105,6 +119,7 @@ export function checkAuthCookie () {
     let authResult = Cookie.load('is_authenticated')
     if (authResult == null) { authResult = false } // null or undefined
     dispatch(checkAuthentication(authResult))
+    return Promise.resolve() // so we can chain other actions
   }
 }
 
@@ -156,5 +171,60 @@ export function fetchPhaseMetadata () {
         // an applicationError - fake an empty response
         dispatch(receivePhaseMetadata([]))
       })
+  }
+}
+
+export function savePersonalisationValues (values) {
+  const csrftoken = Cookie.load('csrftoken')
+
+  return (dispatch, getState) => {
+    const existingValues = getState().personalisationActions.personalisationValues
+    let newValues = Object.assign({}, existingValues)
+
+    // we need to merge the state of the old personalisationValues with the new values
+    values.forEach((object) => {
+      if (!newValues[object.group]) {
+        newValues[object.group] = {}
+      }
+      newValues[object.group][object.key] = object.val
+    })
+
+    // update the app state
+    dispatch(savePersonalisation(newValues))
+
+    // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
+    return fetch('/api/preferences/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(values) // TODO for now we only need to send the updated value - for #37457 we might need to send all newValues
+    })
+      .then(checkStatus)
+      // we don't care about the response from this request
+      .catch(function () {
+        // a failure here is not critical enough to throw
+        // an applicationError
+      })
+  }
+}
+
+export function fetchPersonalisationValues () {
+  return (dispatch, getState) => {
+    if (getState().personalisationActions.isLoggedIn) {
+      dispatch(requestPersonalisationData())
+      return fetch('/api/users/me/', {
+        credentials: 'same-origin'
+      })
+        .then(checkStatus)
+        .then(response => response.json())
+        .then(json => dispatch(receivePersonalisationData(json.preferences)))
+        .catch(function (error) {
+          dispatch(applicationError(error))
+        })
+    }
   }
 }

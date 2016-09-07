@@ -15,8 +15,21 @@ class Phase extends Component {
     }
   }
 
+  componentWillMount () {
+    // the due data could already be available because of the b/e
+    if (this.props.dueDate) {
+      // if phase metadata doesn't yet exist we do the setup
+      // via componentWillReceiveProps instead
+      this.addFormattedDate(this.props.dueDate, this.props.phaseMetadata)
+    }
+  }
+
   componentWillReceiveProps (nextProps) {
-    let date = nextProps.dueDate
+    // the due date could change as a result of user interaction
+    this.addFormattedDate(nextProps.dueDate, nextProps.phaseMetadata)
+  }
+
+  addFormattedDate (date, phaseMetadata) {
     let formattedDate = null
 
     // if it is one of the first 4 phases, and dueDate is set
@@ -28,13 +41,18 @@ class Phase extends Component {
         formattedDate = date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear()
       } else {
         // the three pre-birth phases need a calculated date adding when due date is set
-        formattedDate = this.calculateDateRange(this.props.number, date, nextProps.phaseMetadata)
+        formattedDate = this.calculateDateRange(this.props.number, date, phaseMetadata)
       }
-    }
 
-    this.setState({
-      formattedDate: formattedDate
-    })
+      this.setState({
+        formattedDate: formattedDate
+      })
+    } else if (this.props.number < 5) {
+      // update back to blank on reset
+      this.setState({
+        formattedDate: formattedDate
+      })
+    }
   }
 
   calculateDateRange (phase, date, recievedPhaseMetadata) {

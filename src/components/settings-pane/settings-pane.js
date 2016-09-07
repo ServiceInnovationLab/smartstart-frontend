@@ -5,8 +5,9 @@ import './realme-login-primary.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { addDueDate } from 'actions/actions'
+import { addDueDate, savePersonalisationValues } from 'actions/actions'
 import classNames from 'classnames'
+import { isValidDate } from 'utils'
 
 class SettingsPane extends Component {
   constructor (props) {
@@ -15,7 +16,26 @@ class SettingsPane extends Component {
     this.state = {
       paneOpen: false,
       loginMessageShown: false,
-      fixedControls: false
+      fixedControls: false,
+      dueDateFieldValue: ''
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    // need to use componentWillReceiveProps because this
+    // component renders before the b/e data is available
+    let settingsData = nextProps.personalisationValues.settings
+
+    if (settingsData) {
+      if (settingsData.dd && isValidDate(settingsData.dd)) {
+        // update the input (only if it's a valid value)
+        this.state = {
+          dueDateFieldValue: settingsData.dd
+        }
+
+        // update the timeline
+        this.props.dispatch(addDueDate(settingsData.dd))
+      }
     }
   }
 
@@ -56,17 +76,27 @@ class SettingsPane extends Component {
   updateSettings (event) {
     event.preventDefault() // prevent a form submit action
 
-    this.props.dispatch(addDueDate(this.dueDateField.value))
+    this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
     this.setState({
       paneOpen: false
     })
 
+    // values to save to backend or cookie
+    let valuesToSave = [{
+      'group': 'settings',
+      'key': 'dd', // keep these non-descriptive for privacy reasons
+      'val': this.state.dueDateFieldValue
+    }]
+
     // if the user is not logged in, tell them they should to save
-    // login always requires a page reload, so no need to manually hide this message later
     if (!this.props.isLoggedIn) {
       this.setState({
-        loginMessageShown: true
+        loginMessageShown: true // login always requires a page reload, so no need to manually hide this message later
       })
+      // TODO #37457 save to a cookie here
+    } else {
+      // if they are logged in, save the new value(s) to the backend
+      this.props.dispatch(savePersonalisationValues(valuesToSave))
     }
   }
 
@@ -78,8 +108,13 @@ class SettingsPane extends Component {
     }
   }
 
+  dueDateChange (event) {
+    // needed as per https://facebook.github.io/react/docs/forms.html#controlled-components
+    this.setState({ dueDateFieldValue: event.target.value })
+  }
+
   reset () {
-    this.dueDateField.value = ''
+    this.setState({ dueDateFieldValue: '' })
     this.dueDateField.setCustomValidity('')
   }
 
@@ -96,11 +131,6 @@ class SettingsPane extends Component {
       'message',
       { 'hidden': !this.state.loginMessageShown }
     )
-
-    // TODO if dueDate in store changes because of a login
-    // action, update value here (story RM35006) if there
-    // was not a value added. If there is already a value
-    // here, we need to update the personalisation service.
 
     return (
       <div className='settings' ref={(ref) => { this.settingsElement = ref }}>
@@ -126,6 +156,8 @@ class SettingsPane extends Component {
                   pattern='\d{4}-\d{2}-\d{2}'
                   ref={(ref) => { this.dueDateField = ref }}
                   onKeyUp={this.dueDateValidate.bind(this)}
+                  onChange={this.dueDateChange.bind(this)}
+                  value={this.state.dueDateFieldValue}
               />
               </label>
               <div className='button-set'>
@@ -155,21 +187,21 @@ function mapStateToProps (state) {
   } = state
   const {
     isLoggedIn,
-    dueDate
+    personalisationValues
   } = personalisationActions || {
     isLoggedIn: false,
-    dueDate: null
+    personalisationValues: {}
   }
 
   return {
     isLoggedIn,
-    dueDate
+    personalisationValues
   }
 }
 
 SettingsPane.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  dueDate: PropTypes.object
+  personalisationValues: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps)(SettingsPane)

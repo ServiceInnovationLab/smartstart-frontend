@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchContent, checkAuthCookie, fetchPhaseMetadata, piwikTrackPost } from 'actions/actions'
+import { fetchContent, checkAuthCookie, fetchPhaseMetadata, piwikTrackPost, fetchPersonalisationValues } from 'actions/actions'
 import Page from 'layouts/page/page'
 
 class Container extends Component {
@@ -11,16 +11,20 @@ class Container extends Component {
     dispatch(fetchPhaseMetadata())
 
     // should only need to check on load
-    dispatch(checkAuthCookie())
+    dispatch(checkAuthCookie()).then(() =>
+      // wait for isLoggedIn state before deciding if OK to fetch
+      dispatch(fetchPersonalisationValues())
+    )
 
+    // basic piwik logging
     dispatch(piwikTrackPost('Timeline'))
   }
 
   render () {
-    const { phases, supplementary, supplementaryID, isLoggedIn, error } = this.props
+    const { phases, supplementary, supplementaryID, isLoggedIn, error, isFetchingPersonalisation } = this.props
 
     return (
-      <Page phases={phases} supplementary={supplementary} supplementaryID={supplementaryID} isLoggedIn={isLoggedIn} appError={error} />
+      <Page phases={phases} supplementary={supplementary} supplementaryID={supplementaryID} isLoggedIn={isLoggedIn} appError={error} isFetchingPersonalisation={isFetchingPersonalisation} />
     )
   }
 }
@@ -39,9 +43,11 @@ function mapStateToProps (state) {
     supplementary: []
   }
   const {
-    isLoggedIn
+    isLoggedIn,
+    isFetchingPersonalisation
   } = personalisationActions || {
-    isLoggedIn: false
+    isLoggedIn: false,
+    isFetchingPersonalisation: false
   }
   const {
     error
@@ -53,6 +59,7 @@ function mapStateToProps (state) {
     phases,
     supplementary,
     isLoggedIn,
+    isFetchingPersonalisation,
     error
   }
 }
@@ -61,6 +68,7 @@ Container.propTypes = {
   phases: PropTypes.array.isRequired,
   supplementary: PropTypes.array,
   isLoggedIn: PropTypes.bool.isRequired,
+  isFetchingPersonalisation: PropTypes.bool.isRequired,
   appError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
