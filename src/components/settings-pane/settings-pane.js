@@ -26,7 +26,7 @@ class SettingsPane extends Component {
     let settingsData = nextProps.personalisationValues.settings
 
     if (settingsData) {
-      if (settingsData.dd) { // not false or undefined
+      if (settingsData.dd) { // TODO check it converts to a date OK
         // update the input
         this.state = {
           dueDateFieldValue: settingsData.dd
