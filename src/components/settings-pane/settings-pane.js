@@ -144,7 +144,7 @@ class SettingsPane extends Component {
           <div id='settings' className={paneClasses} aria-hidden={!this.state.paneOpen}>
             <form onSubmit={this.updateSettings.bind(this)}>
               <h4>Personalise the timeline</h4>
-              <p>Make the information displayed in the timeline more relevant by answering these questions. You can answer as many or few as you wish. All your details are kept private (see <a href='#'>our privacy policy</a>).</p>
+              <p>Make the information displayed in the timeline more relevant by answering these questions. You can answer as many or as few as you wish. All your details are kept private (see <a href='#'>our privacy policy</a>).</p>
               <label>
                 When is your baby due?
                 <br />
