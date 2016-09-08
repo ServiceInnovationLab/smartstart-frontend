@@ -152,17 +152,16 @@ a {
 }
 
 ul {
-  padding-left: 30px;
-  list-style: none;
+  padding-left: 16px;
 
-  li {
-    position: relative;
+  > li {
+    padding-left: 8px;
+    margin-bottom: 5px;
+  }
 
-    &::before {
-      content: "—";
-      position: absolute;
-      left: -20px;
-    }
+  // nested
+  > li > ul {
+    list-style-type: circle;
   }
 
   p + & {
