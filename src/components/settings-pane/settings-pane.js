@@ -151,7 +151,7 @@ class SettingsPane extends Component {
                 <input
                   type='date'
                   maxLength='10'
-                  size='10'
+                  size='11'
                   placeholder='yyyy-mm-dd'
                   pattern='\d{4}-\d{2}-\d{2}'
                   ref={(ref) => { this.dueDateField = ref }}
