@@ -47,7 +47,7 @@ class SupplementaryCard extends Card {
     let contentId = 'content-' + this.props.id
 
     return (
-      <div className={supplementaryCardClasses} data-test='card'>
+      <div className={supplementaryCardClasses} data-test='card' id={this.props.id}>
         <div className='expandable-title-wrapper'><h3
           data-test='cardTitle'
           className='expandable-title'

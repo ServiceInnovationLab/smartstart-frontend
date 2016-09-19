@@ -18,7 +18,7 @@ class Card extends Component {
 
   render () {
     return (
-      <div className='card' data-test='card'>
+      <div className='card' data-test='card' id={this.props.id}>
         <h3 data-test='cardTitle'>{this.props.title}</h3>
         {this.props.elements.map(element =>
           this.elementType(element)
@@ -30,7 +30,8 @@ class Card extends Component {
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  elements: PropTypes.array.isRequired
+  elements: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired
 }
 
 export default Card
