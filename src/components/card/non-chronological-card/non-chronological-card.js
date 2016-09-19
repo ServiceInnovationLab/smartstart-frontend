@@ -40,7 +40,7 @@ class NonChronologicalCard extends Card {
     )
 
     return (
-      <div className={nonchronologicalClasses} data-test='non-chronological-card'>
+      <div className={nonchronologicalClasses} data-test='non-chronological-card' id={id}>
         <div className='expandable-title-wrapper'><h3
           data-test='cardTitle'
           className='expandable-title'
@@ -66,7 +66,8 @@ class NonChronologicalCard extends Card {
 
 NonChronologicalCard.propTypes = {
   title: PropTypes.string.isRequired,
-  elements: PropTypes.array.isRequired
+  elements: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired
 }
 
 export default NonChronologicalCard

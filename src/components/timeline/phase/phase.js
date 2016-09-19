@@ -103,7 +103,7 @@ class Phase extends Component {
       if (card.tags.indexOf('boac_presentation::non-chronological') >= 0) {
         nonChronologicalCards.push(<NonChronologicalCard key={card.id} id={card.id} title={card.label} elements={card.elements} />)
       } else {
-        normalCards.push(<Card key={card.id} title={card.label} elements={card.elements} />)
+        normalCards.push(<Card key={card.id} id={card.id} title={card.label} elements={card.elements} />)
       }
     })
 
