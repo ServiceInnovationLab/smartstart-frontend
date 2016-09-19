@@ -9,7 +9,9 @@
     "build": "node build.js",
     "build:testdata": "node build.js --piwik 2 --endpoint /assets/test-data.json",
     "build:externaltest": "node build.js --piwik 2 --endpoint https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all",
+    "build:externalprod": "node build.js --piwik 2 --endpoint https://govtnz.cwp.govt.nz/BoacAPI/v1/all",
     "start": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all",
+    "start:externalprod": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint https://govtnz.cwp.govt.nz/BoacAPI/v1/all",
     "start:testdata": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint /assets/test-data.json",
     "start:snapshot": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint /assets/snapshot-data.json",
     "lint": "./node_modules/.bin/standard"
