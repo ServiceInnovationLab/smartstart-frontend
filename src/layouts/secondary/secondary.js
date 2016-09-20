@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { IndexLink } from 'react-router'
 import Header from 'layouts/header/header'
+import Footer from 'layouts/footer/footer'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 import SiteMetadataCard from 'components/card/site-metadata-card/site-metadata-card'
@@ -49,7 +50,7 @@ class Secondary extends Component {
         <div className={showWhenHasError}>
           <Error />
         </div>
-        {/* footer component will go here */}
+        <Footer />
       </div>
     )
   }
