@@ -76,35 +76,47 @@ class SettingsPane extends Component {
   updateSettings (event) {
     event.preventDefault() // prevent a form submit action
 
-    this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
-    this.setState({
-      paneOpen: false
-    })
+    // unfortunately setCustomValidity doesn't work in safari so we have to
+    // manually check the validity here
 
-    // values to save to backend or cookie
-    let valuesToSave = [{
-      'group': 'settings',
-      'key': 'dd', // keep these non-descriptive for privacy reasons
-      'val': this.state.dueDateFieldValue
-    }]
-
-    // if the user is not logged in, tell them they should to save
-    if (!this.props.isLoggedIn) {
+    if (this.dueDateValidate()) {
+      // it validated, add the due date to the sotre and close the pane
+      this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
       this.setState({
-        loginMessageShown: true // login always requires a page reload, so no need to manually hide this message later
+        paneOpen: false
       })
-      // TODO #37457 save to a cookie here
+
+      // values to save to backend or cookie
+      let valuesToSave = [{
+        'group': 'settings',
+        'key': 'dd', // keep these non-descriptive for privacy reasons
+        'val': this.state.dueDateFieldValue
+      }]
+
+      // if the user is not logged in, tell them they should to save
+      if (!this.props.isLoggedIn) {
+        this.setState({
+          loginMessageShown: true // login always requires a page reload, so no need to manually hide this message later
+        })
+        // TODO #37457 save to a cookie here
+      } else {
+        // if they are logged in, save the new value(s) to the backend
+        this.props.dispatch(savePersonalisationValues(valuesToSave))
+      }
     } else {
-      // if they are logged in, save the new value(s) to the backend
-      this.props.dispatch(savePersonalisationValues(valuesToSave))
+      // it's safari and it didn't validate
+      // TODO #37500 should we display the error manually? or use a polyfill?
     }
   }
+
 
   dueDateValidate () {
     if (this.dueDateField.validity.patternMismatch || !isValidDate(this.state.dueDateFieldValue)) {
       this.dueDateField.setCustomValidity('Please use the format yyyy-mm-dd')
+      return false // so we can do the manual check for safari
     } else {
       this.dueDateField.setCustomValidity('')
+      return true // so we can do the manual check for safari
     }
   }
 
