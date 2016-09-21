@@ -17,7 +17,8 @@ import {
 function contentActions (state = {
   isFetching: false,
   phases: [],
-  supplementary: []
+  supplementary: [],
+  about: []
 }, action) {
   switch (action.type) {
     case REQUEST_API:
@@ -28,7 +29,8 @@ function contentActions (state = {
       return Object.assign({}, state, {
         isFetching: false,
         phases: action.phases,
-        supplementary: action.supplementary
+        supplementary: action.supplementary,
+        about: action.about
       })
     default:
       return state

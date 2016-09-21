@@ -1,20 +1,18 @@
 import React, { PropTypes, Component } from 'react'
+import { Link } from 'react-router'
 import Header from 'layouts/header/header'
-import SettingsPane from 'components/settings-pane/settings-pane'
-import Timeline from 'components/timeline/timeline'
-import Supplementary from 'components/supplementary/supplementary'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 
-class Page extends Component {
+class Secondary extends Component {
   render () {
-    const { phases, supplementary, isLoggedIn, appError, isFetchingPersonalisation } = this.props
+    const { about, isLoggedIn, appError, isFetchingPersonalisation } = this.props
 
     let showWhenLoading = ''
     let showWhenLoaded = 'hidden'
     let showWhenHasError = 'hidden'
 
-    if (phases.length > 0 && !appError && isFetchingPersonalisation === false) { // assumes there will always be both supplementary and phases
+    if (about.length > 0 && !appError && isFetchingPersonalisation === false) {
       showWhenLoading = 'hidden'
       showWhenLoaded = ''
     }
@@ -31,9 +29,7 @@ class Page extends Component {
           <Spinner />
         </div>
         <div className={showWhenLoaded}>
-          <SettingsPane />
-          <Timeline phases={phases} />
-          <Supplementary cards={supplementary} />
+          <p><Link to={'/'}>Go back</Link></p>
         </div>
         <div className={showWhenHasError}>
           <Error />
@@ -44,10 +40,12 @@ class Page extends Component {
   }
 }
 
-Page.propTypes = {
-  phases: PropTypes.array.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  isFetchingPersonalisation: PropTypes.bool.isRequired,
+Secondary.propTypes = {
+  phases: PropTypes.array,
+  supplementary: PropTypes.array,
+  about: PropTypes.array,
+  isLoggedIn: PropTypes.bool,
+  isFetchingPersonalisation: PropTypes.bool,
   appError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
@@ -55,4 +53,4 @@ Page.propTypes = {
   ])
 }
 
-export default Page
+export default Secondary
