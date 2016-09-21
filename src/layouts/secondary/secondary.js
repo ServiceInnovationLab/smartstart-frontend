@@ -1,16 +1,20 @@
 import React, { PropTypes, Component } from 'react'
-import { Link } from 'react-router'
+import { IndexLink } from 'react-router'
 import Header from 'layouts/header/header'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
+import SiteMetadataCard from 'components/card/site-metadata-card/site-metadata-card'
+import { routeTagMapping } from 'index'
 
 class Secondary extends Component {
   render () {
     const { about, isLoggedIn, appError, isFetchingPersonalisation } = this.props
+    const route = this.props.route.path
 
     let showWhenLoading = ''
     let showWhenLoaded = 'hidden'
     let showWhenHasError = 'hidden'
+    let secondaryCard = false
 
     if (about.length > 0 && !appError && isFetchingPersonalisation === false) {
       showWhenLoading = 'hidden'
@@ -22,6 +26,16 @@ class Secondary extends Component {
       showWhenLoading = 'hidden'
     }
 
+    // the primary purpose of the secondary layout is to display the site metadata pages
+    // if we have a mapping for this route, match up the appropriate data
+    if (routeTagMapping[route]) {
+      about.forEach(card => {
+        if (card.tags.indexOf(routeTagMapping[route]) > -1) {
+          secondaryCard = card
+        }
+      })
+    }
+
     return (
       <div>
         <Header isLoggedIn={isLoggedIn} />
@@ -29,7 +43,8 @@ class Secondary extends Component {
           <Spinner />
         </div>
         <div className={showWhenLoaded}>
-          <p><Link to={'/'}>Go back</Link></p>
+          {secondaryCard && <SiteMetadataCard key={secondaryCard.id} id={secondaryCard.id} title={secondaryCard.label} elements={secondaryCard.elements} />}
+          <p><IndexLink to={'/'}>Go back</IndexLink></p>
         </div>
         <div className={showWhenHasError}>
           <Error />
