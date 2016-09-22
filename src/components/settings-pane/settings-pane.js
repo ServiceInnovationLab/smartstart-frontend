@@ -5,6 +5,7 @@ import './realme-login-primary.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { addDueDate, savePersonalisationValues } from 'actions/actions'
 import classNames from 'classnames'
 import { isValidDate } from 'utils'
@@ -48,16 +49,19 @@ class SettingsPane extends Component {
   }
 
   checkIfShouldBeFixed () {
-    const settingsPosition = this.settingsElement.getBoundingClientRect().top
+    // guard so only runs if settings pane is present
+    if (this.settingsElement) {
+      const settingsPosition = this.settingsElement.getBoundingClientRect().top
 
-    if (!this.state.fixedControls && settingsPosition < 0) {
-      this.setState({
-        fixedControls: true
-      })
-    } else if (this.state.fixedControls && settingsPosition >= 0) {
-      this.setState({
-        fixedControls: false
-      })
+      if (!this.state.fixedControls && settingsPosition < 0) {
+        this.setState({
+          fixedControls: true
+        })
+      } else if (this.state.fixedControls && settingsPosition >= 0) {
+        this.setState({
+          fixedControls: false
+        })
+      }
     }
   }
 
@@ -80,7 +84,7 @@ class SettingsPane extends Component {
     // manually check the validity here
 
     if (this.dueDateValidate()) {
-      // it validated, add the due date to the sotre and close the pane
+      // it validated, add the due date to the store and close the pane
       this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
       this.setState({
         paneOpen: false
@@ -108,7 +112,6 @@ class SettingsPane extends Component {
       // TODO #37500 should we display the error manually? or use a polyfill?
     }
   }
-
 
   dueDateValidate () {
     if (this.dueDateField.validity.patternMismatch || !isValidDate(this.state.dueDateFieldValue)) {
@@ -156,7 +159,7 @@ class SettingsPane extends Component {
           <div id='settings' className={paneClasses} aria-hidden={!this.state.paneOpen}>
             <form onSubmit={this.updateSettings.bind(this)}>
               <h4>Personalise the timeline</h4>
-              <p>Make the information displayed in the timeline more relevant by answering these questions. You can answer as many or as few as you wish. All your details are kept private (see <a href='#'>our privacy policy</a>).</p>
+              <p>Make the information displayed in the timeline more relevant by answering these questions. You can answer as many or as few as you wish. All your details are kept private (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</p>
               <label>
                 When is your baby due?
                 <br />

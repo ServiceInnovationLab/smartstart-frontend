@@ -6,7 +6,7 @@ import Supplementary from 'components/supplementary/supplementary'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 
-class Page extends Component {
+class Main extends Component {
   render () {
     const { phases, supplementary, isLoggedIn, appError, isFetchingPersonalisation } = this.props
 
@@ -44,10 +44,12 @@ class Page extends Component {
   }
 }
 
-Page.propTypes = {
-  phases: PropTypes.array.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  isFetchingPersonalisation: PropTypes.bool.isRequired,
+Main.propTypes = {
+  phases: PropTypes.array,
+  supplementary: PropTypes.array,
+  about: PropTypes.array,
+  isLoggedIn: PropTypes.bool,
+  isFetchingPersonalisation: PropTypes.bool,
   appError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
@@ -55,4 +57,4 @@ Page.propTypes = {
   ])
 }
 
-export default Page
+export default Main

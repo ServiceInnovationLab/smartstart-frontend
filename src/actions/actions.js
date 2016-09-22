@@ -28,7 +28,8 @@ function receiveAPI (json) {
   return {
     type: RECEIVE_API,
     phases: json.phases,
-    supplementary: json.supplementary
+    supplementary: json.supplementary,
+    about: json.about
   }
 }
 
