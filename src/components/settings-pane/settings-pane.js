@@ -125,7 +125,8 @@ class SettingsPane extends Component {
 
   dueDateChange (event) {
     // needed as per https://facebook.github.io/react/docs/forms.html#controlled-components
-    this.setState({ dueDateFieldValue: event.target.value })
+    // plus we need to trigger the validation once the state update has finished
+    this.setState({ dueDateFieldValue: event.target.value }, this.dueDateValidate.bind(this))
   }
 
   reset () {
@@ -170,7 +171,6 @@ class SettingsPane extends Component {
                   placeholder='yyyy-mm-dd'
                   pattern='\d{4}-\d{2}-\d{2}'
                   ref={(ref) => { this.dueDateField = ref }}
-                  onKeyUp={this.dueDateValidate.bind(this)}
                   onChange={this.dueDateChange.bind(this)}
                   value={this.state.dueDateFieldValue}
               />

@@ -34,7 +34,7 @@ class Task extends Component {
   }
 
   handleChange () {
-    this.setState({checked: !this.state.checked}, function () {
+    this.setState({checked: !this.state.checked}, () => {
       // further changes needs to occur as callback to ensure state change executed first
       if (this.state.checked) {
         this.setState({checkedClass: 'checked'})
