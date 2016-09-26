@@ -22,11 +22,23 @@ class SettingsPane extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    // need to use componentWillReceiveProps because this
-    // component renders before the b/e data is available
-    let settingsData = nextProps.personalisationValues.settings
+  componentWillMount () {
+    this.setFilterValuesFromStore.bind(this)(this.props.personalisationValues.settings)
+  }
 
+  componentWillReceiveProps (nextProps) {
+    this.setFilterValuesFromStore.bind(this)(nextProps.personalisationValues.settings)
+  }
+
+  componentDidMount () {
+    window.addEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
+  }
+
+  setFilterValuesFromStore (settingsData) {
     if (settingsData) {
       if (settingsData.dd && isValidDate(settingsData.dd)) {
         // update the input (only if it's a valid value)
@@ -38,14 +50,6 @@ class SettingsPane extends Component {
         this.props.dispatch(addDueDate(settingsData.dd))
       }
     }
-  }
-
-  componentDidMount () {
-    window.addEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
   }
 
   checkIfShouldBeFixed () {

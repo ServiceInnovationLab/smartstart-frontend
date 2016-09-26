@@ -15,14 +15,16 @@ class Task extends Component {
   }
 
   componentWillMount () {
-    // we only need to load the saved checkboxes from
-    // the backend on componentWillMount because we
-    // don't render the timeline until data is loaded
-    // and we only need to load saved data once
-    let checkboxData = this.props.personalisationValues.checkboxes
+    this.setCheckboxValuesFromStore.bind(this)(this.props.personalisationValues.checkboxes, this.props.id)
+  }
 
-    if (checkboxData) {
-      let thisCheckbox = checkboxData[this.props.id.toString()]
+  componentWillReceiveProps (nextProps) {
+    this.setCheckboxValuesFromStore.bind(this)(nextProps.personalisationValues.checkboxes, nextProps.id)
+  }
+
+  setCheckboxValuesFromStore (allCheckboxValues, checkboxID) {
+    if (allCheckboxValues) {
+      let thisCheckbox = allCheckboxValues[checkboxID.toString()]
 
       if (thisCheckbox === 'true') {
         this.state = {

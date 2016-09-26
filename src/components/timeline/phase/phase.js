@@ -18,14 +18,13 @@ class Phase extends Component {
   componentWillMount () {
     // the due data could already be available because of the b/e
     if (this.props.dueDate) {
-      // if phase metadata doesn't yet exist we do the setup
-      // via componentWillReceiveProps instead
       this.addFormattedDate(this.props.dueDate, this.props.phaseMetadata)
     }
   }
 
   componentWillReceiveProps (nextProps) {
     // the due date could change as a result of user interaction
+    // don't wrap this in a if check as we need to handle resetting
     this.addFormattedDate(nextProps.dueDate, nextProps.phaseMetadata)
   }
 

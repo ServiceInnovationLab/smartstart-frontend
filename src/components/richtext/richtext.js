@@ -16,9 +16,17 @@ class Richtext extends Component {
   }
 
   componentWillMount () {
+    this.checkIfExpandable.bind(this)(this.props.tags, this.props.title)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.checkIfExpandable.bind(this)(nextProps.tags, nextProps.title)
+  }
+
+  checkIfExpandable (tags, title) {
     // check if it's expandable content
-    for (var tag of this.props.tags) {
-      if (tag === 'boac_presentation::auxiliary' && this.props.title) { // expandable content requires a title
+    for (var tag of tags) {
+      if (tag === 'boac_presentation::auxiliary' && title) { // expandable content requires a title
         this.setState({
           showExpandableHeader: true,
           isExpandable: true

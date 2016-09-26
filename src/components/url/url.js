@@ -13,8 +13,16 @@ class Url extends Component {
   }
 
   componentWillMount () {
+    this.checkIfButton.bind(this)(this.props.tags)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.checkIfButton.bind(this)(nextProps.tags)
+  }
+
+  checkIfButton (tags) {
     // check if it's presented as a button
-    if (this.props.tags.indexOf('boac_presentation::link-button') >= 0) {
+    if (tags.indexOf('boac_presentation::link-button') >= 0) {
       this.setState({isButton: true})
     }
   }
