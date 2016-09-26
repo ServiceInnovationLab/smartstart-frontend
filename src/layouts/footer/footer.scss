@@ -1,0 +1,115 @@
+@import 'variables';
+
+.page-footer {
+  position: relative;
+  z-index: 1; // footer is always above content
+  overflow-x: hidden;
+  padding-top: $footer-top-spacing-mobile;
+
+  @media #{$desktop-and-above} {
+    padding-top: $footer-top-spacing-desktop;
+  }
+}
+
+.page-footer-curve {
+  width: 100%;
+  height: $footer-curve-height;
+  display: block;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: $footer-background-color;
+    width: 124%;
+    height: 74px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    top: $footer-top-spacing-mobile;
+    left: -12%;
+
+    @media #{$desktop-and-above} {
+      top: $footer-top-spacing-desktop;
+    }
+  }
+}
+
+.page-footer-inner-wrap {
+  background-color: $footer-background-color;
+}
+
+.page-footer-inner {
+  max-width: $desktop-max-content-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 20px 25px;
+  text-align: center;
+  font-size: 14px;
+
+  @media #{$desktop-and-above} {
+    text-align: right;
+  }
+
+  a {
+    color: $footer-link-color;
+
+    &:hover,
+    &:focus {
+      color: $footer-link-color-hover;
+    }
+
+    // hide external link icon
+    &[href*="//"] {
+      padding-right: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  ul {
+    margin-top: 0;
+    padding-left: 0;
+    list-style-type: none;
+
+    @media #{$desktop-and-above} {
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    > li {
+      padding-left: 0;
+
+      @media #{$desktop-and-above} {
+        display: inline-block;
+        margin-left: 30px;
+      }
+    }
+  }
+
+  .nz-govt {
+    margin-top: 25px;
+    margin-bottom: 0;
+
+    @media #{$desktop-and-above} {
+      float: left;
+    }
+
+    a {
+      display: inline-block;
+      background-image: url('/assets/img/nz-govt-logo.svg');
+      width: 157px;
+      height: 16px;
+
+      &:hover,
+      &:focus {
+        background-image: url('/assets/img/nz-govt-logo-white.svg');
+      }
+    }
+
+    img {
+      display: none;
+    }
+  }
+}

@@ -2,10 +2,12 @@
 
 .supplementary {
   background-color: $supplementary-background-color;
-  padding-bottom: 60px;
+  padding-bottom: $footer-top-spacing-mobile;
+  margin-bottom: -#{$footer-top-spacing-mobile + $footer-curve-height};
 
   @media #{$desktop-and-above} {
-    padding-bottom: 80px;
+    padding-bottom: $footer-top-spacing-desktop;
+    margin-bottom: -#{$footer-top-spacing-desktop + $footer-curve-height};
   }
 
   > h2 {

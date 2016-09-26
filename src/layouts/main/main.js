@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Header from 'layouts/header/header'
+import Footer from 'layouts/footer/footer'
 import SettingsPane from 'components/settings-pane/settings-pane'
 import Timeline from 'components/timeline/timeline'
 import Supplementary from 'components/supplementary/supplementary'
@@ -38,7 +39,7 @@ class Main extends Component {
         <div className={showWhenHasError}>
           <Error />
         </div>
-        {/* footer component will go here */}
+        <Footer />
       </div>
     )
   }
