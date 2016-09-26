@@ -15,6 +15,10 @@
     max-width: 300px;
   }
 
+  @media #{$extra-small-devices} {
+    margin-left: 50px;
+  }
+
   &:hover,
   &:active,
   &:visited {

@@ -178,7 +178,7 @@
 }
 
 .settings-messages {
-  min-width: calc(#{$mobile-min-content-width} + 30px);
+  min-width: $mobile-min-content-width;
   background-color: $phase-background-color;
   overflow: hidden; // force bfc
 
