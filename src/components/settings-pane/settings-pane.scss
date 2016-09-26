@@ -17,7 +17,8 @@
 
     // need to be able to scroll to see too-tall content
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: auto; // TODO this needs to not be on the fixed element itself :/ OR use absolute
+    –webkit-overflow-scrolling: touch;
     pointer-events: none;
 
     .settings-trigger,
@@ -156,6 +157,15 @@
       border-color: transparent;
       background-color: transparent;
       color: $background-color;
+    }
+
+    // iPhone 5 needs to have an extra row - make space for reset via padding
+    @media #{$extra-small-devices} {
+      padding-top: 60px;
+
+      .reset-button {
+        top: 0;
+      }
     }
 
     .cancel-button,
