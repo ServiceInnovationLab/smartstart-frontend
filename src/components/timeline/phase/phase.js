@@ -94,6 +94,7 @@ class Phase extends Component {
     let normalCards = []
     let nonChronologicalCards = []
     let dateClasses = classNames('phase-date', { 'hidden': !this.state.formattedDate })
+    let phaseClasses = classNames('phase', 'phase-' + number)
 
     cards.map((card) => {
       if (!card.elements) { card.elements = [] } // a card can be empty
@@ -107,7 +108,7 @@ class Phase extends Component {
     })
 
     return (
-      <div className='phase' data-test='phase'>
+      <div className={phaseClasses} data-test='phase'>
         <h2 data-test='phaseTitle'>
           <span className='phase-number'>{number}</span>
           {title}

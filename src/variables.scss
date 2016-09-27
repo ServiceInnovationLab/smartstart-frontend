@@ -3,6 +3,7 @@ $extra-small-devices:  'only screen and (max-width: 390px)';
 $tablet-and-above:     'only screen and (min-width: 768px)';
 $tablet-only:          'only screen and (min-width: 768px and max-width: 991px)';
 $desktop-and-above:    'only screen and (min-width: 992px)';
+$high-res:             'only screen and (min-resolution: 2dppx)';
 
 // brand colors
 $realme-dark-blue:     #3e4d5d;

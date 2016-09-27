@@ -27,6 +27,7 @@
     }
   }
 
+  // phase header shape
   &::before,
   &::after {
     content: "";
@@ -37,26 +38,27 @@
 
   &::before {
     width: 100%;
-    height: 146px;
+    height: 156px;
     top: 0;
 
     @media #{$desktop-and-above} {
-      height: 220px;
+      height: 230px;
     }
   }
 
+  // curved bottom
   &::after {
     width: 124%;
     height: 76px;
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
-    top: 85px;
+    top: 95px;
     left: -12%;
     z-index: -1;
 
     @media #{$desktop-and-above} {
       height: 240px;
-      top: 28px;
+      top: 38px;
     }
   }
 
@@ -65,6 +67,7 @@
     margin-top: 0;
     padding-left: $timeline-spacing;
     padding-right: $timeline-spacing;
+    padding-top: 10px; // create space between phase shape and text
 
     @media #{$desktop-and-above} {
       max-width: $phase-content-width-desktop;
@@ -80,35 +83,36 @@
     &::after {
       content: "";
       display: block;
-      border-radius: 50%;
       position: absolute;
       left: 50%;
     }
 
+    // white circle
     &::before {
+      border-radius: 50%;
       background-color: #fff;
       box-shadow: 0 0 18px 0 rgba(0,0,0,0.2);
       width: 174px;
       height: 174px;
       margin-left: -87px; // half of width
-      top: 15px;
+      top: 25px;
 
       @media #{$desktop-and-above} {
         width: 290px;
         height: 290px;
         margin-left: -145px; // half of width
-        top: -315px;
+        top: -305px;
       }
     }
 
+    // illustration
     &::after {
       width: 204px;
       height: 204px;
       margin-left: -102px; // half of width
-      top: 0;
+      top: 10px; // leave a bit of a gap at the top
 
-      // TODO change illustration for different phases
-      background-image: url(/assets/img/illustration-3.png);
+      // illustration image gets set in the for loop further down
       background-repeat: no-repeat;
       background-size: contain;
 
@@ -116,7 +120,18 @@
         width: 340px;
         height: 340px;
         margin-left: -170px; // half of width
-        top: -340px;
+        top: -330px;
+      }
+    }
+  }
+
+  // illustration image file for each phase
+  @for $i from 1 through 7 {
+    &.phase-#{$i} > h2::after {
+      background-image: url(/assets/img/illustrations/illustration-#{$i}.png);
+
+      @media #{$high-res} {
+        background-image: url(/assets/img/illustrations/illustration-#{$i}-highres.png);
       }
     }
   }

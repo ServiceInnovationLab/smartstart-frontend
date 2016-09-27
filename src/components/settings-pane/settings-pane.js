@@ -121,7 +121,7 @@ class SettingsPane extends Component {
     const fieldValue = this.state.dueDateFieldValue
 
     // if format is wrong OR there is a value but it's not a valid date
-    if (this.dueDateField.validity.patternMismatch || ((fieldValue != '') && !isValidDate(fieldValue))) {
+    if (this.dueDateField.validity.patternMismatch || ((fieldValue !== '') && !isValidDate(fieldValue))) {
       this.dueDateField.setCustomValidity('Please use the format yyyy-mm-dd')
       return false // so we can do the manual check for safari
     } else {
