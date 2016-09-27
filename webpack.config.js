@@ -47,7 +47,8 @@ const common = {
   },
 
   output: {
-    filename: 'app.js'
+    filename: 'app.js',
+    publicPath: '/'
     // don't need a path for default config
   },
 
