@@ -46,6 +46,10 @@ const common = {
     javascript: ['whatwg-fetch', 'babel-polyfill', './index.js']
   },
 
+  devServer: {
+    historyApiFallback: true
+  },
+
   output: {
     filename: 'app.js',
     publicPath: '/'
