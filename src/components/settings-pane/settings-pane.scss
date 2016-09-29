@@ -30,34 +30,74 @@
       box-shadow: $header-subtle-dropshadow;
     }
 
-    .settings-trigger {
+    .settings-triggers {
       box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
     }
   }
 }
 
-.settings-trigger {
+.settings-triggers {
   position: absolute;
   z-index: $z-index-settings-trigger;
   top: 0;
-  right: 20px;
+  right: 15px;
   border-radius: 0 0 5px 5px;
-  border: 0 none;
   background-color: $background-color;
-  min-width: 0;
-  font-weight: normal;
-  padding-top: 12px;
-  padding-bottom: 10px;
-  padding-left: 36px;
-  padding-right: 12px;
+  transition: background-color 0.5s, border-bottom-right-radius 0.5s;
 
-  &::before {
-    font-family: 'icomoon' !important;
-    content: $icon-personalise;
-    display: inline-block;
-    position: absolute;
-    left: 12px;
-    top: 12px;
+  .settings-trigger {
+    padding: 12px 12px 10px 36px;
+    border: 0 none;
+    background-color: transparent;
+    min-width: 0;
+    border-radius: 0;
+    font-weight: normal;
+    position: relative;
+    border-right: 1px solid $border-color;
+    transition: color 0.5s;
+
+    &::before {
+      font-family: 'icomoon' !important;
+      content: $icon-personalise;
+      display: inline-block;
+      position: absolute;
+      left: 12px;
+      top: 12px;
+    }
+
+    &:last-child {
+      border-right: 0 none;
+    }
+  }
+
+  &.pane-open {
+    background-color: $realme-dark-blue;
+    border-bottom-right-radius: 0;
+
+    .is-fixed & {
+      box-shadow: none;
+    }
+
+    .settings-trigger {
+      color: #ffffff;
+      border-right: 1px solid darken($settings-elements-color, 10%);
+
+      &:last-child {
+        border-right: 0 none;
+      }
+
+      &:hover,
+      &:active,
+      &.is-open {
+        color: $settings-elements-color;
+        background-color: $settings-elements-bg-color;
+
+        &:first-child {
+          border-bottom-left-radius: 5px;
+        }
+      }
+    }
+
   }
 }
 
@@ -68,6 +108,7 @@
   color: $background-color;
   background-color: $realme-dark-blue;
   padding: $card-padding-desktop;
+  padding-top: $card-padding-desktop * 2;
   margin-left: 15px;
   margin-right: 15px;
   transform: translateY(calc(-100% - 60px)); // add on curved bottom space too
@@ -76,6 +117,7 @@
   &.is-open {
     visibility: visible;
     transform: translateY(0);
+    z-index: $z-index-settings-pane-open;
   }
 
   @media #{$tablet-and-above} {
@@ -118,7 +160,7 @@
   }
 
   input {
-    background-color: $settings-elements-color;
+    background-color: $settings-elements-bg-color;
     color: $background-color;
 
     &::placeholder {
@@ -173,33 +215,6 @@
     .cancel-button:hover {
       background-color: transparent;
       color: $background-color;
-    }
-  }
-}
-
-.settings-messages {
-  min-width: $mobile-min-content-width;
-  background-color: $phase-background-color;
-  overflow: hidden; // force bfc
-
-  > * {
-    margin-left: 15px;
-    margin-right: 15px;
-    text-align: center;
-
-    @media #{$desktop-and-above} {
-      max-width: 580px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    &:first-child {
-      margin-top: 60px; // leave space for profile toggle button
-
-      @media #{$desktop-and-above} {
-        // but not on desktop
-        margin-top: 22px;
-      }
     }
   }
 }

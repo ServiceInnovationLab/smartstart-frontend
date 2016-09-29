@@ -9,9 +9,9 @@ class SiteMetadataCard extends Card {
     let logos = []
 
     if (tags.indexOf('boac_presentation::contact') > -1) {
-      logos.push(<img key='logo-dia' src='/assets/img/dia-logo.png' className="logo-png" alt='Department of Internal Affairs' />)
+      logos.push(<img key='logo-dia' src='/assets/img/dia-logo.png' className='logo-png' alt='Department of Internal Affairs' />)
       logos.push(<img key='logo-msd' src='/assets/img/msd-logo.svg' alt='Ministry of Social Development' />)
-      logos.push(<img key='logo-ird' src='/assets/img/ird-logo.png' className="logo-png" alt='Inland Revenue' />)
+      logos.push(<img key='logo-ird' src='/assets/img/ird-logo.png' className='logo-png' alt='Inland Revenue' />)
       logos.push(<img key='logo-moh' src='/assets/img/moh-logo.svg' alt='Ministry of Health' />)
     }
 

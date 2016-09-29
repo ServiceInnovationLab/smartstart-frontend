@@ -40,7 +40,8 @@ $header-desktop-padding-left: 160px;
 $header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
 
 // settings panel
-$settings-elements-color: #65717D;
+$settings-elements-bg-color: #65717D;
+$settings-elements-color: #C5CACE;
 
 // timeline
 $timeline-border-width: 2px;
@@ -102,9 +103,10 @@ $footer-top-spacing-desktop:  100px;
 $footer-curve-height:         15px;
 
 // z-index index
-$z-index-header: 2;
-$z-index-settings-trigger: 1;
+$z-index-header: 5;
+$z-index-settings-trigger: 4;
 $z-index-settings-pane: 1;
+$z-index-settings-pane-open: 2;
 $z-index-settings-pane-fixed: 3;
 
 // icons
