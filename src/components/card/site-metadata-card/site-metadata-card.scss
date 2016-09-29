@@ -6,6 +6,12 @@
   margin-left: auto;
   margin-right: auto;
   padding: 15px;
+
+  @media #{$desktop-and-above} {
+    padding: 15px $header-desktop-padding-left;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .site-metadata {

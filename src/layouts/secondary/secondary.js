@@ -45,7 +45,7 @@ class Secondary extends Component {
         </div>
         <div className={showWhenLoaded}>
           {secondaryCard && <SiteMetadataCard key={secondaryCard.id} id={secondaryCard.id} title={secondaryCard.label} elements={secondaryCard.elements} tags={secondaryCard.tags} />}
-          <p className='back-to-main'><IndexLink to={'/'}>Go back</IndexLink></p>
+          <p className='back-to-main'><IndexLink to={'/'} className='button'>Go back</IndexLink></p>
         </div>
         <div className={showWhenHasError}>
           <Error />
