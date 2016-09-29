@@ -48,15 +48,21 @@
 .contact-logos {
   border-bottom: 1px solid #d2d2d2;
   margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   img {
     display: inline-block;
     margin-right: 50px;
     margin-bottom: 25px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
-  .dia-logo,
-  .ird-logo {
+  .logo-png {
     height: 47px;
   }
 }

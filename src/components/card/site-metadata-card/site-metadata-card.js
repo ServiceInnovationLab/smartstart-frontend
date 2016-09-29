@@ -9,20 +9,16 @@ class SiteMetadataCard extends Card {
     let logos = []
 
     if (tags.indexOf('boac_presentation::contact') > -1) {
-      logos.push(
-        <div className='contact-logos'>
-          <img src='/assets/img/dia-logo.png' className="dia-logo" alt='Department of Internal Affairs' />
-          <img src='/assets/img/msd-logo.svg' alt='Ministry of Social Development' />
-          <img src='/assets/img/ird-logo.png' className="ird-logo" alt='Inland Revenue' />
-          <img src='/assets/img/moh-logo.svg' alt='Ministry of Health' />
-        </div>
-      )
+      logos.push(<img key='logo-dia' src='/assets/img/dia-logo.png' className="logo-png" alt='Department of Internal Affairs' />)
+      logos.push(<img key='logo-msd' src='/assets/img/msd-logo.svg' alt='Ministry of Social Development' />)
+      logos.push(<img key='logo-ird' src='/assets/img/ird-logo.png' className="logo-png" alt='Inland Revenue' />)
+      logos.push(<img key='logo-moh' src='/assets/img/moh-logo.svg' alt='Ministry of Health' />)
     }
 
     return (
       <div className='site-metadata' data-test='site-metadata' id={id}>
         <h2 data-test='metadataTitle'>{title}</h2>
-        {logos}
+        <div className='contact-logos'>{logos}</div>
         {elements.map(element =>
           this.elementType(element)
         )}
