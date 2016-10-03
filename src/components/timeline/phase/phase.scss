@@ -1,22 +1,14 @@
 @import 'variables';
 
 .phase {
-  padding-top: 210px;
+  padding-top: 230px;
   padding-bottom: 20px;
   position: relative;
   overflow-x: hidden;
 
   @media #{$desktop-and-above} {
-    padding-top: 340px;
+    padding-top: 360px;
     padding-bottom: 40px;
-  }
-
-  &:first-child {
-    padding-top: 230px; // extra 20px
-
-    @media #{$desktop-and-above} {
-      padding-top: 360px;
-    }
   }
 
   &:last-child {
