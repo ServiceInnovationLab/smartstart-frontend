@@ -90,7 +90,7 @@ class Phase extends Component {
   }
 
   render () {
-    const { cards, number, title } = this.props
+    const { cards, number, title, id } = this.props
     let normalCards = []
     let nonChronologicalCards = []
     let dateClasses = classNames('phase-date', { 'hidden': !this.state.formattedDate })
@@ -108,7 +108,7 @@ class Phase extends Component {
     })
 
     return (
-      <div className={phaseClasses} data-test='phase'>
+      <div id={id} className={phaseClasses} data-test='phase'>
         <h2 data-test='phaseTitle'>
           <span className='phase-number'>{number}</span>
           {title}
@@ -144,6 +144,7 @@ Phase.propTypes = {
   title: PropTypes.string.isRequired,
   cards: PropTypes.array.isRequired,
   number: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   dueDate: PropTypes.object,
   phaseMetadata: PropTypes.array
 }

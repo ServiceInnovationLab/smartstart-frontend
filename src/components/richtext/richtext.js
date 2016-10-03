@@ -13,14 +13,16 @@ class Richtext extends Component {
       showExpandableHeader: false,
       expandableVerb: 'expand'
     }
+
+    this.checkIfExpandable = this.checkIfExpandable.bind(this)
   }
 
   componentWillMount () {
-    this.checkIfExpandable.bind(this)(this.props.tags, this.props.title)
+    this.checkIfExpandable(this.props.tags, this.props.title)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.checkIfExpandable.bind(this)(nextProps.tags, nextProps.title)
+    this.checkIfExpandable(nextProps.tags, nextProps.title)
   }
 
   checkIfExpandable (tags, title) {

@@ -12,14 +12,16 @@ class Task extends Component {
       checked: false,
       checkedClass: ''
     }
+
+    this.setCheckboxValuesFromStore = this.setCheckboxValuesFromStore.bind(this)
   }
 
   componentWillMount () {
-    this.setCheckboxValuesFromStore.bind(this)(this.props.personalisationValues.checkboxes, this.props.id)
+    this.setCheckboxValuesFromStore(this.props.personalisationValues.checkboxes, this.props.id)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setCheckboxValuesFromStore.bind(this)(nextProps.personalisationValues.checkboxes, nextProps.id)
+    this.setCheckboxValuesFromStore(nextProps.personalisationValues.checkboxes, nextProps.id)
   }
 
   setCheckboxValuesFromStore (allCheckboxValues, checkboxID) {

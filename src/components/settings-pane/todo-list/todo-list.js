@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import Task from 'components/task/task'
 
 class TodoList extends Component {
-
   render () {
     let paneClasses = classNames(
       'settings-pane',
@@ -27,7 +26,10 @@ class TodoList extends Component {
         })
 
         if (tasks.length) {
-          phaseTasks.push(<h5 key={'todo-phase-' + phase.id}>{phase.label}</h5>)
+          phaseTasks.push(
+            <h5 key={'todo-phase-' + phase.id}>
+              <a href={'#' + phase.id} onClick={this.props.todoPaneClose}>{phase.label}</a>
+            </h5>)
           phaseTasks.push(tasks)
         }
       }

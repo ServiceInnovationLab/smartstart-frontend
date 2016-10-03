@@ -12,14 +12,16 @@ class MyProfile extends Component {
     this.state = {
       dueDateFieldValue: ''
     }
+
+    this.setFilterValuesFromStore = this.setFilterValuesFromStore.bind(this)
   }
 
   componentWillMount () {
-    this.setFilterValuesFromStore.bind(this)(this.props.personalisationValues.settings)
+    this.setFilterValuesFromStore(this.props.personalisationValues.settings)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setFilterValuesFromStore.bind(this)(nextProps.personalisationValues.settings)
+    this.setFilterValuesFromStore(nextProps.personalisationValues.settings)
   }
 
   setFilterValuesFromStore (settingsData) {

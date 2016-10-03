@@ -12,14 +12,16 @@ class Messages extends Component {
     this.state = {
       loginMessageShown: false
     }
+
+    this.checkIfRealMeLoginShouldBeShown = this.checkIfRealMeLoginShouldBeShown.bind(this)
   }
 
   componentWillMount () {
-    this.checkIfRealMeLoginShouldBeShown.bind(this)(this.props.isLoggedIn, this.props.personalisationValues)
+    this.checkIfRealMeLoginShouldBeShown(this.props.isLoggedIn, this.props.personalisationValues)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.checkIfRealMeLoginShouldBeShown.bind(this)(nextProps.isLoggedIn, nextProps.personalisationValues)
+    this.checkIfRealMeLoginShouldBeShown(nextProps.isLoggedIn, nextProps.personalisationValues)
   }
 
   checkIfRealMeLoginShouldBeShown (isLoggedIn, personalisationValues) {
