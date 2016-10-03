@@ -79,6 +79,10 @@
     &:last-child {
       border-right: 0 none;
     }
+
+    &.settings-trigger-todo-list::before {
+      content: $icon-todo;
+    }
   }
 
   &.pane-open {
