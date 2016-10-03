@@ -199,6 +199,10 @@ table {
     padding: 10px 15px;
     border-top: 1px solid $table-border-color;
     border-bottom: 1px solid $table-border-color;
+
+    @media #{extra-small-devices} {
+      padding: 10px 8px;
+    }
   }
 
   // table head style for <th> and first <tr> of tbody
