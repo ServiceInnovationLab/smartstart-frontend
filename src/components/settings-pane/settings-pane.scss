@@ -46,18 +46,29 @@
   transition: background-color 0.5s, border-bottom-right-radius 0.5s;
 
   .settings-trigger {
-    padding: 12px 12px 10px 36px;
+    padding: 12px 12px 10px;
     border: 0 none;
     background-color: transparent;
-    min-width: 0;
     border-radius: 0;
     font-weight: normal;
     position: relative;
     border-right: 1px solid $border-color;
     transition: color 0.5s;
 
+    // hide the text normally
+    font-size: 0px;
+    min-height: 44px;
+    min-width: 44px;
+
+    @media #{$tablet-and-above} {
+      // show the text on tablet and above
+      font-size: $font-size-base;
+      padding: 12px 12px 10px 36px;
+    }
+
     &::before {
       font-family: 'icomoon' !important;
+      font-size: $font-size-base;
       content: $icon-personalise;
       display: inline-block;
       position: absolute;
