@@ -96,7 +96,7 @@ class Phase extends Component {
     let dateClasses = classNames('phase-date', { 'hidden': !this.state.formattedDate })
     let phaseClasses = classNames('phase', 'phase-' + number)
 
-    cards.map((card) => {
+    cards.map(card => {
       if (!card.elements) { card.elements = [] } // a card can be empty
 
       // some cards need to be moved outside the chronological flow of the phase

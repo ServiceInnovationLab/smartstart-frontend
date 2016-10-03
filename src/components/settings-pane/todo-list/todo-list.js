@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import Task from 'components/task/task'
 
 class TodoList extends Component {
 
@@ -13,7 +14,21 @@ class TodoList extends Component {
     return (
       <div id='todo-list' className={paneClasses} aria-hidden={!this.props.shown}>
         <h4>To do list</h4>
-        <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+
+        {this.props.phases.map(phase => {
+          if (!phase.elements) { phase.elements = [] } // a phase can be empty
+
+          return phase.elements.map(card => {
+            if (!card.elements) { card.elements = [] } // a card can be empty)
+
+            return card.elements.map(element => {
+              if (element.tags.indexOf('boac_presentation::task') >= 0) {
+                return <Task key={element.id} id={element.id} type={element.type} label={element.label} text={element.content} />
+              }
+            })
+          })
+        })}
+
         <div className='button-set'>
           <button type='button' className='cancel-button' onClick={this.props.todoPaneClose}>Close</button>
         </div>
