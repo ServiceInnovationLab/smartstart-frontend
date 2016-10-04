@@ -19,14 +19,15 @@ class SettingsPane extends Component {
 
     this.profilePaneClose = this.profilePaneClose.bind(this)
     this.todoPaneClose = this.todoPaneClose.bind(this)
+    this.checkIfShouldBeFixed = this.checkIfShouldBeFixed.bind(this)
   }
 
   componentDidMount () {
-    window.addEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
+    window.addEventListener('scroll', this.checkIfShouldBeFixed)
   }
 
   componentWillUnmount () {
-    window.removeEventListener('scroll', this.checkIfShouldBeFixed.bind(this))
+    window.removeEventListener('scroll', this.checkIfShouldBeFixed)
   }
 
   checkIfShouldBeFixed () {
