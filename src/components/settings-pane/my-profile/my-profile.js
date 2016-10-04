@@ -48,7 +48,7 @@ class MyProfile extends Component {
       // it validated, add the due date to the store and close the pane
       this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
 
-      this.props.paneClose('profile')
+      this.props.profilePaneClose()
 
       // values to save to backend or cookie
       let valuesToSave = [{

@@ -17,8 +17,8 @@
 
     // need to be able to scroll to see too-tall content
     height: 100vh;
-    overflow-y: auto; // TODO this needs to not be on the fixed element itself :/ OR use absolute
-    –webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; // otherwise older safari barfs
     pointer-events: none;
 
     .settings-trigger,
@@ -72,7 +72,7 @@
       content: $icon-personalise;
       display: inline-block;
       position: absolute;
-      left: 12px;
+      left: 13px;
       top: 14px;
     }
 
