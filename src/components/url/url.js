@@ -10,14 +10,16 @@ class Url extends Component {
     this.state = {
       isButton: false
     }
+
+    this.checkIfButton = this.checkIfButton.bind(this)
   }
 
   componentWillMount () {
-    this.checkIfButton.bind(this)(this.props.tags)
+    this.checkIfButton(this.props.tags)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.checkIfButton.bind(this)(nextProps.tags)
+    this.checkIfButton(nextProps.tags)
   }
 
   checkIfButton (tags) {

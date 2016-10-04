@@ -12,14 +12,16 @@ class Task extends Component {
       checked: false,
       checkedClass: ''
     }
+
+    this.setCheckboxValuesFromStore = this.setCheckboxValuesFromStore.bind(this)
   }
 
   componentWillMount () {
-    this.setCheckboxValuesFromStore.bind(this)(this.props.personalisationValues.checkboxes, this.props.id)
+    this.setCheckboxValuesFromStore(this.props.personalisationValues.checkboxes, this.props.id)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setCheckboxValuesFromStore.bind(this)(nextProps.personalisationValues.checkboxes, nextProps.id)
+    this.setCheckboxValuesFromStore(nextProps.personalisationValues.checkboxes, nextProps.id)
   }
 
   setCheckboxValuesFromStore (allCheckboxValues, checkboxID) {
@@ -51,13 +53,8 @@ class Task extends Component {
         'val': this.state.checked.toString()
       }]
 
-      if (!this.props.isLoggedIn) {
-        // TODO #36411 show login prompt
-        // TODO #37457 save to a cookie here
-      } else {
-        // they are logged in, save the checkbox value to the backend
-        this.props.dispatch(savePersonalisationValues(valuesToSave))
-      }
+      // save values to store
+      this.props.dispatch(savePersonalisationValues(valuesToSave))
     })
   }
 
@@ -89,15 +86,12 @@ function mapStateToProps (state) {
     personalisationActions
   } = state
   const {
-    isLoggedIn,
     personalisationValues
   } = personalisationActions || {
-    isLoggedIn: false,
     personalisationValues: {}
   }
 
   return {
-    isLoggedIn,
     personalisationValues
   }
 }
@@ -107,7 +101,6 @@ Task.propTypes = {
   text: PropTypes.string,
   id: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
   personalisationValues: PropTypes.object.isRequired
 }
 

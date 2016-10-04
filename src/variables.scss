@@ -40,7 +40,8 @@ $header-desktop-padding-left: 160px;
 $header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
 
 // settings panel
-$settings-elements-color: #65717D;
+$settings-elements-bg-color: #65717D;
+$settings-elements-color: #C5CACE;
 
 // timeline
 $timeline-border-width: 2px;
@@ -76,11 +77,6 @@ $expandable-larger-line-height: 26px;
 
 $left-side-curve-width: 40px;
 
-// task
-$task-border-color:       #d2d2d2;
-$task-end-color:          #367bbf;
-$task-end-checked-color:  #d2d2d2;
-
 // supplementary information section
 $supplementary-background-color:          #fef4e3;
 $supplementary-header-color:              #fde4bb;
@@ -102,9 +98,10 @@ $footer-top-spacing-desktop:  100px;
 $footer-curve-height:         15px;
 
 // z-index index
-$z-index-header: 2;
-$z-index-settings-trigger: 1;
+$z-index-header: 5;
+$z-index-settings-trigger: 4;
 $z-index-settings-pane: 1;
+$z-index-settings-pane-open: 2;
 $z-index-settings-pane-fixed: 3;
 
 // icons
@@ -112,5 +109,7 @@ $icon-accordian-close:  '\e900';
 $icon-accordian-open:   '\e901';
 $icon-external-link:    '\e902';
 $icon-personalise:      '\e903';
+$icon-todo:             '\e906';
+$icon-timeline:         '\e907';
 $icon-theme-finance:    '\e904';
 $icon-theme-health:     '\e905';

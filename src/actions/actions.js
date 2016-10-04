@@ -179,11 +179,12 @@ export function savePersonalisationValues (values) {
   const csrftoken = Cookie.load('csrftoken')
 
   return (dispatch, getState) => {
+    const isLoggedIn = getState().personalisationActions.isLoggedIn
     const existingValues = getState().personalisationActions.personalisationValues
     let newValues = Object.assign({}, existingValues)
 
     // we need to merge the state of the old personalisationValues with the new values
-    values.forEach((object) => {
+    values.forEach(object => {
       if (!newValues[object.group]) {
         newValues[object.group] = {}
       }
@@ -193,23 +194,29 @@ export function savePersonalisationValues (values) {
     // update the app state
     dispatch(savePersonalisation(newValues))
 
-    // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
-    return fetch('/api/preferences/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrftoken
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify(values) // TODO for now we only need to send the updated value - for #37457 we might need to send all newValues
-    })
+    // save to a cookie or backend here depending on login state
+    // TODO split into two different actions
+    if (isLoggedIn) {
+      // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
+      return fetch('/api/preferences/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify(values) // TODO for now we only need to send the updated value - for #37457 we might need to send all newValues
+      })
       .then(checkStatus)
       // we don't care about the response from this request
       .catch(function () {
         // a failure here is not critical enough to throw
         // an applicationError
       })
+    } else {
+      // TODO #37457 save to a cookie
+    }
   }
 }
 
