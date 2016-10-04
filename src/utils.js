@@ -30,3 +30,18 @@ export function isValidDate (dateString) {
   let dateObject = new Date(dateString)
   return !isNaN(dateObject.getTime())
 }
+
+// routerScrollHandler
+//
+// Makes sure we scroll up to the the top of the page when changing route
+// (but not for anchor links).
+//
+export function routerScrollHandler () {
+  let {
+    action
+  } = this.state.location
+
+  if (action === 'PUSH') {
+    window.scrollTo(0, 0)
+  }
+}

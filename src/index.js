@@ -8,6 +8,7 @@ import configureStore from 'store/store'
 import Container from 'containers/container'
 import Main from 'layouts/main/main'
 import Secondary from 'layouts/secondary/secondary'
+import { routerScrollHandler } from 'utils'
 
 const store = configureStore()
 
@@ -26,7 +27,7 @@ for (var route in routeTagMapping) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
+    <Router history={browserHistory} onUpdate={routerScrollHandler}>
       <Route path='/' component={Container}>
         <IndexRoute component={Main} />
         {secondaryRoutes}
