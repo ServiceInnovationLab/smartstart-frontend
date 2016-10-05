@@ -195,7 +195,6 @@ export function savePersonalisationValues (values) {
     dispatch(savePersonalisation(newValues))
 
     // save to a cookie or backend here depending on login state
-    // TODO split into two different actions
     if (isLoggedIn) {
       // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
       return fetch('/api/preferences/', {
@@ -206,7 +205,7 @@ export function savePersonalisationValues (values) {
           'X-CSRFToken': csrftoken
         },
         credentials: 'same-origin',
-        body: JSON.stringify(values) // TODO for now we only need to send the updated value - for #37457 we might need to send all newValues
+        body: JSON.stringify(values) // the backend only needs the individual update not all the values
       })
       .then(checkStatus)
       // we don't care about the response from this request
@@ -215,7 +214,7 @@ export function savePersonalisationValues (values) {
         // an applicationError
       })
     } else {
-      // TODO #37457 save to a cookie
+      Cookie.save('savedValues', JSON.stringify(newValues), { path: '/', secure: true, maxAge: 60 * 60 })
     }
   }
 }
