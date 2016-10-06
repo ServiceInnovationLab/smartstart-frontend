@@ -38,17 +38,19 @@ class Secondary extends Component {
     }
 
     return (
-      <div>
-        <Header isLoggedIn={isLoggedIn} />
-        <div className={showWhenLoading}>
-          <Spinner />
-        </div>
-        <div className={showWhenLoaded}>
-          {secondaryCard && <SiteMetadataCard key={secondaryCard.id} id={secondaryCard.id} title={secondaryCard.label} elements={secondaryCard.elements} tags={secondaryCard.tags} />}
-          <p className='back-to-main'><IndexLink to={'/'} className='button'>Go back</IndexLink></p>
-        </div>
-        <div className={showWhenHasError}>
-          <Error />
+      <div className='site-container-wrapper'>
+        <div className='site-container'>
+          <Header isLoggedIn={isLoggedIn} />
+          <div className={showWhenLoading}>
+            <Spinner />
+          </div>
+          <div className={showWhenLoaded}>
+            {secondaryCard && <SiteMetadataCard key={secondaryCard.id} id={secondaryCard.id} title={secondaryCard.label} elements={secondaryCard.elements} tags={secondaryCard.tags} />}
+            <p className='back-to-main'><IndexLink to={'/'} className='button'>Go back</IndexLink></p>
+          </div>
+          <div className={showWhenHasError}>
+            <Error />
+          </div>
         </div>
         <Footer />
       </div>
