@@ -118,8 +118,14 @@ export function fetchContent () {
 export function checkAuthCookie () {
   return dispatch => {
     let authResult = Cookie.load('is_authenticated')
-    if (authResult == null) { authResult = false } // null or undefined
+
+    // not logged in
+    if (authResult == null) { // null or undefined
+      authResult = false
+    }
+
     dispatch(checkAuthentication(authResult))
+
     return Promise.resolve() // so we can chain other actions
   }
 }
@@ -194,7 +200,7 @@ export function savePersonalisationValues (values) {
     // update the app state
     dispatch(savePersonalisation(newValues))
 
-    // save to a cookie or backend here depending on login state
+    // save to a cookie or backend depending on login state
     if (isLoggedIn) {
       // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
       return fetch('/api/preferences/', {
@@ -219,8 +225,50 @@ export function savePersonalisationValues (values) {
   }
 }
 
+export function saveMeldedPersonalisationValues (data) {
+  const csrftoken = Cookie.load('csrftoken')
+
+  return (dispatch) => {
+    let valuesToSave = []
+
+    // update the app state
+    dispatch(receivePersonalisationData(data))
+
+    // restructure data for API save
+    for (var group in data) {
+      for (var key in data[group]) {
+        valuesToSave.push({
+          'group': group,
+          'key': key,
+          'val': data[group][key]
+        })
+      }
+    }
+
+    // send the info to the backend
+    return fetch('/api/preferences/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(valuesToSave) // the backend only needs the individual update not all the values
+    })
+    .then(checkStatus)
+    // we don't care about the response from this request
+    .catch(function () {
+      // a failure here is not critical enough to throw
+      // an applicationError
+    })
+  }
+}
+
 export function fetchPersonalisationValues () {
   return (dispatch, getState) => {
+    let oldData = Cookie.load('savedValues')
+
     if (getState().personalisationActions.isLoggedIn) {
       dispatch(requestPersonalisationData())
       return fetch('/api/users/me/', {
@@ -228,10 +276,47 @@ export function fetchPersonalisationValues () {
       })
         .then(checkStatus)
         .then(response => response.json())
-        .then(json => dispatch(receivePersonalisationData(json.preferences)))
+        .then(json => {
+          let data = json.preferences
+          let oldData = Cookie.load('savedValues')
+
+          // clear the savedValues cookie
+          Cookie.remove('savedValues', { path: '/' })
+
+          // meld with existing values stashed in the savedValues cookie, if present
+          if (oldData) {
+            // for each saved value, overwrite or create a new key in the api data result
+            for (var group in oldData) {
+              // create the setting or checkboxes grouping if not yet preset
+              if (!data[group]) {
+                data[group] = {}
+              }
+
+              // loop through the individual items
+              for (var key in oldData[group]) {
+                if (group === 'checkboxes' && oldData[group][key] === false) {
+                  // don't update the api record if the cookie is explicitly false
+                } else {
+                  data[group][key] = oldData[group][key]
+                }
+              }
+            }
+
+            // need to save melded data back up to b/e - this will also set isFetchingPersonalisation to false
+            dispatch(saveMeldedPersonalisationValues(data))
+          } else {
+            // there wasn't any old data, propogate the api values to the store
+            dispatch(receivePersonalisationData(data))
+          }
+        })
         .catch(function (error) {
           dispatch(applicationError(error))
         })
+    } else {
+      // not logged in, if there are existing stashed values in the savedValues cookie, ressurect them
+      if (oldData) {
+        dispatch(receivePersonalisationData(oldData))
+      }
     }
   }
 }
