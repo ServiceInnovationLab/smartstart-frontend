@@ -15,6 +15,10 @@ export const RECEIVE_PHASE_METADATA = 'RECEIVE_PHASE_METADATA'
 export const SAVE_PERSONALISATION = 'SAVE_PERSONALISATION'
 export const REQUEST_PERSONALISATION_DATA = 'REQUEST_PERSONALISATION_DATA'
 export const RECIEVE_PERSONALISATION_DATA = 'RECIEVE_PERSONALISATION_DATA'
+export const OPEN_PROFILE = 'OPEN_PROFILE'
+export const CLOSE_PROFILE = 'CLOSE_PROFILE'
+export const OPEN_TODO = 'OPEN_TODO'
+export const CLOSE_TODO = 'CLOSE_TODO'
 
 // Action types
 
@@ -97,6 +101,30 @@ function receivePersonalisationData (preferences) {
   return {
     type: RECIEVE_PERSONALISATION_DATA,
     personalisationValues: preferences
+  }
+}
+
+function openTodo () {
+  return {
+    type: OPEN_TODO
+  }
+}
+
+function closeTodo () {
+  return {
+    type: CLOSE_TODO
+  }
+}
+
+function openProfile () {
+  return {
+    type: OPEN_PROFILE
+  }
+}
+
+function closeProfile () {
+  return {
+    type: CLOSE_PROFILE
   }
 }
 
@@ -317,6 +345,25 @@ export function fetchPersonalisationValues () {
       if (oldData) {
         dispatch(receivePersonalisationData(oldData))
       }
+    }
+  }
+}
+
+export function toggleSettings (pane) {
+  return dispatch => {
+    switch (pane) {
+      case OPEN_PROFILE:
+        dispatch(openProfile())
+        break
+      case CLOSE_PROFILE:
+        dispatch(closeProfile())
+        break
+      case OPEN_TODO:
+        dispatch(openTodo())
+        break
+      case CLOSE_TODO:
+        dispatch(closeTodo())
+        break
     }
   }
 }

@@ -1,8 +1,10 @@
 import './settings-pane.scss'
 import './button-set.scss' // used in both child components
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO } from 'actions/actions'
 import MyProfile from 'components/settings-pane/my-profile/my-profile'
 import TodoList from 'components/settings-pane/todo-list/todo-list'
 import Messages from 'components/messages/messages'
@@ -12,9 +14,7 @@ class SettingsPane extends Component {
     super(props)
 
     this.state = {
-      fixedControls: false,
-      profilePaneOpen: false,
-      todoPaneOpen: false
+      fixedControls: false
     }
 
     this.profilePaneClose = this.profilePaneClose.bind(this)
@@ -49,42 +49,30 @@ class SettingsPane extends Component {
 
   profilePaneToggle () {
     // if opening, close the other pane
-    if (this.state.profilePaneOpen === false) {
-      this.setState({
-        profilePaneOpen: true,
-        todoPaneOpen: false
-      })
+    if (this.props.profilePaneOpen === false) {
+      this.props.dispatch(toggleSettings(OPEN_PROFILE))
+      this.props.dispatch(toggleSettings(CLOSE_TODO))
     } else {
-      this.setState({
-        profilePaneOpen: false
-      })
+      this.props.dispatch(toggleSettings(CLOSE_PROFILE))
     }
   }
 
   todoPaneToggle () {
     // if opening, close the other pane
-    if (this.state.todoPaneOpen === false) {
-      this.setState({
-        todoPaneOpen: true,
-        profilePaneOpen: false
-      })
+    if (this.props.todoPaneOpen === false) {
+      this.props.dispatch(toggleSettings(OPEN_TODO))
+      this.props.dispatch(toggleSettings(CLOSE_PROFILE))
     } else {
-      this.setState({
-        todoPaneOpen: false
-      })
+      this.props.dispatch(toggleSettings(CLOSE_TODO))
     }
   }
 
   profilePaneClose () {
-    this.setState({
-      profilePaneOpen: false
-    })
+    this.props.dispatch(toggleSettings(CLOSE_PROFILE))
   }
 
   todoPaneClose () {
-    this.setState({
-      todoPaneOpen: false
-    })
+    this.props.dispatch(toggleSettings(CLOSE_TODO))
   }
 
   render () {
@@ -94,17 +82,17 @@ class SettingsPane extends Component {
     )
     let triggersWrapperClasses = classNames(
       'settings-triggers',
-      { 'pane-open': this.state.profilePaneOpen || this.state.todoPaneOpen }
+      { 'pane-open': this.props.profilePaneOpen || this.props.todoPaneOpen }
     )
     let profileTodoClasses = classNames(
       'settings-trigger',
       'settings-trigger-my-profile',
-      { 'is-open': this.state.profilePaneOpen }
+      { 'is-open': this.props.profilePaneOpen }
     )
     let triggerTodoClasses = classNames(
       'settings-trigger',
       'settings-trigger-todo-list',
-      { 'is-open': this.state.todoPaneOpen }
+      { 'is-open': this.props.todoPaneOpen }
     )
 
     return (
@@ -114,18 +102,18 @@ class SettingsPane extends Component {
             <button
               className={profileTodoClasses}
               aria-controls='my-profile'
-              aria-expanded={this.state.profilePaneOpen}
+              aria-expanded={this.props.profilePaneOpen}
               onClick={this.profilePaneToggle.bind(this)}
             >Your profile</button>
             <button
               className={triggerTodoClasses}
               aria-controls='todo-list'
-              aria-expanded={this.state.todoPaneOpen}
+              aria-expanded={this.props.todoPaneOpen}
               onClick={this.todoPaneToggle.bind(this)}
             >To Do list</button>
           </div>
-          <MyProfile shown={this.state.profilePaneOpen} profilePaneClose={this.profilePaneClose} />
-          <TodoList shown={this.state.todoPaneOpen} todoPaneClose={this.todoPaneClose} />
+          <MyProfile shown={this.props.profilePaneOpen} profilePaneClose={this.profilePaneClose} />
+          <TodoList shown={this.props.todoPaneOpen} todoPaneClose={this.todoPaneClose} />
         </div>
         <Messages />
       </div>
@@ -133,4 +121,27 @@ class SettingsPane extends Component {
   }
 }
 
-export default SettingsPane
+function mapStateToProps (state) {
+  const {
+    settingsDisplayActions
+  } = state
+  const {
+    profilePaneOpen,
+    todoPaneOpen
+  } = settingsDisplayActions || {
+    profilePaneOpen: false,
+    todoPaneOpen: false
+  }
+
+  return {
+    profilePaneOpen,
+    todoPaneOpen
+  }
+}
+
+SettingsPane.propTypes = {
+  profilePaneOpen: PropTypes.bool.isRequired,
+  todoPaneOpen: PropTypes.bool.isRequired
+}
+
+export default connect(mapStateToProps)(SettingsPane)

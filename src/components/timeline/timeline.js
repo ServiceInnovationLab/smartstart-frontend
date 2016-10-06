@@ -8,7 +8,7 @@ class Timeline extends Component {
     const { phases } = this.props
 
     return (
-      <div className='timeline' data-test='timeline'>
+      <div id='timeline' className='timeline' data-test='timeline'>
         {phases.map((phase, index) => {
           if (!phase.elements) { phase.elements = [] } // a phase can be empty
           return <Phase key={phase.id} id={phase.id} title={phase.label} cards={phase.elements} number={index + 1} />

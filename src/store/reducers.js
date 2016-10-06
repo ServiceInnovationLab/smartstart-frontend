@@ -11,7 +11,11 @@ import {
   RECEIVE_PHASE_METADATA,
   SAVE_PERSONALISATION,
   REQUEST_PERSONALISATION_DATA,
-  RECIEVE_PERSONALISATION_DATA
+  RECIEVE_PERSONALISATION_DATA,
+  OPEN_PROFILE,
+  CLOSE_PROFILE,
+  OPEN_TODO,
+  CLOSE_TODO
 } from 'actions/actions'
 
 function contentActions (state = {
@@ -95,6 +99,32 @@ function applicationActions (state = {
   }
 }
 
+function settingsDisplayActions (state = {
+  profilePaneOpen: false,
+  todoPaneOpen: false
+}, action) {
+  switch (action.type) {
+    case OPEN_PROFILE:
+      return Object.assign({}, state, {
+        profilePaneOpen: true
+      })
+    case CLOSE_PROFILE:
+      return Object.assign({}, state, {
+        profilePaneOpen: false
+      })
+    case OPEN_TODO:
+      return Object.assign({}, state, {
+        todoPaneOpen: true
+      })
+    case CLOSE_TODO:
+      return Object.assign({}, state, {
+        todoPaneOpen: false
+      })
+    default:
+      return state
+  }
+}
+
 function supplementaryContentActions (state = {
   supplementaryID: null
 }, action) {
@@ -112,6 +142,7 @@ const rootReducer = combineReducers({
   contentActions,
   personalisationActions,
   applicationActions,
+  settingsDisplayActions,
   supplementaryContentActions
 })
 
