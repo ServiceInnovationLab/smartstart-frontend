@@ -43,6 +43,14 @@ $header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually
 $settings-elements-bg-color: #65717D;
 $settings-elements-color: #C5CACE;
 
+// welcome
+$welcome-bg-color: #d9ed96;
+$welcome-bg-color-secondary: #e0f8ff;
+$welcome-desktop-padding-left: 376px;
+$welcome-button-color: #fff;
+$welcome-button-bg-color: $link-color-hover;
+$welcome-button-bg-color-hover: $text-color;
+
 // timeline
 $timeline-border-width: 2px;
 $timeline-spacing:      65px;

@@ -122,7 +122,7 @@ class SettingsPane extends Component {
               aria-controls='todo-list'
               aria-expanded={this.state.todoPaneOpen}
               onClick={this.todoPaneToggle.bind(this)}
-            >To do list</button>
+            >To Do list</button>
           </div>
           <MyProfile shown={this.state.profilePaneOpen} profilePaneClose={this.profilePaneClose} />
           <TodoList shown={this.state.todoPaneOpen} todoPaneClose={this.todoPaneClose} />
