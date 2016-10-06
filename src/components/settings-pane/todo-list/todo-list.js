@@ -37,7 +37,7 @@ class TodoList extends Component {
 
     return (
       <div id='todo-list' className={paneClasses} aria-hidden={!this.props.shown}>
-        <h4>To do list</h4>
+        <h4>To Do list</h4>
 
         {phaseTasks}
 

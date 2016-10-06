@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import Header from 'layouts/header/header'
 import Footer from 'layouts/footer/footer'
 import SettingsPane from 'components/settings-pane/settings-pane'
+import Welcome from 'components/welcome/welcome'
 import Timeline from 'components/timeline/timeline'
 import Supplementary from 'components/supplementary/supplementary'
 import Spinner from 'components/spinner/spinner'
@@ -33,6 +34,7 @@ class Main extends Component {
         </div>
         <div className={showWhenLoaded}>
           <SettingsPane />
+          <Welcome />
           <Timeline phases={phases} />
           <Supplementary cards={supplementary} />
         </div>
