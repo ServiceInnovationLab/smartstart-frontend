@@ -10,6 +10,10 @@
     margin-bottom: -#{$footer-top-spacing-desktop + $footer-curve-height};
   }
 
+  @media print {
+    background-color: $print-background-color;
+  }
+
   > h2 {
     position: relative;
     background-color: $supplementary-header-color;
@@ -22,6 +26,15 @@
     @media #{$desktop-and-above} {
       font-size: 38px;
       margin-bottom: 60px + $supplementary-arrow-desktop;
+    }
+
+    @media print {
+      background-color: $print-background-color;
+      padding-top: 20px;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-weight: 900;
+      font-size: 34px;
     }
 
     // triangle pointer that points down
@@ -40,6 +53,10 @@
         border-width: $supplementary-arrow-desktop $supplementary-arrow-desktop 0 $supplementary-arrow-desktop;
         left: calc(50% - #{($supplementary-arrow-desktop)});
         bottom: -$supplementary-arrow-desktop;
+      }
+
+      @media print {
+        display: none;
       }
     }
   }

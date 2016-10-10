@@ -17,6 +17,11 @@
     margin-right: auto;
   }
 
+  @media print {
+    margin-bottom: 30px;
+    background-color: $print-background-color;
+  }
+
   // triangle pointer that links to timeline line
   &::before {
     content: "";
@@ -33,6 +38,10 @@
       border-width: $card-arrow-desktop $card-arrow-desktop $card-arrow-desktop 0;
       top: 40px;
       left: -$card-arrow-desktop;
+    }
+
+    @media print {
+      display: none;
     }
   }
 
@@ -53,6 +62,10 @@
     @media #{$desktop-and-above} {
       height: 96px;
       bottom: -48px;
+    }
+
+    @media print {
+      display: none;
     }
   }
 

@@ -19,6 +19,10 @@
     display: none;
   }
 
+  @media print {
+    margin-bottom: 30px;
+  }
+
   > .expandable-title-wrapper,
   > .content {
     width: calc(100% - #{$left-side-curve-width / 2});
@@ -28,6 +32,12 @@
   > .expandable-title-wrapper > .expandable-title {
     font-size: $expandable-larger-font-size;
     line-height: $expandable-larger-line-height;
+
+    @media print {
+      font-family: $font-family-headers;
+      font-weight: 700;
+      font-size: 32px;
+    }
   }
   .expandable-title {
     background-color: $non-chronological-accordion-color;
@@ -38,6 +48,11 @@
 
     @media #{$desktop-and-above} {
       border-right-width: 1px;
+    }
+
+    @media print {
+      background-color: $print-background-color;
+      border: 0 none;
     }
 
     &::before {
@@ -82,6 +97,11 @@
   .richtext.expandable .expandable-title {
     background-color: $non-chronological-nested-accordion-color;
     border: none; //remove border
+
+    @media print {
+      background-color: $print-background-color;
+      border-bottom: $print-border;
+    }
 
     &::before {
       background-color: $non-chronological-nested-accordion-color;
@@ -141,12 +161,17 @@
 
     &::after {
       color: $text-color;
+      border-bottom: 1px solid $text-color;
     }
   }
 
   // content area
   .content {
     background-color: $non-chronological-accordion-color;
+
+    @media print {
+      background-color: $print-background-color;
+    }
 
     &::after {
       background-color: $non-chronological-accordion-color;
@@ -157,6 +182,10 @@
   .richtext.expandable .content {
     background-color: $non-chronological-nested-accordion-color;
     margin-bottom: 60px;
+
+    @media print {
+      background-color: $print-background-color;
+    }
 
     &::after {
       background-color: $non-chronological-nested-accordion-color;

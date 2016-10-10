@@ -11,6 +11,10 @@
     padding-bottom: 40px;
   }
 
+  @media print {
+    padding-top: 0;
+  }
+
   &:last-child {
     padding-bottom: 0;
 
@@ -26,6 +30,10 @@
     display: block;
     position: absolute;
     background-color: $phase-background-color;
+
+    @media print {
+      display: none;
+    }
   }
 
   &::before {
@@ -71,12 +79,21 @@
       position: relative; // on desktop, illustrations and phase number poistioned to max-content width
     }
 
+    @media print {
+      text-align: left;
+      padding-left: 80px;
+    }
+
     &::before,
     &::after {
       content: "";
       display: block;
       position: absolute;
       left: 50%;
+
+      @media print {
+        display: none;
+      }
     }
 
     // white circle
@@ -157,6 +174,10 @@
     padding: 16px 16px 0;
     top: -150px;
     left: -87px;
+  }
+
+  @media print {
+    top: 0;
   }
 
   .timeline .phase:first-child & {

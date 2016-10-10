@@ -13,8 +13,16 @@
     margin-right: auto;
   }
 
+  @media print {
+    border-top: $print-border;
+  }
+
   &:last-child {
     border-bottom: 1px solid $supplimentary-accordian-border-color;
+
+    @media print {
+      border-bottom: $print-border;
+    }
   }
 
   &::before,
@@ -33,6 +41,15 @@
     &::before {
       display: none;
     }
+
+    @media print {
+      background-color: $print-background-color;
+      border-bottom: 0;
+      padding-left: $card-padding;
+      font-family: $font-family-headers;
+      font-weight: 700;
+      font-size: 32px;
+    }
   }
 
   &.is-expanded > .expandable-title-wrapper > .expandable-title {
@@ -46,6 +63,11 @@
 
     &::after {
       display: none;
+    }
+
+    @media print {
+      background-color: $print-background-color;
+      padding: 0 15px 15px;
     }
   }
 

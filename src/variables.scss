@@ -105,6 +105,11 @@ $footer-top-spacing-mobile:   70px;
 $footer-top-spacing-desktop:  100px;
 $footer-curve-height:         15px;
 
+// print styles
+$print-background-color:      #fff;
+$print-text-color:            $text-color;
+$print-border:                1px solid $text-color;
+
 // z-index index
 $z-index-header: 5;
 $z-index-settings-trigger: 4;

@@ -82,6 +82,11 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+
+  @media print {
+    display: block;
+    height: auto;
+  }
 }
 
 .site-container {
@@ -158,7 +163,26 @@ a {
       right: -0.6em;
       top: -0.05em;
     }
+
+    @media print {
+      display: inline-flex;
+      flex-wrap: wrap;
+      order: 1;
+      padding-right: 1.2em;
+
+      &::after {
+        order: 2;
+        width: 2.5em;
+        top: 0.6em;
+      }
+
+      &::before {
+        content: " (" attr(href) ")";
+        order: 3;
+      }
+    }
   }
+
 }
 
 ul {
@@ -270,6 +294,12 @@ button,
       position: static;
       margin-left: 0.6em;
       width: auto;
+
+      @media print {
+        width: 2.5em;
+        right: 0.6em;
+        position: relative;
+      }
     }
   }
 }

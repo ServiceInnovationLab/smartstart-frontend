@@ -10,6 +10,10 @@
   @media #{$desktop-and-above} {
     padding-top: $footer-top-spacing-desktop;
   }
+
+  @media print {
+    padding-top: 20px;
+  }
 }
 
 .page-footer-curve {
@@ -33,10 +37,18 @@
       top: $footer-top-spacing-desktop;
     }
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 .page-footer-inner-wrap {
   background-color: $footer-background-color;
+
+  @media print {
+    background-color: $print-background-color;
+  }
 }
 
 .page-footer-inner {
@@ -49,6 +61,13 @@
 
   @media #{$desktop-and-above} {
     text-align: right;
+  }
+
+  @media print {
+    text-align: left;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   a {
@@ -67,6 +86,10 @@
         display: none;
       }
     }
+
+    @media print {
+      color: $print-text-color;
+    }
   }
 
   ul {
@@ -77,6 +100,10 @@
     @media #{$desktop-and-above} {
       margin-top: 20px;
       display: inline-block;
+    }
+
+    @media print {
+      display: none;
     }
 
     > li {
@@ -107,10 +134,26 @@
       &:focus {
         background-image: url('/assets/img/nz-govt-logo-white.svg');
       }
+
+      &::before,
+      &::after {
+        content: '';
+        display: none;
+      }
     }
 
     img {
       display: none;
+    }
+
+    @media print {
+      a {
+        background-image: none;
+      }
+
+      img {
+        display: block;
+      }
     }
   }
 }

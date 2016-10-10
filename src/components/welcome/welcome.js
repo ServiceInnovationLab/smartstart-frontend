@@ -37,7 +37,7 @@ class Welcome extends Component {
           <a href='#' onClick={this.profileClick} className='welcome-action welcome-action-personalise'>Add your due date</a>
           <a href='#timeline' className='welcome-action welcome-action-timeline'>Find out about services</a>
           <a href='#' onClick={this.todoClick} className='welcome-action welcome-action-todo-list'>Check your To Do list</a>
-          <p><a href='/login/' className=''>Login with RealMe</a> to access and save your SmartStart profile and To Do list</p>
+          <p className='realme-login-message realme-login-message-initial'><a href='/login/'>Login with RealMe</a> to access and save your SmartStart profile and To Do list</p>
 
         </div>
       </div>
