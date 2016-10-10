@@ -11,7 +11,7 @@ const path = require('path')
 const webpack = require('webpack')
 const yargs = require('yargs').argv
 
-const piwikInstance = 'https://analytics.bundle.services.govt.nz/piwik.php'
+const piwikInstance = 'https://analytics.smartstart.services.govt.nz/piwik.php'
 
 const sassLoaders = [
   'css-loader',
