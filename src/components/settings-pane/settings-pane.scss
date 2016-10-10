@@ -121,9 +121,11 @@
   margin-left: 15px;
   margin-right: 15px;
   transform: translateY(calc(-100% - 60px)); // add on curved bottom space too
-  transition: transform 0.5s ease, visibility 1s;
+  transition: transform 0.5s ease, visibility 1s, clip 0.5s;
+  clip: rect(0 0 0 0); // fix IE11 visibility issue
 
   &.is-open {
+    clip: auto;
     visibility: visible;
     transform: translateY(0);
     z-index: $z-index-settings-pane-open;
