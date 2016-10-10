@@ -19,12 +19,6 @@
     height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; // otherwise older safari barfs
-    pointer-events: none;
-
-    .settings-trigger,
-    .settings-pane {
-      pointer-events: auto;
-    }
 
     .settings-pane {
       box-shadow: $header-subtle-dropshadow;
