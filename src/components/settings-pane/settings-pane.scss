@@ -88,7 +88,8 @@
     }
 
     .settings-trigger {
-      color: #ffffff;
+      color: $settings-elements-color;
+      background-color: $settings-elements-bg-color;
       border-right: 1px solid darken($settings-elements-color, 10%);
 
       &:last-child {
@@ -98,8 +99,8 @@
       &:hover,
       &:active,
       &.is-open {
-        color: $settings-elements-color;
-        background-color: $settings-elements-bg-color;
+        color: #ffffff;
+        background-color: transparent;
 
         &:first-child {
           border-bottom-left-radius: 5px;
