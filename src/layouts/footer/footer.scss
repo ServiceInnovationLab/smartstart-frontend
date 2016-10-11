@@ -1,6 +1,7 @@
 @import 'variables';
 
 .page-footer {
+  flex: none;
   position: relative;
   z-index: 1; // footer is always above content
   overflow-x: hidden;

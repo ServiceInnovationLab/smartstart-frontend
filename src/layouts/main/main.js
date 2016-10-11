@@ -27,19 +27,21 @@ class Main extends Component {
     }
 
     return (
-      <div>
-        <Header isLoggedIn={isLoggedIn} />
-        <div className={showWhenLoading}>
-          <Spinner />
-        </div>
-        <div className={showWhenLoaded}>
-          <SettingsPane />
-          <Welcome />
-          <Timeline phases={phases} />
-          <Supplementary cards={supplementary} />
-        </div>
-        <div className={showWhenHasError}>
-          <Error />
+      <div className='site-container-wrapper'>
+        <div className='site-container'>
+          <Header isLoggedIn={isLoggedIn} />
+          <div className={showWhenLoading}>
+            <Spinner />
+          </div>
+          <div className={showWhenLoaded}>
+            <SettingsPane />
+            <Welcome />
+            <Timeline phases={phases} />
+            <Supplementary cards={supplementary} />
+          </div>
+          <div className={showWhenHasError}>
+            <Error />
+          </div>
         </div>
         <Footer />
       </div>
