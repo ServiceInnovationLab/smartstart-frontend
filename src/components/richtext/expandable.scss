@@ -3,7 +3,13 @@
 .expandable {
 
   > .content {
+    padding: $card-padding;
     display: none;
+
+    @media print {
+      display: block;
+      padding: 10px 0 0;
+    }
   }
 
   // pull them to the right of the card
@@ -12,6 +18,10 @@
 
     @media #{$desktop-and-above} {
       margin: 15px -#{$card-padding-desktop} 15px 20px;
+    }
+
+    @media print {
+      margin-left: 0;
     }
   }
 
@@ -39,6 +49,14 @@
     display: flex;
     align-items: center;
 
+    @media print {
+      background-color: $print-background-color;
+      color: $print-text-color;
+      border-bottom: $print-border;
+      padding-bottom: 0;
+      padding-left: 0;
+    }
+
     &:hover {
       color: #fff;
       background-color: $card-accordion-open-color;
@@ -60,6 +78,10 @@
       left: -($left-side-curve-width / 2);
       bottom: 0;
       z-index: -1;
+
+      @media print {
+        display: none;
+      }
     }
 
     &::after {
@@ -75,6 +97,10 @@
       height: 20px;
       margin-top: -10px; // half of icon height
       transition: transform 0.2s ease;
+
+      @media print {
+        display: none;
+      }
     }
   }
 
@@ -105,7 +131,6 @@
     > .content {
       display: block;
       background-color: $card-accordion-color;
-      padding: $card-padding;
       position: relative;
       margin-bottom: 60px;
       z-index: 0;

@@ -6,6 +6,10 @@
   position: relative;
   z-index: $z-index-header; // above .settings-pane
 
+  @media print {
+    background: $print-background-color;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -14,6 +18,10 @@
     width: 100%;
     box-shadow: $header-subtle-dropshadow;
     pointer-events: none;
+
+    @media print {
+      display: none;
+    }
   }
 }
 
@@ -54,11 +62,19 @@ h1 {
       width: 80px;
       height: 30px;
     }
+
+    @media print {
+       // TODO define this once branding is confirmed
+    }
   }
 }
 
 .auth-controls {
   display: inline-block;
+
+  @media print {
+    display: none;
+  }
 }
 
 .user-logged-in-message {
