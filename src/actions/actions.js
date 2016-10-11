@@ -322,7 +322,7 @@ export function fetchPersonalisationValues () {
 
               // loop through the individual items
               for (var key in oldData[group]) {
-                if (group === 'checkboxes' && oldData[group][key] === false) {
+                if (group === 'checkboxes' && oldData[group][key] === 'false') {
                   // don't update the api record if the cookie is explicitly false
                 } else {
                   data[group][key] = oldData[group][key]
