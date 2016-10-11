@@ -7,7 +7,6 @@ import classNames from 'classnames'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO } from 'actions/actions'
 import MyProfile from 'components/settings-pane/my-profile/my-profile'
 import TodoList from 'components/settings-pane/todo-list/todo-list'
-import Messages from 'components/messages/messages'
 
 class SettingsPane extends Component {
   constructor (props) {
@@ -115,7 +114,6 @@ class SettingsPane extends Component {
           <MyProfile shown={this.props.profilePaneOpen} profilePaneClose={this.profilePaneClose} />
           <TodoList shown={this.props.todoPaneOpen} todoPaneClose={this.todoPaneClose} />
         </div>
-        <Messages />
       </div>
     )
   }

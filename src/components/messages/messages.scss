@@ -4,15 +4,16 @@
   border: 2px solid $message-border-color;
   border-radius: $default-border-radius;
   padding: 25px 40px;
+  margin-bottom: 20px;
 
   *:first-child {
     margin-top: 0;
   }
 }
 
-.settings-messages {
+.messages {
   min-width: $mobile-min-content-width;
-  background-color: $phase-background-color;
+  background-color: $welcome-bg-color;
   overflow: hidden; // force bfc
 
   > * {
@@ -24,15 +25,6 @@
       max-width: 580px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    &:first-child {
-      margin-top: 60px; // leave space for profile toggle button
-
-      @media #{$desktop-and-above} {
-        // but not on desktop
-        margin-top: 22px;
-      }
     }
   }
 }
