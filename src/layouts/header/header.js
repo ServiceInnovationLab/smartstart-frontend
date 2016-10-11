@@ -23,7 +23,7 @@ class Header extends Component {
       <header className='page-header'>
         <div className='page-header-inner'>
           <h1>
-            <a href='/'>Bundle</a>
+            <a href='/'>SmartStart</a>
           </h1>
           <div className={loggedOut}>
             <LoginButton />
