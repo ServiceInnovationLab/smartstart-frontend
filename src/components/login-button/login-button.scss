@@ -2,17 +2,6 @@
 
 @import 'realme.css';
 
-.realme_popup_wrapper.show-help {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}
-
-// normally stipulated as an inline style
-.realme_popup {
-  width: 420px;
-}
-
 // old style box model
 .realme_widget,
 .realme_widget * {
@@ -22,25 +11,4 @@
 // make sure smaller devices don't split up the controls
 .realme_widget {
   min-width: 146px;
-}
-
-// turn off our normal external link icon
-.realme_widget {
-  a[href*="//"] {
-    padding-right: 0;
-
-    &::after {
-      content: '';
-      display: none;
-    }
-
-    &.realme_find_out_more {
-      padding-right: 1em;
-    }
-  }
-}
-
-#popup_trigger {
-  cursor: pointer;
-  padding-right: 0;
 }

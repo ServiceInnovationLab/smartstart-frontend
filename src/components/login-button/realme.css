@@ -61,9 +61,9 @@
   padding: 0.76923em 1.07692em;
   border-color: transparent;
   /* The border-color is modified by each theme */
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
   color: inherit;
-  font-size: 13px;
+  font-size: 15px;
   /* Set font-size explicitly to avoid cascade from the page. */
   line-height: 1.53846;
   /* Reset the line-height to something senisble inside the widget */
@@ -169,7 +169,7 @@
   background-position: right center;
 }
 .realme_secondary_login .realme_login, .realme_secondary_login .realme_link, .realme_secondary_login .realme_create_account {
-  padding-right: 1.75em;
+  padding-right: 1.5em;
   padding-top: 0;
 }
 .realme_secondary_login .realme_pipe {
@@ -187,9 +187,6 @@
 }
 .realme_secondary_login .realme_link {
   margin-right: 0.75em;
-}
-.realme_secondary_login .realme_icon_link {
-  right: .615384615em;
 }
 
 /*
@@ -227,207 +224,6 @@
 
 .realme_link {
   text-decoration: none;
-}
-
-/*
-	Popup
-	-----------------------------------------------------
-*/
-.realme_arrow_top_left, .realme_arrow_top_right, .realme_arrow_side_left, .realme_arrow_side_right {
-  padding-top: 1.2em;
-}
-.realme_arrow_top_left .arrow, .realme_arrow_top_right .arrow {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 11px;
-  display: block;
-  border-bottom-color: #d0d0d0;
-  left: -1px;
-  top: -22px;
-}
-.realme_arrow_top_left .arrow .front, .realme_arrow_top_right .arrow .front {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 10px;
-  display: block;
-  border-bottom-color: white;
-  position: absolute;
-  left: -10px;
-  bottom: -11px;
-}
-.realme_popup_wrapper {
-  transition: opacity 0.3s;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 2;
-}
-.realme_arrow_top_left {
-  top: 1.6em;
-  left: -1.7em;
-}
-.realme_arrow_top_left .arrow {
-  left: 1.35em;
-  right: auto;
-}
-.realme_arrow_top_right {
-  top: 1.6em;
-  right: -1.7em;
-}
-.realme_arrow_top_right .arrow {
-  left: auto;
-  right: 1.35em;
-}
-
-.realme_arrow_side_left {
-  top: -1em;
-  left: 100%;
-}
-.realme_arrow_side_left .arrow {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 11px;
-  display: block;
-  border-right-color: #d0d0d0;
-  left: -1px;
-  top: -22px;
-  top: 1.25em;
-  left: -22px;
-}
-.realme_arrow_side_left .arrow .front {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 10px;
-  display: block;
-  border-right-color: white;
-  position: absolute;
-  left: -9px;
-  top: -10px;
-}
-.realme_arrow_side_right {
-  top: -1em;
-  right: 100%;
-}
-.realme_arrow_side_right .arrow {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 11px;
-  display: block;
-  border-left-color: #d0d0d0;
-  left: -1px;
-  top: -22px;
-  top: 1.25em;
-  left: auto;
-  right: -22px;
-}
-.realme_arrow_side_right .arrow .front {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 10px;
-  display: block;
-  border-left-color: white;
-  position: absolute;
-  right: -9px;
-  top: -10px;
-}
-.realme_popup {
-  padding: 0.5em 1.5em 0.5em;
-  background-color: #fff;
-  border: solid 1px #ddd;
-  border-radius: 3px;
-}
-.realme_popup p, .realme_popup ul, .realme_popup strong, .realme_popup b {
-  color: #333;
-}
-.realme_popup p, .realme_popup ul, .realme_popup a {
-  line-height: 1.35em;
-}
-.realme_popup ul {
-  padding-left: 1em;
-  margin-bottom: 1em;
-}
-.realme_popup a {
-  color: #2c5897;
-}
-.realme_popup a:hover, .realme_popup a:active {
-  color: #204170;
-}
-
-.realme_popup_title,
-.realme_popup h2 {
-  font-family: sans-serif;
-  font-size: 1.07692em;
-  color: #e1001e;
-  margin-bottom: 0.5em;
-  margin-top: 11px;
-}
-
-.no_touch .whats_realme:hover + .realme_popup_wrapper,
-.no_touch .realme_popup_wrapper:hover {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-.realme_find_out_more {
-  display: inline-block;
-  padding-right: 1em;
-}
-
-/*
-    Icons
-    -----------------------------------------------------
-*/
-.realme_icon_find_out_more {
-  top: 0.35em;
-  right: 0;
-  width: 9px;
-  height: 9px;
-  background-image: url('/assets/img/realme/icon-new-window-blue.png');
-}
-
-.realme_icon_link {
-  right: 0;
-  bottom: 0;
-  width: 9px;
-  height: 100%;
-  background-image: url('/assets/img/realme/icon-new-window-blue.png');
-  background-position: right center;
-}
-
-.realme_icon_padlock {
-  top: 0;
-  right: 1em;
-  width: 11px;
-  height: 100%;
-  background-image: url('/assets/img/realme/padlock-white.png');
-  background-position: right center;
-}
-
-.realme_icon_new_window {
-  background-image: url('/assets/img/realme/icon-new-window-white.png');
-  width: 9px;
-  height: 9px;
-  margin-left: 5px;
-  vertical-align: baseline;
-  position: relative;
-}
-
-.realme_text_icon_new_window {
-  background-image: url('/assets/img/realme/icon-new-window-white.png');
-  padding-right: 1.2em;
-  background-position: right center;
-  vertical-align: baseline;
 }
 
 /*
