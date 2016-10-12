@@ -23,6 +23,7 @@ class SettingsPane extends Component {
 
   componentDidMount () {
     window.addEventListener('scroll', this.checkIfShouldBeFixed)
+    window.setTimeout(this.checkIfShouldBeFixed, 500) // check if we should display before scroll happens
   }
 
   componentWillUnmount () {
@@ -111,6 +112,7 @@ class SettingsPane extends Component {
               onClick={this.todoPaneToggle.bind(this)}
             >To Do list</button>
           </div>
+          <br />
           <MyProfile shown={this.props.profilePaneOpen} profilePaneClose={this.profilePaneClose} />
           <TodoList shown={this.props.todoPaneOpen} todoPaneClose={this.todoPaneClose} />
         </div>

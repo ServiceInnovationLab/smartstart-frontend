@@ -1,12 +1,23 @@
 @import 'variables';
 
-.settings-pane-wrapper {
-  position: relative;
-  min-width: $mobile-min-content-width;
+// Note: we have to avoid position absolute so we can force the height to be the
+// minimun required, becuase pointer events doesn't work on some mobile devices.
+// Instead, we display: inline-block and text-align: right
+
+.settings {
   max-width: $desktop-max-content-width;
-  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  height: 0; // otherwise pushes all content down. rely on overflow being visible
+  text-align: right; // push everything to the right without using float
+}
+
+.settings-pane-wrapper {
+  max-width: 585px;
+  padding-right: 15px; // leave space at edges on mobile
+  padding-left: 15px;
+  padding-bottom: 7px; // allow space for dropshadow
+  display: inline-block;
 
   @media print {
     display: none;
@@ -16,18 +27,16 @@
     position: fixed;
     z-index: $z-index-settings-pane-fixed;
     top: 0;
-    left: 0;
-    right: 0; // need to set both left & right otherwise margin auto doesn't work
+    right: 0;
+    padding-bottom: 50px; // allow space for pane open curved bottoms
 
     // need to be able to scroll to see too-tall content
-    height: 100vh;
+    max-height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; // otherwise older safari barfs
-    pointer-events: none;
 
-    .settings-trigger,
-    .settings-pane {
-      pointer-events: auto;
+    @media #{$desktop-and-above} {
+      right: calc((100vw - #{$desktop-max-content-width}) / 2);
     }
 
     .settings-pane {
@@ -41,10 +50,9 @@
 }
 
 .settings-triggers {
-  position: absolute;
+  position: relative;
+  display: inline-block;
   z-index: $z-index-settings-trigger;
-  top: 0;
-  right: 15px;
   border-radius: 0 0 5px 5px;
   background-color: $background-color;
   transition: background-color 0.5s, border-bottom-right-radius 0.5s;
@@ -52,16 +60,16 @@
   .settings-trigger {
     padding: 12px 12px 10px;
     border: 0 none;
-    background-color: transparent;
     border-radius: 0;
     font-weight: normal;
     position: relative;
     border-right: 1px solid $border-color;
     transition: color 0.5s;
+    background-color: transparent;
 
     // hide the text normally
     font-size: 0px;
-    min-height: 44px;
+    height: 44px;
     min-width: 44px;
 
     @media #{$tablet-and-above} {
@@ -90,8 +98,8 @@
   }
 
   &.pane-open {
-    background-color: $realme-dark-blue;
     border-bottom-right-radius: 0;
+    background-color: transparent;
 
     .is-fixed & {
       box-shadow: none;
@@ -106,15 +114,15 @@
         border-right: 0 none;
       }
 
+      &:first-child {
+        border-bottom-left-radius: 5px;
+      }
+
       &:hover,
       &:active,
       &.is-open {
         color: #ffffff;
         background-color: transparent;
-
-        &:first-child {
-          border-bottom-left-radius: 5px;
-        }
       }
     }
 
@@ -122,29 +130,20 @@
 }
 
 .settings-pane {
-  visibility: hidden;
-  position: absolute;
+  position: relative;
   z-index: $z-index-settings-pane;
   color: $background-color;
   background-color: $realme-dark-blue;
   padding: $card-padding-desktop;
   padding-top: $card-padding-desktop * 2;
-  margin-left: 15px;
-  margin-right: 15px;
-  transform: translateY(calc(-100% - 60px)); // add on curved bottom space too
-  transition: transform 0.5s ease, visibility 1s, clip 0.5s;
-  clip: rect(0 0 0 0); // fix IE11 visibility issue
+  display: none;
+  text-align: left; // correct for the text-align right
 
   &.is-open {
-    clip: auto;
-    visibility: visible;
-    transform: translateY(0);
     z-index: $z-index-settings-pane-open;
-  }
-
-  @media #{$tablet-and-above} {
+    display: inline-block; // relies on their being a br in the HTML
+    margin-top: -44px; // same as fixed height of trigger buttons
     max-width: 555px;
-    right: 0;
   }
 
   // curved bottom
