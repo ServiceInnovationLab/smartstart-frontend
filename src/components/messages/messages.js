@@ -44,7 +44,7 @@ class Messages extends Component {
     )
 
     return (
-      <div className='settings-messages'>
+      <div className='messages'>
         <div className={loginMessageClasses}>
           <h6>To save your profile for your next visit you need to log in with RealMe.</h6>
           <a className='button realme-primary-login-button ext-link-icon' href='/login/'>
