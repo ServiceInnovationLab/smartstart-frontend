@@ -7,7 +7,6 @@ import classNames from 'classnames'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO } from 'actions/actions'
 import MyProfile from 'components/settings-pane/my-profile/my-profile'
 import TodoList from 'components/settings-pane/todo-list/todo-list'
-import Messages from 'components/messages/messages'
 
 class SettingsPane extends Component {
   constructor (props) {
@@ -24,6 +23,7 @@ class SettingsPane extends Component {
 
   componentDidMount () {
     window.addEventListener('scroll', this.checkIfShouldBeFixed)
+    window.setTimeout(this.checkIfShouldBeFixed, 500) // check if we should display before scroll happens
   }
 
   componentWillUnmount () {
@@ -112,10 +112,10 @@ class SettingsPane extends Component {
               onClick={this.todoPaneToggle.bind(this)}
             >To Do list</button>
           </div>
+          <br />
           <MyProfile shown={this.props.profilePaneOpen} profilePaneClose={this.profilePaneClose} />
           <TodoList shown={this.props.todoPaneOpen} todoPaneClose={this.todoPaneClose} />
         </div>
-        <Messages />
       </div>
     )
   }
