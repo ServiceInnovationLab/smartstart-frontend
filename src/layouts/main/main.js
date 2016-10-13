@@ -7,7 +7,6 @@ import Timeline from 'components/timeline/timeline'
 import Supplementary from 'components/supplementary/supplementary'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
-import Messages from 'components/messages/messages'
 
 class Main extends Component {
   render () {
@@ -37,7 +36,6 @@ class Main extends Component {
           <div className={showWhenLoaded}>
             <SettingsPane />
             <Welcome />
-            <Messages />
             <Timeline phases={phases} />
             <Supplementary cards={supplementary} />
           </div>
