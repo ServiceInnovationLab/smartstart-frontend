@@ -1,46 +1,26 @@
 @import 'variables';
 
-@import 'realme.css';
-
-.realme_popup_wrapper.show-help {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}
-
-// normally stipulated as an inline style
-.realme_popup {
-  width: 420px;
-}
-
-// old style box model
-.realme_widget,
-.realme_widget * {
-  box-sizing: content-box;
-}
-
-// make sure smaller devices don't split up the controls
-.realme_widget {
+.realme-secondary-widget {
+  background: url(/assets/img/realme/logo-simple-highres.png) no-repeat right top;
+  background-size: auto 100%;
+  padding-right: 28px;
+  // make sure smaller devices don't split up the controls
   min-width: 146px;
-}
 
-// turn off our normal external link icon
-.realme_widget {
-  a[href*="//"] {
-    padding-right: 0;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    display: inline-block;
+    padding-right: 20px;
+    margin-right: 10px;
+    border-right: 1px solid $settings-elements-bg-color;
 
-    &::after {
-      content: '';
-      display: none;
-    }
-
-    &.realme_find_out_more {
-      padding-right: 1em;
+    &:hover,
+    &:active,
+    &:visited {
+      color: #ffffff;
+      text-decoration: underline;
     }
   }
-}
-
-#popup_trigger {
-  cursor: pointer;
-  padding-right: 0;
 }
