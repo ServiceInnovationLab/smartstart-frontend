@@ -12,10 +12,12 @@ class Messages extends Component {
     this.state = {
       initialLoginMessageShown: true,
       insistentLoginMessageShown: false,
-      loggedInMessageShown: false
+      loggedInMessageShown: false,
+      realmeHelpShown: false
     }
 
     this.checkIfRealMeLoginShouldBeShown = this.checkIfRealMeLoginShouldBeShown.bind(this)
+    this.concertinaToggle = this.concertinaToggle.bind(this)
   }
 
   componentWillMount () {
@@ -29,24 +31,30 @@ class Messages extends Component {
   checkIfRealMeLoginShouldBeShown (isLoggedIn, personalisationValues) {
     // to know which message to show, we just need to know if a) user is logged in and b) if there is any state
     if (isLoggedIn) {
-      this.state = {
+      this.setState({
         initialLoginMessageShown: false,
         insistentLoginMessageShown: false,
         loggedInMessageShown: true
-      }
+      })
     } else if (!isLoggedIn && Object.getOwnPropertyNames(personalisationValues).length > 0) {
-      this.state = {
+      this.setState({
         initialLoginMessageShown: false,
         insistentLoginMessageShown: true,
         loggedInMessageShown: false
-      }
+      })
     } else {
-      this.state = {
+      this.setState({
         initialLoginMessageShown: true,
         insistentLoginMessageShown: false,
         loggedInMessageShown: false
-      }
+      })
     }
+  }
+
+  concertinaToggle () {
+    this.setState({
+      realmeHelpShown: !this.state.realmeHelpShown
+    })
   }
 
   render () {
@@ -62,6 +70,14 @@ class Messages extends Component {
       'message',
       { 'hidden': !this.state.loggedInMessageShown }
     )
+    let realmeHelpClasses = classNames(
+      'concertina',
+      { 'is-expanded': this.state.realmeHelpShown }
+    )
+    let realmeHelpContentClasses = classNames(
+      'concertina-content',
+      { 'hidden': !this.state.realmeHelpShown }
+    )
 
     return (
       <div className='messages'>
@@ -75,8 +91,8 @@ class Messages extends Component {
             Login
           </a>
           <div>
-            <p className='concertina'>What is RealMe?</p>
-            <div className='concertina-content'>
+            <p className={realmeHelpClasses} onClick={this.concertinaToggle}>What is RealMe?</p>
+            <div className={realmeHelpContentClasses}>
               <p>RealMe is a New Zealand government service that lets you use one username and password to access a wide range of services online. To find out more go to www.RealMe.govt.nz</p>
               <p>SmartStart uses RealMe to save and protect your information.</p>
             </div>
