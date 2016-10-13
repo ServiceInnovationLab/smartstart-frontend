@@ -4,6 +4,19 @@ import classNames from 'classnames'
 import Task from 'components/task/task'
 
 class TodoList extends Component {
+  constructor (props) {
+    super(props)
+
+    this.goToPhaseLink = this.goToPhaseLink.bind(this)
+  }
+
+  goToPhaseLink (location) {
+    // chrome won't honour the anchor link if the todo list is scrolled down
+    // so in addition to the normal link click we also manually set the location
+    this.props.todoPaneClose()
+    window.location = '/#' + location
+  }
+
   render () {
     let paneClasses = classNames(
       'settings-pane',
@@ -28,7 +41,7 @@ class TodoList extends Component {
         if (tasks.length) {
           phaseTasks.push(
             <h5 key={'todo-phase-' + phase.id}>
-              <a href={'#' + phase.id} onClick={this.props.todoPaneClose}>{phase.label}</a>
+              <a href={'#' + phase.id} onClick={() => this.goToPhaseLink(phase.id)}>{phase.label}</a>
             </h5>)
           phaseTasks.push(tasks)
         }
