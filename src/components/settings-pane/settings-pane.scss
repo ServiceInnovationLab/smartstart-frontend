@@ -35,7 +35,7 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; // otherwise older safari barfs
 
-    @media #{$desktop-and-above} {
+    @media only screen and (min-width: #{$desktop-max-content-width}) {
       right: calc((100vw - #{$desktop-max-content-width}) / 2);
     }
 
