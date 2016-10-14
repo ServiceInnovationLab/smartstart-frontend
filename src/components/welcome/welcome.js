@@ -27,7 +27,7 @@ class Welcome extends Component {
 
   render () {
     return (
-      <div className='welcome'>
+      <div className='welcome' role='banner'>
         <div className='welcome-pane-wrapper'>
 
           <div className='welcome-intro'>
@@ -35,11 +35,13 @@ class Welcome extends Component {
             <p>SmartStart provides step-by-step information and support to help you access the right government services for you and your baby.</p>
           </div>
 
-          <a href='#' onClick={this.profileClick} className='welcome-action welcome-action-personalise'>Add your due date</a>
-          <a href='#timeline' className='welcome-action welcome-action-timeline'>Find out about services</a>
-          <a href='#' onClick={this.todoClick} className='welcome-action welcome-action-todo-list'>Check your To Do list</a>
+          <div role='navigation'>
+            <a href='#' onClick={this.profileClick} aria-controls='my-profile' role='button' className='welcome-action welcome-action-personalise'>Add your due date</a>
+            <a href='#timeline' className='welcome-action welcome-action-timeline'>Find out about services</a>
+            <a href='#' onClick={this.todoClick} aria-controls='todo-list' role='button' className='welcome-action welcome-action-todo-list'>Check your To Do list</a>
 
-          <Messages />
+            <Messages />
+          </div>
         </div>
       </div>
     )

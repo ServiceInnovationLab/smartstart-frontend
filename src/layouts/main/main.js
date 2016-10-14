@@ -30,17 +30,21 @@ class Main extends Component {
       <div className='site-container-wrapper'>
         <div className='site-container'>
           <Header isLoggedIn={isLoggedIn} />
-          <div className={showWhenLoading}>
-            <Spinner />
-          </div>
           <div className={showWhenLoaded}>
             <SettingsPane />
             <Welcome />
-            <Timeline phases={phases} />
-            <Supplementary cards={supplementary} />
           </div>
-          <div className={showWhenHasError}>
-            <Error />
+          <div id='content'>
+            <div className={showWhenLoading}>
+              <Spinner />
+            </div>
+            <div className={showWhenLoaded} role='main'>
+                <Timeline phases={phases} />
+                <Supplementary cards={supplementary} />
+            </div>
+            <div className={showWhenHasError}>
+              <Error />
+            </div>
           </div>
         </div>
         <Footer />

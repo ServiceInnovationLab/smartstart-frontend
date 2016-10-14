@@ -10,7 +10,7 @@ class Footer extends Component {
         <span className='page-footer-curve'></span>
         <div className='page-footer-inner-wrap'>
           <div className='page-footer-inner'>
-            <ul>
+            <ul role='contentinfo'>
               <li><Link to={'/contact-us/'}>Contact us</Link></li>
               <li><Link to={'/your-privacy/'}>Your privacy</Link></li>
               <li><Link to={'/copyright-and-attribution/'}>Copyright and attribution</Link></li>

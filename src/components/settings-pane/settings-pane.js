@@ -96,7 +96,7 @@ class SettingsPane extends Component {
     )
 
     return (
-      <div className='settings' ref={(ref) => { this.settingsElement = ref }}>
+      <div className='settings' ref={(ref) => { this.settingsElement = ref }} role='form'>
         <div className={paneWrapperClasses}>
           <div className={triggersWrapperClasses}>
             <button
