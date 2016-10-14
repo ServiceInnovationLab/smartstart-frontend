@@ -82,7 +82,7 @@ class Messages extends Component {
     return (
       <div className='messages'>
         <p className={initialLoginMessageClasses}>
-          <a href='/login/'>Login with RealMe</a> to access and save your SmartStart profile and To Do list
+          <a href='/login/'>Login with RealMe</a> to access and save your SmartStart profile and To Do list.
         </p>
 
         <div className={insistentLoginMessageClasses}>
