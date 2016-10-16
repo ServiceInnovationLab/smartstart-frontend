@@ -93,8 +93,12 @@ class Messages extends Component {
           <div>
             <p className={realmeHelpClasses} onClick={this.concertinaToggle}>What is RealMe?</p>
             <div className={realmeHelpContentClasses}>
-              <p>RealMe is a New Zealand government service that lets you use one username and password to access a wide range of services online. To find out more go to www.RealMe.govt.nz</p>
-              <p>SmartStart uses RealMe to save and protect your information.</p>
+              <p>SmartStart uses RealMe to save and protect your information.  If you have a RealMe login <a href='/login/'>use it here</a>.</p>
+
+              <p>If you don’t have a RealMe login you can <a href='/login/'>create one now</a>.</p>
+
+              <p>RealMe is a New Zealand government service that lets you use one username and password to access a wide range of services online.
+              To find out more go to www.RealMe.govt.nz.</p>
             </div>
           </div>
         </div>
