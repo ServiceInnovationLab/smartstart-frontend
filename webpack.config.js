@@ -120,12 +120,14 @@ switch (runCommand) {
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
           PIWIK_INSTANCE: JSON.stringify(piwikInstance)
         }),
+        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
             warnings: false,
             screw_ie8: true // don't try and support IE6->8
           }
-        })
+        }),
+        new webpack.optimize.OccurrenceOrderPlugin() // in combo with uglify this is equivalent to -p
       ]
     })
     break

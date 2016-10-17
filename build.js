@@ -16,7 +16,7 @@ var commands = [
   'git rev-parse --short HEAD > ./dist/VERSION.txt'
 ]
 
-var buildCommand = './node_modules/.bin/webpack --optimize-minimize --optimize-dedupe'
+var buildCommand = './node_modules/.bin/webpack'
 if (yargs.endpoint) {
   buildCommand = buildCommand + ' --endpoint ' + yargs.endpoint
 }
