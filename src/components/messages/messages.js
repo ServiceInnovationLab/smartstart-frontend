@@ -78,34 +78,40 @@ class Messages extends Component {
       'concertina-content',
       { 'hidden': !this.state.realmeHelpShown }
     )
+    let messageContainerClasses = classNames(
+      'messages',
+      { 'hidden': !(this.state.insistentLoginMessageShown || this.state.loggedInMessageShown) }
+    )
 
     return (
-      <div className='messages'>
+      <div>
         <p className={initialLoginMessageClasses}>
           <a href='/login/'>Login with RealMe</a> to access and save your SmartStart profile and To Do list.
         </p>
 
-        <div className={insistentLoginMessageClasses}>
-          <p>To save your changes for your next visit you need to log in with RealMe.</p>
-          <a className='button realme-primary-login-button ext-link-icon' href='/login/'>
-            Login
-          </a>
-          <div>
-            <p className={realmeHelpClasses} onClick={this.concertinaToggle}>What is RealMe?</p>
-            <div className={realmeHelpContentClasses}>
-              <p>SmartStart uses RealMe to save and protect your information.  If you have a RealMe login <a href='/login/'>use it here</a>.</p>
+        <div className={messageContainerClasses}>
+          <div className={insistentLoginMessageClasses}>
+            <p>To save your changes for your next visit you need to log in with RealMe.</p>
+            <a className='button realme-primary-login-button ext-link-icon' href='/login/'>
+              Login
+            </a>
+            <div>
+              <p className={realmeHelpClasses} onClick={this.concertinaToggle}>What is RealMe?</p>
+              <div className={realmeHelpContentClasses}>
+                <p>SmartStart uses RealMe to save and protect your information.  If you have a RealMe login <a href='/login/'>use it here</a>.</p>
 
-              <p>If you don’t have a RealMe login you can <a href='/login/'>create one now</a>.</p>
+                <p>If you don’t have a RealMe login you can <a href='/login/'>create one now</a>.</p>
 
-              <p>RealMe is a New Zealand government service that lets you use one username and password to access a wide range of services online.
-              To find out more go to www.RealMe.govt.nz.</p>
+                <p>RealMe is a New Zealand government service that lets you use one username and password to access a wide range of services online.
+                To find out more go to www.RealMe.govt.nz.</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className={loggedInMessageClasses}>
-          <h6>You are now logged in.</h6>
-          <p>Your changes will be saved. You will be logged out automatically after 30 minutes.</p>
+          <div className={loggedInMessageClasses}>
+            <h6>You are now logged in.</h6>
+            <p>Your changes will be saved. You will be logged out automatically after 30 minutes.</p>
+          </div>
         </div>
       </div>
     )
