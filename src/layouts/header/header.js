@@ -23,6 +23,7 @@ class Header extends Component {
       <header className='page-header'>
         <div className='page-header-inner'>
           <h1>
+            <img src='/assets/img/smartstart-logo-print.svg' alt='logo - parent cradling child' />
             <a href='/'>SmartStart</a>
           </h1>
           <div className={loggedOut}>
