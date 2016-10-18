@@ -72,7 +72,10 @@ const common = {
 
   plugins: [
     new CopyWebpackPlugin(
-      [{ from: PATHS.src + '/assets', to: 'assets' }],
+      [
+        { from: PATHS.src + '/assets', to: 'assets' },
+        { from: PATHS.src + '/assets/favicons/browserconfig.xml', to: 'browserconfig.xml' }
+      ],
       { ignore: ['.gitkeep'] }
     ),
     new ExtractTextPlugin('app.css'),
