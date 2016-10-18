@@ -32,7 +32,7 @@ class Welcome extends Component {
 
           <div className='welcome-intro'>
             <h2>Welcome to SmartStart</h2>
-            <p>SmartStart provides step-by-step information and support to help you access the right government services for you and your baby.</p>
+            <p>SmartStart provides step-by-step information and support to help you access the right services for you and your baby.</p>
           </div>
 
           <div role='navigation'>
