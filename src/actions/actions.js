@@ -248,7 +248,12 @@ export function savePersonalisationValues (values) {
         // an applicationError
       })
     } else {
-      Cookie.save('savedValues', JSON.stringify(newValues), { path: '/', secure: true, maxAge: 60 * 60 })
+      let now = new Date()
+      let soon = new Date()
+      soon.setUTCHours(now.getUTCHours() + 1)
+
+      // we have to set expiry (takes a date object) for IE and maxAge (takes # of seconds) for everything else
+      Cookie.save('savedValues', JSON.stringify(newValues), { path: '/', secure: true, maxAge: 60 * 60, expires: soon })
     }
   }
 }
