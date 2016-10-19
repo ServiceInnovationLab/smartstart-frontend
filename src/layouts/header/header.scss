@@ -33,14 +33,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  @media #{$desktop-and-above} {
-    padding-left: $header-desktop-padding-left;
-  }
-
-  @media print {
-    margin-left: 0;
-  }
 }
 
 h1 {

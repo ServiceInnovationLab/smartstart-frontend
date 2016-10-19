@@ -26,6 +26,7 @@ $table-border-color: #959390;
 $default-border-radius: 18px;
 $desktop-max-content-width: 1140px;
 $mobile-min-content-width: 320px;
+$indent: 160px;
 
 // typography
 $font-size-base: 16px;
@@ -35,7 +36,6 @@ $font-family-headers: 'merriweather', serif;
 
 // header
 $header-background-color: $realme-dark-blue;
-$header-desktop-padding-left: 160px;
 $header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
 
 // settings panel

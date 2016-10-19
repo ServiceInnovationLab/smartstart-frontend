@@ -15,7 +15,7 @@
 
   @media #{$desktop-and-above} {
     max-width: $desktop-max-content-width;
-    padding: 0 $header-desktop-padding-left;
+    padding: 0 $indent;
     margin-top: 80px;
   }
 }
