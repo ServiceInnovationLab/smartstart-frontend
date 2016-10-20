@@ -1,8 +1,6 @@
-/* globals DocumentTouch  */
 import './login-button.scss'
 
 import React, { Component } from 'react'
-import classNames from 'classnames'
 
 class LoginButton extends Component {
   render () {

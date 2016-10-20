@@ -39,8 +39,8 @@ class Main extends Component {
               <Spinner />
             </div>
             <div className={showWhenLoaded} role='main'>
-                <Timeline phases={phases} />
-                <Supplementary cards={supplementary} />
+              <Timeline phases={phases} />
+              <Supplementary cards={supplementary} />
             </div>
             <div className={showWhenHasError}>
               <Error />
