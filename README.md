@@ -11,18 +11,18 @@ Note: Node is not required in production but it is required to make the build.
 ## Folder structure
 
 - src `the uncompiled project codebase`
--- actions `redux actions and action creators`
--- assets `static files that get copied over unchanged`
--- components `react components`
--- containers `special parent react component that manages redux setup`
--- error-pages `standalone html error pages which are served directly by nginx`
--- layouts `page structures plus the header and footer`
--- store `redux data store setup and reducers`
--- index.html `basic html page that webpack writes the assets into`
--- index.js `entry point to the app`
--- index.scss `base styles`
--- utils.js `misc small reusable JS utilities`
--- variables.scss `style variables`
+  - actions `redux actions and action creators`
+  - assets `static files that get copied over unchanged`
+  - components `react components`
+  - containers `special parent react component that manages redux setup`
+  - error-pages `standalone html error pages which are served directly by nginx`
+  - layouts `page structures plus the header and footer`
+  - store `redux data store setup and reducers`
+  - index.html `basic html page that webpack writes the assets into`
+  - index.js `entry point to the app`
+  - index.scss `base styles`
+  - utils.js `misc small reusable JS utilities`
+  - variables.scss `style variables`
 - build.js `prep script for running webpack build process`
 - package.json `project manifest`
 - README.md `you're reading it`
@@ -41,7 +41,7 @@ to, see the 'Developing with the backend too' section.
 The web page should automatically reload as you make changes. You can also check
 syntax correctness by running:
 
-`npm lint`
+`npm run lint`
 
 ## Using local test data
 
@@ -102,5 +102,5 @@ For example for the development servers Piwik ID number:
 
 If you want to mimic the Ansible build process locally, there are two shortcut
 commands for common local configuration: `npm run build:testdata` and `npm run
-build:externaltest` which point to the local test data and govt.nz's test API
+build:externalprod` which point to the local test data and govt.nz's API
 respectively.
