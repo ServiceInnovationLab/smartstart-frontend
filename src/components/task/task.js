@@ -3,6 +3,7 @@ import './task.scss'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { savePersonalisationValues } from 'actions/actions'
+import classNames from 'classnames'
 
 class Task extends Component {
   constructor (props) {
@@ -61,6 +62,10 @@ class Task extends Component {
   render () {
     let labelText = ''
     let elementId = 'task-' + this.props.id
+    let taskClasses = classNames(
+      'task',
+      { 'subtask': this.props.tags.indexOf('boac_presentation::subtask') >= 0 }
+    )
 
     if (this.props.type === 'plaintext' && this.props.text) {
       labelText = this.props.text
@@ -70,7 +75,7 @@ class Task extends Component {
     }
 
     return (
-      <div className='task'>
+      <div className={taskClasses}>
         <p>
           <label className={this.state.checkedClass}>
             <input id={elementId} type='checkbox' data-test='task' data-test-task={this.props.id} checked={this.state.checked} onChange={this.handleChange.bind(this)} /> {labelText}
@@ -101,7 +106,8 @@ Task.propTypes = {
   text: PropTypes.string,
   id: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
-  personalisationValues: PropTypes.object.isRequired
+  personalisationValues: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps)(Task)

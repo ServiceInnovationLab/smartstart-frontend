@@ -32,7 +32,7 @@ class TodoList extends Component {
           if (card.elements) {
             card.elements.forEach(element => {
               if (element.tags.indexOf('boac_presentation::task') >= 0) {
-                tasks.push(<Task key={element.id} id={element.id} type={element.type} label={element.label} text={element.content} />)
+                tasks.push(<Task key={element.id} id={element.id} type={element.type} label={element.label} text={element.content} tags={element.tags} />)
               }
             })
           }
