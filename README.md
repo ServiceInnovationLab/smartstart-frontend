@@ -8,6 +8,26 @@ Note: Node is not required in production but it is required to make the build.
 3. `cd boac-frontend`
 4. `npm install`
 
+## Folder structure
+
+- src `the uncompiled project codebase`
+-- actions `redux actions and action creators`
+-- assets `static files that get copied over unchanged`
+-- components `react components`
+-- containers `special parent react component that manages redux setup`
+-- error-pages `standalone html error pages which are served directly by nginx`
+-- layouts `page structures plus the header and footer`
+-- store `redux data store setup and reducers`
+-- index.html `basic html page that webpack writes the assets into`
+-- index.js `entry point to the app`
+-- index.scss `base styles`
+-- utils.js `misc small reusable JS utilities`
+-- variables.scss `style variables`
+- build.js `prep script for running webpack build process`
+- package.json `project manifest`
+- README.md `you're reading it`
+- webpack.config.js `both dev and production configuration for build process`
+
 ## Development workflow
 
 The source files are located within the `src/` directory. You need the run the

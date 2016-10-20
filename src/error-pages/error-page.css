@@ -1,0 +1,33 @@
+body {
+  background-color: #d9ed96;
+  min-height: 100vh;
+}
+
+h1 img {
+  display: block;
+  width: 205px;
+  height: 45px;
+}
+
+.page-header {
+  background-color: #e0f8ff;
+}
+
+.page-header::after {
+  box-shadow: none;
+}
+
+.welcome {
+  margin-bottom: 100px;
+}
+
+@media only screen and (min-width: 992px) {
+  .welcome:before {
+    height: 400px;
+  }
+}
+
+.welcome .welcome-intro p {
+  font-size: 16px;
+  font-weight: normal;
+}
