@@ -5,7 +5,7 @@ import { addDueDate, savePersonalisationValues } from 'actions/actions'
 import classNames from 'classnames'
 import { isValidDate } from 'utils'
 
-class MyProfile extends Component {
+export class MyProfile extends Component {
   constructor (props) {
     super(props)
 
@@ -66,15 +66,22 @@ class MyProfile extends Component {
   }
 
   dueDateValidate () {
+    const field = this.dueDateField
     const fieldValue = this.state.dueDateFieldValue
+    const isDateValid = (fieldValue === '' || isValidDate(fieldValue))
 
-    // if format is wrong OR there is a value but it's not a valid date
-    if (this.dueDateField.validity.patternMismatch || ((fieldValue !== '') && !isValidDate(fieldValue))) {
-      this.dueDateField.setCustomValidity('Please use the format yyyy-mm-dd')
-      return false // so we can do the manual check for safari
+    if (isDateValid) {
+      this.setCustomValidity(field, '')
     } else {
-      this.dueDateField.setCustomValidity('')
-      return true // so we can do the manual check for safari
+      this.setCustomValidity(field, 'Please use the format yyyy-mm-dd')
+    }
+
+    return isDateValid // so we can do the manual check for safari
+  }
+
+  setCustomValidity (input, message) {
+    if (input.setCustomValidity) {
+      input.setCustomValidity(message)
     }
   }
 
@@ -85,7 +92,7 @@ class MyProfile extends Component {
   }
 
   reset () {
-    this.setState({ dueDateFieldValue: '' }, this.dueDateField.setCustomValidity(''))
+    this.setState({ dueDateFieldValue: '' }, this.setCustomValidity(this.dueDateField, ''))
   }
 
   render () {
