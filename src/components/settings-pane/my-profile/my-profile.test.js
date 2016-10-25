@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import React from 'react' // eslint-disable-line no-unused-vars
-import { MyProfile } from './my-profile'
+import { MyProfile } from 'components/settings-pane/my-profile/my-profile'
 import { shallow, mount } from 'enzyme'
 
 let myProfile, dispatchMock, props

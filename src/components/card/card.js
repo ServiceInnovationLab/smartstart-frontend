@@ -4,7 +4,7 @@ import React, { PropTypes, Component } from 'react'
 import Richtext from 'components/richtext/richtext'
 import Url from 'components/url/url'
 
-class Card extends Component {
+export class Card extends Component {
   elementType (element) {
     if (element.type === 'richtext' && element.content) {
       return (<Richtext key={element.id} id={element.id} text={element.content} tags={element.tags} title={element.label} />)

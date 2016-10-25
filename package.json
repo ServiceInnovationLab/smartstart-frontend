@@ -79,6 +79,9 @@
     "moduleDirectories": [
       "src",
       "node_modules"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(scss|css)$": "<rootDir>/jest-mock-styles.js"
+    }
   }
 }
