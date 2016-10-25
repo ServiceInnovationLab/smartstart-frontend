@@ -6,7 +6,7 @@ import Card from 'components/card/card'
 import NonChronologicalCard from 'components/card/non-chronological-card/non-chronological-card'
 import classNames from 'classnames'
 
-class Phase extends Component {
+export class Phase extends Component {
   constructor (props) {
     super(props)
 

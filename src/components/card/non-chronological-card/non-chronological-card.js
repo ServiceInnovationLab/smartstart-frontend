@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react'
 import Card from 'components/card/card' // we subclass this component
 import classNames from 'classnames'
 
-class NonChronologicalCard extends Card {
+export class NonChronologicalCard extends Card {
   constructor (props) {
     super(props)
 
