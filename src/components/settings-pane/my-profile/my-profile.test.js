@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react' // eslint-disable-line no-unused-vars
-import {MyProfileComponent} from './my-profile'
-import {shallow, mount} from 'enzyme'
+import { MyProfile } from './my-profile'
+import { shallow, mount } from 'enzyme'
 
 let myProfile, dispatchMock, props
 
@@ -17,15 +17,11 @@ beforeEach(() => {
   }
 })
 
-describe('render empty', () => {
+describe('initial render', () => {
   beforeEach(() => {
     myProfile = shallow(
-      <MyProfileComponent {...props} />
+      <MyProfile {...props} />
     )
-  })
-
-  test('it has correct header', () => {
-    expect(myProfile.find('h4').text()).toEqual('Personalise the timeline')
   })
 
   test('it has a date input', () => {
@@ -36,7 +32,6 @@ describe('render empty', () => {
     expect(myProfile.find('button.reset-button').length).toEqual(1)
     expect(myProfile.find('button.cancel-button').length).toEqual(1)
     expect(myProfile.find('button[type="submit"]').length).toEqual(1)
-    expect(myProfile.find('button[type="submit"]').text()).toEqual('Update')
   })
 })
 
@@ -52,7 +47,7 @@ describe('render stored due date from state', () => {
     }
 
     myProfile = shallow(
-      <MyProfileComponent {...props} />
+      <MyProfile {...props} />
     )
     expect(myProfile.find('input[type="date"]').props().value).toEqual('2016-10-07')
   })
@@ -68,32 +63,14 @@ describe('render stored due date from state', () => {
     }
 
     myProfile = shallow(
-      <MyProfileComponent {...props} />
+      <MyProfile {...props} />
     )
 
     expect(myProfile.find('input[type="date"]').props().value).toEqual('')
   })
 })
 
-// TODO: find a way to assert the validity of the input? Or maybe we can add a `invalid` class?
-xdescribe('date validation', () => {
-  beforeEach(() => {
-    // shallow rendering does not support refs
-    myProfile = mount(
-      <MyProfileComponent {...props} />
-    )
-  })
-
-  test('it should mark invalid date as error', () => {
-    myProfile.find('input[type="date"]').simulate('change', {target: {value: '2016-08-09 and some text'}})
-    expect(myProfile.find('input[type="date"]').hasClass('error')).toBeTruthy()
-  })
-
-  test('it should  accept valid date', () => {
-  })
-})
-
-describe('submit button', () => {
+describe('date validation and submit', () => {
   let profilePaneCloseMock
 
   beforeEach(() => {
@@ -105,29 +82,29 @@ describe('submit button', () => {
     }
 
     myProfile = mount(
-      <MyProfileComponent {...props} />
+      <MyProfile {...props} />
     )
   })
 
-  test('should prevent submission if an invalid date is entered', () => {
+  test('it should prevent submission if an invalid date is entered', () => {
     myProfile.find('input[type="date"]').simulate('change', {target: {value: 'invalid date'}})
 
-    // Enzyme do not support event propagation, so simulate a click on submit button does not work
-    // we simulate the submit on the form directly
+    // enzyme does not support event propagation, so simulating a click on the submit button does not work
+    // simulate the submit on the form directly
     myProfile.find('form').simulate('submit')
 
     expect(profilePaneCloseMock).not.toHaveBeenCalled()
     expect(dispatchMock).not.toHaveBeenCalled()
   })
 
-  test('should allow submission even if no date is enterred', () => {
+  test('it should allow submission even if no date is entered', () => {
     myProfile.find('form').simulate('submit')
 
     expect(profilePaneCloseMock).toHaveBeenCalled()
     expect(dispatchMock.mock.calls.length).toEqual(2)
   })
 
-  test('should submit if the date is valid', () => {
+  test('it should submit if the date is valid', () => {
     myProfile.find('input[type="date"]').simulate('change', {target: {value: '2016-10-01'}})
     myProfile.find('form').simulate('submit')
 
@@ -136,39 +113,41 @@ describe('submit button', () => {
   })
 })
 
-test('Reset button should clear the date', () => {
-  props = {
-    ...props,
-    personalisationValues: {
-      settings: {
-        dd: '2016-10-07'
+describe('other actions', () => {
+  test('it empties the date field when the reset button is used', () => {
+    props = {
+      ...props,
+      personalisationValues: {
+        settings: {
+          dd: '2016-10-07'
+        }
       }
     }
-  }
 
-  myProfile = mount(
-    <MyProfileComponent {...props} />
-  )
+    myProfile = mount(
+      <MyProfile {...props} />
+    )
 
-  myProfile.find('.reset-button').simulate('click')
+    myProfile.find('.reset-button').simulate('click')
 
-  expect(myProfile.find('input[type="date"]').props().value).toEqual('')
+    expect(myProfile.find('input[type="date"]').props().value).toEqual('')
+  })
+
+  test('it closes the pane without submitting when the cancel button is used', () => {
+    let profilePaneCloseMock = jest.fn()
+
+    props = {
+      ...props,
+      profilePaneClose: profilePaneCloseMock
+    }
+
+    myProfile = mount(
+      <MyProfile {...props} />
+    )
+
+    myProfile.find('.cancel-button').simulate('click')
+
+    expect(profilePaneCloseMock).toHaveBeenCalled()
+    expect(dispatchMock.mock.calls.length).toEqual(0)
+  })
 })
-
-test('Cancel button should close the pane', () => {
-  let profilePaneCloseMock = jest.fn()
-
-  props = {
-    ...props,
-    profilePaneClose: profilePaneCloseMock
-  }
-
-  myProfile = mount(
-    <MyProfileComponent {...props} />
-  )
-
-  myProfile.find('.cancel-button').simulate('click')
-
-  expect(profilePaneCloseMock).toHaveBeenCalled()
-})
-

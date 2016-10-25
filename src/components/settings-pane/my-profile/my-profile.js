@@ -5,7 +5,7 @@ import { addDueDate, savePersonalisationValues } from 'actions/actions'
 import classNames from 'classnames'
 import { isValidDate } from 'utils'
 
-export class MyProfileComponent extends Component {
+export class MyProfile extends Component {
   constructor (props) {
     super(props)
 
@@ -66,16 +66,17 @@ export class MyProfileComponent extends Component {
   }
 
   dueDateValidate () {
+    const field = this.dueDateField
     const fieldValue = this.state.dueDateFieldValue
-    const isDateValid = (this.dueDateField.validity && !this.dueDateField.validity.patternMismatch) || (fieldValue === '' || isValidDate(fieldValue))
+    const isDateValid = (fieldValue === '' || isValidDate(fieldValue))
 
     if (isDateValid) {
-      this.setCustomValidity(this.dueDateField, '')
+      this.setCustomValidity(field, '')
     } else {
-      this.setCustomValidity(this.dueDateField, 'Please use the format yyyy-mm-dd')
+      this.setCustomValidity(field, 'Please use the format yyyy-mm-dd')
     }
 
-    return isDateValid
+    return isDateValid // so we can do the manual check for safari
   }
 
   setCustomValidity (input, message) {
@@ -145,8 +146,8 @@ function mapStateToProps (state) {
   }
 }
 
-MyProfileComponent.propTypes = {
+MyProfile.propTypes = {
   personalisationValues: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(MyProfileComponent)
+export default connect(mapStateToProps)(MyProfile)
