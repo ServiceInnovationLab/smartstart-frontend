@@ -83,6 +83,7 @@
     ],
     "moduleNameMapper": {
       "^.+\\.(scss|css)$": "<rootDir>/jest-mock-styles.js"
-    }
+    },
+    "collectCoverageFrom": ["src/**/*.{js,jsx}", "!node_modules/**", "!src/index.js", "!src/store/**/*"]
   }
 }
