@@ -14,7 +14,8 @@
     "start:externaltest": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all",
     "start:testdata": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint /assets/test-data.json",
     "start:snapshot": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint /assets/snapshot-data.json",
-    "lint": "./node_modules/.bin/standard"
+    "lint": "./node_modules/.bin/standard",
+    "coverage": "./node_modules/.bin/jest --coverage"
   },
   "keywords": [
     "react",
