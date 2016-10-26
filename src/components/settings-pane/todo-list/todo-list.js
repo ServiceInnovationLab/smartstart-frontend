@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import Task from 'components/task/task'
 
-class TodoList extends Component {
+export class TodoList extends Component {
   constructor (props) {
     super(props)
 
@@ -64,29 +64,21 @@ class TodoList extends Component {
 
 function mapStateToProps (state) {
   const {
-    contentActions,
-    personalisationActions
+    contentActions
   } = state
   const {
     phases
   } = contentActions || {
     phases: []
   }
-  const {
-    isLoggedIn
-  } = personalisationActions || {
-    isLoggedIn: false
-  }
 
   return {
-    phases,
-    isLoggedIn
+    phases
   }
 }
 
 TodoList.propTypes = {
-  phases: PropTypes.array.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  phases: PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps)(TodoList)
