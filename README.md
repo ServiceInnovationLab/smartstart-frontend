@@ -43,6 +43,12 @@ syntax correctness by running:
 
 `npm run lint`
 
+There are also (currently a small amount of) unit tests that can be run via:
+
+`npm run test`
+
+The test files have the suffix `.test.js` and should be located alongside the files they test.
+
 ## Using local test data
 
 Alternatively, you can run a variant of these commands to use a local data

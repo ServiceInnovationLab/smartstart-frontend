@@ -3,32 +3,32 @@ import React from 'react' // eslint-disable-line no-unused-vars
 import { Phase } from 'components/timeline/phase/phase'
 import { Card } from 'components/card/card'
 import { NonChronologicalCard } from 'components/card/non-chronological-card/non-chronological-card'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 let phase, props
 
 beforeEach(() => {
   props = {
-    title: "Phase 1",
+    title: 'Phase 1',
     cards: [],
     number: 1,
     id: 0,
-    dueDate: new Date(2016,9,28), // 28/10/2016 - exactly 43 weeks into 2016
+    dueDate: new Date(2016, 9, 28), // 28/10/2016 - exactly 43 weeks into 2016
     phaseMetadata: [
       {
-        "id":1,
-        "weeks_start":0,
-        "weeks_finish":14
+        'id': 1,
+        'weeks_start': 0,
+        'weeks_finish': 14
       },
       {
-        "id":2,
-        "weeks_start":15,
-        "weeks_finish":30
+        'id': 2,
+        'weeks_start': 15,
+        'weeks_finish': 30
       },
       {
-        "id":3,
-        "weeks_start":31,
-        "weeks_finish":42
+        'id': 3,
+        'weeks_start': 31,
+        'weeks_finish': 42
       }
     ]
   }
@@ -44,7 +44,7 @@ describe('initial render', () => {
   test('it renders the supplied header text', () => {
     expect(phase.find('h2').length).toEqual(1)
     expect(phase.find('h2').text()).toEqual(props.number + props.title) // number in the ::before
- })
+  })
 })
 
 describe('format date ranges for phases', () => {
