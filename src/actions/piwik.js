@@ -17,10 +17,11 @@ let piwikDefaults = {
   res: window.screen.width + 'x' + window.screen.height
 }
 
-export function createPiwikAction (action, id) {
+export function createPiwikAction (action, id, cvar) {
   return Object.assign({
     'action_name': action,
-    '_id': id
+    '_id': id,
+    '_cvar': JSON.stringify(cvar)
   }, piwikDefaults)
 }
 

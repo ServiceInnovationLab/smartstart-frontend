@@ -167,14 +167,31 @@ export function checkAuthCookie () {
   }
 }
 
-export function piwikTrackPost (piwikAction) {
+export function piwikTrackPost (piwikAction, elementID) {
   return (dispatch, getState) => {
     const piwikID = getState().applicationActions.piwikID
+    const isLoggedIn = getState().personalisationActions.isLoggedIn
+    let customVars = {
+      '1': ['Logged in'],
+      '2': ['Element ID']
+    }
+
+    if (isLoggedIn) {
+      customVars['1'].push('Yes')
+    } else {
+      customVars['1'].push('No')
+    }
+
+    if (elementID) {
+      customVars['2'].push(elementID.toString())
+    } else {
+      customVars['2'].push('n/a')
+    }
 
     return fetch(PIWIK_INSTANCE, {
       method: 'POST',
       body: JSON.stringify({ 'requests': [
-        piwikParams(createPiwikAction(piwikAction, piwikID))
+        piwikParams(createPiwikAction(piwikAction, piwikID, customVars))
       ]})
     })
     .then(() => {
