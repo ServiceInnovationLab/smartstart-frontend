@@ -2,7 +2,7 @@ import './supplementary-card.scss'
 
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { activateSupplementary } from 'actions/actions'
+import { activateSupplementary, piwikTrackPost } from 'actions/actions'
 import Card from 'components/card/card'
 import classNames from 'classnames'
 
@@ -24,6 +24,11 @@ class SupplementaryCard extends Card {
       this.setState({
         isExpanded: !this.state.isExpanded,
         expandableVerb: this.state.expandableVerb !== 'expand' ? 'expand' : 'collapse'
+      }, () => {
+        if (this.state.isExpanded) {
+          // track the action 
+          this.props.dispatch(piwikTrackPost('Open supplementary', this.props.id))
+        }
       })
     }
 
