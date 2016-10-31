@@ -26,8 +26,13 @@ class SupplementaryCard extends Card {
         expandableVerb: this.state.expandableVerb !== 'expand' ? 'expand' : 'collapse'
       }, () => {
         if (this.state.isExpanded) {
-          // track the action 
-          this.props.dispatch(piwikTrackPost('Open supplementary', this.props.id))
+          let piwikEvent = {
+            'category': 'Supplementary Card',
+            'action': 'Opened',
+            'name': this.props.title
+          }
+          // track the event
+          this.props.dispatch(piwikTrackPost('Supplementary', piwikEvent))
         }
       })
     }

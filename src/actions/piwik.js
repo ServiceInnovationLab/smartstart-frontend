@@ -17,12 +17,23 @@ let piwikDefaults = {
   res: window.screen.width + 'x' + window.screen.height
 }
 
-export function createPiwikAction (action, id, cvar) {
-  return Object.assign({
+export function createPiwikAction (action, id, cvar, event) {
+  let request = Object.assign({
     'action_name': action,
     '_id': id,
     '_cvar': JSON.stringify(cvar)
   }, piwikDefaults)
+
+  if (event) {
+    request = Object.assign({
+      'e_c': event.category,
+      'e_a': event.action,
+      'e_n': event.name,
+      'e_v': 0 // piwik wants a monetary or points value here, we don't care
+    }, request)
+  }
+
+  return request
 }
 
 export function piwikParams (params) {
