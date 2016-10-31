@@ -15,7 +15,8 @@ import {
   OPEN_PROFILE,
   CLOSE_PROFILE,
   OPEN_TODO,
-  CLOSE_TODO
+  CLOSE_TODO,
+  GET_PIWIK_ID
 } from 'actions/actions'
 
 function contentActions (state = {
@@ -86,12 +87,17 @@ function personalisationActions (state = {
 }
 
 function applicationActions (state = {
-  error: false
+  error: false,
+  piwikID: null
 }, action) {
   switch (action.type) {
     case APPLICATION_ERROR:
       return Object.assign({}, state, {
         error: action.error
+      })
+    case GET_PIWIK_ID:
+      return Object.assign({}, state, {
+        piwikID: action.piwikID
       })
     case PIWIK_TRACK:
     default:

@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchContent, checkAuthCookie, fetchPhaseMetadata, piwikTrackPost, fetchPersonalisationValues } from 'actions/actions'
+import { fetchContent, checkAuthCookie, fetchPhaseMetadata, getPiwikID, piwikTrackPost, fetchPersonalisationValues } from 'actions/actions'
 
 class Container extends Component {
   componentDidMount () {
@@ -14,9 +14,10 @@ class Container extends Component {
       // wait for isLoggedIn state before deciding if OK to fetch
       dispatch(fetchPersonalisationValues())
     )
-
-    // basic piwik logging
-    dispatch(piwikTrackPost('Timeline'))
+    dispatch(getPiwikID()).then(() =>
+      // basic piwik logging
+      dispatch(piwikTrackPost('Timeline'))
+    )
   }
 
   render () {
