@@ -172,7 +172,7 @@ export function piwikTrackPost (piwikAction, piwikEvent) {
     const piwikID = getState().applicationActions.piwikID
     const isLoggedIn = getState().personalisationActions.isLoggedIn
     let customVars = {
-      '1': ['Logged in']
+      '1': ['Logged in for last action']
     }
 
     if (isLoggedIn) {

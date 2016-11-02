@@ -111,7 +111,7 @@ describe('render card components', () => {
 
   test('it creates one non-chronological and one normal card', () => {
     expect(phase.find(Card).length).toEqual(1)
-    expect(phase.find(NonChronologicalCard).length).toEqual(1)
+    expect(phase.find('Connect(NonChronologicalCard)').length).toEqual(1)
   })
 
   test('it sorts non-chronological cards to the end', () => {

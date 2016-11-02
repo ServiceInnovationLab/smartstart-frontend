@@ -1,7 +1,9 @@
 import './expandable.scss'
 
 import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { piwikTrackPost } from 'actions/actions'
 
 class Richtext extends Component {
   constructor (props) {
@@ -42,6 +44,16 @@ class Richtext extends Component {
     this.setState({
       isExpanded: !this.state.isExpanded,
       expandableVerb: this.state.expandableVerb !== 'expand' ? 'expand' : 'collapse'
+    }, () => {
+      if (this.state.isExpanded) {
+        let piwikEvent = {
+          'category': 'Accordion',
+          'action': 'Opened',
+          'name': this.props.title
+        }
+        // track the event
+        this.props.dispatch(piwikTrackPost('Accordion', piwikEvent))
+      }
     })
   }
 
@@ -105,4 +117,8 @@ Richtext.propTypes = {
   tags: PropTypes.array
 }
 
-export default Richtext
+function mapStateToProps (state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(Richtext)
