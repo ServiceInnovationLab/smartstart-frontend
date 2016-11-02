@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { piwikTrackPost } from 'actions/actions'
 
 class Url extends Component {
   constructor (props) {
@@ -10,6 +12,7 @@ class Url extends Component {
     }
 
     this.checkIfButton = this.checkIfButton.bind(this)
+    this.linkClick = this.linkClick.bind(this)
   }
 
   componentWillMount () {
@@ -27,6 +30,19 @@ class Url extends Component {
     }
   }
 
+  linkClick (event) {
+    event.preventDefault()
+    const destination = this.link.getAttribute('href')
+
+    // track the event
+    this.props.dispatch(piwikTrackPost('Link', destination))
+
+    // match standard piwik outlink delay
+    window.setTimeout(() => {
+      window.location = destination
+    }, 200)
+  }
+
   render () {
     // if there is no linkLabel use the regular label instead
     let linkText = this.props.linkLabel ? this.props.linkLabel : this.props.label
@@ -36,7 +52,16 @@ class Url extends Component {
     )
 
     return (
-      <p><a className={urlClasses} href={this.props.url}>{linkText}</a></p>
+      <p>
+        <a
+          className={urlClasses}
+          href={this.props.url}
+          onClick={this.linkClick}
+          ref={(ref) => { this.link = ref }}
+        >
+          {linkText}
+        </a>
+      </p>
     )
   }
 }
@@ -48,4 +73,8 @@ Url.propTypes = {
   tags: PropTypes.array
 }
 
-export default Url
+function mapStateToProps (state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(Url)

@@ -24,13 +24,18 @@ export function createPiwikAction (action, id, cvar, event) {
     '_cvar': JSON.stringify(cvar)
   }, piwikDefaults)
 
-  if (event) {
+  // if event is an object, use the Event Tracking vars
+  if (event && (typeof event === typeof {})) {
     request = Object.assign({
       'e_c': event.category,
       'e_a': event.action,
       'e_n': event.name,
       'e_v': 0 // piwik wants a monetary or points value here, we don't care
     }, request)
+  } else if (event) {
+    // if it's a string, it's an outlink destination
+    request.link = event
+    request.url = event
   }
 
   return request

@@ -168,6 +168,14 @@ export function checkAuthCookie () {
 }
 
 export function piwikTrackPost (piwikAction, piwikEvent) {
+  // action should be a string
+  // event can be a string of an outlink, or an object of an event
+  // with the format:
+  //   {
+  //     category: string,
+  //     action: string,
+  //     name: string
+  //   }
   return (dispatch, getState) => {
     const piwikID = getState().applicationActions.piwikID
     const isLoggedIn = getState().personalisationActions.isLoggedIn
