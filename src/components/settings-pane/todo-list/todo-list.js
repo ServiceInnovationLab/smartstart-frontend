@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { piwikTrackPost } from 'actions/actions'
 import Task from 'components/task/task'
 
 export class TodoList extends Component {
@@ -10,11 +11,20 @@ export class TodoList extends Component {
     this.goToPhaseLink = this.goToPhaseLink.bind(this)
   }
 
-  goToPhaseLink (location) {
+  goToPhaseLink (location, label) {
     // chrome won't honour the anchor link if the todo list is scrolled down
     // so in addition to the normal link click we also manually set the location
     this.props.todoPaneClose()
     window.location = '/#' + location
+
+    // tracking
+    let piwikEvent = {
+      'category': 'To Do List',
+      'action': 'Jump to phase',
+      'name': label
+    }
+
+    this.props.dispatch(piwikTrackPost('Jump to phase', piwikEvent))
   }
 
   render () {
@@ -41,7 +51,7 @@ export class TodoList extends Component {
         if (tasks.length) {
           phaseTasks.push(
             <h5 key={'todo-phase-' + phase.id}>
-              <a href={'#' + phase.id} onClick={() => this.goToPhaseLink(phase.id)}>{phase.label}</a>
+              <a href={'#' + phase.id} onClick={() => this.goToPhaseLink(phase.id, phase.label)}>{phase.label}</a>
             </h5>)
           phaseTasks.push(tasks)
         }

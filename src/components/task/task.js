@@ -2,7 +2,7 @@ import './task.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { savePersonalisationValues } from 'actions/actions'
+import { savePersonalisationValues, piwikTrackPost } from 'actions/actions'
 import classNames from 'classnames'
 
 class Task extends Component {
@@ -56,23 +56,35 @@ class Task extends Component {
 
       // save values to store
       this.props.dispatch(savePersonalisationValues(valuesToSave))
+
+      // tracking
+      if (this.state.checked) {
+        let piwikEvent = {
+          'category': 'To Do List',
+          'action': 'Checked',
+          'name': this.getLabel()
+        }
+        // track the event
+        this.props.dispatch(piwikTrackPost('To Do List', piwikEvent))
+      }
     })
   }
 
+  getLabel () {
+    if (this.props.type === 'plaintext' && this.props.text) {
+      return this.props.text
+    }
+    // can't trust text will not have markup if not plaintext type, so use label
+    return this.props.label
+  }
+
   render () {
-    let labelText = ''
+    let labelText = this.getLabel()
     let elementId = 'task-' + this.props.id
     let taskClasses = classNames(
       'task',
       { 'subtask': this.props.tags.indexOf('boac_presentation::subtask') >= 0 }
     )
-
-    if (this.props.type === 'plaintext' && this.props.text) {
-      labelText = this.props.text
-    } else {
-      // can't trust text will not have markup if not plaintext type, so use label
-      labelText = this.props.label
-    }
 
     return (
       <div className={taskClasses}>

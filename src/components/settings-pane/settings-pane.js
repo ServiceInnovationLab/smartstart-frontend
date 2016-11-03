@@ -4,7 +4,7 @@ import './button-set.scss' // used in both child components
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO } from 'actions/actions'
+import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
 import MyProfile from 'components/settings-pane/my-profile/my-profile'
 import TodoList from 'components/settings-pane/todo-list/todo-list'
 
@@ -52,6 +52,15 @@ class SettingsPane extends Component {
     if (this.props.profilePaneOpen === false) {
       this.props.dispatch(toggleSettings(OPEN_PROFILE))
       this.props.dispatch(toggleSettings(CLOSE_TODO))
+
+      // tracking
+      let piwikEvent = {
+        'category': 'Drawer',
+        'action': 'Opened',
+        'name': 'Your profile'
+      }
+
+      this.props.dispatch(piwikTrackPost('Drawer', piwikEvent))
     } else {
       this.props.dispatch(toggleSettings(CLOSE_PROFILE))
     }
@@ -62,6 +71,15 @@ class SettingsPane extends Component {
     if (this.props.todoPaneOpen === false) {
       this.props.dispatch(toggleSettings(OPEN_TODO))
       this.props.dispatch(toggleSettings(CLOSE_PROFILE))
+
+      // tracking
+      let piwikEvent = {
+        'category': 'Drawer',
+        'action': 'Opened',
+        'name': 'To Do list'
+      }
+
+      this.props.dispatch(piwikTrackPost('Drawer', piwikEvent))
     } else {
       this.props.dispatch(toggleSettings(CLOSE_TODO))
     }

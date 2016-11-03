@@ -36,7 +36,7 @@ describe('initial render', () => {
 })
 
 describe('render stored due date from state', () => {
-  test('it display the valid due date from props', () => {
+  test('it displays the valid due date from props', () => {
     props = {
       ...props,
       personalisationValues: {
@@ -109,7 +109,7 @@ describe('date validation and submit', () => {
     myProfile.find('form').simulate('submit')
 
     expect(profilePaneCloseMock).toHaveBeenCalled()
-    expect(dispatchMock.mock.calls.length).toEqual(2)
+    expect(dispatchMock.mock.calls.length).toEqual(3)
   })
 })
 

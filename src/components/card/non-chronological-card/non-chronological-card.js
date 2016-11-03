@@ -2,8 +2,10 @@ import 'components/richtext/expandable.scss' // depends on the normal expandable
 import './non-chronological-card.scss'
 
 import React, { PropTypes } from 'react'
-import Card from 'components/card/card' // we subclass this component
+import { connect } from 'react-redux'
 import classNames from 'classnames'
+import Card from 'components/card/card' // we subclass this component
+import { piwikTrackPost } from 'actions/actions'
 
 export class NonChronologicalCard extends Card {
   constructor (props) {
@@ -20,6 +22,16 @@ export class NonChronologicalCard extends Card {
     this.setState({
       isExpanded: !this.state.isExpanded,
       expandableVerb: this.state.expandableVerb !== 'expand' ? 'expand' : 'collapse'
+    }, () => {
+      if (this.state.isExpanded) {
+        let piwikEvent = {
+          'category': 'Non Chronological Card',
+          'action': 'Opened',
+          'name': this.props.title
+        }
+        // track the event
+        this.props.dispatch(piwikTrackPost('Non Chronological Card', piwikEvent))
+      }
     })
   }
 
@@ -70,4 +82,8 @@ NonChronologicalCard.propTypes = {
   id: PropTypes.number.isRequired
 }
 
-export default NonChronologicalCard
+function mapStateToProps (state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(NonChronologicalCard)

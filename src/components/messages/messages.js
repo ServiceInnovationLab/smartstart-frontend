@@ -4,6 +4,7 @@ import './realme-login-primary.scss'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { piwikTrackPost } from 'actions/actions'
 
 class Messages extends Component {
   constructor (props) {
@@ -19,6 +20,7 @@ class Messages extends Component {
 
     this.checkIfRealMeLoginShouldBeShown = this.checkIfRealMeLoginShouldBeShown.bind(this)
     this.concertinaToggle = this.concertinaToggle.bind(this)
+    this.loginAction = this.loginAction.bind(this)
   }
 
   componentWillMount () {
@@ -50,6 +52,23 @@ class Messages extends Component {
         loggedInMessageShown: false
       })
     }
+  }
+
+  loginAction (event) {
+    event.preventDefault()
+    const piwikEvent = {
+      'category': 'Login',
+      'action': 'Click',
+      'name': 'Primary login'
+    }
+
+    // track the event
+    this.props.dispatch(piwikTrackPost('Primary login', piwikEvent))
+
+    // match standard piwik outlink delay
+    window.setTimeout(() => {
+      window.location = '/login/'
+    }, 200)
   }
 
   concertinaToggle () {
@@ -100,7 +119,7 @@ class Messages extends Component {
         <div className={messageContainerClasses}>
           <div className={insistentLoginMessageClasses}>
             <p>To save your changes for your next visit you need to log in with RealMe.</p>
-            <a className='button realme-primary-login-button ext-link-icon' href='/login/'>
+            <a className='button realme-primary-login-button ext-link-icon' href='/login/' onClick={this.loginAction}>
               Login
             </a>
             <div>

@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { addDueDate, savePersonalisationValues } from 'actions/actions'
+import { addDueDate, savePersonalisationValues, piwikTrackPost } from 'actions/actions'
 import classNames from 'classnames'
 import { isValidDate } from 'utils'
 
@@ -59,6 +59,17 @@ export class MyProfile extends Component {
 
       // save values to store
       this.props.dispatch(savePersonalisationValues(valuesToSave))
+
+      // tracking
+      if (this.state.dueDateFieldValue) {
+        let piwikEvent = {
+          'category': 'Profile Data',
+          'action': 'Added',
+          'name': 'Due date'
+        }
+        // track the event
+        this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
+      }
     } else {
       // it's safari and it didn't validate
       // #37500 should we display the error manually? or use a polyfill? - deferred for now

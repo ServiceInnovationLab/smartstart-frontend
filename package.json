@@ -46,6 +46,7 @@
     "html-webpack-plugin": "~2.22.0",
     "is-git-clean": "~1.0.0",
     "jest": "~16.0.1",
+    "js-md5": "~0.4.1",
     "node-sass": "~3.8.0",
     "postcss-loader": "~0.9.1",
     "react": "~15.3.0",

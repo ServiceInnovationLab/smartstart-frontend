@@ -1,7 +1,9 @@
 import './expandable.scss'
 
 import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { piwikTrackPost } from 'actions/actions'
 
 class Richtext extends Component {
   constructor (props) {
@@ -15,6 +17,7 @@ class Richtext extends Component {
     }
 
     this.checkIfExpandable = this.checkIfExpandable.bind(this)
+    this.contentClick = this.contentClick.bind(this)
   }
 
   componentWillMount () {
@@ -42,12 +45,38 @@ class Richtext extends Component {
     this.setState({
       isExpanded: !this.state.isExpanded,
       expandableVerb: this.state.expandableVerb !== 'expand' ? 'expand' : 'collapse'
+    }, () => {
+      if (this.state.isExpanded) {
+        let piwikEvent = {
+          'category': 'Accordion',
+          'action': 'Opened',
+          'name': this.props.title
+        }
+        // track the event
+        this.props.dispatch(piwikTrackPost('Accordion', piwikEvent))
+      }
     })
   }
 
   expandableKeyPress (event) {
     if (event.key === 'Enter') {
       this.expandableToggle()
+    }
+  }
+
+  contentClick (event) {
+    if (event.target && event.target.tagName === 'A') {
+      event.preventDefault()
+
+      let destination = event.target.getAttribute('href')
+
+      // track the event
+      this.props.dispatch(piwikTrackPost('Link', destination))
+
+      // match standard piwik outlink delay
+      window.setTimeout(() => {
+        window.location = destination
+      }, 200)
     }
   }
 
@@ -92,6 +121,7 @@ class Richtext extends Component {
         <div
           {...contentProperties}
           className='content'
+          onClick={this.contentClick}
         />
       </div>
     )
@@ -105,4 +135,8 @@ Richtext.propTypes = {
   tags: PropTypes.array
 }
 
-export default Richtext
+function mapStateToProps (state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(Richtext)
