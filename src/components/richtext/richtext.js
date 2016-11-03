@@ -17,6 +17,7 @@ class Richtext extends Component {
     }
 
     this.checkIfExpandable = this.checkIfExpandable.bind(this)
+    this.contentClick = this.contentClick.bind(this)
   }
 
   componentWillMount () {
@@ -63,6 +64,22 @@ class Richtext extends Component {
     }
   }
 
+  contentClick (event) {
+    if (event.target && event.target.tagName === 'A') {
+      event.preventDefault()
+
+      let destination = event.target.getAttribute('href')
+
+      // track the event
+      this.props.dispatch(piwikTrackPost('Link', destination))
+
+      // match standard piwik outlink delay
+      window.setTimeout(() => {
+        window.location = destination
+      }, 200)
+    }
+  }
+
   render () {
     const markup = {
       __html: this.props.text
@@ -104,6 +121,7 @@ class Richtext extends Component {
         <div
           {...contentProperties}
           className='content'
+          onClick={this.contentClick}
         />
       </div>
     )
