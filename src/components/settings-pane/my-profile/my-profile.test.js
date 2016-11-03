@@ -109,7 +109,7 @@ describe('date validation and submit', () => {
     myProfile.find('form').simulate('submit')
 
     expect(profilePaneCloseMock).toHaveBeenCalled()
-    expect(dispatchMock.mock.calls.length).toEqual(2)
+    expect(dispatchMock.mock.calls.length).toEqual(3)
   })
 })
 
