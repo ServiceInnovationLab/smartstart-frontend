@@ -32,7 +32,7 @@ $indent: 160px;
 $font-size-base: 16px;
 $line-height-base: 1.625; // 26px for 16px base size
 $font-family-base: 'fira-sans', sans-serif;
-$font-family-headers: 'merriweather', serif;
+$font-family-headers: $font-family-base;
 
 // header
 $header-background-color: $realme-dark-blue;

@@ -26,8 +26,6 @@
         font-style: $style;
     }
 }
-@include font-face('merriweather', 'merriweather-700', 700);
-@include font-face('merriweather', 'merriweather-900', 900);
 @include font-face('fira-sans', 'fira-sans-regular');
 @include font-face('fira-sans', 'fira-sans-italic', normal, italic);
 @include font-face('fira-sans', 'fira-sans-500', 500);
@@ -103,7 +101,7 @@ h3 {
 }
 
 h2 {
-  font-weight: 900;
+  font-weight: bold;
   font-size: 34px;
 
   @media #{$desktop-and-above} {
@@ -112,7 +110,7 @@ h2 {
 }
 
 h3 {
-  font-weight: 700;
+  font-weight: bold;
   font-size: 26px;
 
   @media #{$desktop-and-above} {
@@ -128,7 +126,7 @@ h4, h5, h6 {
 }
 
 h4 {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 h5 {
