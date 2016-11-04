@@ -207,9 +207,8 @@
 
 .phase-date {
   font-family: $font-family-headers;
-  font-weight: 700;
-  font-size: 24px;
-  letter-spacing: -1px;
+  font-weight: 500;
+  font-size: 22px;
   text-align: center;
   margin-top: -20px;
   margin-bottom: 35px;
@@ -217,7 +216,7 @@
   padding-right: $timeline-spacing;
 
   @media #{$desktop-and-above} {
-    font-size: 32px;
+    font-size: 28px;
     margin-top: -40px;
     margin-bottom: 60px;
   }
