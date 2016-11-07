@@ -11,7 +11,8 @@ class Header extends Component {
 
     this.state = {
       authErrorShown: false,
-      authErrorMessage: ''
+      authErrorMessage: '',
+      authErrorIsFromIDP:  false
     }
 
     this.clearMessage = this.clearMessage.bind(this)
@@ -32,31 +33,40 @@ class Header extends Component {
 
   setAuthErrorMessage (code) {
     let message = ''
+    let isIDP = false
 
     switch (code) {
       case 'idp-AuthnFailed':
         message = 'You have chosen to leave RealMe.'
+        isIDP = true
         break
       case 'idp-Timeout':
         message = 'Your RealMe session has expired due to inactivity.'
+        isIDP = true
         break
       case 'idp-InternalError':
         message = 'RealMe was unable to process your request due to a RealMe internal error. Please try again. If the problem persists, please contact RealMe Help Desk on 0800 664 774.'
+        isIDP = true
         break
       case 'idp-RequestUnsupported':
       case 'idp-UnsupportedBinding':
       case 'idp-NoPassive':
       case 'idp-RequestDenied':
         message = `RealMe reported a serious application error with the message ${code}. Please try again later. If the problem persists, please contact RealMe Help Desk on 0800 664 774.`
+        isIDP = true
         break
       case 'timeout':
         message = 'Sorry, SmartStart is unable to save your change because your login session has expired.  Please log in again to save your change.'
         break
+      default:
+        message = 'RealMe was unable to log you in. Please try again. If the problem persists, contact RealMe Help Desk on 0800 664 774.'
+        isIDP = true
     }
 
     this.setState({
       authErrorShown: true,
-      authErrorMessage: message
+      authErrorMessage: message,
+      authErrorIsFromIDP: isIDP
     })
   }
 
@@ -72,7 +82,7 @@ class Header extends Component {
     let messageClasses = classNames(
       'page-header-error',
       { 'hidden': !this.state.authErrorShown },
-      { 'realme-error': authError && authError.substr(0, 3) === 'idp' }
+      { 'realme-error': this.state.authErrorIsFromIDP }
     )
     let loginClasses = classNames(
       'auth-controls',
