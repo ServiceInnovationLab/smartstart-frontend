@@ -4,6 +4,7 @@ import {
   RECEIVE_API,
   CHECK_AUTHENTICATION,
   APPLICATION_ERROR,
+  AUTH_ERROR,
   PIWIK_TRACK,
   SUPPLEMENTARY_OPEN,
   SET_DUE_DATE,
@@ -88,12 +89,17 @@ function personalisationActions (state = {
 
 function applicationActions (state = {
   error: false,
+  authError: false,
   piwikID: null
 }, action) {
   switch (action.type) {
     case APPLICATION_ERROR:
       return Object.assign({}, state, {
         error: action.error
+      })
+    case AUTH_ERROR:
+      return Object.assign({}, state, {
+        authError: action.authError
       })
     case GET_PIWIK_ID:
       return Object.assign({}, state, {

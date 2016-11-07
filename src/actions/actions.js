@@ -7,6 +7,7 @@ import { checkStatus } from 'utils'
 export const REQUEST_API = 'REQUEST_API'
 export const RECEIVE_API = 'RECEIVE_API'
 export const APPLICATION_ERROR = 'APPLICATION_ERROR'
+export const AUTH_ERROR = 'AUTH_ERROR'
 export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION'
 export const PIWIK_TRACK = 'PIWIK_TRACK'
 export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
@@ -43,6 +44,13 @@ function applicationError (error) {
   return {
     type: APPLICATION_ERROR,
     error: error
+  }
+}
+
+function authError (error) {
+  return {
+    type: AUTH_ERROR,
+    authError: error
   }
 }
 
@@ -157,7 +165,14 @@ export function checkAuthCookie () {
     let authResult = Cookie.load('is_authenticated')
 
     // not logged in
-    if (authResult == null) { // null or undefined
+    if (authResult !== true) { // null, undefined or RealMe error string
+      if (typeof authResult === 'string') {
+        // RealMe error string
+        dispatch(authError(authResult))
+
+        // clear the cookie so the message is cleared on reload
+        Cookie.remove('is_authenticated', { path: '/' })
+      }
       authResult = false
     }
 
@@ -316,7 +331,7 @@ export function saveMeldedPersonalisationValues (data) {
         'X-CSRFToken': csrftoken
       },
       credentials: 'same-origin',
-      body: JSON.stringify(valuesToSave) // the backend only needs the individual update not all the values
+      body: JSON.stringify(valuesToSave)
     })
     .then(checkStatus)
     // we don't care about the response from this request

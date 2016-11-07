@@ -21,7 +21,7 @@ class Container extends Component {
   }
 
   render () {
-    const { phases, supplementary, about, supplementaryID, isLoggedIn, error, isFetchingPersonalisation } = this.props
+    const { phases, supplementary, about, supplementaryID, isLoggedIn, error, authError, isFetchingPersonalisation } = this.props
 
     // react router renders the appropriate layout accourding to the route, and
     // we pass in all the required props as per https://github.com/ReactTraining/react-router/blob/master/examples/passing-props-to-children/app.js#L48
@@ -34,6 +34,7 @@ class Container extends Component {
           supplementaryID: supplementaryID,
           isLoggedIn: isLoggedIn,
           appError: error,
+          authError: authError,
           isFetchingPersonalisation: isFetchingPersonalisation
         })}
       </div>
@@ -64,9 +65,11 @@ function mapStateToProps (state) {
     isFetchingPersonalisation: false
   }
   const {
-    error
+    error,
+    authError
   } = applicationActions || {
-    error: false
+    error: false,
+    authError: false
   }
 
   return {
@@ -75,7 +78,8 @@ function mapStateToProps (state) {
     about,
     isLoggedIn,
     isFetchingPersonalisation,
-    error
+    error,
+    authError
   }
 }
 
@@ -86,6 +90,11 @@ Container.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   isFetchingPersonalisation: PropTypes.bool.isRequired,
   appError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.object
+  ]),
+  authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
   ]),

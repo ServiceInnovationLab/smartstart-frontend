@@ -17,7 +17,8 @@ $background-color:     #ffffff;
 $text-color:           #4f4b46;
 $link-color:           #285a9b;
 $link-color-hover:     $realme-dark-blue;
-$error-color:          #E30013;
+$error-background:     #D25151;
+$error-outline:        #E30013;
 
 $border-color: #d2d2d2;
 $table-border-color: #959390;
@@ -36,6 +37,7 @@ $font-family-headers: $font-family-base;
 
 // header
 $header-background-color: $realme-dark-blue;
+$header-error-color: $error-background;
 $header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
 
 // settings panel

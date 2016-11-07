@@ -9,7 +9,7 @@ import { routeTagMapping } from 'index'
 
 class Secondary extends Component {
   render () {
-    const { about, isLoggedIn, appError, isFetchingPersonalisation } = this.props
+    const { about, isLoggedIn, appError, authError, isFetchingPersonalisation } = this.props
     const route = this.props.route.path
 
     let showWhenLoading = ''
@@ -40,7 +40,7 @@ class Secondary extends Component {
     return (
       <div className='site-container-wrapper'>
         <div className='site-container'>
-          <Header isLoggedIn={isLoggedIn} />
+          <Header isLoggedIn={isLoggedIn} authError={authError} />
           <div id='content'>
             <div className={showWhenLoading}>
               <Spinner />
@@ -70,6 +70,10 @@ Secondary.propTypes = {
     PropTypes.bool,
     PropTypes.string,
     PropTypes.object
+  ]),
+  authError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
   ])
 }
 

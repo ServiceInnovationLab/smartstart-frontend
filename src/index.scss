@@ -323,7 +323,7 @@ input {
     box-shadow: none;
 
     &:not(:focus) {
-      border: 2px solid $error-color;
+      border: 2px solid $error-outline;
     }
   }
 }
