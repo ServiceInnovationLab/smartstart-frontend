@@ -10,7 +10,7 @@ import Error from 'components/error/error'
 
 class Main extends Component {
   render () {
-    const { phases, supplementary, isLoggedIn, appError, isFetchingPersonalisation } = this.props
+    const { phases, supplementary, isLoggedIn, appError, authError, isFetchingPersonalisation } = this.props
 
     let showWhenLoading = ''
     let showWhenLoaded = 'hidden'
@@ -29,7 +29,7 @@ class Main extends Component {
     return (
       <div className='site-container-wrapper'>
         <div className='site-container'>
-          <Header isLoggedIn={isLoggedIn} />
+          <Header isLoggedIn={isLoggedIn} authError={authError} />
           <div className={showWhenLoaded}>
             <SettingsPane />
             <Welcome />
@@ -63,6 +63,10 @@ Main.propTypes = {
     PropTypes.bool,
     PropTypes.string,
     PropTypes.object
+  ]),
+  authError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
   ])
 }
 

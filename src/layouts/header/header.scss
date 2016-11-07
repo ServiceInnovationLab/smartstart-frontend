@@ -35,6 +35,54 @@
   justify-content: space-between;
 }
 
+.page-header-error {
+  background-color: $header-error-color;
+  color: $background-color;
+
+  .page-header-inner {
+    position: relative;
+    padding-right: 50px;  // allow space for close
+  }
+
+  &.realme-error .page-header-inner {
+    padding-left: 70px;
+    // TODO add realme logo here
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .page-header-error-close {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    top: 18px;
+    right: 15px;
+    color: $background-color;
+    text-decoration: none;
+
+    &:hover,
+    &:visited,
+    &:active {
+      color: $background-color;
+      text-decoration: none;
+    }
+
+    &::after {
+      font-family: 'icomoon' !important;
+      content: $icon-accordian-close;
+      font-size: 20px;
+      line-height: 20px;
+
+      @media print {
+        display: none;
+      }
+    }
+  }
+}
+
 h1 {
   font-size: 0;
   margin: 0 15px 0 0;
