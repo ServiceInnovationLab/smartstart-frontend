@@ -331,7 +331,7 @@ export function saveMeldedPersonalisationValues (data) {
         'X-CSRFToken': csrftoken
       },
       credentials: 'same-origin',
-      body: JSON.stringify(valuesToSave) // the backend only needs the individual update not all the values
+      body: JSON.stringify(valuesToSave)
     })
     .then(checkStatus)
     // we don't care about the response from this request
