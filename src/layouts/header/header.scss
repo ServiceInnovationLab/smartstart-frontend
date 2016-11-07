@@ -45,8 +45,10 @@
   }
 
   &.realme-error .page-header-inner {
-    padding-left: 70px;
-    // TODO add realme logo here
+    padding-left: 85px;
+    background: url(/assets/img/realme/logo-simple-highres-big.png) no-repeat 20px 18px;
+    background-size: 50px auto;
+    min-height: 86px;
   }
 
   p {
