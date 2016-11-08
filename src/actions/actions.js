@@ -286,10 +286,9 @@ export function savePersonalisationValues (values) {
         body: JSON.stringify(values) // the backend only needs the individual update not all the values
       })
       .then(checkStatus)
-      // we don't care about the response from this request
-      .catch(function () {
-        // a failure here is not critical enough to throw
-        // an applicationError
+      .catch(function (error) {
+        // a failure here is indicative that the user's session has timed out
+        dispatch(authError('timeout'))
       })
     } else {
       let now = new Date()
@@ -334,10 +333,9 @@ export function saveMeldedPersonalisationValues (data) {
       body: JSON.stringify(valuesToSave)
     })
     .then(checkStatus)
-    // we don't care about the response from this request
     .catch(function () {
-      // a failure here is not critical enough to throw
-      // an applicationError
+      // a failure here is indicative that the user's session has timed out
+      dispatch(authError('timeout'))
     })
   }
 }
