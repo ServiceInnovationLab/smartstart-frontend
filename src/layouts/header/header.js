@@ -36,26 +36,26 @@ class Header extends Component {
     let isIDP = false
 
     switch (code) {
-      case 'idp-AuthnFailed':
+      case 'AuthnFailed':
         message = 'You have chosen to leave RealMe.'
         isIDP = true
         break
-      case 'idp-Timeout':
+      case 'Timeout':
         message = 'Your RealMe session has expired due to inactivity.'
         isIDP = true
         break
-      case 'idp-InternalError':
+      case 'InternalError':
         message = 'RealMe was unable to process your request due to a RealMe internal error. Please try again. If the problem persists, please contact RealMe Help Desk on 0800 664 774.'
         isIDP = true
         break
-      case 'idp-RequestUnsupported':
-      case 'idp-UnsupportedBinding':
-      case 'idp-NoPassive':
-      case 'idp-RequestDenied':
+      case 'RequestUnsupported':
+      case 'UnsupportedBinding':
+      case 'NoPassive':
+      case 'RequestDenied':
         message = `RealMe reported a serious application error with the message ${code}. Please try again later. If the problem persists, please contact RealMe Help Desk on 0800 664 774.`
         isIDP = true
         break
-      case 'timeout':
+      case 'local-timeout':
         message = 'Sorry, SmartStart is unable to save your change because your login session has expired.  Please log in again to save your change.'
         break
       default:
