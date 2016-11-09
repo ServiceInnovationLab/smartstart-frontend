@@ -288,7 +288,7 @@ export function savePersonalisationValues (values) {
       .then(checkStatus)
       .catch(function (error) {
         // a failure here is indicative that the user's session has timed out
-        dispatch(authError('timeout'))
+        dispatch(authError('local-timeout'))
       })
     } else {
       let now = new Date()
@@ -335,7 +335,7 @@ export function saveMeldedPersonalisationValues (data) {
     .then(checkStatus)
     .catch(function () {
       // a failure here is indicative that the user's session has timed out
-      dispatch(authError('timeout'))
+      dispatch(authError('local-timeout'))
     })
   }
 }
