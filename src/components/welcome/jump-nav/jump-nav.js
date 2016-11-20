@@ -13,11 +13,12 @@ class JumpNav extends Component {
       linkListOpen: false
     }
 
-    this.triggerClick = this.triggerClick.bind(this)
+    this.navToggle = this.navToggle.bind(this)
+    this.navKeyPress = this.navKeyPress.bind(this)
     this.goToSection = this.goToSection.bind(this)
   }
 
-  triggerClick (event) {
+  navToggle (event) {
     event.preventDefault()
 
     this.setState({
@@ -33,6 +34,12 @@ class JumpNav extends Component {
         this.props.dispatch(piwikTrackPost('Welcome', piwikEvent))
       }
     })
+  }
+
+  navKeyPress (event) {
+    if (event.key === 'Enter') {
+      this.navToggle()
+    }
   }
 
   goToSection (location, label) {
@@ -82,10 +89,19 @@ class JumpNav extends Component {
     }
 
     return (
-      <div className='jump-nav'>
-        <a href='#timeline' onClick={this.triggerClick} className={navTriggerClasses}>Show me services for&hellip;</a>
-        <ol className={navLinksClasses}>{navLinks}</ol>
-      </div>
+      <nav className='jump-nav' data-test='jump-navigation' role="navigation">
+        <a
+          href='#timeline'
+          onClick={this.navToggle}
+          className={navTriggerClasses}
+          onKeyPress={this.navKeyPress.bind(this)}
+          aria-controls='jump-nav-list'
+          aria-expanded={this.state.linkListOpen}
+        >
+          <span className='visuallyhidden'>Toggle the quick nav menu to </span>Find and use services
+        </a>
+        <ol id='jump-nav-list' className={navLinksClasses} aria-hidden={!this.state.linkListOpen}>{navLinks}</ol>
+      </nav>
     )
   }
 }
