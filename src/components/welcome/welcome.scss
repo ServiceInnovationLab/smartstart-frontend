@@ -142,9 +142,12 @@
       top: 7px;
     }
 
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: $welcome-button-bg-color-hover;
+    }
+
+    &:focus {
+      outline-color: $text-color;
     }
 
     &.welcome-action-personalise::before {

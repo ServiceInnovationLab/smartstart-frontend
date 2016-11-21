@@ -4,13 +4,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
 import Messages from 'components/messages/messages'
+import JumpNav from 'components/welcome/jump-nav/jump-nav'
 
 class Welcome extends Component {
   constructor (props) {
     super(props)
 
     this.profileClick = this.profileClick.bind(this)
-    this.servicesClick = this.servicesClick.bind(this)
     this.todoClick = this.todoClick.bind(this)
   }
 
@@ -23,16 +23,6 @@ class Welcome extends Component {
       'category': 'Welcome',
       'action': 'Click button',
       'name': 'Add your due date'
-    }
-    // track the event
-    this.props.dispatch(piwikTrackPost('Welcome', piwikEvent))
-  }
-
-  servicesClick () {
-    let piwikEvent = {
-      'category': 'Welcome',
-      'action': 'Click button',
-      'name': 'Find out about services'
     }
     // track the event
     this.props.dispatch(piwikTrackPost('Welcome', piwikEvent))
@@ -64,8 +54,8 @@ class Welcome extends Component {
 
           <div role='navigation'>
             <a href='#' onClick={this.profileClick} aria-controls='my-profile' role='button' className='welcome-action welcome-action-personalise'>Add your due date</a>
-            <a href='#timeline' onClick={this.servicesClick} className='welcome-action welcome-action-timeline'>Find out about services</a>
             <a href='#' onClick={this.todoClick} aria-controls='todo-list' role='button' className='welcome-action welcome-action-todo-list'>Check your To Do list</a>
+            <JumpNav />
 
             <Messages />
           </div>

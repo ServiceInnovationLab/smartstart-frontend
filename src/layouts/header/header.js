@@ -12,7 +12,7 @@ class Header extends Component {
     this.state = {
       authErrorShown: false,
       authErrorMessage: '',
-      authErrorIsFromIDP:  false
+      authErrorIsFromIDP: false
     }
 
     this.clearMessage = this.clearMessage.bind(this)
@@ -78,7 +78,7 @@ class Header extends Component {
   }
 
   render () {
-    const { isLoggedIn, authError } = this.props
+    const { isLoggedIn } = this.props
     let messageClasses = classNames(
       'page-header-error',
       { 'hidden': !this.state.authErrorShown },

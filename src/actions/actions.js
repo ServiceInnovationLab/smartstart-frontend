@@ -286,7 +286,7 @@ export function savePersonalisationValues (values) {
         body: JSON.stringify(values) // the backend only needs the individual update not all the values
       })
       .then(checkStatus)
-      .catch(function (error) {
+      .catch(function () {
         // a failure here is indicative that the user's session has timed out
         dispatch(authError('local-timeout'))
       })
