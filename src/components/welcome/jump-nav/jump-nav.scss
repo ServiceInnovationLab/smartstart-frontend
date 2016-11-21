@@ -17,7 +17,10 @@
     }
 
     &::after {
-      content: '▼';
+      content: $icon-arrow;
+      font-family: 'icomoon' !important;
+      font-size: $font-size-base;
+      display: inline-block;
       position: absolute;
       right: 15px;
       top: 7px;
