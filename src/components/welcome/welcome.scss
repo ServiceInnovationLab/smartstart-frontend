@@ -146,6 +146,10 @@
       background-color: $welcome-button-bg-color-hover;
     }
 
+    &:focus {
+      outline-color: $text-color;
+    }
+
     &.welcome-action-personalise::before {
       content: $icon-personalise;
     }
