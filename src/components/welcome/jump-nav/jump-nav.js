@@ -89,7 +89,7 @@ class JumpNav extends Component {
     }
 
     return (
-      <nav className='jump-nav' data-test='jump-navigation' role="navigation">
+      <nav className='jump-nav' data-test='jump-navigation' role='navigation'>
         <a
           href='#timeline'
           onClick={this.navToggle}
