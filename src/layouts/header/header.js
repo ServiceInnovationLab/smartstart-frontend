@@ -57,6 +57,7 @@ class Header extends Component {
         break
       case 'local-timeout':
         message = 'Sorry, SmartStart is unable to save your change because your login session has expired.  Please log in again to save your change.'
+        window.scrollTo(0, 0)
         break
       default:
         message = 'RealMe was unable to log you in. Please try again. If the problem persists, contact RealMe Help Desk on 0800 664 774.'
