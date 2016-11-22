@@ -41,7 +41,7 @@ describe('initial render', () => {
 
   test('it renders the supplied header text', () => {
     expect(phase.find('h2').length).toEqual(1)
-    expect(phase.find('h2').text()).toEqual(props.number + props.title) // number in the ::before
+    expect(phase.find('h2').text()).toEqual(props.title)
   })
 })
 

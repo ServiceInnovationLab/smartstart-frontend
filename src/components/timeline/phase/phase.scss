@@ -54,7 +54,6 @@
     border-bottom-right-radius: 50%;
     top: 95px;
     left: -12%;
-    z-index: -1;
 
     @media #{$desktop-and-above} {
       height: 240px;
@@ -68,6 +67,7 @@
     padding-left: $timeline-spacing;
     padding-right: $timeline-spacing;
     padding-top: 10px; // create space between phase shape and text
+    z-index:  $z-index-phase-header-content;
 
     @media #{$desktop-and-above} {
       max-width: $phase-content-width-desktop;
@@ -76,7 +76,7 @@
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 60px;
-      position: relative; // on desktop, illustrations and phase number poistioned to max-content width
+      position: relative; // on desktop, illustrations positioned to max-content width
     }
 
     @media print {
@@ -142,65 +142,6 @@
       @media #{$high-res} {
         background-image: url(/assets/img/illustrations/illustration-#{$i}-highres.png);
       }
-    }
-  }
-}
-
-.phase-number {
-  $phase-number-size: 40px;
-  $phase-number-size-desktop: 80px;
-
-  color: $link-color;
-  font-family: 'fira-sans';
-  font-weight: 700;
-  font-size: $phase-number-size / 2;
-  line-height: $phase-number-size;
-  text-align: center;
-  width: $phase-number-size;
-  height: $phase-number-size;
-  padding: 8px 8px 0;
-  box-sizing: content-box;
-  background-color: $background-color;
-  position: absolute;
-  border-radius: 90px 90px 60px 60px;
-  top: 124px;
-  left: 14px;
-
-  @media #{$desktop-and-above} {
-    font-size: $phase-number-size-desktop / 2;
-    line-height: $phase-number-size-desktop;
-    width: $phase-number-size-desktop;
-    height: $phase-number-size-desktop;
-    padding: 16px 16px 0;
-    top: -150px;
-    left: -87px;
-  }
-
-  @media print {
-    top: 0;
-  }
-
-  .timeline .phase:first-child & {
-    letter-spacing: 0.063em; // the number one needs a spacing tweak
-  }
-
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: $phase-number-size;
-    height: $phase-number-size;
-    box-sizing: border-box;
-    border: $timeline-border-width solid $border-color;
-    border-radius: 50%;
-    left: 0;
-    top: 0;
-    margin: 8px;
-
-    @media #{$desktop-and-above} {
-      width: $phase-number-size-desktop;
-      height: $phase-number-size-desktop;
-      margin: 16px;
     }
   }
 }

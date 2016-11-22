@@ -44,3 +44,97 @@
     }
   }
 }
+
+.phase-number-container {
+  padding-left: $timeline-spacing;
+  padding-right: $timeline-spacing;
+
+  @media #{$desktop-and-above} {
+    max-width: $phase-content-width-desktop;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+}
+
+.phase-number {
+  $phase-number-size: 40px;
+  $phase-number-size-desktop: 80px;
+
+  color: $link-color;
+  font-family: $font-family-base;
+  font-weight: 700;
+  font-size: $phase-number-size / 2;
+  line-height: $phase-number-size / 2;
+  text-align: center;
+  width: $phase-number-size;
+  height: $phase-number-size + ($phase-number-size / 2);
+  padding: 8px 8px 0;
+  box-sizing: content-box;
+  background-color: $background-color;
+  position: absolute;
+  border-radius: 90px 90px 60px 60px;
+  top: 130px;
+  left: 14px;
+  z-index: $z-index-phase-number;
+
+  @media #{$desktop-and-above} {
+    font-size: $phase-number-size-desktop / 2;
+    line-height: $phase-number-size-desktop / 3;
+    width: $phase-number-size-desktop;
+    height: $phase-number-size-desktop + ($phase-number-size-desktop / 2) - 16px ;
+    padding: 32px 16px 0;
+    top: 200px;
+    left: -87px;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: $phase-number-size;
+    height: $phase-number-size + ($phase-number-size / 2);
+    box-sizing: border-box;
+    border: $timeline-border-width solid $border-color;
+    border-radius: 90px;
+    left: 0;
+    top: 0;
+    margin: 8px;
+    z-index: -1;
+
+    @media #{$desktop-and-above} {
+      width: $phase-number-size-desktop;
+      height: $phase-number-size-desktop + ($phase-number-size-desktop / 2);
+      margin: 16px;
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+
+  .phase-number-prev,
+  .phase-number-next {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+
+    &::before {
+      content: $icon-next;
+      font-family: 'icomoon' !important;
+      font-size: $font-size-base;
+    }
+
+    &:hover,
+    &:active,
+    &:visited {
+      text-decoration: none;
+    }
+  }
+
+  .phase-number-prev {
+    transform: rotate(180deg);
+  }
+}
