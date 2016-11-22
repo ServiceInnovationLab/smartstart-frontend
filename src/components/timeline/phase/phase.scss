@@ -67,7 +67,7 @@
     padding-left: $timeline-spacing;
     padding-right: $timeline-spacing;
     padding-top: 10px; // create space between phase shape and text
-    z-index:  $z-index-phase-header-content;
+    z-index: $z-index-phase-header-content;
 
     @media #{$desktop-and-above} {
       max-width: $phase-content-width-desktop;
@@ -120,6 +120,7 @@
       height: 204px;
       margin-left: -102px; // half of width
       top: 10px; // leave a bit of a gap at the top
+      z-index: $z-index-phase-header-content;
 
       // illustration image gets set in the for loop further down
       background-repeat: no-repeat;
