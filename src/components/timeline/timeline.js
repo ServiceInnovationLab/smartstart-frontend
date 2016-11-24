@@ -14,6 +14,7 @@ class Timeline extends Component {
 
     this.state = {
       fixedControls: false,
+      endReached: false,
       phaseScrollFunction: throttle(300, this.setupPhaseNumber).bind(this),
       currentPhase: 1,
       prevPhaseID: null,
@@ -34,8 +35,10 @@ class Timeline extends Component {
 
   setupPhaseNumber () {
     // guard so only runs if phase number is present
-    if (this.phaseNumberElement) {
-      const numberPosition = this.phaseNumberElement.getBoundingClientRect().top
+    if (this.phaseNumberContainerElement) {
+      const numberPosition = this.phaseNumberContainerElement.getBoundingClientRect().top
+      const numberHeight = this.phaseNumberElement.getBoundingClientRect().height
+      const timelineEnd = this.timelineElement.getBoundingClientRect().height + this.timelineElement.offsetTop
       let highestSectionReached = 1
       let prevPhaseID = 'app'
       let nextPhaseID = 'bottom'
@@ -52,13 +55,22 @@ class Timeline extends Component {
         })
       }
 
+      // check if the end of timeline has been reached
+      if (currentScrollPos >= ((timelineEnd - numberHeight) - 30)) {
+        this.setState({
+          endReached: true
+        })
+      } else if (this.state.endReached) {
+        this.setState({
+          endReached: false
+        })
+      }
+
       // set the number to the right section
       Array.from(this.phaseRefs.values())
         .filter(phase => phase !== null)
         .forEach((phase, index) => {
           let phaseTop = findDOMNode(phase).getBoundingClientRect().top + currentScrollPos
-
-          // TODO does this need a manual offset to get the change to happen at the right point?
 
           if (currentScrollPos >= phaseTop) {
             highestSectionReached = index + 1
@@ -67,14 +79,11 @@ class Timeline extends Component {
           }
         })
 
-      // TODO check which section in and update links / text accordingly via ref on phase component
       this.setState({
         currentPhase: highestSectionReached,
         prevPhaseID: prevPhaseID,
         nextPhaseID: nextPhaseID
       })
-
-      // TODO check within bottom bound too - timeline top plus height of timeline?
     }
   }
 
@@ -82,13 +91,14 @@ class Timeline extends Component {
     const { phases } = this.props
     let phaseNumberClasses = classNames(
       'phase-number',
-      { 'is-fixed': this.state.fixedControls }
+      { 'is-fixed': this.state.fixedControls },
+      { 'end-reached': this.state.endReached }
     )
 
     return (
-      <div id='timeline' className='timeline' data-test='timeline'>
-        <div className='phase-number-container' ref={(ref) => { this.phaseNumberElement = ref }}>
-          <span className={phaseNumberClasses}>
+      <div id='timeline' className='timeline' data-test='timeline' ref={(ref) => { this.timelineElement = ref }}>
+        <div className='phase-number-container' ref={(ref) => { this.phaseNumberContainerElement = ref }}>
+          <span className={phaseNumberClasses} ref={(ref) => { this.phaseNumberElement = ref }}>
             <a href={'#' + this.state.prevPhaseID} className='phase-number-prev'>
               <span className='visuallyhidden'>Jump to the previous section</span>
             </a>

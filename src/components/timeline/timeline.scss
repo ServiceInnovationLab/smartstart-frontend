@@ -49,6 +49,7 @@
   position: absolute;
   margin-top: 130px;
   margin-left: 14px;
+  height: 100%;
 
   @media #{$desktop-and-above} {
     max-width: $phase-content-width-desktop;
@@ -127,6 +128,18 @@
     &::after {
       background-color: $background-color;
       z-index: -1;
+    }
+  }
+
+  &.end-reached {
+    position: absolute;
+    bottom: 146px;
+    left: 0;
+    top: initial;
+
+    @media #{$desktop-and-above} {
+      bottom: 218px;
+      left: calc(((100vw - #{$desktop-max-content-width}) / 2) + 100px);
     }
   }
 
