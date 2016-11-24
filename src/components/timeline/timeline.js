@@ -38,7 +38,8 @@ class Timeline extends Component {
     if (this.phaseNumberContainerElement) {
       const numberPosition = this.phaseNumberContainerElement.getBoundingClientRect().top
       const numberHeight = this.phaseNumberElement.getBoundingClientRect().height
-      const timelineEnd = this.timelineElement.getBoundingClientRect().height + this.timelineElement.offsetTop
+      const timelineStart = this.timelineElement.offsetTop
+      const timelineEnd = this.timelineElement.getBoundingClientRect().height + timelineStart
       let highestSectionReached = 1
       let prevPhaseID = 'app'
       let nextPhaseID = 'bottom'
@@ -69,13 +70,20 @@ class Timeline extends Component {
       // set the number to the right section
       Array.from(this.phaseRefs.values())
         .filter(phase => phase !== null)
-        .forEach((phase, index) => {
+        .some((phase, index) => {
           let phaseTop = findDOMNode(phase).getBoundingClientRect().top + currentScrollPos
 
-          if (currentScrollPos >= phaseTop) {
+          if (currentScrollPos >= Math.floor(phaseTop)) {
             highestSectionReached = index + 1
             prevPhaseID = phase.props.prevPhaseID
             nextPhaseID = phase.props.nextPhaseID
+          } else if (currentScrollPos < timelineStart) {
+            // if we're before the timeline, the next link should be to the second phase
+            nextPhaseID = phase.props.nextPhaseID
+            return true
+          } else {
+            // we haven't gotten as far as this phase yet, don't bother checking the rest
+            return true
           }
         })
 
