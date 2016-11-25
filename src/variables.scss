@@ -43,6 +43,7 @@ $header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually
 // settings panel
 $settings-elements-bg-color: #65717D;
 $settings-elements-color: #C5CACE;
+$settings-triggers-dropshadow: "0 0 12px 0 rgba(0, 0, 0, 0.2)";
 
 // welcome
 $welcome-bg-color: #d9ed96;
@@ -112,11 +113,13 @@ $print-text-color:            $text-color;
 $print-border:                1px solid $text-color;
 
 // z-index index
-$z-index-header: 5;
-$z-index-jump-nav-list: 1;
-$z-index-settings-trigger: 4;
-$z-index-settings-pane-open: 2;
-$z-index-settings-pane-fixed: 3;
+$z-index-header: 7;
+$z-index-jump-nav-list: 3;
+$z-index-phase-number: 2;
+$z-index-phase-header-content: 1;
+$z-index-settings-trigger: 6;
+$z-index-settings-pane-open: 4;
+$z-index-settings-pane-fixed: 5;
 
 // icons
 $icon-accordian-close:  '\e900';
@@ -129,3 +132,4 @@ $icon-theme-finance:    '\e904';
 $icon-theme-health:     '\e905';
 $icon-next:             '\e909';
 $icon-arrow:            '\e908';
+$icon-tick:             '\e90a';

@@ -6,7 +6,7 @@ import { Link } from 'react-router'
 class Footer extends Component {
   render () {
     return (
-      <footer className='page-footer'>
+      <footer id='bottom' className='page-footer'>
         <span className='page-footer-curve' />
         <div className='page-footer-inner-wrap'>
           <div className='page-footer-inner'>

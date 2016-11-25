@@ -4,6 +4,7 @@ import './button-set.scss' // used in both child components
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import throttle from 'throttle-debounce/throttle'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
 import MyProfile from 'components/settings-pane/my-profile/my-profile'
 import TodoList from 'components/settings-pane/todo-list/todo-list'
@@ -13,7 +14,8 @@ class SettingsPane extends Component {
     super(props)
 
     this.state = {
-      fixedControls: false
+      fixedControls: false,
+      scrollFunction: throttle(300, this.checkIfShouldBeFixed).bind(this)
     }
 
     this.profilePaneClose = this.profilePaneClose.bind(this)
@@ -22,12 +24,12 @@ class SettingsPane extends Component {
   }
 
   componentDidMount () {
-    window.addEventListener('scroll', this.checkIfShouldBeFixed)
+    window.addEventListener('scroll', this.state.scrollFunction)
     window.setTimeout(this.checkIfShouldBeFixed, 500) // check if we should display before scroll happens
   }
 
   componentWillUnmount () {
-    window.removeEventListener('scroll', this.checkIfShouldBeFixed)
+    window.removeEventListener('scroll', this.state.scrollFunction)
   }
 
   checkIfShouldBeFixed () {

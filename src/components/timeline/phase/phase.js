@@ -110,7 +110,6 @@ export class Phase extends Component {
     return (
       <div id={id} className={phaseClasses} data-test='phase'>
         <h2 data-test='phaseTitle'>
-          <span className='phase-number'>{number}</span>
           {title}
         </h2>
         <p className={dateClasses}>{this.state.formattedDate}</p>
