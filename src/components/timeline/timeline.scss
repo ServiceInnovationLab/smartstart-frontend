@@ -73,7 +73,7 @@
   line-height: $phase-number-size / 2;
   text-align: center;
   width: $phase-number-size;
-  height: $phase-number-size + ($phase-number-size / 2);
+  height: $phase-number-size + ($phase-number-size / 1.5);
   padding: 8px 8px 0;
   box-sizing: content-box;
   background-color: $background-color;
@@ -96,7 +96,7 @@
     display: block;
     position: absolute;
     width: $phase-number-size;
-    height: $phase-number-size + ($phase-number-size / 2);
+    height: $phase-number-size + ($phase-number-size / 1.5);
     box-sizing: border-box;
     border: $timeline-border-width solid $border-color;
     border-radius: 90px;
@@ -170,7 +170,7 @@
 
   .phase-number-prev {
     transform: rotate(180deg);
-    padding-bottom: 3px;
+    padding-bottom: 5px;
 
     @media #{$desktop-and-above} {
       padding-bottom: 0;
@@ -179,7 +179,7 @@
 
   .phase-number-number {
     display: block;
-    margin-top: -5px;
+    margin-top: -3px;
 
     @media #{$desktop-and-above} {
       margin-top: 0;
@@ -187,7 +187,7 @@
   }
 
   .phase-number-next {
-    margin-top: -5px;
+    margin-top: -3px;
 
     @media #{$desktop-and-above} {
       margin-top: 0;

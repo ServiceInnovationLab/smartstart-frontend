@@ -64,18 +64,19 @@
   > h2 {
     text-align: center;
     margin-top: 0;
-    padding-left: $timeline-spacing;
-    padding-right: $timeline-spacing;
-    padding-top: 10px; // create space between phase shape and text
+    margin-bottom: 20px;
+    padding-left: $timeline-spacing + ($timeline-line-left-mobile / 2);
+    padding-right: $timeline-spacing - ($timeline-line-left-mobile / 2);
     z-index: $z-index-phase-header-content;
 
     @media #{$desktop-and-above} {
       max-width: $phase-content-width-desktop;
       padding-left: 0;
       padding-right: 0;
+      padding-top: 10px; // create space between phase shape and text
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
       position: relative; // on desktop, illustrations positioned to max-content width
     }
 
@@ -96,14 +97,14 @@
       }
     }
 
-    // white circle behind illustion (with dropshadow)
+    // white circle behind illustration (with dropshadow)
     &::before {
       border-radius: 50%;
       background-color: #fff;
       box-shadow: 0 0 18px 0 rgba(0,0,0,0.2);
       width: 174px;
       height: 174px;
-      margin-left: -87px; // half of width
+      margin-left: -87px + ($timeline-line-left-mobile / 2); // half of width plus offset by timeline width
       top: 25px;
       z-index: $z-index-phase-header-content;
 
@@ -119,7 +120,7 @@
     &::after {
       width: 204px;
       height: 204px;
-      margin-left: -102px; // half of width
+      margin-left: -102px + ($timeline-line-left-mobile / 2); // half of width plus offset by timeline width
       top: 10px; // leave a bit of a gap at the top
       z-index: $z-index-phase-header-content;
 
@@ -154,13 +155,15 @@
   font-size: 22px;
   text-align: center;
   margin-top: -20px;
-  margin-bottom: 35px;
-  padding-left: $timeline-spacing;
-  padding-right: $timeline-spacing;
+  margin-bottom: 20px;
+  padding-left: $timeline-spacing + ($timeline-line-left-mobile / 2);
+  padding-right: $timeline-spacing - ($timeline-line-left-mobile / 2);
 
   @media #{$desktop-and-above} {
     font-size: 28px;
     margin-top: -40px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    padding-left: 0;
+    padding-right: 0;
   }
 }

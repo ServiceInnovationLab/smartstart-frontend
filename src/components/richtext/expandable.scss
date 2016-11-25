@@ -14,14 +14,18 @@
 
   // pull them to the right of the card
   &.richtext {
-    margin: 15px -#{$card-padding} 15px 20px;
+    margin: 25px -#{$card-padding} 25px 20px;
 
     @media #{$desktop-and-above} {
-      margin: 15px -#{$card-padding-desktop} 15px 20px;
+      margin: 25px -#{$card-padding-desktop} 25px 20px;
     }
 
     @media print {
       margin-left: 0;
+    }
+
+    + .richtext.expandable {
+      margin-top: -10px;
     }
   }
 
@@ -105,6 +109,8 @@
   }
 
   &.is-expanded {
+    margin-bottom: 75px;
+
     > .expandable-title-wrapper > .expandable-title {
       color: #fff;
       background-color: $card-accordion-open-color;
