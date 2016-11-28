@@ -72,8 +72,9 @@ class Timeline extends Component {
         .filter(phase => phase !== null)
         .some((phase, index) => {
           let phaseTop = findDOMNode(phase).getBoundingClientRect().top + currentScrollPos
+          let phaseTopGraceZone = Math.floor(phaseTop - (numberHeight / 2)) // change the number as it's halfway through transitioning to the new zone
 
-          if (currentScrollPos >= Math.floor(phaseTop)) {
+          if (currentScrollPos >= phaseTopGraceZone) {
             highestSectionReached = index + 1
             prevPhaseID = phase.props.prevPhaseID
             nextPhaseID = phase.props.nextPhaseID
