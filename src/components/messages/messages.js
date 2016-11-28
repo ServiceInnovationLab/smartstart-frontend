@@ -113,7 +113,7 @@ class Messages extends Component {
     return (
       <div>
         <p className={initialLoginMessageClasses}>
-          <a href='/login/'>Login with RealMe</a> to access and save your SmartStart profile and To Do list.
+          Login with RealMe to access and save your SmartStart profile and To Do list.
         </p>
 
         <div className={messageContainerClasses}>
@@ -135,9 +135,8 @@ class Messages extends Component {
                 <span className='visuallyhidden'> - {this.state.concertinaVerb} this content</span>
               </p>
               <div id='realme-help' className={realmeHelpContentClasses}>
-                <p>SmartStart uses RealMe to save and protect your information. 
-                  If you have a RealMe login <a href='/login/'>use it here</a>.</p>
-                <p>If you don’t have a RealMe login you can <a href='/login/'>create one now</a>.</p>
+                <p>SmartStart uses RealMe to save and protect your information.  If you have a RealMe login you can use it to login to your SmartStart profile and To Do list.</p>
+                <p>If you don’t have a RealMe login you can select login and create one.</p>
                 <p>RealMe is a New Zealand government service that lets you use one username and password to access a wide range of services online. To find out more go to www.RealMe.govt.nz.</p>
               </div>
             </div>
