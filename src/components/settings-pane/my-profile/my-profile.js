@@ -116,7 +116,8 @@ export class MyProfile extends Component {
       <div id='my-profile' className={paneClasses} aria-hidden={!this.props.shown}>
         <form onSubmit={this.updateSettings.bind(this)}>
           <h4>Personalise the timeline</h4>
-          <p>Make the information displayed in the timeline more relevant by answering these questions. You can answer as many or as few as you wish. All your details are kept private (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</p>
+
+          <p>Add your due date to make the information displayed in the timeline more relevant. All your details are kept private (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</p>
           <label>
             When is your baby due?
             <br />
