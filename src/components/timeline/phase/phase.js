@@ -116,6 +116,7 @@ export class Phase extends Component {
 
         {normalCards}
         {nonChronologicalCards}
+        <div className='back-to-top'><a href='#app'>Back to top</a></div>
       </div>
     )
   }

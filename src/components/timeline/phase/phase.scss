@@ -8,7 +8,6 @@
 
   @media #{$desktop-and-above} {
     padding-top: 360px;
-    padding-bottom: 40px;
   }
 
   @media print {
@@ -144,6 +143,41 @@
 
       @media #{$high-res} {
         background-image: url(/assets/img/illustrations/illustration-#{$i}-highres.png);
+      }
+    }
+  }
+
+  .back-to-top {
+    text-align: right;
+    margin-right: 20px;
+    padding-top: 40px;
+
+    @media #{$desktop-and-above} {
+      max-width: $phase-content-width-desktop;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    a {
+      position: relative;
+      padding-right: 22px;
+      font-size: 14px;
+      text-decoration: none;
+      color: $text-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &::after {
+        content: $icon-arrow;
+        font-family: 'icomoon' !important;
+        font-size: 14px;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 1px;
+        transform: rotate(180deg);
       }
     }
   }
