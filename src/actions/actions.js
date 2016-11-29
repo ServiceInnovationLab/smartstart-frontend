@@ -164,19 +164,19 @@ export function checkAuthCookie () {
   return dispatch => {
     let authResult = Cookie.load('is_authenticated')
 
-    // not logged in
-    if (authResult !== true) { // null, undefined or RealMe error string
-      if (typeof authResult === 'string') {
+    if (authResult === 'true') {
+      dispatch(checkAuthentication(true))
+    } else {
+      // not logged in
+      if (typeof authResult === 'string') { // not null or undefined
         // RealMe error string
         dispatch(authError(authResult))
 
         // clear the cookie so the message is cleared on reload
         Cookie.remove('is_authenticated', { path: '/' })
       }
-      authResult = false
+      dispatch(checkAuthentication(false))
     }
-
-    dispatch(checkAuthentication(authResult))
 
     return Promise.resolve() // so we can chain other actions
   }
@@ -289,6 +289,7 @@ export function savePersonalisationValues (values) {
       .catch(function () {
         // a failure here is indicative that the user's session has timed out
         dispatch(authError('local-timeout'))
+        dispatch(checkAuthentication(false))
       })
     } else {
       let now = new Date()
@@ -336,6 +337,7 @@ export function saveMeldedPersonalisationValues (data) {
     .catch(function () {
       // a failure here is indicative that the user's session has timed out
       dispatch(authError('local-timeout'))
+      dispatch(checkAuthentication(false))
     })
   }
 }
