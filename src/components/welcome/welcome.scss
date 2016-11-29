@@ -20,7 +20,7 @@
     }
 
     @media #{$desktop-and-above} {
-      height: 480px;
+      height: 400px;
     }
 
     @media print {
@@ -33,15 +33,13 @@
     max-width: $desktop-max-content-width;
     margin-left: auto;
     margin-right: auto;
-    padding: 70px 15px 20px;
 
     @media #{$tablet-and-above} {
-      padding-top: 110px;
+      padding-top: 80px;
     }
 
     @media #{$desktop-and-above} {
-      padding-top: 75px;
-      padding-left: $welcome-desktop-padding-left;
+      padding-top: 100px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -61,7 +59,7 @@
       height: 195px;
       background-image: url(/assets/img/illustrations/header-illustration.png);
       background-size: cover;
-      top: -137px;
+      top: -152px;
       left: 50%;
       margin-left: -156px;
 
@@ -72,14 +70,14 @@
       @media #{$tablet-and-above} {
         width: 432px;
         height: 270px;
-        top: -190px;
+        top: -210px;
         margin-left: -216px;
       }
 
       @media #{$desktop-and-above} {
         width: 560px;
         height: 350px;
-        top: -246px;
+        top: -272px;
         left: -90px;
         margin-left: 0;
       }
@@ -91,12 +89,17 @@
   }
 
   .welcome-intro {
+    padding: 70px 15px 0;
+
+    @media #{$tablet-and-above} {
+      padding: 0 100px 0 15px;
+    }
 
     @media #{$desktop-and-above} {
       position: absolute;
       top: -330px;
-      max-width: $desktop-max-content-width - $welcome-desktop-padding-left;
-      padding-right: 15px;
+      max-width: $desktop-max-content-width;
+      padding: 40px 100px 0 $welcome-desktop-padding-left;
     }
 
     h2 {
@@ -122,6 +125,16 @@
     }
   }
 
+  .welcome-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 19px;
+
+    @media #{$desktop-and-above} {
+      padding-bottom: 34px;
+    }
+  }
+
   .welcome-action {
     color: $welcome-button-color;
     font-weight: 500;
@@ -130,8 +143,12 @@
     padding: 7px 30px 7px 45px;
     border-radius: 18px;
     position: relative;
-    margin-right: 20px;
+    margin-right: $welcome-buttons-margin-right;
     margin-bottom: 15px;
+
+    @media #{$desktop-and-above} {
+      margin-right: $welcome-desktop-buttons-margin-right;
+    }
 
     &::before {
       font-family: 'icomoon' !important;
@@ -158,6 +175,13 @@
     }
     &.welcome-action-todo-list::before {
       content: $icon-todo;
+    }
+    &.welcome-action-register-birth::before {
+      content: $icon-tick;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
     }
 
     @media print {

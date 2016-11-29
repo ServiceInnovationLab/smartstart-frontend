@@ -4,9 +4,13 @@
   position: relative;
   display: inline-block;
   margin-bottom: 15px;
+  margin-right: $welcome-buttons-margin-right;
+
+  @media #{$desktop-and-above} {
+    margin-right: $welcome-desktop-buttons-margin-right;
+  }
 
   .jump-nav-trigger {
-    margin-right: 0;
     margin-bottom: 0;
     position: relative;
     padding-right: 40px;
