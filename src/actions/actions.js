@@ -335,7 +335,7 @@ export function saveMeldedPersonalisationValues (data) {
     })
     .then(checkStatus)
     .catch(function () {
-      // a failure here is indicative that the user's session has timed out
+      // a failure here is indicative that the user's session has timed out, although this particular action should only happen immediately on login so this is an edge case
       dispatch(authError('local-timeout'))
       dispatch(checkAuthentication(false))
     })

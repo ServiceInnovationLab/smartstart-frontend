@@ -27,7 +27,7 @@ class JumpNav extends Component {
       let piwikEvent = {
         'category': 'Welcome',
         'action': 'Opened nav list',
-        'name': 'Show me services for'
+        'name': 'Find and use services'
       }
       // track the event
       if (this.state.linkListOpen) {
