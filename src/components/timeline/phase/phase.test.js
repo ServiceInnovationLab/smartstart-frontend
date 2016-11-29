@@ -1,5 +1,4 @@
-/* eslint-env jest */
-import React from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
 import { Phase } from 'components/timeline/phase/phase'
 import { shallow } from 'enzyme'
 

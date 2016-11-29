@@ -1,4 +1,3 @@
-/* globals fetch, API_ENDPOINT, PIWIK_INSTANCE  */
 import Cookie from 'react-cookie'
 import md5 from 'js-md5'
 import { piwikParams, createPiwikAction } from 'actions/piwik'

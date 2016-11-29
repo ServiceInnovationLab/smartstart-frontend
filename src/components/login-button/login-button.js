@@ -1,6 +1,6 @@
 import './login-button.scss'
 
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { piwikTrackPost } from 'actions/actions'
 
@@ -38,10 +38,12 @@ class LoginButton extends Component {
   }
 }
 
-LoginButton.propTypes = {}
-
-function mapStateToProps (state) {
+function mapStateToProps () {
   return {}
+}
+
+LoginButton.propTypes = {
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(LoginButton)

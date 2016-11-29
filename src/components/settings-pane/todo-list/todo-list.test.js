@@ -1,5 +1,4 @@
-/* eslint-env jest */
-import React from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
 import { TodoList } from 'components/settings-pane/todo-list/todo-list'
 import { shallow } from 'enzyme'
 
@@ -7,6 +6,8 @@ let todoList, props
 
 beforeEach(() => {
   props = {
+    'shown': true,
+    'todoPaneClose': function() {},
     'phases': [
       {
         'label': 'Phase with tasks',

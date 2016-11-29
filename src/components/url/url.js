@@ -66,15 +66,16 @@ class Url extends Component {
   }
 }
 
+function mapStateToProps () {
+  return {}
+}
+
 Url.propTypes = {
   label: PropTypes.string, // needs EITHER label or linkLabel
   linkLabel: PropTypes.string,
   url: PropTypes.string.isRequired,
-  tags: PropTypes.array
-}
-
-function mapStateToProps (state) {
-  return {}
+  tags: PropTypes.array,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(Url)

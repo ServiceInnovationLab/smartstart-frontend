@@ -1,5 +1,4 @@
-/* eslint-env jest */
-import React from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
 import { MyProfile } from 'components/settings-pane/my-profile/my-profile'
 import { shallow, mount } from 'enzyme'
 
@@ -13,7 +12,9 @@ beforeEach(() => {
         dd: ''
       }
     },
-    dispatch: dispatchMock
+    dispatch: dispatchMock,
+    shown: true,
+    profilePaneClose: function() {}
   }
 })
 

@@ -88,7 +88,10 @@ function mapStateToProps (state) {
 }
 
 TodoList.propTypes = {
-  phases: PropTypes.array.isRequired
+  phases: PropTypes.array.isRequired,
+  shown: PropTypes.bool.isRequired,
+  todoPaneClose: PropTypes.func.isRequired,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(TodoList)

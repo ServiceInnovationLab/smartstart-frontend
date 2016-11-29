@@ -74,7 +74,8 @@ Secondary.propTypes = {
   authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
-  ])
+  ]),
+  route: PropTypes.object
 }
 
 export default Secondary

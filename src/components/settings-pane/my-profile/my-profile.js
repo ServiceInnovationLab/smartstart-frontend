@@ -159,7 +159,10 @@ function mapStateToProps (state) {
 }
 
 MyProfile.propTypes = {
-  personalisationValues: PropTypes.object.isRequired
+  personalisationValues: PropTypes.object.isRequired,
+  shown: PropTypes.bool.isRequired,
+  profilePaneClose: PropTypes.func.isRequired,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(MyProfile)

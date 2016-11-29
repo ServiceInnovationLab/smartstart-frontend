@@ -1,0 +1,27 @@
+{
+    "extends": "standard",
+    "installedESLint": true,
+    "plugins": [
+        "react",
+        "standard",
+        "promise"
+    ],
+    "env": {
+        "jest": true,
+        "es6": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "globals": {
+      "document": true,
+      "window": true,
+      "fetch": true,
+      "URLSearchParams": true,
+      "API_ENDPOINT": true,
+      "PIWIK_INSTANCE": true,
+      "PIWIK_SITE": true
+    }
+}

@@ -126,7 +126,8 @@ function mapStateToProps (state) {
 
 JumpNav.propTypes = {
   phases: PropTypes.array.isRequired,
-  supplementary: PropTypes.array
+  supplementary: PropTypes.array,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(JumpNav)

@@ -71,7 +71,7 @@ class Timeline extends Component {
       Array.from(this.phaseRefs.values())
         .filter(phase => phase !== null)
         .some((phase, index) => {
-          let phaseTop = findDOMNode(phase).getBoundingClientRect().top + currentScrollPos
+          let phaseTop = findDOMNode(phase).getBoundingClientRect().top + currentScrollPos // eslint-disable-line react/no-find-dom-node
           let phaseTopGraceZone = Math.floor(phaseTop - (numberHeight / 2)) // change the number as it's halfway through transitioning to the new zone
 
           if (currentScrollPos >= phaseTopGraceZone) {

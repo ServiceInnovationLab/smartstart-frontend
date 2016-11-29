@@ -128,15 +128,16 @@ class Richtext extends Component {
   }
 }
 
+function mapStateToProps () {
+  return {}
+}
+
 Richtext.propTypes = {
   title: PropTypes.string, // isRequired only for expandable
   text: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  tags: PropTypes.array
-}
-
-function mapStateToProps (state) {
-  return {}
+  tags: PropTypes.array,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(Richtext)

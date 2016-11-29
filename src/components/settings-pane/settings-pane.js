@@ -161,7 +161,8 @@ function mapStateToProps (state) {
 
 SettingsPane.propTypes = {
   profilePaneOpen: PropTypes.bool.isRequired,
-  todoPaneOpen: PropTypes.bool.isRequired
+  todoPaneOpen: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(SettingsPane)

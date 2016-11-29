@@ -89,7 +89,7 @@ Container.propTypes = {
   about: PropTypes.array,
   isLoggedIn: PropTypes.bool.isRequired,
   isFetchingPersonalisation: PropTypes.bool.isRequired,
-  appError: PropTypes.oneOfType([
+  error: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
     PropTypes.object
@@ -98,7 +98,9 @@ Container.propTypes = {
     PropTypes.bool,
     PropTypes.string
   ]),
-  children: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired,
+  supplementaryID: PropTypes.number,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(Container)
