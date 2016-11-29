@@ -42,7 +42,7 @@ class Timeline extends Component {
       const timelineEnd = this.timelineElement.getBoundingClientRect().height + timelineStart
       let highestSectionReached = 1
       let prevPhaseID = 'app'
-      let nextPhaseID = 'bottom'
+      let nextPhaseID = 'when-you-need-support'
       let currentScrollPos = window.pageYOffset
 
       // set number to be fixed or not
@@ -119,7 +119,7 @@ class Timeline extends Component {
         </div>
         {phases.map((phase, index) => {
           let prevPhaseID = phases[index - 1] ? phases[index - 1].id : 'app'
-          let nextPhaseID = phases[index + 1] ? phases[index + 1].id : 'bottom'
+          let nextPhaseID = phases[index + 1] ? phases[index + 1].id : 'when-you-need-support'
 
           if (!phase.elements) { phase.elements = [] } // a phase can be empty
           return <Phase key={phase.id} id={phase.id} title={phase.label} cards={phase.elements} number={index + 1} prevPhaseID={prevPhaseID} nextPhaseID={nextPhaseID} ref={(ref) => { this.phaseRefs.set(index, ref) }} />
