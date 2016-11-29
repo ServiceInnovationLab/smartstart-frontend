@@ -1,6 +1,6 @@
 import './welcome.scss'
 
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
 import Messages from 'components/messages/messages'
@@ -77,8 +77,12 @@ class Welcome extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps () {
   return {}
+}
+
+Welcome.propTypes = {
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(Welcome)

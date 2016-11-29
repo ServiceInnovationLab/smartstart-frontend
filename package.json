@@ -14,7 +14,7 @@
     "start:externaltest": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all",
     "start:testdata": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint /assets/test-data.json",
     "start:snapshot": "./node_modules/.bin/webpack-dev-server --quiet --hot --inline --piwik 2 --endpoint /assets/snapshot-data.json",
-    "lint": "./node_modules/.bin/standard",
+    "lint": "./node_modules/.bin/eslint src",
     "coverage": "./node_modules/.bin/jest --coverage"
   },
   "keywords": [
@@ -31,7 +31,7 @@
   "devDependencies": {
     "autoprefixer": "~6.5.2",
     "babel-core": "~6.18.2",
-    "babel-eslint": "~7.1.0",
+    "babel-eslint": "~7.1.1",
     "babel-jest": "~16.0.0",
     "babel-loader": "~6.2.7",
     "babel-polyfill": "~6.16.0",
@@ -42,6 +42,11 @@
     "copy-webpack-plugin": "~4.0.0",
     "css-loader": "~0.25.0",
     "enzyme": "~2.5.1",
+    "eslint": "~3.11.1",
+    "eslint-config-standard": "~6.2.1",
+    "eslint-plugin-promise": "~3.4.0",
+    "eslint-plugin-react": "~6.7.1",
+    "eslint-plugin-standard": "~2.0.1",
     "extract-text-webpack-plugin": "~1.0.1",
     "html-webpack-plugin": "~2.24.1",
     "is-git-clean": "~1.1.0",
@@ -68,9 +73,6 @@
     "webpack-merge": "~0.15.0",
     "whatwg-fetch": "~1.0.0",
     "yargs": "~6.3.0"
-  },
-  "standard": {
-    "parser": "babel-eslint"
   },
   "jest": {
     "verbose": true,

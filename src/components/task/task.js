@@ -119,7 +119,8 @@ Task.propTypes = {
   id: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   personalisationValues: PropTypes.object.isRequired,
-  tags: PropTypes.array.isRequired
+  tags: PropTypes.array.isRequired,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(Task)

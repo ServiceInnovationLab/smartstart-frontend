@@ -76,14 +76,14 @@ export class NonChronologicalCard extends Card {
   }
 }
 
+function mapStateToProps () {
+  return {}
+}
+
 NonChronologicalCard.propTypes = {
   title: PropTypes.string.isRequired,
   elements: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired
-}
-
-function mapStateToProps (state) {
-  return {}
 }
 
 export default connect(mapStateToProps)(NonChronologicalCard)
