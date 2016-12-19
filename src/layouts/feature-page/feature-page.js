@@ -1,3 +1,5 @@
+import './feature-page.scss'
+
 import React, { PropTypes, Component } from 'react'
 import { IndexLink } from 'react-router'
 import Header from 'layouts/header/header'
@@ -8,11 +10,11 @@ class FeaturePage extends Component {
     const { isLoggedIn, authError } = this.props
 
     return (
-      <div className='site-container-wrapper'>
+      <div className='site-container-wrapper feature-page'>
         <div className='site-container'>
           <Header isLoggedIn={isLoggedIn} authError={authError} />
-          <div id='content'>
-            Hi!
+          <div id='content' className='feature-page-content'>
+            { this.props.children }
             <p role='navigation' className='back-to-main'><IndexLink to={'/'} className='button'>Go back</IndexLink></p>
           </div>
         </div>

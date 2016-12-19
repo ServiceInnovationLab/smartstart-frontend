@@ -9,6 +9,7 @@ import Container from 'containers/container'
 import Main from 'layouts/main/main'
 import MetadataPage from 'layouts/metadata-page/metadata-page'
 import FeaturePage from 'layouts/feature-page/feature-page'
+import BabyNames from 'components/baby-names/baby-names'
 import { routerScrollHandler } from 'utils'
 
 const store = configureStore()
@@ -31,7 +32,9 @@ ReactDOM.render(
     <Router history={browserHistory} onUpdate={routerScrollHandler}>
       <Route path='/' component={Container}>
         <IndexRoute component={Main} />
-        <Route path='baby-names' component={FeaturePage} />
+        <Route path='news' component={FeaturePage}>
+          <Route path='baby-names' component={BabyNames} />
+        </Route>
         {metadataRoutes}
         <Route path='*' component={Main} />
       </Route>

@@ -1,0 +1,31 @@
+@import 'variables';
+
+.feature-page {
+  background-color: $welcome-bg-color;
+
+  @media print {
+    background-color: $print-background-color;
+  }
+
+  .feature-page-content {
+    padding-left: $card-padding;
+    padding-right: $card-padding;
+
+    @media #{$desktop-and-above} {
+      padding-left: $card-padding-desktop;
+      padding-right: $card-padding-desktop;
+      max-width: $phase-content-width-desktop;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .page-footer {
+    background-color: $welcome-bg-color;
+  }
+
+  .back-to-main {
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+}
