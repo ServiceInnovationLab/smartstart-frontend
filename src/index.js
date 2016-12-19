@@ -7,22 +7,22 @@ import { Provider } from 'react-redux'
 import configureStore from 'store/store'
 import Container from 'containers/container'
 import Main from 'layouts/main/main'
-import Secondary from 'layouts/secondary/secondary'
+import MetadataPage from 'layouts/metadata-page/metadata-page'
 import { routerScrollHandler } from 'utils'
 
 const store = configureStore()
 
-// mapping for routes for secondary pages
+// mapping for routes for metadata pages
 // the value is the tag on the card from the content api used to create the association
 export const routeTagMapping = {
   'copyright-and-attribution': 'boac_presentation::copyright',
   'your-privacy': 'boac_presentation::privacy',
   'contact-us': 'boac_presentation::contact'
 }
-let secondaryRoutes = []
+let metadataRoutes = []
 
 for (var route in routeTagMapping) {
-  secondaryRoutes.push(<Route key={route} path={route} component={Secondary} />)
+  metadataRoutes.push(<Route key={route} path={route} component={MetadataPage} />)
 }
 
 ReactDOM.render(
@@ -30,7 +30,7 @@ ReactDOM.render(
     <Router history={browserHistory} onUpdate={routerScrollHandler}>
       <Route path='/' component={Container}>
         <IndexRoute component={Main} />
-        {secondaryRoutes}
+        {metadataRoutes}
         <Route path='*' component={Main} />
       </Route>
     </Router>
