@@ -29,7 +29,8 @@ FeaturePage.propTypes = {
   authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
-  ])
+  ]),
+  children: PropTypes.object.isRequired
 }
 
 export default FeaturePage

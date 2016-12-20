@@ -1,10 +1,13 @@
 @import 'variables';
 
 .feature-page {
-  background-color: $welcome-bg-color;
 
-  @media print {
-    background-color: $print-background-color;
+  .site-container {
+    background-color: $welcome-bg-color;
+
+    @media print {
+      background-color: $print-background-color;
+    }
   }
 
   .feature-page-content {

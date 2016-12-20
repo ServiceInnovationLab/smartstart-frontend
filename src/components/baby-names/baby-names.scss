@@ -1,1 +1,60 @@
 @import 'variables';
+
+.bubble-chart-category {
+  margin-bottom: 20px;
+
+  button {
+    min-width: auto;
+    border-color: $text-color;
+    color: $text-color;
+    background-color: transparent;
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left-width: 0;
+    }
+
+    &:hover {
+      background-color: rgba($text-color, 0.2);
+    }
+
+    &.selected,
+    &.selected:hover {
+      background-color: $text-color;
+      color: $background-color;
+    }
+  }
+}
+
+.bubble-chart-year {
+  margin-top: 20px;
+
+  a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: $text-color;
+    border-radius: 5px;
+    padding: 2px 5px 0 5px;
+    font-weight: 500;
+
+    &:hover {
+      background-color: rgba($text-color, 0.2);
+    }
+
+    &.selected {
+      background-color: $text-color;
+      color: $background-color;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
