@@ -1,0 +1,14 @@
+@import 'variables';
+
+.bubble-chart-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; // sets aspect ratio http://stackoverflow.com/a/25978286/160648
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.bubble-chart {
+  display: inline-block;
+  position: absolute;
+}

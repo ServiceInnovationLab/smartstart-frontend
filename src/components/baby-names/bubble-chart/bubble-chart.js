@@ -1,3 +1,5 @@
+import './bubble-chart.scss'
+
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import chart from 'components/baby-names/bubble-chart/chart'
@@ -33,7 +35,7 @@ class BubbleChart extends Component {
 
   render () {
     return (
-      <div className="bubble-chart"></div>
+      <div className="bubble-chart-container"></div>
     )
   }
 }

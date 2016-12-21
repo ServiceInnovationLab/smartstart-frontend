@@ -13,15 +13,15 @@ let chart = {
 chart.create = function(container, dataset) {
   d3.select(container)
     .append('svg')
-    .attr('width', '100%')
-    .attr('height', chart.config.diameter)
-    .attr('class', 'bubble')
+    .attr('class', 'bubble-chart')
+    .attr('preserveAspectRatio', 'xMinYMin meet')
+    .attr('viewBox', `0 0 ${chart.config.diameter} ${chart.config.diameter}`)
 
   chart.draw(dataset)
 }
 
 chart.draw = function(dataset) {
-  let svg = d3.select('.bubble')
+  let svg = d3.select('.bubble-chart')
 
   let smallestValue = d3.min(dataset.children, function(d) {
     return d.amount
@@ -104,7 +104,7 @@ chart.draw = function(dataset) {
 }
 
 chart.destroy = function() {
-  d3.select('.bubble').remove()
+  d3.select('.bubble-chart').remove()
 }
 
 export default chart
