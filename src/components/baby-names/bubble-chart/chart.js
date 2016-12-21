@@ -4,13 +4,22 @@ let chart = {
   'config': {
     'diameter': 690,
     'spacing': 40,
-    'colors': d3.scaleOrdinal(
-      ['#ed9159', '#afd6ff', '#f28982', '#ceaee6', '#bcd37c', '#93cacc', '#fcc977', '#f8c4c0', '#fcf691', '#d9ed96']
-    )
+    'colors': ['#ed9159', '#afd6ff', '#f28982', '#ceaee6', '#bcd37c', '#93cacc', '#fcc977', '#f8c4c0', '#fcf691', '#d9ed96']
   }
 }
 
-chart.create = function(container, dataset) {
+chart.create = function(container, dataset, config) {
+  // if config overrides supplied, update defaults
+  if (config) {
+    for (let value in config) {
+      chart.config[value] = config[value]
+    }
+  }
+
+  // set up colours as a d3 scale
+  chart.config.colors = d3.scaleOrdinal(chart.config.colors)
+
+  // create svg element
   d3.select(container)
     .append('svg')
     .attr('class', 'bubble-chart')
@@ -60,14 +69,13 @@ chart.draw = function(dataset) {
     .attr('r', function(d) {
       return d.r
     })
-    .style('fill', function(d) {
+    .attr('fill', function(d) {
       return chart.config.colors(d.data.name + d.data.amount)
     })
 
   nodeEnter.append('text')
     .attr('class', 'name-text')
     .attr('dy', '-0.5em')
-    .style('text-anchor', 'middle')
     .text(function(d) {
       return d.data.name // TODO make sure this font size scales for mobile or wraps
     })
@@ -75,7 +83,6 @@ chart.draw = function(dataset) {
   nodeEnter.append('text')
     .attr('class', 'amount-text')
     .attr('dy', '1em')
-    .style('text-anchor', 'middle')
     .text(function(d) {
       return d.data.amount
     })
@@ -89,7 +96,7 @@ chart.draw = function(dataset) {
     .attr('r', function(d) {
       return d.r
     })
-    .style('fill', function(d) {
+    .attr('fill', function(d) {
       return chart.config.colors(d.data.name + d.data.amount)
     })
 

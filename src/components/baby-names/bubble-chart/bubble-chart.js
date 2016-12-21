@@ -17,7 +17,16 @@ class BubbleChart extends Component {
 
     if (data && data[category] && data[category][year]) {
       let container = findDOMNode(this)
-      chart.create(container, {'name': category + year, 'children': data[category][year]})
+      chart.create(
+        container,
+        {
+          'name': category + year,
+          'children': data[category][year]
+        },
+        {
+          'spacing': 5
+        }
+      )
     }
   }
 
