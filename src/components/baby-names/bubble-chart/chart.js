@@ -72,6 +72,14 @@ chart.draw = function(dataset) {
       return chart.config.colors(d.data.name + d.data.amount)
     })
 
+  nodeEnter.append('path')
+    .attr('class', 'string')
+    .attr('transform', function(d) { return chart.stringPosition(d) })
+    .attr('d', 'M0,0c0,0-1.8,24.2,5.1,42c8,20.7-5,35.1-5,43.7')
+    .attr('stroke', '#000000')
+    .attr('stroke-width', '1')
+    .attr('fill', 'none')
+
   nodeEnter.append('text')
     .attr('class', 'name-text')
     .attr('dy', '-0.5em')
@@ -97,6 +105,9 @@ chart.draw = function(dataset) {
       return chart.config.colors(d.data.name + d.data.amount)
     })
 
+  node.select('.string')
+    .attr('transform', function(d) { return chart.stringPosition(d) })
+
   node.select('.amount-text')
     .text(function(d) {
       return d.data.amount
@@ -116,6 +127,12 @@ chart.balloonScale = function(d) {
   let halfHeight = 100 / 2
   let halfWidth = 78 / 2 // width of the path is 78px
   return `scale(${scale}) translate(-${halfWidth}, -${halfHeight})`
+}
+
+chart.stringPosition = function(d) {
+  let scale = (d.r * 2) / 100 // height of the balloon path is 100px
+  let halfHeight = 100 * scale / 2
+  return `translate(0, ${halfHeight})`
 }
 
 export default chart
