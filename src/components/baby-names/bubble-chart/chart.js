@@ -61,14 +61,13 @@ chart.draw = function(dataset) {
 
   // create nodes
   nodeEnter.attr('transform', function(d) {
-    return 'translate(' + d.x + ',' + d.y + ')'
+    return `translate(${d.x}, ${d.y})`
   })
 
-  nodeEnter.append('circle')
-    .attr('class', 'circle')
-    .attr('r', function(d) {
-      return d.r
-    })
+  nodeEnter.append('path')
+    .attr('class', 'balloon')
+    .attr('transform', function(d) { return chart.balloonScale(d) })
+    .attr('d', 'M78.6,42.1C78.6,14.6,61.2,0,39.5,0C18,0.1,0.5,14.6,0.5,42.1c0,19,18.1,46.2,35.6,49.5l-4.3,8.4h15.6l-4.3-8.4C59.2,87.9,78.6,60,78.6,42.1z')
     .attr('fill', function(d) {
       return chart.config.colors(d.data.name + d.data.amount)
     })
@@ -77,7 +76,7 @@ chart.draw = function(dataset) {
     .attr('class', 'name-text')
     .attr('dy', '-0.5em')
     .text(function(d) {
-      return d.data.name // TODO make sure this font size scales for mobile or wraps
+      return d.data.name
     })
 
   nodeEnter.append('text')
@@ -87,15 +86,13 @@ chart.draw = function(dataset) {
       return d.data.amount
     })
 
-  // update nodes - only position, circle size and color, and amount text are updated
+  // update nodes - only position, balloon size and color, and amount text are updated
   node.attr('transform', function(d) {
-    return 'translate(' + d.x + ',' + d.y + ')'
+    return `translate(${d.x}, ${d.y})`
   })
 
-  node.select('.circle')
-    .attr('r', function(d) {
-      return d.r
-    })
+  node.select('.balloon')
+    .attr('transform', function(d) { return chart.balloonScale(d) })
     .attr('fill', function(d) {
       return chart.config.colors(d.data.name + d.data.amount)
     })
@@ -112,6 +109,13 @@ chart.draw = function(dataset) {
 
 chart.destroy = function() {
   d3.select('.bubble-chart').remove()
+}
+
+chart.balloonScale = function(d) {
+  let scale = (d.r * 2) / 100 // height of the balloon path is 100px
+  let halfHeight = 100 / 2
+  let halfWidth = 78 / 2 // width of the path is 78px
+  return `scale(${scale}) translate(-${halfWidth}, -${halfHeight})`
 }
 
 export default chart
