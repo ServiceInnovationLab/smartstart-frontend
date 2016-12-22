@@ -13,9 +13,11 @@ class FeaturePage extends Component {
       <div className='site-container-wrapper feature-page'>
         <div className='site-container'>
           <Header isLoggedIn={isLoggedIn} authError={authError} />
-          <div id='content' className='feature-page-content'>
+          <div id='content'>
             { this.props.children }
-            <p role='navigation' className='back-to-main'><IndexLink to={'/'} className='button'>Go back</IndexLink></p>
+            <div className='feature-page-content'>
+              <p role='navigation' className='back-to-main'><IndexLink to={'/'} className='button'>Go back</IndexLink></p>
+            </div>
           </div>
         </div>
         <Footer />

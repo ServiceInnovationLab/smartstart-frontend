@@ -21,6 +21,13 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    a,
+    button,
+    .button {
+      color: $text-color;
+      border-color: $text-color;
+    }
   }
 
   .page-footer {
@@ -30,5 +37,13 @@
   .back-to-main {
     margin-bottom: 0;
     padding-left: 0;
+  }
+
+  .introtext {
+    margin-bottom: 50px;
+  }
+
+  h5 {
+    margin-top: 35px;
   }
 }

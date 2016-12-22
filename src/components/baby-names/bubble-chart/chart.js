@@ -16,9 +16,6 @@ chart.create = function(container, dataset, config) {
     }
   }
 
-  // set up colours as a d3 scale
-  chart.config.colors = d3.scaleOrdinal(chart.config.colors)
-
   // create svg element
   d3.select(container)
     .append('svg')
@@ -28,6 +25,8 @@ chart.create = function(container, dataset, config) {
 
   chart.draw(dataset)
 }
+
+chart.colorPalette = d3.scaleOrdinal(chart.config.colors)
 
 chart.draw = function(dataset) {
   let svg = d3.select('.bubble-chart')
@@ -69,7 +68,7 @@ chart.draw = function(dataset) {
     .attr('transform', function(d) { return chart.balloonScale(d) })
     .attr('d', 'M78.6,42.1C78.6,14.6,61.2,0,39.5,0C18,0.1,0.5,14.6,0.5,42.1c0,19,18.1,46.2,35.6,49.5l-4.3,8.4h15.6l-4.3-8.4C59.2,87.9,78.6,60,78.6,42.1z')
     .attr('fill', function(d) {
-      return chart.config.colors(d.data.name + d.data.amount)
+      return chart.colorPalette(d.data.name + d.data.amount)
     })
 
   nodeEnter.append('path')
@@ -102,7 +101,7 @@ chart.draw = function(dataset) {
   node.select('.balloon')
     .attr('transform', function(d) { return chart.balloonScale(d) })
     .attr('fill', function(d) {
-      return chart.config.colors(d.data.name + d.data.amount)
+      return chart.colorPalette(d.data.name + d.data.amount)
     })
 
   node.select('.string')

@@ -44,7 +44,7 @@ class BubbleChart extends Component {
 
   render () {
     return (
-      <div className="bubble-chart-container"></div>
+      <div className='bubble-chart-container'></div>
     )
   }
 }

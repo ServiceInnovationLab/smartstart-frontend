@@ -44,23 +44,49 @@ class BabyNames extends Component {
   render () {
     return (
       <div>
-        <h2>Baby names 2016</h2>
-        <BubbleChart data={this.state.data} category={this.state.category} year={this.state.year} />
-        <div className='bubble-chart-category'>
-          <button onClick={() => this.setCategory('girls')} className={this.categorySelected('girls')}>Girls</button>
-          <button onClick={() => this.setCategory('boys')} className={this.categorySelected('boys')}>Boys</button>
+        <div className='baby-names-header'>
+          <h2 className='baby-names-header-title'><span className='visuallyhidden'>New Zealand baby names 2016</span></h2>
+          <div className='feature-page-content'>
+            <BubbleChart data={this.state.data} category={this.state.category} year={this.state.year} />
+          </div>
         </div>
-        <div className='bubble-chart-year'>
-          <a href='#' onClick={(event) => this.setYear(event, '2016')} className={this.yearSelected('2016')}>2016</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2015')} className={this.yearSelected('2015')}>2015</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2014')} className={this.yearSelected('2014')}>2014</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2013')} className={this.yearSelected('2013')}>2013</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2012')} className={this.yearSelected('2012')}>2012</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2011')} className={this.yearSelected('2011')}>2011</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2010')} className={this.yearSelected('2010')}>2010</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2009')} className={this.yearSelected('2009')}>2009</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2008')} className={this.yearSelected('2008')}>2008</a>
-          <a href='#' onClick={(event) => this.setYear(event, '2007')} className={this.yearSelected('2007')}>2007</a>
+        <div className='feature-page-content'>
+          <div className='bubble-chart-category'>
+            <button onClick={() => this.setCategory('girls')} className={this.categorySelected('girls')}>Girls</button>
+            <button onClick={() => this.setCategory('boys')} className={this.categorySelected('boys')}>Boys</button>
+          </div>
+          <div className='bubble-chart-year'>
+            <a href='#' onClick={(event) => this.setYear(event, '2016')} className={this.yearSelected('2016')}>2016</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2015')} className={this.yearSelected('2015')}>2015</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2014')} className={this.yearSelected('2014')}>2014</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2013')} className={this.yearSelected('2013')}>2013</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2012')} className={this.yearSelected('2012')}>2012</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2011')} className={this.yearSelected('2011')}>2011</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2010')} className={this.yearSelected('2010')}>2010</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2009')} className={this.yearSelected('2009')}>2009</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2008')} className={this.yearSelected('2008')}>2008</a>
+            <a href='#' onClick={(event) => this.setYear(event, '2007')} className={this.yearSelected('2007')}>2007</a>
+          </div>
+          <h3>Top baby names 2016</h3>
+
+          <h4 className='introtext'>The top baby names of 2016 have now been released with Oliver and Olivia topping the list for a second year in a row.</h4>
+
+          <h5>Top 10 names of 2016</h5>
+
+          <p>In 2016, Olivia and Oliver remained the most popular baby names with Jack and William staying in second place for boys, and Charlotte for girls.</p>
+
+          <p>Each year, the Department of Internal Affairs releases a list of the most popular baby names for boys and girls registered in New Zealand.  Registering your baby is free, and it’s an important step for all parents. Registration gives children their legal identity and the rights, responsibilities and access to support services associated with being a New Zealander.</p>
+
+          <blockquote>Did you know, the top 100 names make up only a small proportion of all names given to babies, with over [TODO NUMBER HERE] first names registered for children born last year?</blockquote>
+
+          <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help. SmartStart is the one place to go for step-by-step information to get parents and babies off to the best start. Make sure you take the time to <a href='/'>have a look</a>.</p>
+
+          <h5>Full top 100 lists</h5>
+          <ul>
+            <li><a href='#'>Top 100 Male and Female Baby Names (xls 93kb)</a></li>
+            <li><a href='#'>Top 100 Male Baby Names (pdf 49kb)</a></li>
+            <li><a href='#'>Top 100 Female Baby Names (pdf 48kb)</a></li>
+          </ul>
         </div>
       </div>
     )
