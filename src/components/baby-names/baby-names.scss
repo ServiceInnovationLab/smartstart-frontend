@@ -1,0 +1,129 @@
+@import 'variables';
+
+.baby-names-header {
+  background-color: $welcome-bg-color-secondary;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: $z-index-baby-names-header;
+  padding-bottom: 45px;
+  box-shadow: inset 0px -45px 0px 0px $welcome-bg-color;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 108px;
+    background: url('/assets/img/baby-names/bushes.svg') no-repeat right bottom;
+    background-size: 300px auto;
+    bottom: 20px;
+
+    @media #{$tablet-and-above} {
+      bottom: 10px;
+      background-size: 400px auto;
+    }
+
+    @media #{$desktop-and-above} {
+      bottom: 0;
+      background-size: 500px auto;
+    }
+  }
+
+  &::before {
+    display: none;
+    transform: scaleX(-1);
+    left: -100px;
+
+    @media only screen and (min-width: 1350px) {
+      display: block;
+    }
+  }
+
+  &::after {
+    right: -100px;
+  }
+}
+
+.baby-names-header-title {
+  margin: 0;
+  background: url('/assets/img/baby-names/banner-mobile.svg') no-repeat center bottom;
+  background-size: 500px auto;
+  height: 160px;
+
+  @media #{$tablet-and-above} {
+    background-image: url('/assets/img/baby-names/banner-mobile.svg');
+    background-size: 777px auto;
+    height: 230px;
+  }
+
+  @media #{$desktop-and-above} {
+    background-image: url('/assets/img/baby-names/banner-desktop.svg');
+    background-size: 1405px auto;
+    height: 260px;
+  }
+}
+
+.bubble-chart-category {
+  margin-bottom: 20px;
+
+  button {
+    min-width: auto;
+    border-color: $text-color;
+    color: $text-color;
+    background-color: transparent;
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left-width: 0;
+    }
+
+    &:hover {
+      background-color: rgba($text-color, 0.2);
+    }
+
+    &.selected,
+    &.selected:hover {
+      background-color: $text-color;
+      color: $background-color;
+    }
+  }
+}
+
+.bubble-chart-year {
+  margin-top: 20px;
+  margin-bottom: 50px;
+
+  @media #{$desktop-and-above} {
+    margin-bottom: 85px;
+  }
+
+  a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: $text-color;
+    border-radius: 5px;
+    padding: 0 5px;
+    font-weight: 500;
+
+    &:hover {
+      background-color: rgba($text-color, 0.2);
+    }
+
+    &.selected {
+      background-color: $text-color;
+      color: $background-color;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
