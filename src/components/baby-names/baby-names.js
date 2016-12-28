@@ -55,7 +55,6 @@ class BabyNames extends Component {
         </div>
         <div className='feature-page-content'>
           <p className='bubble-chart-caption'><b>{currentTopName.name}</b> is the most popular {this.state.category} name for {this.state.year} with <b>{currentTopName.amount}</b> babies given that name.</p>
-          <p>Use the controls below to switch between girls and boys names, and see the top ten for a previous year.</p>
           <div className='bubble-chart-category'>
             <button onClick={() => this.setCategory('girls')} className={this.categorySelected('girls')}>Girls</button>
             <button onClick={() => this.setCategory('boys')} className={this.categorySelected('boys')}>Boys</button>
@@ -72,6 +71,7 @@ class BabyNames extends Component {
             <a href='#' onClick={(event) => this.setYear(event, '2008')} className={this.yearSelected('2008')}>2008</a>
             <a href='#' onClick={(event) => this.setYear(event, '2007')} className={this.yearSelected('2007')}>2007</a>
           </div>
+          <p className='bubble-chart-controls-help'>Use the controls above to switch between girls and boys names, and see the top ten for a previous year.</p>
           <h3>Top baby names 2016</h3>
 
           <h4 className='introtext'>The top baby names of 2016 have now been released with Oliver and Olivia topping the list for a second year in a row.</h4>

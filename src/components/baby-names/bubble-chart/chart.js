@@ -22,7 +22,7 @@ chart.create = function(container, dataset, config) {
     .append('svg')
     .attr('class', 'bubble-chart')
     .attr('preserveAspectRatio', 'xMinYMin meet')
-    .attr('viewBox', `0 0 ${chart.config.diameter} ${chart.config.diameter}`)
+    .attr('viewBox', `0 0 ${chart.config.diameter} ${chart.config.diameter + 50}`)
 
   chart.draw(dataset)
 }

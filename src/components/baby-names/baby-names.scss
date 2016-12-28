@@ -67,6 +67,14 @@
   margin-top: 0;
 }
 
+.bubble-chart-controls-help {
+  margin-bottom: 50px;
+
+  @media #{$desktop-and-above} {
+    margin-bottom: 85px;
+  }
+}
+
 .bubble-chart-category {
   margin-bottom: 20px;
 
@@ -102,11 +110,6 @@
 
 .bubble-chart-year {
   margin-top: 20px;
-  margin-bottom: 50px;
-
-  @media #{$desktop-and-above} {
-    margin-bottom: 85px;
-  }
 
   a {
     margin-right: 10px;
