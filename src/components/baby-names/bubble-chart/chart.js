@@ -76,8 +76,9 @@ chart.draw = function(dataset) {
     .attr('class', 'string')
     .attr('transform', function(d) { return chart.stringPosition(d) })
     .attr('d', 'M0,0c0,0-1.8,24.2,5.1,42c8,20.7-5,35.1-5,43.7')
-    .attr('stroke', '#000000')
+    .attr('stroke', '#6B5F3F')
     .attr('stroke-width', '1')
+    .attr('opacity', '0.8')
     .attr('fill', 'none')
 
   nodeEnter.append('text')
