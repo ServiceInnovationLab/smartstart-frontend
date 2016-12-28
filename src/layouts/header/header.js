@@ -1,8 +1,10 @@
 import './header.scss'
 
 import React, { PropTypes, Component } from 'react'
+import { IndexLink } from 'react-router'
 import LoginButton from 'components/login-button/login-button'
 import LogoutButton from 'components/logout-button/logout-button'
+import Banner from 'layouts/header/banner/banner'
 import classNames from 'classnames'
 
 class Header extends Component {
@@ -99,7 +101,7 @@ class Header extends Component {
         <div className='page-header-inner'>
           <h1>
             <img src='/assets/img/smartstart-logo-print.svg' alt='logo - parent cradling child' />
-            <a href='/'>SmartStart</a>
+            <IndexLink to={'/'}>SmartStart</IndexLink>
           </h1>
           <div className={loginClasses}>
             <LoginButton />
@@ -114,6 +116,7 @@ class Header extends Component {
             <a className='page-header-error-close' href='#' onClick={this.clearMessage}><span className='visuallyhidden'>Close message</span></a>
           </div>
         </div>
+        <Banner shown={this.props.showBanner} />
       </header>
     )
   }
@@ -124,7 +127,8 @@ Header.propTypes = {
   authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
-  ])
+  ]),
+  showBanner: PropTypes.bool
 }
 
 export default Header

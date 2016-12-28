@@ -11,6 +11,7 @@ class Footer extends Component {
         <div className='page-footer-inner-wrap'>
           <div className='page-footer-inner'>
             <ul role='contentinfo'>
+              <li><Link to={'/news/baby-names/'}>Baby names 2016</Link></li>
               <li><Link to={'/contact-us/'}>Contact us</Link></li>
               <li><Link to={'/your-privacy/'}>Your privacy</Link></li>
               <li><Link to={'/copyright-and-attribution/'}>Copyright and attribution</Link></li>
