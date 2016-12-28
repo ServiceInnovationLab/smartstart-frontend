@@ -1,6 +1,7 @@
 import './baby-names.scss'
 
 import React, { Component } from 'react'
+import { IndexLink } from 'react-router'
 import BubbleChart from 'components/baby-names/bubble-chart/bubble-chart'
 import nameData from 'components/baby-names/baby-name-data'
 
@@ -83,7 +84,7 @@ class BabyNames extends Component {
 
           <blockquote>Did you know, the top 100 names make up only a small proportion of all names given to babies, with over [TODO NUMBER HERE] first names registered for children born last year?</blockquote>
 
-          <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help. SmartStart is the one place to go for step-by-step information to get parents and babies off to the best start. Make sure you take the time to <a href='/'>have a look</a>.</p>
+          <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help. SmartStart is the one place to go for step-by-step information to get parents and babies off to the best start. Make sure you take the time to <IndexLink to={'/'}>have a look</IndexLink>.</p>
 
           <h5>Full top 100 lists</h5>
           <ul>

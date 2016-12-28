@@ -1,0 +1,19 @@
+@import 'variables';
+
+.page-header-banner {
+  background-color: $banner-color;
+  color: $background-color;
+
+  a {
+    color: $background-color;
+  }
+
+  .page-header-inner {
+    background: url('/assets/img/baby-names/miromiro.svg') no-repeat 20px center;
+    background-size: 65px 55px; // can't use auto for y because of IE11 bug
+
+    p {
+      padding-left: 80px;
+    }
+  }
+}
