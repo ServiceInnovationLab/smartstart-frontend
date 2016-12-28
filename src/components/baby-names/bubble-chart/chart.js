@@ -5,7 +5,7 @@ let chart = {
     'diameter': 690,
     'spacing': 40,
     'colors': ['#ed9159', '#afd6ff', '#f28982', '#ceaee6', '#bcd37c', '#93cacc', '#fcc977', '#f8c4c0', '#fcf691', '#d9ed96'],
-    'duration': 2000
+    'duration': 3000
   }
 }
 
@@ -100,7 +100,7 @@ chart.draw = function(dataset) {
       return `translate(${d.x}, ${d.y})`
     })
     .duration(function(d) {
-      return chart.config.duration + (d.data.amount * 2) // bigger balloons rise faster
+      return chart.config.duration - (d.data.amount * 2) // bigger balloons rise faster
     })
 
   node.select('.balloon').transition()
@@ -121,7 +121,26 @@ chart.draw = function(dataset) {
 
   // remove nodes
   node.exit()
-    .transition().duration(chart.config.duration / 2)
+    .selectAll('.string')
+    .remove()
+
+  node.exit()
+    .selectAll('.amount-text')
+    .remove()
+
+  node.exit()
+    .selectAll('.name-text')
+    .remove()
+
+  node.exit()
+    .selectAll('.balloon')
+    .transition()
+    .attr('transform', 'scale(0,0)')
+    .duration(250)
+
+  node.exit()
+    .transition()
+    .duration(250)
     .remove()
 }
 
