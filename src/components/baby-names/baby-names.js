@@ -53,7 +53,7 @@ class BabyNames extends Component {
           </div>
         </div>
         <div className='feature-page-content'>
-          <p><b>{currentTopName.name}</b> is the most popular {this.state.category} name for {this.state.year} with <b>{currentTopName.amount}</b> babies given that name.</p>
+          <p className='bubble-chart-caption'><b>{currentTopName.name}</b> is the most popular {this.state.category} name for {this.state.year} with <b>{currentTopName.amount}</b> babies given that name.</p>
           <p>Use the controls below to switch between girls and boys names, and see the top ten for a previous year.</p>
           <div className='bubble-chart-category'>
             <button onClick={() => this.setCategory('girls')} className={this.categorySelected('girls')}>Girls</button>

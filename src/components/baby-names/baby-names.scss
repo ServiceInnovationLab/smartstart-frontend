@@ -5,7 +5,6 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  z-index: $z-index-baby-names-header;
   padding-bottom: 45px;
   box-shadow: inset 0px -45px 0px 0px $welcome-bg-color;
 
@@ -16,17 +15,17 @@
     width: 100%;
     height: 108px;
     background: url('/assets/img/baby-names/bushes.svg') no-repeat right bottom;
-    background-size: 300px auto;
+    background-size: 300px 64px; // can't use auto for y because of IE11 bug
     bottom: 20px;
 
     @media #{$tablet-and-above} {
       bottom: 10px;
-      background-size: 400px auto;
+      background-size: 400px 85px;
     }
 
     @media #{$desktop-and-above} {
       bottom: 0;
-      background-size: 500px auto;
+      background-size: 500px 107px;
     }
   }
 
@@ -62,6 +61,10 @@
     background-size: 1405px auto;
     height: 260px;
   }
+}
+
+.bubble-chart-caption {
+  margin-top: 0;
 }
 
 .bubble-chart-category {
