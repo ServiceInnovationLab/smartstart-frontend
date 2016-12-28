@@ -4,7 +4,8 @@ let chart = {
   'config': {
     'diameter': 690,
     'spacing': 40,
-    'colors': ['#ed9159', '#afd6ff', '#f28982', '#ceaee6', '#bcd37c', '#93cacc', '#fcc977', '#f8c4c0', '#fcf691', '#d9ed96']
+    'colors': ['#ed9159', '#afd6ff', '#f28982', '#ceaee6', '#bcd37c', '#93cacc', '#fcc977', '#f8c4c0', '#fcf691', '#d9ed96'],
+    'duration': 2000
   }
 }
 
@@ -60,7 +61,7 @@ chart.draw = function(dataset) {
 
   // create nodes
   nodeEnter.attr('transform', function(d) {
-    return `translate(${d.x}, ${d.y})`
+    return `translate(${d.x}, ${d.y + chart.config.diameter})`
   })
 
   nodeEnter.append('path')
@@ -94,18 +95,24 @@ chart.draw = function(dataset) {
     })
 
   // update nodes - only position, balloon size and color, and amount text are updated
-  node.attr('transform', function(d) {
-    return `translate(${d.x}, ${d.y})`
-  })
+  svg.selectAll('.node').transition()
+    .attr('transform', function(d) {
+      return `translate(${d.x}, ${d.y})`
+    })
+    .duration(function(d) {
+      return chart.config.duration + (d.data.amount * 2) // bigger balloons rise faster
+    })
 
-  node.select('.balloon')
+  node.select('.balloon').transition()
     .attr('transform', function(d) { return chart.balloonScale(d) })
     .attr('fill', function(d) {
       return chart.colorPalette(d.data.name + d.data.amount)
     })
+    .duration(chart.config.duration)
 
-  node.select('.string')
+  node.select('.string').transition()
     .attr('transform', function(d) { return chart.stringPosition(d) })
+    .duration(chart.config.duration)
 
   node.select('.amount-text')
     .text(function(d) {
@@ -114,6 +121,7 @@ chart.draw = function(dataset) {
 
   // remove nodes
   node.exit()
+    .transition().duration(chart.config.duration / 2)
     .remove()
 }
 
