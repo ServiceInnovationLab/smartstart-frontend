@@ -96,8 +96,44 @@ chart.draw = function(dataset) {
       return d.data.amount
     })
 
+  // move the balloon in the 'breeze'
+  nodeEnter.each(function() {
+    let element = this
+
+    d3.interval(function() {
+
+      if (d3.active(element) === null) { // if it's not already transitioning
+
+        d3.select(element)
+          .transition()
+          .attr('transform', function(d) {
+            d.x += Math.random() * 3 * Math.sin(Math.random() * 3 * d.x + Math.random() * 10)
+            d.y += Math.random() * 3 * Math.sin(Math.random() * 3 * d.y + Math.random() * 10)
+
+            // stop things going over the edge
+            if (d.x > chart.config.diameter) {
+              d.x -= chart.config.diameter
+            } else if (d.x < 0) {
+              d.x += chart.config.diameter
+            }
+
+            if (d.y > chart.config.diameter) {
+              d.y -= chart.config.diameter
+            } else if (d.y < 0) {
+              d.y += chart.config.diameter
+            }
+
+            return `translate(${d.x},${d.y})`
+          })
+          .duration(900)
+      }
+    }, 1000)
+  })
+
   // update nodes - only position, balloon size, and amount text are updated
-  svg.selectAll('.node').transition()
+  svg.selectAll('.node')
+    .interrupt()
+    .transition()
     .attr('transform', function(d) {
       return `translate(${d.x}, ${d.y})`
     })
@@ -136,11 +172,9 @@ chart.draw = function(dataset) {
     .transition()
     .attr('transform', 'scale(0,0)')
     .duration(250)
-
-  node.exit()
-    .transition()
-    .duration(250)
-    .remove()
+    .on('end', function() {
+      d3.select(this.parentNode).remove()
+    })
 }
 
 chart.destroy = function() {
