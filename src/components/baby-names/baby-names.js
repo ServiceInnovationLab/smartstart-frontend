@@ -95,6 +95,7 @@ class BabyNames extends Component {
 
           <h5>Share this with your friends</h5>
           <p className='social-media'>
+            <a className='facebook' href='https://www.facebook.com/dialog/share?app_id=749135385236444&display=popup&href=https%3A%2F%2Fsmartstart.services.govt.nz' target='_blank'rel='noreferrer noopener'><span className='visuallyhidden'>Share on Facebook</span></a>
             <a className='twitter' href='https://twitter.com/intent/tweet?text=What%20were%20New%20Zealand%27s%20most%20popular%20baby%20names%20for%202016%3F%20Find%20out%20at%20https%3A%2F%2Fsmartstart.services.govt.nz' target='_blank' rel='noreferrer noopener'><span className='visuallyhidden'>Share on Twitter</span></a>
           </p>
         </div>
