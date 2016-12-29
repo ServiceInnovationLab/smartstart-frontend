@@ -133,3 +133,26 @@
     }
   }
 }
+
+.social-media {
+
+  a {
+    &::before {
+      display: inline-block;
+      font-family: 'icomoon' !important;
+      font-size: 22px;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .twitter::before {
+    content: $icon-twitter;
+  }
+
+  .facebook::before {
+    content: $icon-facebook;
+  }
+}
