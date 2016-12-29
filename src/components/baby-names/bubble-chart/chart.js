@@ -5,7 +5,8 @@ let chart = {
     'diameter': 690,
     'spacing': 40,
     'colors': ['#ed9159', '#afd6ff', '#f28982', '#ceaee6', '#bcd37c', '#93cacc', '#fcc977', '#f8c4c0', '#fcf691', '#d9ed96'],
-    'duration': 3000
+    'duration': 3000,
+    'bottomPadding': 50 // note: if this is adjusted, aspect ratio must be changed in bubble-chart.scss
   }
 }
 
@@ -22,7 +23,7 @@ chart.create = function(container, dataset, config) {
     .append('svg')
     .attr('class', 'bubble-chart')
     .attr('preserveAspectRatio', 'xMinYMin meet')
-    .attr('viewBox', `0 0 ${chart.config.diameter} ${chart.config.diameter + 50}`)
+    .attr('viewBox', `0 0 ${chart.config.diameter} ${chart.config.diameter + chart.config.bottomPadding}`)
 
   chart.draw(dataset)
 }
@@ -61,7 +62,7 @@ chart.draw = function(dataset) {
 
   // create nodes
   nodeEnter.attr('transform', function(d) {
-    return `translate(${d.x}, ${d.y + chart.config.diameter})`
+    return `translate(${d.x}, ${d.y + chart.config.diameter + chart.config.bottomPadding})`
   })
 
   nodeEnter.append('path')

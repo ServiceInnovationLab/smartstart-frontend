@@ -54,7 +54,7 @@ class BabyNames extends Component {
           </div>
         </div>
         <div className='feature-page-content'>
-          <p className='bubble-chart-caption'><b>{currentTopName.name}</b> is the most popular {this.state.category} name for {this.state.year} with <b>{currentTopName.amount}</b> babies given that name.</p>
+          <p className='bubble-chart-caption'><b>{currentTopName.name}</b> is the most popular {this.state.category} name for <b>{this.state.year}</b> with <b>{currentTopName.amount}</b> babies given that name.</p>
           <div className='bubble-chart-category'>
             <button onClick={() => this.setCategory('girls')} className={this.categorySelected('girls')}>Girls</button>
             <button onClick={() => this.setCategory('boys')} className={this.categorySelected('boys')}>Boys</button>
