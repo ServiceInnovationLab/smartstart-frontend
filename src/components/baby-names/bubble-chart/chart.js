@@ -102,7 +102,7 @@ chart.draw = function(dataset) {
       return `translate(${d.x}, ${d.y})`
     })
     .duration(function(d) {
-      return chart.config.duration - (d.data.amount * 2) // bigger balloons rise faster
+      return chart.config.duration - (d.data.amount) // bigger balloons rise faster
     })
 
   node.select('.balloon').transition()

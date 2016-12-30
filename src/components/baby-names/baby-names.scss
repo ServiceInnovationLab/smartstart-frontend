@@ -77,6 +77,7 @@
 
 .bubble-chart-category {
   margin-bottom: 20px;
+  display: inline-block;
 
   button {
     min-width: auto;
@@ -109,29 +110,12 @@
 }
 
 .bubble-chart-year {
-  margin-top: 20px;
-
-  a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: $text-color;
-    border-radius: 5px;
-    padding: 0 5px;
-    font-weight: 500;
-
-    &:hover {
-      background-color: rgba($text-color, 0.2);
-    }
-
-    &.selected {
-      background-color: $text-color;
-      color: $background-color;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
+  display: inline-block;
+  margin-left: 20px;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  font-weight: 500;
+  padding: 6px;
 }
 
 .social-media {
