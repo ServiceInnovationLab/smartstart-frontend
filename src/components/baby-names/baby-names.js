@@ -75,7 +75,7 @@ class BabyNames extends Component {
 
           <p>Each year, the Department of Internal Affairs releases a list of the most popular baby names for boys and girls registered in New Zealand.  Registering your baby is free, and it’s an important step for all parents. Registration gives children their legal identity and the rights, responsibilities and access to support services associated with being a New Zealander.</p>
 
-          <blockquote>Did you know, the top 100 names make up only a small proportion of all names given to babies, with over [TODO NUMBER HERE] first names registered for children born last year?</blockquote>
+          <blockquote>Did you know, the top 100 names make up only a small proportion of all names given to babies, with over 60,913 births recorded in 2016, the top 100 names make up only a small proportion of all names given to babies? There were over 18,202 unique first names registered for children born last year.</blockquote>
 
           <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help. SmartStart is the one place to go for step-by-step information to get parents and babies off to the best start. Make sure you take the time to <IndexLink to={'/'}>have a look</IndexLink>.</p>
 
