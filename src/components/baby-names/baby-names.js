@@ -48,7 +48,7 @@ class BabyNames extends Component {
       <div>
         <div className='baby-names-header'>
           <h2 className='baby-names-header-title'><span className='visuallyhidden'>New Zealand baby names 2016</span></h2>
-          <div className='feature-page-content'>
+          <div className='feature-page-content bubble-chart-container-wrapper'>
             <BubbleChart data={this.state.data} category={this.state.category} year={this.state.year} />
           </div>
         </div>
