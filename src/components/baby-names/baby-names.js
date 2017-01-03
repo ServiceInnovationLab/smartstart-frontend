@@ -12,7 +12,7 @@ class BabyNames extends Component {
     this.state = {
       data: nameData,
       category: 'girls',
-      year: '2015'// TODO default to 2016
+      year: '2016'
     }
 
     this.setCategory = this.setCategory.bind(this)
