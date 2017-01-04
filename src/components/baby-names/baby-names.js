@@ -55,14 +55,18 @@ class BabyNames extends Component {
         <div className='feature-page-content'>
           <p className='bubble-chart-caption'><b>{currentTopName.name}</b> is the most popular {this.state.category} name for <b>{this.state.year}</b> with <b>{currentTopName.amount}</b> babies given that name.</p>
 
+          <span className='visuallyhidden'>Select boys or girls names</span>
           <div className='bubble-chart-category'>
             <button onClick={() => this.setCategory('girls')} className={this.categorySelected('girls')}>Girls</button>
             <button onClick={() => this.setCategory('boys')} className={this.categorySelected('boys')}>Boys</button>
           </div>
 
-          <select ref={(ref) => { this.yearPicker = ref }} className='bubble-chart-year' onChange={this.setYear}>
-            {yearOptions}
-          </select>
+          <label>
+            <span className='visuallyhidden'>Select which year to see the top 10 for</span>
+            <select ref={(ref) => { this.yearPicker = ref }} className='bubble-chart-year' onChange={this.setYear}>
+              {yearOptions}
+            </select>
+          </label>
 
           <p className='bubble-chart-controls-help'>Use the controls above to switch between girls and boys names, and see the top ten for a previous year.</p>
           <h3>Top baby names</h3>
