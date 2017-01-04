@@ -79,11 +79,12 @@ class BabyNames extends Component {
 
           <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help. SmartStart is the one place to go for step-by-step information to get parents and babies off to the best start. Make sure you take the time to <IndexLink to={'/'}>have a look</IndexLink>.</p>
 
-          <h5>Full top 100 lists</h5>
+          <h5>Full top names lists</h5>
           <ul>
-            <li><a href='#'>Top 100 Male and Female Baby Names (xls 93kb)</a></li>
-            <li><a href='#'>Top 100 Male Baby Names (pdf 49kb)</a></li>
-            <li><a href='#'>Top 100 Female Baby Names (pdf 48kb)</a></li>
+            <li><a href='/assets/files/Top-baby-Girl-names-1999-2016.pdf'>Top 100 Female Baby Names (pdf 58kb)</a></li>
+            <li><a href='/assets/files/Top-baby-Boy-names-1999-2016.pdf'>Top 100 Male Baby Names (pdf 58kb)</a></li>
+            <li><a href='/assets/files/Top-baby-names-1954-2016.xlsx'>Top 100 Male and Female Baby Names since 1954 (xlsx 303kb)</a></li>
+            <li><a href='https://www.dia.govt.nz/press.nsf/d77da9b523f12931cc256ac5000d19b6/3a6c1923b85f3819cc257f48008050eb!OpenDocument'>Top 20 Māori boys’ and girls’ names for 2015</a></li>
           </ul>
 
           <h5>Share this with your friends</h5>
