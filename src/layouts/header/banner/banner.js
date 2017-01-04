@@ -9,7 +9,7 @@ class Banner extends Component {
       return (
         <div className='page-header-banner' data-test='banner'>
           <div className='page-header-inner'>
-            <p>DIA has just announced <Link to={'/news/baby-names/'}>the top baby names for 2016</Link></p>
+            <p>The Department of Internal Affairs has just announced <Link to={'/news/baby-names/'}>the top baby names for 2016</Link></p>
           </div>
         </div>
       )

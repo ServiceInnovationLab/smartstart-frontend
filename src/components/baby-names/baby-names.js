@@ -65,25 +65,27 @@ class BabyNames extends Component {
           </select>
 
           <p className='bubble-chart-controls-help'>Use the controls above to switch between girls and boys names, and see the top ten for a previous year.</p>
-          <h3>Top baby names 2016</h3>
+          <h3>Top baby names</h3>
 
-          <h4 className='introtext'>The top baby names of 2016 have now been released with Oliver and Olivia topping the list for a second year in a row.</h4>
+          <h4 className='introtext'>The top baby names of 2016 have been released with Olivia and Oliver topping the list for a second year in a row.</h4>
 
-          <h5>Top 10 names of 2016</h5>
+          <p>Olivia and Oliver remained the most popular baby names in 2016, with Charlotte staying in second place for girls, and Jack for boys.</p>
 
-          <p>In 2016, Olivia and Oliver remained the most popular baby names with Jack and William staying in second place for boys, and Charlotte for girls.</p>
+          <p>Each year, the Department of Internal Affairs releases a list of the most popular baby names for boys and girls registered in New Zealand.</p>
 
-          <p>Each year, the Department of Internal Affairs releases a list of the most popular baby names for boys and girls registered in New Zealand.  Registering your baby is free, and it’s an important step for all parents. Registration gives children their legal identity and the rights, responsibilities and access to support services associated with being a New Zealander.</p>
+          <p>Registering your baby is free, and it’s an important step for all parents. Registration gives children their legal identity and the rights, responsibilities and access to support services associated with being a New Zealander.</p>
 
-          <blockquote>Did you know, the top 100 names make up only a small proportion of all names given to babies, with over 60,913 births recorded in 2016, the top 100 names make up only a small proportion of all names given to babies? There were over 18,202 unique first names registered for children born last year.</blockquote>
+          <blockquote>The top 100 names make up only a small proportion of all names given to babies, with over 18,000 unique first names registered for children born in 2016.</blockquote>
 
-          <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help. SmartStart is the one place to go for step-by-step information to get parents and babies off to the best start. Make sure you take the time to <IndexLink to={'/'}>have a look</IndexLink>.</p>
+          <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help.</p>
 
-          <h5>Full top names lists</h5>
+          <p><IndexLink to={'/'}>Find step-by-step information and use services on SmartStart</IndexLink>.</p>
+
+          <h5>New Zealand top baby names</h5>
           <ul>
-            <li><a href='/assets/files/Top-baby-Girl-names-1999-2016.pdf'>Top 100 Female Baby Names (pdf 58kb)</a></li>
-            <li><a href='/assets/files/Top-baby-Boy-names-1999-2016.pdf'>Top 100 Male Baby Names (pdf 58kb)</a></li>
-            <li><a href='/assets/files/Top-baby-names-1954-2016.xlsx'>Top 100 Male and Female Baby Names since 1954 (xlsx 303kb)</a></li>
+            <li><a href='/assets/files/Top-baby-Girl-names-1999-2016.pdf'>Top 100 girls’ names (pdf 58kb)</a></li>
+            <li><a href='/assets/files/Top-baby-Boy-names-1999-2016.pdf'>Top 100 boys’ names (pdf 58kb)</a></li>
+            <li><a href='/assets/files/Top-baby-names-1954-2016.xlsx'>Top 100 girls’ and boys’ names since 1954 (xlsx 303kb)</a></li>
             <li><a href='https://www.dia.govt.nz/press.nsf/d77da9b523f12931cc256ac5000d19b6/3a6c1923b85f3819cc257f48008050eb!OpenDocument'>Top 20 Māori boys’ and girls’ names for 2015</a></li>
           </ul>
 
