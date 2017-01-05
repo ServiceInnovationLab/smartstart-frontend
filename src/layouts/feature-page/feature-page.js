@@ -1,11 +1,28 @@
 import './feature-page.scss'
 
 import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
+import { piwikTrackPost } from 'actions/actions'
 import { IndexLink } from 'react-router'
 import Header from 'layouts/header/header'
 import Footer from 'layouts/footer/footer'
 
 class FeaturePage extends Component {
+  componentDidMount () {
+    if (!this.props.children) {
+      window.location = '/'
+    }
+
+    // tracking
+    let piwikEvent = {
+      'category': 'News page',
+      'action': 'Loaded',
+      'name': 'baby-names' // TODO make this dynamic based on route when more than one
+    }
+
+    this.props.dispatch(piwikTrackPost('Load news page', piwikEvent))
+  }
+
   render () {
     const { isLoggedIn, authError } = this.props
 
@@ -26,13 +43,18 @@ class FeaturePage extends Component {
   }
 }
 
+function mapStateToProps () {
+  return {}
+}
+
 FeaturePage.propTypes = {
   isLoggedIn: PropTypes.bool,
   authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
   ]),
-  children: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired,
+  dispatch: PropTypes.func
 }
 
-export default FeaturePage
+export default connect(mapStateToProps)(FeaturePage)

@@ -34,6 +34,7 @@ ReactDOM.render(
         <IndexRoute component={Main} />
         <Route path='news' component={FeaturePage}>
           <Route path='baby-names' component={BabyNames} />
+          <Route path='*' component={BabyNames} />
         </Route>
         {metadataRoutes}
         <Route path='*' component={Main} />

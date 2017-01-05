@@ -16,7 +16,7 @@ class Container extends Component {
     )
     dispatch(getPiwikID()).then(() =>
       // basic piwik logging
-      dispatch(piwikTrackPost('Load page'))
+      dispatch(piwikTrackPost('Load site'))
     )
   }
 

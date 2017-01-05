@@ -1,4 +1,6 @@
 import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
+import { piwikTrackPost } from 'actions/actions'
 import Header from 'layouts/header/header'
 import Footer from 'layouts/footer/footer'
 import SettingsPane from 'components/settings-pane/settings-pane'
@@ -9,6 +11,17 @@ import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 
 class Main extends Component {
+  componentDidMount () {
+    // tracking
+    let piwikEvent = {
+      'category': 'Main page',
+      'action': 'Loaded',
+      'name': 'home'
+    }
+
+    this.props.dispatch(piwikTrackPost('Load main page', piwikEvent))
+  }
+
   render () {
     const { phases, supplementary, isLoggedIn, appError, authError, isFetchingPersonalisation } = this.props
 
@@ -53,6 +66,10 @@ class Main extends Component {
   }
 }
 
+function mapStateToProps () {
+  return {}
+}
+
 Main.propTypes = {
   phases: PropTypes.array,
   supplementary: PropTypes.array,
@@ -67,7 +84,8 @@ Main.propTypes = {
   authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
-  ])
+  ]),
+  dispatch: PropTypes.func
 }
 
-export default Main
+export default connect(mapStateToProps)(Main)
