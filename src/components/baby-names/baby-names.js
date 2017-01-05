@@ -83,7 +83,7 @@ class BabyNames extends Component {
 
           <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help.</p>
 
-          <p><IndexLink to={'/'}>Find step-by-step information and use services on SmartStart</IndexLink>.</p>
+          <p><IndexLink to={'/'}>Find step-by-step information and use services on SmartStart</IndexLink></p>
 
           <h5>New Zealand top baby names</h5>
           <ul>

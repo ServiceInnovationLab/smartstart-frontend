@@ -125,6 +125,8 @@
 .social-media {
 
   a {
+    text-decoration: none;
+
     &::before {
       display: inline-block;
       font-family: 'icomoon' !important;
