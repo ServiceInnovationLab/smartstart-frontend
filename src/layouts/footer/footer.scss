@@ -6,6 +6,7 @@
   z-index: 1; // footer is always above content
   overflow-x: hidden;
   padding-top: $footer-top-spacing-mobile;
+  min-width: $mobile-min-content-width;
 
   @media #{$desktop-and-above} {
     padding-top: $footer-top-spacing-desktop;

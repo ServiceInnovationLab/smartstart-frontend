@@ -4,6 +4,7 @@
 
   .site-container {
     background-color: $welcome-bg-color;
+    min-width: $mobile-min-content-width;
 
     @media print {
       background-color: $print-background-color;
@@ -13,6 +14,7 @@
   .feature-page-content {
     padding-left: $card-padding;
     padding-right: $card-padding;
+    min-width: $mobile-min-content-width;
 
     @media #{$desktop-and-above} {
       padding-left: $card-padding-desktop;

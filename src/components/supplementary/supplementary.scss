@@ -4,6 +4,7 @@
   background-color: $supplementary-background-color;
   padding-bottom: $footer-top-spacing-mobile;
   margin-bottom: -#{$footer-top-spacing-mobile + $footer-curve-height};
+  min-width: $mobile-min-content-width;
 
   @media #{$desktop-and-above} {
     padding-bottom: $footer-top-spacing-desktop;
