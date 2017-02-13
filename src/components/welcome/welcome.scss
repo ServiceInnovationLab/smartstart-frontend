@@ -3,6 +3,7 @@
 .welcome {
   position: relative;
   background-color: $welcome-bg-color;
+  min-width: $mobile-min-content-width;
 
   @media print {
     background-color: $print-background-color;
