@@ -81,7 +81,7 @@
 
     @media print {
       text-align: left;
-      padding-left: 80px;
+      padding-left: 15px;
     }
 
     &::before,
@@ -179,6 +179,10 @@
         top: 1px;
         transform: rotate(180deg);
       }
+    }
+
+    @media print {
+      display: none;
     }
   }
 }

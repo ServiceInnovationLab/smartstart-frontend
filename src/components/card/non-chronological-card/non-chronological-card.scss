@@ -21,6 +21,7 @@
 
   @media print {
     margin-bottom: 30px;
+    margin-left: 0;
   }
 
   > .expandable-title-wrapper,
@@ -127,6 +128,10 @@
       &::after {
         color: $text-color;
       }
+    }
+
+    @media print {
+      border: 0 none;
     }
   }
 

@@ -21,7 +21,7 @@
     }
 
     @media print {
-      border-left: $timeline-border-width solid $border-color;
+      display: none;
     }
   }
 
@@ -41,6 +41,10 @@
     @media #{$desktop-and-above} {
       left: 50%;
       margin-left: $timeline-line-left-desktop - floor(($timeline-terminator-size / 2));
+    }
+
+    @media print {
+      display: none;
     }
   }
 }

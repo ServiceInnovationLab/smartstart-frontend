@@ -33,6 +33,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media print {
+    margin: 0;
+  }
 }
 
 .page-header-error {
