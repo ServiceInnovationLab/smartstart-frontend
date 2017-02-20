@@ -5,19 +5,22 @@ import { fetchContent, checkAuthCookie, fetchPhaseMetadata, getPiwikID, piwikTra
 class Container extends Component {
   componentDidMount () {
     const { dispatch } = this.props
-    // should only need to get once on load
-    dispatch(fetchContent())
-    dispatch(fetchPhaseMetadata())
 
-    // should only need to check on load
-    dispatch(checkAuthCookie()).then(() =>
-      // wait for isLoggedIn state before deciding if OK to fetch
-      dispatch(fetchPersonalisationValues())
-    )
-    dispatch(getPiwikID()).then(() =>
+    dispatch(getPiwikID()).then(() => {
+
+      // should only need to get once on load
+      dispatch(fetchContent())
+      dispatch(fetchPhaseMetadata())
+
+      // should only need to check on load
+      dispatch(checkAuthCookie()).then(() =>
+        // wait for isLoggedIn state before deciding if OK to fetch
+        dispatch(fetchPersonalisationValues())
+      )
+
       // basic piwik logging
       dispatch(piwikTrackPost('Load site'))
-    )
+    })
   }
 
   render () {

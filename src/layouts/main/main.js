@@ -11,17 +11,6 @@ import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 
 class Main extends Component {
-  componentDidMount () {
-    // tracking
-    let piwikEvent = {
-      'category': 'Main page',
-      'action': 'Loaded',
-      'name': 'home'
-    }
-
-    this.props.dispatch(piwikTrackPost('Load main page', piwikEvent))
-  }
-
   render () {
     const { phases, supplementary, isLoggedIn, appError, authError, isFetchingPersonalisation } = this.props
 

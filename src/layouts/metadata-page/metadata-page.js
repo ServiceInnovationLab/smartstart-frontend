@@ -10,17 +10,6 @@ import SiteMetadataCard from 'components/card/site-metadata-card/site-metadata-c
 import { routeTagMapping } from 'index'
 
 class MetadataPage extends Component {
-  componentDidMount () {
-    // tracking
-    let piwikEvent = {
-      'category': 'Metadata page',
-      'action': 'Loaded',
-      'name': this.props.route.path
-    }
-
-    this.props.dispatch(piwikTrackPost('Load metadata page', piwikEvent))
-  }
-
   render () {
     const { about, isLoggedIn, appError, authError, isFetchingPersonalisation } = this.props
     const route = this.props.route.path

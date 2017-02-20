@@ -12,15 +12,6 @@ class FeaturePage extends Component {
     if (!this.props.children) {
       window.location = '/'
     }
-
-    // tracking
-    let piwikEvent = {
-      'category': 'News page',
-      'action': 'Loaded',
-      'name': 'baby-names' // TODO make this dynamic based on route when more than one
-    }
-
-    this.props.dispatch(piwikTrackPost('Load news page', piwikEvent))
   }
 
   render () {
