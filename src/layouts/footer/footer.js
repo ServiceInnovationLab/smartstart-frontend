@@ -17,7 +17,7 @@ class Footer extends Component {
               <li><Link to={'/copyright-and-attribution/'}>Copyright and attribution</Link></li>
             </ul>
             <p className='nz-govt'>
-              <a href='https://www.govt.nz/'><img src='/assets/img/nz-govt-logo-black.svg' alt='New Zealand Government' /><span className='visuallyhidden'>New Zealand Government</span></a>
+              <a href='https://www.govt.nz/'><img src='/assets/img/nz-govt-logo-black.svg' alt='New Zealand Government' /><span className='visuallyhidden focusable'>New Zealand Government</span></a>
             </p>
           </div>
         </div>
