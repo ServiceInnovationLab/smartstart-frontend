@@ -35,7 +35,7 @@ class Timeline extends Component {
 
   setupPhaseNumber () {
     // guard so only runs if phase number is present
-    if (this.phaseNumberContainerElement) {
+    if (this.phaseNumberContainerElement && this.timelineElement) {
       const numberPosition = this.phaseNumberContainerElement.getBoundingClientRect().top
       const numberHeight = this.phaseNumberElement.getBoundingClientRect().height
       const timelineStart = this.timelineElement.offsetTop
@@ -93,6 +93,12 @@ class Timeline extends Component {
         prevPhaseID: prevPhaseID,
         nextPhaseID: nextPhaseID
       })
+
+      // remove anchor if user scrolled to top of the page
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop === 0) {
+        window.history.replaceState("", document.title, window.location.pathname + window.location.search);
+      }
     }
   }
 

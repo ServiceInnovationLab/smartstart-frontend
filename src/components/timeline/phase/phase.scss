@@ -60,7 +60,7 @@
     }
   }
 
-  > h2 {
+  > div > h2 {
     text-align: center;
     margin-top: 0;
     margin-bottom: 20px;
@@ -138,7 +138,7 @@
 
   // illustration image file for each phase
   @for $i from 1 through 7 {
-    &.phase-#{$i} > h2::after {
+    &.phase-#{$i} > div > h2::after {
       background-image: url(/assets/img/illustrations/illustration-#{$i}.png);
 
       @media #{$high-res} {

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import Card from 'components/card/card' // we subclass this component
 import { piwikTrackPost } from 'actions/actions'
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 export class NonChronologicalCard extends Card {
   constructor (props) {
@@ -52,26 +53,29 @@ export class NonChronologicalCard extends Card {
     )
 
     return (
-      <div className={nonchronologicalClasses} data-test='non-chronological-card' id={id}>
-        <div className='expandable-title-wrapper'><h3
-          data-test='cardTitle'
-          className='expandable-title'
-          aria-controls={contentId}
-          aria-expanded={this.state.isExpanded}
-          tabIndex='0'
-          onClick={this.expandableToggle.bind(this)}
-          onKeyPress={this.expandableKeyPress.bind(this)}
-        >
-          {title}
-          <span className='visuallyhidden'> - {this.state.expandableVerb} this content</span>
-        </h3></div>
+      <ScrollableAnchor id={id.toString()} >
+        <div className={nonchronologicalClasses} data-test='non-chronological-card'>
+          <div className='expandable-title-wrapper'><h3
+            data-test='cardTitle'
+            className='expandable-title'
+            aria-controls={contentId}
+            aria-expanded={this.state.isExpanded}
+            tabIndex='0'
+            onClick={this.expandableToggle.bind(this)}
+            onKeyPress={this.expandableKeyPress.bind(this)}
+          >
+            {title}
+            <span className='visuallyhidden'> - {this.state.expandableVerb} this content</span>
+          </h3></div>
 
-        <div id={contentId} aria-hidden={!this.state.isExpanded} className='content'>
-          {elements.map(element =>
-            this.elementType(element)
-          )}
+          <div id={contentId} aria-hidden={!this.state.isExpanded} className='content'>
+            {elements.map(element =>
+              this.elementType(element)
+            )}
+          </div>
         </div>
-      </div>
+      </ScrollableAnchor>
+
     )
   }
 }

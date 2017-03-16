@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Card from 'components/card/card'
 import NonChronologicalCard from 'components/card/non-chronological-card/non-chronological-card'
 import classNames from 'classnames'
+import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor'
 
 export class Phase extends Component {
   constructor (props) {
@@ -13,6 +14,9 @@ export class Phase extends Component {
     this.state = {
       formattedDate: null
     }
+
+    // scrollable anchor configuration comes here
+    configureAnchors({ keepLastAnchorId: true })
   }
 
   componentWillMount () {
@@ -108,11 +112,15 @@ export class Phase extends Component {
     })
 
     return (
-      <div id={id} className={phaseClasses} data-test='phase'>
-        <h2 data-test='phaseTitle'>
-          {title}
-        </h2>
-        <p className={dateClasses}>{this.state.formattedDate}</p>
+      <div className={phaseClasses} data-test='phase'>
+        <ScrollableAnchor id={id.toString()}>
+          <div>
+            <h2 data-test='phaseTitle'>
+              {title}
+            </h2>
+            <p className={dateClasses}>{this.state.formattedDate}</p>
+          </div>
+        </ScrollableAnchor>
 
         {normalCards}
         {nonChronologicalCards}

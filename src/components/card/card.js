@@ -3,6 +3,7 @@ import './card.scss'
 import React, { PropTypes, Component } from 'react'
 import Richtext from 'components/richtext/richtext'
 import Url from 'components/url/url'
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 export class Card extends Component {
   elementType (element) {
@@ -15,12 +16,14 @@ export class Card extends Component {
 
   render () {
     return (
-      <div className='card' data-test='card' id={this.props.id}>
-        <h3 data-test='cardTitle'>{this.props.title}</h3>
-        {this.props.elements.map(element =>
-          this.elementType(element)
-        )}
-      </div>
+      <ScrollableAnchor id={this.props.id.toString()} >
+        <div className='card' data-test='card'>
+          <h3 data-test='cardTitle'>{this.props.title}</h3>
+          {this.props.elements.map(element =>
+            this.elementType(element)
+          )}
+        </div>
+      </ScrollableAnchor>
     )
   }
 }

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { activateSupplementary, piwikTrackPost } from 'actions/actions'
 import Card from 'components/card/card'
 import classNames from 'classnames'
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 class SupplementaryCard extends Card {
   constructor (props) {
@@ -57,26 +58,28 @@ class SupplementaryCard extends Card {
     let contentId = 'content-' + this.props.id
 
     return (
-      <div className={supplementaryCardClasses} data-test='card' id={this.props.id}>
-        <div className='expandable-title-wrapper'><h3
-          data-test='cardTitle'
-          className='expandable-title'
-          aria-controls={contentId}
-          aria-expanded={this.state.isExpanded}
-          tabIndex='0'
-          onClick={this.expandableToggle.bind(this)}
-          onKeyPress={this.expandableKeyPress.bind(this)}
-        >
-          {this.props.title}
-          <span className='visuallyhidden'> - {this.state.expandableVerb} this content</span>
-        </h3></div>
+      <ScrollableAnchor id={this.props.id.toString()} >
+        <div className={supplementaryCardClasses} data-test='card'>
+          <div className='expandable-title-wrapper'><h3
+            data-test='cardTitle'
+            className='expandable-title'
+            aria-controls={contentId}
+            aria-expanded={this.state.isExpanded}
+            tabIndex='0'
+            onClick={this.expandableToggle.bind(this)}
+            onKeyPress={this.expandableKeyPress.bind(this)}
+          >
+            {this.props.title}
+            <span className='visuallyhidden'> - {this.state.expandableVerb} this content</span>
+          </h3></div>
 
-        <div id={contentId} aria-hidden={!this.state.isExpanded} className='content'>
-          {this.props.elements.map(element =>
-            this.elementType(element)
-          )}
+          <div id={contentId} aria-hidden={!this.state.isExpanded} className='content'>
+            {this.props.elements.map(element =>
+              this.elementType(element)
+            )}
+          </div>
         </div>
-      </div>
+      </ScrollableAnchor>
     )
   }
 }
