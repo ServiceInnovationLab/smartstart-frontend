@@ -16,7 +16,7 @@ export class Phase extends Component {
     }
 
     // scrollable anchor configuration comes here
-    configureAnchors({ keepLastAnchorId: true })
+    configureAnchors({ keepLastAnchorHash: true })
   }
 
   componentWillMount () {
