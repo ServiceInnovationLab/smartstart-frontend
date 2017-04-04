@@ -33,7 +33,7 @@ class Timeline extends Component {
     window.removeEventListener('scroll', this.state.phaseScrollFunction)
   }
 
-  setupPhaseNumber () {
+  setupPhaseNumber (e) {
     // guard so only runs if phase number is present
     if (this.phaseNumberContainerElement && this.timelineElement) {
       const numberPosition = this.phaseNumberContainerElement.getBoundingClientRect().top
@@ -94,10 +94,12 @@ class Timeline extends Component {
         nextPhaseID: nextPhaseID
       })
 
-      // remove anchor if user scrolled to top of the page
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      if (scrollTop === 0) {
-        window.history.replaceState("", document.title, window.location.pathname + window.location.search);
+      // remove anchor if user scrolled to top of the page (checking scroll event)
+      if (e && e.type === 'scroll') {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop === 0) {
+          window.history.replaceState("", document.title, window.location.pathname + window.location.search);
+        }
       }
     }
   }
