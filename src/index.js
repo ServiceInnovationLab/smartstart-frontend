@@ -9,7 +9,10 @@ import Container from 'containers/container'
 import Main from 'layouts/main/main'
 import MetadataPage from 'layouts/metadata-page/metadata-page'
 import FeaturePage from 'layouts/feature-page/feature-page'
+import BirthRegistrationPage from 'layouts/birth-registration-page/birth-registration-page'
 import BabyNames from 'components/baby-names/baby-names'
+import RegisterMyBabyLandingPage from 'components/register-my-baby/landing-page'
+import RegisterMyBabyStep1 from 'components/register-my-baby/step1'
 import { routerScrollHandler } from 'utils'
 
 const store = configureStore()
@@ -32,6 +35,10 @@ ReactDOM.render(
     <Router history={browserHistory} onUpdate={routerScrollHandler}>
       <Route path='/' component={Container}>
         <IndexRoute component={Main} />
+        <Route path='register-my-baby' component={BirthRegistrationPage}>
+          <IndexRoute component={RegisterMyBabyLandingPage} />
+          <Route path='step1' component={RegisterMyBabyStep1} />
+        </Route>
         <Route path='news' component={FeaturePage}>
           <Route path='baby-names' component={BabyNames} />
           <Route path='*' component={BabyNames} />
