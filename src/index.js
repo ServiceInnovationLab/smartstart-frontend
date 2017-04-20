@@ -1,52 +1,33 @@
-import 'index.scss'
-
+/* globals module */
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { Provider } from 'react-redux'
+import { render } from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import configureStore from 'store/store'
-import Container from 'containers/container'
-import Main from 'layouts/main/main'
-import MetadataPage from 'layouts/metadata-page/metadata-page'
-import FeaturePage from 'layouts/feature-page/feature-page'
-import BirthRegistrationPage from 'layouts/birth-registration-page/birth-registration-page'
-import BabyNames from 'components/baby-names/baby-names'
-import RegisterMyBabyLandingPage from 'components/register-my-baby/landing-page'
-import RegisterMyBabyStep1 from 'components/register-my-baby/step1'
-import { routerScrollHandler } from 'utils'
 
-const store = configureStore()
+import Root from './containers/root'
 
-// mapping for routes for metadata pages
-// the value is the tag on the card from the content api used to create the association
-export const routeTagMapping = {
-  'copyright-and-attribution': 'boac_presentation::copyright',
-  'your-privacy': 'boac_presentation::privacy',
-  'contact-us': 'boac_presentation::contact'
-}
-let metadataRoutes = []
+const store = configureStore();
 
-for (var route in routeTagMapping) {
-  metadataRoutes.push(<Route key={route} path={route} component={MetadataPage} />)
-}
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={browserHistory} onUpdate={routerScrollHandler}>
-      <Route path='/' component={Container}>
-        <IndexRoute component={Main} />
-        <Route path='register-my-baby' component={BirthRegistrationPage}>
-          <IndexRoute component={RegisterMyBabyLandingPage} />
-          <Route path='child-details' component={RegisterMyBabyStep1} />
-        </Route>
-        <Route path='news' component={FeaturePage}>
-          <Route path='baby-names' component={BabyNames} />
-          <Route path='*' component={BabyNames} />
-        </Route>
-        {metadataRoutes}
-        <Route path='*' component={Main} />
-      </Route>
-    </Router>
-  </Provider>,
+render(
+  <AppContainer>
+    <Root
+      store={ store }
+    />
+  </AppContainer>,
   document.getElementById('app')
 )
+
+
+if (module.hot) {
+  module.hot.accept('./containers/root', () => {
+    const RootContainer = require('./containers/root').default;
+    render(
+      <AppContainer>
+        <RootContainer
+          store={ store }
+        />
+      </AppContainer>,
+      document.getElementById('app')
+    );
+  });
+}

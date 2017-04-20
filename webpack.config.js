@@ -103,6 +103,7 @@ const common = {
 // build config from common plus custom config according to event trigger
 var config
 var runCommand = process.env.npm_lifecycle_event
+var frontendHost = process.env.frontend_host || 'http://localhost:8080';
 
 // only use the run script invocation command up to the colon delimiter
 if (runCommand.indexOf(':') > -1) {
@@ -137,17 +138,64 @@ switch (runCommand) {
     })
     break
   default:
-    config = merge(common, {
+    config = merge.strategy({
+      entry: 'replace',
+      devServer: 'replace',
+      plugins: 'preprend',
+      'module.loaders': 'replace'
+    })(common, {
       devtool: 'cheap-module-eval-source-map',
 
+      entry: [
+        'babel-polyfill',
+        `webpack-dev-server/client?${frontendHost}`,
+        'webpack/hot/dev-server',
+        'react-hot-loader/patch',
+        'whatwg-fetch',
+        './index.js'
+      ],
+
+      devServer: {
+        historyApiFallback: true,
+        public: '0.0.0.0',
+        host: '0.0.0.0',
+        disableHostCheck: true,
+        hot: true
+      },
+
       plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        // enable HMR globally
+
+        new webpack.NamedModulesPlugin(),
+        // prints more readable module names in the browser console on HMR updates
+
         new webpack.DefinePlugin({
           'process.env': {NODE_ENV: JSON.stringify('development')},
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
           PIWIK_INSTANCE: JSON.stringify(piwikInstance)
         })
-      ]
+      ],
+
+      module: {
+        loaders: [
+          {
+            test: /\.js[x]?$/,
+            exclude: /node_modules/,
+            loaders: ['react-hot-loader/webpack', 'babel-loader']
+          },
+          {
+            test: /\.scss$/,
+            loader: [
+              'style-loader',
+              'css-loader',
+              'postcss-loader',
+              'sass-loader?includePaths[]=' + path.resolve(__dirname, './src')
+            ].join('!')
+          }
+        ]
+      }
     })
 }
 
