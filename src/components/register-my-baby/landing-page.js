@@ -54,9 +54,6 @@ RegisterMyBabyLandingPage.propTypes = {
   dispatch: PropTypes.func
 };
 
-
-function mapStateToProps () {
-  return {}
-}
+const mapStateToProps = () => ({})
 
 export default connect(mapStateToProps)(RegisterMyBabyLandingPage)
