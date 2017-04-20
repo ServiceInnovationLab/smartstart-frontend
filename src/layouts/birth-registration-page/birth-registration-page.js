@@ -1,4 +1,5 @@
 import '../plain-layout-page.scss'
+import './birth-registration-page.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
@@ -10,11 +11,13 @@ class BirthRegistrationPage extends Component {
     const { isLoggedIn, authError } = this.props
 
     return (
-      <div className='site-container-wrapper'>
+      <div className='site-container-wrapper birth-registration-page'>
         <div className='site-container'>
           <Header isLoggedIn={isLoggedIn} authError={authError} />
           <div id='content' className="plain-layout-page">
-            { this.props.children }
+            <div className="page-content">
+              { this.props.children }
+            </div>
           </div>
         </div>
         <Footer />

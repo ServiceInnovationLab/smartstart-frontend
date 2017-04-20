@@ -1,21 +1,123 @@
 @import 'variables';
 
 .birth-registration-page {
-  .page-content {
-    max-width: $desktop-max-content-width;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 15px;
+  form {
+    input, label {
+      margin: 0;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      border: 1px solid #ccc;
+      height: 39px;
+    }
 
-    @media only screen and (min-width: #{$desktop-max-content-width}) {
-      padding: 15px #{$indent * 2} 15px 20px;
-      margin-left: auto;
-      margin-right: auto;
+    .has-error {
+      input {
+        border-color: $error-background;
+        border-width: 1px;
+      }
+    }
+
+    button {
+      background-color: #fff;
+      margin-bottom: 10px;
+      max-width: 500px;
+    }
+
+    .form-actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+
+      legend {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+
+    div.input-group, div.radio-group, div.checkbox-group {
+      display: flex;
+      flex-flow: column;
+      margin: 10px 5px;
+
+      > label {
+        margin-right: 10px;
+        text-align: left;
+        padding: 9px 9px 9px 0;
+      }
+
+      > div {
+        flex: 1;
+        max-width: 500px;
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+        position: relative;
+
+        > span {
+          flex: 1;
+          font-size: 16px;
+          padding: 5px 8px;
+        }
+
+        > span {
+          color: $error-background;
+          padding-left: 0;
+        }
+      }
     }
   }
 
-  .divider {
-    border-bottom: 1px solid #d2d2d2;
-    margin-bottom: 30px;
+  div.radio-group {
+    > div {
+      > div {
+        label {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  div.checkbox-group {
+    > div {
+      > div {
+        label {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .aligner {
+    display: flex;
+    align-items: center;
+
+    .aligner-item {
+      max-width: 50%;
+    }
+
+    .aligner-item-top {
+      align-self: flex-start;
+    }
+
+    .aligner-item-center {
+      align-self: center;
+    }
+
+    .aligner-item-bottom {
+      align-self: flex-end;
+    }
+  }
+
+  .instruction-text {
+    color: #777;
+    font-style: italic;
+    padding-bottom: 9px;
   }
 }

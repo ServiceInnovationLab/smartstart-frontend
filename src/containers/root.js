@@ -10,7 +10,7 @@ import FeaturePage from 'layouts/feature-page/feature-page'
 import BirthRegistrationPage from 'layouts/birth-registration-page/birth-registration-page'
 import BabyNames from 'components/baby-names/baby-names'
 import RegisterMyBabyLandingPage from 'components/register-my-baby/landing-page'
-import RegisterMyBabyStep1 from 'components/register-my-baby/step1'
+import RegisterMyBaby from 'components/register-my-baby'
 import { routerScrollHandler } from 'utils'
 
 // mapping for routes for metadata pages
@@ -33,7 +33,7 @@ const Root = (props) => (
         <IndexRoute component={Main} />
         <Route path='register-my-baby' component={BirthRegistrationPage}>
           <IndexRoute component={RegisterMyBabyLandingPage} />
-          <Route path='child-details' component={RegisterMyBabyStep1} />
+          <Route path=':step' component={RegisterMyBaby} />
         </Route>
         <Route path='news' component={FeaturePage}>
           <Route path='baby-names' component={BabyNames} />
@@ -51,4 +51,3 @@ Root.propTypes = {
 }
 
 export default Root
-

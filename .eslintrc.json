@@ -22,6 +22,10 @@
       "URLSearchParams": true,
       "API_ENDPOINT": true,
       "PIWIK_INSTANCE": true,
-      "PIWIK_SITE": true
+      "PIWIK_SITE": true,
+      "process": true
+    },
+    "rules": {
+      "no-class-assign": "off"
     }
 }

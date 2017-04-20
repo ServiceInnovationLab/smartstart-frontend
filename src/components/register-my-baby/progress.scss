@@ -1,0 +1,17 @@
+.form-wizard-progress {
+  display: flex;
+  position: relative;
+
+  .form-wizard-step {
+    flex: 1;
+    text-align: center;
+
+    &.current {
+      font-weight: bold;
+    }
+
+    &.finished {
+      font-weight: bold;
+    }
+  }
+}

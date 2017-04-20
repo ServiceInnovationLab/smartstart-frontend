@@ -5,9 +5,9 @@ import { piwikTrackPost } from '../../actions/actions'
 
 class RegisterMyBabyLandingPage extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.getStartedClick = this.getStartedClick.bind(this);
+    this.getStartedClick = this.getStartedClick.bind(this)
   }
 
   getStartedClick() {
@@ -21,7 +21,7 @@ class RegisterMyBabyLandingPage extends Component {
 
   render() {
     return (
-      <div className="page-content">
+      <div>
         <h3>Notification of Birth for Registration</h3>
         <div className="divider" />
 
@@ -46,13 +46,13 @@ class RegisterMyBabyLandingPage extends Component {
         <h3>Ready to go?</h3>
         <Link to={'/register-my-baby/child-details'} role="button" className="button" onClick={this.getStartedClick}>Get started</Link>
       </div>
-    );
+    )
   }
 }
 
 RegisterMyBabyLandingPage.propTypes = {
   dispatch: PropTypes.func
-};
+}
 
 const mapStateToProps = () => ({})
 

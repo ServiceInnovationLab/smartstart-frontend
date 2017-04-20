@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import {
   REQUEST_API,
   RECEIVE_API,
@@ -161,7 +162,8 @@ const rootReducer = combineReducers({
   personalisationActions,
   applicationActions,
   settingsDisplayActions,
-  supplementaryContentActions
+  supplementaryContentActions,
+  form: formReducer
 })
 
 export default rootReducer

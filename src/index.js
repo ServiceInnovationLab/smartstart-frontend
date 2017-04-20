@@ -6,7 +6,7 @@ import configureStore from 'store/store'
 
 import Root from './containers/root'
 
-const store = configureStore();
+const store = configureStore()
 
 render(
   <AppContainer>
@@ -20,7 +20,7 @@ render(
 
 if (module.hot) {
   module.hot.accept('./containers/root', () => {
-    const RootContainer = require('./containers/root').default;
+    const RootContainer = require('./containers/root').default
     render(
       <AppContainer>
         <RootContainer
@@ -28,6 +28,6 @@ if (module.hot) {
         />
       </AppContainer>,
       document.getElementById('app')
-    );
-  });
+    )
+  })
 }
