@@ -37,7 +37,7 @@ ReactDOM.render(
         <IndexRoute component={Main} />
         <Route path='register-my-baby' component={BirthRegistrationPage}>
           <IndexRoute component={RegisterMyBabyLandingPage} />
-          <Route path='step1' component={RegisterMyBabyStep1} />
+          <Route path='child-details' component={RegisterMyBabyStep1} />
         </Route>
         <Route path='news' component={FeaturePage}>
           <Route path='baby-names' component={BabyNames} />

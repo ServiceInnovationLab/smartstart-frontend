@@ -44,7 +44,7 @@ class RegisterMyBabyLandingPage extends Component {
         </p>
 
         <h3>Ready to go?</h3>
-        <Link to={'/register-my-baby/step1/'} role="button" className="button" onClick={this.getStartedClick}>Get started</Link>
+        <Link to={'/register-my-baby/child-details'} role="button" className="button" onClick={this.getStartedClick}>Get started</Link>
       </div>
     );
   }
