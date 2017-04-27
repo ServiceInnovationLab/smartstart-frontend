@@ -28,7 +28,7 @@ class RegisterMyBabyLandingPage extends Component {
         <h5>Before you apply, make sure you have read everything you need:</h5>
         <ul>
           <li>Name and birth details of child being registered</li>
-          <li>Name, birth and occupation details of both parents (if available)  [TODO: link to info]</li>
+          <li>Name, birth and occupation details of both parents (if available)</li>
           <li>Address details for delivery of birth certificate (if you're ordering one)</li>
           <li>Credit or debit card, or internet banking details for ordering a certificate, if required</li>
         </ul>
