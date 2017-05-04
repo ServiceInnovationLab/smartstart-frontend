@@ -117,6 +117,36 @@ class ChildDetailsForm extends Component {
           <p>The name should include a family name and one or more given names.</p>
           <p>The child’s name will be registered exactly as you describe it here. There is a cost to change the name once it has been registered.</p>
         </div>
+        <Accordion>
+          <Accordion.Toggle>
+            What names are unacceptable?
+          </Accordion.Toggle>
+          <Accordion.Content>
+            <p>The name or combination of names may not be acceptable if:</p>
+            <ul>
+              <li>It is offensive; or</li>
+              <li>it is unreasonably long; or</li>
+              <li>it includes or resembles an official title or rank; or</li>
+              <li>Is spelt with numbers or symbols (e.g V8)</li>
+            </ul>
+          </Accordion.Content>
+        </Accordion>
+        <Accordion>
+          <Accordion.Toggle>
+            Can I enter names with macrons and international characters?
+          </Accordion.Toggle>
+          <Accordion.Content>
+            <p>You may use macrons and international characters in your child’s name. The child’s name will use these characters on the birth certificate.</p>
+          </Accordion.Content>
+        </Accordion>
+        <Accordion>
+          <Accordion.Toggle>
+            Can I give my child a single name?
+          </Accordion.Toggle>
+          <Accordion.Content>
+            <p>Your child may have a single name where religious or philosophical beliefs or cultural traditions require the child to have one name. In these cases please describe the reasons for a single name.</p>
+          </Accordion.Content>
+        </Accordion>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
             name="firstName"

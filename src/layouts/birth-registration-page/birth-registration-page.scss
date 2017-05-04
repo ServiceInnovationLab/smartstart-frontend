@@ -120,4 +120,13 @@
     font-style: italic;
     padding-bottom: 9px;
   }
+
+  .expandable {
+    margin-bottom: 10px;
+
+    .expandable-title {
+      min-height: auto;
+      font-size: 14px;
+    }
+  }
 }
