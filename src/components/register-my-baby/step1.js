@@ -53,12 +53,24 @@ const validate = (values) => {
     errors.placeOfBirth = REQUIRE_MESSAGE
   }
 
+  if (values.placeOfBirth === 'hospital' && !values.hospitalName) {
+    errors.hospitalName = REQUIRE_MESSAGE
+  }
+  else if (values.placeOfBirth === 'home' && !values.birthPlaceAddress1 && !values.birthPlaceAddress2) {
+    errors.birthPlaceAddress1 = REQUIRE_MESSAGE
+  }
+  else if (values.placeOfBirth === 'other' && !values.birthPlaceOther) {
+    errors.birthPlaceOther = REQUIRE_MESSAGE
+  }
+
   if (!values.isMaoriDecendant) {
     errors.isMaoriDecendant = REQUIRE_MESSAGE
   }
 
   if (!values.ethnicGroups || !values.ethnicGroups.length) {
     errors.ethnicGroups = REQUIRE_MESSAGE
+  } else if (values.ethnicGroups.indexOf('Other') > -1 && !values.ethnicityDescription) {
+    errors.ethnicityDescription = REQUIRE_MESSAGE
   }
 
   return errors
@@ -117,6 +129,7 @@ class ChildDetailsForm extends Component {
           <p>The name should include a family name and one or more given names.</p>
           <p>The child’s name will be registered exactly as you describe it here. There is a cost to change the name once it has been registered.</p>
         </div>
+
         <Accordion>
           <Accordion.Toggle>
             What names are unacceptable?
@@ -131,6 +144,7 @@ class ChildDetailsForm extends Component {
             </ul>
           </Accordion.Content>
         </Accordion>
+
         <Accordion>
           <Accordion.Toggle>
             Can I enter names with macrons and international characters?
@@ -139,6 +153,7 @@ class ChildDetailsForm extends Component {
             <p>You may use macrons and international characters in your child’s name. The child’s name will use these characters on the birth certificate.</p>
           </Accordion.Content>
         </Accordion>
+
         <Accordion>
           <Accordion.Toggle>
             Can I give my child a single name?
@@ -147,6 +162,7 @@ class ChildDetailsForm extends Component {
             <p>Your child may have a single name where religious or philosophical beliefs or cultural traditions require the child to have one name. In these cases please describe the reasons for a single name.</p>
           </Accordion.Content>
         </Accordion>
+
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
             name="firstName"
@@ -155,6 +171,7 @@ class ChildDetailsForm extends Component {
             placeholder="First name"
             label="Child's given names"
           />
+
           <Field
             name="lastName"
             component={renderField}
@@ -162,6 +179,7 @@ class ChildDetailsForm extends Component {
             placeholder="E.g Williscroft"
             label="Child's family name"
           />
+
           <fieldset>
             <legend>Child's sex</legend>
             <div className="radio-group">
@@ -180,6 +198,7 @@ class ChildDetailsForm extends Component {
               </div>
             </div>
           </fieldset>
+
           <fieldset>
             <legend>Was this child alive at birth?</legend>
             <div className="radio-group">
@@ -198,6 +217,7 @@ class ChildDetailsForm extends Component {
               </div>
             </div>
           </fieldset>
+
           <Accordion>
             <Accordion.Toggle>
               What is a stillbirth?
@@ -211,6 +231,7 @@ class ChildDetailsForm extends Component {
               <p>You still need to register the birth. If you don’t want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field. A pregnancy miscarriage occurs when the baby is not born alive, and the before the 20th week of the pregnancy.</p>
             </Accordion.Content>
           </Accordion>
+
           <Field
             name="dateOfBirth"
             component={renderDatepicker}
@@ -351,7 +372,7 @@ class ChildDetailsForm extends Component {
               name="ethnicityDescription"
               component={renderField}
               type="text"
-              instructionText="Please describe the child’s ethnicity"
+              placeholder="Please describe the child’s ethnicity"
             />
           }
 
