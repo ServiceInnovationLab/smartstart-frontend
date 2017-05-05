@@ -56,8 +56,13 @@ const validate = (values) => {
   if (values.placeOfBirth === 'hospital' && !values.hospitalName) {
     errors.hospitalName = REQUIRE_MESSAGE
   }
-  else if (values.placeOfBirth === 'home' && !values.birthPlaceAddress1 && !values.birthPlaceAddress2) {
-    errors.birthPlaceAddress1 = REQUIRE_MESSAGE
+  else if (values.placeOfBirth === 'home') {
+    if (!values.birthPlaceAddress1) {
+      errors.birthPlaceAddress1 = REQUIRE_MESSAGE
+    }
+    if (!values.birthPlaceAddress2) {
+      errors.birthPlaceAddress2 = REQUIRE_MESSAGE
+    }
   }
   else if (values.placeOfBirth === 'other' && !values.birthPlaceOther) {
     errors.birthPlaceOther = REQUIRE_MESSAGE
