@@ -39,7 +39,7 @@ renderCheckboxGroup.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   instructionText: PropTypes.string,
-  options: PropTypes.object,
+  options: PropTypes.array,
   type: PropTypes.string,
   meta: PropTypes.object
 }

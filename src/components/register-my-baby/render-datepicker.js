@@ -109,7 +109,7 @@ class SimpleDatePicker extends Component {
       <div>
         <span className="styled-select">
           <select
-            value={day}
+            value={day || ''}
             onChange={this.handleChange('day')}
             onBlur={this.handleBlur}
             ref={ daySelect => this.daySelect = daySelect }
@@ -124,7 +124,7 @@ class SimpleDatePicker extends Component {
         </span>
         <span className="styled-select">
           <select
-            value={month}
+            value={month || ''}
             onChange={this.handleChange('month')}
             onBlur={this.handleBlur}
             ref={ monthSelect => this.monthSelect = monthSelect }
@@ -139,7 +139,7 @@ class SimpleDatePicker extends Component {
         </span>
         <span className="styled-select">
           <select
-            value={year}
+            value={year || ''}
             onChange={this.handleChange('year')}
             onBlur={this.handleBlur}
             ref={ yearSelect => this.yearSelect = yearSelect }
@@ -170,7 +170,7 @@ const renderDatepicker = ({ input, label, meta: { touched, error } }) => (
     <div className={`input-group ${(touched && error) ? 'has-error' : ''}`}>
       <div>
         <SimpleDatePicker
-          value={input.value}
+          value={input.value || null}
           onChange={input.onChange}
           onBlur={input.onBlur}
         />

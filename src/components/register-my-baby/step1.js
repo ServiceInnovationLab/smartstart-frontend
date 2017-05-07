@@ -9,19 +9,15 @@ import renderSelect from './render-select'
 import renderDatepicker from './render-datepicker'
 import renderBirthOrderSelector from './render-birth-order-selector'
 import renderCheckboxGroup from './render-checkbox-group'
-
-const REQUIRE_MESSAGE = 'This is a required field, please provide an answer'
+import { required, maxLength30 } from './validate'
+import {
+  REQUIRE_MESSAGE,
+  INVALID_DATE_MESSAGE,
+  FUTURE_DATE_MESSAGE
+} from './validation-messages'
 
 const validate = (values) => {
   const errors = {}
-
-  if (!values.firstName) {
-    errors.firstName = REQUIRE_MESSAGE
-  }
-
-  if (!values.lastName) {
-    errors.lastName = REQUIRE_MESSAGE
-  }
 
   if (!values.sex) {
     errors.sex = REQUIRE_MESSAGE
@@ -35,9 +31,9 @@ const validate = (values) => {
     errors.dateOfBirth = REQUIRE_MESSAGE
   } else {
     if (!values.dateOfBirth.isValid()) {
-      errors.dateOfBirth = 'The selected date is not valid, please try again'
+      errors.dateOfBirth = INVALID_DATE_MESSAGE
     } else if (values.dateOfBirth.isAfter(moment())) {
-      errors.dateOfBirth = 'This date is in the future, please provide a valid date'
+      errors.dateOfBirth = FUTURE_DATE_MESSAGE
     }
   }
 
@@ -53,29 +49,12 @@ const validate = (values) => {
     errors.placeOfBirth = REQUIRE_MESSAGE
   }
 
-  if (values.placeOfBirth === 'hospital' && !values.hospitalName) {
-    errors.hospitalName = REQUIRE_MESSAGE
-  }
-  else if (values.placeOfBirth === 'home') {
-    if (!values.birthPlaceAddress1) {
-      errors.birthPlaceAddress1 = REQUIRE_MESSAGE
-    }
-    if (!values.birthPlaceAddress2) {
-      errors.birthPlaceAddress2 = REQUIRE_MESSAGE
-    }
-  }
-  else if (values.placeOfBirth === 'other' && !values.birthPlaceOther) {
-    errors.birthPlaceOther = REQUIRE_MESSAGE
-  }
-
   if (!values.isMaoriDecendant) {
     errors.isMaoriDecendant = REQUIRE_MESSAGE
   }
 
   if (!values.ethnicGroups || !values.ethnicGroups.length) {
     errors.ethnicGroups = REQUIRE_MESSAGE
-  } else if (values.ethnicGroups.indexOf('Other') > -1 && !values.ethnicityDescription) {
-    errors.ethnicityDescription = REQUIRE_MESSAGE
   }
 
   return errors
@@ -175,6 +154,7 @@ class ChildDetailsForm extends Component {
             type="text"
             placeholder="First name"
             label="Child's given names"
+            validate={[required]}
           />
 
           <Field
@@ -183,6 +163,7 @@ class ChildDetailsForm extends Component {
             type="text"
             placeholder="E.g Williscroft"
             label="Child's family name"
+            validate={[required]}
           />
 
           <fieldset>
@@ -299,6 +280,7 @@ class ChildDetailsForm extends Component {
               component={renderSelect}
               options={['Hospital One', 'Hospital Two', 'Hospital Three']}
               label="Hospital name"
+              validate={[required]}
             />
           }
 
@@ -308,6 +290,7 @@ class ChildDetailsForm extends Component {
               component={renderField}
               type="text"
               label="Street number, Street Name, Suburb"
+              validate={[required]}
             />
           }
 
@@ -317,6 +300,7 @@ class ChildDetailsForm extends Component {
               component={renderField}
               type="text"
               label="Town/City and Postcode"
+              validate={[required]}
             />
           }
 
@@ -326,6 +310,7 @@ class ChildDetailsForm extends Component {
               component={renderField}
               type="text"
               instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
+              validate={[required]}
             />
           }
 
@@ -378,6 +363,7 @@ class ChildDetailsForm extends Component {
               component={renderField}
               type="text"
               placeholder="Please describe the child’s ethnicity"
+              validate={[required, maxLength30]}
             />
           }
 
@@ -406,7 +392,6 @@ ChildDetailsForm = reduxForm({
   form: 'registration', // same name for all wizard's form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  touchOnBlur: false, // turn this on if we want to do validation on blur
   validate
 })(ChildDetailsForm)
 

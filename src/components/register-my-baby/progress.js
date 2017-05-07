@@ -21,7 +21,7 @@ class FormWizardProgress extends Component {
               { 'current': i + 1 === currentStep }
             )
             return (
-              <div className={stepClass}>
+              <div className={stepClass} key={`step-${i + 1}`}>
                 <div className="form-wizard-step-icon">
                   {
                     step.icon ?
