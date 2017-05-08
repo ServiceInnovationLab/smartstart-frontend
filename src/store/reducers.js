@@ -164,17 +164,9 @@ function supplementaryContentActions (state = {
  *
  * {
  *   step: number, // current step at the time of save
- *   data: object         // current form state at the time of save
+ *   data: object  // current form state at the time of save
  * }
  */
-
-// const initialRegistrationFormState = {
-//   step: 2,
-//   data: {
-//     firstName: 'Andrew',
-//     lastName: 'Shaw'
-//   }
-// }
 
 const initialRegistrationFormState = null
 

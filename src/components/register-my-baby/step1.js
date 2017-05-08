@@ -50,8 +50,8 @@ const validate = (values) => {
     errors.placeOfBirth = REQUIRE_MESSAGE
   }
 
-  if (!values.isMaoriDecendant) {
-    errors.isMaoriDecendant = REQUIRE_MESSAGE
+  if (!values.isMaoriDescendant) {
+    errors.isMaoriDescendant = REQUIRE_MESSAGE
   }
 
   if (!values.ethnicGroups || !values.ethnicGroups.length) {
@@ -322,19 +322,19 @@ class ChildDetailsForm extends Component {
               <div>
                 <div>
                   <label>
-                    <Field name="isMaoriDecendant" component="input" type="radio" value="yes" />
+                    <Field name="isMaoriDescendant" component="input" type="radio" value="yes" />
                     <span role="button">Yes</span>
                   </label>
                   <label>
-                    <Field name="isMaoriDecendant" component="input" type="radio" value="no" />
+                    <Field name="isMaoriDescendant" component="input" type="radio" value="no" />
                     <span role="button">No</span>
                   </label>
                   <label>
-                    <Field name="isMaoriDecendant" component="input" type="radio" value="notsure" />
+                    <Field name="isMaoriDescendant" component="input" type="radio" value="notsure" />
                     <span role="button">Not sure</span>
                   </label>
                 </div>
-                <Field name="isMaoriDecendant" component={renderError} />
+                <Field name="isMaoriDescendant" component={renderError} />
               </div>
             </div>
           </fieldset>
@@ -345,7 +345,7 @@ class ChildDetailsForm extends Component {
             label="Which ethnic group(s) does this child belong to?"
             instructionText="Select as many boxes as you wish to describe the ethnic group(s) this child belongs to."
             options={[
-              { value: 'NZ Eroupean', display: 'NZ Eroupean'},
+              { value: 'NZ European', display: 'NZ European'},
               { value: 'Māori', display: 'Māori'},
               { value: 'Samoan', display: 'Samoan'},
               { value: 'Cook Island Māori', display: 'Cook Island Māori'},

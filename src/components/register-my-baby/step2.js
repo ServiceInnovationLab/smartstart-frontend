@@ -35,6 +35,10 @@ const validate = (values) => {
     set(errors, 'mother.ethnicGroups', REQUIRE_MESSAGE)
   }
 
+  if (!get(values, 'mother.isMaoriDescendant')) {
+    set(errors, 'mother.isMaoriDescendant', REQUIRE_MESSAGE)
+  }
+
   return errors
 }
 
@@ -65,7 +69,7 @@ class MotherDetailsForm extends Component {
             name="mother.firstName"
             component={renderField}
             type="text"
-            label="All first name(s) mother is currently known by (text)"
+            label="All first name(s) mother is currently known by"
             instructionText="Enter all current first and given names. If any differ from names given at birth, those names can be entered below."
             validate={[required]}
           />
@@ -148,25 +152,25 @@ class MotherDetailsForm extends Component {
           </fieldset>
 
           <fieldset>
-            <legend>Is this mother a descendant of a New Zealand Māori?</legend>
+            <legend>Is the mother a descendant of a New Zealand Māori?</legend>
             <div className="instruction-text">This will not appear on the birth certificate</div>
             <div className="radio-group">
               <div>
                 <div>
                   <label>
-                    <Field name="mother.isMaoriDecendant" component="input" type="radio" value="yes" />
+                    <Field name="mother.isMaoriDescendant" component="input" type="radio" value="yes" />
                     <span role="button">Yes</span>
                   </label>
                   <label>
-                    <Field name="mother.isMaoriDecendant" component="input" type="radio" value="no" />
+                    <Field name="mother.isMaoriDescendant" component="input" type="radio" value="no" />
                     <span role="button">No</span>
                   </label>
                   <label>
-                    <Field name="mother.isMaoriDecendant" component="input" type="radio" value="notsure" />
+                    <Field name="mother.isMaoriDescendant" component="input" type="radio" value="notsure" />
                     <span role="button">Not sure</span>
                   </label>
                 </div>
-                <Field name="mother.isMaoriDecendant" component={renderError} />
+                <Field name="mother.isMaoriDescendant" component={renderError} />
               </div>
             </div>
           </fieldset>
@@ -177,7 +181,7 @@ class MotherDetailsForm extends Component {
             label="Which ethnic group(s) does the mother belong to?"
             instructionText="Select as many boxes as you wish to describe the ethnic group(s) the mother belongs to."
             options={[
-              { value: 'NZ Eroupean', display: 'NZ Eroupean'},
+              { value: 'NZ European', display: 'NZ European'},
               { value: 'Māori', display: 'Māori'},
               { value: 'Samoan', display: 'Samoan'},
               { value: 'Cook Island Māori', display: 'Cook Island Māori'},
@@ -221,7 +225,7 @@ class MotherDetailsForm extends Component {
           <Field
             name="mother.email"
             component={renderField}
-            type="text"
+            type="email"
             label="Email address"
             instructionText=""
             validate={[email]}
