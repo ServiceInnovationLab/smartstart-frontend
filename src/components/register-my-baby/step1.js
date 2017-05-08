@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import moment from 'moment'
+import get from 'lodash/get'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderError from './render-error'
@@ -401,6 +402,7 @@ const selector = formValueSelector('registration')
 // check render method for more detail
 ChildDetailsForm = connect(
   state => ({
+    initialValues: get(state, 'savedRegistrationForm.data'),
     multipleBirth: selector(state, 'multipleBirth'),
     placeOfBirth: selector(state, 'placeOfBirth'),
     ethnicGroups: selector(state, 'ethnicGroups')

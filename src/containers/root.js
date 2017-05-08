@@ -33,7 +33,7 @@ const Root = (props) => (
         <IndexRoute component={Main} />
         <Route path='register-my-baby' component={BirthRegistrationPage}>
           <IndexRoute component={RegisterMyBabyLandingPage} />
-          <Route path=':step' component={RegisterMyBaby} />
+          <Route path=':stepName' component={RegisterMyBaby} />
         </Route>
         <Route path='news' component={FeaturePage}>
           <Route path='baby-names' component={BabyNames} />

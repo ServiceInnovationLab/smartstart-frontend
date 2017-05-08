@@ -157,13 +157,42 @@ function supplementaryContentActions (state = {
   }
 }
 
+/*
+ * If we have a saved state of form, here is where we load that state into upon initialization
+ *
+ * A saved state should following this structure:
+ *
+ * {
+ *   step: number, // current step at the time of save
+ *   data: object         // current form state at the time of save
+ * }
+ */
+
+// const initialRegistrationFormState = {
+//   step: 2,
+//   data: {
+//     firstName: 'Andrew',
+//     lastName: 'Shaw'
+//   }
+// }
+
+const initialRegistrationFormState = null
+
+function savedRegistrationForm (state = initialRegistrationFormState, action) {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   contentActions,
   personalisationActions,
   applicationActions,
   settingsDisplayActions,
   supplementaryContentActions,
-  form: formReducer
+  form: formReducer,
+  savedRegistrationForm
 })
 
 export default rootReducer

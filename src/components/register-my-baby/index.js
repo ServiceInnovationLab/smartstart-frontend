@@ -1,9 +1,21 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import invert from 'lodash/invert'
+import get from 'lodash/get'
 import FormWizardProgress from './progress'
 import Step1 from './step1'
 import Step2 from './step2'
 import Step3 from './step3'
 import Step4 from './step4'
+
+const stepByStepName = {
+  'child-details': 1,
+  'mother-details': 2,
+  'father-details': 3,
+  'other-details': 4
+}
+
+const stepNameByStep = invert(stepByStepName)
 
 class RegisterMyBabyForm extends Component {
   constructor(props) {
@@ -12,6 +24,7 @@ class RegisterMyBabyForm extends Component {
     this.previousStep = this.previousStep.bind(this)
     this.state = {
       step: 1,
+      stepName: 'child-details',
       steps: [
         { icon: '', name: 'Child'},
         { icon: '', name: 'Mother'},
@@ -21,18 +34,50 @@ class RegisterMyBabyForm extends Component {
     }
   }
   nextStep() {
-    this.setState({ step: this.state.step + 1 })
+    this.goToStep(this.state.step + 1)
   }
 
   previousStep() {
-    this.setState({ step: this.state.step - 1 })
+    this.goToStep(this.state.step - 1)
+  }
+
+  goToStep(step, replace = false) {
+    const stepName = stepNameByStep[step]
+
+    if (stepName) {
+      this.props.router[replace ? 'replace': 'push'](`/register-my-baby/${stepName}`)
+    }
   }
 
   onSubmit() {
   }
 
+  componentDidMount() {
+    const { params, savedRegistrationForm } = this.props
+    const { stepName } = params
+
+    const step = stepByStepName[stepName]
+
+    if (step && savedRegistrationForm && savedRegistrationForm.step === step) {
+      this.goToStep(step)
+    } else {
+      this.goToStep(1, true)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextStepName = get(nextProps, 'params.stepName')
+    const currentStepName = get(this.state, 'stepName')
+
+    if (nextStepName && nextStepName !== currentStepName) {
+      const step = stepByStepName[nextStepName]
+      this.setState({ step, stepName: nextStepName })
+    }
+  }
+
   render() {
     const { step, steps } = this.state
+
     return (
       <div>
         <FormWizardProgress currentStep={step} steps={steps} />
@@ -46,6 +91,15 @@ class RegisterMyBabyForm extends Component {
 }
 
 RegisterMyBabyForm.propTypes = {
+  params: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
+  savedRegistrationForm: PropTypes.object
 }
+
+RegisterMyBabyForm = connect(
+  state => ({
+    savedRegistrationForm: state.savedRegistrationForm,
+  })
+)(RegisterMyBabyForm)
 
 export default RegisterMyBabyForm
