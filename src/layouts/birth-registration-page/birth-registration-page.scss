@@ -21,7 +21,7 @@
       color: #fff;
       text-align: center;
 
-      &:before {
+      &::before {
         content: '';
         border: 1px solid $form-teal-dark;
         height: 200%;
@@ -43,6 +43,7 @@
       }
     }
   }
+
   .instruction {
     font-size: 18px;
     margin-bottom: 20px;
@@ -91,14 +92,14 @@
         background-color: darken($form-teal-dark, 5%);
       }
 
-      &.next:after {
-        font-family: 'icomoon' !important;
+      &.next::after {
+        font-family: 'icomoon';
         content: $icon-arrow-right;
         margin-left: 10px;
       }
 
-      &.previous:before {
-        font-family: 'icomoon' !important;
+      &.previous::before {
+        font-family: 'icomoon';
         content: $icon-arrow-left;
         margin-right: 10px;
       }
@@ -133,7 +134,7 @@
       }
 
       > div {
-        flex: 1 auto;
+        flex: 1 1 1;
         display: flex;
         justify-content: center;
         flex-flow: column;
@@ -144,7 +145,8 @@
         }
 
         > span {
-          flex: 1 auto;
+          flex: 1 1 1;
+          display: inline-block;
           font-size: 16px;
           margin-top: 10px;
           margin-bottom: 10px;
@@ -152,8 +154,8 @@
           position: relative;
 
           &.error {
-            &:before {
-              font-family: 'icomoon' !important;
+            &::before {
+              font-family: 'icomoon';
               font-size: 18px;
               line-height: 18px;
               position: absolute;
@@ -192,7 +194,6 @@
       input[type="radio"] {
         position: absolute;
         opacity: 0;
-        z-index: -1;
       }
 
       > span {
@@ -255,10 +256,9 @@
       input[type="checkbox"] {
         position: absolute;
         opacity: 0;
-        z-index: -1;
       }
 
-      span:before {
+      span::before {
         content: "";
         border: 1px solid $form-border-color;
         background: transparent;
@@ -270,13 +270,13 @@
         left: 0;
       }
 
-      input[type="checkbox"]:checked + span:before{
+      input[type="checkbox"]:checked + span::before{
         background-color: $form-teal-dark;
         border-color: $form-teal-dark;
       }
 
-      input[type="checkbox"]:checked + span:after{
-        font-family: 'icomoon' !important;
+      input[type="checkbox"]:checked + span::after{
+        font-family: 'icomoon';
         font-size: 18px;
         content: $icon-tick;
         position: absolute;
@@ -290,7 +290,7 @@
       }
 
       &:hover {
-        input + span:before {
+        input + span::before {
           background-color: $form-teal-hover;
         }
       }
@@ -298,7 +298,7 @@
 
     @media #{$desktop-and-above} {
       > div > div {
-        display:  flex;
+        display: flex;
         flex-wrap: wrap;
 
         > label {
