@@ -107,7 +107,7 @@ class ChildDetailsForm extends Component {
 
     return (
       <div>
-        <h2>Tamaiti <br/> Child</h2>
+        <h2><span className="visuallyhidden">Step</span> <span className="step-number">1</span> Tamaiti <br/> Child</h2>
 
         <div className="instruction">
           <strong>Birth Registration is when you officially give your child a legal name.</strong><br/>
@@ -330,7 +330,8 @@ class ChildDetailsForm extends Component {
           }
 
           <div className="form-actions">
-            <button type="submit" className="button" disabled={submitting}>Next</button>
+            <div />
+            <button type="submit" className="next" disabled={submitting}>Next</button>
           </div>
         </form>
       </div>

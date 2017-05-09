@@ -62,7 +62,7 @@ class MotherDetailsForm extends Component {
     const { ethnicGroups, handleSubmit, submitting } = this.props
     return (
       <div>
-        <h2>Whaea <br/> Mother</h2>
+        <h2><span className="visuallyhidden">Step</span> <span className="step-number">2</span> Whaea <br/> Mother</h2>
         <div className="divider" />
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
@@ -223,8 +223,8 @@ class MotherDetailsForm extends Component {
           />
 
           <div className="form-actions">
-            <button type="button" className="previous" onClick={this.props.onPrevious}>Previous</button>
-            <button type="submit" className="button" disabled={submitting}>Next</button>
+            <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
+            <button type="submit" className="next" disabled={submitting}>Next</button>
           </div>
         </form>
       </div>
