@@ -107,8 +107,7 @@ class ChildDetailsForm extends Component {
 
     return (
       <div>
-        <h2>Tamaiti</h2>
-        <h2>Child</h2>
+        <h2>Tamaiti <br/> Child</h2>
         <div className="instruction">
           <p>Birth Registration is when you officially give your child a legal name.</p>
           <p>The name should include a family name and one or more given names.</p>

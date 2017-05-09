@@ -62,8 +62,7 @@ class MotherDetailsForm extends Component {
     const { ethnicGroups, handleSubmit, submitting } = this.props
     return (
       <div>
-        <h2>Whaea</h2>
-        <h2>Mother</h2>
+        <h2>Whaea <br/> Mother</h2>
         <div className="divider" />
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
