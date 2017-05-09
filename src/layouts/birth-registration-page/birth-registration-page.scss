@@ -26,7 +26,6 @@
       margin-right: 10px;
       font-size: $font-size-base;
       font-family: $font-family-base;
-      font-weight: 500;
       height: $form-input-height;
       padding: 6px 9px;
     }
@@ -77,13 +76,24 @@
         }
 
         > span {
-          flex: 1;
+          flex: 1 auto;
           font-size: 16px;
           margin-top: 10px;
           margin-bottom: 10px;
-          padding: 5px 8px 5px 32px;
+          padding: 5px 8px 5px 40px;
+          position: relative;
 
           &.error {
+            &:before {
+              font-family: 'icomoon' !important;
+              font-size: 18px;
+              line-height: 18px;
+              position: absolute;
+              left: 10px;
+              top: 7px;
+              content: $icon-exclamation;
+              color: $form-error-outline;
+            }
             background-color: $form-error-bg;
             border-left: 3px solid $form-error-outline;
           }
@@ -192,29 +202,17 @@
         left: 0;
       }
 
-      span:after {
-        content: "";
-        border: solid;
-        border-width: 0 0 5px 5px;
-        background: transparent;
-        width: 17px;
-        height: 10px;
-        position: absolute;
-        top: 10px;
-        left: 8px;
-        transform: rotate(-45deg);
-        zoom: 1;
-        opacity: 0;
-      }
-
       input[type="checkbox"]:checked + span:before{
         background-color: $form-checkbox-group-active;
         border-color: $form-checkbox-group-active;
       }
 
       input[type="checkbox"]:checked + span:after{
-        zoom: 1;
-        filter: alpha(opacity=100);
+        font-family: 'icomoon' !important;
+        font-size: 18px;
+        content: $icon-tick;
+        position: absolute;
+        left: 8px;
         opacity: 1;
         color: #fff;
       }
@@ -226,6 +224,18 @@
       &:hover {
         input + span:before {
           background-color: $form-checkbox-group-hover;
+        }
+      }
+    }
+
+    @media #{$desktop-and-above} {
+      > div > div {
+        display:  flex;
+        flex-wrap: wrap;
+
+        > label {
+          flex-grow: 1;
+          width: 33%;
         }
       }
     }
@@ -258,8 +268,6 @@
   }
 
   .instruction-text {
-    color: #777;
-    font-style: italic;
     padding-bottom: 9px;
   }
 

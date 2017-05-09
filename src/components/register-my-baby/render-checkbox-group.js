@@ -58,14 +58,14 @@ CheckboxGroup.propTypes = {
   onBlur: PropTypes.func
 }
 
-const renderCheckboxGroup = ({ input, name, label, instructionText, options, meta: { touched, error } }) => (
+const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { touched, error } }) => (
   <fieldset>
     { label && <legend>{label}</legend> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
     <div className={`checkbox-group ${(touched && error) ? 'has-error' : ''}`}>
       <div>
         <CheckboxGroup
-          name={name}
+          name={input.name}
           value={input.value}
           options={options}
           onChange={input.onChange}
