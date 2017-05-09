@@ -124,7 +124,7 @@ const renderBirthOrderSelector = ({ input, label, meta: { touched, error } }) =>
     <div className={`input-group ${(touched && error) ? 'has-error' : ''}`}>
       <div>
         <BirthOrderSelector {...input} />
-        {touched && error && <span>{error}</span>}
+        {touched && error && <span className="error">{error}</span>}
       </div>
     </div>
   </fieldset>

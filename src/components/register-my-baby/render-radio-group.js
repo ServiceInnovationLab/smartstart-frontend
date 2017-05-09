@@ -1,27 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 
-class CheckboxGroup extends Component {
+class RadioGroup extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
-    this.checkboxes = []
+    this.radios = []
   }
 
   handleChange(option) {
     return event => {
-      const newValue = [...this.props.value]
       if(event.target.checked) {
-        newValue.push(option.value)
-      } else {
-        newValue.splice(newValue.indexOf(option.value), 1)
+        return this.props.onChange(option.value)
       }
-      return this.props.onChange(newValue)
     }
   }
 
   handleBlur(event) {
-    const focusOutsideGroup = this.checkboxes.indexOf(event.relatedTarget) === -1
+    const focusOutsideGroup = this.radios.indexOf(event.relatedTarget) === -1
     if (focusOutsideGroup) {
       this.props.onBlur(this.props.value)
     }
@@ -32,14 +28,14 @@ class CheckboxGroup extends Component {
     return (
       <div>
         { options.map((option, index) => (
-            <label key={index}>
-              <input type="checkbox"
-                name={`${name}[${index}]`}
+            <label key={`${name}-${index}`}>
+              <input type="radio"
+                name={`${name}-group`}
                 value={option.value}
-                checked={value.indexOf(option.value) !== -1}
+                checked={value === option.value}
                 onChange={this.handleChange(option)}
                 onBlur={this.handleBlur}
-                ref={ checkbox => this.checkboxes = [checkbox, ...this.checkboxes] }
+                ref={ radio => this.radios = [radio, ...this.radios] }
               />
               <span>{option.display}</span>
             </label>
@@ -50,22 +46,22 @@ class CheckboxGroup extends Component {
   }
 }
 
-CheckboxGroup.propTypes = {
+RadioGroup.propTypes = {
   name: PropTypes.string,
-  value: PropTypes.array,
+  value: PropTypes.string,
   options: PropTypes.array,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
 }
 
-const renderCheckboxGroup = ({ input, name, label, instructionText, options, meta: { touched, error } }) => (
+const renderRadioGroup = ({ input, label, instructionText, options, meta: { touched, error } }) => (
   <fieldset>
     { label && <legend>{label}</legend> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
-    <div className={`checkbox-group ${(touched && error) ? 'has-error' : ''}`}>
+    <div className={`radio-group ${(touched && error) ? 'has-error' : ''}`}>
       <div>
-        <CheckboxGroup
-          name={name}
+        <RadioGroup
+          name={input.name}
           value={input.value}
           options={options}
           onChange={input.onChange}
@@ -77,7 +73,7 @@ const renderCheckboxGroup = ({ input, name, label, instructionText, options, met
   </fieldset>
 )
 
-renderCheckboxGroup.propTypes = {
+renderRadioGroup.propTypes = {
   input: PropTypes.object,
   name: PropTypes.string,
   label: PropTypes.string,
@@ -87,4 +83,4 @@ renderCheckboxGroup.propTypes = {
   meta: PropTypes.object
 }
 
-export default renderCheckboxGroup
+export default renderRadioGroup

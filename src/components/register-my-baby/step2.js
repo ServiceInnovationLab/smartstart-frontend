@@ -5,8 +5,8 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
 import renderField from './render-field'
-import renderError from './render-error'
 import renderDatepicker from './render-datepicker'
+import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
 import { required, number, email, maxLength30 } from './validate'
 import {
@@ -151,29 +151,18 @@ class MotherDetailsForm extends Component {
             </div>
           </fieldset>
 
-          <fieldset>
-            <legend>Is the mother a descendant of a New Zealand Māori?</legend>
-            <div className="instruction-text">This will not appear on the birth certificate</div>
-            <div className="radio-group">
-              <div>
-                <div>
-                  <label>
-                    <Field name="mother.isMaoriDescendant" component="input" type="radio" value="yes" />
-                    <span role="button">Yes</span>
-                  </label>
-                  <label>
-                    <Field name="mother.isMaoriDescendant" component="input" type="radio" value="no" />
-                    <span role="button">No</span>
-                  </label>
-                  <label>
-                    <Field name="mother.isMaoriDescendant" component="input" type="radio" value="notsure" />
-                    <span role="button">Not sure</span>
-                  </label>
-                </div>
-                <Field name="mother.isMaoriDescendant" component={renderError} />
-              </div>
-            </div>
-          </fieldset>
+
+          <Field
+            name="mother.isMaoriDescendant"
+            component={renderRadioGroup}
+            label="Is the mother a descendant of a New Zealand Māori?"
+            instructionText="This will not appear on the birth certificate"
+            options={[
+              { value: 'yes', display: 'Yes'},
+              { value: 'no', display: 'No'},
+              { value: 'notsure', display: 'Not sure'}
+            ]}
+          />
 
           <Field
             name="mother.ethnicGroups"
@@ -195,13 +184,15 @@ class MotherDetailsForm extends Component {
           />
 
           { ethnicGroups && ethnicGroups.indexOf('Other') > -1 &&
-            <Field
-              name="mother.ethnicityDescription"
-              component={renderField}
-              type="text"
-              placeholder="Please describe the mother’s ethnicity"
-              validate={[required, maxLength30]}
-            />
+            <div className="conditional-field">
+              <Field
+                name="mother.ethnicityDescription"
+                component={renderField}
+                type="text"
+                placeholder="Please describe the mother’s ethnicity"
+                validate={[required, maxLength30]}
+              />
+            </div>
           }
 
           <Field

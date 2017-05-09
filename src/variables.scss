@@ -90,6 +90,11 @@ $non-chronological-nested-accordion-open-color: $accent-color-light;
 // expandables and checkboxes
 $expandable-larger-font-size:   18px;
 $expandable-larger-line-height: 22px;
+$expandable-larger-height: 54px;
+
+$expandable-smaller-font-size:   16px;
+$expandable-smaller-line-height: 18px;
+$expandable-smaller-height: 42px;
 
 $left-side-curve-width: 40px;
 
@@ -104,6 +109,18 @@ $supplementary-content-background-color:  #fef9f1;
 $supplementary-nested-accordion-color:          #e8e5e5;
 $supplementary-nested-accordion-open-color:     $supplementary-header-color;
 $supplementary-nested-content-background-color: #feefd6;
+
+// form
+$form-input-height: 42px;
+$form-border-color: #9fa6ae;
+$form-error-bg: #fce7e6;
+$form-error-outline: $error-outline;
+$form-warning-bg: #fbebda;
+$form-warning-outline: #e95e20;
+$form-radio-group-active: #487f80;
+$form-radio-group-hover: #e0efee;
+$form-checkbox-group-active: #487f80;
+$form-checkbox-group-hover: #e0efee;
 
 // footer
 $footer-background-color:     $realme-dark-blue;

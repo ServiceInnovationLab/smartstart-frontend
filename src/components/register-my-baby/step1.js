@@ -5,11 +5,11 @@ import moment from 'moment'
 import get from 'lodash/get'
 import Accordion from './accordion'
 import renderField from './render-field'
-import renderError from './render-error'
 import renderSelect from './render-select'
 import renderDatepicker from './render-datepicker'
 import renderBirthOrderSelector from './render-birth-order-selector'
 import renderCheckboxGroup from './render-checkbox-group'
+import renderRadioGroup from './render-radio-group'
 import { required, maxLength30 } from './validate'
 import {
   REQUIRE_MESSAGE,
@@ -108,44 +108,47 @@ class ChildDetailsForm extends Component {
     return (
       <div>
         <h2>Tamaiti <br/> Child</h2>
+
         <div className="instruction">
-          <p>Birth Registration is when you officially give your child a legal name.</p>
-          <p>The name should include a family name and one or more given names.</p>
-          <p>The child’s name will be registered exactly as you describe it here. There is a cost to change the name once it has been registered.</p>
+          <strong>Birth Registration is when you officially give your child a legal name.</strong><br/>
+          <strong>The name should include a family name and one or more given names.</strong><br/>
+          <strong>The child’s name will be registered exactly as you describe it here. There is a cost to change the name once it has been registered.</strong>
         </div>
 
-        <Accordion>
-          <Accordion.Toggle>
-            What names are unacceptable?
-          </Accordion.Toggle>
-          <Accordion.Content>
-            <p>The name or combination of names may not be acceptable if:</p>
-            <ul>
-              <li>It is offensive; or</li>
-              <li>it is unreasonably long; or</li>
-              <li>it includes or resembles an official title or rank; or</li>
-              <li>Is spelt with numbers or symbols (e.g V8)</li>
-            </ul>
-          </Accordion.Content>
-        </Accordion>
+        <div className="expandable-group primary">
+          <Accordion>
+            <Accordion.Toggle>
+              What names are unacceptable?
+            </Accordion.Toggle>
+            <Accordion.Content>
+              <p>The name or combination of names may not be acceptable if:</p>
+              <ul>
+                <li>It is offensive; or</li>
+                <li>it is unreasonably long; or</li>
+                <li>it includes or resembles an official title or rank; or</li>
+                <li>Is spelt with numbers or symbols (e.g V8)</li>
+              </ul>
+            </Accordion.Content>
+          </Accordion>
 
-        <Accordion>
-          <Accordion.Toggle>
-            Can I enter names with macrons and international characters?
-          </Accordion.Toggle>
-          <Accordion.Content>
-            <p>You may use macrons and international characters in your child’s name. The child’s name will use these characters on the birth certificate.</p>
-          </Accordion.Content>
-        </Accordion>
+          <Accordion>
+            <Accordion.Toggle>
+              Can I enter names with macrons and international characters?
+            </Accordion.Toggle>
+            <Accordion.Content>
+              <p>You may use macrons and international characters in your child’s name. The child’s name will use these characters on the birth certificate.</p>
+            </Accordion.Content>
+          </Accordion>
 
-        <Accordion>
-          <Accordion.Toggle>
-            Can I give my child a single name?
-          </Accordion.Toggle>
-          <Accordion.Content>
-            <p>Your child may have a single name where religious or philosophical beliefs or cultural traditions require the child to have one name. In these cases please describe the reasons for a single name.</p>
-          </Accordion.Content>
-        </Accordion>
+          <Accordion>
+            <Accordion.Toggle>
+              Can I give my child a single name?
+            </Accordion.Toggle>
+            <Accordion.Content>
+              <p>Your child may have a single name where religious or philosophical beliefs or cultural traditions require the child to have one name. In these cases please describe the reasons for a single name.</p>
+            </Accordion.Content>
+          </Accordion>
+        </div>
 
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
@@ -166,57 +169,41 @@ class ChildDetailsForm extends Component {
             validate={[required]}
           />
 
-          <fieldset>
-            <legend>Child's sex</legend>
-            <div className="radio-group">
-              <div>
-                <div>
-                  <label>
-                    <Field name="sex" component="input" type="radio" value="male" />
-                    <span role="button">Male</span>
-                  </label>
-                  <label>
-                    <Field name="sex" component="input" type="radio" value="female" />
-                    <span role="button">Female</span>
-                  </label>
-                </div>
-                <Field name="sex" component={renderError} />
-              </div>
-            </div>
-          </fieldset>
+          <Field
+            name="sex"
+            component={renderRadioGroup}
+            label="Child's sex"
+            options={[
+              { value: 'male', display: 'Male'},
+              { value: 'female', display: 'Female'}
+            ]}
+          />
 
-          <fieldset>
-            <legend>Was this child alive at birth?</legend>
-            <div className="radio-group">
-              <div>
-                <div>
-                  <label>
-                    <Field name="aliveAtBirth" component="input" type="radio" value="yes" />
-                    <span role="button">Yes</span>
-                  </label>
-                  <label>
-                    <Field name="aliveAtBirth" component="input" type="radio" value="no" />
-                    <span role="button">No</span>
-                  </label>
-                </div>
-                <Field name="aliveAtBirth" component={renderError} />
-              </div>
-            </div>
-          </fieldset>
+          <Field
+            name="aliveAtBirth"
+            component={renderRadioGroup}
+            label="Was this child alive at birth?"
+            options={[
+              { value: 'yes', display: 'Yes'},
+              { value: 'no', display: 'No'}
+            ]}
+          />
 
-          <Accordion>
-            <Accordion.Toggle>
-              What is a stillbirth?
-            </Accordion.Toggle>
-            <Accordion.Content>
-              <p>A baby is stillborn if the baby is not alive at birth when born, and either;</p>
-              <ul>
-                <li>weighed 400g or more at birth, or</li>
-                <li>the baby is delivered after the 20th week of the pregnancy</li>
-              </ul>
-              <p>You still need to register the birth. If you don’t want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field. A pregnancy miscarriage occurs when the baby is not born alive, and the before the 20th week of the pregnancy.</p>
-            </Accordion.Content>
-          </Accordion>
+          <div className="expandable-group secondary">
+            <Accordion>
+              <Accordion.Toggle>
+                What is a stillbirth?
+              </Accordion.Toggle>
+              <Accordion.Content>
+                <p>A baby is stillborn if the baby is not alive at birth when born, and either;</p>
+                <ul>
+                  <li>weighed 400g or more at birth, or</li>
+                  <li>the baby is delivered after the 20th week of the pregnancy</li>
+                </ul>
+                <p>You still need to register the birth. If you don’t want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field. A pregnancy miscarriage occurs when the baby is not born alive, and the before the 20th week of the pregnancy.</p>
+              </Accordion.Content>
+            </Accordion>
+          </div>
 
           <Field
             name="dateOfBirth"
@@ -224,119 +211,92 @@ class ChildDetailsForm extends Component {
             label="The child's date of birth"
           />
 
-          <fieldset>
-            <legend>Is this child one of a multiple birth (twins, triplets, etc)</legend>
-            <div className="radio-group">
-              <div>
-                <div>
-                  <label>
-                    <Field name="multipleBirth" component="input" type="radio" value="yes" onChange={this.onMultipleBirthChange}  />
-                    <span role="button">Yes</span>
-                  </label>
-                  <label>
-                    <Field name="multipleBirth" component="input" type="radio" value="no" onChange={this.onMultipleBirthChange} />
-                    <span role="button">No</span>
-                  </label>
-                </div>
-                <Field name="multipleBirth" component={renderError} />
-              </div>
-            </div>
-          </fieldset>
+          <Field
+            name="multipleBirth"
+            component={renderRadioGroup}
+            label="Is this child one of a multiple birth (twins, triplets, etc)"
+            options={[
+              { value: 'yes', display: 'Yes'},
+              { value: 'no', display: 'No'}
+            ]}
+            onChange={this.onMultipleBirthChange}
+          />
 
           { multipleBirth === 'yes' &&
-            <Field
-              name="multipleBirthOrder"
-              component={renderBirthOrderSelector}
-              label="What is the birth order for this child?"
-            />
+            <div className="conditional-field">
+              <Field
+                name="multipleBirthOrder"
+                component={renderBirthOrderSelector}
+                label="What is the birth order for this child?"
+              />
+            </div>
           }
 
-          <fieldset>
-            <legend>Where was the child born?</legend>
-            <div className="radio-group">
-              <div>
-                <div>
-                  <label>
-                    <Field name="placeOfBirth" component="input" type="radio" value="hospital" onChange={this.onPlaceOfBirthChanged}  />
-                    <span role="button">Hospital</span>
-                  </label>
-                  <label>
-                    <Field name="placeOfBirth" component="input" type="radio" value="home" onChange={this.onPlaceOfBirthChanged} />
-                    <span role="button">Home</span>
-                  </label>
-                  <label>
-                    <Field name="placeOfBirth" component="input" type="radio" value="other" onChange={this.onPlaceOfBirthChanged} />
-                    <span role="button">Other place</span>
-                  </label>
-                </div>
-                <Field name="placeOfBirth" component={renderError} />
-              </div>
-            </div>
-          </fieldset>
+          <Field
+            name="placeOfBirth"
+            component={renderRadioGroup}
+            label="Where was the child born?"
+            options={[
+              { value: 'hospital', display: 'Hospital'},
+              { value: 'home', display: 'Home'},
+              { value: 'other', display: 'Other'}
+            ]}
+            onChange={this.onPlaceOfBirthChanged}
+          />
 
           { placeOfBirth === 'hospital' &&
-            <Field
-              name="hospitalName"
-              component={renderSelect}
-              options={['Hospital One', 'Hospital Two', 'Hospital Three']}
-              label="Hospital name"
-              validate={[required]}
-            />
+            <div className="conditional-field">
+              <Field
+                name="hospitalName"
+                component={renderSelect}
+                options={['Hospital One', 'Hospital Two', 'Hospital Three']}
+                label="Hospital name"
+                validate={[required]}
+              />
+            </div>
           }
 
           { placeOfBirth === 'home' &&
-            <Field
-              name="birthPlaceAddress1"
-              component={renderField}
-              type="text"
-              label="Street number, Street Name, Suburb"
-              validate={[required]}
-            />
-          }
-
-          { placeOfBirth === 'home' &&
-            <Field
-              name="birthPlaceAddress2"
-              component={renderField}
-              type="text"
-              label="Town/City and Postcode"
-              validate={[required]}
-            />
+            <div className="conditional-field">
+              <Field
+                name="birthPlaceAddress1"
+                component={renderField}
+                type="text"
+                label="Street number, Street Name, Suburb"
+                validate={[required]}
+              />
+              <Field
+                name="birthPlaceAddress2"
+                component={renderField}
+                type="text"
+                label="Town/City and Postcode"
+                validate={[required]}
+              />
+            </div>
           }
 
           { placeOfBirth === 'other' &&
-            <Field
-              name="birthPlaceOther"
-              component={renderField}
-              type="text"
-              instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
-              validate={[required]}
-            />
+            <div className="conditional-field">
+              <Field
+                name="birthPlaceOther"
+                component={renderField}
+                type="text"
+                instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
+                validate={[required]}
+              />
+            </div>
           }
 
-          <fieldset>
-            <legend>Is this child a descendant of a New Zealand Māori?</legend>
-            <div className="instruction-text">This will not appear on the birth certificate</div>
-            <div className="radio-group">
-              <div>
-                <div>
-                  <label>
-                    <Field name="isMaoriDescendant" component="input" type="radio" value="yes" />
-                    <span role="button">Yes</span>
-                  </label>
-                  <label>
-                    <Field name="isMaoriDescendant" component="input" type="radio" value="no" />
-                    <span role="button">No</span>
-                  </label>
-                  <label>
-                    <Field name="isMaoriDescendant" component="input" type="radio" value="notsure" />
-                    <span role="button">Not sure</span>
-                  </label>
-                </div>
-                <Field name="isMaoriDescendant" component={renderError} />
-              </div>
-            </div>
-          </fieldset>
+          <Field
+            name="isMaoriDescendant"
+            component={renderRadioGroup}
+            label="Is this child a descendant of a New Zealand Māori?"
+            options={[
+              { value: 'yes', display: 'Yes'},
+              { value: 'no', display: 'No'},
+              { value: 'notsure', display: 'Not sure'}
+            ]}
+          />
 
           <Field
             name="ethnicGroups"
@@ -351,20 +311,22 @@ class ChildDetailsForm extends Component {
               { value: 'Tongan', display: 'Tongan'},
               { value: 'Niuean', display: 'Niuean'},
               { value: 'Chinese', display: 'Chinese'},
-              { value: 'Indian', display: 'Indian'},
+                { value: 'Indian', display: 'Indian'},
               { value: 'Other', display: 'Other'}
             ]}
             onChange={this.onEthnicGroupsChange}
           />
 
           { ethnicGroups && ethnicGroups.indexOf('Other') > -1 &&
-            <Field
-              name="ethnicityDescription"
-              component={renderField}
-              type="text"
-              placeholder="Please describe the child’s ethnicity"
-              validate={[required, maxLength30]}
-            />
+            <div className="conditional-field">
+              <Field
+                name="ethnicityDescription"
+                component={renderField}
+                type="text"
+                placeholder="Please describe the child’s ethnicity"
+                validate={[required, maxLength30]}
+              />
+            </div>
           }
 
           <div className="form-actions">
