@@ -104,6 +104,7 @@ class MotherDetailsForm extends Component {
             component={renderField}
             type="text"
             label="Usual occupation, profession or job of mother"
+            placeholder="e.g. Teacher"
             instructionText="Please enter the mother's type of occupation not the name of the mother's employer"
             validate={[required]}
           />
