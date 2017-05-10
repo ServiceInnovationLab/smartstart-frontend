@@ -51,11 +51,13 @@
 
   form {
     border-bottom: 1px solid $form-lighter-border-color;
+    margin-top: 48px;
     padding-bottom: 20px;
 
     input, label {
       margin: 0;
     }
+
     input[type="text"],
     input[type="email"],
     input[type="number"] {
@@ -114,10 +116,11 @@
     fieldset {
       border: none;
       padding: 0;
-      margin: 0;
 
       legend {
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 1em;
+        margin-bottom: .5em;
         font-weight: 500;
       }
     }
@@ -125,12 +128,11 @@
     div.input-group, div.radio-group, div.checkbox-group {
       display: flex;
       flex-flow: column;
-      margin: 10px 5px;
 
       > label {
-        margin-right: 10px;
+        font-size: 16px;
+        margin-bottom: .5em;
         text-align: left;
-        padding: 9px 9px 9px 0;
       }
 
       > div {
@@ -139,6 +141,7 @@
         justify-content: center;
         flex-flow: column;
         position: relative;
+        margin-top: .5em;
 
         > input {
           flex: 1 auto;
@@ -149,7 +152,6 @@
           display: inline-block;
           font-size: 16px;
           margin-top: 10px;
-          margin-bottom: 10px;
           padding: 5px 8px 5px 40px;
           position: relative;
 
@@ -175,6 +177,19 @@
         }
       }
     }
+
+    > div.input-group, > div.radio-group, > div.checkbox-group {
+      margin: 30px 0;
+    }
+
+    > fieldset {
+      margin: 30px 0;
+    }
+
+    div.conditional-field {
+      padding-left: 20px;
+      border-left: 2px solid $form-lighter-border-color;
+    }
   }
 
   div.input-group {
@@ -187,7 +202,7 @@
   }
 
   div.radio-group {
-    > div > div > label {
+    label {
       display: inline-block;
       cursor: pointer;
 
@@ -238,14 +253,14 @@
     }
 
     &.has-error {
-      > div > div > label > span {
+      label > span {
         border-color: $form-error-outline;
       }
     }
   }
 
   div.checkbox-group {
-    > div > div > label {
+    label {
       position: relative;
       cursor: pointer;
       display: block;
@@ -309,11 +324,6 @@
     }
   }
 
-  div.conditional-field {
-    padding-left: 20px;
-    border-left: 2px solid $form-lighter-border-color;
-  }
-
   .aligner {
     display: flex;
     align-items: center;
@@ -336,7 +346,7 @@
   }
 
   .instruction-text {
-    padding-bottom: 9px;
+    margin: 0.5em 0;
   }
 
   .expandable {
