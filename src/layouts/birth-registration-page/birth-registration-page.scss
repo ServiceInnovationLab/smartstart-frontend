@@ -189,6 +189,10 @@
     div.conditional-field {
       padding-left: 20px;
       border-left: 2px solid $form-lighter-border-color;
+
+      > div.input-group {
+        margin: 30px 0;
+      }
     }
   }
 
