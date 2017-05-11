@@ -125,6 +125,35 @@
       }
     }
 
+    span.error, span.warning {
+      font-size: 16px;
+      padding: 5px 8px 5px 40px;
+      position: relative;
+      display: inline-block;
+
+      &::before {
+        font-family: 'icomoon';
+        font-size: 18px;
+        line-height: 18px;
+        position: absolute;
+        left: 10px;
+        top: 7px;
+        content: $icon-exclamation;
+        color: $form-error-outline;
+      }
+    }
+
+
+    span.error {
+      background-color: $form-error-bg;
+      border-left: 3px solid $form-error-outline;
+    }
+
+    span.warning {
+      background-color: $form-warning-bg;
+      border-left: 3px solid $form-warning-outline;
+    }
+
     div.input-group, div.radio-group, div.checkbox-group {
       display: flex;
       flex-flow: column;
@@ -147,34 +176,14 @@
           flex: 1 auto;
         }
 
-        > span {
+        > span.error, > span.warning {
           flex: 1 1 1;
-          display: inline-block;
-          font-size: 16px;
           margin-top: 10px;
-          padding: 5px 8px 5px 40px;
-          position: relative;
-
-          &.error {
-            &::before {
-              font-family: 'icomoon';
-              font-size: 18px;
-              line-height: 18px;
-              position: absolute;
-              left: 10px;
-              top: 7px;
-              content: $icon-exclamation;
-              color: $form-error-outline;
-            }
-            background-color: $form-error-bg;
-            border-left: 3px solid $form-error-outline;
-          }
-
-          &.warning {
-            background-color: $form-warning-bg;
-            border-left: 3px solid $form-warning-outline;
-          }
         }
+      }
+
+      + span.error, + span.warning {
+        margin-top: -20px;
       }
     }
 

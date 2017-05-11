@@ -5,20 +5,26 @@ import moment from 'moment'
 import get from 'lodash/get'
 import Accordion from './accordion'
 import renderField from './render-field'
+import renderWarning from './render-warning'
 import renderSelect from './render-select'
 import renderDatepicker from './render-datepicker'
 import renderBirthOrderSelector from './render-birth-order-selector'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderRadioGroup from './render-radio-group'
-import { required, maxLength30 } from './validate'
+import { required, maxLength30, validName } from './validate'
 import {
   REQUIRE_MESSAGE,
   INVALID_DATE_MESSAGE,
-  FUTURE_DATE_MESSAGE
+  FUTURE_DATE_MESSAGE,
+  LONG_NAME_WARNING_MESSAGE
 } from './validation-messages'
 
 const validate = (values) => {
   const errors = {}
+
+  if (!values.firstName) {
+    errors.firstName = REQUIRE_MESSAGE + '. If you want your child to have a single name enter a dash (-) in the given names field.'
+  }
 
   if (!values.sex) {
     errors.sex = REQUIRE_MESSAGE
@@ -59,6 +65,29 @@ const validate = (values) => {
   }
 
   return errors
+}
+
+const warn = (values) => {
+  const warnings = {}
+
+  if (values.firstName && values.firstName.length > 70) {
+    warnings.firstName = 'Child\'s given name(s) exceeds 70 characters'
+  }
+
+  if (values.lastName) {
+    if (values.firstName && values.firstName.length + values.lastName.length > 100) {
+      warnings.lastName = 'Combined names exceed 100 characters'
+    } else if (values.lastName.length > 50) {
+      warnings.lastName = 'Child\'s surname exceeds 50 characters'
+    }
+  }
+
+  if (warnings.firstName || warnings.lastName) {
+    warnings.nameAdditionalWarning = LONG_NAME_WARNING_MESSAGE
+  }
+
+  return warnings
+
 }
 
 class ChildDetailsForm extends Component {
@@ -156,17 +185,23 @@ class ChildDetailsForm extends Component {
             component={renderField}
             type="text"
             placeholder="First name"
-            label="Child's given names"
-            validate={[required]}
+            label="Child's given name(s)"
+            instructionText="Enter the child's first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate"
+            validate={[validName]}
           />
 
           <Field
             name="lastName"
             component={renderField}
             type="text"
-            placeholder="E.g Williscroft"
-            label="Child's family name"
-            validate={[required]}
+            placeholder="E.g Smith"
+            label="Child's surname"
+            validate={[required, validName]}
+          />
+
+          <Field
+            name="nameAdditionalWarning"
+            component={renderWarning}
           />
 
           <Field
@@ -312,7 +347,7 @@ class ChildDetailsForm extends Component {
               { value: 'Tongan', display: 'Tongan'},
               { value: 'Niuean', display: 'Niuean'},
               { value: 'Chinese', display: 'Chinese'},
-                { value: 'Indian', display: 'Indian'},
+              { value: 'Indian', display: 'Indian'},
               { value: 'Other', display: 'Other'}
             ]}
             onChange={this.onEthnicGroupsChange}
@@ -356,7 +391,8 @@ ChildDetailsForm = reduxForm({
   form: 'registration', // same name for all wizard's form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
+  warn
 })(ChildDetailsForm)
 
 const selector = formValueSelector('registration')
