@@ -150,7 +150,7 @@ class ChildDetailsForm extends Component {
           </Accordion>
         </div>
 
-        <form onSubmit={handleSubmit(this.props.onSubmit)}>
+        <form onSubmit={handleSubmit}>
           <Field
             name="firstName"
             component={renderField}
@@ -291,6 +291,7 @@ class ChildDetailsForm extends Component {
             name="isMaoriDescendant"
             component={renderRadioGroup}
             label="Is this child a descendant of a New Zealand Māori?"
+            instructionText="This will not appear on the birth certificate"
             options={[
               { value: 'yes', display: 'Yes'},
               { value: 'no', display: 'No'},
@@ -343,8 +344,8 @@ ChildDetailsForm.propTypes = {
   multipleBirth: PropTypes.string,
   placeOfBirth: PropTypes.string,
   ethnicGroups: PropTypes.array,
-  onSubmit: PropTypes.func,
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   change: PropTypes.func,     // passed via reduxForm
   submitting: PropTypes.bool, // passed via reduxForm
   pristine: PropTypes.bool,   // passed via reduxForm

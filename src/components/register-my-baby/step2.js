@@ -63,7 +63,6 @@ class MotherDetailsForm extends Component {
     return (
       <div>
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">2</span> Whaea <br/> Mother</h2>
-        <div className="divider" />
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
             name="mother.firstName"
