@@ -30,7 +30,7 @@ class Main extends Component {
     return (
       <div className='site-container-wrapper'>
         <div className='site-container'>
-          <Header isLoggedIn={isLoggedIn} authError={authError} showBanner={true} />
+          <Header isLoggedIn={isLoggedIn} authError={authError} />
           <div className={showWhenLoaded}>
             <SettingsPane />
             <Welcome />
