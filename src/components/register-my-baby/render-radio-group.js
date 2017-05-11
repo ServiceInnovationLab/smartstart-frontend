@@ -67,7 +67,7 @@ const renderRadioGroup = ({ input, label, instructionText, options, meta: { touc
           onChange={input.onChange}
           onBlur={input.onBlur}
         />
-        {touched && error && <span className="error">{error}</span>}
+        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
       </div>
     </div>
   </fieldset>

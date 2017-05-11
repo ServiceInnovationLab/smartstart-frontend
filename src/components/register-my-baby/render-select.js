@@ -12,7 +12,7 @@ const renderSelect = ({ input, label, placeholder, options, meta: { touched, err
           )
         }
       </select>
-      {touched && error && <span className="error">{error}</span>}
+      {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
     </div>
   </div>
 )

@@ -174,7 +174,7 @@ const renderDatepicker = ({ input, label, meta: { touched, error } }) => (
           onChange={input.onChange}
           onBlur={input.onBlur}
         />
-        {touched && error && <span className="error">{error}</span>}
+        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
       </div>
     </div>
   </fieldset>

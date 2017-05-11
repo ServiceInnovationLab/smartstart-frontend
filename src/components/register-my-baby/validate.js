@@ -19,6 +19,11 @@ export const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
   INVALID_EMAIL_MESSAGE : undefined
 
+/*
+ * Validation rules for name in BRO form:
+ * - alpha characters only except hyphen and apostrophe
+ * - Macrons allowed
+ */
 export const validName = value =>
   value && /[0-9,.":;_=+*~`!<>?|\!()@#$%^&*_+&*^$]/g.test(value) ?
   INVALID_NAME_MESSAGE : undefined

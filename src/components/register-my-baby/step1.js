@@ -23,7 +23,7 @@ const validate = (values) => {
   const errors = {}
 
   if (!values.firstName) {
-    errors.firstName = REQUIRE_MESSAGE + '. If you want your child to have a single name enter a dash (-) in the given names field.'
+    errors.firstName = REQUIRE_MESSAGE + '. If you want your child to have a single name enter a dash (-) in the given names field'
   }
 
   if (!values.sex) {
