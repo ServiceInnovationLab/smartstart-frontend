@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import moment from 'moment'
+import find from 'lodash/find'
 import get from 'lodash/get'
 import Accordion from './accordion'
 import renderField from './render-field'
@@ -11,6 +12,7 @@ import renderDatepicker from './render-datepicker'
 import renderBirthOrderSelector from './render-birth-order-selector'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderRadioGroup from './render-radio-group'
+import renderPlacesAutocomplete from './render-places-autocomplete'
 import { required, maxLength30, validName } from './validate'
 import {
   REQUIRE_MESSAGE,
@@ -96,6 +98,7 @@ class ChildDetailsForm extends Component {
     this.onMultipleBirthChange = this.onMultipleBirthChange.bind(this)
     this.onPlaceOfBirthChanged = this.onPlaceOfBirthChanged.bind(this)
     this.onEthnicGroupsChange = this.onEthnicGroupsChange.bind(this)
+    this.onPlaceSelect = this.onPlaceSelect.bind(this)
   }
 
   onMultipleBirthChange(e, newVal) {
@@ -109,6 +112,7 @@ class ChildDetailsForm extends Component {
     if (newVal === 'hospital') {
       this.props.change('birthPlaceAddress1', '')
       this.props.change('birthPlaceAddress2', '')
+      this.props.change('birthPlaceAddress3', '')
       this.props.change('birthPlaceOther', '')
     }
     if (newVal === 'home') {
@@ -119,6 +123,7 @@ class ChildDetailsForm extends Component {
       this.props.change('hospitalName', '')
       this.props.change('birthPlaceAddress1', '')
       this.props.change('birthPlaceAddress2', '')
+      this.props.change('birthPlaceAddress3', '')
     }
   }
 
@@ -129,6 +134,25 @@ class ChildDetailsForm extends Component {
     ) {
       this.props.change('ethnicityDescription', '')
     }
+  }
+
+  onPlaceSelect(placeDetail) {
+    const { address_components: addressComponents } = placeDetail
+
+    const streetAddress = get(placeDetail, 'name')
+    const suburb = get(placeDetail, 'vicinity')
+    const town = get(
+      find(addressComponents, component => component.types.indexOf('locality') > -1),
+      'long_name'
+    )
+    const postalCode = get(
+      find(addressComponents, component => component.types.indexOf('postal_code') > -1),
+      'long_name'
+    )
+
+    this.props.change('birthPlaceAddress1', streetAddress)
+    this.props.change('birthPlaceAddress2', suburb)
+    this.props.change('birthPlaceAddress3', `${town} ${postalCode}`)
   }
 
   render() {
@@ -295,13 +319,21 @@ class ChildDetailsForm extends Component {
             <div className="conditional-field">
               <Field
                 name="birthPlaceAddress1"
-                component={renderField}
+                component={renderPlacesAutocomplete}
                 type="text"
-                label="Street number, Street Name, Suburb"
+                label="Street number and Street name"
+                onPlaceSelect={this.onPlaceSelect}
                 validate={[required]}
               />
               <Field
                 name="birthPlaceAddress2"
+                component={renderField}
+                type="text"
+                label="Suburb"
+                validate={[required]}
+              />
+              <Field
+                name="birthPlaceAddress3"
                 component={renderField}
                 type="text"
                 label="Town/City and Postcode"

@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector} from 'redux-form'
+import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
@@ -8,6 +9,7 @@ import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
+import renderPlacesAutocomplete from './render-places-autocomplete'
 import { required, number, email, maxLength30 } from './validate'
 import {
   REQUIRE_MESSAGE,
@@ -47,6 +49,7 @@ class MotherDetailsForm extends Component {
     super(props)
 
     this.onEthnicGroupsChange = this.onEthnicGroupsChange.bind(this);
+    this.onPlaceSelect = this.onPlaceSelect.bind(this);
   }
 
   onEthnicGroupsChange(e, newVal, previousVal) {
@@ -56,6 +59,26 @@ class MotherDetailsForm extends Component {
     ) {
       this.props.change('ethnicityDescription', '')
     }
+  }
+
+  onPlaceSelect(placeDetail) {
+    const { address_components: addressComponents } = placeDetail
+
+    const streetAddress = get(placeDetail, 'name')
+    const suburb = get(placeDetail, 'vicinity')
+
+    const town = get(
+      find(addressComponents, component => component.types.indexOf('locality') > -1),
+      'long_name'
+    )
+    const postalCode = get(
+      find(addressComponents, component => component.types.indexOf('postal_code') > -1),
+      'long_name'
+    )
+
+    this.props.change('mother.homeAddress1', streetAddress)
+    this.props.change('mother.homeAddress2', suburb)
+    this.props.change('mother.homeAddress3', `${town} ${postalCode}`)
   }
 
   render() {
@@ -136,13 +159,21 @@ class MotherDetailsForm extends Component {
             <div className="input-groups">
               <Field
                 name="mother.homeAddress1"
-                component={renderField}
+                component={renderPlacesAutocomplete}
                 type="text"
-                label="Street number, Street Name, Suburb"
+                label="Street number and Street name"
+                onPlaceSelect={this.onPlaceSelect}
                 validate={[required]}
               />
               <Field
                 name="mother.homeAddress2"
+                component={renderField}
+                type="text"
+                label="Suburb"
+                validate={[required]}
+              />
+              <Field
+                name="mother.homeAddress3"
                 component={renderField}
                 type="text"
                 label="Town/City and Postcode"

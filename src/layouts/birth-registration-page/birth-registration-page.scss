@@ -122,6 +122,7 @@
         line-height: 1em;
         margin-bottom: .5em;
         font-weight: 500;
+        padding: 0;
       }
     }
 
@@ -199,6 +200,18 @@
 
     > fieldset {
       margin: 30px 0;
+
+      > div > div.input-group {
+        margin: 15px 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
 
     div.conditional-field,
@@ -442,4 +455,24 @@
       }
     }
   }
+}
+
+.google-autocomplete-container {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border: 1px solid $form-border-color;
+  width: 100%;
+  z-index: 10;
+}
+
+.google-autocomplete-item {
+  background-color: #ffffff;
+  padding: 10px;
+  color: #555555;
+  cursor: pointer;
+}
+
+.google-autocomplete-item-active {
+  background-color: $form-teal-hover;
 }
