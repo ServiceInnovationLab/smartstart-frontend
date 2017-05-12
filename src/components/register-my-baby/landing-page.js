@@ -13,7 +13,7 @@ class RegisterMyBabyLandingPage extends Component {
   getStartedClick() {
     const piwikEvent = {
       'category': 'RegisterMyBaby',
-      'action': 'Click button',
+      'action': 'Click next',
       'name': 'Get started'
     }
     this.props.dispatch(piwikTrackPost('Register My Baby', piwikEvent))
