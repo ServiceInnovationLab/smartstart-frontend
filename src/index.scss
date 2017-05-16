@@ -362,6 +362,13 @@ input {
   }
 }
 
+[placeholder] {
+  text-overflow: ellipsis;
+}
+
+::placeholder {
+  text-overflow: ellipsis;
+}
 
 // HELPER CLASSES from HTML5 Boilerplate
 
