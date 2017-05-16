@@ -49,6 +49,11 @@
     margin-bottom: 20px;
   }
 
+  .informative-text {
+    background-color: $form-informative-background;
+    padding: 20px;
+  }
+
   form {
     border-bottom: 1px solid $form-lighter-border-color;
     margin-top: 48px;
