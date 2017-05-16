@@ -1,0 +1,28 @@
+@import 'variables';
+
+.react-autosuggest__suggestions-container--open {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border: 1px solid $form-border-color;
+  width: 100%;
+  z-index: 10;
+}
+
+.react-autosuggest__suggestions-list {
+  padding: 0;
+  margin: 0;
+}
+
+.react-autosuggest__suggestion {
+  list-style: none;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 0;
+  color: #555555;
+  cursor: pointer;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: $form-teal-hover;
+}

@@ -445,22 +445,8 @@
   }
 }
 
-.google-autocomplete-container {
-  position: absolute;
-  top: 100%;
-  background-color: white;
-  border: 1px solid $form-border-color;
-  width: 100%;
-  z-index: 10;
-}
-
-.google-autocomplete-item {
-  background-color: #ffffff;
-  padding: 10px;
-  color: #555555;
-  cursor: pointer;
-}
-
-.google-autocomplete-item-active {
-  background-color: $form-teal-hover;
+.places-autocomplete {
+  input {
+    width: 100%;
+  }
 }
