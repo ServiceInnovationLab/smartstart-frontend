@@ -133,7 +133,7 @@ class MotherDetailsForm extends Component {
 
           <fieldset>
             <legend>Home address</legend>
-            <div>
+            <div className="input-groups">
               <Field
                 name="mother.homeAddress1"
                 component={renderField}
