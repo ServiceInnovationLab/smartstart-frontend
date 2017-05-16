@@ -200,18 +200,6 @@
 
     > fieldset {
       margin: 30px 0;
-
-      > div > div.input-group {
-        margin: 15px 0;
-
-        &:first-child {
-          margin-top: 0;
-        }
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
     }
 
     div.conditional-field,

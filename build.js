@@ -23,6 +23,9 @@ if (yargs.endpoint) {
 if (yargs.piwik) {
   buildCommand = buildCommand + ' --piwik ' + yargs.piwik
 }
+if (yargs.google_api_key) {
+  buildCommand = buildCommand + ' --google_api_key ' + yargs.google_api_key
+}
 commands.push(buildCommand)
 
 isGitClean().then(function (clean) {

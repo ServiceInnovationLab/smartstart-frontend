@@ -64,16 +64,18 @@ class MotherDetailsForm extends Component {
   onPlaceSelect(placeDetail) {
     const { address_components: addressComponents } = placeDetail
 
-    const streetAddress = get(placeDetail, 'name')
-    const suburb = get(placeDetail, 'vicinity')
+    const streetAddress = get(placeDetail, 'name', '')
+    const suburb = get(placeDetail, 'vicinity', '')
 
     const town = get(
       find(addressComponents, component => component.types.indexOf('locality') > -1),
-      'long_name'
+      'long_name',
+      ''
     )
     const postalCode = get(
       find(addressComponents, component => component.types.indexOf('postal_code') > -1),
-      'long_name'
+      'long_name',
+      ''
     )
 
     this.props.change('mother.homeAddress1', streetAddress)

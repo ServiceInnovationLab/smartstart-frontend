@@ -23,7 +23,8 @@
       "API_ENDPOINT": true,
       "PIWIK_INSTANCE": true,
       "PIWIK_SITE": true,
-      "process": true
+      "process": true,
+      "GOOGLE_API_KEY": true
     },
     "rules": {
       "no-class-assign": "off"

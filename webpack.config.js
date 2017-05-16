@@ -38,6 +38,9 @@ if (yargs.piwik) {
   throw new Error('Piwik site ID not specified')
 }
 
+// API for loading Google Maps JavaScript API
+const GOOGLE_API_KEY = yargs.google_api_key || 'AIzaSyBm3adi63TaMp3sjs3g0OnOjPX0DqJZLx4'
+
 // config that is shared between all types of build
 const common = {
   context: PATHS.src,
@@ -174,7 +177,8 @@ switch (runCommand) {
           'process.env': {NODE_ENV: JSON.stringify('development')},
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
-          PIWIK_INSTANCE: JSON.stringify(piwikInstance)
+          PIWIK_INSTANCE: JSON.stringify(piwikInstance),
+          GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY)
         })
       ],
 

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
 import get from 'lodash/get'
 import FormWizardProgress from './progress'
@@ -123,4 +124,6 @@ RegisterMyBabyForm = connect(
   })
 )(RegisterMyBabyForm)
 
-export default RegisterMyBabyForm
+export default scriptLoader(
+  `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`
+)(RegisterMyBabyForm)

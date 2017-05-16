@@ -34,7 +34,6 @@ class renderPlacesAutocomplete extends Component {
       types: ['address']
     }
 
-
     const cssClasses = {
       autocompleteContainer: 'google-autocomplete-container',
       autocompleteItem: 'google-autocomplete-item',
