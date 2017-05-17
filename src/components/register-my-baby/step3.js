@@ -161,7 +161,7 @@ class FatherDetailsForm extends Component {
 
           <fieldset>
             <legend>Home address</legend>
-            <div>
+            <div className="input-groups">
               <Field
                 name="father.homeAddress1"
                 component={renderPlacesAutocomplete}

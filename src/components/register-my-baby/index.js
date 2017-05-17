@@ -14,7 +14,7 @@ const stepByStepName = {
   'child-details': 1,
   'mother-details': 2,
   'father-details': 3,
-  'other-details': 4
+  'parents-relationship': 4
 }
 
 const stepNameByStep = invert(stepByStepName)

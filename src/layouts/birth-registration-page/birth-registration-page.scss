@@ -76,13 +76,20 @@
 
     select {
       display: inline-block;
-      margin-right: 10px;
       font-size: $font-size-base;
       font-family: $font-family-base;
       height: $form-input-height;
       padding: 6px 9px;
       background-color: #fff;
       border-radius: 5px;
+    }
+
+    .styled-select + .styled-select {
+      margin-left: 5px;
+
+      @media #{$desktop-and-above} {
+        padding-left: 10px;
+      }
     }
 
     button {
@@ -209,12 +216,20 @@
 
     div.conditional-field,
     fieldset > .input-groups {
-      padding-left: 20px;
+      padding-left: 15px;
       border-left: 2px solid $form-lighter-border-color;
 
-      > div.input-group {
+      > div.input-group, > fieldset {
         margin: 30px 0;
       }
+
+      @media #{$desktop-and-above} {
+        padding-left: 20px;
+      }
+    }
+
+    div.conditional-field + div.conditional-field {
+      margin-top: 30px;
     }
 
     fieldset > .input-groups {
@@ -252,7 +267,11 @@
       > span {
         display: inline-block;
         border: 1px solid $form-border-color;
-        padding: 9.5px 20px;
+        padding: 9.5px 12px;
+
+        @media #{$desktop-and-above} {
+          padding: 9.5px 20px;
+        }
       }
 
       &:hover {
