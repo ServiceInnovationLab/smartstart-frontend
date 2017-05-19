@@ -23,7 +23,12 @@ const validate = (values) => {
   if (!get(values, 'mother.dateOfBirth')) {
     set(errors, 'mother.dateOfBirth', REQUIRE_MESSAGE)
   } else {
-    const dob = get(values, 'mother.dateOfBirth');
+    let dob = get(values, 'mother.dateOfBirth');
+
+    if (typeof dob === 'string') {
+      dob = moment(dob)
+    }
+
     if (!dob.isValid()) {
       set(errors, 'mother.dateOfBirth', INVALID_DATE_MESSAGE)
     } else if (dob.isAfter(moment())) {

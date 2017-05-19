@@ -29,7 +29,6 @@ class FormWizardProgress extends Component {
                     <span>{i + 1}</span>
                   }
                 </div>
-                <p>{step.name}</p>
               </div>
             )
           })

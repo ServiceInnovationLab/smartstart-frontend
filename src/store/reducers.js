@@ -168,7 +168,9 @@ function supplementaryContentActions (state = {
  * }
  */
 
-const initialRegistrationFormState = null
+const initialRegistrationFormState = {
+  numberOfSiblings: 0
+}
 
 function savedRegistrationForm (state = initialRegistrationFormState, action) {
   switch (action.type) {

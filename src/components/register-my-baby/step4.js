@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import get from 'lodash/get'
 import times from 'lodash/times'
 import Accordion from './accordion'
 import renderField from './render-field'
@@ -141,7 +140,6 @@ const selector = formValueSelector('registration')
 
 ParentRelationshipForm = connect(
   state => ({
-    initialValues: get(state, 'savedRegistrationForm.data') || { numberOfSiblings: 0 },
     parentRelationship: selector(state, 'parentRelationship'),
     numberOfSiblings: parseInt(selector(state, 'numberOfSiblings'))
   })

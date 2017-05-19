@@ -66,7 +66,7 @@ const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { t
       <div>
         <CheckboxGroup
           name={input.name}
-          value={input.value}
+          value={input.value || []}
           options={options}
           onChange={input.onChange}
           onBlur={input.onBlur}

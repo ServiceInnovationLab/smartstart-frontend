@@ -1,17 +1,53 @@
+@import 'variables';
+
 .form-wizard-progress {
   display: flex;
   position: relative;
+  border-bottom: 1px solid $form-teal-dark;
 
   .form-wizard-step {
     flex: 1;
     text-align: center;
+    border: 1px solid $border-color;
+    color: darken($border-color, 20%);
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 5px;
+
+    + .form-wizard-step {
+      margin-left: 5px;
+    }
 
     &.current {
+      color: $text-color;
       font-weight: bold;
+      border-color: $form-teal-dark;
+      border-bottom: 1px solid white;
+      margin-bottom: -1px;
     }
 
     &.finished {
       font-weight: bold;
+      background-color: $form-teal-dark;
+      color: white;
+      border-color: $form-teal-dark;
+
+      .form-wizard-step-icon span {
+        display: none;
+      }
+
+      .form-wizard-step-icon:before {
+        font-family: 'icomoon';
+        font-size: 1em;
+        content: $icon-tick;
+        display: block;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $form-teal-hover;
+      }
     }
   }
 }

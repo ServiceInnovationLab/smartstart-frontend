@@ -14,7 +14,10 @@ const stepByStepName = {
   'child-details': 1,
   'mother-details': 2,
   'father-details': 3,
-  'parents-relationship': 4
+  'parents-relationship': 4,
+  'ird-msd': 5,
+  'buy-birth-certificates': 6,
+  'review': 7
 }
 
 const stepNameByStep = invert(stepByStepName)
@@ -32,7 +35,10 @@ class RegisterMyBabyForm extends Component {
         { icon: '', name: 'Child'},
         { icon: '', name: 'Mother'},
         { icon: '', name: 'Father'},
-        { icon: '', name: 'Others'}
+        { icon: '', name: 'Others'},
+        { icon: '', name: 'IRD/MSD Sharing'},
+        { icon: '', name: 'Buy Birth Certificates'},
+        { icon: '', name: 'Review'}
       ]
     }
   }

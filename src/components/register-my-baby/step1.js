@@ -39,6 +39,9 @@ const validate = (values) => {
   if (!values.dateOfBirth) {
     errors.dateOfBirth = REQUIRE_MESSAGE
   } else {
+    if (typeof values.dateOfBirth === 'string') {
+      values.dateOfBirth = moment(values.dateOfBirth)
+    }
     if (!values.dateOfBirth.isValid()) {
       errors.dateOfBirth = INVALID_DATE_MESSAGE
     } else if (values.dateOfBirth.isAfter(moment())) {
@@ -438,7 +441,7 @@ ChildDetailsForm = connect(
     initialValues: get(state, 'savedRegistrationForm.data'),
     multipleBirth: selector(state, 'multipleBirth'),
     placeOfBirth: selector(state, 'placeOfBirth'),
-    ethnicGroups: selector(state, 'ethnicGroups')
+    ethnicGroups: selector(state, 'ethnicGroups') || []
   })
 )(ChildDetailsForm)
 
