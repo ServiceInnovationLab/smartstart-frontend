@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
 import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
@@ -49,6 +50,9 @@ class RegisterMyBabyForm extends Component {
       'name': this.state.stepName
     }))
     this.goToStep(this.state.step + 1)
+    this.setState({
+      animationClass: 'next'
+    })
   }
 
   previousStep() {
@@ -58,6 +62,9 @@ class RegisterMyBabyForm extends Component {
       'name': this.state.stepName
     }))
     this.goToStep(this.state.step - 1)
+    this.setState({
+      animationClass: 'previous'
+    })
   }
 
   goToStep(step, replace = false) {
@@ -103,15 +110,22 @@ class RegisterMyBabyForm extends Component {
   }
 
   render() {
-    const { step, steps } = this.state
+    const { step, steps, animationClass = '' } = this.state
 
     return (
       <div>
         <FormWizardProgress currentStep={step} steps={steps} />
-        {step === 1 && <Step1 onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-        {step === 2 && <Step2 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-        {step === 3 && <Step3 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-        {step === 4 && <Step4 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+        <CSSTransitionGroup
+          component="div"
+          className={`slider-animation-container ${animationClass}`}
+          transitionName="slide"
+          transitionEnterTimeout={600}
+          transitionLeaveTimeout={600}>
+          {step === 1 && <Step1 onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 2 && <Step2 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 3 && <Step3 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 4 && <Step4 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+        </CSSTransitionGroup>
       </div>
     )
   }

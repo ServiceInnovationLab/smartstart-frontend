@@ -10,6 +10,8 @@ export default function configureStore (preloadedState) {
     middleware.push(logger)
   }
 
+  // Enabling the interaction with Redux Dev Tools extension.
+  // Beside debugging capabilities, one convenient thing that it supports is for export/import the state
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
   return createStore(
