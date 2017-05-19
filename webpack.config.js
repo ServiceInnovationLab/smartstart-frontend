@@ -127,7 +127,8 @@ switch (runCommand) {
           'process.env': {NODE_ENV: JSON.stringify('production')},
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
-          PIWIK_INSTANCE: JSON.stringify(piwikInstance)
+          PIWIK_INSTANCE: JSON.stringify(piwikInstance),
+          GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY)
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
