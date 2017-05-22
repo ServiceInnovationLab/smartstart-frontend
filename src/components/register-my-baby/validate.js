@@ -7,6 +7,7 @@ import {
 } from './validation-messages'
 
 export const required = value => value ? undefined : REQUIRE_MESSAGE
+export const requiredWithMessage = message => value => value ? undefined : message
 
 export const maxLength = max => value =>
   value && value.length > max ? EXCEED_MAXLENGTH_MESSAGE.replace('{max}', max) : undefined

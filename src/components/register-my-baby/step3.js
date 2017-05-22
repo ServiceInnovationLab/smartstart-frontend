@@ -10,9 +10,11 @@ import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
-import { required, number, email, maxLength30 } from './validate'
+import { required, requiredWithMessage, number, email, maxLength30 } from './validate'
 import {
   REQUIRE_MESSAGE,
+  REQUIRE_MESSAGE_STREET,
+  REQUIRE_MESSAGE_POSTCODE,
   INVALID_DATE_MESSAGE,
   FUTURE_DATE_MESSAGE
 } from './validation-messages'
@@ -173,21 +175,20 @@ class FatherDetailsForm extends Component {
                 type="text"
                 label="Street number and Street name"
                 onPlaceSelect={this.onPlaceSelect}
-                validate={[required]}
+                validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
               />
               <Field
                 name="father.homeAddress2"
                 component={renderField}
                 type="text"
                 label="Suburb"
-                validate={[required]}
               />
               <Field
                 name="father.homeAddress3"
                 component={renderField}
                 type="text"
                 label="Town/City and Postcode"
-                validate={[required]}
+                validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
               />
             </div>
           </fieldset>

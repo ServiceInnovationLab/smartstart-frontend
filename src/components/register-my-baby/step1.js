@@ -13,9 +13,12 @@ import renderBirthOrderSelector from './render-birth-order-selector'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderRadioGroup from './render-radio-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
-import { required, maxLength30, validName } from './validate'
+import { required, requiredWithMessage, maxLength30, validName } from './validate'
 import {
   REQUIRE_MESSAGE,
+  REQUIRE_MESSAGE_CHILD_FIRST_NAME,
+  REQUIRE_MESSAGE_STREET,
+  REQUIRE_MESSAGE_POSTCODE,
   INVALID_DATE_MESSAGE,
   FUTURE_DATE_MESSAGE,
   LONG_NAME_WARNING_MESSAGE
@@ -23,10 +26,6 @@ import {
 
 const validate = (values) => {
   const errors = {}
-
-  if (!values.firstName) {
-    errors.firstName = REQUIRE_MESSAGE + '. If you want your child to have a single name enter a dash (-) in the given names field'
-  }
 
   if (!values.sex) {
     errors.sex = REQUIRE_MESSAGE
@@ -216,7 +215,7 @@ class ChildDetailsForm extends Component {
             placeholder="First name"
             label="Child's given name(s)"
             instructionText="Enter the child's first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate"
-            validate={[validName]}
+            validate={[requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validName]}
           />
 
           <Field
@@ -328,21 +327,20 @@ class ChildDetailsForm extends Component {
                 type="text"
                 label="Street number and Street name"
                 onPlaceSelect={this.onPlaceSelect}
-                validate={[required]}
+                validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
               />
               <Field
                 name="birthPlaceAddress2"
                 component={renderField}
                 type="text"
                 label="Suburb"
-                validate={[required]}
               />
               <Field
                 name="birthPlaceAddress3"
                 component={renderField}
                 type="text"
                 label="Town/City and Postcode"
-                validate={[required]}
+                validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
               />
             </div>
           }

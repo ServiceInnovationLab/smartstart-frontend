@@ -64,7 +64,8 @@ class ParentRelationshipForm extends Component {
             name="numberOfSiblings"
             component={renderSelect}
             options={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
-            label="Select the number of other children with the same mother and father. If this is the first child together then go to the next question"
+            label="Are there other children born from the same parent relationship?"
+            instructionText="Select the number of other children with the same mother and father. If this is the first child together then go to the next question"
             validate={[required]}
           />
 
