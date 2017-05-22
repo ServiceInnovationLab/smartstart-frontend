@@ -163,7 +163,7 @@ SimpleDatePicker.propTypes = {
   onBlur: PropTypes.func
 }
 
-const renderDatepicker = ({ input, label, meta: { touched, error } }) => (
+const renderDatepicker = ({ input, label, meta: { touched, error, warning } }) => (
 
   <fieldset>
     <legend>{label}</legend>
@@ -175,6 +175,7 @@ const renderDatepicker = ({ input, label, meta: { touched, error } }) => (
           onBlur={input.onBlur}
         />
         {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+        {touched && warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
       </div>
     </div>
   </fieldset>

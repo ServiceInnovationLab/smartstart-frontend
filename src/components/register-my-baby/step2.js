@@ -16,7 +16,8 @@ import {
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
   INVALID_DATE_MESSAGE,
-  FUTURE_DATE_MESSAGE
+  FUTURE_DATE_MESSAGE,
+  WARNING_MOTHER_DATE_OF_BIRTH
 } from './validation-messages'
 
 const validate = (values) => {
@@ -49,6 +50,25 @@ const validate = (values) => {
   }
 
   return errors
+}
+
+
+const warn = (values) => {
+  const warnings = {}
+
+  let dob = get(values, 'mother.dateOfBirth');
+
+  if (dob) {
+    if (typeof dob === 'string') {
+      dob = moment(dob)
+    }
+
+    if (dob.isValid() && moment().diff(dob, 'years') <= 13) {
+      set(warnings, 'mother.dateOfBirth', WARNING_MOTHER_DATE_OF_BIRTH)
+    }
+  }
+
+  return warnings
 }
 
 class MotherDetailsForm extends Component {
@@ -286,7 +306,8 @@ MotherDetailsForm = reduxForm({
   form: 'registration', // same name for all wizard's form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
+  warn
 })(MotherDetailsForm)
 
 const selector = formValueSelector('registration')
