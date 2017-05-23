@@ -10,6 +10,7 @@ import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
+import CitizenshipQuestions from './citizenship-questions'
 import { required, requiredWithMessage, number, email, maxLength30 } from './validate'
 import {
   REQUIRE_MESSAGE,
@@ -17,7 +18,8 @@ import {
   REQUIRE_MESSAGE_POSTCODE,
   INVALID_DATE_MESSAGE,
   FUTURE_DATE_MESSAGE,
-  WARNING_MOTHER_DATE_OF_BIRTH
+  WARNING_MOTHER_DATE_OF_BIRTH,
+  WARNING_CITIZENSHIP
 } from './validation-messages'
 
 const validate = (values) => {
@@ -66,6 +68,18 @@ const warn = (values) => {
     if (dob.isValid() && moment().diff(dob, 'years') <= 13) {
       set(warnings, 'mother.dateOfBirth', WARNING_MOTHER_DATE_OF_BIRTH)
     }
+  }
+
+  const isPermanentResident = get(values, 'mother.isPermanentResident');
+  const isNZRealmResident = get(values, 'mother.isNZRealmResident');
+  const isAuResidentOrCitizen = get(values, 'mother.isAuResidentOrCitizen');
+
+  if (
+    isPermanentResident === 'no' &&
+    isNZRealmResident === 'no' &&
+    isAuResidentOrCitizen === 'no'
+  ) {
+    set(warnings, 'mother.citizenshipWarning', WARNING_CITIZENSHIP)
   }
 
   return warnings
@@ -254,6 +268,11 @@ class MotherDetailsForm extends Component {
             </div>
           }
 
+          <CitizenshipQuestions
+            target="mother"
+            {...this.props}
+          />
+
           <Field
             name="mother.primaryPhoneNumber"
             component={renderField}
@@ -293,6 +312,11 @@ class MotherDetailsForm extends Component {
 
 MotherDetailsForm.propTypes = {
   ethnicGroups: PropTypes.array,
+  isCitizen: PropTypes.string,
+  isNZRealmResident: PropTypes.string,
+  isAuResidentOrCitizen: PropTypes.string,
+  isPermanentResident: PropTypes.string,
+  citizenshipSource: PropTypes.string,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
   change: PropTypes.func,     // passed via reduxForm
@@ -314,6 +338,11 @@ const selector = formValueSelector('registration')
 MotherDetailsForm = connect(
   state => ({
     ethnicGroups: selector(state, 'mother.ethnicGroups'),
+    isCitizen: selector(state, 'mother.isCitizen'),
+    isPermanentResident: selector(state, 'mother.isPermanentResident'),
+    isNZRealmResident: selector(state, 'mother.isNZRealmResident'),
+    isAuResidentOrCitizen: selector(state, 'mother.isAuResidentOrCitizen'),
+    citizenshipSource: selector(state, 'mother.citizenshipSource'),
   })
 )(MotherDetailsForm)
 

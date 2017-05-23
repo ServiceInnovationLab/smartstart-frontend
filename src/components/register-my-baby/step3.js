@@ -10,13 +10,15 @@ import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
+import CitizenshipQuestions from './citizenship-questions'
 import { required, requiredWithMessage, number, email, maxLength30 } from './validate'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
   INVALID_DATE_MESSAGE,
-  FUTURE_DATE_MESSAGE
+  FUTURE_DATE_MESSAGE,
+  WARNING_CITIZENSHIP
 } from './validation-messages'
 
 const validate = (values) => {
@@ -49,6 +51,24 @@ const validate = (values) => {
   }
 
   return errors
+}
+
+const warn = (values) => {
+  const warnings = {}
+
+  const isPermanentResident = get(values, 'father.isPermanentResident');
+  const isNZRealmResident = get(values, 'father.isNZRealmResident');
+  const isAuResidentOrCitizen = get(values, 'father.isAuResidentOrCitizen');
+
+  if (
+    isPermanentResident === 'no' &&
+    isNZRealmResident === 'no' &&
+    isAuResidentOrCitizen === 'no'
+  ) {
+    set(warnings, 'father.citizenshipWarning', WARNING_CITIZENSHIP)
+  }
+
+  return warnings
 }
 
 class FatherDetailsForm extends Component {
@@ -237,6 +257,11 @@ class FatherDetailsForm extends Component {
             </div>
           }
 
+          <CitizenshipQuestions
+            target="father"
+            {...this.props}
+          />
+
           <Field
             name="father.primaryPhoneNumber"
             component={renderField}
@@ -276,6 +301,11 @@ class FatherDetailsForm extends Component {
 
 FatherDetailsForm.propTypes = {
   ethnicGroups: PropTypes.array,
+  isCitizen: PropTypes.string,
+  isNZRealmResident: PropTypes.string,
+  isAuResidentOrCitizen: PropTypes.string,
+  isPermanentResident: PropTypes.string,
+  citizenshipSource: PropTypes.string,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
   change: PropTypes.func,     // passed via reduxForm
@@ -289,13 +319,19 @@ FatherDetailsForm = reduxForm({
   form: 'registration', // same name for all wizard's form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
+  warn
 })(FatherDetailsForm)
 
 const selector = formValueSelector('registration')
 FatherDetailsForm = connect(
   state => ({
     ethnicGroups: selector(state, 'father.ethnicGroups'),
+    isCitizen: selector(state, 'father.isCitizen'),
+    isPermanentResident: selector(state, 'father.isPermanentResident'),
+    isNZRealmResident: selector(state, 'father.isNZRealmResident'),
+    isAuResidentOrCitizen: selector(state, 'father.isAuResidentOrCitizen'),
+    citizenshipSource: selector(state, 'father.citizenshipSource'),
   })
 )(FatherDetailsForm)
 
