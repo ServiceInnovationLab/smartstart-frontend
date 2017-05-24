@@ -4,41 +4,22 @@ import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import moment from 'moment'
 import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
 import CitizenshipQuestions from './citizenship-questions'
-import { required, requiredWithMessage, number, email, maxLength30 } from './validate'
+import { required, requiredWithMessage, number, email, maxLength30, validDate } from './validate'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
-  INVALID_DATE_MESSAGE,
-  FUTURE_DATE_MESSAGE,
   WARNING_CITIZENSHIP
 } from './validation-messages'
 
 const validate = (values) => {
   const errors = {}
-
-  if (!get(values, 'father.dateOfBirth')) {
-    set(errors, 'father.dateOfBirth', REQUIRE_MESSAGE)
-  } else {
-    let dob = get(values, 'father.dateOfBirth');
-
-    if (typeof dob === 'string') {
-      dob = moment(dob)
-    }
-
-    if (!dob.isValid()) {
-      set(errors, 'father.dateOfBirth', INVALID_DATE_MESSAGE)
-    } else if (dob.isAfter(moment())) {
-      set(errors, 'father.dateOfBirth', FUTURE_DATE_MESSAGE)
-    }
-  }
 
   const ethnicGroups = get(values, 'father.ethnicGroups');
 
@@ -167,6 +148,7 @@ class FatherDetailsForm extends Component {
             name="father.dateOfBirth"
             component={renderDatepicker}
             label="Father's date of birth"
+            validate={[required, validDate]}
           />
 
           <Field

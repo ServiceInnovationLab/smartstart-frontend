@@ -11,35 +11,17 @@ import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
 import CitizenshipQuestions from './citizenship-questions'
-import { required, requiredWithMessage, number, email, maxLength30 } from './validate'
+import { required, requiredWithMessage, number, email, maxLength30, validDate } from './validate'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
-  INVALID_DATE_MESSAGE,
-  FUTURE_DATE_MESSAGE,
   WARNING_MOTHER_DATE_OF_BIRTH,
   WARNING_CITIZENSHIP
 } from './validation-messages'
 
 const validate = (values) => {
   const errors = {}
-
-  if (!get(values, 'mother.dateOfBirth')) {
-    set(errors, 'mother.dateOfBirth', REQUIRE_MESSAGE)
-  } else {
-    let dob = get(values, 'mother.dateOfBirth');
-
-    if (typeof dob === 'string') {
-      dob = moment(dob)
-    }
-
-    if (!dob.isValid()) {
-      set(errors, 'mother.dateOfBirth', INVALID_DATE_MESSAGE)
-    } else if (dob.isAfter(moment())) {
-      set(errors, 'mother.dateOfBirth', FUTURE_DATE_MESSAGE)
-    }
-  }
 
   const ethnicGroups = get(values, 'mother.ethnicGroups');
 
@@ -178,6 +160,7 @@ class MotherDetailsForm extends Component {
             name="mother.dateOfBirth"
             component={renderDatepicker}
             label="Mother's date of birth"
+            validate={[required, validDate]}
           />
 
           <Field

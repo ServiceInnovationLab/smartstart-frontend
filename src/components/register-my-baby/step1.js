@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import moment from 'moment'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import Accordion from './accordion'
@@ -13,14 +12,12 @@ import renderBirthOrderSelector from './render-birth-order-selector'
 import renderCheckboxGroup from './render-checkbox-group'
 import renderRadioGroup from './render-radio-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
-import { required, requiredWithMessage, maxLength30, validName } from './validate'
+import { required, requiredWithMessage, maxLength30, validName, validDate } from './validate'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_CHILD_FIRST_NAME,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
-  INVALID_DATE_MESSAGE,
-  FUTURE_DATE_MESSAGE,
   LONG_NAME_WARNING_MESSAGE
 } from './validation-messages'
 
@@ -33,19 +30,6 @@ const validate = (values) => {
 
   if (!values.aliveAtBirth) {
     errors.aliveAtBirth = REQUIRE_MESSAGE
-  }
-
-  if (!values.dateOfBirth) {
-    errors.dateOfBirth = REQUIRE_MESSAGE
-  } else {
-    if (typeof values.dateOfBirth === 'string') {
-      values.dateOfBirth = moment(values.dateOfBirth)
-    }
-    if (!values.dateOfBirth.isValid()) {
-      errors.dateOfBirth = INVALID_DATE_MESSAGE
-    } else if (values.dateOfBirth.isAfter(moment())) {
-      errors.dateOfBirth = FUTURE_DATE_MESSAGE
-    }
   }
 
   if (!values.multipleBirth) {
@@ -272,6 +256,7 @@ class ChildDetailsForm extends Component {
             name="dateOfBirth"
             component={renderDatepicker}
             label="The child's date of birth"
+            validate={[required, validDate]}
           />
 
           <Field
@@ -436,7 +421,7 @@ const selector = formValueSelector('registration')
 // check render method for more detail
 ChildDetailsForm = connect(
   state => ({
-    initialValues: get(state, 'savedRegistrationForm.data'),
+    initialValues: get(state, 'savedRegistrationForm'),
     multipleBirth: selector(state, 'multipleBirth'),
     placeOfBirth: selector(state, 'placeOfBirth'),
     ethnicGroups: selector(state, 'ethnicGroups') || []

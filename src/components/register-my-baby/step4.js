@@ -7,7 +7,7 @@ import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
 import renderSelect from './render-select'
 import renderRadioGroup from './render-radio-group'
-import { required } from './validate'
+import { required, validDate } from './validate'
 
 const validate = () => {
   const errors = {}
@@ -45,7 +45,7 @@ class ParentRelationshipForm extends Component {
                 name={`otherChildren.[${idx}].dateOfBirth`}
                 component={renderDatepicker}
                 label="What is this child's date of birth?"
-                validate={[required]}
+                validate={[required, validDate]}
               />
             </div>
           ))
@@ -64,6 +64,7 @@ class ParentRelationshipForm extends Component {
             name="numberOfSiblings"
             component={renderSelect}
             options={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
+            renderEmptyOption={false}
             label="Are there other children born from the same parent relationship?"
             instructionText="Select the number of other children with the same mother and father. If this is the first child together then go to the next question"
             validate={[required]}
@@ -85,7 +86,7 @@ class ParentRelationshipForm extends Component {
                 name="parentDateOfMarriage"
                 component={renderDatepicker}
                 label="Date of marriage/civil union"
-                validate={[required]}
+                validate={[required, validDate]}
               />
               <Field
                 name="parentPlaceOfMarriage"

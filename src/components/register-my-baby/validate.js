@@ -1,12 +1,17 @@
+import moment from 'moment'
 import {
   REQUIRE_MESSAGE,
   INVALID_EMAIL_MESSAGE,
   INVALID_NUMBER_MESSAGE,
   EXCEED_MAXLENGTH_MESSAGE,
-  INVALID_NAME_MESSAGE
+  INVALID_NAME_MESSAGE,
+  INVALID_DATE_MESSAGE,
+  FUTURE_DATE_MESSAGE
 } from './validation-messages'
 
-export const required = value => value ? undefined : REQUIRE_MESSAGE
+export const required = value =>
+  (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '')) ? REQUIRE_MESSAGE : undefined
+
 export const requiredWithMessage = message => value => value ? undefined : message
 
 export const maxLength = max => value =>
@@ -28,3 +33,19 @@ export const email = value =>
 export const validName = value =>
   value && /[0-9,.":;_=+*~`!<>?|\!()@#$%^&*_+&*^$]/g.test(value) ?
   INVALID_NAME_MESSAGE : undefined
+
+export const validDate = value => {
+  if (!value) {
+    return
+  }
+
+  if (typeof value === 'string') {
+    value = moment(value)
+  }
+
+  if (!value.isValid()) {
+    return INVALID_DATE_MESSAGE
+  } else if (value.isAfter(moment())) {
+    return FUTURE_DATE_MESSAGE
+  }
+}
