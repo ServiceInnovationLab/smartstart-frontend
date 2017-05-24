@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { Field } from 'redux-form'
+import capitalize from 'lodash/capitalize'
 import { required } from './validate'
 import Accordion from './accordion'
 import renderField from './render-field'
@@ -131,7 +132,8 @@ class CitizenshipQuestions extends Component {
           <Field
             name={prefix(target, 'citizenshipSource')}
             component={renderSelect}
-            label={`Please indicate how the ${target} is a New Zealand citizen`}
+            label={`${capitalize(target)} is either`}
+            instructionText={`Please indicate how the ${target} is a New Zealand citizen`}
             options={[
               { value: 'bornInNZ', display: 'Born in New Zealand' },
               { value: 'bornInNiue', display: 'Born in Niue' },
