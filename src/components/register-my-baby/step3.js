@@ -4,6 +4,7 @@ import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
+import moment from 'moment'
 import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
@@ -15,7 +16,8 @@ import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
-  WARNING_CITIZENSHIP
+  WARNING_CITIZENSHIP,
+  WARNING_FATHER_DATE_OF_BIRTH
 } from './validation-messages'
 
 const validate = (values) => {
@@ -36,6 +38,23 @@ const validate = (values) => {
 
 const warn = (values) => {
   const warnings = {}
+
+  let dob = get(values, 'father.dateOfBirth')
+  let childBirthDate = get(values, 'dateOfBirth')
+
+  if (dob && childBirthDate) {
+    if (typeof dob === 'string') {
+      dob = moment(dob)
+    }
+
+    if (typeof childBirthDate === 'string') {
+      childBirthDate = moment(childBirthDate)
+    }
+
+    if (dob.isValid() && childBirthDate.diff(dob, 'years') < 13) {
+      set(warnings, 'father.dateOfBirth', WARNING_FATHER_DATE_OF_BIRTH)
+    }
+  }
 
   const isPermanentResident = get(values, 'father.isPermanentResident');
   const isNZRealmResident = get(values, 'father.isNZRealmResident');

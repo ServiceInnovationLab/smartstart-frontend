@@ -23,7 +23,7 @@ import {
 const validate = (values) => {
   const errors = {}
 
-  const ethnicGroups = get(values, 'mother.ethnicGroups');
+  const ethnicGroups = get(values, 'mother.ethnicGroups')
 
   if (!ethnicGroups || !ethnicGroups.length) {
     set(errors, 'mother.ethnicGroups', REQUIRE_MESSAGE)
@@ -40,21 +40,26 @@ const validate = (values) => {
 const warn = (values) => {
   const warnings = {}
 
-  let dob = get(values, 'mother.dateOfBirth');
+  let dob = get(values, 'mother.dateOfBirth')
+  let childBirthDate = get(values, 'dateOfBirth')
 
-  if (dob) {
+  if (dob && childBirthDate) {
     if (typeof dob === 'string') {
       dob = moment(dob)
     }
 
-    if (dob.isValid() && moment().diff(dob, 'years') <= 13) {
+    if (typeof childBirthDate === 'string') {
+      childBirthDate = moment(childBirthDate)
+    }
+
+    if (dob.isValid() && childBirthDate.diff(dob, 'years') < 13) {
       set(warnings, 'mother.dateOfBirth', WARNING_MOTHER_DATE_OF_BIRTH)
     }
   }
 
-  const isPermanentResident = get(values, 'mother.isPermanentResident');
-  const isNZRealmResident = get(values, 'mother.isNZRealmResident');
-  const isAuResidentOrCitizen = get(values, 'mother.isAuResidentOrCitizen');
+  const isPermanentResident = get(values, 'mother.isPermanentResident')
+  const isNZRealmResident = get(values, 'mother.isNZRealmResident')
+  const isAuResidentOrCitizen = get(values, 'mother.isAuResidentOrCitizen')
 
   if (
     isPermanentResident === 'no' &&
@@ -71,8 +76,8 @@ class MotherDetailsForm extends Component {
   constructor(props) {
     super(props)
 
-    this.onEthnicGroupsChange = this.onEthnicGroupsChange.bind(this);
-    this.onPlaceSelect = this.onPlaceSelect.bind(this);
+    this.onEthnicGroupsChange = this.onEthnicGroupsChange.bind(this)
+    this.onPlaceSelect = this.onPlaceSelect.bind(this)
   }
 
   onEthnicGroupsChange(e, newVal, previousVal) {
