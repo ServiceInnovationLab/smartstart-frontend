@@ -124,7 +124,7 @@ class SimpleDatePicker extends Component {
         </span>
         <span className="styled-select">
           <select
-            value={month || ''}
+            value={month === 0 ? month : (month ||  '')}
             onChange={this.handleChange('month')}
             onBlur={this.handleBlur}
             ref={ monthSelect => this.monthSelect = monthSelect }
