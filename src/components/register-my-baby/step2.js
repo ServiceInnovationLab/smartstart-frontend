@@ -13,6 +13,10 @@ import renderPlacesAutocomplete from './render-places-autocomplete'
 import CitizenshipQuestions from './citizenship-questions'
 import { required, requiredWithMessage, number, email, maxLength30, validDate } from './validate'
 import {
+  ethnicGroups as ethnicGroupOptions,
+  yesNoNotSure as yesNoNotSureOptions
+} from './options'
+import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
@@ -218,11 +222,7 @@ class MotherDetailsForm extends Component {
             component={renderRadioGroup}
             label="Is the mother a descendant of a New Zealand Māori?"
             instructionText="This will not appear on the birth certificate"
-            options={[
-              { value: 'yes', display: 'Yes'},
-              { value: 'no', display: 'No'},
-              { value: 'notsure', display: 'Not sure'}
-            ]}
+            options={yesNoNotSureOptions}
           />
 
           <Field
@@ -230,17 +230,7 @@ class MotherDetailsForm extends Component {
             component={renderCheckboxGroup}
             label="Which ethnic group(s) does the mother belong to?"
             instructionText="Select as many boxes as you wish to describe the ethnic group(s) the mother belongs to."
-            options={[
-              { value: 'NZ European', display: 'NZ European'},
-              { value: 'Māori', display: 'Māori'},
-              { value: 'Samoan', display: 'Samoan'},
-              { value: 'Cook Island Māori', display: 'Cook Island Māori'},
-              { value: 'Tongan', display: 'Tongan'},
-              { value: 'Niuean', display: 'Niuean'},
-              { value: 'Chinese', display: 'Chinese'},
-              { value: 'Indian', display: 'Indian'},
-              { value: 'Other', display: 'Other'}
-            ]}
+            options={ethnicGroupOptions}
             onChange={this.onEthnicGroupsChange}
           />
 

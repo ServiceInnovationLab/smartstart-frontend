@@ -320,14 +320,16 @@
     }
   }
 
-  div.checkbox-group {
+  div.checkbox-group,
+  div.checkbox {
     label {
       position: relative;
       cursor: pointer;
-      display: block;
+      display: flex;
+      align-items: center;
       padding-left: 39px;
-      line-height: 34px;
       margin-bottom: 5px;
+      min-height: 34px;
 
       input[type="checkbox"] {
         position: absolute;
@@ -342,8 +344,9 @@
         height: 34px;
         border-radius: 5px;
         position: absolute;
-        top: 0;
+        top: 50%;
         left: 0;
+        transform: translateY(-50%);
       }
 
       input[type="checkbox"]:checked + span::before{
@@ -357,8 +360,20 @@
         content: $icon-tick;
         position: absolute;
         left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         opacity: 1;
         color: #fff;
+      }
+
+      input[type="checkbox"]:disabled {
+        + span::before {
+          border-color: $form-disabled-color;
+        }
+
+        + span {
+          color: $form-disabled-color;
+        }
       }
 
       input:focus + span {
@@ -366,8 +381,16 @@
       }
 
       &:hover {
-        input + span::before {
+        input[type="checkbox"] + span::before {
           background-color: $form-teal-hover;
+        }
+
+        input[type="checkbox"]:checked + span::before {
+          background-color: $form-teal-dark;
+        }
+
+        input[type="checkbox"]:disabled + span::before {
+          background-color: transparent;
         }
       }
     }

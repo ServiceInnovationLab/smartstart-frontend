@@ -14,6 +14,11 @@ import renderRadioGroup from './render-radio-group'
 import renderPlacesAutocomplete from './render-places-autocomplete'
 import { required, requiredWithMessage, maxLength30, validName, validDate } from './validate'
 import {
+  ethnicGroups as ethnicGroupOptions,
+  yesNo as yesNoOptions,
+  yesNoNotSure as yesNoNotSureOptions
+} from './options'
+import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_CHILD_FIRST_NAME,
   REQUIRE_MESSAGE_STREET,
@@ -230,10 +235,7 @@ class ChildDetailsForm extends Component {
             name="aliveAtBirth"
             component={renderRadioGroup}
             label="Was this child alive at birth?"
-            options={[
-              { value: 'yes', display: 'Yes'},
-              { value: 'no', display: 'No'}
-            ]}
+            options={yesNoOptions}
           />
 
           <div className="expandable-group secondary">
@@ -263,10 +265,7 @@ class ChildDetailsForm extends Component {
             name="multipleBirth"
             component={renderRadioGroup}
             label="Is this child one of a multiple birth (twins, triplets, etc)"
-            options={[
-              { value: 'yes', display: 'Yes'},
-              { value: 'no', display: 'No'}
-            ]}
+            options={yesNoOptions}
             onChange={this.onMultipleBirthChange}
           />
 
@@ -347,11 +346,7 @@ class ChildDetailsForm extends Component {
             component={renderRadioGroup}
             label="Is this child a descendant of a New Zealand Māori?"
             instructionText="This will not appear on the birth certificate"
-            options={[
-              { value: 'yes', display: 'Yes'},
-              { value: 'no', display: 'No'},
-              { value: 'notsure', display: 'Not sure'}
-            ]}
+            options={yesNoNotSureOptions}
           />
 
           <Field
@@ -359,17 +354,7 @@ class ChildDetailsForm extends Component {
             component={renderCheckboxGroup}
             label="Which ethnic group(s) does this child belong to?"
             instructionText="Select as many boxes as you wish to describe the ethnic group(s) this child belongs to."
-            options={[
-              { value: 'NZ European', display: 'NZ European'},
-              { value: 'Māori', display: 'Māori'},
-              { value: 'Samoan', display: 'Samoan'},
-              { value: 'Cook Island Māori', display: 'Cook Island Māori'},
-              { value: 'Tongan', display: 'Tongan'},
-              { value: 'Niuean', display: 'Niuean'},
-              { value: 'Chinese', display: 'Chinese'},
-              { value: 'Indian', display: 'Indian'},
-              { value: 'Other', display: 'Other'}
-            ]}
+            options={ethnicGroupOptions}
             onChange={this.onEthnicGroupsChange}
           />
 

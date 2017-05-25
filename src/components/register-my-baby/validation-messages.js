@@ -2,6 +2,7 @@ export const REQUIRE_MESSAGE = 'This is a required field, please provide an answ
 export const REQUIRE_MESSAGE_STREET = 'This is a required field, please enter a street address'
 export const REQUIRE_MESSAGE_POSTCODE = 'This is a required field, please enter a town or city and a postcode'
 export const REQUIRE_MESSAGE_CHILD_FIRST_NAME = 'This is a required field, please provide an answer. If you want your child to have a single name enter a dash (-) in the given names field'
+export const REQUIRE_AT_LEAST_ONE = 'You have to select at least one of the above'
 
 export const INVALID_DATE_MESSAGE = 'The selected date is not valid, please try again'
 export const FUTURE_DATE_MESSAGE = 'This date is in the future, please provide a valid date'
