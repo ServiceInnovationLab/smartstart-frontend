@@ -14,6 +14,7 @@ class CitizenshipQuestions extends Component {
   constructor(props) {
     super(props)
     this.onCitizenshipSourceChange = this.onCitizenshipSourceChange.bind(this)
+    this.onIsCitizenChange = this.onIsCitizenChange.bind(this)
   }
 
   onCitizenshipSourceChange(source) {
@@ -34,6 +35,20 @@ class CitizenshipQuestions extends Component {
     }
   }
 
+  onIsCitizenChange(e, newVal) {
+    const { target } = this.props;
+
+    if (newVal === 'yes') {
+      this.props.change(prefix(target, 'isPermanentResident'), '')
+      this.props.change(prefix(target, 'isNZRealmResident'), '')
+      this.props.change(prefix(target, 'isAuResidentOrCitizen'), '')
+      this.props.change(prefix(target, 'nonCitizenDocNumber'), '')
+    } else {
+      this.props.change(prefix(target, 'citizenshipSource'), '')
+      this.props.change(prefix(target, 'citizenshipPassportNumber'), '')
+    }
+  }
+
   render() {
     const { target, isCitizen, isPermanentResident, isNZRealmResident, isAuResidentOrCitizen, citizenshipSource } = this.props
 
@@ -49,6 +64,7 @@ class CitizenshipQuestions extends Component {
             { value: 'no', display: 'No'}
           ]}
           validate={[required]}
+          onChange={this.onIsCitizenChange}
         />
 
         <div className="expandable-group secondary">
