@@ -330,7 +330,7 @@ class FatherDetailsForm extends Component {
             name="assistedHumanReproduction"
             component={renderRadioGroup}
             label="Is the child born as a result of an assisted human reproduction procedure (such as artificial insemination)?"
-            options={yesNoNotSureOptions}
+            options={yesNoOptions}
             onChange={this.handleAssistedHumanReproductionChange}
             validate={[required]}
           />
