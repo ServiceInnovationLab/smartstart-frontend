@@ -17,36 +17,56 @@ const validate = () => {
 class ParentRelationshipForm extends Component {
   renderSiblings(numberOfSiblings) {
     return numberOfSiblings > 0 ?
-      <div>
+      <div className="component-grouping">
         { times(numberOfSiblings).map(idx => (
-            <div className="conditional-field" key={`siblings-${idx}`}>
-              <Field
-                name={`otherChildren.[${idx}].sex`}
-                component={renderRadioGroup}
-                label={`Sex of child ${idx + 1}`}
-                options={[
-                  { value: 'male', display: 'Male'},
-                  { value: 'female', display: 'Female'}
-                ]}
-                validate={[required]}
-              />
-              <Field
-                name={`otherChildren.[${idx}].aliveAtBirth`}
-                component={renderRadioGroup}
-                label="Is this child alive, since died, or were they stillborn?"
-                options={[
-                  { value: 'alive', display: 'Alive'},
-                  { value: 'sincedied', display: 'Since died'},
-                  { value: 'stillborn', display: 'Stillborn'}
-                ]}
-                validate={[required]}
-              />
-              <Field
-                name={`otherChildren.[${idx}].dateOfBirth`}
-                component={renderDatepicker}
-                label="What is this child's date of birth?"
-                validate={[required, validDate]}
-              />
+            <div>
+              <h4>Child {idx + 1}</h4>
+              <div className="conditional-field" key={`siblings-${idx}`}>
+                <Field
+                  name={`otherChildren.[${idx}].sex`}
+                  component={renderRadioGroup}
+                  label={`Sex of child ${idx + 1}`}
+                  options={[
+                    { value: 'male', display: 'Male'},
+                    { value: 'female', display: 'Female'}
+                  ]}
+                  validate={[required]}
+                />
+                <Field
+                  name={`otherChildren.[${idx}].aliveAtBirth`}
+                  component={renderRadioGroup}
+                  label="Is this child alive, since died, or were they stillborn?"
+                  options={[
+                    { value: 'alive', display: 'Alive'},
+                    { value: 'sincedied', display: 'Since died'},
+                    { value: 'stillborn', display: 'Stillborn'}
+                  ]}
+                  validate={[required]}
+                />
+                <Field
+                  name={`otherChildren.[${idx}].dateOfBirth`}
+                  component={renderDatepicker}
+                  label="What is this child's date of birth?"
+                  validate={[required, validDate]}
+                />
+                { idx === 0 &&
+                  <div className="expandable-group secondary">
+                    <Accordion>
+                      <Accordion.Toggle>
+                        What is a stillbirth?
+                      </Accordion.Toggle>
+                      <Accordion.Content>
+                        <p>A baby is stillborn if the baby is not alive at birth when born, and either;</p>
+                        <ul>
+                          <li>weighed 400g or more at birth, or</li>
+                          <li>the baby is delivered after the 20th week of the pregnancy</li>
+                        </ul>
+                        <p>You still need to register the birth. If you don’t want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field. A pregnancy miscarriage occurs when the baby is not born alive, and the before the 20th week of the pregnancy.</p>
+                      </Accordion.Content>
+                    </Accordion>
+                  </div>
+                }
+              </div>
             </div>
           ))
         }
