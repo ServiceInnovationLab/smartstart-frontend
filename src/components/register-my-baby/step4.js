@@ -55,66 +55,84 @@ class ParentRelationshipForm extends Component {
   }
 
   render() {
-    const { parentRelationship, numberOfSiblings, handleSubmit, submitting } = this.props
+    const { parentRelationship, numberOfSiblings, fatherKnown, assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting } = this.props
+    const isFormHidden = !fatherKnown || (assistedHumanReproduction && assistedHumanReproductionSpermDonor)
+
     return (
       <div>
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">4</span> Hononga mātua <br/> Parent's relationship</h2>
-        <form onSubmit={handleSubmit(this.props.onSubmit)}>
-          <Field
-            name="numberOfSiblings"
-            component={renderSelect}
-            options={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
-            renderEmptyOption={false}
-            label="Are there other children born from the same parent relationship?"
-            instructionText="Select the number of other children with the same mother and father. If this is the first child together then go to the next question"
-            validate={[required]}
-          />
-
-          { this.renderSiblings(numberOfSiblings) }
-
-          <Field
-            name="parentRelationship"
-            component={renderSelect}
-            options={['Marriage', 'Civil Union', 'De Facto Relationship', 'Not married/in a Civil Union/De Facto Relationship']}
-            label="What was the parents' relationship with each other at the time of the child's birth?"
-            validate={[required]}
-          />
-
-          { (parentRelationship === 'Marriage' || parentRelationship === 'Civil Union') &&
-            <div className="conditional-field">
-              <Field
-                name="parentDateOfMarriage"
-                component={renderDatepicker}
-                label="Date of marriage/civil union"
-                validate={[required, validDate]}
-              />
-              <Field
-                name="parentPlaceOfMarriage"
-                component={renderField}
-                type="text"
-                label="Place of marriage/civil union"
-                instructionText="City or town and Country (if ceremony was performed overseas)"
-                validate={[required]}
-              />
+        { isFormHidden &&
+          <form onSubmit={handleSubmit(this.props.onSubmit)}>
+            <div className="informative-text">
+              You indicated that the father is not known, so you do not need to complete this step.
+              <br/>
+              Just select <strong>Next</strong> to continue on or <strong>Back</strong> if you wish to change anything on the step before.
             </div>
-          }
+            <div className="form-actions">
+              <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
+              <button type="submit" className="next" disabled={submitting}>Next</button>
+            </div>
+          </form>
+        }
 
-          <div className="expandable-group secondary">
-            <Accordion>
-              <Accordion.Toggle>
-                What is a de facto relationship?
-              </Accordion.Toggle>
-              <Accordion.Content>
-                <p>Not every relationship where two people live together (and are not married, nor in a civil union) is a de facto relationship under the law. Being in a de facto relationship depends on the couple's circumstances, including the couple's ages, the length of the relationship, the degree to which the couple are mutually committed to a shared life together, and the extent to which they make their relationship known publicly, for example, to friends and family. It is important that you know whether or not you are in a de facto relationship before you tick the de facto relationship box. If you are unsure whether you are in a de facto relationship, you should get advice from a lawyer.</p>
-              </Accordion.Content>
-            </Accordion>
-          </div>
+        { !isFormHidden &&
+          <form onSubmit={handleSubmit(this.props.onSubmit)}>
+            <Field
+              name="numberOfSiblings"
+              component={renderSelect}
+              options={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
+              renderEmptyOption={false}
+              label="Are there other children born from the same parent relationship?"
+              instructionText="Select the number of other children with the same mother and father. If this is the first child together then go to the next question"
+              validate={[required]}
+            />
 
-          <div className="form-actions">
-            <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
-            <button type="submit" className="next" disabled={submitting}>Next</button>
-          </div>
-        </form>
+            { this.renderSiblings(numberOfSiblings) }
+
+            <Field
+              name="parentRelationship"
+              component={renderSelect}
+              options={['Marriage', 'Civil Union', 'De Facto Relationship', 'Not married/in a Civil Union/De Facto Relationship']}
+              label="What was the parents' relationship with each other at the time of the child's birth?"
+              validate={[required]}
+            />
+
+            { (parentRelationship === 'Marriage' || parentRelationship === 'Civil Union') &&
+              <div className="conditional-field">
+                <Field
+                  name="parentDateOfMarriage"
+                  component={renderDatepicker}
+                  label="Date of marriage/civil union"
+                  validate={[required, validDate]}
+                />
+                <Field
+                  name="parentPlaceOfMarriage"
+                  component={renderField}
+                  type="text"
+                  label="Place of marriage/civil union"
+                  instructionText="City or town and Country (if ceremony was performed overseas)"
+                  validate={[required]}
+                />
+              </div>
+            }
+
+            <div className="expandable-group secondary">
+              <Accordion>
+                <Accordion.Toggle>
+                  What is a de facto relationship?
+                </Accordion.Toggle>
+                <Accordion.Content>
+                  <p>Not every relationship where two people live together (and are not married, nor in a civil union) is a de facto relationship under the law. Being in a de facto relationship depends on the couple's circumstances, including the couple's ages, the length of the relationship, the degree to which the couple are mutually committed to a shared life together, and the extent to which they make their relationship known publicly, for example, to friends and family. It is important that you know whether or not you are in a de facto relationship before you tick the de facto relationship box. If you are unsure whether you are in a de facto relationship, you should get advice from a lawyer.</p>
+                </Accordion.Content>
+              </Accordion>
+            </div>
+
+            <div className="form-actions">
+              <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
+              <button type="submit" className="next" disabled={submitting}>Next</button>
+            </div>
+          </form>
+        }
       </div>
     )
   }
@@ -123,6 +141,9 @@ class ParentRelationshipForm extends Component {
 ParentRelationshipForm.propTypes = {
   parentRelationship: PropTypes.string,
   numberOfSiblings: PropTypes.number,
+  fatherKnown: PropTypes.bool,
+  assistedHumanReproduction: PropTypes.bool,
+  assistedHumanReproductionSpermDonor: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
   handleSubmit: PropTypes.func,
@@ -143,7 +164,10 @@ const selector = formValueSelector('registration')
 ParentRelationshipForm = connect(
   state => ({
     parentRelationship: selector(state, 'parentRelationship'),
-    numberOfSiblings: parseInt(selector(state, 'numberOfSiblings'))
+    numberOfSiblings: parseInt(selector(state, 'numberOfSiblings')),
+    fatherKnown: selector(state, 'fatherKnown'),
+    assistedHumanReproduction: selector(state, 'assistedHumanReproduction'),
+    assistedHumanReproductionSpermDonor: selector(state, 'assistedHumanReproductionSpermDonor'),
   })
 )(ParentRelationshipForm)
 
