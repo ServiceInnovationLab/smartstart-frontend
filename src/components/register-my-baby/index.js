@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
 import get from 'lodash/get'
+import { animateScroll } from 'react-scroll'
 import FormWizardProgress from './progress'
 import Step1 from './step1'
 import Step2 from './step2'
@@ -97,6 +98,8 @@ class RegisterMyBabyForm extends Component {
     } else {
       this.goToStep(1, true)
     }
+
+    animateScroll.scrollToTop({ duration: 300 })
   }
 
   componentWillReceiveProps(nextProps) {
