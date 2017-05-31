@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { validateIrdNumber, validateMsdNumber } from './modulus-11'
 import {
   REQUIRE_MESSAGE,
   INVALID_EMAIL_MESSAGE,
@@ -6,6 +7,8 @@ import {
   EXCEED_MAXLENGTH_MESSAGE,
   INVALID_NAME_MESSAGE,
   INVALID_DATE_MESSAGE,
+  INVALID_IRD_MESSAGE,
+  INVALID_MSD_MESSAGE,
   FUTURE_DATE_MESSAGE
 } from './validation-messages'
 
@@ -47,5 +50,25 @@ export const validDate = value => {
     return INVALID_DATE_MESSAGE
   } else if (value.isAfter(moment())) {
     return FUTURE_DATE_MESSAGE
+  }
+}
+
+export const validIrd = value => {
+  if (!value) {
+    return;
+  }
+
+  if (!validateIrdNumber(value)) {
+    return INVALID_IRD_MESSAGE
+  }
+}
+
+export const validMsd = value => {
+  if (!value) {
+    return;
+  }
+
+  if (!validateMsdNumber(value)) {
+    return INVALID_MSD_MESSAGE
   }
 }

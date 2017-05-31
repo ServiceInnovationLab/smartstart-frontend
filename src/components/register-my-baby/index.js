@@ -10,6 +10,7 @@ import Step1 from './step1'
 import Step2 from './step2'
 import Step3 from './step3'
 import Step4 from './step4'
+import Step5 from './step5'
 import { piwikTrackPost } from '../../actions/actions'
 
 const stepByStepName = {
@@ -17,7 +18,7 @@ const stepByStepName = {
   'mother-details': 2,
   'father-details': 3,
   'parents-relationship': 4,
-  'ird-msd': 5,
+  'other-services': 5,
   'buy-birth-certificates': 6,
   'review': 7
 }
@@ -128,6 +129,7 @@ class RegisterMyBabyForm extends Component {
           {step === 2 && <Step2 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
           {step === 3 && <Step3 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
           {step === 4 && <Step4 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 5 && <Step5 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
         </CSSTransitionGroup>
       </div>
     )
