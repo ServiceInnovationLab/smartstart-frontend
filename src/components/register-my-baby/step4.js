@@ -76,7 +76,7 @@ class ParentRelationshipForm extends Component {
 
   render() {
     const { parentRelationship, numberOfSiblings, fatherKnown, assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting } = this.props
-    const isFormHidden = !fatherKnown || (assistedHumanReproduction && assistedHumanReproductionSpermDonor)
+    const isFormHidden = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
 
     return (
       <div>
