@@ -55,7 +55,7 @@ export const validDate = value => {
 
 export const validIrd = value => {
   if (!value) {
-    return;
+    return
   }
 
   if (!validateIrdNumber(value)) {
@@ -65,7 +65,7 @@ export const validIrd = value => {
 
 export const validMsd = value => {
   if (!value) {
-    return;
+    return
   }
 
   if (!validateMsdNumber(value)) {

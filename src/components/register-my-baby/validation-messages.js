@@ -1,3 +1,6 @@
+import React from 'react'
+import { Link } from 'react-router'
+
 export const REQUIRE_MESSAGE = 'This is a required field, please provide an answer'
 export const REQUIRE_MESSAGE_STREET = 'This is a required field, please enter a street address'
 export const REQUIRE_MESSAGE_POSTCODE = 'This is a required field, please enter a town or city and a postcode'
@@ -20,3 +23,13 @@ export const LONG_NAME_WARNING_MESSAGE = 'The child\'s name appears to be very l
 export const WARNING_MOTHER_DATE_OF_BIRTH = 'You have indicated that the mother was less than 13 years old when the child was born. If this is a mistake please adjust the date, or continue'
 export const WARNING_FATHER_DATE_OF_BIRTH = 'You have indicated that the father was less than 13 years old when the child was born. If this is a mistake please adjust the date, or continue'
 export const WARNING_CITIZENSHIP = 'Note - If both the mother and father (or other parent) of the child being registered are not New Zealand citizens or entitled under the Immigration Act 2009 to be in New Zealand indefinitely or entitled to reside indefinitely in the Cook Islands, Niue or Tokelau, the child is not a New Zealand citizen by birth.'
+
+export const REQUIRE_MOTHER_EMAIL_IRD = <span>
+  You have not supplied mother's email address, please add one to the contact details on
+  &nbsp;<Link to={'/register-my-baby/mother-details?focus=mother.email'}>this step <span className="visuallyhidden">on the Mother details page</span></Link>
+</span>
+
+export const REQUIRE_FATHER_EMAIL_IRD = <span>
+  You have not supplied father's email address, please add one to the contact details on
+  &nbsp;<Link to={'/register-my-baby/father-details?focus=father.email'}>this step <span className="visuallyhidden">on the Father details page</span></Link>
+</span>

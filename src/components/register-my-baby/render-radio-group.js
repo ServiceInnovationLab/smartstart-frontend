@@ -17,7 +17,7 @@ class RadioGroup extends Component {
   }
 
   handleBlur(event) {
-    const focusOutsideGroup = this.radios.indexOf(event.relatedTarget) === -1
+    const focusOutsideGroup = !event.relatedTarget || this.radios.indexOf(event.relatedTarget) === -1
     if (focusOutsideGroup) {
       this.props.onBlur(this.props.value)
     }

@@ -139,7 +139,8 @@
     }
 
     span.error,
-    span.warning {
+    span.warning,
+    span.info {
       font-size: 16px;
       padding: 5px 8px 5px 40px;
       position: relative;
@@ -166,6 +167,19 @@
     span.warning {
       background-color: $form-warning-bg;
       border-left: 3px solid $form-warning-outline;
+
+      &::before {
+        color: $form-warning-outline;
+      }
+    }
+
+    span.info {
+      background-color: $form-info-bg;
+      border-left: 3px solid $form-info-outline;
+
+      &::before {
+        color: $form-info-outline;
+      }
     }
 
     div.input-group,
@@ -476,7 +490,7 @@
   }
 
   .expandable-group {
-    margin-bottom: 10px;
+    margin: 20px 0;
 
     &.primary {
       .expandable-title-wrapper > .expandable-title {

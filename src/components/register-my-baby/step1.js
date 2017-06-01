@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
+import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderWarning from './render-warning'
@@ -413,4 +414,4 @@ ChildDetailsForm = connect(
   })
 )(ChildDetailsForm)
 
-export default ChildDetailsForm
+export default makeFocusable(ChildDetailsForm)

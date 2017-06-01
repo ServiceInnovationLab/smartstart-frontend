@@ -21,7 +21,7 @@ class CheckboxGroup extends Component {
   }
 
   handleBlur(event) {
-    const focusOutsideGroup = this.checkboxes.indexOf(event.relatedTarget) === -1
+    const focusOutsideGroup = !event.relatedTarget || this.checkboxes.indexOf(event.relatedTarget) === -1
     if (focusOutsideGroup) {
       this.props.onBlur(this.props.value)
     }

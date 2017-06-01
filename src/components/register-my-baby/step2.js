@@ -5,6 +5,7 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
+import makeFocusable from './make-focusable'
 import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
@@ -324,4 +325,4 @@ MotherDetailsForm = connect(
   })
 )(MotherDetailsForm)
 
-export default MotherDetailsForm
+export default makeFocusable(MotherDetailsForm)

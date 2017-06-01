@@ -5,6 +5,7 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
+import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
@@ -468,4 +469,4 @@ FatherDetailsForm = connect(
   })
 )(FatherDetailsForm)
 
-export default FatherDetailsForm
+export default makeFocusable(FatherDetailsForm)

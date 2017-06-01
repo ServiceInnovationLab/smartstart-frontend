@@ -95,9 +95,12 @@ class SimpleDatePicker extends Component {
    */
   handleBlur(e) {
     if (
-      e.relatedTarget !== this.daySelect &&
-      e.relatedTarget !== this.monthSelect &&
-      e.relatedTarget !== this.yearSelect
+      !e.relatedTarget ||
+      (
+        e.relatedTarget !== this.daySelect &&
+        e.relatedTarget !== this.monthSelect &&
+        e.relatedTarget !== this.yearSelect
+      )
     ) {
       this.props.onBlur(this.getSelectedDate())
     }

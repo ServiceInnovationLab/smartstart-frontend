@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import URLSearchParams from 'url-search-params'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
 import scriptLoader from 'react-async-script-loader'
@@ -116,6 +117,9 @@ class RegisterMyBabyForm extends Component {
   render() {
     const { step, steps, animationClass = '' } = this.state
 
+    const searchParams = new URLSearchParams(this.props.location.search)
+    const autoFocusField = searchParams.get('focus')
+
     return (
       <div>
         <FormWizardProgress currentStep={step} steps={steps} />
@@ -125,11 +129,11 @@ class RegisterMyBabyForm extends Component {
           transitionName="slide"
           transitionEnterTimeout={600}
           transitionLeaveTimeout={600}>
-          {step === 1 && <Step1 onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 2 && <Step2 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 3 && <Step3 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 4 && <Step4 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 5 && <Step5 onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 1 && <Step1 autoFocusField={autoFocusField} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 2 && <Step2 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 3 && <Step3 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 4 && <Step4 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 5 && <Step5 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
         </CSSTransitionGroup>
       </div>
     )
@@ -138,6 +142,7 @@ class RegisterMyBabyForm extends Component {
 
 RegisterMyBabyForm.propTypes = {
   params: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   savedRegistrationForm: PropTypes.object,
   dispatch: PropTypes.func

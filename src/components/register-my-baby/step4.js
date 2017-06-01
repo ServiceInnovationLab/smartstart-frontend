@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import times from 'lodash/times'
+import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
@@ -191,5 +192,4 @@ ParentRelationshipForm = connect(
   })
 )(ParentRelationshipForm)
 
-export default ParentRelationshipForm
-
+export default makeFocusable(ParentRelationshipForm)

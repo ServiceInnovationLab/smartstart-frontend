@@ -59,8 +59,11 @@ class BirthOrderSelector extends Component {
   handleBlur() {
     return e => {
       if (
-        e.relatedTarget !== this.firstSelect &&
-        e.relatedTarget !== this.secondSelect
+        !e.relatedTarget ||
+        (
+          e.relatedTarget !== this.firstSelect &&
+          e.relatedTarget !== this.secondSelect
+        )
       ) {
         this.props.onBlur(this.getValue())
       }

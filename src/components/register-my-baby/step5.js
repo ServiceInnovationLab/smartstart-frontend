@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import get from 'lodash/get'
 import set from 'lodash/set'
+import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderSelect from './render-select'
@@ -12,10 +13,48 @@ import {
   yesNo as yesNoOptions
 } from './options'
 import { required, requiredWithMessage, validIrd, validMsd } from './validate'
-import { REQUIRE_IRD_ADDRESS, REQUIRE_AT_LEAST_ONE_MSD } from './validation-messages'
+import {
+  REQUIRE_IRD_ADDRESS,
+  REQUIRE_AT_LEAST_ONE_MSD,
+  REQUIRE_MOTHER_EMAIL_IRD,
+  REQUIRE_FATHER_EMAIL_IRD
+} from './validation-messages'
+
+/**
+ * A normalizer function to mimic HTML5 `maxlength` behavior (refer to MSD & IRD field)
+ */
+const maximum = (max) => (value, previousVal) =>
+  value <= max ? value : previousVal
 
 const validate = (values) => {
   const errors = {}
+
+  const irdApplyForNumber = get(values, 'ird.applyForNumber')
+  const irdNumberDeliveryAddress = get(values, 'ird.numberDeliveryAddress')
+  const irdNumberByEmail = get(values, 'ird.numberByEmail')
+
+  if (
+    irdApplyForNumber === 'yes' &&
+    irdNumberByEmail === 'yes' &&
+    (
+      irdNumberDeliveryAddress === 'motherAddress' ||
+      irdNumberDeliveryAddress === 'fatherAddress'
+    )
+  ) {
+    if (irdNumberDeliveryAddress === 'motherAddress') {
+      const motherEmail = get(values, 'mother.email')
+      if (!motherEmail) {
+        set(errors, 'ird.numberByEmail', REQUIRE_MOTHER_EMAIL_IRD)
+      }
+    } else if (irdNumberDeliveryAddress === 'fatherAddress') {
+      const fatherEmail = get(values, 'father.email')
+      if (!fatherEmail) {
+        set(errors, 'ird.numberByEmail', REQUIRE_FATHER_EMAIL_IRD)
+      }
+    }
+  }
+
+
   const motherMsd = get(values, 'msd.mothersClientNumber')
   const fatherMsd = get(values, 'msd.fathersClientNumber')
 
@@ -28,7 +67,7 @@ const validate = (values) => {
 
 class IrdMsdSharingForm extends Component {
   render() {
-    const { applyForNumber, numberDeliveryAddress, msdNotify, handleSubmit, submitting } = this.props
+    const { applyForNumber, numberDeliveryAddress, numberByEmail, msdNotify, handleSubmit, submitting } = this.props
 
     return (
       <div>
@@ -82,7 +121,7 @@ class IrdMsdSharingForm extends Component {
             validate={[required]}
           />
 
-          { applyForNumber &&
+          { applyForNumber === 'yes' &&
             <div className="conditional-field">
               <Field
                 name="ird.numberDeliveryAddress"
@@ -106,6 +145,13 @@ class IrdMsdSharingForm extends Component {
                 />
               }
 
+              {
+                numberByEmail === 'yes' &&
+                <span className="info">
+                  By selecting <strong>Yes</strong> you agree to receive your child's IRD number by email. Inland Revenue will take all reasonable steps to reduce any risk of unauthorised access or release of confidential information. If you don’t provide consent, your IRD number will be mailed to the postal address you have provided.
+                </span>
+              }
+
               <Field
                 name="ird.taxCreditIRDNumber"
                 component={renderField}
@@ -113,6 +159,7 @@ class IrdMsdSharingForm extends Component {
                 instructionText="This will allow Inland Revenue to add the child's IRD number to your Working for Families details"
                 label="If you have applied for Working for Families Tax Credits for this child please provide your IRD number"
                 validate={[validIrd]}
+                normalize={maximum(999999999)}
               />
             </div>
           }
@@ -163,6 +210,7 @@ class IrdMsdSharingForm extends Component {
                 label="Mother's MSD client number"
                 instructionText="Please provide the MSD client number for at least one parent"
                 validate={[validMsd]}
+                normalize={maximum(999999999)}
               />
               <Field
                 name="msd.fathersClientNumber"
@@ -171,6 +219,7 @@ class IrdMsdSharingForm extends Component {
                 label="Father/Other parent's MSD client number"
                 instructionText="Please provide the MSD client number for at least one parent"
                 validate={[validMsd]}
+                normalize={maximum(999999999)}
               />
             </div>
           }
@@ -188,6 +237,7 @@ class IrdMsdSharingForm extends Component {
 IrdMsdSharingForm.propTypes = {
   applyForNumber: PropTypes.string,
   numberDeliveryAddress: PropTypes.string,
+  numberByEmail: PropTypes.string,
   msdNotify: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
@@ -210,10 +260,9 @@ IrdMsdSharingForm = connect(
   state => ({
     applyForNumber: selector(state, 'ird.applyForNumber'),
     numberDeliveryAddress: selector(state, 'ird.numberDeliveryAddress'),
+    numberByEmail: selector(state, 'ird.numberByEmail'),
     msdNotify: selector(state, 'msd.notify')
   })
 )(IrdMsdSharingForm)
 
-export default IrdMsdSharingForm
-
-
+export default makeFocusable(IrdMsdSharingForm)
