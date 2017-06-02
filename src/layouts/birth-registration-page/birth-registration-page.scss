@@ -265,7 +265,7 @@
 
       input[type="radio"] {
         position: absolute;
-        opacity: 0;
+        left: -9999px;
       }
 
       > span {
@@ -333,7 +333,7 @@
 
       input[type="checkbox"] {
         position: absolute;
-        opacity: 0;
+        left: -9999px;
       }
 
       span::before {
