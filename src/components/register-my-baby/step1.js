@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
+import set from 'lodash/set'
 import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
@@ -30,32 +31,16 @@ import {
 const validate = (values) => {
   const errors = {}
 
-  if (!values.sex) {
-    errors.sex = REQUIRE_MESSAGE
+  const oneOfMultiple = get(values, 'child.oneOfMultiple')
+  const multipleBirthOrder = get(values, 'child.multipleBirthOrder')
+
+  if (oneOfMultiple === 'yes' && !multipleBirthOrder) {
+    set(errors, 'child.multipleBirthOrder', REQUIRE_MESSAGE)
   }
 
-  if (!values.aliveAtBirth) {
-    errors.aliveAtBirth = REQUIRE_MESSAGE
-  }
-
-  if (!values.multipleBirth) {
-    errors.multipleBirth = REQUIRE_MESSAGE
-  }
-
-  if (values.multipleBirth === 'yes' && !values.multipleBirthOrder) {
-    errors.multipleBirthOrder = REQUIRE_MESSAGE
-  }
-
-  if (!values.placeOfBirth) {
-    errors.placeOfBirth = REQUIRE_MESSAGE
-  }
-
-  if (!values.isMaoriDescendant) {
-    errors.isMaoriDescendant = REQUIRE_MESSAGE
-  }
-
-  if (!values.ethnicGroups || !values.ethnicGroups.length) {
-    errors.ethnicGroups = REQUIRE_MESSAGE
+  const ethnicGroups = get(values, 'child.ethnicGroups')
+  if (!ethnicGroups || !ethnicGroups.length) {
+    set(errors, 'child.ethnicGroups', REQUIRE_MESSAGE)
   }
 
   return errors
@@ -63,27 +48,38 @@ const validate = (values) => {
 
 const warn = (values) => {
   const warnings = {}
+  const firstNames = get(values, 'child.firstNames')
 
-  if (values.firstName && values.firstName.length > 70) {
-    warnings.firstName = 'Child\'s given name(s) exceeds 70 characters'
+  if (firstNames && firstNames.length > 70) {
+    set(warnings, 'child.firstNames', 'Child\'s given name(s) exceeds 70 characters')
   }
 
-  if (values.lastName) {
-    if (values.firstName && values.firstName.length + values.lastName.length > 100) {
-      warnings.lastName = 'Combined names exceed 100 characters'
-    } else if (values.lastName.length > 50) {
-      warnings.lastName = 'Child\'s surname exceeds 50 characters'
+  const surname = get(values, 'child.surname')
+
+  if (surname) {
+    if (firstNames && firstNames.length + surname.length > 100) {
+      set(warnings, 'child.surname', 'Combined names exceed 100 characters')
+    } else if (surname.length > 50) {
+      set(warnings, 'child.surname', 'Child\'s surname exceeds 50 characters')
     }
   }
 
-  if (warnings.firstName || warnings.lastName) {
-    warnings.nameAdditionalWarning = LONG_NAME_WARNING_MESSAGE
+  if (get(warnings, 'child.firstNames') || get(warnings, 'child.surname')) {
+    set(warnings, 'child.nameAdditionalWarning', LONG_NAME_WARNING_MESSAGE);
   }
 
   return warnings
 
 }
 
+/**
+ * TODO in transformation step:
+ *
+ * [ ] child.multipleBirthOrder --> birthOrderNumber / birthOrderTotal
+ * [ ] remove child.nameAdditionalWarning
+ * [ ] normalize birth date to correct format
+ * [ ] transform child.ethnicGroups, move child.ethnicityDescription to child.ethnicGroups.other
+ */
 class ChildDetailsForm extends Component {
   constructor(props) {
     super(props)
@@ -96,26 +92,22 @@ class ChildDetailsForm extends Component {
   onMultipleBirthChange(e, newVal) {
     // In case user already select birthOrder, we need to reset the selection when 'No' is selected
     if (newVal === 'no') {
-      this.props.change('multipleBirthOrder', '')
+      this.props.change('child.multipleBirthOrder', '')
     }
   }
 
   onPlaceOfBirthChanged(e, newVal) {
     if (newVal === 'hospital') {
-      this.props.change('birthPlaceAddress1', '')
-      this.props.change('birthPlaceAddress2', '')
-      this.props.change('birthPlaceAddress3', '')
-      this.props.change('birthPlaceOther', '')
+      this.props.change('birthPlace.home', {})
+      this.props.change('birthPlace.other', '')
     }
     if (newVal === 'home') {
-      this.props.change('hospitalName', '')
-      this.props.change('birthPlaceOther', '')
+      this.props.change('birthPlace.hospital', '')
+      this.props.change('birthPlace.other', '')
     }
     if (newVal === 'other') {
-      this.props.change('hospitalName', '')
-      this.props.change('birthPlaceAddress1', '')
-      this.props.change('birthPlaceAddress2', '')
-      this.props.change('birthPlaceAddress3', '')
+      this.props.change('birthPlace.hospital', '')
+      this.props.change('birthPlace.home', {})
     }
   }
 
@@ -124,7 +116,7 @@ class ChildDetailsForm extends Component {
       previousVal && previousVal.indexOf('Other') > -1 &&
       newVal && newVal.indexOf('Other') === -1
     ) {
-      this.props.change('ethnicityDescription', '')
+      this.props.change('child.ethnicityDescription', '')
     }
   }
 
@@ -144,13 +136,13 @@ class ChildDetailsForm extends Component {
       ''
     )
 
-    this.props.change('birthPlaceAddress1', streetAddress)
-    this.props.change('birthPlaceAddress2', suburb)
-    this.props.change('birthPlaceAddress3', `${town} ${postalCode}`)
+    this.props.change('birthPlace.home.address1', streetAddress)
+    this.props.change('birthPlace.home.address2', suburb)
+    this.props.change('birthPlace.home.address3', `${town} ${postalCode}`)
   }
 
   render() {
-    const { multipleBirth, placeOfBirth, ethnicGroups, handleSubmit, submitting } = this.props
+    const { oneOfMultiple, birthPlaceCategory, ethnicGroups, handleSubmit, submitting } = this.props
 
     return (
       <div>
@@ -199,7 +191,7 @@ class ChildDetailsForm extends Component {
 
         <form onSubmit={handleSubmit}>
           <Field
-            name="firstName"
+            name="child.firstNames"
             component={renderField}
             type="text"
             placeholder="First name"
@@ -209,7 +201,7 @@ class ChildDetailsForm extends Component {
           />
 
           <Field
-            name="lastName"
+            name="child.surname"
             component={renderField}
             type="text"
             placeholder="E.g Smith"
@@ -218,25 +210,27 @@ class ChildDetailsForm extends Component {
           />
 
           <Field
-            name="nameAdditionalWarning"
+            name="child.nameAdditionalWarning"
             component={renderWarning}
           />
 
           <Field
-            name="sex"
+            name="child.sex"
             component={renderRadioGroup}
             label="Child's sex"
             options={[
               { value: 'male', display: 'Male'},
               { value: 'female', display: 'Female'}
             ]}
+            validate={[required]}
           />
 
           <Field
-            name="aliveAtBirth"
+            name="child.stillBorn"
             component={renderRadioGroup}
             label="Was this child alive at birth?"
             options={yesNoOptions}
+            validate={[required]}
           />
 
           <div className="expandable-group secondary">
@@ -256,24 +250,25 @@ class ChildDetailsForm extends Component {
           </div>
 
           <Field
-            name="dateOfBirth"
+            name="child.birthDate"
             component={renderDatepicker}
             label="The child's date of birth"
             validate={[required, validDate]}
           />
 
           <Field
-            name="multipleBirth"
+            name="child.oneOfMultiple"
             component={renderRadioGroup}
             label="Is this child one of a multiple birth (twins, triplets, etc)"
             options={yesNoOptions}
             onChange={this.onMultipleBirthChange}
+            validate={[required]}
           />
 
-          { multipleBirth === 'yes' &&
+          { oneOfMultiple === 'yes' &&
             <div className="conditional-field">
               <Field
-                name="multipleBirthOrder"
+                name="child.multipleBirthOrder"
                 component={renderBirthOrderSelector}
                 label="What is the birth order for this child?"
               />
@@ -281,7 +276,7 @@ class ChildDetailsForm extends Component {
           }
 
           <Field
-            name="placeOfBirth"
+            name="birthPlace.category"
             component={renderRadioGroup}
             label="Where was the child born?"
             options={[
@@ -290,12 +285,13 @@ class ChildDetailsForm extends Component {
               { value: 'other', display: 'Other'}
             ]}
             onChange={this.onPlaceOfBirthChanged}
+            validate={[required]}
           />
 
-          { placeOfBirth === 'hospital' &&
+          { birthPlaceCategory === 'hospital' &&
             <div className="conditional-field">
               <Field
-                name="hospitalName"
+                name="birthPlace.hospital"
                 component={renderSelect}
                 options={['Hospital One', 'Hospital Two', 'Hospital Three']}
                 label="Hospital name"
@@ -304,10 +300,10 @@ class ChildDetailsForm extends Component {
             </div>
           }
 
-          { placeOfBirth === 'home' &&
+          { birthPlaceCategory === 'home' &&
             <div className="conditional-field">
               <Field
-                name="birthPlaceAddress1"
+                name="birthPlace.home.address1"
                 component={renderPlacesAutocomplete}
                 type="text"
                 label="Street number and Street name"
@@ -315,13 +311,13 @@ class ChildDetailsForm extends Component {
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
               />
               <Field
-                name="birthPlaceAddress2"
+                name="birthPlace.home.address2"
                 component={renderField}
                 type="text"
                 label="Suburb"
               />
               <Field
-                name="birthPlaceAddress3"
+                name="birthPlace.home.address3"
                 component={renderField}
                 type="text"
                 label="Town/City and Postcode"
@@ -330,10 +326,10 @@ class ChildDetailsForm extends Component {
             </div>
           }
 
-          { placeOfBirth === 'other' &&
+          { birthPlaceCategory === 'other' &&
             <div className="conditional-field">
               <Field
-                name="birthPlaceOther"
+                name="birthPlace.other"
                 component={renderField}
                 type="text"
                 instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
@@ -343,15 +339,16 @@ class ChildDetailsForm extends Component {
           }
 
           <Field
-            name="isMaoriDescendant"
+            name="child.maoriDescendant"
             component={renderRadioGroup}
             label="Is this child a descendant of a New Zealand Māori?"
             instructionText="This will not appear on the birth certificate"
             options={yesNoNotSureOptions}
+            validate={[required]}
           />
 
           <Field
-            name="ethnicGroups"
+            name="child.ethnicGroups"
             component={renderCheckboxGroup}
             label="Which ethnic group(s) does this child belong to?"
             instructionText="Select as many boxes as you wish to describe the ethnic group(s) this child belongs to."
@@ -362,7 +359,7 @@ class ChildDetailsForm extends Component {
           { ethnicGroups && ethnicGroups.indexOf('Other') > -1 &&
             <div className="conditional-field">
               <Field
-                name="ethnicityDescription"
+                name="child.ethnicityDescription"
                 component={renderField}
                 type="text"
                 placeholder="Please describe the child’s ethnicity"
@@ -382,8 +379,8 @@ class ChildDetailsForm extends Component {
 }
 
 ChildDetailsForm.propTypes = {
-  multipleBirth: PropTypes.string,
-  placeOfBirth: PropTypes.string,
+  oneOfMultiple: PropTypes.string,
+  birthPlaceCategory: PropTypes.string,
   ethnicGroups: PropTypes.array,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
@@ -408,9 +405,9 @@ const selector = formValueSelector('registration')
 ChildDetailsForm = connect(
   state => ({
     initialValues: get(state, 'savedRegistrationForm'),
-    multipleBirth: selector(state, 'multipleBirth'),
-    placeOfBirth: selector(state, 'placeOfBirth'),
-    ethnicGroups: selector(state, 'ethnicGroups') || []
+    oneOfMultiple: selector(state, 'child.oneOfMultiple'),
+    birthPlaceCategory: selector(state, 'birthPlace.category'),
+    ethnicGroups: selector(state, 'child.ethnicGroups') || []
   })
 )(ChildDetailsForm)
 

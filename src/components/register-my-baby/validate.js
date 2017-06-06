@@ -15,7 +15,8 @@ import {
 export const required = value =>
   (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '')) ? REQUIRE_MESSAGE : undefined
 
-export const requiredWithMessage = message => value => value ? undefined : message
+export const requiredWithMessage = message => value =>
+  (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '')) ? message : undefined
 
 export const maxLength = max => value =>
   value && value.length > max ? EXCEED_MAXLENGTH_MESSAGE.replace('{max}', max) : undefined
