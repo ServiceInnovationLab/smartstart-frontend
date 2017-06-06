@@ -8,6 +8,7 @@ import moment from 'moment'
 import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
+import renderError from './render-error'
 import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
 import renderCheckboxGroup from './render-checkbox-group'
@@ -55,7 +56,7 @@ const validate = (values) => {
       !assistedHumanReproductionSpermDonor
     )
   ) {
-    set(errors, 'assistedHumanReproductionSpermDonor', REQUIRE_AT_LEAST_ONE)
+    set(errors, 'assistedHumanReproductionError', REQUIRE_AT_LEAST_ONE)
   }
 
   return errors
@@ -316,6 +317,7 @@ class FatherDetailsForm extends Component {
       assistedHumanReproductionManConsented,
       assistedHumanReproductionWomanConsented,
       assistedHumanReproductionSpermDonor,
+      assistedHumanReproductionTouched,
       fatherKnown, handleSubmit, submitting
     } = this.props
 
@@ -336,22 +338,24 @@ class FatherDetailsForm extends Component {
             validate={[required]}
           />
 
-          <div className="informative-text">
-            <span>How to answer this section:</span>
-            <br />
-            <span>If the mother married, or entered into a civil union or de facto relationship with a man who consented to the mother undergoing the procedure, that man's details should be entered under the Father/other parent details. Note: The Donor is generally not the father on the birth certificate.</span>
-          </div>
-
           { assistedHumanReproduction === 'yes' &&
-            <div className="component-grouping">
+            <div className="conditional-field">
+              <div className="informative-text">
+                If the mother married, or entered into a civil union or de facto relationship with a man who consented to the mother undergoing the procedure, that man's details should be entered under the father/other parent details. Note: The Donor is generally not the father on the birth certificate.
+              </div>
               <Field
                 name="assistedHumanReproductionManConsented"
                 label="I am in a relationship with a man who consented to the procedure. I will name him as the child's father"
                 component={renderCheckbox}
                 disabled={assistedHumanReproductionWomanConsented || assistedHumanReproductionSpermDonor}
               />
+            </div>
+          }
+
+          { assistedHumanReproduction === 'yes' &&
+            <div className="conditional-field">
               <div className="informative-text">
-                If the mother married or entered into a civil union or de facto relationship with a woman who consented to the mother undergoing the procedure, that woman's details should be entered under the Father/other parent details. When you tick the box below all references to 'father' will be changed to 'other parent'.
+                If the mother married or entered into a civil union or de facto relationship with a woman who consented to the mother undergoing the procedure, that woman's details should be entered under the father/other parent details. When you tick the box below all references to 'father' will be changed to 'other parent'.
               </div>
               <Field
                 name="assistedHumanReproductionWomanConsented"
@@ -359,6 +363,11 @@ class FatherDetailsForm extends Component {
                 component={renderCheckbox}
                 disabled={assistedHumanReproductionManConsented || assistedHumanReproductionSpermDonor}
               />
+            </div>
+          }
+
+          { assistedHumanReproduction === 'yes' &&
+            <div className="conditional-field">
               <div className="informative-text">
                 If the mother isn't in a relationship with a partner that consented to the mother undergoing the procedure, then you don't need to complete the father/other parent section - you will be able to skip this step and the next step.
               </div>
@@ -371,7 +380,15 @@ class FatherDetailsForm extends Component {
             </div>
           }
 
-          { (assistedHumanReproduction && assistedHumanReproduction !== 'yes') &&
+          { assistedHumanReproductionTouched &&
+            <Field
+              name="assistedHumanReproductionError"
+              component={renderError}
+              immediate={true}
+            />
+          }
+
+          { assistedHumanReproduction === 'no' &&
             <div className="component-grouping">
               <Field
                 name="fatherKnown"
@@ -434,6 +451,7 @@ FatherDetailsForm.propTypes = {
   assistedHumanReproductionManConsented: PropTypes.bool,
   assistedHumanReproductionWomanConsented: PropTypes.bool,
   assistedHumanReproductionSpermDonor: PropTypes.bool,
+  assistedHumanReproductionTouched: PropTypes.bool,
   fatherKnown: PropTypes.string,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
@@ -465,7 +483,10 @@ FatherDetailsForm = connect(
     assistedHumanReproductionManConsented: selector(state, 'assistedHumanReproductionManConsented'),
     assistedHumanReproductionWomanConsented: selector(state, 'assistedHumanReproductionWomanConsented'),
     assistedHumanReproductionSpermDonor: selector(state, 'assistedHumanReproductionSpermDonor'),
-    fatherKnown: selector(state, 'fatherKnown')
+    fatherKnown: selector(state, 'fatherKnown'),
+    assistedHumanReproductionTouched: get(state, 'form.registration.fields.assistedHumanReproductionManConsented.touched') ||
+                                      get(state, 'form.registration.fields.assistedHumanReproductionWomanConsented.touched') ||
+                                      get(state, 'form.registration.fields.assistedHumanReproductionSpermDonor.touched')
   })
 )(FatherDetailsForm)
 
