@@ -23,8 +23,13 @@ import {
 /**
  * A normalizer function to mimic HTML5 `maxlength` behavior (refer to MSD & IRD field)
  */
-const maximum = (max) => (value, previousVal) =>
-  value <= max ? value : previousVal
+const maximum = (max) => (value, previousVal) => {
+  if (isNaN(value)) {
+    return previousVal;
+  }
+
+  return value <= max ? value : previousVal
+}
 
 const validate = (values) => {
   const errors = {}
@@ -155,7 +160,7 @@ class IrdMsdSharingForm extends Component {
               <Field
                 name="ird.taxCreditIRDNumber"
                 component={renderField}
-                type="number"
+                type="text"
                 instructionText="This will allow Inland Revenue to add the child's IRD number to your Working for Families details"
                 label="If you have applied for Working for Families Tax Credits for this child please provide your IRD number"
                 validate={[validIrd]}
@@ -206,7 +211,7 @@ class IrdMsdSharingForm extends Component {
               <Field
                 name="msd.mothersClientNumber"
                 component={renderField}
-                type="number"
+                type="text"
                 label="Mother's MSD client number"
                 instructionText="Please provide the MSD client number for at least one parent"
                 validate={[validMsd]}
@@ -215,7 +220,7 @@ class IrdMsdSharingForm extends Component {
               <Field
                 name="msd.fathersClientNumber"
                 component={renderField}
-                type="number"
+                type="text"
                 label="Father/Other parent's MSD client number"
                 instructionText="Please provide the MSD client number for at least one parent"
                 validate={[validMsd]}
