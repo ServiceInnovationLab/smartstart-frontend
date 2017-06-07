@@ -35,7 +35,7 @@ const validate = (values) => {
   const errors = {}
 
   const irdApplyForNumber = get(values, 'ird.applyForNumber')
-  const irdNumberDeliveryAddress = get(values, 'ird.numberDeliveryAddress')
+  const irdNumberDeliveryAddress = get(values, 'ird.deliveryAddress')
   const irdNumberByEmail = get(values, 'ird.numberByEmail')
 
   if (
@@ -72,7 +72,7 @@ const validate = (values) => {
 
 class IrdMsdSharingForm extends Component {
   render() {
-    const { applyForNumber, numberDeliveryAddress, numberByEmail, msdNotify, handleSubmit, submitting } = this.props
+    const { applyForNumber, deliveryAddress, numberByEmail, msdNotify, handleSubmit, submitting } = this.props
 
     return (
       <div>
@@ -129,7 +129,7 @@ class IrdMsdSharingForm extends Component {
           { applyForNumber === 'yes' &&
             <div className="conditional-field">
               <Field
-                name="ird.numberDeliveryAddress"
+                name="ird.deliveryAddress"
                 component={renderSelect}
                 options={[
                   { value: 'motherAddress', display: 'Mother\'s' },
@@ -140,7 +140,7 @@ class IrdMsdSharingForm extends Component {
                 validate={[requiredWithMessage(REQUIRE_IRD_ADDRESS)]}
               />
               {
-                numberDeliveryAddress &&
+                deliveryAddress &&
                 <Field
                   name="ird.numberByEmail"
                   component={renderRadioGroup}
@@ -241,7 +241,7 @@ class IrdMsdSharingForm extends Component {
 
 IrdMsdSharingForm.propTypes = {
   applyForNumber: PropTypes.string,
-  numberDeliveryAddress: PropTypes.string,
+  deliveryAddress: PropTypes.string,
   numberByEmail: PropTypes.string,
   msdNotify: PropTypes.bool,
   onSubmit: PropTypes.func,
@@ -264,7 +264,7 @@ const selector = formValueSelector('registration')
 IrdMsdSharingForm = connect(
   state => ({
     applyForNumber: selector(state, 'ird.applyForNumber'),
-    numberDeliveryAddress: selector(state, 'ird.numberDeliveryAddress'),
+    deliveryAddress: selector(state, 'ird.deliveryAddress'),
     numberByEmail: selector(state, 'ird.numberByEmail'),
     msdNotify: selector(state, 'msd.notify')
   })
