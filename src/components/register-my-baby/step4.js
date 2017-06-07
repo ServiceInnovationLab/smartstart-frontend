@@ -15,16 +15,21 @@ const validate = () => {
   return errors
 }
 
+/**
+ * TODO in transformation step:
+ *
+ * [ ] normalize siblings birthdate, parentRelationshipDate to correct format
+ */
 class ParentRelationshipForm extends Component {
-  renderSiblings(numberOfSiblings) {
-    return numberOfSiblings > 0 ?
+  renderSiblings(otherChildren) {
+    return otherChildren > 0 ?
       <div className="component-grouping">
-        { times(numberOfSiblings).map(idx => (
+        { times(otherChildren).map(idx => (
             <div>
               <h4>Child {idx + 1}</h4>
               <div className="conditional-field" key={`siblings-${idx}`}>
                 <Field
-                  name={`otherChildren.[${idx}].sex`}
+                  name={`siblings.[${idx}].sex`}
                   component={renderRadioGroup}
                   label={`Sex of child ${idx + 1}`}
                   options={[
@@ -34,18 +39,18 @@ class ParentRelationshipForm extends Component {
                   validate={[required]}
                 />
                 <Field
-                  name={`otherChildren.[${idx}].aliveAtBirth`}
+                  name={`siblings.[${idx}].statusOfChild`}
                   component={renderRadioGroup}
                   label="Is this child alive, since died, or were they stillborn?"
                   options={[
-                    { value: 'alive', display: 'Alive'},
-                    { value: 'sincedied', display: 'Since died'},
-                    { value: 'stillborn', display: 'Stillborn'}
+                    { value: 'born-alive', display: 'Alive'},
+                    { value: 'has-died-since', display: 'Since died'},
+                    { value: 'stillborne', display: 'Stillborn'}
                   ]}
                   validate={[required]}
                 />
                 <Field
-                  name={`otherChildren.[${idx}].dateOfBirth`}
+                  name={`siblings.[${idx}].dateOfBirth`}
                   component={renderDatepicker}
                   label="What is this child's date of birth?"
                   validate={[required, validDate]}
@@ -76,7 +81,7 @@ class ParentRelationshipForm extends Component {
   }
 
   render() {
-    const { parentRelationship, numberOfSiblings, fatherKnown, assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting } = this.props
+    const { parentRelationship, otherChildren, fatherKnown, assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting } = this.props
     const isFormHidden = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
 
     return (
@@ -99,7 +104,7 @@ class ParentRelationshipForm extends Component {
         { !isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
             <Field
-              name="numberOfSiblings"
+              name="otherChildren"
               component={renderSelect}
               options={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
               renderEmptyOption={false}
@@ -108,26 +113,31 @@ class ParentRelationshipForm extends Component {
               validate={[required]}
             />
 
-            { this.renderSiblings(numberOfSiblings) }
+            { this.renderSiblings(otherChildren) }
 
             <Field
               name="parentRelationship"
               component={renderSelect}
-              options={['Marriage', 'Civil Union', 'De Facto Relationship', 'Not married/in a Civil Union/De Facto Relationship']}
+              options={[
+                { value: 'marriage', display: 'Marriage' },
+                { value: 'civilUnion', display: 'Civil Union' },
+                { value: 'deFacto', display: 'De Facto Relationship' },
+                { value: 'none', display: 'Not married/in a Civil Union/De Facto Relationship' }
+              ]}
               label="What was the parents' relationship with each other at the time of the child's birth?"
               validate={[required]}
             />
 
-            { (parentRelationship === 'Marriage' || parentRelationship === 'Civil Union') &&
+            { (parentRelationship === 'marriage' || parentRelationship === 'civilUnion') &&
               <div className="conditional-field">
                 <Field
-                  name="parentDateOfMarriage"
+                  name="parentRelationshipDate"
                   component={renderDatepicker}
                   label="Date of marriage/civil union"
                   validate={[required, validDate]}
                 />
                 <Field
-                  name="parentPlaceOfMarriage"
+                  name="parentRelationshipPlace"
                   component={renderField}
                   type="text"
                   label="Place of marriage/civil union"
@@ -161,7 +171,7 @@ class ParentRelationshipForm extends Component {
 
 ParentRelationshipForm.propTypes = {
   parentRelationship: PropTypes.string,
-  numberOfSiblings: PropTypes.number,
+  otherChildren: PropTypes.number,
   fatherKnown: PropTypes.bool,
   assistedHumanReproduction: PropTypes.bool,
   assistedHumanReproductionSpermDonor: PropTypes.bool,
@@ -185,7 +195,7 @@ const selector = formValueSelector('registration')
 ParentRelationshipForm = connect(
   state => ({
     parentRelationship: selector(state, 'parentRelationship'),
-    numberOfSiblings: parseInt(selector(state, 'numberOfSiblings')),
+    otherChildren: parseInt(selector(state, 'otherChildren')),
     fatherKnown: selector(state, 'fatherKnown'),
     assistedHumanReproduction: selector(state, 'assistedHumanReproduction'),
     assistedHumanReproductionSpermDonor: selector(state, 'assistedHumanReproductionSpermDonor'),
