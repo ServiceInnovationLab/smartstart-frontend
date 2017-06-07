@@ -39,10 +39,6 @@ const validate = (values) => {
     set(errors, 'father.ethnicGroups', REQUIRE_MESSAGE)
   }
 
-  if (!get(values, 'father.isMaoriDescendant')) {
-    set(errors, 'father.isMaoriDescendant', REQUIRE_MESSAGE)
-  }
-
   const assistedHumanReproduction = get(values, 'assistedHumanReproduction')
   const assistedHumanReproductionManConsented = get(values, 'assistedHumanReproductionManConsented')
   const assistedHumanReproductionWomanConsented = get(values, 'assistedHumanReproductionWomanConsented')
@@ -97,6 +93,21 @@ const warn = (values) => {
   return warnings
 }
 
+/**
+ * TODO in transformation step:
+ *
+ * [ ] transform father.ethnicGroups, move ethnicityDescription to ethnicGroups.other
+ * [ ] normalize birth date to correct format
+ * [ ] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenshipSource`
+ * [ ] depends on:
+ *
+ *      - assistedHumanReproduction
+ *      - assistedHumanReproductionManConsented
+ *      - assistedHumanReproductionWomanConsented
+ *      - assistedHumanReproductionSpermDonor
+ *
+ *      we need to set correct value for `assistedReproductionFemaleParents` & `fatherKnown`
+ */
 class FatherDetailsForm extends Component {
   constructor(props) {
     super(props)
@@ -132,9 +143,9 @@ class FatherDetailsForm extends Component {
       ''
     )
 
-    this.props.change('father.homeAddress1', streetAddress)
-    this.props.change('father.homeAddress2', suburb)
-    this.props.change('father.homeAddress3', `${town} ${postalCode}`)
+    this.props.change('father.homeAddress.line1', streetAddress)
+    this.props.change('father.homeAddress.suburb', suburb)
+    this.props.change('father.homeAddress.line2', `${town} ${postalCode}`)
   }
 
   handleAssistedHumanReproductionChange(e, newVal) {
@@ -152,7 +163,7 @@ class FatherDetailsForm extends Component {
     return (
       <div className="component-grouping">
         <Field
-          name="father.firstName"
+          name="father.firstNames"
           component={renderField}
           type="text"
           label="All first name(s) father is currently known by"
@@ -161,7 +172,7 @@ class FatherDetailsForm extends Component {
         />
 
         <Field
-          name="father.lastName"
+          name="father.surname"
           component={renderField}
           type="text"
           label="Surname of father (currently known by)"
@@ -170,7 +181,7 @@ class FatherDetailsForm extends Component {
         />
 
         <Field
-          name="father.firstNameAtBirth"
+          name="father.firstNamesAtBirth"
           component={renderField}
           type="text"
           label="All first name(s) of father at birth (if different from current name)"
@@ -178,7 +189,7 @@ class FatherDetailsForm extends Component {
         />
 
         <Field
-          name="father.lastNameAtBirth"
+          name="father.surnameAtBirth"
           component={renderField}
           type="text"
           label="Surname of father at birth (if different from current name)"
@@ -203,7 +214,7 @@ class FatherDetailsForm extends Component {
         />
 
         <Field
-          name="father.cityOfBirth"
+          name="father.placeOfBirth"
           component={renderField}
           type="text"
           label="Place of Birth - City/town"
@@ -223,7 +234,7 @@ class FatherDetailsForm extends Component {
           <legend>Home address</legend>
           <div className="input-groups">
             <Field
-              name="father.homeAddress1"
+              name="father.homeAddress.line1"
               component={renderPlacesAutocomplete}
               type="text"
               label="Street number and Street name"
@@ -231,13 +242,13 @@ class FatherDetailsForm extends Component {
               validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
             />
             <Field
-              name="father.homeAddress2"
+              name="father.homeAddress.suburb"
               component={renderField}
               type="text"
               label="Suburb"
             />
             <Field
-              name="father.homeAddress3"
+              name="father.homeAddress.line2"
               component={renderField}
               type="text"
               label="Town/City and Postcode"
@@ -248,11 +259,12 @@ class FatherDetailsForm extends Component {
 
 
         <Field
-          name="father.isMaoriDescendant"
+          name="father.maoriDescendant"
           component={renderRadioGroup}
           label="Is the father a descendant of a New Zealand Māori?"
           instructionText="This will not appear on the birth certificate"
           options={yesNoNotSureOptions}
+          validate={[required]}
         />
 
         <Field
@@ -282,7 +294,7 @@ class FatherDetailsForm extends Component {
         />
 
         <Field
-          name="father.primaryPhoneNumber"
+          name="father.daytimePhone"
           component={renderField}
           type="text"
           label="Daytime contact phone number"
@@ -291,7 +303,7 @@ class FatherDetailsForm extends Component {
         />
 
         <Field
-          name="father.secondaryPhoneNumber"
+          name="father.alternativePhone"
           component={renderField}
           type="text"
           label="Alternative contact phone number"
