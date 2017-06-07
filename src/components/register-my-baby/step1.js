@@ -136,9 +136,9 @@ class ChildDetailsForm extends Component {
       ''
     )
 
-    this.props.change('birthPlace.home.address1', streetAddress)
-    this.props.change('birthPlace.home.address2', suburb)
-    this.props.change('birthPlace.home.address3', `${town} ${postalCode}`)
+    this.props.change('birthPlace.home.line1', streetAddress)
+    this.props.change('birthPlace.home.suburb', suburb)
+    this.props.change('birthPlace.home.line2', `${town} ${postalCode}`)
   }
 
   render() {
@@ -303,7 +303,7 @@ class ChildDetailsForm extends Component {
           { birthPlaceCategory === 'home' &&
             <div className="conditional-field">
               <Field
-                name="birthPlace.home.address1"
+                name="birthPlace.home.line1"
                 component={renderPlacesAutocomplete}
                 type="text"
                 label="Street number and Street name"
@@ -311,13 +311,13 @@ class ChildDetailsForm extends Component {
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
               />
               <Field
-                name="birthPlace.home.address2"
+                name="birthPlace.home.suburb"
                 component={renderField}
                 type="text"
                 label="Suburb"
               />
               <Field
-                name="birthPlace.home.address3"
+                name="birthPlace.home.line2"
                 component={renderField}
                 type="text"
                 label="Town/City and Postcode"
