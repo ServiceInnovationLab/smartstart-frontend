@@ -324,11 +324,12 @@ class FatherDetailsForm extends Component {
     return (
       <div>
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">3</span> Matua <br/> Father/Other parent</h2>
-        <div className="informative-text">
-          You now need to give details of the child's father, if know. A reminder that it is an offence to provide false information and any person who provides false information is liable, on conviction, to imprisonment for up to 5 years.
-        </div>
-        <form onSubmit={handleSubmit(this.props.onSubmit)}>
 
+        <div className="informative-text">
+          In this section you provide the details of the father or other parent of the child. If you don't know who the father is you can still register the child online - just read and answer the first question below.
+        </div>
+
+        <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
             name="assistedHumanReproduction"
             component={renderRadioGroup}
