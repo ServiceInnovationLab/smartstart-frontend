@@ -34,10 +34,6 @@ const validate = (values) => {
     set(errors, 'mother.ethnicGroups', REQUIRE_MESSAGE)
   }
 
-  if (!get(values, 'mother.isMaoriDescendant')) {
-    set(errors, 'mother.isMaoriDescendant', REQUIRE_MESSAGE)
-  }
-
   return errors
 }
 
@@ -77,6 +73,12 @@ const warn = (values) => {
   return warnings
 }
 
+/**
+ * TODO in transformation step:
+ *
+ * [ ] transform mother.ethnicGroups, move ethnicityDescription to ethnicGroups.other
+ * [ ] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenshipSource`
+ */
 class MotherDetailsForm extends Component {
   constructor(props) {
     super(props)
@@ -111,9 +113,9 @@ class MotherDetailsForm extends Component {
       ''
     )
 
-    this.props.change('mother.homeAddress1', streetAddress)
-    this.props.change('mother.homeAddress2', suburb)
-    this.props.change('mother.homeAddress3', `${town} ${postalCode}`)
+    this.props.change('mother.homeAddress.line1', streetAddress)
+    this.props.change('mother.homeAddress.suburb', suburb)
+    this.props.change('mother.homeAddress.line2', `${town} ${postalCode}`)
   }
 
   render() {
@@ -123,7 +125,7 @@ class MotherDetailsForm extends Component {
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">2</span> Whaea <br/> Mother</h2>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field
-            name="mother.firstName"
+            name="mother.firstNames"
             component={renderField}
             type="text"
             label="All first name(s) mother is currently known by"
@@ -132,7 +134,7 @@ class MotherDetailsForm extends Component {
           />
 
           <Field
-            name="mother.lastName"
+            name="mother.surname"
             component={renderField}
             type="text"
             label="Surname of mother (currently known by)"
@@ -141,7 +143,7 @@ class MotherDetailsForm extends Component {
           />
 
           <Field
-            name="mother.firstNameAtBirth"
+            name="mother.firstNamesAtBirth"
             component={renderField}
             type="text"
             label="All first name(s) of mother at birth (if different from current name)"
@@ -149,7 +151,7 @@ class MotherDetailsForm extends Component {
           />
 
           <Field
-            name="mother.lastNameAtBirth"
+            name="mother.surnameAtBirth"
             component={renderField}
             type="text"
             label="Surname of mother at birth (if different from current name)"
@@ -174,7 +176,7 @@ class MotherDetailsForm extends Component {
           />
 
           <Field
-            name="mother.cityOfBirth"
+            name="mother.placeOfBirth"
             component={renderField}
             type="text"
             label="Place of Birth - City/town"
@@ -194,7 +196,7 @@ class MotherDetailsForm extends Component {
             <legend>Home address</legend>
             <div className="input-groups">
               <Field
-                name="mother.homeAddress1"
+                name="mother.homeAddress.line1"
                 component={renderPlacesAutocomplete}
                 type="text"
                 label="Street number and Street name"
@@ -202,13 +204,13 @@ class MotherDetailsForm extends Component {
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
               />
               <Field
-                name="mother.homeAddress2"
+                name="mother.homeAddress.suburb"
                 component={renderField}
                 type="text"
                 label="Suburb"
               />
               <Field
-                name="mother.homeAddress3"
+                name="mother.homeAddress.line2"
                 component={renderField}
                 type="text"
                 label="Town/City and Postcode"
@@ -219,11 +221,12 @@ class MotherDetailsForm extends Component {
 
 
           <Field
-            name="mother.isMaoriDescendant"
+            name="mother.maoriDescendant"
             component={renderRadioGroup}
             label="Is the mother a descendant of a New Zealand Māori?"
             instructionText="This will not appear on the birth certificate"
             options={yesNoNotSureOptions}
+            validate={[required]}
           />
 
           <Field
@@ -253,7 +256,7 @@ class MotherDetailsForm extends Component {
           />
 
           <Field
-            name="mother.primaryPhoneNumber"
+            name="mother.daytimePhone"
             component={renderField}
             type="text"
             label="Daytime contact phone number"
@@ -262,7 +265,7 @@ class MotherDetailsForm extends Component {
           />
 
           <Field
-            name="mother.secondaryPhoneNumber"
+            name="mother.alternativePhone"
             component={renderField}
             type="text"
             label="Alternative contact phone number"
