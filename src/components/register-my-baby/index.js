@@ -28,6 +28,30 @@ const stepByStepName = {
 
 const stepNameByStep = invert(stepByStepName)
 
+const scrollToFirstError = () => {
+  const firstErrorNode = document.querySelector('.has-error')
+  const firstErrorInput = document.querySelector('.has-error input, .has-error select')
+
+  if (!firstErrorNode) {
+    return;
+  }
+
+  const bodyRect = document.body.getBoundingClientRect()
+
+  let elemRect
+
+  if (firstErrorNode.parentNode.tagName === 'FIELDSET') {
+    elemRect = firstErrorNode.parentNode.getBoundingClientRect()
+  } else {
+    elemRect = firstErrorNode.getBoundingClientRect()
+  }
+
+  const offset = elemRect.top - bodyRect.top;
+
+  animateScroll.scrollTo(offset, { smooth: true })
+  firstErrorInput.focus()
+}
+
 class RegisterMyBabyForm extends Component {
   constructor(props) {
     super(props)
@@ -86,6 +110,7 @@ class RegisterMyBabyForm extends Component {
       'action': 'Click next (errors)',
       'name': this.state.stepName
     })
+    window.setTimeout(scrollToFirstError, 200)
   }
 
   onSubmit() {

@@ -7,7 +7,6 @@ import set from 'lodash/set'
 import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
-import renderWarning from './render-warning'
 import renderCustomSelect from './render-custom-select'
 import renderDatepicker from './render-datepicker'
 import renderBirthOrderSelector from './render-birth-order-selector'
@@ -24,9 +23,12 @@ import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_CHILD_FIRST_NAME,
   REQUIRE_MESSAGE_STREET,
-  REQUIRE_MESSAGE_POSTCODE,
-  LONG_NAME_WARNING_MESSAGE
+  REQUIRE_MESSAGE_POSTCODE
 } from './validation-messages'
+
+const maxLength = (max) => (value, previousVal) => {
+  return value.length <= max ? value : previousVal
+}
 
 const validate = (values) => {
   const errors = {}
@@ -46,28 +48,8 @@ const validate = (values) => {
   return errors
 }
 
-const warn = (values) => {
+const warn = () => {
   const warnings = {}
-  const firstNames = get(values, 'child.firstNames')
-
-  if (firstNames && firstNames.length > 70) {
-    set(warnings, 'child.firstNames', 'Child\'s given name(s) exceeds 70 characters')
-  }
-
-  const surname = get(values, 'child.surname')
-
-  if (surname) {
-    if (firstNames && firstNames.length + surname.length > 100) {
-      set(warnings, 'child.surname', 'Combined names exceed 100 characters')
-    } else if (surname.length > 50) {
-      set(warnings, 'child.surname', 'Child\'s surname exceeds 50 characters')
-    }
-  }
-
-  if (get(warnings, 'child.firstNames') || get(warnings, 'child.surname')) {
-    set(warnings, 'child.nameAdditionalWarning', LONG_NAME_WARNING_MESSAGE);
-  }
-
   return warnings
 }
 
@@ -78,7 +60,6 @@ const renderHospitalOption = option =>
  * TODO in transformation step:
  *
  * [ ] child.multipleBirthOrder --> birthOrderNumber / birthOrderTotal
- * [ ] remove child.nameAdditionalWarning
  * [ ] normalize birth date to correct format
  * [ ] transform child.ethnicGroups, move child.ethnicityDescription to child.ethnicGroups.other
  */
@@ -200,6 +181,7 @@ class ChildDetailsForm extends Component {
             label="Child's given name(s)"
             instructionText="Enter the child's first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate"
             validate={[requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validName]}
+            normalize={maxLength(75)}
           />
 
           <Field
@@ -209,11 +191,7 @@ class ChildDetailsForm extends Component {
             placeholder="E.g Smith"
             label="Child's surname"
             validate={[required, validName]}
-          />
-
-          <Field
-            name="child.nameAdditionalWarning"
-            component={renderWarning}
+            normalize={maxLength(75)}
           />
 
           <Field
