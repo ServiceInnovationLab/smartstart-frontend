@@ -62,7 +62,7 @@ const warn = (values) => {
   const warnings = {}
 
   let dob = get(values, 'father.dateOfBirth')
-  let childBirthDate = get(values, 'dateOfBirth')
+  let childBirthDate = get(values, 'child.birthDate')
 
   if (dob && childBirthDate) {
     if (typeof dob === 'string') {
