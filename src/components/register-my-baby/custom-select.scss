@@ -1,0 +1,110 @@
+@import 'variables';
+
+// this is the styling for react-select lib
+.Select-control {
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  padding: 7px 15px;
+  min-height: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .Select-value {
+    line-height: 1.2em;
+    position: relative;
+  }
+
+  .Select-input {
+    position: absolute;
+  }
+
+  em {
+    color: #777;
+  }
+}
+
+.Select-menu-outer {
+  border: 1px solid $border-color;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+
+  .Select-option {
+    padding: 10px 15px;
+    &.is-focused {
+      background-color: $form-teal-hover;
+      cursor: pointer;
+    }
+  }
+  em {
+    color: #777;
+  }
+}
+
+.Select-arrow-zone {
+  cursor: pointer;
+  display: table-cell;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 25px;
+  padding-right: 5px;
+}
+
+.Select-arrow {
+  border-color: #999 transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 2.5px;
+  display: inline-block;
+  height: 0;
+  width: 0;
+  position: relative;
+}
+
+.Select-input {
+  // for searchable=false select
+  // this line should be updated when implement autocomplete for hospital & country
+  visibility: hidden;
+}
+
+.Select {
+  position: relative;
+
+  &.is-focused {
+    .Select-control {
+      border-color: $form-teal-dark;
+    }
+  }
+
+  &.is-open {
+    .Select-control {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom: none;
+    }
+    .Select-menu-outer {
+      box-shadow: 0 2px 3px 0 rgba(34,36,38,.15);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.is-open,
+  &:hover {
+    .Select-control,
+    .Select-menu-outer {
+      border-color: $form-teal-dark;
+    }
+    .Select-arrow {
+      border-top-color: #666;
+    }
+  }
+}
+

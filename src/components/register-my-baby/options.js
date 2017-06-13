@@ -20,3 +20,8 @@ export const yesNoNotSure = [
   { value: 'no', display: 'No'},
   { value: 'notsure', display: 'Not sure'}
 ]
+
+export const deliveryMethods = [
+  { value: 'standard', display: 'Standard (Free)'},
+  { value: 'courier', display: 'Courier ($5)'}
+]

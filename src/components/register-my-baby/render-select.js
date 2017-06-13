@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import get from 'lodash/get'
 
-const renderSelect = ({ input, label, placeholder, instructionText, options, renderEmptyOption = true, meta: { touched, error, form } }) => (
-  <div className={`input-group ${(touched && error) ? 'has-error' : ''}`}>
+const renderSelect = ({ input, label, placeholder, instructionText, options, renderEmptyOption = true, className, meta: { touched, error, form } }) => (
+  <div className={`input-group ${className} ${(touched && error) ? 'has-error' : ''}`}>
     { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
     <div className="styled-select">
@@ -32,6 +32,7 @@ renderSelect.propTypes = {
   placeholder: PropTypes.string,
   renderEmptyOption: PropTypes.bool,
   options: PropTypes.array,
+  className: PropTypes.string,
   meta: PropTypes.object
 }
 

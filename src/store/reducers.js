@@ -169,7 +169,10 @@ function supplementaryContentActions (state = {
  */
 
 const initialRegistrationFormState = {
-  numberOfSiblings: 0
+  numberOfSiblings: 0,
+  certificateOrder: {
+    courierDelivery: 'standard'
+  }
 }
 
 function savedRegistrationForm (state = initialRegistrationFormState, action) {

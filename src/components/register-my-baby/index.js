@@ -12,6 +12,7 @@ import Step2 from './step2'
 import Step3 from './step3'
 import Step4 from './step4'
 import Step5 from './step5'
+import Step6 from './step6'
 import { piwikTrackPost } from '../../actions/actions'
 
 const stepByStepName = {
@@ -134,6 +135,7 @@ class RegisterMyBabyForm extends Component {
           {step === 3 && <Step3 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
           {step === 4 && <Step4 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
           {step === 5 && <Step5 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 6 && <Step6 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
         </CSSTransitionGroup>
       </div>
     )
