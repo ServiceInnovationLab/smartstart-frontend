@@ -3,6 +3,20 @@ import Select from 'react-select'
 import './custom-select.scss'
 
 class CustomSelect extends Component {
+  constructor(props) {
+    super(props)
+    this.clearRenderer = this.clearRenderer.bind(this)
+  }
+
+  clearRenderer() {
+    return <a href="#" title="Clear value" aria-label="Clear value"
+      onClick={(e) => {
+        e.preventDefault()
+        this.props.input.onChange(null)
+      }}
+    ></a>
+  }
+
   render() {
     const {
       input, label, placeholder, className, instructionText, options, meta: { touched, error, form },
@@ -21,7 +35,7 @@ class CustomSelect extends Component {
         clearable,
         searchable,
         onBlur: () => input.onBlur(input.value),
-        onChange: selected => input.onChange(selected[valueKey])
+        onChange: selected => input.onChange(selected ? selected[valueKey] : null)
     }
 
     if (optionRenderer) {
@@ -30,6 +44,10 @@ class CustomSelect extends Component {
 
     if (valueRenderer) {
       selectProps.valueRenderer = valueRenderer
+    }
+
+    if (clearable) {
+      selectProps.clearRenderer = this.clearRenderer
     }
 
     return <div className={`input-group ${className} ${(touched && error) ? 'has-error' : ''}`}>

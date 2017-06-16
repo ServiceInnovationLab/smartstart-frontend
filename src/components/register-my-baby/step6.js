@@ -267,6 +267,7 @@ class OrderCertificatesForm extends Component {
                   { value: 'Japan', label: 'Japan' },
                   { value: 'Madagascar', label: 'Madagascar' },
                 ]}
+                clearable={true}
                 label="Country (if not New Zealand)"
                 placeholder="Please select"
               />

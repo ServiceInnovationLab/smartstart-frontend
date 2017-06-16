@@ -3,7 +3,7 @@
 
 // this is the styling for react-select lib
 .Select-control {
-  border: 1px solid $border-color;
+  border: 1px solid $form-border-color;
   border-radius: 5px;
   min-height: 40px;
   display: flex;
@@ -18,6 +18,32 @@
     @include visuallyhidden;
     @include visuallyhidden-focusable;
     position: absolute;
+  }
+
+  .Select-clear-zone {
+    display: none;
+    position: absolute;
+    right: 30px;
+
+    > a {
+      color: #999;
+      text-decoration: none;
+
+      &:after {
+        font-family: 'icomoon' !important;
+        content: "\E908";
+        font-size: 20px;
+        line-height: 20px;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        margin-top: -14px;
+        transform: rotate(45deg);
+      }
+    }
   }
 
   em {
@@ -82,6 +108,7 @@
   &.is-focused {
     .Select-control {
       border-color: $form-teal-dark;
+      outline: -webkit-focus-ring-color auto 5px;
     }
   }
 
@@ -108,6 +135,9 @@
     }
     .Select-arrow {
       border-top-color: #666;
+    }
+    .Select-clear-zone > a {
+      color: #666;
     }
   }
 
@@ -139,6 +169,12 @@
           outline: none;
         }
       }
+    }
+  }
+
+  &.has-value {
+    .Select-clear-zone {
+      display: block;
     }
   }
 }
