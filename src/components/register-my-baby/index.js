@@ -14,6 +14,7 @@ import Step4 from './step4'
 import Step5 from './step5'
 import Step6 from './step6'
 import { piwikTrackPost } from '../../actions/actions'
+import { fetchBirthFacilities } from '../../actions/birth-registration'
 
 const stepByStepName = {
   'child-details': 1,
@@ -48,11 +49,11 @@ class RegisterMyBabyForm extends Component {
     }
   }
   nextStep() {
-    this.props.dispatch(piwikTrackPost('Register My Baby', {
+    this.props.piwikTrackPost('Register My Baby', {
       'category': 'RegisterMyBaby',
       'action': 'Click next',
       'name': this.state.stepName
-    }))
+    })
     this.goToStep(this.state.step + 1)
     this.setState({
       animationClass: 'next'
@@ -60,11 +61,11 @@ class RegisterMyBabyForm extends Component {
   }
 
   previousStep() {
-    this.props.dispatch(piwikTrackPost('Register My Baby', {
+    this.props.piwikTrackPost('Register My Baby', {
       'category': 'RegisterMyBaby',
       'action': 'Click back',
       'name': this.state.stepName
-    }))
+    })
     this.goToStep(this.state.step - 1)
     this.setState({
       animationClass: 'previous'
@@ -80,14 +81,18 @@ class RegisterMyBabyForm extends Component {
   }
 
   handleSubmitFail() {
-    this.props.dispatch(piwikTrackPost('Register My Baby', {
+    this.props.piwikTrackPost('Register My Baby', {
       'category': 'RegisterMyBaby',
       'action': 'Click next (errors)',
       'name': this.state.stepName
-    }))
+    })
   }
 
   onSubmit() {
+  }
+
+  componentWillMount() {
+    this.props.fetchBirthFacilities();
   }
 
   componentDidMount() {
@@ -147,13 +152,20 @@ RegisterMyBabyForm.propTypes = {
   location: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   savedRegistrationForm: PropTypes.object,
-  dispatch: PropTypes.func
+  fetchBirthFacilities: PropTypes.func,
+  piwikTrackPost: PropTypes.func
 }
 
+const mapStateToProps = (state) => ({
+  savedRegistrationForm: state.birthRegistration.savedRegistrationForm,
+})
+
 RegisterMyBabyForm = connect(
-  state => ({
-    savedRegistrationForm: state.savedRegistrationForm,
-  })
+  mapStateToProps,
+  {
+    fetchBirthFacilities,
+    piwikTrackPost
+  }
 )(RegisterMyBabyForm)
 
 export default scriptLoader(

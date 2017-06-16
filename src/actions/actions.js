@@ -41,7 +41,7 @@ function receiveAPI (json) {
   }
 }
 
-function applicationError (error) {
+export function applicationError (error) {
   return {
     type: APPLICATION_ERROR,
     error: error

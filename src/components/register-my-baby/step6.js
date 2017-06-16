@@ -35,6 +35,23 @@ const PRODUCT_OPTIONS_WITH_PRICE = PRODUCT_OPTIONS.map(product => ({
     label: `${product.label} - $${product.price.toFixed(2)}`
 }))
 
+const renderProductValue = (option) => {
+  return <div>
+    <div>{option.label}</div>
+    { option.subLabel &&
+      <em>{option.subLabel}</em>
+    }
+  </div>
+}
+const renderProductOption = (option) => {
+  return <div>
+    <div>{option.label}</div>
+    { option.subLabel &&
+      <em>{option.subLabel}</em>
+    }
+  </div>
+}
+
 const validate = () => {
   const errors = {}
   return errors
@@ -133,6 +150,8 @@ class OrderCertificatesForm extends Component {
                 name="certificateOrder.productCode"
                 component={renderCustomSelect}
                 options={PRODUCT_OPTIONS_WITH_PRICE}
+                optionRenderer={renderProductOption}
+                valueRenderer={renderProductValue}
                 label="Choose your design"
                 placeholder="Please select a design"
                 validate={[required]}

@@ -8,7 +8,7 @@ import makeFocusable from './make-focusable'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderWarning from './render-warning'
-import renderSelect from './render-select'
+import renderCustomSelect from './render-custom-select'
 import renderDatepicker from './render-datepicker'
 import renderBirthOrderSelector from './render-birth-order-selector'
 import renderCheckboxGroup from './render-checkbox-group'
@@ -69,8 +69,10 @@ const warn = (values) => {
   }
 
   return warnings
-
 }
+
+const renderHospitalOption = option =>
+  <div>{option.name}, {option.location}</div>
 
 /**
  * TODO in transformation step:
@@ -292,8 +294,14 @@ class ChildDetailsForm extends Component {
             <div className="conditional-field">
               <Field
                 name="birthPlace.hospital"
-                component={renderSelect}
-                options={['Hospital One', 'Hospital Two', 'Hospital Three']}
+                component={renderCustomSelect}
+                options={this.props.birthFacilities}
+                valueKey="identifier"
+                labelKey="name"
+                placeholder="Please select"
+                optionRenderer={renderHospitalOption}
+                valueRenderer={renderHospitalOption}
+                searchable={true}
                 label="Hospital name"
                 validate={[required]}
               />
@@ -379,6 +387,7 @@ class ChildDetailsForm extends Component {
 }
 
 ChildDetailsForm.propTypes = {
+  birthFacilities: PropTypes.array,
   oneOfMultiple: PropTypes.string,
   birthPlaceCategory: PropTypes.string,
   ethnicGroups: PropTypes.array,
@@ -404,7 +413,8 @@ const selector = formValueSelector('registration')
 // check render method for more detail
 ChildDetailsForm = connect(
   state => ({
-    initialValues: get(state, 'savedRegistrationForm'),
+    birthFacilities: get(state, 'birthRegistration.birthFacilities'),
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm'),
     oneOfMultiple: selector(state, 'child.oneOfMultiple'),
     birthPlaceCategory: selector(state, 'birthPlace.category'),
     ethnicGroups: selector(state, 'child.ethnicGroups') || []

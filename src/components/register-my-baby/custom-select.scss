@@ -1,21 +1,22 @@
 @import 'variables';
+@import 'mixins';
 
 // this is the styling for react-select lib
 .Select-control {
   border: 1px solid $border-color;
   border-radius: 5px;
-  padding: 7px 15px;
-  min-height: 36px;
+  min-height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  .Select-value {
-    line-height: 1.2em;
-    position: relative;
+  .Select-value, .Select-placeholder {
+    padding: 7px 15px;
   }
 
-  .Select-input {
+  div[role=combobox] {
+    @include visuallyhidden;
+    @include visuallyhidden-focusable;
     position: absolute;
   }
 
@@ -41,6 +42,11 @@
       cursor: pointer;
     }
   }
+
+  .Select-noresults {
+    padding: 10px 15px;
+  }
+
   em {
     color: #777;
   }
@@ -66,10 +72,8 @@
   position: relative;
 }
 
-.Select-input {
-  // for searchable=false select
-  // this line should be updated when implement autocomplete for hospital & country
-  visibility: hidden;
+.Select-placeholder {
+  color: #aaa;
 }
 
 .Select {
@@ -104,6 +108,37 @@
     }
     .Select-arrow {
       border-top-color: #666;
+    }
+  }
+
+  &.is-searchable {
+    .Select-control {
+      height: 42px;
+    }
+    .Select-value, .Select-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 10px 0 10px;
+      line-height: 42px;
+    }
+
+    .Select-input {
+      height: 42px;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      input {
+        background: none transparent;
+        padding: 0;
+        border: none;
+        line-height: 42px;
+        height: 42px;
+
+        &:focus {
+          outline: none;
+        }
+      }
     }
   }
 }

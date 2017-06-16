@@ -21,6 +21,9 @@ import {
   CLOSE_TODO,
   GET_PIWIK_ID
 } from 'actions/actions'
+import {
+  RECEIVE_BIRTH_FACILITIES
+} from 'actions/birth-registration'
 
 function contentActions (state = {
   isFetching: false,
@@ -175,8 +178,17 @@ const initialRegistrationFormState = {
   }
 }
 
-function savedRegistrationForm (state = initialRegistrationFormState, action) {
+function birthRegistration (state = {
+  birthFacilities: [],
+  countries: [],
+  savedRegistrationForm: initialRegistrationFormState
+}, action) {
   switch (action.type) {
+    case RECEIVE_BIRTH_FACILITIES:
+      return {
+        ...state,
+        birthFacilities: action.payload.response
+      };
     default:
       return state
   }
@@ -189,7 +201,7 @@ const rootReducer = combineReducers({
   settingsDisplayActions,
   supplementaryContentActions,
   form: formReducer,
-  savedRegistrationForm
+  birthRegistration
 })
 
 export default rootReducer
