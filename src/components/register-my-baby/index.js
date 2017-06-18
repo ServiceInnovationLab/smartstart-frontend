@@ -14,7 +14,7 @@ import Step4 from './step4'
 import Step5 from './step5'
 import Step6 from './step6'
 import { piwikTrackPost } from '../../actions/actions'
-import { fetchBirthFacilities } from '../../actions/birth-registration'
+import { fetchBirthFacilities, fetchCountries } from '../../actions/birth-registration'
 
 const stepByStepName = {
   'child-details': 1,
@@ -93,6 +93,7 @@ class RegisterMyBabyForm extends Component {
 
   componentWillMount() {
     this.props.fetchBirthFacilities();
+    this.props.fetchCountries();
   }
 
   componentDidMount() {
@@ -153,6 +154,7 @@ RegisterMyBabyForm.propTypes = {
   router: PropTypes.object.isRequired,
   savedRegistrationForm: PropTypes.object,
   fetchBirthFacilities: PropTypes.func,
+  fetchCountries: PropTypes.func,
   piwikTrackPost: PropTypes.func
 }
 
@@ -164,6 +166,7 @@ RegisterMyBabyForm = connect(
   mapStateToProps,
   {
     fetchBirthFacilities,
+    fetchCountries,
     piwikTrackPost
   }
 )(RegisterMyBabyForm)

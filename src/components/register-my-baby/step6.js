@@ -261,13 +261,11 @@ class OrderCertificatesForm extends Component {
               <Field
                 name="certificateOrder.deliveryAddress.countryCode"
                 component={renderCustomSelect}
-                options={[
-                  { value: 'Australia', label: 'Australia' },
-                  { value: 'Canada', label: 'Canada' },
-                  { value: 'Japan', label: 'Japan' },
-                  { value: 'Madagascar', label: 'Madagascar' },
-                ]}
+                options={this.props.countries}
                 clearable={true}
+                searchable={true}
+                valueKey="code"
+                labelKey="name"
                 label="Country (if not New Zealand)"
                 placeholder="Please select"
               />
@@ -296,6 +294,7 @@ class OrderCertificatesForm extends Component {
 }
 
 OrderCertificatesForm.propTypes = {
+  countries: PropTypes.array,
   orderBirthCertificate: PropTypes.string,
   productCode: PropTypes.string,
   quantity: PropTypes.number,
@@ -327,6 +326,7 @@ const selector = formValueSelector('registration')
 
 OrderCertificatesForm = connect(
   state => ({
+    countries: get(state, 'birthRegistration.countries'),
     orderBirthCertificate: selector(state, 'orderBirthCertificate'),
     productCode: selector(state, 'certificateOrder.productCode'),
     quantity: selector(state, 'certificateOrder.quantity'),

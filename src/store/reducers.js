@@ -22,7 +22,8 @@ import {
   GET_PIWIK_ID
 } from 'actions/actions'
 import {
-  RECEIVE_BIRTH_FACILITIES
+  RECEIVE_BIRTH_FACILITIES,
+  RECEIVE_COUNTRIES
 } from 'actions/birth-registration'
 
 function contentActions (state = {
@@ -188,6 +189,11 @@ function birthRegistration (state = {
       return {
         ...state,
         birthFacilities: action.payload.response
+      };
+    case RECEIVE_COUNTRIES:
+      return {
+        ...state,
+        countries: action.payload.response
       };
     default:
       return state
