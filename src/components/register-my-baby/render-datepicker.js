@@ -108,6 +108,7 @@ class SimpleDatePicker extends Component {
 
   render() {
     const { day, month, year, days, months, years } = this.state
+    const { ariaDescribedBy } = this.props;
     return (
       <div>
         <span className="styled-select">
@@ -116,6 +117,7 @@ class SimpleDatePicker extends Component {
             onChange={this.handleChange('day')}
             onBlur={this.handleBlur}
             ref={ daySelect => this.daySelect = daySelect }
+            aria-describedby={ariaDescribedBy}
           >
             <option value="">Day</option>
             {
@@ -131,6 +133,7 @@ class SimpleDatePicker extends Component {
             onChange={this.handleChange('month')}
             onBlur={this.handleBlur}
             ref={ monthSelect => this.monthSelect = monthSelect }
+            aria-describedby={ariaDescribedBy}
           >
             <option value="">Month</option>
             {
@@ -146,6 +149,7 @@ class SimpleDatePicker extends Component {
             onChange={this.handleChange('year')}
             onBlur={this.handleBlur}
             ref={ yearSelect => this.yearSelect = yearSelect }
+            aria-describedby={ariaDescribedBy}
           >
             <option value="">Year</option>
             {
@@ -162,11 +166,12 @@ class SimpleDatePicker extends Component {
 
 SimpleDatePicker.propTypes = {
   value: PropTypes.object,
+  ariaDescribedBy: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
 }
 
-const renderDatepicker = ({ input, label, meta: { touched, error, warning } }) => (
+const renderDatepicker = ({ input, label, meta: { touched, error, warning, form } }) => (
 
   <fieldset>
     <legend>{label}</legend>
@@ -176,8 +181,9 @@ const renderDatepicker = ({ input, label, meta: { touched, error, warning } }) =
           value={input.value || null}
           onChange={input.onChange}
           onBlur={input.onBlur}
+          ariaDescribedBy={(touched && error) ? `${form}-${input.name}-error` : null}
         />
-        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+        {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
         {touched && warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
       </div>
     </div>
@@ -186,7 +192,7 @@ const renderDatepicker = ({ input, label, meta: { touched, error, warning } }) =
 
 renderDatepicker.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   meta: PropTypes.object
 }
 

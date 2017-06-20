@@ -24,7 +24,7 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const { options, value, name } = this.props;
+    const { options, value, name, ariaDescribedBy } = this.props;
     return (
       <div>
         { options.map((option, index) => (
@@ -36,6 +36,7 @@ class RadioGroup extends Component {
                 onChange={this.handleChange(option)}
                 onBlur={this.handleBlur}
                 ref={ radio => this.radios = [radio, ...this.radios] }
+                aria-describedby={ariaDescribedBy}
               />
               <span>{option.display}</span>
             </label>
@@ -49,12 +50,13 @@ class RadioGroup extends Component {
 RadioGroup.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
+  ariaDescribedBy: PropTypes.string,
   options: PropTypes.array,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
 }
 
-const renderRadioGroup = ({ input, label, instructionText, options, meta: { touched, error } }) => (
+const renderRadioGroup = ({ input, label, instructionText, options, meta: { touched, error, form } }) => (
   <fieldset>
     { label && <legend>{label}</legend> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
@@ -66,8 +68,9 @@ const renderRadioGroup = ({ input, label, instructionText, options, meta: { touc
           options={options}
           onChange={input.onChange}
           onBlur={input.onBlur}
+          ariaDescribedBy={(touched && error) ? `${form}-${input.name}-error` : null}
         />
-        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+        {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
       </div>
     </div>
   </fieldset>
@@ -76,7 +79,7 @@ const renderRadioGroup = ({ input, label, instructionText, options, meta: { touc
 renderRadioGroup.propTypes = {
   input: PropTypes.object,
   name: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.node,
   instructionText: PropTypes.string,
   options: PropTypes.array,
   type: PropTypes.string,

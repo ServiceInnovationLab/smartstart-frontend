@@ -28,7 +28,7 @@ class CheckboxGroup extends Component {
   }
 
   render() {
-    const { options, value, name } = this.props;
+    const { options, value, name, ariaDescribedBy } = this.props;
     return (
       <div>
         { options.map((option, index) => (
@@ -39,6 +39,7 @@ class CheckboxGroup extends Component {
                 checked={value.indexOf(option.value) !== -1}
                 onChange={this.handleChange(option)}
                 onBlur={this.handleBlur}
+                aria-describedby={ariaDescribedBy}
                 ref={ checkbox => this.checkboxes = [checkbox, ...this.checkboxes] }
               />
               <span>{option.display}</span>
@@ -53,12 +54,13 @@ class CheckboxGroup extends Component {
 CheckboxGroup.propTypes = {
   name: PropTypes.string,
   value: PropTypes.array,
+  ariaDescribedBy: PropTypes.string,
   options: PropTypes.array,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
 }
 
-const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { touched, error } }) => (
+const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { touched, error, form } }) => (
   <fieldset>
     { label && <legend>{label}</legend> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
@@ -70,8 +72,9 @@ const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { t
           options={options}
           onChange={input.onChange}
           onBlur={input.onBlur}
+          ariaDescribedBy={(touched && error) ? `${form}-${input.name}-error` : null}
         />
-        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+        {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
       </div>
     </div>
   </fieldset>
@@ -80,7 +83,7 @@ const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { t
 renderCheckboxGroup.propTypes = {
   input: PropTypes.object,
   name: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.node,
   instructionText: PropTypes.string,
   options: PropTypes.array,
   type: PropTypes.string,

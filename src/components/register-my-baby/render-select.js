@@ -6,7 +6,11 @@ const renderSelect = ({ input, label, placeholder, instructionText, options, ren
     { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
     <div className="styled-select">
-      <select id={`${form}-${input.name}`} {...input}>
+      <select
+        id={`${form}-${input.name}`}
+        {...input}
+        aria-describedby={(touched && error) ? `${form}-${input.name}-error` : null}
+      >
         { renderEmptyOption && <option value="">{placeholder || 'Please select ...'}</option> }
         {
           options.map((option, idx) => {
@@ -20,14 +24,14 @@ const renderSelect = ({ input, label, placeholder, instructionText, options, ren
           })
         }
       </select>
-      {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+      {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
     </div>
   </div>
 )
 
 renderSelect.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   instructionText: PropTypes.string,
   placeholder: PropTypes.string,
   renderEmptyOption: PropTypes.bool,

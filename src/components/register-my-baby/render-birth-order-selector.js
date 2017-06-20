@@ -84,6 +84,7 @@ class BirthOrderSelector extends Component {
             onChange={this.handleChange('firstSelection')}
             onBlur={this.handleBlur('firstSelection')}
             ref={ firstSelect => this.firstSelect = firstSelect }
+            aria-describedby={this.props.ariaDescribedBy}
           >
             <option value=""></option>
             {
@@ -100,6 +101,7 @@ class BirthOrderSelector extends Component {
             onChange={this.handleChange('secondSelection')}
             onBlur={this.handleBlur('secondSelection')}
             ref={ secondSelect => this.secondSelect = secondSelect }
+            aria-describedby={this.props.ariaDescribedBy}
           >
             <option value=""></option>
             {
@@ -116,18 +118,19 @@ class BirthOrderSelector extends Component {
 
 BirthOrderSelector.propTypes = {
   value: PropTypes.string,
+  ariaDescribedBy: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
 }
 
-const renderBirthOrderSelector = ({ input, label, meta: { touched, error } }) => (
+const renderBirthOrderSelector = ({ input, label, meta: { touched, error, form } }) => (
   <fieldset>
     <legend>{label}</legend>
     <div className="instruction-text">If this child was the second born of triplets select 2 of 3</div>
     <div className={`input-group ${(touched && error) ? 'has-error' : ''}`}>
       <div>
-        <BirthOrderSelector {...input} />
-        {touched && error && <span className="error">{error}</span>}
+        <BirthOrderSelector {...input} ariaDescribedBy={(touched && error) ? `${form}-${input.name}-error` : null} />
+        {touched && error && <span id={`${form}-${input.name}-error`} className="error">{error}</span>}
       </div>
     </div>
   </fieldset>
@@ -135,7 +138,7 @@ const renderBirthOrderSelector = ({ input, label, meta: { touched, error } }) =>
 
 renderBirthOrderSelector.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   meta: PropTypes.object
 }
 

@@ -5,7 +5,7 @@ import React from 'react'
  */
 const makeMandatoryLabel = (label) => {
   return <span>
-    <span>{label}</span>
+    {label}
     <span className="visuallyhidden">(required)</span>
   </span>
 }

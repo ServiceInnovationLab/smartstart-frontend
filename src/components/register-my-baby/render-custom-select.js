@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Select from 'react-select'
+import { getTextContent } from '../../utils'
 import './custom-select.scss'
 
 class CustomSelect extends Component {
@@ -54,8 +55,13 @@ class CustomSelect extends Component {
         { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
         { instructionText && <div className="instruction-text">{instructionText}</div> }
         <div>
-          <Select {...selectProps} />
-          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+          <Select
+            {...selectProps}
+            id={`${form}-${input.name}`}
+            aria-describedby={(touched && error) ? `${form}-${input.name}-error` : null}
+            aria-label={getTextContent(label)}
+          />
+          {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
         </div>
       </div>
   }
@@ -63,7 +69,7 @@ class CustomSelect extends Component {
 
 CustomSelect.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   instructionText: PropTypes.string,
   placeholder: PropTypes.string,
   className: PropTypes.string,

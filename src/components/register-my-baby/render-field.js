@@ -5,8 +5,14 @@ const renderField = ({ input, label, placeholder, instructionText, type, meta: {
     { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
     <div>
-      <input id={`${form}-${input.name}`} {...input} placeholder={placeholder} type={type}/>
-      {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+      <input
+        id={`${form}-${input.name}`}
+        {...input}
+        placeholder={placeholder}
+        type={type}
+        aria-describedby={(touched && error) ? `${form}-${input.name}-error` : null}
+      />
+      {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
       {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
     </div>
   </div>
@@ -14,7 +20,7 @@ const renderField = ({ input, label, placeholder, instructionText, type, meta: {
 
 renderField.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   instructionText: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,

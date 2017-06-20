@@ -110,10 +110,11 @@ class renderPlacesAutocomplete extends Component {
             onChange: this.onChange,
             placeholder,
             autoComplete: 'off',
-            id: `${form}-${input.name}`
+            id: `${form}-${input.name}`,
+            'aria-describedby': (touched && error) ? `${form}-${input.name}-error` : null
           }}
         />
-        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+        {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
         {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
       </div>
     </div>
@@ -122,7 +123,7 @@ class renderPlacesAutocomplete extends Component {
 
 renderPlacesAutocomplete.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   instructionText: PropTypes.string,
   placeholder: PropTypes.string,
   onPlaceSelect: PropTypes.func,
