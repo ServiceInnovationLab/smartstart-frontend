@@ -4,7 +4,8 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import Accordion from './accordion'
-import makeFocusable from './make-focusable'
+import makeFocusable from './hoc/make-focusable'
+import makeMandatoryLabel from './hoc/make-mandatory-label'
 import renderRadioGroup from './render-radio-group'
 import renderCustomSelect from './render-custom-select'
 import renderField from './render-field'
@@ -137,7 +138,7 @@ class OrderCertificatesForm extends Component {
           <Field
             name="orderBirthCertificate"
             component={renderRadioGroup}
-            label="Do you want to order a birth certificate?"
+            label={makeMandatoryLabel("Do you want to order a birth certificate?")}
             instructionText="You can buy a birth certificate or move on to reviewing your registration."
             options={yesNoOptions}
             validate={[required]}
@@ -152,7 +153,7 @@ class OrderCertificatesForm extends Component {
                 options={PRODUCT_OPTIONS_WITH_PRICE}
                 optionRenderer={renderProductOption}
                 valueRenderer={renderProductValue}
-                label="Choose your design"
+                label={makeMandatoryLabel("Choose your design")}
                 placeholder="Please select a design"
                 validate={[required]}
               />
@@ -170,13 +171,13 @@ class OrderCertificatesForm extends Component {
                   {value: 4, label: '4'},
                   {value: 5, label: '5'},
                 ]}
-                label="Choose your quantity"
+                label={makeMandatoryLabel("Choose your quantity")}
                 validate={[required]}
               />
               <Field
                 name="certificateOrder.courierDelivery"
                 component={renderRadioGroup}
-                label="Choose your delivery method"
+                label={makeMandatoryLabel("Choose your delivery method")}
                 options={deliveryMethods}
                 validate={[required]}
               />
@@ -214,14 +215,14 @@ class OrderCertificatesForm extends Component {
                 name="certificateOrder.deliveryName"
                 component={renderField}
                 type="text"
-                label="Delivery name"
+                label={makeMandatoryLabel("Delivery name")}
                 instructionText="You may address the certificate to your baby if you wish."
                 validate={[required]}
               />
               <Field
                 name="certificateOrder.deliveryAddressType"
                 component={renderRadioGroup}
-                label="What address should we deliver to?"
+                label={makeMandatoryLabel("What address should we deliver to?")}
                 options={[
                   { value: 'mother', display: 'Mother\'s' },
                   { value: 'father', display: 'Father\'s' },
@@ -238,7 +239,7 @@ class OrderCertificatesForm extends Component {
                     name="certificateOrder.deliveryAddress.line1"
                     component={renderPlacesAutocomplete}
                     type="text"
-                    label="Street number and Street name"
+                    label={makeMandatoryLabel("Street number and Street name")}
                     onPlaceSelect={this.onPlaceSelect}
                     validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
                   />
@@ -252,7 +253,7 @@ class OrderCertificatesForm extends Component {
                     name="certificateOrder.deliveryAddress.line2"
                     component={renderField}
                     type="text"
-                    label="Town/City and Postcode"
+                    label={makeMandatoryLabel("Town/City and Postcode")}
                     validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
                   />
                 </div>

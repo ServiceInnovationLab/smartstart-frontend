@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { Field } from 'redux-form'
 import capitalize from 'lodash/capitalize'
+import makeMandatoryLabel from './hoc/make-mandatory-label'
 import { required } from './validate'
 import Accordion from './accordion'
 import renderField from './render-field'
@@ -57,7 +58,7 @@ class CitizenshipQuestions extends Component {
         <Field
           name={prefix(target, 'isCitizen')}
           component={renderRadioGroup}
-          label={`Is the ${target} a New Zealand citizen?`}
+          label={makeMandatoryLabel(`Is the ${target} a New Zealand citizen?`)}
           instructionText={`Please indicate the ${target}'s citizenship or immigration status.`}
           options={[
             { value: 'yes', display: 'Yes'},
@@ -88,7 +89,7 @@ class CitizenshipQuestions extends Component {
           <Field
             name={prefix(target, 'isPermanentResident')}
             component={renderRadioGroup}
-            label={`Is the ${target} a New Zealand permanent resident?`}
+            label={makeMandatoryLabel(`Is the ${target} a New Zealand permanent resident?`)}
             options={[
               { value: 'yes', display: 'Yes'},
               { value: 'no', display: 'No'}
@@ -101,7 +102,7 @@ class CitizenshipQuestions extends Component {
           <Field
             name={prefix(target, 'isNZRealmResident')}
             component={renderRadioGroup}
-            label={`Is the ${target} a resident of the Cook Islands, Niue or Tokelau?`}
+            label={makeMandatoryLabel(`Is the ${target} a resident of the Cook Islands, Niue or Tokelau?`)}
             options={[
               { value: 'yes', display: 'Yes'},
               { value: 'no', display: 'No'}
@@ -114,7 +115,7 @@ class CitizenshipQuestions extends Component {
           <Field
             name={prefix(target, 'isAuResidentOrCitizen')}
             component={renderRadioGroup}
-            label={`Is the ${target} an Australian citizen or permanent resident of Australia?`}
+            label={makeMandatoryLabel(`Is the ${target} an Australian citizen or permanent resident of Australia?`)}
             options={[
               { value: 'yes', display: 'Yes'},
               { value: 'no', display: 'No'}
@@ -133,7 +134,7 @@ class CitizenshipQuestions extends Component {
           <Field
             name={prefix(target, 'nonCitizenDocNumber')}
             component={renderField}
-            label={`Enter the passport/travel document number the ${target} entered New Zealand on:`}
+            label={makeMandatoryLabel(`Enter the passport/travel document number the ${target} entered New Zealand on:`)}
             type="text"
             validate={[required]}
           />
@@ -148,7 +149,7 @@ class CitizenshipQuestions extends Component {
           <Field
             name={prefix(target, 'citizenshipSource')}
             component={renderSelect}
-            label={`${capitalize(target)} is either`}
+            label={makeMandatoryLabel(`${capitalize(target)} is either`)}
             instructionText={`Please indicate how the ${target} is a New Zealand citizen`}
             options={[
               { value: 'bornInNZ', display: 'Born in New Zealand' },
@@ -171,7 +172,7 @@ class CitizenshipQuestions extends Component {
           <Field
             name={prefix(target, 'citizenshipPassportNumber')}
             component={renderField}
-            label={`Enter the ${target}'s New Zealand passport number`}
+            label={makeMandatoryLabel(`Enter the ${target}'s New Zealand passport number`)}
             type="text"
             validate={[required]}
           />

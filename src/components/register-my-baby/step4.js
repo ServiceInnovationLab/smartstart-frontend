@@ -2,7 +2,8 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import times from 'lodash/times'
-import makeFocusable from './make-focusable'
+import makeFocusable from './hoc/make-focusable'
+import makeMandatoryLabel from './hoc/make-mandatory-label'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
@@ -31,7 +32,7 @@ class ParentRelationshipForm extends Component {
                 <Field
                   name={`siblings.[${idx}].sex`}
                   component={renderRadioGroup}
-                  label={`Sex of child ${idx + 1}`}
+                  label={makeMandatoryLabel(`Sex of child ${idx + 1}`)}
                   options={[
                     { value: 'male', display: 'Male'},
                     { value: 'female', display: 'Female'}
@@ -41,7 +42,7 @@ class ParentRelationshipForm extends Component {
                 <Field
                   name={`siblings.[${idx}].statusOfChild`}
                   component={renderRadioGroup}
-                  label="Is this child alive, since died, or were they stillborn?"
+                  label={makeMandatoryLabel("Is this child alive, since died, or were they stillborn?")}
                   options={[
                     { value: 'born-alive', display: 'Alive'},
                     { value: 'has-died-since', display: 'Since died'},
@@ -52,7 +53,7 @@ class ParentRelationshipForm extends Component {
                 <Field
                   name={`siblings.[${idx}].dateOfBirth`}
                   component={renderDatepicker}
-                  label="What is this child's date of birth?"
+                  label={makeMandatoryLabel("What is this child's date of birth?")}
                   validate={[required, validDate]}
                 />
                 { idx === 0 &&
@@ -108,7 +109,7 @@ class ParentRelationshipForm extends Component {
               component={renderSelect}
               options={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
               renderEmptyOption={false}
-              label="Are there other children born from the same parent relationship?"
+              label={makeMandatoryLabel("Are there other children born from the same parent relationship?")}
               instructionText="Select the number of other children with the same mother and father. If this is the first child together then go to the next question"
               validate={[required]}
             />
@@ -124,7 +125,7 @@ class ParentRelationshipForm extends Component {
                 { value: 'deFacto', display: 'De Facto Relationship' },
                 { value: 'none', display: 'Not married/in a Civil Union/De Facto Relationship' }
               ]}
-              label="What was the parents' relationship with each other at the time of the child's birth?"
+              label={makeMandatoryLabel("What was the parents' relationship with each other at the time of the child's birth?")}
               validate={[required]}
             />
 
@@ -133,14 +134,14 @@ class ParentRelationshipForm extends Component {
                 <Field
                   name="parentRelationshipDate"
                   component={renderDatepicker}
-                  label="Date of marriage/civil union"
+                  label={makeMandatoryLabel("Date of marriage/civil union")}
                   validate={[required, validDate]}
                 />
                 <Field
                   name="parentRelationshipPlace"
                   component={renderField}
                   type="text"
-                  label="Place of marriage/civil union"
+                  label={makeMandatoryLabel("Place of marriage/civil union")}
                   instructionText="City or town and Country (if ceremony was performed overseas)"
                   validate={[required]}
                 />

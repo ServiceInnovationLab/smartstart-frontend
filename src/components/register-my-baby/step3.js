@@ -5,7 +5,8 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
-import makeFocusable from './make-focusable'
+import makeFocusable from './hoc/make-focusable'
+import makeMandatoryLabel from './hoc/make-mandatory-label'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderError from './render-error'
@@ -166,7 +167,7 @@ class FatherDetailsForm extends Component {
           name="father.firstNames"
           component={renderField}
           type="text"
-          label="All first name(s) father is currently known by"
+          label={makeMandatoryLabel("All first name(s) father is currently known by")}
           instructionText="Enter all current first and given names. If any differ from names given at birth, those names can be entered below."
           validate={[required]}
         />
@@ -175,7 +176,7 @@ class FatherDetailsForm extends Component {
           name="father.surname"
           component={renderField}
           type="text"
-          label="Surname of father (currently known by)"
+          label={makeMandatoryLabel("Surname of father (currently known by)")}
           instructionText="Enter all current surnames or family names. If any differ from names at birth, those names can be entered below."
           validate={[required]}
         />
@@ -200,7 +201,7 @@ class FatherDetailsForm extends Component {
           name="father.ocupation"
           component={renderField}
           type="text"
-          label="Usual occupation, profession or job of father"
+          label={makeMandatoryLabel("Usual occupation, profession or job of father")}
           placeholder="e.g. Teacher"
           instructionText="Please enter the father's type of occupation not the name of the father's employer"
           validate={[required]}
@@ -209,7 +210,7 @@ class FatherDetailsForm extends Component {
         <Field
           name="father.dateOfBirth"
           component={renderDatepicker}
-          label="Father's date of birth"
+          label={makeMandatoryLabel("Father's date of birth")}
           validate={[required, validDate]}
         />
 
@@ -217,7 +218,7 @@ class FatherDetailsForm extends Component {
           name="father.placeOfBirth"
           component={renderField}
           type="text"
-          label="Place of Birth - City/town"
+          label={makeMandatoryLabel("Place of Birth - City/town")}
           placeholder="e.g. Auckland"
           validate={[required]}
         />
@@ -237,7 +238,7 @@ class FatherDetailsForm extends Component {
               name="father.homeAddress.line1"
               component={renderPlacesAutocomplete}
               type="text"
-              label="Street number and Street name"
+              label={makeMandatoryLabel("Street number and Street name")}
               onPlaceSelect={this.onPlaceSelect}
               validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
             />
@@ -251,7 +252,7 @@ class FatherDetailsForm extends Component {
               name="father.homeAddress.line2"
               component={renderField}
               type="text"
-              label="Town/City and Postcode"
+              label={makeMandatoryLabel("Town/City and Postcode")}
               validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
             />
           </div>
@@ -261,7 +262,7 @@ class FatherDetailsForm extends Component {
         <Field
           name="father.maoriDescendant"
           component={renderRadioGroup}
-          label="Is the father a descendant of a New Zealand Māori?"
+          label={makeMandatoryLabel("Is the father a descendant of a New Zealand Māori?")}
           instructionText="This will not appear on the birth certificate"
           options={yesNoNotSureOptions}
           validate={[required]}
@@ -270,7 +271,7 @@ class FatherDetailsForm extends Component {
         <Field
           name="father.ethnicGroups"
           component={renderCheckboxGroup}
-          label="Which ethnic group(s) does the father belong to?"
+          label={makeMandatoryLabel("Which ethnic group(s) does the father belong to?")}
           instructionText="Select as many boxes as you wish to describe the ethnic group(s) the father belongs to."
           options={ethnicGroupOptions}
           onChange={this.onEthnicGroupsChange}
@@ -345,7 +346,7 @@ class FatherDetailsForm extends Component {
           <Field
             name="assistedHumanReproduction"
             component={renderRadioGroup}
-            label="Is the child born as a result of an assisted human reproduction procedure (such as artificial insemination)?"
+            label={makeMandatoryLabel("Is the child born as a result of an assisted human reproduction procedure (such as artificial insemination)?")}
             options={yesNoOptions}
             onChange={this.handleAssistedHumanReproductionChange}
             validate={[required]}
@@ -406,7 +407,7 @@ class FatherDetailsForm extends Component {
               <Field
                 name="fatherKnown"
                 component={renderRadioGroup}
-                label="Is the father known?"
+                label={makeMandatoryLabel("Is the father known?")}
                 instructionText="The mother does not need to be in a relationship with the father for him to be named on the birth certificate"
                 options={yesNoOptions}
                 validate={[required]}

@@ -4,7 +4,8 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import makeFocusable from './make-focusable'
+import makeFocusable from './hoc/make-focusable'
+import makeMandatoryLabel from './hoc/make-mandatory-label'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderCustomSelect from './render-custom-select'
@@ -178,7 +179,7 @@ class ChildDetailsForm extends Component {
             component={renderField}
             type="text"
             placeholder="First name"
-            label="Child's given name(s)"
+            label={makeMandatoryLabel("Child's given name(s)")}
             instructionText="Enter the child's first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate"
             validate={[requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validName]}
             normalize={maxLength(75)}
@@ -189,7 +190,7 @@ class ChildDetailsForm extends Component {
             component={renderField}
             type="text"
             placeholder="E.g Smith"
-            label="Child's surname"
+            label={makeMandatoryLabel("Child's surname")}
             validate={[required, validName]}
             normalize={maxLength(75)}
           />
@@ -197,7 +198,7 @@ class ChildDetailsForm extends Component {
           <Field
             name="child.sex"
             component={renderRadioGroup}
-            label="Child's sex"
+            label={makeMandatoryLabel("Child's sex")}
             options={[
               { value: 'male', display: 'Male'},
               { value: 'female', display: 'Female'}
@@ -208,7 +209,7 @@ class ChildDetailsForm extends Component {
           <Field
             name="child.stillBorn"
             component={renderRadioGroup}
-            label="Was this child alive at birth?"
+            label={makeMandatoryLabel("Was this child alive at birth?")}
             options={yesNoOptions}
             validate={[required]}
           />
@@ -232,14 +233,14 @@ class ChildDetailsForm extends Component {
           <Field
             name="child.birthDate"
             component={renderDatepicker}
-            label="The child's date of birth"
+            label={makeMandatoryLabel("The child's date of birth")}
             validate={[required, validDate]}
           />
 
           <Field
             name="child.oneOfMultiple"
             component={renderRadioGroup}
-            label="Is this child one of a multiple birth (twins, triplets, etc)"
+            label={makeMandatoryLabel("Is this child one of a multiple birth (twins, triplets, etc)")}
             options={yesNoOptions}
             onChange={this.onMultipleBirthChange}
             validate={[required]}
@@ -250,7 +251,7 @@ class ChildDetailsForm extends Component {
               <Field
                 name="child.multipleBirthOrder"
                 component={renderBirthOrderSelector}
-                label="What is the birth order for this child?"
+                label={makeMandatoryLabel("What is the birth order for this child?")}
               />
             </div>
           }
@@ -258,7 +259,7 @@ class ChildDetailsForm extends Component {
           <Field
             name="birthPlace.category"
             component={renderRadioGroup}
-            label="Where was the child born?"
+            label={makeMandatoryLabel("Where was the child born?")}
             options={[
               { value: 'hospital', display: 'Hospital'},
               { value: 'home', display: 'Home'},
@@ -280,7 +281,7 @@ class ChildDetailsForm extends Component {
                 optionRenderer={renderHospitalOption}
                 valueRenderer={renderHospitalOption}
                 searchable={true}
-                label="Hospital name"
+                label={makeMandatoryLabel("Hospital name")}
                 validate={[required]}
               />
             </div>
@@ -292,7 +293,7 @@ class ChildDetailsForm extends Component {
                 name="birthPlace.home.line1"
                 component={renderPlacesAutocomplete}
                 type="text"
-                label="Street number and Street name"
+                label={makeMandatoryLabel("Street number and Street name")}
                 onPlaceSelect={this.onPlaceSelect}
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
               />
@@ -306,7 +307,7 @@ class ChildDetailsForm extends Component {
                 name="birthPlace.home.line2"
                 component={renderField}
                 type="text"
-                label="Town/City and Postcode"
+                label={makeMandatoryLabel("Town/City and Postcode")}
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
               />
             </div>
@@ -327,7 +328,7 @@ class ChildDetailsForm extends Component {
           <Field
             name="child.maoriDescendant"
             component={renderRadioGroup}
-            label="Is this child a descendant of a New Zealand Māori?"
+            label={makeMandatoryLabel("Is this child a descendant of a New Zealand Māori?")}
             instructionText="This will not appear on the birth certificate"
             options={yesNoNotSureOptions}
             validate={[required]}
@@ -336,7 +337,7 @@ class ChildDetailsForm extends Component {
           <Field
             name="child.ethnicGroups"
             component={renderCheckboxGroup}
-            label="Which ethnic group(s) does this child belong to?"
+            label={makeMandatoryLabel("Which ethnic group(s) does this child belong to?")}
             instructionText="Select as many boxes as you wish to describe the ethnic group(s) this child belongs to."
             options={ethnicGroupOptions}
             onChange={this.onEthnicGroupsChange}

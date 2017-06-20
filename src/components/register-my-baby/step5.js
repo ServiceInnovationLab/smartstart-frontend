@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import makeFocusable from './make-focusable'
+import makeFocusable from './hoc/make-focusable'
+import makeMandatoryLabel from './hoc/make-mandatory-label'
 import Accordion from './accordion'
 import renderField from './render-field'
 import renderSelect from './render-select'
@@ -121,7 +122,7 @@ class IrdMsdSharingForm extends Component {
           <Field
             name="ird.applyForNumber"
             component={renderRadioGroup}
-            label="Do you wish to apply for an IRD number for your child?"
+            label={makeMandatoryLabel("Do you wish to apply for an IRD number for your child?")}
             options={yesNoOptions}
             validate={[required]}
           />
@@ -136,7 +137,7 @@ class IrdMsdSharingForm extends Component {
                   { value: 'fatherAddress', display: 'Father\'s' },
                   { value: 'birthCertificateAddress', display: 'Birth Certificate (if you order one)' },
                 ]}
-                label="Please choose an address Inland Revenue should post your child's IRD number to"
+                label={makeMandatoryLabel("Please choose an address Inland Revenue should post your child's IRD number to")}
                 validate={[requiredWithMessage(REQUIRE_IRD_ADDRESS)]}
               />
               {
@@ -144,7 +145,7 @@ class IrdMsdSharingForm extends Component {
                 <Field
                   name="ird.numberByEmail"
                   component={renderRadioGroup}
-                  label="Do you also wish to receive your child's IRD number by email?"
+                  label={makeMandatoryLabel("Do you also wish to receive your child's IRD number by email?")}
                   options={yesNoOptions}
                   validate={[required]}
                 />

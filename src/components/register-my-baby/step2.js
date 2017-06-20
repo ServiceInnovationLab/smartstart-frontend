@@ -5,7 +5,8 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
-import makeFocusable from './make-focusable'
+import makeFocusable from './hoc/make-focusable'
+import makeMandatoryLabel from './hoc/make-mandatory-label'
 import renderField from './render-field'
 import renderDatepicker from './render-datepicker'
 import renderRadioGroup from './render-radio-group'
@@ -129,7 +130,7 @@ class MotherDetailsForm extends Component {
             name="mother.firstNames"
             component={renderField}
             type="text"
-            label="All first name(s) mother is currently known by"
+            label={makeMandatoryLabel("All first name(s) mother is currently known by")}
             instructionText="Enter all current first and given names. If any differ from names given at birth, those names can be entered below."
             validate={[required]}
           />
@@ -138,7 +139,7 @@ class MotherDetailsForm extends Component {
             name="mother.surname"
             component={renderField}
             type="text"
-            label="Surname of mother (currently known by)"
+            label={makeMandatoryLabel("Surname of mother (currently known by)")}
             instructionText="Enter all current surnames or family names. If any differ from names at birth, those names can be entered below."
             validate={[required]}
           />
@@ -163,7 +164,7 @@ class MotherDetailsForm extends Component {
             name="mother.ocupation"
             component={renderField}
             type="text"
-            label="Usual occupation, profession or job of mother"
+            label={makeMandatoryLabel("Usual occupation, profession or job of mother")}
             placeholder="e.g. Teacher"
             instructionText="Please enter the mother's type of occupation not the name of the mother's employer"
             validate={[required]}
@@ -172,7 +173,7 @@ class MotherDetailsForm extends Component {
           <Field
             name="mother.dateOfBirth"
             component={renderDatepicker}
-            label="Mother's date of birth"
+            label={makeMandatoryLabel("Mother's date of birth")}
             validate={[required, validDate]}
           />
 
@@ -180,7 +181,7 @@ class MotherDetailsForm extends Component {
             name="mother.placeOfBirth"
             component={renderField}
             type="text"
-            label="Place of Birth - City/town"
+            label={makeMandatoryLabel("Place of Birth - City/town")}
             placeholder="e.g. Auckland"
             validate={[required]}
           />
@@ -200,7 +201,7 @@ class MotherDetailsForm extends Component {
                 name="mother.homeAddress.line1"
                 component={renderPlacesAutocomplete}
                 type="text"
-                label="Street number and Street name"
+                label={makeMandatoryLabel("Street number and Street name")}
                 onPlaceSelect={this.onPlaceSelect}
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
               />
@@ -214,7 +215,7 @@ class MotherDetailsForm extends Component {
                 name="mother.homeAddress.line2"
                 component={renderField}
                 type="text"
-                label="Town/City and Postcode"
+                label={makeMandatoryLabel("Town/City and Postcode")}
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
               />
             </div>
@@ -224,7 +225,7 @@ class MotherDetailsForm extends Component {
           <Field
             name="mother.maoriDescendant"
             component={renderRadioGroup}
-            label="Is the mother a descendant of a New Zealand Māori?"
+            label={makeMandatoryLabel("Is the mother a descendant of a New Zealand Māori?")}
             instructionText="This will not appear on the birth certificate"
             options={yesNoNotSureOptions}
             validate={[required]}
@@ -233,7 +234,7 @@ class MotherDetailsForm extends Component {
           <Field
             name="mother.ethnicGroups"
             component={renderCheckboxGroup}
-            label="Which ethnic group(s) does the mother belong to?"
+            label={makeMandatoryLabel("Which ethnic group(s) does the mother belong to?")}
             instructionText="Select as many boxes as you wish to describe the ethnic group(s) the mother belongs to."
             options={ethnicGroupOptions}
             onChange={this.onEthnicGroupsChange}
