@@ -5,26 +5,26 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
-import makeFocusable from './hoc/make-focusable'
-import makeMandatoryLabel from './hoc/make-mandatory-label'
-import renderField from './render-field'
-import renderDatepicker from './render-datepicker'
-import renderRadioGroup from './render-radio-group'
-import renderCheckboxGroup from './render-checkbox-group'
-import renderPlacesAutocomplete from './render-places-autocomplete'
-import CitizenshipQuestions from './citizenship-questions'
-import { required, requiredWithMessage, number, email, maxLength30, validDate } from './validate'
+import makeFocusable from '../hoc/make-focusable'
+import makeMandatoryLabel from '../hoc/make-mandatory-label'
+import renderField from '../fields/render-field'
+import renderDatepicker from '../fields/render-datepicker'
+import renderRadioGroup from '../fields/render-radio-group'
+import renderCheckboxGroup from '../fields/render-checkbox-group'
+import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
+import CitizenshipQuestions from '../citizenship-questions'
+import { required, requiredWithMessage, number, email, maxLength30, validDate } from '../validate'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNoNotSure as yesNoNotSureOptions
-} from './options'
+} from '../options'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
   WARNING_MOTHER_DATE_OF_BIRTH,
   WARNING_CITIZENSHIP
-} from './validation-messages'
+} from '../validation-messages'
 
 const validate = (values) => {
   const errors = {}

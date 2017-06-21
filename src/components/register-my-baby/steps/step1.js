@@ -4,28 +4,28 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import makeFocusable from './hoc/make-focusable'
-import makeMandatoryLabel from './hoc/make-mandatory-label'
-import Accordion from './accordion'
-import renderField from './render-field'
-import renderCustomSelect from './render-custom-select'
-import renderDatepicker from './render-datepicker'
-import renderBirthOrderSelector from './render-birth-order-selector'
-import renderCheckboxGroup from './render-checkbox-group'
-import renderRadioGroup from './render-radio-group'
-import renderPlacesAutocomplete from './render-places-autocomplete'
-import { required, requiredWithMessage, maxLength30, validName, validDate } from './validate'
+import makeFocusable from '../hoc/make-focusable'
+import makeMandatoryLabel from '../hoc/make-mandatory-label'
+import Accordion from '../accordion'
+import renderField from '../fields/render-field'
+import renderCustomSelect from '../fields/render-custom-select'
+import renderDatepicker from '../fields/render-datepicker'
+import renderBirthOrderSelector from '../fields/render-birth-order-selector'
+import renderCheckboxGroup from '../fields/render-checkbox-group'
+import renderRadioGroup from '../fields/render-radio-group'
+import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
+import { required, requiredWithMessage, maxLength30, validName, validDate } from '../validate'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
   yesNoNotSure as yesNoNotSureOptions
-} from './options'
+} from '../options'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_CHILD_FIRST_NAME,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE
-} from './validation-messages'
+} from '../validation-messages'
 
 const maxLength = (max) => (value, previousVal) => {
   return value.length <= max ? value : previousVal

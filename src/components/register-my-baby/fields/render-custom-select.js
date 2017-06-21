@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Select from 'react-select'
-import { getTextContent } from '../../utils'
+import { getTextContent } from '../../../utils'
 import './custom-select.scss'
 
 class CustomSelect extends Component {

@@ -3,22 +3,22 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import Accordion from './accordion'
-import makeFocusable from './hoc/make-focusable'
-import makeMandatoryLabel from './hoc/make-mandatory-label'
-import renderRadioGroup from './render-radio-group'
-import renderCustomSelect from './render-custom-select'
-import renderField from './render-field'
-import renderPlacesAutocomplete from './render-places-autocomplete'
+import Accordion from '../accordion'
+import makeFocusable from '../hoc/make-focusable'
+import makeMandatoryLabel from '../hoc/make-mandatory-label'
+import renderRadioGroup from '../fields/render-radio-group'
+import renderCustomSelect from '../fields/render-custom-select'
+import renderField from '../fields/render-field'
+import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import {
   yesNo as yesNoOptions,
   deliveryMethods
-} from './options'
+} from '../options'
 import {
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
-} from './validation-messages'
-import { required, requiredWithMessage, email } from './validate'
+} from '../validation-messages'
+import { required, requiredWithMessage, email } from '../validate'
 import './step6.scss'
 
 const PRODUCT_OPTIONS = [

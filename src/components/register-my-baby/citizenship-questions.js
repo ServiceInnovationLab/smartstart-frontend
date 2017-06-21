@@ -4,10 +4,10 @@ import capitalize from 'lodash/capitalize'
 import makeMandatoryLabel from './hoc/make-mandatory-label'
 import { required } from './validate'
 import Accordion from './accordion'
-import renderField from './render-field'
-import renderWarning from './render-warning'
-import renderRadioGroup from './render-radio-group'
-import renderSelect from './render-select'
+import renderField from './fields/render-field'
+import renderWarning from './fields/render-warning'
+import renderRadioGroup from './fields/render-radio-group'
+import renderSelect from './fields/render-select'
 
 const prefix = (prefix, field) => prefix ? `${prefix}.${field}` : field
 

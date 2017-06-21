@@ -5,23 +5,23 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
-import makeFocusable from './hoc/make-focusable'
-import makeMandatoryLabel from './hoc/make-mandatory-label'
-import Accordion from './accordion'
-import renderField from './render-field'
-import renderError from './render-error'
-import renderDatepicker from './render-datepicker'
-import renderRadioGroup from './render-radio-group'
-import renderCheckboxGroup from './render-checkbox-group'
-import renderCheckbox from './render-checkbox'
-import renderPlacesAutocomplete from './render-places-autocomplete'
-import CitizenshipQuestions from './citizenship-questions'
-import { required, requiredWithMessage, number, email, maxLength30, validDate } from './validate'
+import makeFocusable from '../hoc/make-focusable'
+import makeMandatoryLabel from '../hoc/make-mandatory-label'
+import Accordion from '../accordion'
+import renderField from '../fields/render-field'
+import renderError from '../fields/render-error'
+import renderDatepicker from '../fields/render-datepicker'
+import renderRadioGroup from '../fields/render-radio-group'
+import renderCheckboxGroup from '../fields/render-checkbox-group'
+import renderCheckbox from '../fields/render-checkbox'
+import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
+import CitizenshipQuestions from '../citizenship-questions'
+import { required, requiredWithMessage, number, email, maxLength30, validDate } from '../validate'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
   yesNoNotSure as yesNoNotSureOptions
-} from './options'
+} from '../options'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
@@ -29,7 +29,7 @@ import {
   WARNING_CITIZENSHIP,
   WARNING_FATHER_DATE_OF_BIRTH,
   REQUIRE_AT_LEAST_ONE
-} from './validation-messages'
+} from '../validation-messages'
 
 const validate = (values) => {
   const errors = {}

@@ -3,23 +3,23 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import makeFocusable from './hoc/make-focusable'
-import makeMandatoryLabel from './hoc/make-mandatory-label'
-import Accordion from './accordion'
-import renderField from './render-field'
-import renderSelect from './render-select'
-import renderCheckbox from './render-checkbox'
-import renderRadioGroup from './render-radio-group'
+import makeFocusable from '../hoc/make-focusable'
+import makeMandatoryLabel from '../hoc/make-mandatory-label'
+import Accordion from '../accordion'
+import renderField from '../fields/render-field'
+import renderSelect from '../fields/render-select'
+import renderCheckbox from '../fields/render-checkbox'
+import renderRadioGroup from '../fields/render-radio-group'
 import {
   yesNo as yesNoOptions
-} from './options'
-import { required, requiredWithMessage, validIrd, validMsd } from './validate'
+} from '../options'
+import { required, requiredWithMessage, validIrd, validMsd } from '../validate'
 import {
   REQUIRE_IRD_ADDRESS,
   REQUIRE_AT_LEAST_ONE_MSD,
   REQUIRE_MOTHER_EMAIL_IRD,
   REQUIRE_FATHER_EMAIL_IRD
-} from './validation-messages'
+} from '../validation-messages'
 
 /**
  * A normalizer function to mimic HTML5 `maxlength` behavior (refer to MSD & IRD field)
