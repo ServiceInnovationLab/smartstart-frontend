@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 
 class BirthOrderSelector extends Component {
   constructor(props) {
@@ -85,6 +86,7 @@ class BirthOrderSelector extends Component {
             onBlur={this.handleBlur('firstSelection')}
             ref={ firstSelect => this.firstSelect = firstSelect }
             aria-describedby={this.props.ariaDescribedBy}
+            aria-label={makeMandatoryAriaLabel("Select child's birth order")}
           >
             <option value=""></option>
             {
@@ -102,6 +104,7 @@ class BirthOrderSelector extends Component {
             onBlur={this.handleBlur('secondSelection')}
             ref={ secondSelect => this.secondSelect = secondSelect }
             aria-describedby={this.props.ariaDescribedBy}
+            aria-label={makeMandatoryAriaLabel("Select total number of births")}
           >
             <option value=""></option>
             {

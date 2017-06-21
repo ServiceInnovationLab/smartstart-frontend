@@ -6,7 +6,7 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 import moment from 'moment'
 import makeFocusable from '../hoc/make-focusable'
-import makeMandatoryLabel from '../hoc/make-mandatory-label'
+import makeMandatoryLabel, { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 import renderField from '../fields/render-field'
 import renderDatepicker from '../fields/render-datepicker'
 import renderRadioGroup from '../fields/render-radio-group'
@@ -247,6 +247,7 @@ class MotherDetailsForm extends Component {
                 component={renderField}
                 type="text"
                 placeholder="Please describe the mother’s ethnicity"
+                ariaLabel={makeMandatoryAriaLabel("State other ethnicity")}
                 validate={[required, maxLength30]}
               />
             </div>

@@ -5,7 +5,7 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import makeFocusable from '../hoc/make-focusable'
-import makeMandatoryLabel from '../hoc/make-mandatory-label'
+import makeMandatoryLabel, { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 import Accordion from '../accordion'
 import renderField from '../fields/render-field'
 import renderCustomSelect from '../fields/render-custom-select'
@@ -320,6 +320,7 @@ class ChildDetailsForm extends Component {
                 component={renderField}
                 type="text"
                 instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
+                ariaLabel={makeMandatoryAriaLabel("State other birth place")}
                 validate={[required]}
               />
             </div>
@@ -349,6 +350,7 @@ class ChildDetailsForm extends Component {
                 name="child.ethnicityDescription"
                 component={renderField}
                 type="text"
+                ariaLabel={makeMandatoryAriaLabel("State other ethnicity")}
                 placeholder="Please describe the child’s ethnicity"
                 validate={[required, maxLength30]}
               />

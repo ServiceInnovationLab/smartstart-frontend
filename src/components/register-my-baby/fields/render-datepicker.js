@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
+import { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 
 const DAYS = []
 const MONTHS = [
@@ -118,6 +119,7 @@ class SimpleDatePicker extends Component {
             onBlur={this.handleBlur}
             ref={ daySelect => this.daySelect = daySelect }
             aria-describedby={ariaDescribedBy}
+            aria-label={makeMandatoryAriaLabel("Select day")}
           >
             <option value="">Day</option>
             {
@@ -134,6 +136,7 @@ class SimpleDatePicker extends Component {
             onBlur={this.handleBlur}
             ref={ monthSelect => this.monthSelect = monthSelect }
             aria-describedby={ariaDescribedBy}
+            aria-label={makeMandatoryAriaLabel("Select month")}
           >
             <option value="">Month</option>
             {
@@ -150,6 +153,7 @@ class SimpleDatePicker extends Component {
             onBlur={this.handleBlur}
             ref={ yearSelect => this.yearSelect = yearSelect }
             aria-describedby={ariaDescribedBy}
+            aria-label={makeMandatoryAriaLabel("Select year")}
           >
             <option value="">Year</option>
             {
