@@ -11,7 +11,8 @@ import renderSelect from '../fields/render-select'
 import renderCheckbox from '../fields/render-checkbox'
 import renderRadioGroup from '../fields/render-radio-group'
 import {
-  yesNo as yesNoOptions
+  yesNo as yesNoOptions,
+  irdDeliveryAddresses
 } from '../options'
 import { required, requiredWithMessage, validIrd, validMsd } from '../validate'
 import {
@@ -61,10 +62,11 @@ const validate = (values) => {
   }
 
 
+  const notifyMsd = get(values, 'msd.notify')
   const motherMsd = get(values, 'msd.mothersClientNumber')
   const fatherMsd = get(values, 'msd.fathersClientNumber')
 
-  if (!motherMsd && !fatherMsd) {
+  if (notifyMsd && (!motherMsd && !fatherMsd)) {
     set(errors, 'msd.fathersClientNumber', REQUIRE_AT_LEAST_ONE_MSD)
   }
 
@@ -132,11 +134,7 @@ class IrdMsdSharingForm extends Component {
               <Field
                 name="ird.deliveryAddress"
                 component={renderSelect}
-                options={[
-                  { value: 'motherAddress', display: 'Mother\'s' },
-                  { value: 'fatherAddress', display: 'Father\'s' },
-                  { value: 'birthCertificateAddress', display: 'Birth Certificate (if you order one)' },
-                ]}
+                options={irdDeliveryAddresses}
                 label={makeMandatoryLabel("Please choose an address Inland Revenue should post your child's IRD number to")}
                 validate={[requiredWithMessage(REQUIRE_IRD_ADDRESS)]}
               />
@@ -232,7 +230,12 @@ class IrdMsdSharingForm extends Component {
 
           <div className="form-actions">
             <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
-            <button type="submit" className="next" disabled={submitting}>Next</button>
+            <div>
+              { this.props.isReviewing &&
+                <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
+              }
+              <button type="submit" className="next" disabled={submitting}>Next</button>
+            </div>
           </div>
         </form>
       </div>
@@ -247,9 +250,11 @@ IrdMsdSharingForm.propTypes = {
   msdNotify: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
+  isReviewing: PropTypes.bool,
+  onComebackToReview: PropTypes.func,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
-  pristine: PropTypes.bool,
+  pristine: PropTypes.bool
 }
 
 IrdMsdSharingForm = reduxForm({

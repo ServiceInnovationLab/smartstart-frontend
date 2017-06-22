@@ -10,13 +10,18 @@ class CheckboxGroup extends Component {
 
   handleChange(option) {
     return event => {
-      const newValue = [...this.props.value]
+      const values = [...this.props.value]
       if(event.target.checked) {
-        newValue.push(option.value)
+        values.push(option.value)
       } else {
-        newValue.splice(newValue.indexOf(option.value), 1)
+        values.splice(values.indexOf(option.value), 1)
       }
-      return this.props.onChange(newValue)
+
+      const presevedOrderValues = this.props.options
+        .map(option => option.value)
+        .filter(val => values.indexOf(val) > -1);
+
+      return this.props.onChange(presevedOrderValues)
     }
   }
 

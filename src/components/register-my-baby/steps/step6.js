@@ -12,7 +12,9 @@ import renderField from '../fields/render-field'
 import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import {
   yesNo as yesNoOptions,
-  deliveryMethods
+  products as productOptions,
+  deliveryMethods,
+  birthCertificateDeliveryAddresses
 } from '../options'
 import {
   REQUIRE_MESSAGE_STREET,
@@ -21,17 +23,7 @@ import {
 import { required, requiredWithMessage, email } from '../validate'
 import './step6.scss'
 
-const PRODUCT_OPTIONS = [
-  { value: 'BC05', label: 'All Blacks NZ (limited time only)', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-allblacks.png' },
-  { value: 'ZBFD', label: 'Forest', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-forest.png' },
-  { value: 'ZBBD', label: 'Beach', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-beach.png' },
-  { value: 'ZBBC', label: 'Standard', price: 33, imageSrc: '/assets/img/certificates/birth-certificate-standard.png' },
-  { value: 'BC06', label: 'Standard & All Blacks NZ', subLabel: 'Two certificate package', price: 55, imageSrc: '/assets/img/certificates/birth-certificate-standard-and-allblacks.png' },
-  { value: 'ZBFP', label: 'Standard & Forest', subLabel: 'Two certificate package', price: 55, imageSrc: '/assets/img/certificates/birth-certificate-standard-and-forest.png' },
-  { value: 'ZBBP', label: 'Standard & Beach', subLabel: 'Two certificate package', price: 55, imageSrc: '/assets/img/certificates/birth-certificate-standard-and-beach.png' }
-]
-
-const PRODUCT_OPTIONS_WITH_PRICE = PRODUCT_OPTIONS.map(product => ({
+const PRODUCT_OPTIONS_WITH_PRICE = productOptions.map(product => ({
     ...product,
     label: `${product.label} - $${product.price.toFixed(2)}`
 }))
@@ -123,7 +115,7 @@ class OrderCertificatesForm extends Component {
 
   render() {
     const { orderBirthCertificate, productCode, quantity, courierDelivery, handleSubmit, submitting } = this.props
-    const product = productCode ? find(PRODUCT_OPTIONS, { value: productCode }) : null
+    const product = productCode ? find(productOptions, { value: productCode }) : null
     const previewImage = product ? product.imageSrc : '/assets/img/certificates/birth-certificate-preview.png'
     const deliveryPrice = courierDelivery === 'standard' ? 0 : 5
     const totalPrice = (product && quantity) ? (product.price * quantity + deliveryPrice) : 0
@@ -223,11 +215,7 @@ class OrderCertificatesForm extends Component {
                 name="certificateOrder.deliveryAddressType"
                 component={renderRadioGroup}
                 label={makeMandatoryLabel("What address should we deliver to?")}
-                options={[
-                  { value: 'mother', display: 'Mother\'s' },
-                  { value: 'father', display: 'Father\'s' },
-                  { value: 'other', display: 'Other' }
-                ]}
+                options={birthCertificateDeliveryAddresses}
                 onChange={this.onDeliveryAddressTypeChange}
                 validate={[required]}
               />
@@ -286,7 +274,12 @@ class OrderCertificatesForm extends Component {
           }
           <div className="form-actions">
             <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
-            <button type="submit" className="next" disabled={submitting}>Next</button>
+            <div>
+              { this.props.isReviewing &&
+                <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
+              }
+              <button type="submit" className="next" disabled={submitting}>Next</button>
+            </div>
           </div>
         </form>
       </div>
@@ -309,6 +302,8 @@ OrderCertificatesForm.propTypes = {
   fatherAddressSuburb: PropTypes.string,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
+  isReviewing: PropTypes.bool,
+  onComebackToReview: PropTypes.func,
   handleSubmit: PropTypes.func,
   change: PropTypes.func,
   submitting: PropTypes.bool,

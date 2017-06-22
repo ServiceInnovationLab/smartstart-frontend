@@ -23,7 +23,10 @@ import {
 } from 'actions/actions'
 import {
   RECEIVE_BIRTH_FACILITIES,
-  RECEIVE_COUNTRIES
+  RECEIVE_COUNTRIES,
+  RECEIVE_CSRF_TOKEN,
+  REQUEST_VALIDATION_RESULT,
+  RECEIVE_VALIDATION_RESULT
 } from 'actions/birth-registration'
 
 function contentActions (state = {
@@ -182,6 +185,7 @@ const initialRegistrationFormState = {
 function birthRegistration (state = {
   birthFacilities: [],
   countries: [],
+  csrfToken: '',
   savedRegistrationForm: initialRegistrationFormState
 }, action) {
   switch (action.type) {
@@ -195,6 +199,22 @@ function birthRegistration (state = {
         ...state,
         countries: action.payload.response
       };
+    case RECEIVE_CSRF_TOKEN:
+      return {
+        ...state,
+        csrfToken: action.token
+      };
+    case REQUEST_VALIDATION_RESULT:
+      return {
+        ...state,
+        isValidating: true
+      }
+    case RECEIVE_VALIDATION_RESULT:
+      return {
+        ...state,
+        isValidating: false,
+        validationResult: action.payload
+      }
     default:
       return state
   }

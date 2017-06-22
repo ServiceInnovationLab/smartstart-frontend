@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { animateScroll } from 'react-scroll'
 
 const focusToField = (fieldName) => {
-  const node = document.querySelector(`[name="${fieldName}"]`)
+  const node = document.querySelector(`[name="${fieldName}"], [name="${fieldName}[0]"], [name="${fieldName}-group"]`)
 
   if (!node) {
     return

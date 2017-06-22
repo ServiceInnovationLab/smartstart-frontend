@@ -9,6 +9,11 @@ import renderWarning from './fields/render-warning'
 import renderRadioGroup from './fields/render-radio-group'
 import renderSelect from './fields/render-select'
 
+import {
+  yesNo as yesNoOptions,
+  citizenshipSources as citizenshipSourceOptions
+} from './options'
+
 const prefix = (prefix, field) => prefix ? `${prefix}.${field}` : field
 
 class CitizenshipQuestions extends Component {
@@ -60,10 +65,7 @@ class CitizenshipQuestions extends Component {
           component={renderRadioGroup}
           label={makeMandatoryLabel(`Is the ${target} a New Zealand citizen?`)}
           instructionText={`Please indicate the ${target}'s citizenship or immigration status.`}
-          options={[
-            { value: 'yes', display: 'Yes'},
-            { value: 'no', display: 'No'}
-          ]}
+          options={yesNoOptions}
           validate={[required]}
           onChange={this.onIsCitizenChange}
         />
@@ -90,10 +92,7 @@ class CitizenshipQuestions extends Component {
             name={prefix(target, 'isPermanentResident')}
             component={renderRadioGroup}
             label={makeMandatoryLabel(`Is the ${target} a New Zealand permanent resident?`)}
-            options={[
-              { value: 'yes', display: 'Yes'},
-              { value: 'no', display: 'No'}
-            ]}
+            options={yesNoOptions}
             validate={[required]}
             onChange={this.onCitizenshipSourceChange('isPermanentResident')}
           />
@@ -103,10 +102,7 @@ class CitizenshipQuestions extends Component {
             name={prefix(target, 'isNZRealmResident')}
             component={renderRadioGroup}
             label={makeMandatoryLabel(`Is the ${target} a resident of the Cook Islands, Niue or Tokelau?`)}
-            options={[
-              { value: 'yes', display: 'Yes'},
-              { value: 'no', display: 'No'}
-            ]}
+            options={yesNoOptions}
             validate={[required]}
             onChange={this.onCitizenshipSourceChange('isNZRealmResident')}
           />
@@ -116,10 +112,7 @@ class CitizenshipQuestions extends Component {
             name={prefix(target, 'isAuResidentOrCitizen')}
             component={renderRadioGroup}
             label={makeMandatoryLabel(`Is the ${target} an Australian citizen or permanent resident of Australia?`)}
-            options={[
-              { value: 'yes', display: 'Yes'},
-              { value: 'no', display: 'No'}
-            ]}
+            options={yesNoOptions}
             validate={[required]}
             onChange={this.onCitizenshipSourceChange('isAuResidentOrCitizen')}
           />
@@ -151,14 +144,7 @@ class CitizenshipQuestions extends Component {
             component={renderSelect}
             label={makeMandatoryLabel(`${capitalize(target)} is either`)}
             instructionText={`Please indicate how the ${target} is a New Zealand citizen`}
-            options={[
-              { value: 'bornInNZ', display: 'Born in New Zealand' },
-              { value: 'bornInNiue', display: 'Born in Niue' },
-              { value: 'bornInCookIslands', display: 'Born in the Cook Islands' },
-              { value: 'bornInTokelau', display: 'Born in Tokelau' },
-              { value: 'citizenByDescent', display: 'New Zealand citizen by Descent' },
-              { value: 'citizenByGrant', display: 'New Zealand citizen by Grant' }
-            ]}
+            options={citizenshipSourceOptions}
             validate={[required]}
           />
         }

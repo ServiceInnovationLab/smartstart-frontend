@@ -10,6 +10,10 @@ import renderDatepicker from '../fields/render-datepicker'
 import renderSelect from '../fields/render-select'
 import renderRadioGroup from '../fields/render-radio-group'
 import { required, validDate } from '../validate'
+import {
+  childStatuses as childStatusOptions,
+  parentRelationships as parentRelationshipOptions
+} from '../options'
 
 const validate = () => {
   const errors = {}
@@ -43,11 +47,7 @@ class ParentRelationshipForm extends Component {
                   name={`siblings.[${idx}].statusOfChild`}
                   component={renderRadioGroup}
                   label={makeMandatoryLabel("Is this child alive, since died, or were they stillborn?")}
-                  options={[
-                    { value: 'born-alive', display: 'Alive'},
-                    { value: 'has-died-since', display: 'Since died'},
-                    { value: 'stillborne', display: 'Stillborn'}
-                  ]}
+                  options={childStatusOptions}
                   validate={[required]}
                 />
                 <Field
@@ -119,12 +119,7 @@ class ParentRelationshipForm extends Component {
             <Field
               name="parentRelationship"
               component={renderSelect}
-              options={[
-                { value: 'marriage', display: 'Marriage' },
-                { value: 'civilUnion', display: 'Civil Union' },
-                { value: 'deFacto', display: 'De Facto Relationship' },
-                { value: 'none', display: 'Not married/in a Civil Union/De Facto Relationship' }
-              ]}
+              options={parentRelationshipOptions}
               label={makeMandatoryLabel("What was the parents' relationship with each other at the time of the child's birth?")}
               validate={[required]}
             />
@@ -161,7 +156,12 @@ class ParentRelationshipForm extends Component {
 
             <div className="form-actions">
               <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
-              <button type="submit" className="next" disabled={submitting}>Next</button>
+              <div>
+                { this.props.isReviewing &&
+                  <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
+                }
+                <button type="submit" className="next" disabled={submitting}>Next</button>
+              </div>
             </div>
           </form>
         }
@@ -178,6 +178,8 @@ ParentRelationshipForm.propTypes = {
   assistedHumanReproductionSpermDonor: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
+  isReviewing: PropTypes.bool,
+  onComebackToReview: PropTypes.func,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   pristine: PropTypes.bool,

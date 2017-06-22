@@ -18,7 +18,8 @@ import { required, requiredWithMessage, maxLength30, validName, validDate } from
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
-  yesNoNotSure as yesNoNotSureOptions
+  yesNoNotSure as yesNoNotSureOptions,
+  sexs as sexOptions
 } from '../options'
 import {
   REQUIRE_MESSAGE,
@@ -47,11 +48,6 @@ const validate = (values) => {
   }
 
   return errors
-}
-
-const warn = () => {
-  const warnings = {}
-  return warnings
 }
 
 const renderHospitalOption = option =>
@@ -199,10 +195,7 @@ class ChildDetailsForm extends Component {
             name="child.sex"
             component={renderRadioGroup}
             label={makeMandatoryLabel("Child's sex")}
-            options={[
-              { value: 'male', display: 'Male'},
-              { value: 'female', display: 'Female'}
-            ]}
+            options={sexOptions}
             validate={[required]}
           />
 
@@ -359,7 +352,12 @@ class ChildDetailsForm extends Component {
 
           <div className="form-actions">
             <div />
-            <button type="submit" className="next" disabled={submitting}>Next</button>
+            <div>
+              { this.props.isReviewing &&
+                <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
+              }
+              <button type="submit" className="next" disabled={submitting}>Next</button>
+            </div>
           </div>
         </form>
       </div>
@@ -374,6 +372,8 @@ ChildDetailsForm.propTypes = {
   ethnicGroups: PropTypes.array,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
+  isReviewing: PropTypes.bool,
+  onComebackToReview: PropTypes.func,
   change: PropTypes.func,     // passed via reduxForm
   submitting: PropTypes.bool, // passed via reduxForm
   pristine: PropTypes.bool,   // passed via reduxForm
@@ -384,8 +384,7 @@ ChildDetailsForm = reduxForm({
   form: 'registration', // same name for all wizard's form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate,
-  warn
+  validate
 })(ChildDetailsForm)
 
 const selector = formValueSelector('registration')

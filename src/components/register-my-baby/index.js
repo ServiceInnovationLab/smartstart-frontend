@@ -13,6 +13,7 @@ import Step3 from './steps/step3'
 import Step4 from './steps/step4'
 import Step5 from './steps/step5'
 import Step6 from './steps/step6'
+import Review from './steps/review/index'
 import { piwikTrackPost } from '../../actions/actions'
 import { fetchBirthFacilities, fetchCountries } from '../../actions/birth-registration'
 
@@ -57,10 +58,13 @@ class RegisterMyBabyForm extends Component {
     super(props)
     this.nextStep = this.nextStep.bind(this)
     this.previousStep = this.previousStep.bind(this)
+    this.goToReviewStep = this.goToReviewStep.bind(this)
     this.handleSubmitFail = this.handleSubmitFail.bind(this)
+    this.handleFieldReviewEdit = this.handleFieldReviewEdit.bind(this)
     this.state = {
       step: 1,
       stepName: 'child-details',
+      isReviewing: false,
       steps: [
         { icon: '', name: 'Child'},
         { icon: '', name: 'Mother'},
@@ -96,11 +100,23 @@ class RegisterMyBabyForm extends Component {
     })
   }
 
-  goToStep(step, replace = false) {
+  goToReviewStep() {
+    if (this.state.isReviewing) {
+      this.goToStep(7)
+    }
+  }
+
+  goToStep(step, replace = false, focus = '') {
     const stepName = stepNameByStep[step]
 
     if (stepName) {
-      this.props.router[replace ? 'replace': 'push'](`/register-my-baby/${stepName}`)
+      let url = `/register-my-baby/${stepName}`;
+
+      if (focus) {
+        url += `?focus=${focus}`
+      }
+
+      this.props.router[replace ? 'replace': 'push'](url)
     }
   }
 
@@ -111,6 +127,14 @@ class RegisterMyBabyForm extends Component {
       'name': this.state.stepName
     })
     window.setTimeout(scrollToFirstError, 200)
+  }
+
+  handleFieldReviewEdit(section, fieldName) {
+    this.setState({
+      isReviewing: true
+    });
+
+    this.goToStep(stepByStepName[section], false, fieldName)
   }
 
   onSubmit() {
@@ -127,11 +151,13 @@ class RegisterMyBabyForm extends Component {
 
     const step = stepByStepName[stepName]
 
-    if (step && savedRegistrationForm && savedRegistrationForm.step === step) {
-      this.goToStep(step)
-    } else {
-      this.goToStep(1, true)
-    }
+    this.setState({ step })
+
+    // if (step && savedRegistrationForm && savedRegistrationForm.step === step) {
+    //   this.goToStep(step)
+    // } else {
+    //   this.goToStep(1, true)
+    // }
 
     animateScroll.scrollToTop({ duration: 300 })
   }
@@ -147,7 +173,7 @@ class RegisterMyBabyForm extends Component {
   }
 
   render() {
-    const { step, steps, animationClass = '' } = this.state
+    const { step, steps, isReviewing, animationClass = '' } = this.state
 
     const searchParams = new URLSearchParams(this.props.location.search)
     const autoFocusField = searchParams.get('focus')
@@ -161,12 +187,13 @@ class RegisterMyBabyForm extends Component {
           transitionName="slide"
           transitionEnterTimeout={600}
           transitionLeaveTimeout={600}>
-          {step === 1 && <Step1 autoFocusField={autoFocusField} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 2 && <Step2 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 3 && <Step3 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 4 && <Step4 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 5 && <Step5 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 6 && <Step6 autoFocusField={autoFocusField} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 1 && <Step1 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 2 && <Step2 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 3 && <Step3 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 4 && <Step4 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 5 && <Step5 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 6 && <Step6 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
+          {step === 7 && <Review onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} onFieldEdit={this.handleFieldReviewEdit} />}
         </CSSTransitionGroup>
       </div>
     )

@@ -4,7 +4,6 @@ import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import moment from 'moment'
 import makeFocusable from '../hoc/make-focusable'
 import makeMandatoryLabel, { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 import Accordion from '../accordion'
@@ -22,12 +21,11 @@ import {
   yesNo as yesNoOptions,
   yesNoNotSure as yesNoNotSureOptions
 } from '../options'
+import warn from '../warn'
 import {
   REQUIRE_MESSAGE,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
-  WARNING_CITIZENSHIP,
-  WARNING_FATHER_DATE_OF_BIRTH,
   REQUIRE_AT_LEAST_ONE
 } from '../validation-messages'
 
@@ -57,41 +55,6 @@ const validate = (values) => {
   }
 
   return errors
-}
-
-const warn = (values) => {
-  const warnings = {}
-
-  let dob = get(values, 'father.dateOfBirth')
-  let childBirthDate = get(values, 'child.birthDate')
-
-  if (dob && childBirthDate) {
-    if (typeof dob === 'string') {
-      dob = moment(dob)
-    }
-
-    if (typeof childBirthDate === 'string') {
-      childBirthDate = moment(childBirthDate)
-    }
-
-    if (dob.isValid() && childBirthDate.diff(dob, 'years') < 13) {
-      set(warnings, 'father.dateOfBirth', WARNING_FATHER_DATE_OF_BIRTH)
-    }
-  }
-
-  const isPermanentResident = get(values, 'father.isPermanentResident')
-  const isNZRealmResident = get(values, 'father.isNZRealmResident')
-  const isAuResidentOrCitizen = get(values, 'father.isAuResidentOrCitizen')
-
-  if (
-    isPermanentResident === 'no' &&
-    isNZRealmResident === 'no' &&
-    isAuResidentOrCitizen === 'no'
-  ) {
-    set(warnings, 'father.citizenshipWarning', WARNING_CITIZENSHIP)
-  }
-
-  return warnings
 }
 
 /**
@@ -447,7 +410,12 @@ class FatherDetailsForm extends Component {
 
           <div className="form-actions">
             <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
-            <button type="submit" className="next" disabled={submitting}>Next</button>
+            <div>
+              { this.props.isReviewing &&
+                <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
+              }
+              <button type="submit" className="next" disabled={submitting}>Next</button>
+            </div>
           </div>
         </form>
       </div>
@@ -470,6 +438,8 @@ FatherDetailsForm.propTypes = {
   fatherKnown: PropTypes.string,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
+  isReviewing: PropTypes.bool,
+  onComebackToReview: PropTypes.func,
   change: PropTypes.func,     // passed via reduxForm
   handleSubmit: PropTypes.func, // passed via reduxForm
   submitting: PropTypes.bool, // passed via reduxForm

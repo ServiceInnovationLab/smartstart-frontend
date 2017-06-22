@@ -1,0 +1,81 @@
+@import 'variables';
+
+.review-section {
+  background-color: $form-informative-background;
+  padding: 30px;
+  margin-bottom: 60px;
+
+  h3 {
+    font-weight: normal;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  button.section-edit-btn {
+    padding: 5px 10px;
+    border: 1px solid darken($form-teal-dark, 5%);
+    border-radius: 5px;
+    background-color: $form-teal-dark;
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      background-color: darken($form-teal-dark, 5%);
+    }
+  }
+
+  .warning {
+    margin-bottom: 20px;
+  }
+}
+
+.review-field {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-top: 1px solid #ccc;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button.field-edit-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    text-decoration: none;
+    color: $text-color;
+
+    &:hover {
+      color: $text-color;
+      border: 1px solid #ccc;
+      background-color: $form-teal-hover;
+    }
+  }
+
+  em {
+    color: $text-shade-color;
+  }
+}
+
+.review-subfields {
+  border-left: 2px solid $border-color;
+  padding-left: 20px;
+  margin-bottom: 20px;
+
+  .review-subfield {
+    > strong {
+      margin-right: 5px;
+    }
+  }
+}

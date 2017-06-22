@@ -1,15 +1,17 @@
+import React, { Component, PropTypes } from 'react'
 import './spinner.scss'
-
-import React, { Component } from 'react'
 
 class Spinner extends Component {
   render () {
+    const { text = 'Loading content' } = this.props
     return (
-      <p className='spinner' data-test='spinner'>Loading content</p>
+      <p className='spinner' data-test='spinner'>{text}</p>
     )
   }
 }
 
-Spinner.propTypes = {}
+Spinner.propTypes = {
+  text: PropTypes.string
+}
 
 export default Spinner
