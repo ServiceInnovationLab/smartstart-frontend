@@ -17,15 +17,15 @@ export const sexs = [
 ]
 
 export const ethnicGroups = [
-  { value: 'NZ European', display: 'NZ European'},
-  { value: 'Māori', display: 'Māori'},
-  { value: 'Samoan', display: 'Samoan'},
-  { value: 'Cook Island Māori', display: 'Cook Island Māori'},
-  { value: 'Tongan', display: 'Tongan'},
-  { value: 'Niuean', display: 'Niuean'},
-  { value: 'Chinese', display: 'Chinese'},
-  { value: 'Indian', display: 'Indian'},
-  { value: 'Other', display: 'Other'}
+  { value: 'nzEuropean', display: 'NZ European'},
+  { value: 'maori', display: 'Māori'},
+  { value: 'samoan', display: 'Samoan'},
+  { value: 'cookIslandMaori', display: 'Cook Island Māori'},
+  { value: 'tongan', display: 'Tongan'},
+  { value: 'niuean', display: 'Niuean'},
+  { value: 'chinese', display: 'Chinese'},
+  { value: 'indian', display: 'Indian'},
+  { value: 'other', display: 'Other'}
 ]
 
 export const citizenshipSources = [

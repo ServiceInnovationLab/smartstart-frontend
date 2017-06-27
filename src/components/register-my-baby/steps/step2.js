@@ -36,13 +36,6 @@ const validate = (values) => {
   return errors
 }
 
-/**
- * TODO in transformation step:
- *
- * [ ] transform mother.ethnicGroups, move ethnicityDescription to ethnicGroups.other
- * [ ] normalize birth date to correct format
- * [ ] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenshipSource`
- */
 class MotherDetailsForm extends Component {
   constructor(props) {
     super(props)

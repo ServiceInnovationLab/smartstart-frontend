@@ -57,21 +57,6 @@ const validate = (values) => {
   return errors
 }
 
-/**
- * TODO in transformation step:
- *
- * [ ] transform father.ethnicGroups, move ethnicityDescription to ethnicGroups.other
- * [ ] normalize birth date to correct format
- * [ ] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenshipSource`
- * [ ] depends on:
- *
- *      - assistedHumanReproduction
- *      - assistedHumanReproductionManConsented
- *      - assistedHumanReproductionWomanConsented
- *      - assistedHumanReproductionSpermDonor
- *
- *      we need to set correct value for `assistedReproductionFemaleParents` & `fatherKnown`
- */
 class FatherDetailsForm extends Component {
   constructor(props) {
     super(props)

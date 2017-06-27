@@ -50,20 +50,6 @@ const validate = () => {
   return errors
 }
 
-/**
- * TODO in transformation step:
- *
- * [ ] remove certificateOrder.deliveryAddressType
- * [ ] convert certificateOrder.courierDelivery to boolean
- * [ ] convert certificateOrder.deliveryAddress to match spec
- *
- * "deliveryAddress": {
- *   "line1": "string",                -> `streetAddress`
- *   "line2": "string",                -> `suburb`
- *   "suburbTownPostCode": "string",   -> `${town} ${postalCode}`
- *   "countryCode": "string"
- * }
- */
 class OrderCertificatesForm extends Component {
   constructor(props) {
     super(props)

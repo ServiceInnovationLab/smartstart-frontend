@@ -53,13 +53,6 @@ const validate = (values) => {
 const renderHospitalOption = option =>
   <div>{option.name}, {option.location}</div>
 
-/**
- * TODO in transformation step:
- *
- * [ ] child.multipleBirthOrder --> birthOrderNumber / birthOrderTotal
- * [ ] normalize birth date to correct format
- * [ ] transform child.ethnicGroups, move child.ethnicityDescription to child.ethnicGroups.other
- */
 class ChildDetailsForm extends Component {
   constructor(props) {
     super(props)

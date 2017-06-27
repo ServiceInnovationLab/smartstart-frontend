@@ -20,11 +20,6 @@ const validate = () => {
   return errors
 }
 
-/**
- * TODO in transformation step:
- *
- * [ ] normalize siblings birthdate, parentRelationshipDate to correct format
- */
 class ParentRelationshipForm extends Component {
   renderSiblings(otherChildren) {
     return otherChildren > 0 ?
