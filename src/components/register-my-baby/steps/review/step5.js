@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import FieldReview from './field-review'
+import { Field } from 'redux-form'
+import renderFieldReview from '../../fields/render-review-field'
 import {
   yesNo,
   irdDeliveryAddresses,
@@ -14,39 +15,42 @@ const renderStep5Review = ({ formState, onEdit }) => {
     </div>
 
     <h4>Apply for an IRD number for your child</h4>
-    <FieldReview
+    <Field
       name="ird.applyForNumber"
       label="Do you wish to apply for an IRD number for your child?"
-      value={getOptionDisplay(yesNo, formState.ird.applyForNumber)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(yesNo)}
       section="other-services"
       onEdit={onEdit}
     />
 
     { formState.ird.applyForNumber === 'yes' &&
       <div>
-        <FieldReview
+        <Field
           name="ird.deliveryAddress"
           label="Address Inland Revenue should post your child's IRD number to"
-          value={getOptionDisplay(irdDeliveryAddresses, formState.ird.deliveryAddress)}
+          component={renderFieldReview}
+          valueRenderer={getOptionDisplay(irdDeliveryAddresses)}
           section="other-services"
           onEdit={onEdit}
         />
 
         {
           formState.ird.deliveryAddress &&
-          <FieldReview
+          <Field
             name="ird.numberByEmail"
             label="Do you also wish to receive your child's IRD number by email?"
-            value={getOptionDisplay(yesNo, formState.ird.numberByEmail)}
+            component={renderFieldReview}
+            valueRenderer={getOptionDisplay(yesNo)}
             section="other-services"
             onEdit={onEdit}
           />
         }
 
-        <FieldReview
+        <Field
           name="ird.taxCreditIRDNumber"
           label="If you have applied for Working for Families Tax Credits for this child please provide your IRD number"
-          value={formState.ird.taxCreditIRDNumber}
+          component={renderFieldReview}
           section="other-services"
           onEdit={onEdit}
         />
@@ -55,27 +59,28 @@ const renderStep5Review = ({ formState, onEdit }) => {
 
     <h4>Notify the Ministry of Social Development (MSD) of the birth</h4>
 
-    <FieldReview
+    <Field
       name="msd.notify"
       label="I give permission for Births, Deaths and Marriages to notify the Ministry of Social Development of the birth of my child."
-      value={(formState.msd && formState.msd.notify) ? 'Yes' : 'No'}
+      component={renderFieldReview}
+      valueRenderer={value => value ? 'Yes' : 'No'}
       section="other-services"
       onEdit={onEdit}
     />
 
     { formState.msd && formState.msd.notify &&
       <div>
-        <FieldReview
+        <Field
           name="msd.mothersClientNumber"
           label="Mother's MSD client number"
-          value={formState.msd.mothersClientNumber}
+          component={renderFieldReview}
           section="other-services"
           onEdit={onEdit}
         />
-        <FieldReview
+        <Field
           name="msd.fathersClientNumber"
           label="Father/Other parent's MSD client number"
-          value={formState.msd.fathersClientNumber}
+          component={renderFieldReview}
           section="other-services"
           onEdit={onEdit}
         />

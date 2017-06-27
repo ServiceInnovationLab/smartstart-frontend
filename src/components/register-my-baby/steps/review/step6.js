@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
-import FieldReview from './field-review'
+import { Field } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
+import renderFieldReview from '../../fields/render-review-field'
 import { formatAddress } from './utils'
 // import SubFieldReview from './sub-field-review'
 import {
@@ -31,79 +32,87 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
       <h3>Tono i te tiwhikete whanau <br/> Order a birth certificate</h3>
       <button type="button" onClick={() => onEdit('buy-birth-certificates')} className="section-edit-btn">Edit</button>
     </div>
-    <FieldReview
+    <Field
       name="orderBirthCertificate"
       label="Do you want to order a birth certificate?"
-      value={getOptionDisplay(yesNo, formState.orderBirthCertificate)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(yesNo)}
       section="buy-birth-certificates"
       onEdit={onEdit}
     />
     { formState.orderBirthCertificate === 'yes' &&
       <div>
-        <FieldReview
+        <Field
           name="certificateOrder.productCode"
           label="Choose your design"
-          value={selectedDesign}
+          component={renderFieldReview}
+          valueRenderer={() => selectedDesign}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
-        <FieldReview
+        <Field
           name="certificateOrder.quantity"
           label="Choose your quantity"
-          value={formState.certificateOrder.quantity}
+          component={renderFieldReview}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
-        <FieldReview
+        <Field
           name="certificateOrder.courierDelivery"
           label="Choose your delivery method"
-          value={getOptionDisplay(deliveryMethods, formState.certificateOrder.courierDelivery)}
+          component={renderFieldReview}
+          valueRenderer={getOptionDisplay(deliveryMethods)}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
 
         <div className="review-field">
           <div>
-            <strong>Total cost</strong>
-            <span>${ totalPrice.toFixed(2) }</span>
+            <div>
+              <strong>Total cost</strong>
+              <span>${ totalPrice.toFixed(2) }</span>
+            </div>
           </div>
         </div>
 
         <h4>Delivery details</h4>
-        <FieldReview
+        <Field
           name="certificateOrder.deliveryName"
           label="Delivery name"
-          value={formState.certificateOrder.deliveryName}
+          component={renderFieldReview}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
-        <FieldReview
+        <Field
           name="certificateOrder.deliveryAddressType"
           label="What address should we deliver to?"
-          value={getOptionDisplay(birthCertificateDeliveryAddresses, formState.certificateOrder.deliveryAddressType)}
+          component={renderFieldReview}
+          valueRenderer={getOptionDisplay(birthCertificateDeliveryAddresses)}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
-        <FieldReview
+        <Field
           name="certificateOrder.deliveryAddress.line1"
           label="What address should we deliver to?"
-          value={formatAddress(formState.certificateOrder.deliveryAddress)}
+          component={renderFieldReview}
+          valueRenderer={() => formatAddress(formState.certificateOrder.deliveryAddress)}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
 
-        <FieldReview
+        <Field
           name="certificateOrder.deliveryAddress.countryCode"
           label="Country (if not New Zealand)"
-          value={deliveryCountry}
+          component={renderFieldReview}
+          valueRenderer={() => deliveryCountry}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
 
-        <FieldReview
+        <Field
           name="certificateOrder.emailAddress"
           label="Email address (for a tax receipt)"
-          value={formState.certificateOrder.emailAddress}
+          component={renderFieldReview}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />

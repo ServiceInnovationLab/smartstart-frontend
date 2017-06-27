@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
-import FieldReview from './field-review'
-import SubFieldReview from './sub-field-review'
+import renderFieldReview from '../../fields/render-review-field'
+import renderSubFieldReview from '../../fields/render-review-subfield'
 import { formatAddress, formatDate } from './utils'
 import renderWarning from '../../fields/render-warning'
 import {
@@ -12,52 +12,54 @@ import {
 } from '../../options'
 
 const renderStep3Review = ({ formState, onEdit }) => {
-    const {
-      isCitizen, isPermanentResident, isNZRealmResident, isAuResidentOrCitizen,
-      nonCitizenDocNumber, citizenshipSource, citizenshipPassportNumber
-    } = formState.father;
+    const { isCitizen, citizenshipSource } = formState.father;
     return <div className="review-section">
       <div className="section-heading">
         <h3>Matua <br/> Father/Other parent</h3>
         <button type="button" onClick={() => onEdit('father-details')} className="section-edit-btn">Edit</button>
       </div>
 
-      <FieldReview
+      <Field
         label="Is the child born as a result of an assisted human reproduction procedure (such as artificial insemination)?"
         name="assistedHumanReproduction"
-        value={getOptionDisplay(yesNo, formState.assistedHumanReproduction)}
+        component={renderFieldReview}
+        valueRenderer={getOptionDisplay(yesNo)}
         section="father-details"
         onEdit={onEdit}
       />
 
       { formState.assistedHumanReproduction === 'yes' &&
         <div className="review-subfields">
-          <SubFieldReview
+          <Field
             label="I am in a relationship with a man who consented to the procedure. I will name him as the child's father"
             name="assistedHumanReproductionManConsented"
-            value={formState.assistedHumanReproductionManConsented ? 'Yes' : 'No'}
+            component={renderSubFieldReview}
+            valueRenderer={value => value ? 'Yes' : 'No'}
             section="father-details"
           />
-          <SubFieldReview
+          <Field
             label="I am in a relationship with a woman who consented to the procedure. I will name her as the child's other parent"
             name="assistedHumanReproductionWomanConsented"
-            value={formState.assistedHumanReproductionWomanConsented ? 'Yes' : 'No'}
+            component={renderSubFieldReview}
+            valueRenderer={value => value ? 'Yes' : 'No'}
             section="father-details"
           />
-          <SubFieldReview
+          <Field
             label="I used a sperm donor on my own without a consenting partner. I do not know who the father of the child is"
             name="assistedHumanReproductionSpermDonor"
-            value={formState.assistedHumanReproductionSpermDonor ? 'Yes' : 'No'}
+            component={renderSubFieldReview}
+            valueRenderer={value => value ? 'Yes' : 'No'}
             section="father-details"
           />
         </div>
       }
 
       { formState.assistedHumanReproduction === 'no' &&
-        <FieldReview
+        <Field
           label="Is the father known?"
           name="fatherKnown"
-          value={getOptionDisplay(yesNo, formState.fatherKnown)}
+          component={renderFieldReview}
+          valueRenderer={getOptionDisplay(yesNo)}
           section="father-details"
           onEdit={onEdit}
         />
@@ -75,116 +77,124 @@ const renderStep3Review = ({ formState, onEdit }) => {
           )
         ) &&
         <div>
-          <FieldReview
+          <Field
             label="All first name(s) father is currently known by"
             name="father.firstNames"
-            value={formState.father.firstNames}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="Surname of father (currently known by)"
             name="father.surname"
-            value={formState.father.surname}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="All first name(s) of father at birth (if different from current name)"
             name="father.firstNamesAtBirth"
-            value={formState.father.firstNamesAtBirth}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="Surname of father at birth (if different from current name)"
             name="father.surnameAtBirth"
-            value={formState.father.surnameAtBirth}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="father's date of birth"
             name="father.dateOfBirth"
-            value={formatDate(formState.father.dateOfBirth)}
+            component={renderFieldReview}
+            valueRenderer={formatDate}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="Place of Birth - City/town"
             name="father.placeOfBirth"
-            value={formState.father.placeOfBirth}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="Place of Birth - Country (if born overseas)"
             name="father.countryOfBirth"
-            value={formState.father.countryOfBirth}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="Home address"
             name="father.homeAddress.line1"
-            value={formatAddress(formState.father.homeAddress)}
+            component={renderFieldReview}
+            valueRenderer={() => formatAddress(formState.father.homeAddress)}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="Is the father a descendant of a New Zealand Māori?"
             name="father.maoriDescendant"
-            value={getOptionDisplay(yesNoNotSure, formState.father.maoriDescendant)}
+            component={renderFieldReview}
+            valueRenderer={getOptionDisplay(yesNoNotSure)}
             section="father-details"
             onEdit={onEdit}
           />
-          <FieldReview
+          <Field
             label="Which ethnic group(s) does the father belong to?"
             name="father.ethnicGroups"
-            value={formState.father.ethnicGroups.join(', ')}
+            component={renderFieldReview}
+            valueRenderer={value => value.join(', ')}
             section="father-details"
             onEdit={onEdit}
           />
           { formState.father.ethnicGroups && formState.father.ethnicGroups.indexOf('Other') > -1 &&
-            <FieldReview
+            <Field
               label="Please describe the father’s ethnicity"
               name="father.ethnicityDescription"
-              value={formState.father.ethnicityDescription}
+              component={renderFieldReview}
               section="father-details"
               onEdit={onEdit}
             />
           }
-          <FieldReview
+          <Field
             label="Is the father a New Zealand citizen?"
             name="father.isCitizen"
-            value={getOptionDisplay(yesNo, isCitizen)}
+            component={renderFieldReview}
+            valueRenderer={getOptionDisplay(yesNo)}
             section="father-details"
             onEdit={onEdit}
           />
           { isCitizen === 'no' &&
             <div className="review-subfields">
-              <SubFieldReview
+              <Field
                 label="Is the father a New Zealand permanent resident?"
                 name="father.isPermanentResident"
-                value={getOptionDisplay(yesNo, isPermanentResident)}
+                component={renderSubFieldReview}
+                valueRenderer={getOptionDisplay(yesNo)}
                 section="father-details"
               />
-              <SubFieldReview
+              <Field
                 label="Is the father a resident of the Cook Islands, Niue or Tokelau?"
                 name="father.isNZRealmResident"
-                value={getOptionDisplay(yesNo, isNZRealmResident)}
+                component={renderSubFieldReview}
+                valueRenderer={getOptionDisplay(yesNo)}
                 section="father-details"
               />
-              <SubFieldReview
+              <Field
                 label="Is the father an Australian citizen or permanent resident of Australia?"
                 name="father.isAuResidentOrCitizen"
-                value={getOptionDisplay(yesNo, isAuResidentOrCitizen)}
+                component={renderSubFieldReview}
+                valueRenderer={getOptionDisplay(yesNo)}
                 section="father-details"
               />
-              <SubFieldReview
+              <Field
                 label="Passport/travel document number the father entered New Zealand on:"
                 name="father.nonCitizenDocNumber"
-                value={nonCitizenDocNumber}
+                component={renderSubFieldReview}
                 section="father-details"
               />
             </div>
@@ -192,19 +202,20 @@ const renderStep3Review = ({ formState, onEdit }) => {
 
           { isCitizen === 'yes' &&
             <div className="review-subfields">
-              <SubFieldReview
+              <Field
                 label="Father is"
                 name="father.citizenshipSource"
-                value={getOptionDisplay(citizenshipSources, citizenshipSource)}
+                component={renderSubFieldReview}
+                valueRenderer={getOptionDisplay(citizenshipSources)}
                 section="father-details"
               />
               { (citizenshipSource === 'bornInNiue' ||
                  citizenshipSource === 'bornInCookIslands' ||
                  citizenshipSource === 'bornInTokelau') &&
-                <SubFieldReview
+                <Field
                   label="Father's New Zealand passport number:"
                   name="father.citizenshipPassportNumber"
-                  value={citizenshipPassportNumber}
+                  component={renderSubFieldReview}
                   section="father-details"
                 />
               }
@@ -216,26 +227,26 @@ const renderStep3Review = ({ formState, onEdit }) => {
             component={renderWarning}
           />
 
-          <FieldReview
+          <Field
             name="father.daytimePhone"
             label="Daytime contact phone number"
-            value={formState.father.daytimePhone}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
 
-          <FieldReview
+          <Field
             name="father.alternativePhone"
             label="Alternative contact phone number"
-            value={formState.father.alternativePhone}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
 
-          <FieldReview
+          <Field
             name="father.email"
             label="Email address"
-            value={formState.father.email}
+            component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />

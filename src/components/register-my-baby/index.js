@@ -151,13 +151,11 @@ class RegisterMyBabyForm extends Component {
 
     const step = stepByStepName[stepName]
 
-    this.setState({ step })
-
-    // if (step && savedRegistrationForm && savedRegistrationForm.step === step) {
-    //   this.goToStep(step)
-    // } else {
-    //   this.goToStep(1, true)
-    // }
+    if (step && savedRegistrationForm && savedRegistrationForm.step === step) {
+      this.goToStep(step)
+    } else {
+      this.goToStep(1, true)
+    }
 
     animateScroll.scrollToTop({ duration: 300 })
   }

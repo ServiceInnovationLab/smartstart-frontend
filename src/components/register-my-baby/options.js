@@ -76,7 +76,7 @@ export const deliveryMethods = [
   { value: 'courier', display: 'Courier ($5)'}
 ]
 
-export const getOptionDisplay = (options, value) => {
+export const getOptionDisplay = options => value => {
   const option = options.find(option => option.value === value)
   return get(option, 'display');
 }

@@ -37,30 +37,35 @@
 }
 
 .review-field {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 15px 0;
-  border-top: 1px solid #ccc;
-
   > div {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-top: 1px solid #ccc;
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    button.field-edit-btn {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      text-decoration: none;
+      color: $text-color;
+
+      &:hover {
+        color: $text-color;
+        border: 1px solid #ccc;
+        background-color: $form-teal-hover;
+      }
+    }
   }
 
-  button.field-edit-btn {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    text-decoration: none;
-    color: $text-color;
-
-    &:hover {
-      color: $text-color;
-      border: 1px solid #ccc;
-      background-color: $form-teal-hover;
-    }
+  > span {
+    display: block;
   }
 
   em {
@@ -74,8 +79,11 @@
   margin-bottom: 20px;
 
   .review-subfield {
-    > strong {
+    > div > strong {
       margin-right: 5px;
+    }
+    > span {
+      display: block;
     }
   }
 }

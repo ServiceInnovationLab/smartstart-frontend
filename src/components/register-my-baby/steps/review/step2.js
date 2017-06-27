@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
-import FieldReview from './field-review'
-import SubFieldReview from './sub-field-review'
+import renderFieldReview from '../../fields/render-review-field'
+import renderSubFieldReview from '../../fields/render-review-subfield'
 import { formatAddress, formatDate } from './utils'
 import renderWarning from '../../fields/render-warning'
 import {
@@ -13,8 +13,7 @@ import {
 
 const renderStep2Review = ({ formState, onEdit }) => {
   const {
-    isCitizen, isPermanentResident, isNZRealmResident, isAuResidentOrCitizen,
-    nonCitizenDocNumber, citizenshipSource, citizenshipPassportNumber
+    isCitizen, citizenshipSource
   } = formState.mother;
   return <div className="review-section">
     <div className="section-heading">
@@ -22,116 +21,124 @@ const renderStep2Review = ({ formState, onEdit }) => {
       <button type="button" onClick={() => onEdit('mother-details')} className="section-edit-btn">Edit</button>
     </div>
 
-    <FieldReview
+    <Field
       label="All first name(s) mother is currently known by"
       name="mother.firstNames"
-      value={formState.mother.firstNames}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Surname of mother (currently known by)"
       name="mother.surname"
-      value={formState.mother.surname}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="All first name(s) of mother at birth (if different from current name)"
       name="mother.firstNamesAtBirth"
-      value={formState.mother.firstNamesAtBirth}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Surname of mother at birth (if different from current name)"
       name="mother.surnameAtBirth"
-      value={formState.mother.surnameAtBirth}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Mother's date of birth"
       name="mother.dateOfBirth"
-      value={formatDate(formState.mother.dateOfBirth)}
+      component={renderFieldReview}
+      valueRenderer={formatDate}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Place of Birth - City/town"
       name="mother.placeOfBirth"
-      value={formState.mother.placeOfBirth}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Place of Birth - Country (if born overseas)"
       name="mother.countryOfBirth"
-      value={formState.mother.countryOfBirth}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Home address"
       name="mother.homeAddress.line1"
-      value={formatAddress(formState.mother.homeAddress)}
+      component={renderFieldReview}
+      valueRenderer={() => formatAddress(formState.mother.homeAddress)}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Is the mother a descendant of a New Zealand Māori?"
       name="mother.maoriDescendant"
-      value={getOptionDisplay(yesNoNotSure, formState.mother.maoriDescendant)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(yesNoNotSure)}
       section="mother-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Which ethnic group(s) does the mother belong to?"
       name="mother.ethnicGroups"
-      value={formState.mother.ethnicGroups.join(', ')}
+      component={renderFieldReview}
+      valueRenderer={value => value.join(', ')}
       section="mother-details"
       onEdit={onEdit}
     />
     { formState.mother.ethnicGroups && formState.mother.ethnicGroups.indexOf('Other') > -1 &&
-      <FieldReview
+      <Field
         label="Please describe the mother’s ethnicity"
         name="mother.ethnicityDescription"
-        value={formState.mother.ethnicityDescription}
+        component={renderFieldReview}
         section="mother-details"
         onEdit={onEdit}
       />
     }
-    <FieldReview
+    <Field
       label="Is the mother a New Zealand citizen?"
       name="mother.isCitizen"
-      value={getOptionDisplay(yesNo, isCitizen)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(yesNo)}
       section="mother-details"
       onEdit={onEdit}
     />
     { isCitizen === 'no' &&
       <div className="review-subfields">
-        <SubFieldReview
+        <Field
           label="Is the mother a New Zealand permanent resident?"
           name="mother.isPermanentResident"
-          value={getOptionDisplay(yesNo, isPermanentResident)}
+          component={renderSubFieldReview}
+          valueRenderer={getOptionDisplay(yesNo)}
           section="mother-details"
         />
-        <SubFieldReview
+        <Field
           label="Is the mother a resident of the Cook Islands, Niue or Tokelau?"
           name="mother.isNZRealmResident"
-          value={getOptionDisplay(yesNo, isNZRealmResident)}
+          component={renderSubFieldReview}
+          valueRenderer={getOptionDisplay(yesNo)}
           section="mother-details"
         />
-        <SubFieldReview
+        <Field
           label="Is the mother an Australian citizen or permanent resident of Australia?"
           name="mother.isAuResidentOrCitizen"
-          value={getOptionDisplay(yesNo, isAuResidentOrCitizen)}
+          component={renderSubFieldReview}
+          valueRenderer={getOptionDisplay(yesNo)}
           section="mother-details"
         />
-        <SubFieldReview
+        <Field
           label="Passport/travel document number the mother entered New Zealand on:"
           name="mother.nonCitizenDocNumber"
-          value={nonCitizenDocNumber}
+          component={renderSubFieldReview}
           section="mother-details"
         />
       </div>
@@ -139,19 +146,20 @@ const renderStep2Review = ({ formState, onEdit }) => {
 
     { isCitizen === 'yes' &&
       <div className="review-subfields">
-        <SubFieldReview
+        <Field
           label="Mother is"
           name="mother.citizenshipSource"
-          value={getOptionDisplay(citizenshipSources, citizenshipSource)}
+          component={renderSubFieldReview}
+          valueRenderer={getOptionDisplay(citizenshipSources)}
           section="mother-details"
         />
         { (citizenshipSource === 'bornInNiue' ||
            citizenshipSource === 'bornInCookIslands' ||
            citizenshipSource === 'bornInTokelau') &&
-          <SubFieldReview
+          <Field
             label="Mother's New Zealand passport number:"
             name="mother.citizenshipPassportNumber"
-            value={citizenshipPassportNumber}
+            component={renderSubFieldReview}
             section="mother-details"
           />
         }
@@ -163,26 +171,26 @@ const renderStep2Review = ({ formState, onEdit }) => {
       component={renderWarning}
     />
 
-    <FieldReview
+    <Field
       name="mother.daytimePhone"
       label="Daytime contact phone number"
-      value={formState.mother.daytimePhone}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
 
-    <FieldReview
+    <Field
       name="mother.alternativePhone"
       label="Alternative contact phone number"
-      value={formState.mother.alternativePhone}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />
 
-    <FieldReview
+    <Field
       name="mother.email"
       label="Email address"
-      value={formState.mother.email}
+      component={renderFieldReview}
       section="mother-details"
       onEdit={onEdit}
     />

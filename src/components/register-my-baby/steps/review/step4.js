@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
+import { Field } from 'redux-form'
 import times from 'lodash/times'
-import FieldReview from './field-review'
-import SubFieldReview from './sub-field-review'
+import renderFieldReview from '../../fields/render-review-field'
+import renderSubFieldReview from '../../fields/render-review-subfield'
 import { formatDate } from './utils'
 import {
   sexs,
@@ -28,10 +29,10 @@ const renderStep4Review = ({ formState, onEdit }) => {
 
     { !isFormHidden &&
       <div>
-        <FieldReview
+        <Field
           label="Are there other children born from the same parent relationship?"
           name="otherChildren"
-          value={formState.otherChildren}
+          component={renderFieldReview}
           section="parents-relationship"
           onEdit={onEdit}
         />
@@ -39,48 +40,53 @@ const renderStep4Review = ({ formState, onEdit }) => {
         { times(formState.otherChildren).map(idx =>
             <div className="review-subfields">
               <h4>Child {idx + 1}</h4>
-              <SubFieldReview
+              <Field
                 label={`Sex of child ${idx + 1}`}
                 name={`siblings.[${idx}].sex`}
-                value={getOptionDisplay(sexs, formState.siblings[idx].sex)}
+                component={renderSubFieldReview}
+                valueRenderer={getOptionDisplay(sexs)}
                 section="parents-relationship"
               />
-              <SubFieldReview
+              <Field
                 label="Is this child alive, since died, or were they stillborn?"
                 name={`siblings.[${idx}].statusOfChild`}
-                value={getOptionDisplay(childStatuses, formState.siblings[idx].statusOfChild)}
+                component={renderSubFieldReview}
+                valueRenderer={getOptionDisplay(childStatuses)}
                 section="parents-relationship"
               />
-              <SubFieldReview
+              <Field
                 label="What is this child's date of birth?"
                 name={`siblings.[${idx}].dateOfBirth`}
-                value={formatDate(formState.siblings[idx].dateOfBirth)}
+                component={renderSubFieldReview}
+                valueRenderer={formatDate}
                 section="parents-relationship"
               />
             </div>
           )
         }
 
-        <FieldReview
+        <Field
           label="What was the parents' relationship with each other at the time of the child's birth?"
           name="parentRelationship"
-          value={getOptionDisplay(parentRelationships, formState.parentRelationship)}
+          component={renderFieldReview}
+          valueRenderer={getOptionDisplay(parentRelationships)}
           section="parents-relationship"
           onEdit={onEdit}
         />
 
         { (formState.parentRelationship === 'marriage' || formState.parentRelationship === 'civilUnion') &&
           <div className="review-subfields">
-            <SubFieldReview
+            <Field
               name="parentRelationshipDate"
               label="Date of marriage/civil union"
-              value={formatDate(formState.parentRelationshipDate)}
+              component={renderSubFieldReview}
+              valueRenderer={formatDate}
               section="parents-relationship"
             />
-            <SubFieldReview
+            <Field
               name="parentRelationshipPlace"
               label="Place of marriage/civil union"
-              value={formState.parentRelationshipPlace}
+              component={renderSubFieldReview}
               section="parents-relationship"
             />
           </div>

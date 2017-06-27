@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import FieldReview from './field-review'
+import { Field } from 'redux-form'
+import renderFieldReview from '../../fields/render-review-field'
 import { formatAddress, formatDate } from './utils'
 import {
   sexs,
@@ -8,101 +9,107 @@ import {
   getOptionDisplay
 } from '../../options'
 
-const renderStep1Review = ({formState, onEdit}) => {
-  const birthPlaceCategory = formState.birthPlace.category
-  let birthPlaceValue;
-
-  if (birthPlaceCategory === 'hospital') {
-    birthPlaceValue = formState.birthPlace.hospital
-  } else if (birthPlaceCategory === 'home') {
-    birthPlaceValue = formatAddress(formState.birthPlace.home)
+const renderBirthPlace = formState => category => {
+  if (category === 'hospital') {
+    return formState.birthPlace.hospital
+  } else if (category === 'home') {
+    return formatAddress(formState.birthPlace.home)
   } else {
-    birthPlaceValue = formState.birthPlace.other
+    return formState.birthPlace.other
   }
+}
 
+const renderStep1Review = ({formState, onEdit}) => {
   return <div className="review-section">
     <div className="section-heading">
       <h3>Tamaiti <br/> Child</h3>
       <button type="button" onClick={() => onEdit('child-details')} className="section-edit-btn">Edit</button>
     </div>
 
-    <FieldReview
+    <Field
       label="Child's given names"
       name="child.firstNames"
-      value={formState.child.firstNames}
+      component={renderFieldReview}
       section="child-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Child's surname"
       name="child.surname"
-      value={formState.child.surname}
+      component={renderFieldReview}
       section="child-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Sex of child"
       name="child.sex"
-      value={getOptionDisplay(sexs, formState.child.sex)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(sexs)}
       section="child-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Was this child alive at birth?"
       name="child.stillBorn"
-      value={getOptionDisplay(yesNo, formState.child.stillBorn)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(yesNo)}
       section="child-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="The child's date of birth"
       name="child.birthDate"
-      value={formatDate(formState.child.birthDate)}
+      component={renderFieldReview}
+      valueRenderer={formatDate}
       section="child-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Is this child one of a multiple birth (twins, triplets, etc)"
       name="child.oneOfMultiple"
-      value={getOptionDisplay(yesNo, formState.child.oneOfMultiple)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(yesNo)}
       section="child-details"
       onEdit={onEdit}
     />
     { formState.child.oneOfMultiple === 'yes' &&
-      <FieldReview
+      <Field
         label="What is the birth order for this child?"
         name="child.multipleBirthOrder"
-        value={formState.child.multipleBirthOrder}
+        component={renderFieldReview}
         section="child-details"
         onEdit={onEdit}
       />
     }
-    <FieldReview
+    <Field
       label="Where was the child born?"
       name="birthPlace.category"
-      value={birthPlaceValue}
+      component={renderFieldReview}
+      valueRenderer={renderBirthPlace(formState)}
       section="child-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Is this child a descendant of a New Zealand Māori?"
       name="child.maoriDescendant"
-      value={getOptionDisplay(yesNoNotSure, formState.child.maoriDescendant)}
+      component={renderFieldReview}
+      valueRenderer={getOptionDisplay(yesNoNotSure)}
       section="child-details"
       onEdit={onEdit}
     />
-    <FieldReview
+    <Field
       label="Which ethnic group(s) does this child belong to?"
       name="child.ethnicGroups"
-      value={formState.child.ethnicGroups.join(', ')}
+      component={renderFieldReview}
+      valueRenderer={value => value.join(', ')}
       section="child-details"
       onEdit={onEdit}
     />
     { formState.child.ethnicGroups && formState.child.ethnicGroups.indexOf('Other') > -1 &&
-      <FieldReview
+      <Field
         label="Please describe the child’s ethnicity"
         name="child.ethnicityDescription"
-        value={formState.child.ethnicityDescription}
+        component={renderFieldReview}
         section="child-details"
         onEdit={onEdit}
       />

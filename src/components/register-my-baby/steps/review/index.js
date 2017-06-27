@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, getFormValues } from 'redux-form'
+import { reduxForm, getFormValues, getFormSyncErrors, getFormSyncWarnings } from 'redux-form'
 import get from 'lodash/get'
 import renderStep1Review from './step1'
 import renderStep2Review from './step2'
@@ -18,7 +18,10 @@ class Review extends Component {
     this.props.validate(formState, csrfToken)
   }
   render() {
-    const { isValidating, countries, formState, handleSubmit, submitting, onPrevious, onFieldEdit } = this.props
+    const {
+      isValidating, countries, formState, syncErrors, syncWarnings,
+      handleSubmit, submitting, onPrevious, onFieldEdit
+    } = this.props
 
     if (isValidating) {
       return <Spinner text="Checking your application ..."/>
@@ -28,12 +31,12 @@ class Review extends Component {
       <div id="step-review">
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">7</span> Maori text here <br/> Review</h2>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
-          { renderStep1Review({ formState, onEdit: onFieldEdit }) }
-          { renderStep2Review({ formState, onEdit: onFieldEdit }) }
-          { renderStep3Review({ formState, onEdit: onFieldEdit }) }
-          { renderStep4Review({ formState, onEdit: onFieldEdit }) }
-          { renderStep5Review({ formState, onEdit: onFieldEdit }) }
-          { renderStep6Review({ formState, onEdit: onFieldEdit, countries}) }
+          { renderStep1Review({ formState, errors: syncErrors, warnings: syncWarnings, onEdit: onFieldEdit }) }
+          { renderStep2Review({ formState, errors: syncErrors, warnings: syncWarnings, onEdit: onFieldEdit }) }
+          { renderStep3Review({ formState, errors: syncErrors, warnings: syncWarnings, onEdit: onFieldEdit }) }
+          { renderStep4Review({ formState, errors: syncErrors, warnings: syncWarnings, onEdit: onFieldEdit }) }
+          { renderStep5Review({ formState, errors: syncErrors, warnings: syncWarnings, onEdit: onFieldEdit }) }
+          { renderStep6Review({ formState, errors: syncErrors, warnings: syncWarnings, onEdit: onFieldEdit, countries}) }
           <div className="form-actions">
             <button type="button" className="previous" onClick={onPrevious}>Back</button>
             <button type="submit" className="next" disabled={submitting}>Register this birth</button>
@@ -49,6 +52,8 @@ Review.propTypes = {
   isValidating: PropTypes.bool,
   countries: PropTypes.object,
   formState: PropTypes.object,
+  syncErrors: PropTypes.object,
+  syncWarnings: PropTypes.object,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   onSubmit: PropTypes.func,
@@ -66,6 +71,8 @@ Review = reduxForm({
 Review = connect(
   state => ({
     formState: getFormValues('registration')(state),
+    syncErrors: getFormSyncErrors('registration')(state),
+    syncWarnings: getFormSyncWarnings('registration')(state),
     isValidating: get(state, 'birthRegistration.isValidating'),
     countries: get(state, 'birthRegistration.countries'),
     csrfToken: get(state, 'birthRegistration.csrfToken')
