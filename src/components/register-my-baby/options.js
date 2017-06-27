@@ -11,7 +11,8 @@ export const yesNoNotSure = [
   { value: 'notsure', display: 'Not sure'}
 ]
 
-export const sexs = [ { value: 'male', display: 'Male'},
+export const sexs = [
+  { value: 'male', display: 'Male'},
   { value: 'female', display: 'Female'}
 ]
 

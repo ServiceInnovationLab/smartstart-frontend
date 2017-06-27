@@ -4,7 +4,6 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import renderFieldReview from '../../fields/render-review-field'
 import { formatAddress } from './utils'
-// import SubFieldReview from './sub-field-review'
 import {
   yesNo,
   products,

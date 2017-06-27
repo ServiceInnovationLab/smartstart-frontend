@@ -18,7 +18,13 @@ const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta:
           <em>Not applicable</em>
         }
       </div>
-      <button type="button" onClick={() => onEdit(section, input.name)} className="field-edit-btn">Edit</button>
+      <button type="button"
+        className="field-edit-btn"
+        onClick={() => onEdit(section, input.name)}
+        aria-label={`Edit ${label}`}
+      >
+        Edit
+      </button>
     </div>
     {error && <span className="error"><strong>Error:</strong> {error}</span>}
     {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
