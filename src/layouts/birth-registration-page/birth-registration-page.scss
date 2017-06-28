@@ -199,7 +199,7 @@
       }
 
       > div {
-        flex: 1 1 1;
+        flex: 1;
         display: flex;
         justify-content: center;
         flex-flow: column;
@@ -210,9 +210,9 @@
           flex: 1 auto;
         }
 
-        > span.error,
-        > span.warning {
-          flex: 1 1 1;
+        span.error,
+        span.warning {
+          flex: 1;
           margin-top: 10px;
         }
       }

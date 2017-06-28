@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error } }) => (
+const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error, warning } }) => (
   <div className={`input-group checkbox ${(touched && error) ? 'has-error' : ''}`}>
     <label>
       <input
@@ -9,11 +9,15 @@ const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error }
         {...input}
         checked={input.value}
         disabled={disabled}
-        aria-describedby={(touched && error) ? `${form}-${input.name}-error` : null}
+        aria-describedby={`${form}-${input.name}-desc`}
       />
       <span>{label}</span>
     </label>
-    {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
+
+    <div id={`${form}-${input.name}-desc`}>
+      {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+      {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+    </div>
   </div>
 )
 

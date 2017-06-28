@@ -25,18 +25,30 @@ class CitizenshipQuestions extends Component {
 
   onCitizenshipSourceChange(source) {
     return (e, newVal) => {
-      const { target } = this.props;
-      if (source === 'isPermanentResident' && newVal === 'yes') {
-        this.props.change(prefix(target, 'isNZRealmResident'), 'no')
-        this.props.change(prefix(target, 'isAuResidentOrCitizen'), 'no')
+      const { target, isPermanentResident, isNZRealmResident, isAuResidentOrCitizen } = this.props;
+      if (source === 'isPermanentResident') {
+        if (newVal === 'yes') {
+          this.props.change(prefix(target, 'isNZRealmResident'), 'no')
+          this.props.change(prefix(target, 'isAuResidentOrCitizen'), 'no')
+        } else if (isNZRealmResident === 'no' && isAuResidentOrCitizen === 'no') {
+          this.props.change(prefix(target, 'nonCitizenDocNumber'), '')
+        }
       }
-      if (source === 'isNZRealmResident' && newVal === 'yes') {
-        this.props.change(prefix(target, 'isPermanentResident'), 'no')
-        this.props.change(prefix(target, 'isAuResidentOrCitizen'), 'no')
+      if (source === 'isNZRealmResident') {
+        if (newVal === 'yes') {
+          this.props.change(prefix(target, 'isPermanentResident'), 'no')
+          this.props.change(prefix(target, 'isAuResidentOrCitizen'), 'no')
+        } else if (isPermanentResident === 'no' && isAuResidentOrCitizen === 'no') {
+          this.props.change(prefix(target, 'nonCitizenDocNumber'), '')
+        }
       }
-      if (source === 'isAuResidentOrCitizen' && newVal === 'yes') {
-        this.props.change(prefix(target, 'isPermanentResident'), 'no')
-        this.props.change(prefix(target, 'isNZRealmResident'), 'no')
+      if (source === 'isAuResidentOrCitizen') {
+        if (newVal === 'yes') {
+          this.props.change(prefix(target, 'isPermanentResident'), 'no')
+          this.props.change(prefix(target, 'isNZRealmResident'), 'no')
+        } else if (isPermanentResident === 'no' && isNZRealmResident === 'no') {
+          this.props.change(prefix(target, 'nonCitizenDocNumber'), '')
+        }
       }
     }
   }

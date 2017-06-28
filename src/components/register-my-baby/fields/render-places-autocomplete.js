@@ -111,11 +111,13 @@ class renderPlacesAutocomplete extends Component {
             placeholder,
             autoComplete: 'off',
             id: `${form}-${input.name}`,
-            'aria-describedby': (touched && error) ? `${form}-${input.name}-error` : null
+            'aria-describedby': `${form}-${input.name}-desc`
           }}
         />
-        {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
-        {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+        <div id={`${form}-${input.name}-desc`}>
+          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+          {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+        </div>
       </div>
     </div>
   }

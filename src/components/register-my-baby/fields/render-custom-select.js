@@ -20,7 +20,7 @@ class CustomSelect extends Component {
 
   render() {
     const {
-      input, label, placeholder, className, instructionText, options, meta: { touched, error, form },
+      input, label, placeholder, className, instructionText, options, meta: { touched, error, warning, form },
       clearable = false, searchable = false, labelKey = 'label', valueKey = 'value',
       optionRenderer, valueRenderer
     } = this.props;
@@ -58,10 +58,13 @@ class CustomSelect extends Component {
           <Select
             {...selectProps}
             id={`${form}-${input.name}`}
-            aria-describedby={(touched && error) ? `${form}-${input.name}-error` : null}
+            aria-describedby={`${form}-${input.name}-desc`}
             aria-label={getTextContent(label)}
           />
-          {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
+          <div id={`${form}-${input.name}-desc`}>
+            {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+            {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+          </div>
         </div>
       </div>
   }

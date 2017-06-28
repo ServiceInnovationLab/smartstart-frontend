@@ -86,8 +86,8 @@ class ChildDetailsForm extends Component {
 
   onEthnicGroupsChange(e, newVal, previousVal) {
     if (
-      previousVal && previousVal.indexOf('Other') > -1 &&
-      newVal && newVal.indexOf('Other') === -1
+      previousVal && previousVal.indexOf('other') > -1 &&
+      newVal && newVal.indexOf('other') === -1
     ) {
       this.props.change('child.ethnicityDescription', '')
     }
@@ -330,7 +330,7 @@ class ChildDetailsForm extends Component {
             onChange={this.onEthnicGroupsChange}
           />
 
-          { ethnicGroups && ethnicGroups.indexOf('Other') > -1 &&
+          { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
             <div className="conditional-field">
               <Field
                 name="child.ethnicityDescription"

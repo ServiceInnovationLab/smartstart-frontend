@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import get from 'lodash/get'
 
-const renderSelect = ({ input, label, placeholder, instructionText, options, renderEmptyOption = true, className, meta: { touched, error, form } }) => (
+const renderSelect = ({ input, label, placeholder, instructionText, options, renderEmptyOption = true, className, meta: { touched, error, warning, form } }) => (
   <div className={`input-group ${className} ${(touched && error) ? 'has-error' : ''}`}>
     { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
@@ -9,7 +9,7 @@ const renderSelect = ({ input, label, placeholder, instructionText, options, ren
       <select
         id={`${form}-${input.name}`}
         {...input}
-        aria-describedby={(touched && error) ? `${form}-${input.name}-error` : null}
+        aria-describedby={`${form}-${input.name}-desc`}
       >
         { renderEmptyOption && <option value="">{placeholder || 'Please select ...'}</option> }
         {
@@ -24,7 +24,10 @@ const renderSelect = ({ input, label, placeholder, instructionText, options, ren
           })
         }
       </select>
-      {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
+      <div id={`${form}-${input.name}-desc`}>
+        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+        {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+      </div>
     </div>
   </div>
 )

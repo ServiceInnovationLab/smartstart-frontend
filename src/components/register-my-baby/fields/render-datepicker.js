@@ -185,10 +185,12 @@ const renderDatepicker = ({ input, label, meta: { touched, error, warning, form 
           value={input.value || null}
           onChange={input.onChange}
           onBlur={input.onBlur}
-          ariaDescribedBy={(touched && error) ? `${form}-${input.name}-error` : null}
+          ariaDescribedBy={`${form}-${input.name}-desc`}
         />
-        {touched && error && <span id={`${form}-${input.name}-error`} className="error"><strong>Error:</strong> {error}</span>}
-        {touched && warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+        <div id={`${form}-${input.name}-desc`}>
+          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
+          {touched && warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+        </div>
       </div>
     </div>
   </fieldset>
