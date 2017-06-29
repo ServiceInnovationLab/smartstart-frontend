@@ -37,7 +37,7 @@
 }
 
 .review-field {
-  > div {
+  > div.review-field-content {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;

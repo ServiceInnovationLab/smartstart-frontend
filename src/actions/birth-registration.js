@@ -42,51 +42,45 @@ function receiveCsrfToken(token) {
   }
 }
 
-function requestValidationResult() {
+export function requestValidationResult() {
   return {
     type: REQUEST_VALIDATION_RESULT
   }
 }
 
-function receiveValidationResult() {
+export function receiveValidationResult(result) {
   return {
-    type: RECEIVE_VALIDATION_RESULT
+    type: RECEIVE_VALIDATION_RESULT,
+    result
   }
 }
 
 export function fetchBirthFacilities() {
   return dispatch => {
     dispatch(requestBirthFacilities())
-    return fetch('/birth-registration-api/ReferenceData/birth-facilities')
-      .then(checkStatus)
-      .then(response => response.json())
-      .then(json => dispatch(receiveBirthFacilities(json)))
-      .catch(error => dispatch(applicationError(error)))
+    return fetch('/birth-registration-api/ReferenceData/birth-facilities', {
+      credentials: 'same-origin'
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+    .then(json => dispatch(receiveBirthFacilities(json)))
+    .catch(error => dispatch(applicationError(error)))
   }
 }
 
 export function fetchCountries() {
   return dispatch => {
     dispatch(requestCountries())
-    return fetch('/birth-registration-api/ReferenceData/countries')
-      .then(checkStatus)
-      .then(response => {
-        const csrfToken = response.headers.get('X-XSRF-TOKEN')
-        dispatch(receiveCsrfToken(csrfToken))
-        return response.json()
-      })
-      .then(json => dispatch(receiveCountries(json)))
-      .catch(error => dispatch(applicationError(error)))
-  }
-}
-
-export function validate(/*formState, csrfToken*/) {
-  // const transformedData = transform(formState)
-  return dispatch => {
-    dispatch(requestValidationResult())
-
-    window.setTimeout(() => {
-      dispatch(receiveValidationResult())
-    }, 1000)
+    return fetch('/birth-registration-api/ReferenceData/countries', {
+      credentials: 'same-origin'
+    })
+    .then(checkStatus)
+    .then(response => {
+      const csrfToken = response.headers.get('X-XSRF-TOKEN')
+      dispatch(receiveCsrfToken(csrfToken))
+      return response.json()
+    })
+    .then(json => dispatch(receiveCountries(json)))
+    .catch(error => dispatch(applicationError(error)))
   }
 }

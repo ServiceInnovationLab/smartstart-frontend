@@ -15,6 +15,7 @@ import renderCheckboxGroup from '../fields/render-checkbox-group'
 import renderRadioGroup from '../fields/render-radio-group'
 import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import { required, requiredWithMessage, maxLength30, validName, validDate } from '../validate'
+import { maxLength } from '../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
@@ -27,10 +28,6 @@ import {
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE
 } from '../validation-messages'
-
-const maxLength = (max) => (value, previousVal) => {
-  return value.length <= max ? value : previousVal
-}
 
 const validate = (values) => {
   const errors = {}

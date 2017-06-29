@@ -213,7 +213,7 @@ function birthRegistration (state = {
       return {
         ...state,
         isValidating: false,
-        validationResult: action.payload
+        validationResult: action.result
       }
     default:
       return state

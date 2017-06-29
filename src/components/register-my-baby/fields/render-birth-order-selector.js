@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 import { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 
 class BirthOrderSelector extends Component {
@@ -130,12 +132,12 @@ const renderBirthOrderSelector = ({ input, label, meta: { touched, error, warnin
   <fieldset>
     <legend>{label}</legend>
     <div className="instruction-text">If this child was the second born of triplets select 2 of 3</div>
-    <div className={`input-group ${(touched && error) ? 'has-error' : ''}`}>
+    <div className={`input-group ${hasError({ touched, error }) ? 'has-error' : ''}`}>
       <div>
         <BirthOrderSelector {...input} ariaDescribedBy={`${form}-${input.name}-desc`} />
         <div id={`${form}-${input.name}-desc`}>
-          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-          {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+          { renderError({ meta: { touched, error } }) }
+          { renderWarning({ meta: { warning } }) }
         </div>
       </div>
     </div>

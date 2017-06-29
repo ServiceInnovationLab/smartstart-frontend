@@ -2,6 +2,8 @@
 import React, { PropTypes, Component } from 'react'
 import Autosuggest from 'react-autosuggest'
 import debounce from 'lodash/debounce'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 import './autocomplete.scss'
 
 const getSuggestionValue = suggestion => suggestion.name
@@ -93,7 +95,7 @@ class renderPlacesAutocomplete extends Component {
     const { input, label, placeholder, instructionText, meta: { touched, error, warning, form } } = this.props
     const { suggestions } = this.state
 
-    return <div className={`input-group places-autocomplete ${(touched && error) ? 'has-error' : ''}`}>
+    return <div className={`input-group places-autocomplete ${hasError({ touched, error }) ? 'has-error' : ''}`}>
       { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
       { instructionText && <div className="instruction-text">{instructionText}</div> }
       <div>
@@ -115,8 +117,8 @@ class renderPlacesAutocomplete extends Component {
           }}
         />
         <div id={`${form}-${input.name}-desc`}>
-          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-          {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+          { renderError({ meta: { touched, error } }) }
+          { renderWarning({ meta: { warning } }) }
         </div>
       </div>
     </div>

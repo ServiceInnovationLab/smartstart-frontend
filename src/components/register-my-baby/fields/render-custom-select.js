@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import Select from 'react-select'
 import { getTextContent } from '../../../utils'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 import './custom-select.scss'
 
 class CustomSelect extends Component {
@@ -51,7 +53,7 @@ class CustomSelect extends Component {
       selectProps.clearRenderer = this.clearRenderer
     }
 
-    return <div className={`input-group ${className} ${(touched && error) ? 'has-error' : ''}`}>
+    return <div className={`input-group ${className} ${hasError({ touched,  error }) ? 'has-error' : ''}`}>
         { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
         { instructionText && <div className="instruction-text">{instructionText}</div> }
         <div>
@@ -62,8 +64,8 @@ class CustomSelect extends Component {
             aria-label={getTextContent(label)}
           />
           <div id={`${form}-${input.name}-desc`}>
-            {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-            {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+            { renderError({ meta: { touched, error } }) }
+            { renderWarning({ meta: { warning } }) }
           </div>
         </div>
       </div>

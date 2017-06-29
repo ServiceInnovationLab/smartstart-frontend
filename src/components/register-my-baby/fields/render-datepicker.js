@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 import { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 
 const DAYS = []
@@ -169,7 +171,10 @@ class SimpleDatePicker extends Component {
 }
 
 SimpleDatePicker.propTypes = {
-  value: PropTypes.object,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   ariaDescribedBy: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
@@ -179,7 +184,7 @@ const renderDatepicker = ({ input, label, meta: { touched, error, warning, form 
 
   <fieldset>
     <legend>{label}</legend>
-    <div className={`input-group ${(touched && error) ? 'has-error' : ''}`}>
+    <div className={`input-group ${hasError({ touched, error }) ? 'has-error' : ''}`}>
       <div>
         <SimpleDatePicker
           value={input.value || null}
@@ -188,8 +193,8 @@ const renderDatepicker = ({ input, label, meta: { touched, error, warning, form 
           ariaDescribedBy={`${form}-${input.name}-desc`}
         />
         <div id={`${form}-${input.name}-desc`}>
-          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-          {touched && warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+          { renderError({ meta: { touched, error } }) }
+          { renderWarning({ meta: { warning } }) }
         </div>
       </div>
     </div>

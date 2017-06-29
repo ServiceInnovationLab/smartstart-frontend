@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 
 const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error, warning } }) => (
-  <div className={`input-group checkbox ${(touched && error) ? 'has-error' : ''}`}>
+  <div className={`input-group checkbox ${hasError({ touched, error }) ? 'has-error' : ''}`}>
     <label>
       <input
         type="checkbox"
@@ -15,8 +17,8 @@ const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error, 
     </label>
 
     <div id={`${form}-${input.name}-desc`}>
-      {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-      {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+      { renderError({ meta: { touched, error } }) }
+      { renderWarning({ meta: { warning } }) }
     </div>
   </div>
 )

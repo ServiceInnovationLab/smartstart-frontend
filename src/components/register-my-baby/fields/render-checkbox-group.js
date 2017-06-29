@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 
 class CheckboxGroup extends Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class CheckboxGroup extends Component {
   render() {
     const { options, value, name, ariaDescribedBy } = this.props;
     return (
-      <div>
+      <div className="checkboxes">
         { options.map((option, index) => (
             <label key={index}>
               <input type="checkbox"
@@ -69,7 +71,7 @@ const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { t
   <fieldset>
     { label && <legend>{label}</legend> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
-    <div className={`checkbox-group ${(touched && error) ? 'has-error' : ''}`}>
+    <div className={`checkbox-group ${hasError({ touched, error }) ? 'has-error' : ''}`}>
       <div>
         <CheckboxGroup
           name={input.name}
@@ -80,8 +82,8 @@ const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { t
           ariaDescribedBy={`${form}-${input.name}-desc`}
         />
         <div id={`${form}-${input.name}-desc`}>
-          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-          {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+          { renderError({ meta: { touched, error } }) }
+          { renderWarning({ meta: { warning } }) }
         </div>
       </div>
     </div>

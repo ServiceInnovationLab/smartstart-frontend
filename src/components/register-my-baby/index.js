@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { getFormValues } from 'redux-form'
 import URLSearchParams from 'url-search-params'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
@@ -14,6 +15,7 @@ import Step4 from './steps/step4'
 import Step5 from './steps/step5'
 import Step6 from './steps/step6'
 import Review from './steps/review/index'
+import { fullSubmit } from './submit'
 import { piwikTrackPost } from '../../actions/actions'
 import { fetchBirthFacilities, fetchCountries } from '../../actions/birth-registration'
 
@@ -61,6 +63,7 @@ class RegisterMyBabyForm extends Component {
     this.goToReviewStep = this.goToReviewStep.bind(this)
     this.handleSubmitFail = this.handleSubmitFail.bind(this)
     this.handleFieldReviewEdit = this.handleFieldReviewEdit.bind(this)
+    this.submit = this.submit.bind(this)
     this.state = {
       step: 1,
       stepName: 'child-details',
@@ -137,7 +140,8 @@ class RegisterMyBabyForm extends Component {
     this.goToStep(stepByStepName[section], false, fieldName)
   }
 
-  onSubmit() {
+  submit() {
+    fullSubmit(this.props.formState, this.props.csrfToken)
   }
 
   componentWillMount() {
@@ -191,7 +195,14 @@ class RegisterMyBabyForm extends Component {
           {step === 4 && <Step4 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
           {step === 5 && <Step5 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
           {step === 6 && <Step6 autoFocusField={autoFocusField} isReviewing={isReviewing} onComebackToReview={this.goToReviewStep} onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} />}
-          {step === 7 && <Review onPrevious={this.previousStep} onSubmit={this.nextStep} onSubmitFail={this.handleSubmitFail} onFieldEdit={this.handleFieldReviewEdit} />}
+          {step === 7 &&
+            <Review
+              onPrevious={this.previousStep}
+              onSubmit={this.submit}
+              onSubmitFail={this.handleSubmitFail}
+              onFieldEdit={this.handleFieldReviewEdit}
+            />
+          }
         </CSSTransitionGroup>
       </div>
     )
@@ -205,11 +216,15 @@ RegisterMyBabyForm.propTypes = {
   savedRegistrationForm: PropTypes.object,
   fetchBirthFacilities: PropTypes.func,
   fetchCountries: PropTypes.func,
+  formState: PropTypes.object,
+  csrfToken: PropTypes.string,
   piwikTrackPost: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
-  savedRegistrationForm: state.birthRegistration.savedRegistrationForm,
+  savedRegistrationForm: get(state, 'birthRegistration.savedRegistrationForm'),
+  formState: getFormValues('registration')(state),
+  csrfToken: get(state, 'birthRegistration.csrfToken')
 })
 
 RegisterMyBabyForm = connect(

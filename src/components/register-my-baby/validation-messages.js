@@ -8,6 +8,7 @@ export const REQUIRE_MESSAGE_CHILD_FIRST_NAME = 'This is a required field, pleas
 export const REQUIRE_IRD_ADDRESS = 'This is a required field, please choose an address to post your child\'s IRD number to.'
 export const REQUIRE_AT_LEAST_ONE = 'You have to select at least one of the above'
 export const REQUIRE_AT_LEAST_ONE_MSD = 'Please provide the MSD client number for at least one parent'
+export const REQUIRE_EXPLAINATION = 'Please provide an explanation'
 
 export const INVALID_DATE_MESSAGE = 'The selected date is not valid, please try again'
 export const INVALID_EMAIL_MESSAGE = 'This is not a valid email address, please re-enter the email address'
@@ -33,3 +34,31 @@ export const REQUIRE_FATHER_EMAIL_IRD = <span>
   You have not supplied father's email address, please add one to the contact details on
   &nbsp;<Link to={'/register-my-baby/father-details?focus=father.email'}>this step <span className="visuallyhidden">on the Father details page</span></Link>
 </span>
+
+const EMPTY = ''
+
+export const frontendMessageByErrorCode = {
+  'ethnic:child.ethnicGroups': { message: REQUIRE_MESSAGE, type: 'error' },
+  'ethnic:mother.ethnicGroups': { message: REQUIRE_MESSAGE, type: 'error' },
+  'ethnic:father.ethnicGroups': { message: REQUIRE_MESSAGE, type: 'error' },
+  'ird_fathers_email': { message: REQUIRE_FATHER_EMAIL_IRD, type: 'error' },
+  'ird_mothers_email': { message: REQUIRE_MOTHER_EMAIL_IRD, type: 'error' },
+  'msd_invalid:msd.mothersClientNumber': { message: INVALID_MSD_MESSAGE, type: 'error' },
+  'msd_invalid:msd.fathersClientNumber': { message: INVALID_MSD_MESSAGE, type: 'error' },
+  'msd_mandatory:msd.mothersClientNumber': { message: REQUIRE_AT_LEAST_ONE_MSD, type: 'error' },
+  'msd_mandatory:msd.fathersClientNumber': { message: REQUIRE_AT_LEAST_ONE_MSD, type: 'error' },
+  'name_contains_rank:child.firstNames': { message: EMPTY, type: 'warning' },
+  'name_contains_rank:child.surname': { message: EMPTY, type: 'warning' },
+  'obscene_name:child.firstNames': { message: EMPTY, type: 'warning' },
+  'obscene_name:child.surname': { message: EMPTY, type: 'warning' },
+  'surname_match:mother.surname': { message: EMPTY, type: 'warning' },
+  'surname_match:father.surname': { message: EMPTY, type: 'warning' },
+  'wdatet_parent_young': { message: EMPTY, type: 'warning' },
+  '10001': { message: REQUIRE_MESSAGE, type: 'error' },
+  '10010': { message: EMPTY, type: 'error' },
+  '10014:mother.dateOfBirth': { message: WARNING_MOTHER_DATE_OF_BIRTH, type: 'warning' },
+  '10014:father.dateOfBirth': { message: WARNING_FATHER_DATE_OF_BIRTH, type: 'warning' },
+  '10015': { message: FUTURE_DATE_MESSAGE, type: 'error' },
+  '10025': { message: EXCEED_MAXLENGTH_MESSAGE, type: 'error' },
+  '10066': { message: INVALID_NAME_MESSAGE, type: 'error' }
+}

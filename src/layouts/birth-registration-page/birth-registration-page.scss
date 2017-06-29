@@ -59,7 +59,9 @@
     margin-top: 48px;
     padding-bottom: 20px;
 
-    input, label {
+    input,
+    textarea,
+    label {
       margin: 0;
     }
 
@@ -72,6 +74,10 @@
       line-height: $form-input-height;
       height: $form-input-height;
       box-sizing: border-box;
+    }
+
+    textarea {
+      border: 1px solid $form-border-color;
     }
 
     select {
@@ -163,6 +169,10 @@
     }
 
 
+    > .general-error {
+      margin-bottom: 20px;
+    }
+
     span.error {
       background-color: $form-error-bg;
       border-left: 3px solid $form-error-outline;
@@ -199,7 +209,7 @@
       }
 
       > div {
-        flex: 1;
+        flex: 1 0 auto;
         display: flex;
         justify-content: center;
         flex-flow: column;
@@ -207,12 +217,12 @@
         margin-top: .5em;
 
         > input {
-          flex: 1 auto;
+          flex: 1 0 auto;
         }
 
         span.error,
         span.warning {
-          flex: 1;
+          flex: 1 0 auto;
           margin-top: 10px;
         }
       }
@@ -273,7 +283,8 @@
 
   div.input-group {
     &.has-error {
-      input {
+      input,
+      textarea {
         border-color: $error-background;
         border-width: 1px;
       }
@@ -418,7 +429,7 @@
     }
 
     @media #{$desktop-and-above} {
-      > div > div {
+      > div > div.checkboxes {
         display: flex;
         flex-wrap: wrap;
 

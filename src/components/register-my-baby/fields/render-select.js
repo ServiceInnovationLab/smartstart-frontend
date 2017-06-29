@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react'
 import get from 'lodash/get'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 
 const renderSelect = ({ input, label, placeholder, instructionText, options, renderEmptyOption = true, className, meta: { touched, error, warning, form } }) => (
-  <div className={`input-group ${className} ${(touched && error) ? 'has-error' : ''}`}>
+  <div className={`input-group ${className} ${hasError({ touched, error }) ? 'has-error' : ''}`}>
     { label && <label htmlFor={`${form}-${input.name}`}>{label}</label> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
     <div className="styled-select">
@@ -25,8 +27,8 @@ const renderSelect = ({ input, label, placeholder, instructionText, options, ren
         }
       </select>
       <div id={`${form}-${input.name}-desc`}>
-        {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-        {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+        { renderError({ meta: { touched, error } }) }
+        { renderWarning({ meta: { warning } }) }
       </div>
     </div>
   </div>

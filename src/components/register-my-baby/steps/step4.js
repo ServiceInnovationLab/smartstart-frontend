@@ -25,7 +25,7 @@ class ParentRelationshipForm extends Component {
     return otherChildren > 0 ?
       <div className="component-grouping">
         { times(otherChildren).map(idx => (
-            <div>
+            <div key={idx}>
               <h4>Child {idx + 1}</h4>
               <div className="conditional-field" key={`siblings-${idx}`}>
                 <Field
@@ -168,8 +168,8 @@ class ParentRelationshipForm extends Component {
 ParentRelationshipForm.propTypes = {
   parentRelationship: PropTypes.string,
   otherChildren: PropTypes.number,
-  fatherKnown: PropTypes.bool,
-  assistedHumanReproduction: PropTypes.bool,
+  fatherKnown: PropTypes.string,
+  assistedHumanReproduction: PropTypes.string,
   assistedHumanReproductionSpermDonor: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,

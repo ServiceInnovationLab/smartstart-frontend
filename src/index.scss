@@ -342,7 +342,8 @@ label {
   @extend h5;
 }
 
-input {
+input,
+textarea {
   font-family: $font-family-base;
   font-size: $font-size-base;
   display: inline-block;

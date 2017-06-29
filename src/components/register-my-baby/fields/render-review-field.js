@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react'
+import renderError from './render-error'
+import renderWarning from './render-warning'
 
 const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta: { error, warning } }) => {
   let valueDisplay;
@@ -10,7 +12,7 @@ const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta:
   }
 
   return <div className="review-field">
-    <div>
+    <div className="review-field-content">
       <div>
         <strong>{label}</strong>
         { valueDisplay ?
@@ -26,8 +28,9 @@ const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta:
         Edit
       </button>
     </div>
-    {error && <span className="error"><strong>Error:</strong> {error}</span>}
-    {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+
+    { renderError({ meta: { touched: true, error } }) }
+    { renderWarning({ meta: { warning } }) }
   </div>
 }
 

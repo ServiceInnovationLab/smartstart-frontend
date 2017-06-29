@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import renderError, { hasError } from './render-error'
+import renderWarning from './render-warning'
 
 class RadioGroup extends Component {
   constructor(props) {
@@ -60,7 +62,7 @@ const renderRadioGroup = ({ input, label, instructionText, options, meta: { touc
   <fieldset>
     { label && <legend>{label}</legend> }
     { instructionText && <div className="instruction-text">{instructionText}</div> }
-    <div className={`radio-group ${(touched && error) ? 'has-error' : ''}`}>
+    <div className={`radio-group ${hasError({ touched, error }) ? 'has-error' : ''}`}>
       <div>
         <RadioGroup
           name={input.name}
@@ -72,8 +74,8 @@ const renderRadioGroup = ({ input, label, instructionText, options, meta: { touc
         />
 
         <div id={`${form}-${input.name}-desc`}>
-          {touched && error && <span className="error"><strong>Error:</strong> {error}</span>}
-          {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+          { renderError({ meta: { touched, error } }) }
+          { renderWarning({ meta: { warning } }) }
         </div>
       </div>
     </div>

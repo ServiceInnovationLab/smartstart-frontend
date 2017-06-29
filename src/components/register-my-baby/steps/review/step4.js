@@ -38,7 +38,7 @@ const renderStep4Review = ({ formState, onEdit }) => {
         />
 
         { times(formState.otherChildren).map(idx =>
-            <div className="review-subfields">
+            <div className="review-subfields" key={idx}>
               <h4>Child {idx + 1}</h4>
               <Field
                 label={`Sex of child ${idx + 1}`}

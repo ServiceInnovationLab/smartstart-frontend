@@ -93,6 +93,17 @@ export const transform = data => {
   return transformedData
 }
 
+export const transformFullSubmission = (data) => {
+  const transformedData = transform(data)
+
+  transformedData.otherInformation = [
+    transformedData.child.nameExplaination || '',
+    transformedData.otherInformation || ''
+  ].join('\n')
+
+  return transformedData
+}
+
 const update = (object, path, updater) => {
   if (has(object, path)) {
     lodashUpdate(object, path, updater)

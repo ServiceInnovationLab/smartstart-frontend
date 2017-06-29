@@ -12,7 +12,7 @@ import {
 } from '../../options'
 
 const renderStep3Review = ({ formState, onEdit }) => {
-    const { isCitizen, citizenshipSource } = formState.father;
+    const { isCitizen, citizenshipSource } = formState.father || {};
     return <div className="review-section">
       <div className="section-heading">
         <h3>Matua <br/> Father/Other parent</h3>

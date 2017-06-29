@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
+import get from 'lodash/get'
+import makeMandatoryLabel from '../../hoc/make-mandatory-label'
+import renderTextarea from '../../fields/render-textarea'
 import renderFieldReview from '../../fields/render-review-field'
 import { formatAddress, formatDate } from './utils'
 import {
@@ -8,6 +11,11 @@ import {
   yesNoNotSure,
   getOptionDisplay
 } from '../../options'
+import { requiredWithMessage } from '../../validate'
+import {
+  REQUIRE_EXPLAINATION
+} from '../../validation-messages'
+import { maxLength } from '../../normalize'
 
 const renderBirthPlace = formState => category => {
   if (category === 'hospital') {
@@ -19,7 +27,10 @@ const renderBirthPlace = formState => category => {
   }
 }
 
-const renderStep1Review = ({formState, onEdit}) => {
+const renderStep1Review = ({formState, submitErrors, onEdit}) => {
+  const firstNamesWarning = get(submitErrors, 'child.firstNames')
+  const surnameWarning = get(submitErrors, 'child.surname')
+
   return <div className="review-section">
     <div className="section-heading">
       <h3>Tamaiti <br/> Child</h3>
@@ -40,6 +51,18 @@ const renderStep1Review = ({formState, onEdit}) => {
       section="child-details"
       onEdit={onEdit}
     />
+    { (firstNamesWarning || surnameWarning) &&
+      <div className="conditional-field">
+        <Field
+          label={makeMandatoryLabel("Please explain (600 characters)")}
+          placeholder="Give your reasons for wanting this name for your child"
+          name="child.nameExplaination"
+          component={renderTextarea}
+          validate={[requiredWithMessage(REQUIRE_EXPLAINATION)]}
+          normalize={maxLength(600)}
+        />
+      </div>
+    }
     <Field
       label="Sex of child"
       name="child.sex"
@@ -119,6 +142,7 @@ const renderStep1Review = ({formState, onEdit}) => {
 
 renderStep1Review.propTypes = {
   formState: PropTypes.object,
+  submitErrors: PropTypes.object,
   onEdit: PropTypes.func
 }
 export default renderStep1Review;
