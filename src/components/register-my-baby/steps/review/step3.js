@@ -7,6 +7,7 @@ import renderWarning from '../../fields/render-warning'
 import {
   yesNo,
   yesNoNotSure,
+  ethnicGroups,
   citizenshipSources,
   getOptionDisplay
 } from '../../options'
@@ -147,7 +148,7 @@ const renderStep3Review = ({ formState, onEdit }) => {
             label="Which ethnic group(s) does the father belong to?"
             name="father.ethnicGroups"
             component={renderFieldReview}
-            valueRenderer={value => value.join(', ')}
+            valueRenderer={value => value.map(getOptionDisplay(ethnicGroups)).join(', ')}
             section="father-details"
             onEdit={onEdit}
           />

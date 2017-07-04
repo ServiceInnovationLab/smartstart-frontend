@@ -24,9 +24,7 @@ import {
 import {
   RECEIVE_BIRTH_FACILITIES,
   RECEIVE_COUNTRIES,
-  RECEIVE_CSRF_TOKEN,
-  REQUEST_VALIDATION_RESULT,
-  RECEIVE_VALIDATION_RESULT
+  RECEIVE_CSRF_TOKEN
 } from 'actions/birth-registration'
 
 function contentActions (state = {
@@ -176,7 +174,7 @@ function supplementaryContentActions (state = {
  */
 
 const initialRegistrationFormState = {
-  numberOfSiblings: 0,
+  otherChildren: 0,
   certificateOrder: {
     courierDelivery: 'standard'
   }
@@ -204,17 +202,6 @@ function birthRegistration (state = {
         ...state,
         csrfToken: action.token
       };
-    case REQUEST_VALIDATION_RESULT:
-      return {
-        ...state,
-        isValidating: true
-      }
-    case RECEIVE_VALIDATION_RESULT:
-      return {
-        ...state,
-        isValidating: false,
-        validationResult: action.result
-      }
     default:
       return state
   }

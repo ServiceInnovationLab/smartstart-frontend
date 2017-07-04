@@ -3,8 +3,6 @@ import { applicationError } from './actions'
 
 export const REQUEST_BIRTH_FACILITIES = 'REQUEST_BIRTH_FACILITIES'
 export const RECEIVE_BIRTH_FACILITIES = 'RECEIVE_BIRTH_FACILITIES'
-export const REQUEST_VALIDATION_RESULT = 'REQUEST_VALIDATION_RESULT'
-export const RECEIVE_VALIDATION_RESULT = 'RECEIVE_VALIDATION_RESULT'
 export const RECEIVE_CSRF_TOKEN = 'RECEIVE_CSRF_TOKEN'
 export const REQUEST_COUNTRIES = 'REQUEST_COUNTRIES'
 export const RECEIVE_COUNTRIES = 'RECEIVE_COUNTRIES'
@@ -39,19 +37,6 @@ function receiveCsrfToken(token) {
   return {
     type: RECEIVE_CSRF_TOKEN,
     token
-  }
-}
-
-export function requestValidationResult() {
-  return {
-    type: REQUEST_VALIDATION_RESULT
-  }
-}
-
-export function receiveValidationResult(result) {
-  return {
-    type: RECEIVE_VALIDATION_RESULT,
-    result
   }
 }
 

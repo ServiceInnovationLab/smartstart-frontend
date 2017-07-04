@@ -9,6 +9,7 @@ import {
   sexs,
   yesNo,
   yesNoNotSure,
+  ethnicGroups,
   getOptionDisplay
 } from '../../options'
 import { requiredWithMessage } from '../../validate'
@@ -124,7 +125,7 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
       label="Which ethnic group(s) does this child belong to?"
       name="child.ethnicGroups"
       component={renderFieldReview}
-      valueRenderer={value => value.join(', ')}
+      valueRenderer={value => value.map(getOptionDisplay(ethnicGroups)).join(', ')}
       section="child-details"
       onEdit={onEdit}
     />

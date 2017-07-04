@@ -1,6 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, getFormValues, getFormSyncErrors, getFormSubmitErrors, getFormSyncWarnings } from 'redux-form'
+import {
+  Field, reduxForm, getFormValues, getFormSyncErrors,
+  getFormSubmitErrors, getFormSyncWarnings, SubmissionError
+} from 'redux-form'
 import get from 'lodash/get'
 import renderStep1Review from './step1'
 import renderStep2Review from './step2'
@@ -9,23 +12,25 @@ import renderStep4Review from './step4'
 import renderStep5Review from './step5'
 import renderStep6Review from './step6'
 import renderTextarea from '../../fields/render-textarea'
-import renderRadioGroup from '../../fields/render-radio-group'
-import makeMandatoryLabel from '../../hoc/make-mandatory-label'
+import renderCheckbox from '../../fields/render-checkbox'
 import renderError from '../../fields/render-error'
 import {
-  yesNo as yesNoOptions
-} from '../../options'
-import { required } from '../../validate'
+  REQUIRE_DECLARATION
+} from '../../validation-messages'
 import { maxLength } from '../../normalize'
 import Spinner from '../../../spinner/spinner'
 import { validateOnly } from '../../submit'
-import { fetchCountries, requestValidationResult, receiveValidationResult  } from '../../../../actions/birth-registration'
+import { fetchCountries } from '../../../../actions/birth-registration'
 import './review.scss'
 
 class Review extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      validating: true
+    }
     this.onValidate = this.onValidate.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   componentWillMount() {
@@ -33,18 +38,33 @@ class Review extends Component {
   }
 
   onValidate() {
-    this.props.dispatch(requestValidationResult())
     return validateOnly(this.props.formState, this.props.csrfToken)
-      .then(() => this.props.dispatch(receiveValidationResult()))
+      .then(() => {
+        this.setState({
+          validating: false
+        })
+      })
       .catch((err) => {
-        this.props.dispatch(receiveValidationResult())
+        this.setState({
+          validating: false
+        })
         throw err
       })
   }
 
+  onSubmit() {
+    if (!this.props.formState.declarationMade) {
+      throw new SubmissionError({
+        declarationMade: REQUIRE_DECLARATION
+      });
+    }
+
+    return this.props.onSubmit();
+  }
+
   render() {
     const {
-      isValidating, countries, formState, submitErrors, syncWarnings,
+      countries, formState, submitErrors, syncWarnings,
       handleSubmit, submitting, error, onPrevious, onFieldEdit
     } = this.props
 
@@ -66,9 +86,9 @@ class Review extends Component {
         <div className="informative-text">
           In a small number of cases Registry staff may need to make contact regarding a registration and you may need to provide further information and/or a statutory declaration.
         </div>
-        { isValidating ?
+        { this.state.validating ?
           <Spinner text="Checking your application ..."/> :
-          <form onSubmit={handleSubmit(this.props.onSubmit)}>
+          <form onSubmit={handleSubmit(this.onSubmit)}>
             { error &&
               <div className="general-error">
                 { renderError({ meta: { touched: true, error }}) }
@@ -84,11 +104,8 @@ class Review extends Component {
 
             <Field
               name="declarationMade"
-              component={renderRadioGroup}
-              label={makeMandatoryLabel("Declaration")}
-              instructionText={declarationText}
-              options={yesNoOptions}
-              validate={[required]}
+              label={declarationText}
+              component={renderCheckbox}
             />
 
             <Field
@@ -126,7 +143,6 @@ Review.propTypes = {
 
   csrfToken: PropTypes.string.isRequired,
   isValidating: PropTypes.bool,
-  validationResult: PropTypes.object,
   fetchCountries: PropTypes.func
 }
 
@@ -144,8 +160,7 @@ Review = connect(
     submitErrors: getFormSubmitErrors('registration')(state),
     syncWarnings: getFormSyncWarnings('registration')(state),
     isValidating: get(state, 'birthRegistration.isValidating'),
-    countries: get(state, 'birthRegistration.countries'),
-    validationResult: get(state, 'birthRegistration.validationResult')
+    countries: get(state, 'birthRegistration.countries')
   }),
   {
     fetchCountries

@@ -8,6 +8,7 @@ import {
   yesNo,
   yesNoNotSure,
   citizenshipSources,
+  ethnicGroups,
   getOptionDisplay
 } from '../../options'
 
@@ -91,7 +92,7 @@ const renderStep2Review = ({ formState, onEdit }) => {
       label="Which ethnic group(s) does the mother belong to?"
       name="mother.ethnicGroups"
       component={renderFieldReview}
-      valueRenderer={value => value.join(', ')}
+      valueRenderer={value => value.map(getOptionDisplay(ethnicGroups)).join(', ')}
       section="mother-details"
       onEdit={onEdit}
     />
