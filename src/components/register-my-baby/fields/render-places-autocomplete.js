@@ -118,7 +118,7 @@ class renderPlacesAutocomplete extends Component {
         />
         <div id={`${form}-${input.name}-desc`}>
           { renderError({ meta: { touched, error } }) }
-          { renderWarning({ meta: { warning } }) }
+          { renderWarning({ meta: { error, warning } }) }
         </div>
       </div>
     </div>

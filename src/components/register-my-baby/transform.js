@@ -6,6 +6,8 @@ import keys from 'lodash/keys'
 import unset from 'lodash/unset'
 import cloneDeep from 'lodash/cloneDeep'
 import lodashUpdate from 'lodash/update'
+import invert from 'lodash/invert'
+import forOwn from 'lodash/forOwn'
 
 /**
  * STEP 1
@@ -49,6 +51,18 @@ import lodashUpdate from 'lodash/update'
  *   "countryCode": "string"
  * }
  */
+
+export const FRONTEND_FIELD_TO_SERVER_FIELD = {
+  'birthPlace.home.suburb': 'birthPlace.home.line2',
+  'certificateOrder.deliveryAddress.line2': 'certificateOrder.deliveryAddress.suburbTownPostCode',
+  'certificateOrder.deliveryAddress.suburb': 'certificateOrder.deliveryAddress.line2',
+  'child.ethnicityDescription': 'child.ethnicGroups.other',
+  'mother.ethnicityDescription': 'mother.ethnicGroups.other',
+  'father.ethnicityDescription': 'father.ethnicGroups.other'
+}
+
+export const SERVER_FIELD_TO_FRONTEND_FIELD = invert(FRONTEND_FIELD_TO_SERVER_FIELD)
+
 export const transform = data => {
   const transformedData = cloneDeep(data)
 
@@ -88,7 +102,9 @@ export const transform = data => {
 
   transformHart(transformedData)
 
-  transformCertificateDeliveryAddress(transformedData.certificateOrder)
+  unset(transformedData.certificateOrder, 'deliveryAddressType')
+
+  transformFrontendFieldToServerField(transformedData)
 
   return transformedData
 }
@@ -188,12 +204,15 @@ const transformHart = data => {
   return data
 }
 
-const transformCertificateDeliveryAddress = target => {
-  unset(target, 'deliveryAddressType')
+const transformFrontendFieldToServerField = data => {
+  const snapshot = cloneDeep(data)
 
-  set(target, 'deliveryAddress.suburbTownPostCode', get(target, 'deliveryAddress.line2'))
-  set(target, 'deliveryAddress.line2', get(target, 'deliveryAddress.suburb'))
-  unset(target, 'deliveryAddress.suburb')
+  forOwn(FRONTEND_FIELD_TO_SERVER_FIELD, (serverField, frontendField) => {
+    const value = get(snapshot, frontendField)
+    set(data, serverField, value)
+    unset(data, frontendField)
+  })
 
-  return target
+  return data
 }
+

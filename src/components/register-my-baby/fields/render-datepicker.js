@@ -194,7 +194,7 @@ const renderDatepicker = ({ input, label, meta: { touched, error, warning, form 
         />
         <div id={`${form}-${input.name}-desc`}>
           { renderError({ meta: { touched, error } }) }
-          { renderWarning({ meta: { warning } }) }
+          { renderWarning({ meta: { error, warning } }) }
         </div>
       </div>
     </div>

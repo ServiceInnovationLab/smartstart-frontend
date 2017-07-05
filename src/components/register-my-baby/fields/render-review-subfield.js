@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react'
+import renderError from './render-error'
+import renderWarning from './render-warning'
 
 const renderSubFieldReview = ({ input, valueRenderer, label, meta: { error, warning } }) => {
   let valueDisplay;
@@ -17,8 +19,8 @@ const renderSubFieldReview = ({ input, valueRenderer, label, meta: { error, warn
         <em>Not applicable</em>
       }
     </div>
-    {error && <span className="error"><strong>Error:</strong> {error}</span>}
-    {warning && <span className="warning"><strong>Warning:</strong> {warning}</span>}
+    { renderError({ meta: { touched: true, error } }) }
+    { renderWarning({ meta: { error, warning } }) }
   </div>
 }
 

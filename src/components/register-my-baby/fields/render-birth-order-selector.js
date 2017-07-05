@@ -137,7 +137,7 @@ const renderBirthOrderSelector = ({ input, label, meta: { touched, error, warnin
         <BirthOrderSelector {...input} ariaDescribedBy={`${form}-${input.name}-desc`} />
         <div id={`${form}-${input.name}-desc`}>
           { renderError({ meta: { touched, error } }) }
-          { renderWarning({ meta: { warning } }) }
+          { renderWarning({ meta: { error, warning } }) }
         </div>
       </div>
     </div>

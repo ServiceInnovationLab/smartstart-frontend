@@ -146,7 +146,7 @@ class FatherDetailsForm extends Component {
         />
 
         <Field
-          name="father.ocupation"
+          name="father.occupation"
           component={renderField}
           type="text"
           label={makeMandatoryLabel("Usual occupation, profession or job of father")}

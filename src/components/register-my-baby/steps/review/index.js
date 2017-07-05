@@ -86,7 +86,7 @@ class Review extends Component {
         <div className="informative-text">
           In a small number of cases Registry staff may need to make contact regarding a registration and you may need to provide further information and/or a statutory declaration.
         </div>
-        { this.state.validating ?
+        { (this.state.validating || submitting) ?
           <Spinner text="Checking your application ..."/> :
           <form onSubmit={handleSubmit(this.onSubmit)}>
             { error &&
@@ -114,6 +114,12 @@ class Review extends Component {
               component={renderTextarea}
               normalize={maxLength(600)}
             />
+
+            { error &&
+              <div className="general-error">
+                { renderError({ meta: { touched: true, error }}) }
+              </div>
+            }
 
             <div className="form-actions">
               <button type="button" className="previous" onClick={onPrevious}>Back</button>

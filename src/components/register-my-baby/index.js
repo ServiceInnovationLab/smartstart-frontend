@@ -141,7 +141,16 @@ class RegisterMyBabyForm extends Component {
   }
 
   submit() {
-    fullSubmit(this.props.formState, this.props.csrfToken)
+    return fullSubmit(this.props.formState, this.props.csrfToken)
+      .then((/* result */) => {
+        window.alert('Application has been submitted')
+        // TODO:
+        // when no certificate is requested:
+        // present the full success (no order summary) result/confirmation screen to the user (covered separately in story #44711)
+
+        // when certificate is requested & paymentURL is returned:
+        // Redirect the user to the e-commerce flow (covered separately in story #43892)
+      });
   }
 
   componentWillMount() {

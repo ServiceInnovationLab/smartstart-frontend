@@ -28,7 +28,7 @@ const renderSelect = ({ input, label, placeholder, instructionText, options, ren
       </select>
       <div id={`${form}-${input.name}-desc`}>
         { renderError({ meta: { touched, error } }) }
-        { renderWarning({ meta: { warning } }) }
+        { renderWarning({ meta: { error, warning } }) }
       </div>
     </div>
   </div>

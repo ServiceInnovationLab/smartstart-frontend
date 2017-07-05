@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import makeMandatoryLabel from '../../hoc/make-mandatory-label'
 import renderTextarea from '../../fields/render-textarea'
 import renderFieldReview from '../../fields/render-review-field'
+import renderReviewValidation from '../../fields/render-review-validation'
 import { formatAddress, formatDate } from './utils'
 import {
   sexs,
@@ -113,6 +114,10 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
       section="child-details"
       onEdit={onEdit}
     />
+    <Field name="birthPlace.home.line1" component={renderReviewValidation} />
+    <Field name="birthPlace.home.suburb" component={renderReviewValidation} />
+    <Field name="birthPlace.home.line2" component={renderReviewValidation} />
+    <Field name="birthPlace.other" component={renderReviewValidation} />
     <Field
       label="Is this child a descendant of a New Zealand Māori?"
       name="child.maoriDescendant"
@@ -129,7 +134,7 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
       section="child-details"
       onEdit={onEdit}
     />
-    { formState.child.ethnicGroups && formState.child.ethnicGroups.indexOf('Other') > -1 &&
+    { formState.child.ethnicGroups && formState.child.ethnicGroups.indexOf('other') > -1 &&
       <Field
         label="Please describe the child’s ethnicity"
         name="child.ethnicityDescription"

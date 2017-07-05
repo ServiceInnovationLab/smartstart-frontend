@@ -83,7 +83,7 @@ const renderCheckboxGroup = ({ input, label, instructionText, options, meta: { t
         />
         <div id={`${form}-${input.name}-desc`}>
           { renderError({ meta: { touched, error } }) }
-          { renderWarning({ meta: { warning } }) }
+          { renderWarning({ meta: { error, warning } }) }
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ const renderField = ({ input, label, ariaLabel, placeholder, instructionText, ty
       />
       <div id={`${form}-${input.name}-desc`}>
         { renderError({ meta: { touched, error } }) }
-        { renderWarning({ meta: { warning } }) }
+        { renderWarning({ meta: { error, warning } }) }
       </div>
     </div>
   </div>

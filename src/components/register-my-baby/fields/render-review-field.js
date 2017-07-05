@@ -30,7 +30,7 @@ const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta:
     </div>
 
     { renderError({ meta: { touched: true, error } }) }
-    { renderWarning({ meta: { warning } }) }
+    { renderWarning({ meta: { error, warning } }) }
   </div>
 }
 

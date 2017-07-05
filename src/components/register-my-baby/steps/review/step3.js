@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 import renderFieldReview from '../../fields/render-review-field'
 import renderSubFieldReview from '../../fields/render-review-subfield'
+import renderReviewValidation from '../../fields/render-review-validation'
 import { formatAddress, formatDate } from './utils'
 import renderWarning from '../../fields/render-warning'
 import {
@@ -107,7 +108,14 @@ const renderStep3Review = ({ formState, onEdit }) => {
             onEdit={onEdit}
           />
           <Field
-            label="father's date of birth"
+            label="Usual occupation, profession or job of father"
+            name="father.occupation"
+            component={renderFieldReview}
+            section="father-details"
+            onEdit={onEdit}
+          />
+          <Field
+            label="Father's date of birth"
             name="father.dateOfBirth"
             component={renderFieldReview}
             valueRenderer={formatDate}
@@ -136,6 +144,8 @@ const renderStep3Review = ({ formState, onEdit }) => {
             section="father-details"
             onEdit={onEdit}
           />
+          <Field name="father.homeAddress.suburb" component={renderReviewValidation} />
+          <Field name="father.homeAddress.line2" component={renderReviewValidation} />
           <Field
             label="Is the father a descendant of a New Zealand Māori?"
             name="father.maoriDescendant"
@@ -152,7 +162,7 @@ const renderStep3Review = ({ formState, onEdit }) => {
             section="father-details"
             onEdit={onEdit}
           />
-          { formState.father.ethnicGroups && formState.father.ethnicGroups.indexOf('Other') > -1 &&
+          { formState.father.ethnicGroups && formState.father.ethnicGroups.indexOf('other') > -1 &&
             <Field
               label="Please describe the father’s ethnicity"
               name="father.ethnicityDescription"
