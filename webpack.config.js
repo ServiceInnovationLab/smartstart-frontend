@@ -76,7 +76,7 @@ const common = {
         { from: PATHS.src + '/assets', to: 'assets' },
         { from: PATHS.src + '/assets/favicons/browserconfig.xml', to: 'browserconfig.xml' },
         { from: PATHS.src + '/error-pages', to: 'error-pages' },
-        { from: PATHS.src + '/error-pages/error-page.css', to: 'error-page.css' }
+        { from: PATHS.src + '/error-pages/standalone-page.css', to: 'standalone-page.css' }
       ],
       { ignore: ['.gitkeep'] }
     ),
