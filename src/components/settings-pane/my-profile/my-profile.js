@@ -1,67 +1,89 @@
+import './my-profile.scss'
+
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { addDueDate, savePersonalisationValues, piwikTrackPost } from 'actions/actions'
+import { addDueDate, addSubscribed, savePersonalisationValues, saveNewEmail, piwikTrackPost, checkPendingEmails } from 'actions/actions'
 import classNames from 'classnames'
-import { isValidDate } from 'utils'
+import { isValidDate, isValidEmail } from 'utils'
 
 export class MyProfile extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      dueDateFieldValue: ''
+      dueDateFieldValue: '',
+      subscribedFieldValue: false,
+      newEmailFieldValue: '',
+      displayPendingEmailNotification: false,
     }
 
     this.setFilterValuesFromStore = this.setFilterValuesFromStore.bind(this)
+    this.setEmailValue = this.setEmailValue.bind(this)
   }
 
   componentWillMount () {
-    this.setFilterValuesFromStore(this.props.personalisationValues.settings)
+    this.setFilterValuesFromStore(this.props.personalisationValues)
+    this.setEmailValue()
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setFilterValuesFromStore(nextProps.personalisationValues.settings)
+    this.setFilterValuesFromStore(nextProps.personalisationValues)
+    this.setEmailValue()
+  }
+
+  setEmailValue() {
+
+    // if user has pending emails display last one in an email field
+    // otherwise display existing email in a field
+    this.props.dispatch(checkPendingEmails()).then(emails => {
+      if (emails.length > 0) {
+        this.setState({ newEmailFieldValue: emails[0].email })
+        // display message to user to remind that he has unconfirmed email
+        this.setState({ displayPendingEmailNotification: true })
+      } else {
+        this.setState({ newEmailFieldValue: this.props.personalisationValues.email })
+      }
+    })
   }
 
   setFilterValuesFromStore (settingsData) {
-    if (settingsData) {
-      if (settingsData.dd && isValidDate(settingsData.dd)) {
+    let {settings, email } = settingsData
+
+    if (settings) {
+      // due date
+      if (settings.dd && isValidDate(settings.dd)) {
         // update the input (only if it's a valid value)
-        this.setState({
-          dueDateFieldValue: settingsData.dd
-        })
+        this.setState({ dueDateFieldValue: settings.dd })
 
         // update the timeline
-        this.props.dispatch(addDueDate(settingsData.dd))
+        this.props.dispatch(addDueDate(settings.dd))
+      }
+
+      // subscribed value
+      if (settings.ss) {
+        this.setState({ subscribedFieldValue: settings.ss === 'true' })
+        this.props.dispatch(addSubscribed(this.state.subscribedFieldValue))
       }
     }
   }
 
-  updateSettings (event) {
+  submitForm (event) {
     event.preventDefault() // prevent a form submit action
 
     // unfortunately setCustomValidity doesn't work in safari so we have to
     // manually check the validity here
+    let valuesToSave = []
+    let formIsValid = true
 
-    if (this.dueDateValidate()) {
-      // it validated, add the due date to the store and close the pane
-      this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
+    let { dueDateFieldValue, subscribedFieldValue, newEmailFieldValue } = this.state
+    let { settings, email } = this.props.personalisationValues
 
-      this.props.profilePaneClose()
+    // due date field
+    if(this.dueDateValidate()) {
+      if (!settings || dueDateFieldValue !== settings.dd) {
+        valuesToSave.push({ 'group': 'settings', 'key': 'dd', 'val': dueDateFieldValue })
 
-      // values to save to backend or cookie
-      let valuesToSave = [{
-        'group': 'settings',
-        'key': 'dd', // keep these non-descriptive for privacy reasons
-        'val': this.state.dueDateFieldValue
-      }]
-
-      // save values to store
-      this.props.dispatch(savePersonalisationValues(valuesToSave))
-
-      // tracking
-      if (this.state.dueDateFieldValue) {
         let piwikEvent = {
           'category': 'Profile Data',
           'action': 'Added',
@@ -69,17 +91,60 @@ export class MyProfile extends Component {
         }
         // track the event
         this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
+
+        // update in store
+        this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
       }
     } else {
-      // it's safari and it didn't validate
-      // #37500 should we display the error manually? or use a polyfill? - deferred for now
+      formIsValid = false
+    }
+
+    // subscribed checkbox
+    if (settings && subscribedFieldValue.toString() !== settings.ss) {
+      valuesToSave.push({ 'group': 'settings', 'key': 'ss', 'val': subscribedFieldValue.toString() })
+
+      // update in store
+      this.props.dispatch(addSubscribed(this.state.subscribedFieldValue))
+
+      // track the event
+      let piwikEvent = {
+        'category': 'Profile Data',
+        'action': this.state.subscribedFieldValue ? 'checked' : 'unchecked',
+        'name': 'Subscribed'
+      }
+      this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
+    }
+
+    // email field
+    if (this.props.isLoggedIn && !this.emailValidate()) {
+      formIsValid = false
+    }
+
+    // send request
+    if (formIsValid) {
+      if (email !== newEmailFieldValue && newEmailFieldValue !== "") {
+          // track the event
+          let piwikEvent = {
+            'category': 'Profile Data',
+            'action': 'submitted',
+            'name': 'New Email'
+          }
+          this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
+
+          // submit new email
+          this.props.dispatch(saveNewEmail(newEmailFieldValue))
+      }
+
+      this.props.dispatch(savePersonalisationValues(valuesToSave))
+      this.props.profilePaneClose()
     }
   }
 
   dueDateValidate () {
     const field = this.dueDateField
     const fieldValue = this.state.dueDateFieldValue
-    const isDateValid = (fieldValue === '' || isValidDate(fieldValue))
+    // if subscribed, email is required
+    const isDateValid = isValidDate(fieldValue, this.state.subscribedFieldValue)
 
     if (isDateValid) {
       this.setCustomValidity(field, '')
@@ -87,7 +152,44 @@ export class MyProfile extends Component {
       this.setCustomValidity(field, 'Please use the format yyyy-mm-dd')
     }
 
+    let message
+
+    if (isDateValid) {
+      message = ''
+    } else {
+      if (this.state.subscribedFieldValue && fieldValue === "") {
+        message = 'Please enter a due date to receive reminders'
+      } else {
+        message = 'Please use the format yyyy-mm-dd'
+      }
+    }
+
+    this.setCustomValidity(field, message)
+
     return isDateValid // so we can do the manual check for safari
+  }
+
+  emailValidate () {
+    const field = this.emailField
+    const fieldValue = this.state.newEmailFieldValue
+    // if subscribed, email is required
+    const emailIsValid = isValidEmail(fieldValue, this.state.subscribedFieldValue) // custom validation
+
+    let message
+
+    if (emailIsValid) {
+      message = ''
+    } else {
+      if (fieldValue === "") {
+        message = 'Please enter an email address'
+      } else {
+        message = 'Please enter a valid email address'
+      }
+    }
+
+    this.setCustomValidity(field, message)
+
+    return emailIsValid // so we can do the manual check for safari
   }
 
   setCustomValidity (input, message) {
@@ -102,8 +204,13 @@ export class MyProfile extends Component {
     this.setState({ dueDateFieldValue: event.target.value }, this.dueDateValidate.bind(this))
   }
 
-  reset () {
-    this.setState({ dueDateFieldValue: '' }, this.setCustomValidity(this.dueDateField, ''))
+  subscribedChange (event) {
+    this.setState({subscribedFieldValue: !this.state.subscribedFieldValue})
+  }
+
+  emailChange (event) {
+    this.setState({ newEmailFieldValue: event.target.value }, this.emailValidate.bind(this))
+    this.setState({ displayPendingEmailNotification: false })
   }
 
   render () {
@@ -114,7 +221,7 @@ export class MyProfile extends Component {
 
     return (
       <div id='my-profile' className={paneClasses} aria-hidden={!this.props.shown}>
-        <form onSubmit={this.updateSettings.bind(this)}>
+        <form onSubmit={this.submitForm.bind(this)}>
           <h4>Personalise the timeline</h4>
 
           <p>Add your due date to make the information displayed in the timeline more relevant. All your details are kept private (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</p>
@@ -130,10 +237,44 @@ export class MyProfile extends Component {
               ref={(ref) => { this.dueDateField = ref }}
               onChange={this.dueDateChange.bind(this)}
               value={this.state.dueDateFieldValue}
-          />
+            />
           </label>
+          <div className="signup-section">
+            <h4>Sign-up to reminders</h4>
+            <p>Sign-up to receive reminders from the SmartStart To Do list. A reminder is sent to you at the start of each pregnancy and new baby phase. You can unsubscribe here at any time.</p>
+            {!this.props.isLoggedIn ? <div>Please login to sign-up or update your details.</div> :
+              <div>
+                <label>
+                  <input
+                    type='checkbox'
+                    ref={(ref) => { this.subscribedField = ref }}
+                    onChange={this.subscribedChange.bind(this)}
+                    checked={this.state.subscribedFieldValue}
+                    />
+                  Sign-up to SmartStart To Do list reminders
+                </label>
+                <br />
+                <label>
+                  Your email address
+                  <br />
+                  <input
+                    type='email'
+                    placeholder="email@example.co.nz"
+                    ref={(ref) => { this.emailField = ref }}
+                    onChange={this.emailChange.bind(this)}
+                    value={this.state.newEmailFieldValue}
+                    />
+                </label>
+
+                <div className={this.state.displayPendingEmailNotification ? 'success-message' : 'hidden'}>
+                  You need to confirm your email address before you can receive reminders to this address.
+                  We will have sent you an email with a confirmation link
+                </div>
+              </div>
+            }
+          </div>
+
           <div className='button-set'>
-            <button type='button' onClick={this.reset.bind(this)} className='reset-button'>Reset</button>
             <button type='button' onClick={this.props.profilePaneClose} className='cancel-button'>Cancel</button>
             <button type='submit'>Update</button>
           </div>
@@ -148,13 +289,16 @@ function mapStateToProps (state) {
     personalisationActions
   } = state
   const {
-    personalisationValues
+    personalisationValues,
+    isLoggedIn
   } = personalisationActions || {
-    personalisationValues: {}
+    personalisationValues: {},
+    isLoggedIn: false
   }
 
   return {
-    personalisationValues
+    personalisationValues,
+    isLoggedIn
   }
 }
 

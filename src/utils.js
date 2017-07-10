@@ -26,9 +26,31 @@ export function checkStatus (response) {
 //
 // Arguments:
 // 'dateString' (required) - the string to be converted
-export function isValidDate (dateString) {
+export function isValidDate (dateString, required) {
   let dateObject = new Date(dateString)
+
+  if (!required && dateString === '') {
+    return true
+  }
+
   return !isNaN(dateObject.getTime())
+}
+
+export function isValidEmail (email, required) {
+  // simple email validation
+  // just looking for @ and dot
+  const emailRegex = /.+\@.+\..+/
+
+  if (!required && email === '') {
+    return true
+  }
+
+  if (typeof emailRegex.test === 'function') {
+    return emailRegex.test(email)
+  } else {
+    // browser doesn't support regex, skip validation
+    return true
+  }
 }
 
 // routerScrollHandler

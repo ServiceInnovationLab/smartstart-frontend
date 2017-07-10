@@ -11,6 +11,7 @@ export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION'
 export const PIWIK_TRACK = 'PIWIK_TRACK'
 export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
 export const SET_DUE_DATE = 'SET_DUE_DATE'
+export const SET_SUBSCRIBED = 'SET_SUBSCRIBED'
 export const REQUEST_PHASE_METADATA = 'REQUEST_PHASE_METADATA'
 export const RECEIVE_PHASE_METADATA = 'RECEIVE_PHASE_METADATA'
 export const SAVE_PERSONALISATION = 'SAVE_PERSONALISATION'
@@ -77,6 +78,13 @@ function setDueDate (date) {
   return {
     type: SET_DUE_DATE,
     dueDate: date
+  }
+}
+
+function setSubscribed (state) {
+  return {
+    type: SET_SUBSCRIBED,
+    subscribed: state
   }
 }
 
@@ -237,6 +245,12 @@ export function addDueDate (date) {
   }
 }
 
+export function addSubscribed (subscribed) {
+    return dispatch => {
+      dispatch(setSubscribed(!!subscribed))
+    }
+}
+
 export function fetchPhaseMetadata () {
   return dispatch => {
     dispatch(requestPhaseMetadata())
@@ -272,7 +286,7 @@ export function savePersonalisationValues (values) {
     dispatch(savePersonalisation(newValues))
 
     // save to a cookie or backend depending on login state
-    if (isLoggedIn) {
+    if (isLoggedIn && values.length) {
       // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
       return fetch('/api/preferences/', {
         method: 'POST',
@@ -434,5 +448,51 @@ export function getPiwikID () {
     dispatch(piwikId(id))
 
     return Promise.resolve() // so we can chain other actions
+  }
+}
+
+export function saveNewEmail(email) {
+  const csrftoken = Cookie.load('csrftoken')
+
+  return (dispatch, getState) => {
+    const isLoggedIn = getState().personalisationActions.isLoggedIn
+
+    // save to a cookie or backend depending on login state
+    if (isLoggedIn) {
+      // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
+      return fetch('/api/emailaddresses/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({ email }) // the backend only needs the individual update not all the values
+      })
+        .then(checkStatus)
+        .catch(function () {
+          // a failure here is indicative that the user's session has timed out
+          dispatch(authError('local-timeout'))
+          dispatch(checkAuthentication(false))
+        })
+    }
+  }
+}
+
+export function checkPendingEmails () {
+  const csrftoken = Cookie.load('csrftoken')
+
+  return (dispatch, getState) => {
+    const isLoggedIn = getState().personalisationActions.isLoggedIn
+
+    if (isLoggedIn) {
+      return fetch('/api/emailaddresses/', {
+        credentials: 'same-origin'
+      })
+      .then(checkStatus)
+      .then(response => response.json())
+    }
+    return Promise.resolve([])
   }
 }
