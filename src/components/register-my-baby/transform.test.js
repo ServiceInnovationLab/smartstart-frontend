@@ -227,12 +227,6 @@ describe('Form Data Transformation', () => {
       transformedData = transform({ fatherKnown: 'no' })
       expect(transformedData.fatherKnown).toEqual(false)
     })
-    test('parentSameAddress', () => {
-      let transformedData = transform({ parentSameAddress: 'yes' })
-      expect(transformedData.parentSameAddress).toEqual(true)
-      transformedData = transform({ parentSameAddress: 'no' })
-      expect(transformedData.parentSameAddress).toEqual(false)
-    })
     test('ird.applyForNumber', () => {
       let transformedData = transform({ ird: { applyForNumber: 'yes' } })
       expect(transformedData.ird.applyForNumber).toEqual(true)
@@ -405,6 +399,13 @@ describe('Form Data Transformation', () => {
         }
       })
       expect(keys(transformedData.certificateOrder.deliveryAddress).indexOf('suburb')).toEqual(-1)
+    })
+  })
+
+  describe('Remove uneccessary fields', () => {
+    test('remove parentSameAddress', () => {
+      let transformedData = transform({ parentSameAddress: 'yes' })
+      expect(keys(transformedData).indexOf('parentSameAddress')).toEqual(-1)
     })
   })
 })

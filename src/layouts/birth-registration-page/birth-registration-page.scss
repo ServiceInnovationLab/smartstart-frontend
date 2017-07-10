@@ -289,6 +289,13 @@
         border-width: 1px;
       }
     }
+
+    &.checkbox {
+      > div,
+      > label {
+        margin: 0;
+      }
+    }
   }
 
   div.radio-group {

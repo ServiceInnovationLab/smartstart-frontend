@@ -63,6 +63,7 @@ class FatherDetailsForm extends Component {
 
     this.onEthnicGroupsChange = this.onEthnicGroupsChange.bind(this)
     this.onPlaceSelect = this.onPlaceSelect.bind(this)
+    this.onParentSameAddressChange = this.onParentSameAddressChange.bind(this)
     this.handleAssistedHumanReproductionChange = this.handleAssistedHumanReproductionChange.bind(this)
   }
 
@@ -72,6 +73,15 @@ class FatherDetailsForm extends Component {
       newVal && newVal.indexOf('Other') === -1
     ) {
       this.props.change('ethnicityDescription', '')
+    }
+  }
+
+  onParentSameAddressChange(e, newVal) {
+    if (newVal) {
+      const { motherHomeAddress } = this.props;
+      this.props.change('father.homeAddress.line1', motherHomeAddress.line1)
+      this.props.change('father.homeAddress.suburb', motherHomeAddress.suburb)
+      this.props.change('father.homeAddress.line2', motherHomeAddress.line2)
     }
   }
 
@@ -182,6 +192,12 @@ class FatherDetailsForm extends Component {
         <fieldset>
           <legend>Home address</legend>
           <div className="input-groups">
+            <Field
+              name="parentSameAddress"
+              label="Same as mother's"
+              component={renderCheckbox}
+              onChange={this.onParentSameAddressChange}
+            />
             <Field
               name="father.homeAddress.line1"
               component={renderPlacesAutocomplete}
@@ -409,6 +425,7 @@ class FatherDetailsForm extends Component {
 }
 
 FatherDetailsForm.propTypes = {
+  motherHomeAddress: PropTypes.object,
   ethnicGroups: PropTypes.array,
   isCitizen: PropTypes.string,
   isNZRealmResident: PropTypes.string,
@@ -443,6 +460,7 @@ FatherDetailsForm = reduxForm({
 const selector = formValueSelector('registration')
 FatherDetailsForm = connect(
   state => ({
+    motherHomeAddress: selector(state, 'mother.homeAddress'),
     ethnicGroups: selector(state, 'father.ethnicGroups'),
     isCitizen: selector(state, 'father.isCitizen'),
     isPermanentResident: selector(state, 'father.isPermanentResident'),

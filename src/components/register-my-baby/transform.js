@@ -86,7 +86,6 @@ export const transform = data => {
   update(transformedData, 'mother.isCitizen', yesNoToBoolean)
   update(transformedData, 'father.isCitizen', yesNoToBoolean)
   update(transformedData, 'fatherKnown', yesNoToBoolean)
-  update(transformedData, 'parentSameAddress', yesNoToBoolean)
   update(transformedData, 'ird.applyForNumber', yesNoToBoolean)
   update(transformedData, 'ird.numberByEmail', yesNoToBoolean)
   update(transformedData, 'msd.notify', yesNoToBoolean)
@@ -105,6 +104,8 @@ export const transform = data => {
   unset(transformedData.certificateOrder, 'deliveryAddressType')
 
   transformFrontendFieldToServerField(transformedData)
+
+  unset(transformedData, 'parentSameAddress')
 
   return transformedData
 }
