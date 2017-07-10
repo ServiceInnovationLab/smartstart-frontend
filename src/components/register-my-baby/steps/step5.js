@@ -75,7 +75,15 @@ const validate = (values) => {
 
 class IrdMsdSharingForm extends Component {
   render() {
-    const { applyForNumber, deliveryAddress, numberByEmail, msdNotify, handleSubmit, submitting } = this.props
+    const {
+      applyForNumber, deliveryAddress, numberByEmail, msdNotify, fatherKnown,
+      assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting
+    } = this.props
+
+    const hideFatherOption = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
+    const deliveryAddresses = hideFatherOption ?
+      irdDeliveryAddresses.filter(opt => opt.value !== 'fatherAddress') :
+      irdDeliveryAddresses
 
     return (
       <div>
@@ -134,7 +142,7 @@ class IrdMsdSharingForm extends Component {
               <Field
                 name="ird.deliveryAddress"
                 component={renderSelect}
-                options={irdDeliveryAddresses}
+                options={deliveryAddresses}
                 label={makeMandatoryLabel("Please choose an address Inland Revenue should post your child's IRD number to")}
                 validate={[requiredWithMessage(REQUIRE_IRD_ADDRESS)]}
               />
@@ -248,6 +256,9 @@ IrdMsdSharingForm.propTypes = {
   deliveryAddress: PropTypes.string,
   numberByEmail: PropTypes.string,
   msdNotify: PropTypes.bool,
+  fatherKnown: PropTypes.string,
+  assistedHumanReproduction: PropTypes.string,
+  assistedHumanReproductionSpermDonor: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
   isReviewing: PropTypes.bool,
@@ -272,7 +283,10 @@ IrdMsdSharingForm = connect(
     applyForNumber: selector(state, 'ird.applyForNumber'),
     deliveryAddress: selector(state, 'ird.deliveryAddress'),
     numberByEmail: selector(state, 'ird.numberByEmail'),
-    msdNotify: selector(state, 'msd.notify')
+    msdNotify: selector(state, 'msd.notify'),
+    fatherKnown: selector(state, 'fatherKnown'),
+    assistedHumanReproduction: selector(state, 'assistedHumanReproduction'),
+    assistedHumanReproductionSpermDonor: selector(state, 'assistedHumanReproductionSpermDonor'),
   })
 )(IrdMsdSharingForm)
 

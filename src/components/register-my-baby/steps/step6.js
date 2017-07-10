@@ -100,11 +100,19 @@ class OrderCertificatesForm extends Component {
   }
 
   render() {
-    const { orderBirthCertificate, productCode, quantity, courierDelivery, handleSubmit, submitting } = this.props
+    const {
+      orderBirthCertificate, productCode, quantity, courierDelivery, fatherKnown,
+      assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting
+    } = this.props
     const product = productCode ? find(productOptions, { value: productCode }) : null
     const previewImage = product ? product.imageSrc : '/assets/img/certificates/birth-certificate-preview.png'
     const deliveryPrice = courierDelivery === 'standard' ? 0 : 5
     const totalPrice = (product && quantity) ? (product.price * quantity + deliveryPrice) : 0
+
+    const hideFatherOption = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
+    const deliveryAddresses = hideFatherOption ?
+    birthCertificateDeliveryAddresses.filter(opt => opt.value !== 'father') :
+    birthCertificateDeliveryAddresses
 
     return (
       <div id="step-6">
@@ -201,7 +209,7 @@ class OrderCertificatesForm extends Component {
                 name="certificateOrder.deliveryAddressType"
                 component={renderRadioGroup}
                 label={makeMandatoryLabel("What address should we deliver to?")}
-                options={birthCertificateDeliveryAddresses}
+                options={deliveryAddresses}
                 onChange={this.onDeliveryAddressTypeChange}
                 validate={[required]}
               />
@@ -286,6 +294,9 @@ OrderCertificatesForm.propTypes = {
   fatherAddressLine1: PropTypes.string,
   fatherAddressLine2: PropTypes.string,
   fatherAddressSuburb: PropTypes.string,
+  fatherKnown: PropTypes.string,
+  assistedHumanReproduction: PropTypes.string,
+  assistedHumanReproductionSpermDonor: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
   isReviewing: PropTypes.bool,
@@ -319,7 +330,10 @@ OrderCertificatesForm = connect(
     motherAddressSuburb: selector(state, 'mother.homeAddress.suburb'),
     fatherAddressLine1: selector(state, 'father.homeAddress.line1'),
     fatherAddressLine2: selector(state, 'father.homeAddress.line2'),
-    fatherAddressSuburb: selector(state, 'father.homeAddress.suburb')
+    fatherAddressSuburb: selector(state, 'father.homeAddress.suburb'),
+    fatherKnown: selector(state, 'fatherKnown'),
+    assistedHumanReproduction: selector(state, 'assistedHumanReproduction'),
+    assistedHumanReproductionSpermDonor: selector(state, 'assistedHumanReproductionSpermDonor'),
   })
 )(OrderCertificatesForm)
 
