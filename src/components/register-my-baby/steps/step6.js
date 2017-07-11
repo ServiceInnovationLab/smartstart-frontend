@@ -21,6 +21,7 @@ import {
   REQUIRE_MESSAGE_POSTCODE,
 } from '../validation-messages'
 import { required, requiredWithMessage, email } from '../validate'
+import { maxLength } from '../normalize'
 import './step6.scss'
 
 const PRODUCT_OPTIONS_WITH_PRICE = productOptions.map(product => ({
@@ -74,9 +75,9 @@ class OrderCertificatesForm extends Component {
       ''
     )
 
-    this.props.change('certificateOrder.deliveryAddress.line1', streetAddress)
-    this.props.change('certificateOrder.deliveryAddress.suburb', suburb)
-    this.props.change('certificateOrder.deliveryAddress.line2', `${town} ${postalCode}`)
+    this.props.change('certificateOrder.deliveryAddress.line1', maxLength(45)(streetAddress))
+    this.props.change('certificateOrder.deliveryAddress.suburb', maxLength(30)(suburb))
+    this.props.change('certificateOrder.deliveryAddress.line2', maxLength(30)(`${town} ${postalCode}`))
   }
 
   onDeliveryAddressTypeChange(e, newVal) {
@@ -204,6 +205,7 @@ class OrderCertificatesForm extends Component {
                 label={makeMandatoryLabel("Delivery name")}
                 instructionText="You may address the certificate to your baby if you wish."
                 validate={[required]}
+                normalize={maxLength(100)}
               />
               <Field
                 name="certificateOrder.deliveryAddressType"
@@ -224,12 +226,14 @@ class OrderCertificatesForm extends Component {
                     label={makeMandatoryLabel("Street number and Street name")}
                     onPlaceSelect={this.onPlaceSelect}
                     validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
+                    normalize={maxLength(45)}
                   />
                   <Field
                     name="certificateOrder.deliveryAddress.suburb"
                     component={renderField}
                     type="text"
                     label="Suburb"
+                    normalize={maxLength(30)}
                   />
                   <Field
                     name="certificateOrder.deliveryAddress.line2"
@@ -237,6 +241,7 @@ class OrderCertificatesForm extends Component {
                     type="text"
                     label={makeMandatoryLabel("Town/City and Postcode")}
                     validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
+                    normalize={maxLength(30)}
                   />
                 </div>
               </fieldset>
@@ -259,6 +264,7 @@ class OrderCertificatesForm extends Component {
                 type="email"
                 label="Email address (for a tax receipt)"
                 validate={[email]}
+                normalize={maxLength(60)}
               />
 
               <div className="informative-text">

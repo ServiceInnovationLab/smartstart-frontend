@@ -54,6 +54,7 @@ import forOwn from 'lodash/forOwn'
 
 export const FRONTEND_FIELD_TO_SERVER_FIELD = {
   'birthPlace.home.suburb': 'birthPlace.home.line2',
+  'birthPlace.home.line2': 'birthPlace.home.line3',
   'certificateOrder.deliveryAddress.line2': 'certificateOrder.deliveryAddress.suburbTownPostCode',
   'certificateOrder.deliveryAddress.suburb': 'certificateOrder.deliveryAddress.line2',
   'child.ethnicityDescription': 'child.ethnicGroups.other',

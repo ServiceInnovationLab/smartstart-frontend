@@ -106,9 +106,9 @@ class ChildDetailsForm extends Component {
       ''
     )
 
-    this.props.change('birthPlace.home.line1', streetAddress)
-    this.props.change('birthPlace.home.suburb', suburb)
-    this.props.change('birthPlace.home.line2', `${town} ${postalCode}`)
+    this.props.change('birthPlace.home.line1', maxLength(33)(streetAddress))
+    this.props.change('birthPlace.home.suburb', maxLength(20)(suburb))
+    this.props.change('birthPlace.home.line2', maxLength(20)(`${town} ${postalCode}`))
   }
 
   render() {
@@ -279,12 +279,14 @@ class ChildDetailsForm extends Component {
                 label={makeMandatoryLabel("Street number and Street name")}
                 onPlaceSelect={this.onPlaceSelect}
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
+                normalize={maxLength(33)}
               />
               <Field
                 name="birthPlace.home.suburb"
                 component={renderField}
                 type="text"
                 label="Suburb"
+                normalize={maxLength(20)}
               />
               <Field
                 name="birthPlace.home.line2"
@@ -292,6 +294,7 @@ class ChildDetailsForm extends Component {
                 type="text"
                 label={makeMandatoryLabel("Town/City and Postcode")}
                 validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
+                normalize={maxLength(20)}
               />
             </div>
           }
@@ -305,6 +308,7 @@ class ChildDetailsForm extends Component {
                 instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
                 ariaLabel={makeMandatoryAriaLabel("State other birth place")}
                 validate={[required]}
+                normalize={maxLength(75)}
               />
             </div>
           }

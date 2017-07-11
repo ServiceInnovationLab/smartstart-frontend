@@ -16,6 +16,7 @@ import renderCheckbox from '../fields/render-checkbox'
 import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import CitizenshipQuestions from '../citizenship-questions'
 import { required, requiredWithMessage, number, email, maxLength30, validDate } from '../validate'
+import { maxLength } from '../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
@@ -102,9 +103,9 @@ class FatherDetailsForm extends Component {
       ''
     )
 
-    this.props.change('father.homeAddress.line1', streetAddress)
-    this.props.change('father.homeAddress.suburb', suburb)
-    this.props.change('father.homeAddress.line2', `${town} ${postalCode}`)
+    this.props.change('father.homeAddress.line1', maxLength(50)(streetAddress))
+    this.props.change('father.homeAddress.suburb', maxLength(25)(suburb))
+    this.props.change('father.homeAddress.line2', maxLength(75)(`${town} ${postalCode}`))
   }
 
   handleAssistedHumanReproductionChange(e, newVal) {
@@ -128,6 +129,7 @@ class FatherDetailsForm extends Component {
           label={makeMandatoryLabel("All first name(s) father is currently known by")}
           instructionText="Enter all current first and given names. If any differ from names given at birth, those names can be entered below."
           validate={[required]}
+          normalize={maxLength(75)}
         />
 
         <Field
@@ -137,6 +139,7 @@ class FatherDetailsForm extends Component {
           label={makeMandatoryLabel("Surname of father (currently known by)")}
           instructionText="Enter all current surnames or family names. If any differ from names at birth, those names can be entered below."
           validate={[required]}
+          normalize={maxLength(75)}
         />
 
         <Field
@@ -145,6 +148,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="All first name(s) of father at birth (if different from current name)"
           instructionText="Enter the name given at birth (if it differs from the above). If adopted, please enter the name/s given when adopted not before adoption (if known)"
+          normalize={maxLength(75)}
         />
 
         <Field
@@ -153,6 +157,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="Surname of father at birth (if different from current name)"
           instructionText="Enter the surname or family name at birth (if it differs). If adopted, please enter the surname when adopted not before adoption (if known)"
+          normalize={maxLength(75)}
         />
 
         <Field
@@ -163,6 +168,7 @@ class FatherDetailsForm extends Component {
           placeholder="e.g. Teacher"
           instructionText="Please enter the father's type of occupation not the name of the father's employer"
           validate={[required]}
+          normalize={maxLength(60)}
         />
 
         <Field
@@ -179,6 +185,7 @@ class FatherDetailsForm extends Component {
           label={makeMandatoryLabel("Place of Birth - City/town")}
           placeholder="e.g. Auckland"
           validate={[required]}
+          normalize={maxLength(40)}
         />
 
         <Field
@@ -187,6 +194,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="Place of Birth - Country (if born overseas)"
           placeholder="e.g. Australia"
+          normalize={maxLength(19)}
         />
 
         <fieldset>
@@ -205,12 +213,14 @@ class FatherDetailsForm extends Component {
               label={makeMandatoryLabel("Street number and Street name")}
               onPlaceSelect={this.onPlaceSelect}
               validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
+              normalize={maxLength(50)}
             />
             <Field
               name="father.homeAddress.suburb"
               component={renderField}
               type="text"
               label="Suburb"
+              normalize={maxLength(25)}
             />
             <Field
               name="father.homeAddress.line2"
@@ -218,6 +228,7 @@ class FatherDetailsForm extends Component {
               type="text"
               label={makeMandatoryLabel("Town/City and Postcode")}
               validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
+              normalize={maxLength(75)}
             />
           </div>
         </fieldset>
@@ -266,6 +277,7 @@ class FatherDetailsForm extends Component {
           label="Daytime contact phone number"
           instructionText="Please include the area code or suffix"
           validate={[number]}
+          normalize={maxLength(20)}
         />
 
         <Field
@@ -275,6 +287,7 @@ class FatherDetailsForm extends Component {
           label="Alternative contact phone number"
           instructionText="Please include the area code or suffix"
           validate={[number]}
+          normalize={maxLength(20)}
         />
 
         <Field
@@ -284,6 +297,7 @@ class FatherDetailsForm extends Component {
           label="Email address"
           instructionText=""
           validate={[email]}
+          normalize={maxLength(60)}
         />
       </div>
     )

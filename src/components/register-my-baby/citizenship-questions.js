@@ -8,6 +8,7 @@ import renderField from './fields/render-field'
 import renderWarning from './fields/render-warning'
 import renderRadioGroup from './fields/render-radio-group'
 import renderSelect from './fields/render-select'
+import { maxLength } from './normalize'
 
 import {
   yesNo as yesNoOptions,
@@ -142,6 +143,7 @@ class CitizenshipQuestions extends Component {
             label={makeMandatoryLabel(`Enter the passport/travel document number the ${target} entered New Zealand on:`)}
             type="text"
             validate={[required]}
+            normalize={maxLength(9)}
           />
         }
 
@@ -173,6 +175,7 @@ class CitizenshipQuestions extends Component {
             label={makeMandatoryLabel(`Enter the ${target}'s New Zealand passport number`)}
             type="text"
             validate={[required]}
+            normalize={maxLength(9)}
           />
         }
       </div>

@@ -1,3 +1,3 @@
-export const maxLength = (max) => (value, previousVal) => {
-  return value.length <= max ? value : previousVal
+export const maxLength = (max) => (value) => {
+  return value.length <= max ? value : value.substring(0, max)
 }
