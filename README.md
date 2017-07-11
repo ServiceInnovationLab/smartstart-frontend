@@ -15,7 +15,7 @@ Note: Node is not required in production but it is required to make the build.
   - assets `static files that get copied over unchanged`
   - components `react components`
   - containers `special parent react component that manages redux setup`
-  - error-pages `standalone html error pages which are served directly by nginx`
+  - static-pages `static html pages which are served directly by nginx`
   - layouts `page structures plus the header and footer`
   - store `redux data store setup and reducers`
   - index.html `basic html page that webpack writes the assets into`
