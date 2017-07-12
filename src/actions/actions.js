@@ -457,7 +457,6 @@ export function saveNewEmail(email) {
   return (dispatch, getState) => {
     const isLoggedIn = getState().personalisationActions.isLoggedIn
 
-    // save to a cookie or backend depending on login state
     if (isLoggedIn) {
       // send the info to the backend - no dispatch as we don't need the result or to put up a spinner
       return fetch('/api/emailaddresses/', {

@@ -24,12 +24,18 @@ export class MyProfile extends Component {
 
   componentWillMount () {
     this.setFilterValuesFromStore(this.props.personalisationValues)
-    this.setEmailValue()
+
+    if (this.props.isLoggedIn) {
+      this.setEmailValue()
+    }
   }
 
   componentWillReceiveProps (nextProps) {
     this.setFilterValuesFromStore(nextProps.personalisationValues)
-    this.setEmailValue()
+
+    if (this.props.isLoggedIn) {
+      this.setEmailValue()
+    }
   }
 
   setEmailValue() {
@@ -39,7 +45,7 @@ export class MyProfile extends Component {
     this.props.dispatch(checkPendingEmails()).then(emails => {
       if (emails.length > 0) {
         this.setState({ newEmailFieldValue: emails[0].email })
-        // display message to user to remind that he has unconfirmed email
+        // display message to user to remind that they have unconfirmed email
         this.setState({ displayPendingEmailNotification: true })
       } else {
         this.setState({ newEmailFieldValue: this.props.personalisationValues.email })
@@ -48,7 +54,7 @@ export class MyProfile extends Component {
   }
 
   setFilterValuesFromStore (settingsData) {
-    let {settings, email } = settingsData
+    let { settings, email } = settingsData
 
     if (settings) {
       // due date
@@ -96,6 +102,8 @@ export class MyProfile extends Component {
         this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
       }
     } else {
+      // it's safari and it didn't validate
+      // #37500 should we display the error manually? or use a polyfill? - deferred for now
       formIsValid = false
     }
 
@@ -122,19 +130,18 @@ export class MyProfile extends Component {
 
     // send request
     if (formIsValid) {
-      if (email !== newEmailFieldValue && newEmailFieldValue !== "") {
-          // track the event
-          let piwikEvent = {
-            'category': 'Profile Data',
-            'action': 'submitted',
-            'name': 'New Email'
-          }
-          this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
+      if (email !== newEmailFieldValue && newEmailFieldValue !== '') {
+        // track the event
+        let piwikEvent = {
+          'category': 'Profile Data',
+          'action': 'submitted',
+          'name': 'New Email'
+        }
+        this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
 
-          // submit new email
-          this.props.dispatch(saveNewEmail(newEmailFieldValue))
+        // submit new email
+        this.props.dispatch(saveNewEmail(newEmailFieldValue))
       }
-
       this.props.dispatch(savePersonalisationValues(valuesToSave))
       this.props.profilePaneClose()
     }
@@ -143,29 +150,18 @@ export class MyProfile extends Component {
   dueDateValidate () {
     const field = this.dueDateField
     const fieldValue = this.state.dueDateFieldValue
-    // if subscribed, email is required
-    const isDateValid = isValidDate(fieldValue, this.state.subscribedFieldValue)
+    // if subscribed, due date is required
+    let isDateValid, message
 
-    if (isDateValid) {
-      this.setCustomValidity(field, '')
+    if (this.state.subscribedFieldValue && !fieldValue) {
+      isDateValid = false
+      message = 'Please enter a due date to receive reminders'
     } else {
-      this.setCustomValidity(field, 'Please use the format yyyy-mm-dd')
-    }
-
-    let message
-
-    if (isDateValid) {
-      message = ''
-    } else {
-      if (this.state.subscribedFieldValue && fieldValue === "") {
-        message = 'Please enter a due date to receive reminders'
-      } else {
-        message = 'Please use the format yyyy-mm-dd'
-      }
+      isDateValid = fieldValue === '' || isValidDate(fieldValue)
+      message = isDateValid ? '' : 'Please use the format yyyy-mm-dd'
     }
 
     this.setCustomValidity(field, message)
-
     return isDateValid // so we can do the manual check for safari
   }
 
@@ -180,7 +176,7 @@ export class MyProfile extends Component {
     if (emailIsValid) {
       message = ''
     } else {
-      if (fieldValue === "") {
+      if (fieldValue === '') {
         message = 'Please enter an email address'
       } else {
         message = 'Please enter a valid email address'
@@ -242,7 +238,7 @@ export class MyProfile extends Component {
           <div className="signup-section">
             <h4>Sign-up to reminders</h4>
             <p>Sign-up to receive reminders from the SmartStart To Do list. A reminder is sent to you at the start of each pregnancy and new baby phase. You can unsubscribe here at any time.</p>
-            {!this.props.isLoggedIn ? <div>Please login to sign-up or update your details.</div> :
+            {!this.props.isLoggedIn ? <p>Please login to sign-up or update your details.</p> :
               <div>
                 <label>
                   <input
@@ -268,7 +264,7 @@ export class MyProfile extends Component {
 
                 <div className={this.state.displayPendingEmailNotification ? 'success-message' : 'hidden'}>
                   You need to confirm your email address before you can receive reminders to this address.
-                  We will have sent you an email with a confirmation link
+                  We will have sent you an email with a confirmation link.
                 </div>
               </div>
             }

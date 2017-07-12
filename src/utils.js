@@ -26,13 +26,8 @@ export function checkStatus (response) {
 //
 // Arguments:
 // 'dateString' (required) - the string to be converted
-export function isValidDate (dateString, required) {
+export function isValidDate (dateString) {
   let dateObject = new Date(dateString)
-
-  if (!required && dateString === '') {
-    return true
-  }
-
   return !isNaN(dateObject.getTime())
 }
 

@@ -1,7 +1,7 @@
 @import 'variables';
 
 .signup-section {
-  border-top: 1px solid #8B949D;
+  border-top: 1px solid $settings-border-color;
   input[type='email'] {
     width: 100%;
   }
