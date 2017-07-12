@@ -102,11 +102,9 @@ export const transform = data => {
 
   transformHart(transformedData)
 
-  unset(transformedData.certificateOrder, 'deliveryAddressType')
-
   transformFrontendFieldToServerField(transformedData)
 
-  unset(transformedData, 'parentSameAddress')
+  cleanup(transformedData)
 
   return transformedData
 }
@@ -150,10 +148,9 @@ const transformEthnicGroups = (target = {}) => {
     ethnicGroupsObj[key] = (target.ethnicGroups || []).indexOf(key) > -1
   )
 
-  ethnicGroupsObj.other = target.ethnicityDescription || ''
-
-  unset(target, 'ethnicityDescription')
   set(target, 'ethnicGroups', ethnicGroupsObj)
+
+  // ethnicGroups.other will be transform in transformFrontendFieldToServerField
 
   return target
 }
@@ -218,3 +215,43 @@ const transformFrontendFieldToServerField = data => {
   return data
 }
 
+
+const cleanup = data => {
+  const birthPlaceCategory = get(data, 'birthPlace.category')
+  const oneOfMultiple = get(data, 'child.oneOfMultiple')
+  const fatherKnown = get(data, 'fatherKnown')
+  const orderBirthCertificate = get(data, 'orderBirthCertificate')
+
+  if (birthPlaceCategory === 'home') {
+    unset(data, 'birthPlace.hospital')
+    unset(data, 'birthPlace.other')
+  } else if (birthPlaceCategory === 'hospital') {
+    unset(data, 'birthPlace.home')
+    unset(data, 'birthPlace.other')
+  } else {
+    unset(data, 'birthPlace.hospital')
+    unset(data, 'birthPlace.home')
+  }
+
+  if (!oneOfMultiple) {
+    unset(data, 'child.birthOrderNumber')
+    unset(data, 'child.birthOrderTotal')
+  }
+
+  if (!fatherKnown) {
+    unset(data, 'father')
+    unset(data, 'parentRelationship')
+    unset(data, 'parentRelationshipDate')
+    unset(data, 'parentRelationshipPlace')
+    unset(data, 'siblings')
+  }
+
+  if (orderBirthCertificate !== 'yes') {
+    unset(data, 'certificateOrder')
+  }
+
+  unset(data, 'otherChildren')
+  unset(data, 'certificateOrder.deliveryAddressType')
+  unset(data, 'parentSameAddress')
+  unset(data, 'orderBirthCertificate')
+}

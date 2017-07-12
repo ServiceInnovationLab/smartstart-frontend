@@ -7,7 +7,7 @@ import renderFieldReview from '../../fields/render-review-field'
 import renderReviewValidation from '../../fields/render-review-validation'
 import { formatAddress, formatDate } from './utils'
 import {
-  sexs,
+  sexes,
   yesNo,
   yesNoNotSure,
   ethnicGroups,
@@ -69,7 +69,7 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
       label="Sex of child"
       name="child.sex"
       component={renderFieldReview}
-      valueRenderer={getOptionDisplay(sexs)}
+      valueRenderer={getOptionDisplay(sexes)}
       section="child-details"
       onEdit={onEdit}
     />

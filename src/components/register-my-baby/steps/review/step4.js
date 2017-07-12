@@ -5,7 +5,7 @@ import renderFieldReview from '../../fields/render-review-field'
 import renderSubFieldReview from '../../fields/render-review-subfield'
 import { formatDate } from './utils'
 import {
-  sexs,
+  sexes,
   childStatuses,
   parentRelationships,
   getOptionDisplay
@@ -44,7 +44,7 @@ const renderStep4Review = ({ formState, onEdit }) => {
                 label={`Sex of child ${idx + 1}`}
                 name={`siblings.[${idx}].sex`}
                 component={renderSubFieldReview}
-                valueRenderer={getOptionDisplay(sexs)}
+                valueRenderer={getOptionDisplay(sexes)}
                 section="parents-relationship"
               />
               <Field

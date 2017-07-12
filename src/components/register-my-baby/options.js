@@ -11,9 +11,15 @@ export const yesNoNotSure = [
   { value: 'notsure', display: 'Not sure'}
 ]
 
-export const sexs = [
+export const sexes = [
   { value: 'male', display: 'Male'},
   { value: 'female', display: 'Female'}
+]
+
+export const birthPlaceCategories = [
+  { value: 'hospital', display: 'Hospital'},
+  { value: 'home', display: 'Home'},
+  { value: 'other', display: 'Other'}
 ]
 
 export const ethnicGroups = [

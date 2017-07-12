@@ -60,6 +60,7 @@ describe('Form Data Transformation', () => {
 
     test('format father.dateOfBirth', () => {
       const transformedData = transform({
+        fatherKnown: 'yes',
         father: {
           dateOfBirth: moment('1989-06-23')
         }
@@ -70,6 +71,7 @@ describe('Form Data Transformation', () => {
 
     test('format siblings dateOfBirth', () => {
       const transformedData = transform({
+        fatherKnown: 'yes',
         siblings: [
           { dateOfBirth: moment('2000-01-22') },
           { dateOfBirth: moment('2005-02-09') },
@@ -84,6 +86,7 @@ describe('Form Data Transformation', () => {
 
     test('format parentRelationshipDate', () => {
       const transformedData = transform({
+        fatherKnown: 'yes',
         parentRelationshipDate: moment('2000-06-23')
       });
 
@@ -136,6 +139,7 @@ describe('Form Data Transformation', () => {
 
     test('transform father\'s ethnicGroups', () => {
       const transformedData = transform({
+        fatherKnown: 'yes',
         father: {
           ethnicGroups: ['other'],
           ethnicityDescription: 'foobar'
@@ -212,11 +216,13 @@ describe('Form Data Transformation', () => {
     })
     test('father.isCitizen', () => {
       let transformedData = transform({
+        fatherKnown: 'yes',
         father: { isCitizen: 'yes' }
       })
       expect(transformedData.father.isCitizen).toEqual(true)
 
       transformedData = transform({
+        fatherKnown: 'yes',
         father: { isCitizen: 'no' }
       })
       expect(transformedData.father.isCitizen).toEqual(false)
@@ -252,9 +258,16 @@ describe('Form Data Transformation', () => {
       expect(transformedData.declarationMade).toEqual(false)
     })
     test('certificateOrder.courierDelivery', () => {
-      let transformedData = transform({ certificateOrder: { courierDelivery: 'yes' } })
+      let transformedData = transform({
+        orderBirthCertificate: 'yes',
+        certificateOrder: { courierDelivery: 'yes' }
+      })
       expect(transformedData.certificateOrder.courierDelivery).toEqual(true)
-      transformedData = transform({ certificateOrder: { courierDelivery: 'no' } })
+
+      transformedData = transform({
+        orderBirthCertificate: 'yes',
+        certificateOrder: { courierDelivery: 'no' }
+      })
       expect(transformedData.certificateOrder.courierDelivery).toEqual(false)
     })
   })
@@ -357,6 +370,7 @@ describe('Form Data Transformation', () => {
   describe('Certificate order', () => {
     test('remove helper property: certificateOrder.deliveryAddressType', () => {
       let transformedData = transform({
+        orderBirthCertificate: 'yes',
         certificateOrder: {
           deliveryAddressType: 'mother'
         }
@@ -366,6 +380,7 @@ describe('Form Data Transformation', () => {
 
     test('copy deliveryAddress.line2 to deliveryAddress.suburbTownPostCode', () => {
       let transformedData = transform({
+        orderBirthCertificate: 'yes',
         certificateOrder: {
           deliveryAddress: {
             line1: 'street address',
@@ -378,6 +393,7 @@ describe('Form Data Transformation', () => {
     })
     test('copy deliveryAddress.suburb to deliveryAddress.line2', () => {
       let transformedData = transform({
+        orderBirthCertificate: 'yes',
         certificateOrder: {
           deliveryAddress: {
             line1: 'street address',
@@ -390,6 +406,7 @@ describe('Form Data Transformation', () => {
     })
     test('should remove deliveryAddress.suburb property', () => {
       let transformedData = transform({
+        orderBirthCertificate: 'yes',
         certificateOrder: {
           deliveryAddress: {
             line1: 'street address',
@@ -406,6 +423,106 @@ describe('Form Data Transformation', () => {
     test('remove parentSameAddress', () => {
       let transformedData = transform({ parentSameAddress: 'yes' })
       expect(keys(transformedData).indexOf('parentSameAddress')).toEqual(-1)
+    })
+    test('remove otherChildren', () => {
+      let transformedData = transform({ otherChildren: 1 })
+      expect(keys(transformedData).indexOf('otherChildren')).toEqual(-1)
+    })
+  })
+
+  describe('Remove conditional fields', () => {
+    describe('birthPlace', () => {
+      test('when birthPlace.category is hospital, home and other must not be sent', () => {
+        let transformedData = transform({
+          birthPlace: {
+            category: 'hospital',
+            hospital: 'X',
+            home: {
+              line1: 'line1',
+              line2: 'line2',
+              suburb: 'suburb'
+            },
+            other: 'foo'
+          }
+        })
+        expect(keys(transformedData.birthPlace).indexOf('home')).toEqual(-1)
+        expect(keys(transformedData.birthPlace).indexOf('hospital')).toBeGreaterThan(-1)
+        expect(keys(transformedData.birthPlace).indexOf('other')).toEqual(-1)
+      })
+      test('when birthPlace.category is home, hospital and other must not be sent', () => {
+        let transformedData = transform({
+          birthPlace: {
+            category: 'home',
+            hospital: 'X',
+            home: {
+              line1: 'line1',
+              line2: 'line2',
+              suburb: 'suburb'
+            },
+            other: 'foo'
+          }
+        })
+
+        expect(keys(transformedData.birthPlace).indexOf('home')).toBeGreaterThan(-1)
+        expect(keys(transformedData.birthPlace).indexOf('hospital')).toEqual(-1)
+        expect(keys(transformedData.birthPlace).indexOf('other')).toEqual(-1)
+      })
+      test('when birthPlace.category is other, home and hospital must not be sent', () => {
+        let transformedData = transform({
+          birthPlace: {
+            category: 'other',
+            hospital: 'X',
+            home: {
+              line1: 'line1',
+              line2: 'line2',
+              suburb: 'suburb'
+            },
+            other: 'foo'
+          }
+        })
+
+        expect(keys(transformedData.birthPlace).indexOf('home')).toEqual(-1)
+        expect(keys(transformedData.birthPlace).indexOf('hospital')).toEqual(-1)
+        expect(keys(transformedData.birthPlace).indexOf('other')).toBeGreaterThan(-1)
+      })
+    })
+
+
+    describe('oneOfMultiple', () => {
+      test('should not send birthOrderNumber & birthOrderTotal when not one of multiple', () => {
+        let transformedData = transform({
+          child: {
+            oneOfMultiple: 'no',
+            multipleBirthOrder: '1 of 2'
+          }
+        })
+        expect(keys(transformedData.child).indexOf('birthOrderNumber')).toEqual(-1)
+        expect(keys(transformedData.child).indexOf('birthOrderTotal')).toEqual(-1)
+      })
+    })
+
+    describe('father', () => {
+      test('must not send father when father is not known', () => {
+        let transformedData = transform({
+          fatherKnown: 'no',
+          father: {
+            firstNames: 'firstNames'
+          }
+        })
+        expect(keys(transformedData).indexOf('father')).toEqual(-1)
+      })
+    })
+
+    describe('certificateOrder', () => {
+      test('must not send certificateOrder when not ordering a birth certificate', () => {
+        let transformedData = transform({
+          orderBirthCertificate: 'no',
+          certificateOrder: {
+            deliveryAddressType: 'mother'
+          }
+        })
+        expect(keys(transformedData).indexOf('certificateOrder')).toEqual(-1)
+      })
     })
   })
 })

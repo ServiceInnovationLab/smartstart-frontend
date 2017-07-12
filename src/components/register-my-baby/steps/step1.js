@@ -20,7 +20,8 @@ import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
   yesNoNotSure as yesNoNotSureOptions,
-  sexs as sexOptions
+  sexes as sexOptions,
+  birthPlaceCategories as birthPlaceCategoryOptions
 } from '../options'
 import {
   REQUIRE_MESSAGE,
@@ -243,11 +244,7 @@ class ChildDetailsForm extends Component {
             name="birthPlace.category"
             component={renderRadioGroup}
             label={makeMandatoryLabel("Where was the child born?")}
-            options={[
-              { value: 'hospital', display: 'Hospital'},
-              { value: 'home', display: 'Home'},
-              { value: 'other', display: 'Other'}
-            ]}
+            options={birthPlaceCategoryOptions}
             onChange={this.onPlaceOfBirthChanged}
             validate={[required]}
           />
