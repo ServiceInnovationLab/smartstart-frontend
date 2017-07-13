@@ -15,7 +15,7 @@ import renderCheckboxGroup from '../fields/render-checkbox-group'
 import renderCheckbox from '../fields/render-checkbox'
 import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import CitizenshipQuestions from '../citizenship-questions'
-import { required, requiredWithMessage, number, email, maxLength30, validDate } from '../validate'
+import { required, requiredWithMessage, email, maxLength30, validDate, validAlpha, validCharStrict } from '../validate'
 import { maxLength } from '../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
@@ -128,7 +128,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label={makeMandatoryLabel("All first name(s) father is currently known by")}
           instructionText="Enter all current first and given names. If any differ from names given at birth, those names can be entered below."
-          validate={[required]}
+          validate={[required, validAlpha]}
           normalize={maxLength(75)}
         />
 
@@ -138,7 +138,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label={makeMandatoryLabel("Surname of father (currently known by)")}
           instructionText="Enter all current surnames or family names. If any differ from names at birth, those names can be entered below."
-          validate={[required]}
+          validate={[required, validAlpha]}
           normalize={maxLength(75)}
         />
 
@@ -148,6 +148,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="All first name(s) of father at birth (if different from current name)"
           instructionText="Enter the name given at birth (if it differs from the above). If adopted, please enter the name/s given when adopted not before adoption (if known)"
+          validate={[validAlpha]}
           normalize={maxLength(75)}
         />
 
@@ -157,6 +158,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="Surname of father at birth (if different from current name)"
           instructionText="Enter the surname or family name at birth (if it differs). If adopted, please enter the surname when adopted not before adoption (if known)"
+          validate={[validAlpha]}
           normalize={maxLength(75)}
         />
 
@@ -167,7 +169,7 @@ class FatherDetailsForm extends Component {
           label={makeMandatoryLabel("Usual occupation, profession or job of father")}
           placeholder="e.g. Teacher"
           instructionText="Please enter the father's type of occupation not the name of the father's employer"
-          validate={[required]}
+          validate={[required, validCharStrict]}
           normalize={maxLength(60)}
         />
 
@@ -184,7 +186,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label={makeMandatoryLabel("Place of Birth - City/town")}
           placeholder="e.g. Auckland"
-          validate={[required]}
+          validate={[required, validAlpha]}
           normalize={maxLength(40)}
         />
 
@@ -194,6 +196,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="Place of Birth - Country (if born overseas)"
           placeholder="e.g. Australia"
+          validate={[validAlpha]}
           normalize={maxLength(19)}
         />
 
@@ -260,7 +263,7 @@ class FatherDetailsForm extends Component {
               type="text"
               ariaLabel={makeMandatoryAriaLabel("State other ethnicity")}
               placeholder="Please describe the father’s ethnicity"
-              validate={[required, maxLength30]}
+              validate={[required, maxLength30, validCharStrict]}
             />
           </div>
         }
@@ -276,7 +279,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="Daytime contact phone number"
           instructionText="Please include the area code or suffix"
-          validate={[number]}
+          validate={[validCharStrict]}
           normalize={maxLength(20)}
         />
 
@@ -286,7 +289,7 @@ class FatherDetailsForm extends Component {
           type="text"
           label="Alternative contact phone number"
           instructionText="Please include the area code or suffix"
-          validate={[number]}
+          validate={[validCharStrict]}
           normalize={maxLength(20)}
         />
 

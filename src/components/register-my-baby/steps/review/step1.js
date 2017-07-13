@@ -13,7 +13,7 @@ import {
   ethnicGroups,
   getOptionDisplay
 } from '../../options'
-import { requiredWithMessage } from '../../validate'
+import { requiredWithMessage, validCharRelax } from '../../validate'
 import {
   REQUIRE_EXPLAINATION
 } from '../../validation-messages'
@@ -60,7 +60,7 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
           placeholder="Give your reasons for wanting this name for your child"
           name="child.nameExplaination"
           component={renderTextarea}
-          validate={[requiredWithMessage(REQUIRE_EXPLAINATION)]}
+          validate={[requiredWithMessage(REQUIRE_EXPLAINATION), validCharRelax]}
           normalize={maxLength(600)}
         />
       </div>

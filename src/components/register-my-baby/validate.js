@@ -1,11 +1,12 @@
 import moment from 'moment'
+import uniq from 'lodash/uniq'
 import { validateIrdNumber, validateMsdNumber } from './modulus-11'
 import {
   REQUIRE_MESSAGE,
   INVALID_EMAIL_MESSAGE,
   INVALID_NUMBER_MESSAGE,
   EXCEED_MAXLENGTH_MESSAGE,
-  INVALID_NAME_MESSAGE,
+  INVALID_CHAR_MESSAGE,
   INVALID_DATE_MESSAGE,
   INVALID_IRD_MESSAGE,
   INVALID_MSD_MESSAGE,
@@ -29,14 +30,19 @@ export const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
   INVALID_EMAIL_MESSAGE : undefined
 
-/*
- * Validation rules for name in BRO form:
- * - alpha characters only except hyphen and apostrophe
- * - Macrons allowed
- */
-export const validName = value =>
-  value && /[0-9,.":;_=+*~`!<>?|\!()@#$%^&*_+&*^$]/g.test(value) ?
-  INVALID_NAME_MESSAGE : undefined
+const invalidAlphaRegex = /[^a-zA-Z\-'ÀÁÂÃÄÅÇÈÉÊÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸàáâãäåçèéêëìíîïñòóðõöùúûüýÿĀāĒēĪīŌōŪū\s]/g
+const invalidCharStrictRegex = /[^a-zA-Z0-9\-'ÀÁÂÃÄÅÇÈÉÊÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸàáâãäåçèéêëìíîïñòóðõöùúûüýÿĀāĒēĪīŌōŪū\s]/g
+const invalidCharRelaxRegex = /[~!@#$%^&*()+={}[]|:;<>]+/g
+const invalidCharTest = (value, regex) => {
+  const invalidMatches = value ? value.match(regex) : []
+
+  if (invalidMatches && invalidMatches.length) {
+    return INVALID_CHAR_MESSAGE.replace('${invalid_matches}', uniq(invalidMatches).map(c => `'${c}'`).join(', '))
+  }
+}
+export const validAlpha = value => invalidCharTest(value, invalidAlphaRegex)
+export const validCharStrict = value => invalidCharTest(value, invalidCharStrictRegex)
+export const validCharRelax = value => invalidCharTest(value, invalidCharRelaxRegex)
 
 export const validDate = value => {
   if (!value) {

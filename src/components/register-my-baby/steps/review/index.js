@@ -17,6 +17,7 @@ import renderError from '../../fields/render-error'
 import {
   REQUIRE_DECLARATION
 } from '../../validation-messages'
+import { validCharRelax } from '../../validate'
 import { maxLength } from '../../normalize'
 import Spinner from '../../../spinner/spinner'
 import { validateOnly } from '../../submit'
@@ -112,6 +113,7 @@ class Review extends Component {
               label="Any other information you want to advise us of? (600 Characters)"
               name="otherInformation"
               component={renderTextarea}
+              validate={[validCharRelax]}
               normalize={maxLength(600)}
             />
 

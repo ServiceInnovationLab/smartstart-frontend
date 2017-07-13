@@ -14,7 +14,7 @@ import renderBirthOrderSelector from '../fields/render-birth-order-selector'
 import renderCheckboxGroup from '../fields/render-checkbox-group'
 import renderRadioGroup from '../fields/render-radio-group'
 import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
-import { required, requiredWithMessage, maxLength30, validName, validDate } from '../validate'
+import { required, requiredWithMessage, maxLength30, validAlpha, validDate, validCharStrict } from '../validate'
 import { maxLength } from '../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
@@ -167,7 +167,7 @@ class ChildDetailsForm extends Component {
             placeholder="First name"
             label={makeMandatoryLabel("Child's given name(s)")}
             instructionText="Enter the child's first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate"
-            validate={[requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validName]}
+            validate={[requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validAlpha]}
             normalize={maxLength(75)}
           />
 
@@ -177,7 +177,7 @@ class ChildDetailsForm extends Component {
             type="text"
             placeholder="E.g Smith"
             label={makeMandatoryLabel("Child's surname")}
-            validate={[required, validName]}
+            validate={[required, validAlpha]}
             normalize={maxLength(75)}
           />
 
@@ -307,7 +307,7 @@ class ChildDetailsForm extends Component {
                 type="text"
                 instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
                 ariaLabel={makeMandatoryAriaLabel("State other birth place")}
-                validate={[required]}
+                validate={[required, validCharStrict]}
                 normalize={maxLength(75)}
               />
             </div>
@@ -339,7 +339,7 @@ class ChildDetailsForm extends Component {
                 type="text"
                 ariaLabel={makeMandatoryAriaLabel("State other ethnicity")}
                 placeholder="Please describe the child’s ethnicity"
-                validate={[required, maxLength30]}
+                validate={[required, maxLength30, validCharStrict]}
               />
             </div>
           }

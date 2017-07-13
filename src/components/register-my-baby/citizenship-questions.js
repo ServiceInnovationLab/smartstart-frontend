@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { Field } from 'redux-form'
 import capitalize from 'lodash/capitalize'
 import makeMandatoryLabel from './hoc/make-mandatory-label'
-import { required } from './validate'
+import { required, validCharStrict } from './validate'
 import Accordion from './accordion'
 import renderField from './fields/render-field'
 import renderWarning from './fields/render-warning'
@@ -142,7 +142,7 @@ class CitizenshipQuestions extends Component {
             component={renderField}
             label={makeMandatoryLabel(`Enter the passport/travel document number the ${target} entered New Zealand on:`)}
             type="text"
-            validate={[required]}
+            validate={[required, validCharStrict]}
             normalize={maxLength(9)}
           />
         }
@@ -174,7 +174,7 @@ class CitizenshipQuestions extends Component {
             component={renderField}
             label={makeMandatoryLabel(`Enter the ${target}'s New Zealand passport number`)}
             type="text"
-            validate={[required]}
+            validate={[required, validCharStrict]}
             normalize={maxLength(9)}
           />
         }

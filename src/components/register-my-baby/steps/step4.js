@@ -9,7 +9,7 @@ import renderField from '../fields/render-field'
 import renderDatepicker from '../fields/render-datepicker'
 import renderSelect from '../fields/render-select'
 import renderRadioGroup from '../fields/render-radio-group'
-import { required, validDate } from '../validate'
+import { required, validDate, validCharStrict } from '../validate'
 import { maxLength } from '../normalize'
 import {
   childStatuses as childStatusOptions,
@@ -134,7 +134,7 @@ class ParentRelationshipForm extends Component {
                   type="text"
                   label={makeMandatoryLabel("Place of marriage/civil union")}
                   instructionText="City or town and Country (if ceremony was performed overseas)"
-                  validate={[required]}
+                  validate={[required, validCharStrict]}
                   normalize={maxLength(60)}
                 />
               </div>

@@ -20,7 +20,7 @@ import {
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE,
 } from '../validation-messages'
-import { required, requiredWithMessage, email } from '../validate'
+import { required, requiredWithMessage, email, validCharStrict } from '../validate'
 import { maxLength } from '../normalize'
 import './step6.scss'
 
@@ -204,7 +204,7 @@ class OrderCertificatesForm extends Component {
                 type="text"
                 label={makeMandatoryLabel("Delivery name")}
                 instructionText="You may address the certificate to your baby if you wish."
-                validate={[required]}
+                validate={[required, validCharStrict]}
                 normalize={maxLength(100)}
               />
               <Field
@@ -225,7 +225,7 @@ class OrderCertificatesForm extends Component {
                     type="text"
                     label={makeMandatoryLabel("Street number and Street name")}
                     onPlaceSelect={this.onPlaceSelect}
-                    validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
+                    validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET), validCharStrict]}
                     normalize={maxLength(45)}
                   />
                   <Field
@@ -233,6 +233,7 @@ class OrderCertificatesForm extends Component {
                     component={renderField}
                     type="text"
                     label="Suburb"
+                    validate={[validCharStrict]}
                     normalize={maxLength(30)}
                   />
                   <Field
@@ -240,7 +241,7 @@ class OrderCertificatesForm extends Component {
                     component={renderField}
                     type="text"
                     label={makeMandatoryLabel("Town/City and Postcode")}
-                    validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
+                    validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE), validCharStrict]}
                     normalize={maxLength(30)}
                   />
                 </div>
