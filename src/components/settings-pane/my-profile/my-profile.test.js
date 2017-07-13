@@ -14,8 +14,13 @@ beforeEach(() => {
     },
     dispatch: dispatchMock,
     shown: true,
+    isLoggedIn: false,
     profilePaneClose: function() {}
   }
+
+  dispatchMock.mockReturnValue({
+    then: () => {}
+  })
 })
 
 describe('initial render', () => {
@@ -29,8 +34,7 @@ describe('initial render', () => {
     expect(myProfile.find('input[type="date"]').length).toEqual(1)
   })
 
-  test('it has reset/cancel/update buttons', () => {
-    expect(myProfile.find('button.reset-button').length).toEqual(1)
+  test('it has cancel/update buttons', () => {
     expect(myProfile.find('button.cancel-button').length).toEqual(1)
     expect(myProfile.find('button[type="submit"]').length).toEqual(1)
   })
@@ -87,53 +91,45 @@ describe('date validation and submit', () => {
     )
   })
 
-  test('it should prevent submission if an invalid date is entered', () => {
-    myProfile.find('input[type="date"]').simulate('change', {target: {value: 'invalid date'}})
+  describe('annonymous user', () => {
 
-    // enzyme does not support event propagation, so simulating a click on the submit button does not work
-    // simulate the submit on the form directly
-    myProfile.find('form').simulate('submit')
+    beforeEach(() => {
+    })
+    test('it should prevent submission if an invalid date is entered', () => {
+      myProfile.find('input[type="date"]').simulate('change', {target: {value: 'invalid date'}})
 
-    expect(profilePaneCloseMock).not.toHaveBeenCalled()
-    expect(dispatchMock).not.toHaveBeenCalled()
+      // enzyme does not support event propagation, so simulating a click on the submit button does not work
+      // simulate the submit on the form directly
+      myProfile.find('form').simulate('submit')
+
+      expect(profilePaneCloseMock).not.toHaveBeenCalled()
+      expect(dispatchMock.mock.calls.length).toEqual(2)
+    })
+
+    test('it should allow submission even if no date is entered', () => {
+      myProfile.find('form').simulate('submit')
+
+      expect(profilePaneCloseMock).toHaveBeenCalled()
+      expect(dispatchMock.mock.calls.length).toEqual(3)
+    })
+
+    test('it should submit if the date is valid', () => {
+      myProfile.find('input[type="date"]').simulate('change', {target: {value: '2016-10-01'}})
+      myProfile.find('form').simulate('submit')
+
+      expect(profilePaneCloseMock).toHaveBeenCalled()
+      expect(dispatchMock.mock.calls.length).toEqual(5)
+    })
   })
 
-  test('it should allow submission even if no date is entered', () => {
-    myProfile.find('form').simulate('submit')
-
-    expect(profilePaneCloseMock).toHaveBeenCalled()
-    expect(dispatchMock.mock.calls.length).toEqual(2)
-  })
-
-  test('it should submit if the date is valid', () => {
-    myProfile.find('input[type="date"]').simulate('change', {target: {value: '2016-10-01'}})
-    myProfile.find('form').simulate('submit')
-
-    expect(profilePaneCloseMock).toHaveBeenCalled()
-    expect(dispatchMock.mock.calls.length).toEqual(3)
+  describe('authenticated user', () => {
+    test.skip('it should display user data correctly', () => {})
+    test.skip('it should not submit if form invalid', () => {})
+    test.skip('it should submit if form valid', () => {})
   })
 })
 
 describe('other actions', () => {
-  test('it empties the date field when the reset button is used', () => {
-    props = {
-      ...props,
-      personalisationValues: {
-        settings: {
-          dd: '2016-10-07'
-        }
-      }
-    }
-
-    myProfile = mount(
-      <MyProfile {...props} />
-    )
-
-    myProfile.find('.reset-button').simulate('click')
-
-    expect(myProfile.find('input[type="date"]').props().value).toEqual('')
-  })
-
   test('it closes the pane without submitting when the cancel button is used', () => {
     let profilePaneCloseMock = jest.fn()
 

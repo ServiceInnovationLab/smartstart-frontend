@@ -31,6 +31,23 @@ export function isValidDate (dateString) {
   return !isNaN(dateObject.getTime())
 }
 
+export function isValidEmail (email, required) {
+  // simple email validation
+  // just looking for @ and dot
+  const emailRegex = /.+\@.+\..+/
+
+  if (!required && email === '') {
+    return true
+  }
+
+  if (typeof emailRegex.test === 'function') {
+    return emailRegex.test(email)
+  } else {
+    // browser doesn't support regex, skip validation
+    return true
+  }
+}
+
 // routerScrollHandler
 //
 // Makes sure we scroll up to the the top of the page when changing route

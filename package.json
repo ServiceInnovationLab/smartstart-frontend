@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": " ./node_modules/.bin/jest --watch",
     "build": "node build.js",
     "build:testdata": "node build.js --piwik 2 --endpoint /assets/test-data.json",
     "build:externaltest": "node build.js --piwik 2 --endpoint https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all",
