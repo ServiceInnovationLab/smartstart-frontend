@@ -12,7 +12,7 @@ import renderRadioGroup from '../fields/render-radio-group'
 import renderCheckboxGroup from '../fields/render-checkbox-group'
 import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import CitizenshipQuestions from '../citizenship-questions'
-import { required, requiredWithMessage, email, maxLength30, validDate, validAlpha, validCharStrict } from '../validate'
+import { required, requiredWithMessage, email, maxLength30, validDate, validAlpha, validCharStrict, olderThan, youngerThan } from '../validate'
 import { maxLength } from '../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
@@ -137,7 +137,7 @@ class MotherDetailsForm extends Component {
             name="mother.dateOfBirth"
             component={renderDatepicker}
             label={makeMandatoryLabel("Mother's date of birth")}
-            validate={[required, validDate]}
+            validate={[required, validDate, olderThan(10), youngerThan(100)]}
           />
 
           <Field

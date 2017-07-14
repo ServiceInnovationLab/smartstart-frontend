@@ -24,8 +24,10 @@ export const INVALID_NAME_MESSAGE = 'A name cannot contain, punctuation or symbo
 export const INVALID_CHAR_MESSAGE = 'Some punctuation or special characters cannot be accepted - please remove any ${invalid_matches} from your answer.'
 
 
-export const WARNING_MOTHER_DATE_OF_BIRTH = 'You have indicated that the mother was less than 13 years old when the child was born. If this is a mistake please adjust the date, or continue'
-export const WARNING_FATHER_DATE_OF_BIRTH = 'You have indicated that the father was less than 13 years old when the child was born. If this is a mistake please adjust the date, or continue'
+export const MIN_AGE_MESSAGE = 'Parent\'s age cannot be less than {min_age} years, please check the date entered.'
+export const MAX_AGE_MESSAGE = 'Parent\'s age cannot be greater than {max_age} years, please check the date entered.'
+export const MIN_10_AGE_MESSAGE = 'Parent\'s age cannot be less than 10 years, please check the date entered.'
+export const MAX_100_AGE_MESSAGE = 'Parent\'s age cannot be greater than 100 years, please check the date entered.'
 export const WARNING_CITIZENSHIP = 'Note - If both the mother and father (or other parent) of the child being registered are not New Zealand citizens or entitled under the Immigration Act 2009 to be in New Zealand indefinitely or entitled to reside indefinitely in the Cook Islands, Niue or Tokelau, the child is not a New Zealand citizen by birth.'
 export const WARNING_NAME_CONTAINS_RANK = 'The name looks like it may include an official title or rank. If you wish your child to have a name that includes or resembles an official title or rank you must include your reasons in the box below. Prior to registration, a Registrar will review the name(s) and your reasoning to ensure it is not undesirable in the public interest for the person to bear a name or combination of names.'
 export const WARNING_NAME_CONTAINS_OFFENSIVE = 'The name appears to contain a word or words that may cause offence to a reasonable person. The name may not be accepted for registration as it is, but you do have the opportunity to explain below your reasons for wanting your child to have a name that may contain an offensive term. Prior to registration, a Registrar will review the name(s) and your reasoning to ensure it is not undesirable in the public interest for the person to bear a name or combination of names.'
@@ -67,6 +69,6 @@ export const frontendMessageByErrorCode = {
   'obscene_name:child.surname': { message: WARNING_NAME_CONTAINS_OFFENSIVE, type: 'warning' },
   'surname_match:mother.surname': { message: WARNING_PARENT_SURNAME_MATCH, type: 'warning' },
   'surname_match:father.surname': { message: WARNING_PARENT_SURNAME_MATCH, type: 'warning' },
-  '10014:mother.dateOfBirth': { message: WARNING_MOTHER_DATE_OF_BIRTH, type: 'warning' },
-  '10014:father.dateOfBirth': { message: WARNING_FATHER_DATE_OF_BIRTH, type: 'warning' }
+  '10014:mother.dateOfBirth': { message: MIN_10_AGE_MESSAGE, type: 'error' },
+  '10014:father.dateOfBirth': { message: MAX_100_AGE_MESSAGE, type: 'error' }
 }

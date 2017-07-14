@@ -15,7 +15,7 @@ import renderCheckboxGroup from '../fields/render-checkbox-group'
 import renderCheckbox from '../fields/render-checkbox'
 import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import CitizenshipQuestions from '../citizenship-questions'
-import { required, requiredWithMessage, email, maxLength30, validDate, validAlpha, validCharStrict } from '../validate'
+import { required, requiredWithMessage, email, maxLength30, validDate, validAlpha, validCharStrict, olderThan, youngerThan } from '../validate'
 import { maxLength } from '../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
@@ -177,7 +177,7 @@ class FatherDetailsForm extends Component {
           name="father.dateOfBirth"
           component={renderDatepicker}
           label={makeMandatoryLabel("Father's date of birth")}
-          validate={[required, validDate]}
+          validate={[required, validDate, olderThan(10), youngerThan(100)]}
         />
 
         <Field

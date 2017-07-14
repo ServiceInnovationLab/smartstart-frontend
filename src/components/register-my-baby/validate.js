@@ -10,7 +10,9 @@ import {
   INVALID_DATE_MESSAGE,
   INVALID_IRD_MESSAGE,
   INVALID_MSD_MESSAGE,
-  FUTURE_DATE_MESSAGE
+  FUTURE_DATE_MESSAGE,
+  MIN_AGE_MESSAGE,
+  MAX_AGE_MESSAGE
 } from './validation-messages'
 
 export const required = value =>
@@ -77,5 +79,29 @@ export const validMsd = value => {
 
   if (!validateMsdNumber(value)) {
     return INVALID_MSD_MESSAGE
+  }
+}
+
+export const olderThan = minAge => value => {
+  const dob = moment(value)
+
+  if (dob.isValid()) {
+    const age = moment().diff(dob, 'years')
+
+    if (age < minAge) {
+      return MIN_AGE_MESSAGE.replace('{min_age}', minAge)
+    }
+  }
+}
+
+export const youngerThan = maxAge => value => {
+  const dob = moment(value)
+
+  if (dob.isValid()) {
+    const age = moment().diff(dob, 'years')
+
+    if (age > maxAge) {
+      return MAX_AGE_MESSAGE.replace('{max_age}', maxAge)
+    }
   }
 }
