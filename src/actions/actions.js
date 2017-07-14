@@ -367,7 +367,10 @@ export function fetchPersonalisationValues () {
         .then(checkStatus)
         .then(response => response.json())
         .then(json => {
-          let data = json.preferences
+          let data = Object.assign({}, json.preferences)
+
+          // FIXME: confirm is email needs to be tracked
+          data.email = json.email
 
           // clear the savedValues cookie
           Cookie.remove('savedValues', { path: '/' })

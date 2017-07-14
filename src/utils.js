@@ -31,14 +31,9 @@ export function isValidDate (dateString) {
   return !isNaN(dateObject.getTime())
 }
 
-export function isValidEmail (email, required) {
+export function isValidEmail (email) {
   // simple email validation
-  // just looking for @ and dot
-  const emailRegex = /.+\@.+\..+/
-
-  if (!required && email === '') {
-    return true
-  }
+  const emailRegex = /[^\s@]+@[^\s@]+\.[^\s@]+/
 
   if (typeof emailRegex.test === 'function') {
     return emailRegex.test(email)

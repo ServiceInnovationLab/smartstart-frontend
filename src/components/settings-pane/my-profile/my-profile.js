@@ -23,15 +23,11 @@ export class MyProfile extends Component {
   }
 
   componentWillMount () {
-    this.setFilterValuesFromStore(this.props.personalisationValues)
-
-    if (this.props.isLoggedIn) {
-      this.setEmailValue()
-    }
+    this.setFilterValuesFromStore(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setFilterValuesFromStore(nextProps.personalisationValues)
+    this.setFilterValuesFromStore(nextProps)
 
     if (this.props.isLoggedIn) {
       this.setEmailValue()
@@ -53,8 +49,9 @@ export class MyProfile extends Component {
     })
   }
 
-  setFilterValuesFromStore (settingsData) {
-    let { settings, email } = settingsData
+  setFilterValuesFromStore (props) {
+    let { isLoggedIn, personalisationValues, dispatch } = props
+    let { settings, email } = personalisationValues
 
     if (settings) {
       // due date
@@ -63,13 +60,19 @@ export class MyProfile extends Component {
         this.setState({ dueDateFieldValue: settings.dd })
 
         // update the timeline
-        this.props.dispatch(addDueDate(settings.dd))
+        dispatch(addDueDate(settings.dd))
       }
 
       // subscribed value
       if (settings.ss) {
+        //defaults to true
         this.setState({ subscribedFieldValue: settings.ss === 'true' })
-        this.props.dispatch(addSubscribed(this.state.subscribedFieldValue))
+        dispatch(addSubscribed(this.state.subscribedFieldValue))
+      } else {
+        if (isLoggedIn) {
+          this.setState({ subscribedFieldValue: true })
+          dispatch(addSubscribed(this.state.subscribedFieldValue))
+        }
       }
     }
   }
@@ -107,26 +110,29 @@ export class MyProfile extends Component {
       formIsValid = false
     }
 
-    // subscribed checkbox
-    if (settings && subscribedFieldValue.toString() !== settings.ss) {
-      valuesToSave.push({ 'group': 'settings', 'key': 'ss', 'val': subscribedFieldValue.toString() })
+    if (this.props.isLoggedIn) {
+      // subscribed checkbox
+      if (settings && subscribedFieldValue.toString() !== settings.ss) {
+        valuesToSave.push({ 'group': 'settings', 'key': 'ss', 'val': subscribedFieldValue.toString() })
 
-      // update in store
-      this.props.dispatch(addSubscribed(this.state.subscribedFieldValue))
+        // update in store
+        this.props.dispatch(addSubscribed(this.state.subscribedFieldValue))
 
-      // track the event
-      let piwikEvent = {
-        'category': 'Profile Data',
-        'action': this.state.subscribedFieldValue ? 'checked' : 'unchecked',
-        'name': 'Subscribed'
+        // track the event
+        let piwikEvent = {
+          'category': 'Profile Data',
+          'action': this.state.subscribedFieldValue ? 'checked' : 'unchecked',
+          'name': 'Subscribed'
+        }
+        this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
       }
-      this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
+
+      // email field
+      if (!this.emailValidate()) {
+        formIsValid = false
+      }
     }
 
-    // email field
-    if (this.props.isLoggedIn && !this.emailValidate()) {
-      formIsValid = false
-    }
 
     // send request
     if (formIsValid) {
@@ -169,23 +175,19 @@ export class MyProfile extends Component {
     const field = this.emailField
     const fieldValue = this.state.newEmailFieldValue
     // if subscribed, email is required
-    const emailIsValid = isValidEmail(fieldValue, this.state.subscribedFieldValue) // custom validation
+    let isEmailValid, message
 
-    let message
-
-    if (emailIsValid) {
-      message = ''
+    if (this.state.subscribedFieldValue && !fieldValue) {
+      isEmailValid = false
+      message = 'Please enter an email address'
     } else {
-      if (fieldValue === '') {
-        message = 'Please enter an email address'
-      } else {
-        message = 'Please enter a valid email address'
-      }
+      isEmailValid = fieldValue === '' || isValidEmail(fieldValue)
+      message = isEmailValid ? '' : 'Please enter a valid email address'
     }
 
     this.setCustomValidity(field, message)
 
-    return emailIsValid // so we can do the manual check for safari
+    return isEmailValid // so we can do the manual check for safari
   }
 
   setCustomValidity (input, message) {
@@ -213,7 +215,11 @@ export class MyProfile extends Component {
     let paneClasses = classNames(
       'settings-pane',
       { 'is-open': this.props.shown }
+    ),
+    notificationClasses = classNames(
+      this.state.displayPendingEmailNotification ? 'success-message' : 'hidden'
     )
+
 
     return (
       <div id='my-profile' className={paneClasses} aria-hidden={!this.props.shown}>
@@ -262,7 +268,7 @@ export class MyProfile extends Component {
                     />
                 </label>
 
-                <div className={this.state.displayPendingEmailNotification ? 'success-message' : 'hidden'}>
+                <div className={notificationClasses}>
                   You need to confirm your email address before you can receive reminders to this address.
                   We will have sent you an email with a confirmation link.
                 </div>
