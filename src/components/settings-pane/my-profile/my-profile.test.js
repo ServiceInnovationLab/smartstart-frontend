@@ -10,7 +10,8 @@ beforeEach(() => {
     personalisationValues: {
       settings: {
         dd: ''
-      }
+      },
+      email: ''
     },
     dispatch: dispatchMock,
     shown: true,
@@ -103,14 +104,14 @@ describe('date validation and submit', () => {
       myProfile.find('form').simulate('submit')
 
       expect(profilePaneCloseMock).not.toHaveBeenCalled()
-      expect(dispatchMock.mock.calls.length).toEqual(2)
+      expect(dispatchMock.mock.calls.length).toEqual(0)
     })
 
     test('it should allow submission even if no date is entered', () => {
       myProfile.find('form').simulate('submit')
 
       expect(profilePaneCloseMock).toHaveBeenCalled()
-      expect(dispatchMock.mock.calls.length).toEqual(3)
+      expect(dispatchMock.mock.calls.length).toEqual(1)
     })
 
     test('it should submit if the date is valid', () => {
@@ -118,7 +119,7 @@ describe('date validation and submit', () => {
       myProfile.find('form').simulate('submit')
 
       expect(profilePaneCloseMock).toHaveBeenCalled()
-      expect(dispatchMock.mock.calls.length).toEqual(5)
+      expect(dispatchMock.mock.calls.length).toEqual(3)
     })
   })
 
