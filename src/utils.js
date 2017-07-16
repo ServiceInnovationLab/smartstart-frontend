@@ -82,3 +82,18 @@ export function getTextContent(rootChild) {
 
   return res
 }
+
+// reference: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+export function findClosestDomElement(node, selector) {
+    let matches = document.querySelectorAll(selector);
+    let i;
+
+    do {
+        i = matches.length;
+        while (--i >= 0 && matches.item(i) !== node) {
+          // empty
+        }
+    } while ((i < 0) && (node = node.parentElement))
+
+    return node
+}

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { animateScroll } from 'react-scroll'
+import { findClosestDomElement } from '../../../utils'
 
 const focusToField = (fieldName) => {
   const node = document.querySelector(`[name="${fieldName}"], [name="${fieldName}[0]"], [name="${fieldName}-group"]`)
@@ -8,17 +9,11 @@ const focusToField = (fieldName) => {
     return
   }
 
+  const inputGroup = findClosestDomElement(node, '.input-group, fieldset')
+
   const bodyRect = document.body.getBoundingClientRect()
-
-  let elemRect
-
-  if (node.parentNode.tagName === 'FIELDSET') {
-    elemRect = node.parentNode.getBoundingClientRect()
-  } else {
-    elemRect = node.getBoundingClientRect()
-  }
-
-  const offset = elemRect.top - bodyRect.top
+  const elemRect = inputGroup.getBoundingClientRect()
+  const offset = elemRect.top - bodyRect.top - 20
 
   animateScroll.scrollTo(offset, { smooth: true })
 
