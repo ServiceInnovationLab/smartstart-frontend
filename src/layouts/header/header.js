@@ -1,7 +1,7 @@
 import './header.scss'
 
 import React, { PropTypes, Component } from 'react'
-import { IndexLink } from 'react-router'
+import { Link, IndexLink } from 'react-router'
 import LoginButton from 'components/login-button/login-button'
 import LogoutButton from 'components/logout-button/logout-button'
 import Banner from 'layouts/header/banner/banner'
@@ -116,7 +116,12 @@ class Header extends Component {
             <a className='page-header-error-close' href='#' onClick={this.clearMessage}><span className='visuallyhidden'>Close message</span></a>
           </div>
         </div>
-        <Banner shown={this.props.showBanner} />
+        <nav className='main-nav' data-test='main-navigation' role='navigation'>
+          <div className='page-header-inner'>
+            <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
+            <Link to={'news/baby-names'} activeClassName='active'>Top baby names</Link>
+          </div>
+        </nav>
       </header>
     )
   }

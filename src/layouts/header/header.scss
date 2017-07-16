@@ -140,3 +140,44 @@ h1 {
 .user-logged-in-message {
   color: #ffffff;
 }
+
+.main-nav {
+  border-top: 1px solid $header-border-color;
+  font-size: 18px;
+
+  .page-header-inner {
+    display: block;
+    padding: 0;
+
+    @media #{$desktop-and-above} {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  a {
+    color: #ffffff;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 7px 25px;
+    border-bottom: 1px solid $header-border-color;
+
+    &:hover,
+    &:active,
+    &:visited {
+      color: #ffffff;
+    }
+
+    &:hover,
+    &:active,
+    &.active {
+      background-color: $muted-blue;
+    }
+
+    @media #{$desktop-and-above} {
+      display: inline-block;
+      border-bottom: 0px none;
+    }
+  }
+}

@@ -8,6 +8,7 @@ $high-res:             'only screen and (min-resolution: 2dppx)';
 // brand colors
 $realme-dark-blue:     #3e4d5d;
 $realme-middle-blue:   #125da3;
+$muted-blue:           #65717D;
 $accent-color-dark:    #66b3aa;
 $accent-color:         #c1e0dd;
 $accent-color-light:   #d1e8e5;
@@ -38,11 +39,12 @@ $font-family-headers: $font-family-base;
 
 // header
 $header-background-color: $realme-dark-blue;
+$header-border-color: #9ea6ae;
 $header-error-color: $error-background;
 $header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
 
 // settings panel
-$settings-elements-bg-color: #65717D;
+$settings-elements-bg-color: $muted-blue;
 $settings-elements-color: #C5CACE;
 $settings-triggers-dropshadow: "0 0 12px 0 rgba(0, 0, 0, 0.2)";
 $settings-border-color: #8B949D;
