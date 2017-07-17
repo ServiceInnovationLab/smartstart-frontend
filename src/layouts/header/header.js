@@ -4,7 +4,6 @@ import React, { PropTypes, Component } from 'react'
 import { Link, IndexLink } from 'react-router'
 import LoginButton from 'components/login-button/login-button'
 import LogoutButton from 'components/logout-button/logout-button'
-import Banner from 'layouts/header/banner/banner'
 import classNames from 'classnames'
 
 class Header extends Component {
