@@ -53,26 +53,24 @@ export class MyProfile extends Component {
     let { isLoggedIn, personalisationValues, dispatch } = props
     let { settings, email } = personalisationValues
 
-    if (settings) {
-      // due date
-      if (settings.dd && isValidDate(settings.dd)) {
-        // update the input (only if it's a valid value)
-        this.setState({ dueDateFieldValue: settings.dd })
+    // due date
+    if (settings && settings.dd && isValidDate(settings.dd)) {
+      // update the input (only if it's a valid value)
+      this.setState({ dueDateFieldValue: settings.dd })
 
-        // update the timeline
-        dispatch(addDueDate(settings.dd))
-      }
+      // update the timeline
+      dispatch(addDueDate(settings.dd))
+    }
 
-      // subscribed value
-      if (settings.ss) {
-        //defaults to true
-        this.setState({ subscribedFieldValue: settings.ss === 'true' })
+    // subscribed value
+    if (settings && settings.subscribed) {
+      //defaults to true
+      this.setState({ subscribedFieldValue: settings.subscribed === 'true' })
+      dispatch(addSubscribed(this.state.subscribedFieldValue))
+    } else {
+      if (isLoggedIn) {
+        this.setState({ subscribedFieldValue: true })
         dispatch(addSubscribed(this.state.subscribedFieldValue))
-      } else {
-        if (isLoggedIn) {
-          this.setState({ subscribedFieldValue: true })
-          dispatch(addSubscribed(this.state.subscribedFieldValue))
-        }
       }
     }
   }
@@ -112,8 +110,8 @@ export class MyProfile extends Component {
 
     if (this.props.isLoggedIn) {
       // subscribed checkbox
-      if (settings && subscribedFieldValue.toString() !== settings.ss) {
-        valuesToSave.push({ 'group': 'settings', 'key': 'ss', 'val': subscribedFieldValue.toString() })
+      if (settings && subscribedFieldValue.toString() !== settings.subscribed) {
+        valuesToSave.push({ 'group': 'settings', 'key': 'subscribed', 'val': subscribedFieldValue.toString() })
 
         // update in store
         this.props.dispatch(addSubscribed(this.state.subscribedFieldValue))
