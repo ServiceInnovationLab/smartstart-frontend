@@ -5,6 +5,22 @@ import { SubmissionError } from 'redux-form';
 import { transform, transformFullSubmission, SERVER_FIELD_TO_FRONTEND_FIELD } from './transform'
 import { frontendMessageByErrorCode } from './validation-messages'
 
+const getBaseUrl = () => {
+  return window.location.protocol + '//' + window.location.host;
+}
+
+const getConfirmationSuccessUrl = () => {
+  return getBaseUrl() + '/register-my-baby/confirmation';
+}
+
+const getConfirmationPaymentSuccessUrl = () => {
+  return getBaseUrl() + '/register-my-baby/confirmation-payment-success';
+}
+
+const getConfirmationPaymentFailureUrl = () => {
+  return getBaseUrl() + '/register-my-baby/confirmation-payment-outstanding';
+}
+
 const toReduxFormSubmissionError = (json) => {
   const consumableError = {}
   const statusCode = get(json, 'error.statusCode')
@@ -46,8 +62,13 @@ export function validateOnly(formState, csrfToken) {
   const transformedData = transform(formState)
   transformedData._csrf = csrfToken
   transformedData.activity = 'validateOnly'
-  transformedData.confirmationUrlSuccess = 'https://smartstart.services.govt/register-my-baby/confirmation'
-  transformedData.confirmationUrlFailure = 'https://smartstart.services.govt/register-my-baby/confirmation/payment-failed'
+  if (transformedData.certificateOrder) {
+    transformedData.confirmationUrlSuccess = getConfirmationPaymentSuccessUrl()
+    transformedData.confirmationUrlFailure = getConfirmationPaymentFailureUrl()
+  } else {
+    transformedData.confirmationUrlSuccess = getConfirmationSuccessUrl()
+    transformedData.confirmationUrlFailure = ''
+  }
 
   return fetch('/birth-registration-api/Births/birth-registrations', {
     method: 'POST',
@@ -75,8 +96,13 @@ export function fullSubmit(formState, csrfToken) {
   const transformedData = transformFullSubmission(formState)
   transformedData._csrf = csrfToken
   transformedData.activity = 'fullSubmission'
-  transformedData.confirmationUrlSuccess = 'https://smartstart.services.govt/register-my-baby/confirmation'
-  transformedData.confirmationUrlFailure = 'https://smartstart.services.govt/register-my-baby/confirmation/payment-failed'
+  if (transformedData.certificateOrder) {
+    transformedData.confirmationUrlSuccess = getConfirmationPaymentSuccessUrl()
+    transformedData.confirmationUrlFailure = getConfirmationPaymentFailureUrl()
+  } else {
+    transformedData.confirmationUrlSuccess = getConfirmationSuccessUrl()
+    transformedData.confirmationUrlFailure = ''
+  }
 
   return fetch('/birth-registration-api/Births/birth-registrations', {
     method: 'POST',
@@ -89,6 +115,12 @@ export function fullSubmit(formState, csrfToken) {
   })
   .then(checkStatus)
   .then(response => response.json())
+  .then(result => {
+    return {
+      submittedData: transformedData,
+      result
+    };
+  })
   .catch((error) => {
     if (error.response) {
       return error.response.json()

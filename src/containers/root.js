@@ -11,6 +11,9 @@ import BirthRegistrationPage from 'layouts/birth-registration-page/birth-registr
 import BabyNames from 'components/baby-names/baby-names'
 import RegisterMyBabyLandingPage from 'components/register-my-baby/landing-page'
 import RegisterMyBaby from 'components/register-my-baby'
+import RegisterMyBabyConfirmation from 'components/register-my-baby/confirmation-page-no-birth-certificate-order'
+import RegisterMyBabyConfirmationPaymentSuccess from 'components/register-my-baby/confirmation-page-payment-success'
+import RegisterMyBabyConfirmationPaymentOutstanding from 'components/register-my-baby/confirmation-page-payment-outstanding'
 import { routerScrollHandler } from 'utils'
 
 // mapping for routes for metadata pages
@@ -33,6 +36,9 @@ const Root = (props) => (
         <IndexRoute component={Main} />
         <Route path='register-my-baby' component={BirthRegistrationPage}>
           <IndexRoute component={RegisterMyBabyLandingPage} />
+          <Route path='confirmation' component={RegisterMyBabyConfirmation} />
+          <Route path='confirmation-payment-success' component={RegisterMyBabyConfirmationPaymentSuccess} />
+          <Route path='confirmation-payment-outstanding' component={RegisterMyBabyConfirmationPaymentOutstanding} />
           <Route path=':stepName' component={RegisterMyBaby} />
         </Route>
         <Route path='news' component={FeaturePage}>

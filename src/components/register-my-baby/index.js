@@ -3,6 +3,7 @@ import { getFormValues } from 'redux-form'
 import URLSearchParams from 'url-search-params'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
 import get from 'lodash/get'
@@ -17,7 +18,7 @@ import Step6 from './steps/step6'
 import Review from './steps/review/index'
 import { fullSubmit } from './submit'
 import { piwikTrackPost } from '../../actions/actions'
-import { fetchBirthFacilities, fetchCountries } from '../../actions/birth-registration'
+import { fetchBirthFacilities, fetchCountries, rememberBroData } from '../../actions/birth-registration'
 
 const stepByStepName = {
   'child-details': 1,
@@ -142,14 +143,30 @@ class RegisterMyBabyForm extends Component {
 
   submit() {
     return fullSubmit(this.props.formState, this.props.csrfToken)
-      .then((/* result */) => {
-        window.alert('Application has been submitted')
-        // TODO:
-        // when no certificate is requested:
-        // present the full success (no order summary) result/confirmation screen to the user (covered separately in story #44711)
+      .then(({ submittedData, result }) => {
+        if (submittedData.certificateOrder) {
+          if (result.response && result.response.paymentURL) {
+            const productCode = get(submittedData, 'certificateOrder.productCode')
+            const quantity = get(submittedData, 'certificateOrder.quantity')
+            const courierDelivery = get(submittedData, 'certificateOrder.courierDelivery')
+            return rememberBroData({
+              applicationReferenceNumber: result.response.applicationReferenceNumber,
+              productCode,
+              quantity,
+              courierDelivery
+            })
+            .then(() => {
+              window.location = result.response.paymentURL;
+            });
+          }
+        }
 
-        // when certificate is requested & paymentURL is returned:
-        // Redirect the user to the e-commerce flow (covered separately in story #43892)
+        return rememberBroData({
+          applicationReferenceNumber: result.response.applicationReferenceNumber
+        })
+        .then(() => {
+          browserHistory.push('/register-my-baby/confirmation')
+        });
       });
   }
 

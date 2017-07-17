@@ -1,3 +1,4 @@
+import Cookie from 'react-cookie'
 import { checkStatus } from 'utils'
 import { applicationError } from './actions'
 
@@ -68,4 +69,30 @@ export function fetchCountries() {
     .then(json => dispatch(receiveCountries(json)))
     .catch(error => dispatch(applicationError(error)))
   }
+}
+
+export function retrieveBroData() {
+  return fetch('/api/sessions/bro_application/', {
+    credentials: 'same-origin'
+  })
+  .then(checkStatus)
+  .then(response => response.json());
+}
+
+export function rememberBroData(data) {
+  const djangoCsrfToken = Cookie.load('csrftoken')
+
+  // the api need a forward slash in the end
+  return fetch('/api/sessions/bro_application/', {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'X-CSRFToken': djangoCsrfToken
+    },
+    credentials: 'same-origin',
+    body: JSON.stringify(data)
+  })
+  .then(checkStatus)
+  .then(response => response.json());
 }

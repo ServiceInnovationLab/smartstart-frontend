@@ -54,6 +54,92 @@
     padding: 20px;
   }
 
+  button {
+    background-color: $form-teal-dark;
+    border-color: $form-teal-dark;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+    min-width: auto;
+
+    &:hover {
+      color: #fff;
+      border-color: darken($form-teal-dark, 5%);
+      background-color: darken($form-teal-dark, 5%);
+    }
+
+    &.next::after {
+      font-family: 'icomoon';
+      content: $icon-arrow-right;
+      margin-left: 10px;
+    }
+
+    &.previous::before {
+      font-family: 'icomoon';
+      content: $icon-arrow-left;
+      margin-right: 10px;
+    }
+  }
+
+  .error,
+  .success,
+  .warning,
+  .info {
+    font-size: 16px;
+    padding: 5px 8px 5px 40px;
+    position: relative;
+    display: block;
+
+    &::before {
+      font-family: 'icomoon';
+      font-size: 18px;
+      line-height: 18px;
+      position: absolute;
+      left: 10px;
+      top: 7px;
+      content: $icon-exclamation;
+      color: $form-error-outline;
+    }
+  }
+
+
+  .general-error {
+    margin-bottom: 20px;
+  }
+
+  .error {
+    background-color: $form-error-bg;
+    border-left: 3px solid $form-error-outline;
+  }
+
+  .warning {
+    background-color: $form-warning-bg;
+    border-left: 3px solid $form-warning-outline;
+
+    &::before {
+      color: $form-warning-outline;
+    }
+  }
+
+  .info {
+    background-color: $form-info-bg;
+    border-left: 3px solid $form-info-outline;
+
+    &::before {
+      color: $form-info-outline;
+    }
+  }
+
+  .success {
+    background-color: $form-success-bg;
+    border-left: 3px solid $form-success-outline;
+
+    &::before {
+      color: $form-success-outline;
+      content: $icon-tick;
+    }
+  }
+
   form {
     border-bottom: 1px solid $form-lighter-border-color;
     margin-top: 48px;
@@ -98,33 +184,6 @@
       }
     }
 
-    button {
-      background-color: $form-teal-dark;
-      border-color: $form-teal-dark;
-      border-radius: 5px;
-      color: #fff;
-      margin-bottom: 10px;
-      min-width: auto;
-
-      &:hover {
-        color: #fff;
-        border-color: darken($form-teal-dark, 5%);
-        background-color: darken($form-teal-dark, 5%);
-      }
-
-      &.next::after {
-        font-family: 'icomoon';
-        content: $icon-arrow-right;
-        margin-left: 10px;
-      }
-
-      &.previous::before {
-        font-family: 'icomoon';
-        content: $icon-arrow-left;
-        margin-right: 10px;
-      }
-    }
-
     .form-actions {
       margin-top: 60px;
       display: flex;
@@ -145,54 +204,6 @@
         margin-bottom: .5em;
         font-weight: 500;
         padding: 0;
-      }
-    }
-
-    span.error,
-    span.warning,
-    span.info {
-      font-size: 16px;
-      padding: 5px 8px 5px 40px;
-      position: relative;
-      display: block;
-
-      &::before {
-        font-family: 'icomoon';
-        font-size: 18px;
-        line-height: 18px;
-        position: absolute;
-        left: 10px;
-        top: 7px;
-        content: $icon-exclamation;
-        color: $form-error-outline;
-      }
-    }
-
-
-    > .general-error {
-      margin-bottom: 20px;
-    }
-
-    span.error {
-      background-color: $form-error-bg;
-      border-left: 3px solid $form-error-outline;
-    }
-
-    span.warning {
-      background-color: $form-warning-bg;
-      border-left: 3px solid $form-warning-outline;
-
-      &::before {
-        color: $form-warning-outline;
-      }
-    }
-
-    span.info {
-      background-color: $form-info-bg;
-      border-left: 3px solid $form-info-outline;
-
-      &::before {
-        color: $form-info-outline;
       }
     }
 
@@ -589,3 +600,92 @@ $animationDuration: 0.6s;
   }
 }
 
+.confirmation {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 30px;
+
+  .step-number:after {
+    font-family: 'icomoon';
+    content: $icon-tick;
+    font-size: 16px;
+  }
+
+  .success,
+  .warning {
+    margin-bottom: 15px;
+  }
+
+  .aligner {
+    flex-direction: column;
+
+    .aligner-item {
+      max-width: 100%;
+    }
+
+    .instruction {
+      text-align: center;
+    }
+
+    img {
+      width: 150px;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  }
+
+  .order-summary {
+    margin: 30px 0;
+
+    .fail-payment {
+      border-top: 2px solid $form-warning-outline;
+      border-bottom: 2px solid $form-warning-outline;
+      background-color: $form-warning-bg;
+      justify-content: flex-end;
+
+      > strong {
+        position: relative;
+        display: block;
+        &::before {
+          font-family: 'icomoon';
+          font-size: 18px;
+          line-height: 18px;
+          position: absolute;
+          left: -25px;
+          top: 3px;
+          content: $icon-exclamation;
+          color: $form-error-outline;
+        }
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+  }
+
+  @media #{$desktop-and-above} {
+    .step-number:after {
+      font-size: 28px;
+    }
+
+    .aligner {
+      flex-direction: row;
+
+      img {
+        margin-right: 15px;
+        margin-bottom: 0;
+      }
+
+      .instruction {
+        text-align: left;
+      }
+    }
+
+    .print {
+      text-align: right;
+      button {
+        width: auto;
+      }
+    }
+  }
+}
