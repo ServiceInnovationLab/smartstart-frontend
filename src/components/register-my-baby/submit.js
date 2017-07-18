@@ -17,12 +17,12 @@ const toReduxFormSubmissionError = (json) => {
         const frontendMessage = frontendMessageByErrorCode[error.code] || frontendMessageByErrorCode[`${error.code}:${error.field}`]
         const frontendField = SERVER_FIELD_TO_FRONTEND_FIELD[error.field] || error.field
 
-        if (!frontendMessage.message) {
-          frontendMessage.message = error.message
-        }
-
         if (!frontendMessage) {
           throw new Error('NO_FRONTEND_ERROR_CODE_MAPPING')
+        }
+
+        if (!frontendMessage.message) {
+          frontendMessage.message = error.message
         }
 
         const fieldErrors = get(consumableError, frontendField, [])

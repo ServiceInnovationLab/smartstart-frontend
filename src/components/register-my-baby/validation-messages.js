@@ -59,6 +59,7 @@ export const frontendMessageByErrorCode = {
   'msd_mandatory:msd.mothersClientNumber': { message: REQUIRE_AT_LEAST_ONE_MSD, type: 'error' },
   'msd_mandatory:msd.fathersClientNumber': { message: REQUIRE_AT_LEAST_ONE_MSD, type: 'error' },
   '10001': { message: REQUIRE_MESSAGE, type: 'error' },
+  '10003': { message: INVALID_CHAR_MESSAGE, type: 'error' },
   '10015': { message: FUTURE_DATE_MESSAGE, type: 'error' },
   '10025': { message: EXCEED_MAXLENGTH_MESSAGE, type: 'error' },
   '10066': { message: INVALID_NAME_MESSAGE, type: 'error' },
