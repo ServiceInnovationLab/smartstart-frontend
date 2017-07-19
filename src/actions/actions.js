@@ -262,7 +262,7 @@ export function addSubscribed (subscribed) {
 export function fetchPhaseMetadata () {
   return dispatch => {
     dispatch(requestPhaseMetadata())
-    return fetch('/api/phase-metadata/')
+    return fetch('/api/phase-metadata/', { credentials: 'same-origin' })
       .then(checkStatus)
       .then(response => response.json())
       .then(json => dispatch(receivePhaseMetadata(json)))
