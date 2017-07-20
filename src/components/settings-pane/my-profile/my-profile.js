@@ -267,8 +267,7 @@ export class MyProfile extends Component {
                 </label>
 
                 <div className={notificationClasses}>
-                  You need to confirm your email address before you can receive reminders to this address.
-                  We will have sent you an email with a confirmation link.
+                  Please confirm your email address in the sign-up email we sent you.
                 </div>
               </div>
             }
