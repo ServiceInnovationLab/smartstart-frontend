@@ -16,7 +16,7 @@ import {
 } from './validation-messages'
 
 export const required = value =>
-  (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '')) ? REQUIRE_MESSAGE : undefined
+  (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '') || (Array.isArray(value) && !value.length)) ? REQUIRE_MESSAGE : undefined
 
 export const requiredWithMessage = message => value =>
   (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '')) ? message : undefined

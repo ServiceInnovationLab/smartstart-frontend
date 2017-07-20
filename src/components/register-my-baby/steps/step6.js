@@ -3,53 +3,21 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
+import omit from 'lodash/omit'
 import Accordion from '../accordion'
 import makeFocusable from '../hoc/make-focusable'
-import makeMandatoryLabel from '../hoc/make-mandatory-label'
-import renderRadioGroup from '../fields/render-radio-group'
-import renderCustomSelect from '../fields/render-custom-select'
-import renderField from '../fields/render-field'
-import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import {
-  yesNo as yesNoOptions,
   products as productOptions,
-  deliveryMethods,
   birthCertificateDeliveryAddresses
 } from '../options'
-import {
-  REQUIRE_MESSAGE_STREET,
-  REQUIRE_MESSAGE_POSTCODE,
-} from '../validation-messages'
-import { required, requiredWithMessage, email, validCharStrict } from '../validate'
-import { maxLength } from '../normalize'
 import './step6.scss'
+import { maxLength } from '../normalize'
+import validate from './validation'
+import schema from './schemas/step6'
 
-const PRODUCT_OPTIONS_WITH_PRICE = productOptions.map(product => ({
-    ...product,
-    label: `${product.label} - $${product.price.toFixed(2)}`
-}))
+const getFieldProps = fieldName =>
+  omit(schema[fieldName], ['validate'])
 
-const renderProductValue = (option) => {
-  return <div>
-    <div>{option.label}</div>
-    { option.subLabel &&
-      <em>{option.subLabel}</em>
-    }
-  </div>
-}
-const renderProductOption = (option) => {
-  return <div>
-    <div>{option.label}</div>
-    { option.subLabel &&
-      <em>{option.subLabel}</em>
-    }
-  </div>
-}
-
-const validate = () => {
-  const errors = {}
-  return errors
-}
 
 class OrderCertificatesForm extends Component {
   constructor(props) {
@@ -122,52 +90,21 @@ class OrderCertificatesForm extends Component {
           You're not required to buy a birth certificate but some people like to have one as a record or momento. To purchase a certificate online you will need a credit card.
         </div>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
-          <Field
-            name="orderBirthCertificate"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Do you want to order a birth certificate?")}
-            instructionText="You can buy a birth certificate or move on to reviewing your registration."
-            options={yesNoOptions}
-            validate={[required]}
-          />
+          <Field {...getFieldProps('orderBirthCertificate')} />
+
           { orderBirthCertificate === 'yes' &&
             <div className="component-grouping">
               <h4>Certificate details</h4>
-              <Field
-                className="product-select"
-                name="certificateOrder.productCode"
-                component={renderCustomSelect}
-                options={PRODUCT_OPTIONS_WITH_PRICE}
-                optionRenderer={renderProductOption}
-                valueRenderer={renderProductValue}
-                label={makeMandatoryLabel("Choose your design")}
-                placeholder="Please select a design"
-                validate={[required]}
-              />
+
+              <Field {...getFieldProps('certificateOrder.productCode')} />
+
               <div className="birth-certificate-preview">
                 <img src={`${previewImage}`} alt={`${product ? product.label : 'default'}  preview`}/>
               </div>
-              <Field
-                className="quantity-select"
-                name="certificateOrder.quantity"
-                component={renderCustomSelect}
-                options={[
-                  {value: 1, label: '1'},
-                  {value: 2, label: '2'},
-                  {value: 3, label: '3'},
-                  {value: 4, label: '4'},
-                  {value: 5, label: '5'},
-                ]}
-                label={makeMandatoryLabel("Choose your quantity")}
-                validate={[required]}
-              />
-              <Field
-                name="certificateOrder.courierDelivery"
-                component={renderRadioGroup}
-                label={makeMandatoryLabel("Choose your delivery method")}
-                options={deliveryMethods}
-                validate={[required]}
-              />
+
+              <Field {...getFieldProps('certificateOrder.quantity')} />
+              <Field {...getFieldProps('certificateOrder.courierDelivery')} />
+
               <div className="expandable-group secondary">
                 <Accordion>
                   <Accordion.Toggle>
@@ -198,75 +135,32 @@ class OrderCertificatesForm extends Component {
                 </div>
               }
               <h4>Delivery details</h4>
+
+              <Field {...getFieldProps('certificateOrder.deliveryName')} />
               <Field
-                name="certificateOrder.deliveryName"
-                component={renderField}
-                type="text"
-                label={makeMandatoryLabel("Delivery name")}
-                instructionText="You may address the certificate to your baby if you wish."
-                validate={[required, validCharStrict]}
-                normalize={maxLength(100)}
-              />
-              <Field
-                name="certificateOrder.deliveryAddressType"
-                component={renderRadioGroup}
-                label={makeMandatoryLabel("What address should we deliver to?")}
+                {...getFieldProps('certificateOrder.deliveryAddressType')}
                 options={deliveryAddresses}
                 onChange={this.onDeliveryAddressTypeChange}
-                validate={[required]}
               />
 
               <fieldset>
                 <legend className="visuallyhidden">Delivery address</legend>
                 <div className="input-groups">
                   <Field
-                    name="certificateOrder.deliveryAddress.line1"
-                    component={renderPlacesAutocomplete}
-                    type="text"
-                    label={makeMandatoryLabel("Street number and Street name")}
+                    {...getFieldProps('certificateOrder.deliveryAddress.line1')}
                     onPlaceSelect={this.onPlaceSelect}
-                    validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET), validCharStrict]}
-                    normalize={maxLength(45)}
                   />
-                  <Field
-                    name="certificateOrder.deliveryAddress.suburb"
-                    component={renderField}
-                    type="text"
-                    label="Suburb"
-                    validate={[validCharStrict]}
-                    normalize={maxLength(30)}
-                  />
-                  <Field
-                    name="certificateOrder.deliveryAddress.line2"
-                    component={renderField}
-                    type="text"
-                    label={makeMandatoryLabel("Town/City and Postcode")}
-                    validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE), validCharStrict]}
-                    normalize={maxLength(30)}
-                  />
+                  <Field {...getFieldProps('certificateOrder.deliveryAddress.suburb')} />
+                  <Field {...getFieldProps('certificateOrder.deliveryAddress.line2')} />
                 </div>
               </fieldset>
 
               <Field
-                name="certificateOrder.deliveryAddress.countryCode"
-                component={renderCustomSelect}
+                {...getFieldProps('certificateOrder.deliveryAddress.countryCode')}
                 options={this.props.countries}
-                clearable={true}
-                searchable={true}
-                valueKey="code"
-                labelKey="name"
-                label="Country (if not New Zealand)"
-                placeholder="Please select"
               />
 
-              <Field
-                name="certificateOrder.emailAddress"
-                component={renderField}
-                type="email"
-                label="Email address (for a tax receipt)"
-                validate={[email]}
-                normalize={maxLength(60)}
-              />
+              <Field {...getFieldProps('certificateOrder.emailAddress')} />
 
               <div className="informative-text">
                 You will be directed to a Payment Express hosted payment page for payment when you submit your birth registration.

@@ -1,21 +1,10 @@
 import React, { PropTypes, Component } from 'react'
+import omit from 'lodash/omit'
 import { Field } from 'redux-form'
-import capitalize from 'lodash/capitalize'
-import makeMandatoryLabel from './hoc/make-mandatory-label'
-import { required, validCharStrict } from './validate'
 import Accordion from './accordion'
-import renderField from './fields/render-field'
-import renderWarning from './fields/render-warning'
-import renderRadioGroup from './fields/render-radio-group'
-import renderSelect from './fields/render-select'
-import { maxLength } from './normalize'
-
-import {
-  yesNo as yesNoOptions,
-  citizenshipSources as citizenshipSourceOptions
-} from './options'
 
 const prefix = (prefix, field) => prefix ? `${prefix}.${field}` : field
+const getFieldProps = (schema, fieldName) => omit(schema[fieldName], ['validate'])
 
 class CitizenshipQuestions extends Component {
   constructor(props) {
@@ -69,19 +58,11 @@ class CitizenshipQuestions extends Component {
   }
 
   render() {
-    const { target, isCitizen, isPermanentResident, isNZRealmResident, isAuResidentOrCitizen, citizenshipSource } = this.props
+    const { schema, target, isCitizen, isPermanentResident, isNZRealmResident, isAuResidentOrCitizen, citizenshipSource } = this.props
 
     return (
       <div className="component-grouping">
-        <Field
-          name={prefix(target, 'isCitizen')}
-          component={renderRadioGroup}
-          label={makeMandatoryLabel(`Is the ${target} a New Zealand citizen?`)}
-          instructionText={`Please indicate the ${target}'s citizenship or immigration status.`}
-          options={yesNoOptions}
-          validate={[required]}
-          onChange={this.onIsCitizenChange}
-        />
+        <Field {...getFieldProps(schema, prefix(target, 'isCitizen'))} onChange={this.onIsCitizenChange} />
 
         <div className="expandable-group secondary">
           <Accordion>
@@ -101,34 +82,13 @@ class CitizenshipQuestions extends Component {
         </div>
 
         { isCitizen === 'no' &&
-          <Field
-            name={prefix(target, 'isPermanentResident')}
-            component={renderRadioGroup}
-            label={makeMandatoryLabel(`Is the ${target} a New Zealand permanent resident?`)}
-            options={yesNoOptions}
-            validate={[required]}
-            onChange={this.onCitizenshipSourceChange('isPermanentResident')}
-          />
+          <Field {...getFieldProps(schema, prefix(target, 'isPermanentResident'))} onChange={this.onCitizenshipSourceChange('isPermanentResident')} />
         }
         { isCitizen === 'no' &&
-          <Field
-            name={prefix(target, 'isNZRealmResident')}
-            component={renderRadioGroup}
-            label={makeMandatoryLabel(`Is the ${target} a resident of the Cook Islands, Niue or Tokelau?`)}
-            options={yesNoOptions}
-            validate={[required]}
-            onChange={this.onCitizenshipSourceChange('isNZRealmResident')}
-          />
+          <Field {...getFieldProps(schema, prefix(target, 'isNZRealmResident'))} onChange={this.onCitizenshipSourceChange('isNZRealmResident')} />
         }
         { isCitizen === 'no' &&
-          <Field
-            name={prefix(target, 'isAuResidentOrCitizen')}
-            component={renderRadioGroup}
-            label={makeMandatoryLabel(`Is the ${target} an Australian citizen or permanent resident of Australia?`)}
-            options={yesNoOptions}
-            validate={[required]}
-            onChange={this.onCitizenshipSourceChange('isAuResidentOrCitizen')}
-          />
+          <Field {...getFieldProps(schema, prefix(target, 'isAuResidentOrCitizen'))} onChange={this.onCitizenshipSourceChange('isAuResidentOrCitizen')} />
         }
 
         { isCitizen === 'no' &&
@@ -137,30 +97,13 @@ class CitizenshipQuestions extends Component {
             isNZRealmResident === 'yes' ||
             isAuResidentOrCitizen === 'yes'
           ) &&
-          <Field
-            name={prefix(target, 'nonCitizenDocNumber')}
-            component={renderField}
-            label={makeMandatoryLabel(`Enter the passport/travel document number the ${target} entered New Zealand on:`)}
-            type="text"
-            validate={[required, validCharStrict]}
-            normalize={maxLength(9)}
-          />
+          <Field {...getFieldProps(schema, prefix(target, 'nonCitizenDocNumber'))} />
         }
 
-        <Field
-          name={prefix(target, 'citizenshipWarning')}
-          component={renderWarning}
-        />
+        <Field {...getFieldProps(schema, prefix(target, 'citizenshipWarning'))} />
 
         { isCitizen === 'yes' &&
-          <Field
-            name={prefix(target, 'citizenshipSource')}
-            component={renderSelect}
-            label={makeMandatoryLabel(`${capitalize(target)} is either`)}
-            instructionText={`Please indicate how the ${target} is a New Zealand citizen`}
-            options={citizenshipSourceOptions}
-            validate={[required]}
-          />
+          <Field {...getFieldProps(schema, prefix(target, 'citizenshipSource'))} />
         }
 
         { isCitizen === 'yes' &&
@@ -169,14 +112,7 @@ class CitizenshipQuestions extends Component {
             citizenshipSource === 'bornInCookIslands' ||
             citizenshipSource === 'bornInTokelau'
           ) &&
-          <Field
-            name={prefix(target, 'citizenshipPassportNumber')}
-            component={renderField}
-            label={makeMandatoryLabel(`Enter the ${target}'s New Zealand passport number`)}
-            type="text"
-            validate={[required, validCharStrict]}
-            normalize={maxLength(9)}
-          />
+          <Field {...getFieldProps(schema, prefix(target, 'citizenshipPassportNumber'))} />
         }
       </div>
     )
@@ -185,6 +121,7 @@ class CitizenshipQuestions extends Component {
 
 
 CitizenshipQuestions.propTypes = {
+  schema: PropTypes.object,
   target: PropTypes.string, // the target field that the citizenship form bind to (eg. mother or father)
   isCitizen: PropTypes.string,
   isPermanentResident: PropTypes.string,

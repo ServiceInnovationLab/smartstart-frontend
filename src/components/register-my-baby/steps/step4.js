@@ -2,24 +2,15 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import times from 'lodash/times'
+import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
-import makeMandatoryLabel from '../hoc/make-mandatory-label'
 import Accordion from '../accordion'
-import renderField from '../fields/render-field'
-import renderDatepicker from '../fields/render-datepicker'
-import renderSelect from '../fields/render-select'
-import renderRadioGroup from '../fields/render-radio-group'
-import { required, validDate, validCharStrict } from '../validate'
-import { maxLength } from '../normalize'
-import {
-  childStatuses as childStatusOptions,
-  parentRelationships as parentRelationshipOptions
-} from '../options'
 
-const validate = () => {
-  const errors = {}
-  return errors
-}
+import validate from './validation'
+import schema from './schemas/step4'
+
+const getFieldProps = fieldName =>
+  omit(schema[fieldName], ['validate'])
 
 class ParentRelationshipForm extends Component {
   renderSiblings(otherChildren) {
@@ -29,29 +20,9 @@ class ParentRelationshipForm extends Component {
             <div key={idx}>
               <h4>Child {idx + 1}</h4>
               <div className="conditional-field" key={`siblings-${idx}`}>
-                <Field
-                  name={`siblings.[${idx}].sex`}
-                  component={renderRadioGroup}
-                  label={makeMandatoryLabel(`Sex of child ${idx + 1}`)}
-                  options={[
-                    { value: 'male', display: 'Male'},
-                    { value: 'female', display: 'Female'}
-                  ]}
-                  validate={[required]}
-                />
-                <Field
-                  name={`siblings.[${idx}].statusOfChild`}
-                  component={renderRadioGroup}
-                  label={makeMandatoryLabel("Is this child alive, since died, or were they stillborn?")}
-                  options={childStatusOptions}
-                  validate={[required]}
-                />
-                <Field
-                  name={`siblings.[${idx}].dateOfBirth`}
-                  component={renderDatepicker}
-                  label={makeMandatoryLabel("What is this child's date of birth?")}
-                  validate={[required, validDate]}
-                />
+                <Field {...getFieldProps('siblings[].sex')} name={`siblings.[${idx}].sex`} />
+                <Field {...getFieldProps('siblings[].statusOfChild')} name={`siblings.[${idx}].statusOfChild`} />
+                <Field {...getFieldProps('siblings[].dateOfBirth')} name={`siblings.[${idx}].dateOfBirth`} />
                 { idx === 0 &&
                   <div className="expandable-group secondary">
                     <Accordion>
@@ -105,43 +76,17 @@ class ParentRelationshipForm extends Component {
 
         { !isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
-            <Field
-              name="otherChildren"
-              component={renderSelect}
-              options={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
-              renderEmptyOption={false}
-              label={makeMandatoryLabel("Are there other children born from the same parent relationship?")}
-              instructionText="Select the number of other children with the same mother and father. If this is the first child together then go to the next question"
-              validate={[required]}
-            />
+            <Field {...getFieldProps('otherChildren')} />
 
             { this.renderSiblings(otherChildren) }
 
-            <Field
-              name="parentRelationship"
-              component={renderSelect}
-              options={parentRelationshipOptions}
-              label={makeMandatoryLabel("What was the parents' relationship with each other at the time of the child's birth?")}
-              validate={[required]}
-            />
+            <Field {...getFieldProps('parentRelationship')} />
 
             { (parentRelationship === 'marriage' || parentRelationship === 'civilUnion') &&
               <div className="conditional-field">
-                <Field
-                  name="parentRelationshipDate"
-                  component={renderDatepicker}
-                  label={makeMandatoryLabel("Date of marriage/civil union")}
-                  validate={[required, validDate]}
-                />
-                <Field
-                  name="parentRelationshipPlace"
-                  component={renderField}
-                  type="text"
-                  label={makeMandatoryLabel("Place of marriage/civil union")}
-                  instructionText="City or town and Country (if ceremony was performed overseas)"
-                  validate={[required, validCharStrict]}
-                  normalize={maxLength(60)}
-                />
+                <Field {...getFieldProps('parentRelationship')} />
+                <Field {...getFieldProps('parentRelationshipDate')} />
+                <Field {...getFieldProps('parentRelationshipPlace')} />
               </div>
             }
 

@@ -3,60 +3,17 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import set from 'lodash/set'
+import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
-import makeMandatoryLabel, { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 import Accordion from '../accordion'
-import renderField from '../fields/render-field'
-import renderError from '../fields/render-error'
-import renderDatepicker from '../fields/render-datepicker'
-import renderRadioGroup from '../fields/render-radio-group'
-import renderCheckboxGroup from '../fields/render-checkbox-group'
-import renderCheckbox from '../fields/render-checkbox'
-import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
 import CitizenshipQuestions from '../citizenship-questions'
-import { required, requiredWithMessage, email, maxLength30, validDate, validAlpha, validCharStrict, olderThan, youngerThan } from '../validate'
 import { maxLength } from '../normalize'
-import {
-  ethnicGroups as ethnicGroupOptions,
-  yesNo as yesNoOptions,
-  yesNoNotSure as yesNoNotSureOptions
-} from '../options'
 import warn from '../warn'
-import {
-  REQUIRE_MESSAGE,
-  REQUIRE_MESSAGE_STREET,
-  REQUIRE_MESSAGE_POSTCODE,
-  REQUIRE_AT_LEAST_ONE
-} from '../validation-messages'
+import validate from './validation'
+import schema from './schemas/step3'
 
-const validate = (values) => {
-  const errors = {}
-
-  const ethnicGroups = get(values, 'father.ethnicGroups')
-
-  if (!ethnicGroups || !ethnicGroups.length) {
-    set(errors, 'father.ethnicGroups', REQUIRE_MESSAGE)
-  }
-
-  const assistedHumanReproduction = get(values, 'assistedHumanReproduction')
-  const assistedHumanReproductionManConsented = get(values, 'assistedHumanReproductionManConsented')
-  const assistedHumanReproductionWomanConsented = get(values, 'assistedHumanReproductionWomanConsented')
-  const assistedHumanReproductionSpermDonor = get(values, 'assistedHumanReproductionSpermDonor')
-
-  if (
-    assistedHumanReproduction === 'yes' &&
-    (
-      !assistedHumanReproductionWomanConsented &&
-      !assistedHumanReproductionManConsented &&
-      !assistedHumanReproductionSpermDonor
-    )
-  ) {
-    set(errors, 'assistedHumanReproductionError', REQUIRE_AT_LEAST_ONE)
-  }
-
-  return errors
-}
+const getFieldProps = fieldName =>
+  omit(schema[fieldName], ['validate'])
 
 class FatherDetailsForm extends Component {
   constructor(props) {
@@ -122,186 +79,42 @@ class FatherDetailsForm extends Component {
     const { ethnicGroups } = this.props
     return (
       <div className="component-grouping">
-        <Field
-          name="father.firstNames"
-          component={renderField}
-          type="text"
-          label={makeMandatoryLabel("All first name(s) father is currently known by")}
-          instructionText="Enter all current first and given names. If any differ from names given at birth, those names can be entered below."
-          validate={[required, validAlpha]}
-          normalize={maxLength(75)}
-        />
-
-        <Field
-          name="father.surname"
-          component={renderField}
-          type="text"
-          label={makeMandatoryLabel("Surname of father (currently known by)")}
-          instructionText="Enter all current surnames or family names. If any differ from names at birth, those names can be entered below."
-          validate={[required, validAlpha]}
-          normalize={maxLength(75)}
-        />
-
-        <Field
-          name="father.firstNamesAtBirth"
-          component={renderField}
-          type="text"
-          label="All first name(s) of father at birth (if different from current name)"
-          instructionText="Enter the name given at birth (if it differs from the above). If adopted, please enter the name/s given when adopted not before adoption (if known)"
-          validate={[validAlpha]}
-          normalize={maxLength(75)}
-        />
-
-        <Field
-          name="father.surnameAtBirth"
-          component={renderField}
-          type="text"
-          label="Surname of father at birth (if different from current name)"
-          instructionText="Enter the surname or family name at birth (if it differs). If adopted, please enter the surname when adopted not before adoption (if known)"
-          validate={[validAlpha]}
-          normalize={maxLength(75)}
-        />
-
-        <Field
-          name="father.occupation"
-          component={renderField}
-          type="text"
-          label={makeMandatoryLabel("Usual occupation, profession or job of father")}
-          placeholder="e.g. Teacher"
-          instructionText="Please enter the father's type of occupation not the name of the father's employer"
-          validate={[required, validCharStrict]}
-          normalize={maxLength(60)}
-        />
-
-        <Field
-          name="father.dateOfBirth"
-          component={renderDatepicker}
-          label={makeMandatoryLabel("Father's date of birth")}
-          validate={[required, validDate, olderThan(10), youngerThan(100)]}
-        />
-
-        <Field
-          name="father.placeOfBirth"
-          component={renderField}
-          type="text"
-          label={makeMandatoryLabel("Place of Birth - City/town")}
-          placeholder="e.g. Auckland"
-          validate={[required, validAlpha]}
-          normalize={maxLength(40)}
-        />
-
-        <Field
-          name="father.countryOfBirth"
-          component={renderField}
-          type="text"
-          label="Place of Birth - Country (if born overseas)"
-          placeholder="e.g. Australia"
-          validate={[validAlpha]}
-          normalize={maxLength(19)}
-        />
+        <Field {...getFieldProps('father.firstNames')} />
+        <Field {...getFieldProps('father.surname')} />
+        <Field {...getFieldProps('father.firstNamesAtBirth')} />
+        <Field {...getFieldProps('father.surnameAtBirth')} />
+        <Field {...getFieldProps('father.occupation')} />
+        <Field {...getFieldProps('father.dateOfBirth')} />
+        <Field {...getFieldProps('father.placeOfBirth')} />
+        <Field {...getFieldProps('father.countryOfBirth')} />
 
         <fieldset>
           <legend>Home address</legend>
           <div className="input-groups">
-            <Field
-              name="parentSameAddress"
-              label="Same as mother's"
-              component={renderCheckbox}
-              onChange={this.onParentSameAddressChange}
-            />
-            <Field
-              name="father.homeAddress.line1"
-              component={renderPlacesAutocomplete}
-              type="text"
-              label={makeMandatoryLabel("Street number and Street name")}
-              onPlaceSelect={this.onPlaceSelect}
-              validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
-              normalize={maxLength(50)}
-            />
-            <Field
-              name="father.homeAddress.suburb"
-              component={renderField}
-              type="text"
-              label="Suburb"
-              normalize={maxLength(25)}
-            />
-            <Field
-              name="father.homeAddress.line2"
-              component={renderField}
-              type="text"
-              label={makeMandatoryLabel("Town/City and Postcode")}
-              validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
-              normalize={maxLength(75)}
-            />
+            <Field {...getFieldProps('parentSameAddress')} onChange={this.onParentSameAddressChange}/>
+            <Field {...getFieldProps('father.homeAddress.line1')} onPlaceSelect={this.onPlaceSelect}/>
+            <Field {...getFieldProps('father.homeAddress.suburb')} />
+            <Field {...getFieldProps('father.homeAddress.line2')} />
           </div>
         </fieldset>
 
 
-        <Field
-          name="father.maoriDescendant"
-          component={renderRadioGroup}
-          label={makeMandatoryLabel("Is the father a descendant of a New Zealand Māori?")}
-          instructionText="This will not appear on the birth certificate"
-          options={yesNoNotSureOptions}
-          validate={[required]}
-        />
-
-        <Field
-          name="father.ethnicGroups"
-          component={renderCheckboxGroup}
-          label={makeMandatoryLabel("Which ethnic group(s) does the father belong to?")}
-          instructionText="Select as many boxes as you wish to describe the ethnic group(s) the father belongs to."
-          options={ethnicGroupOptions}
-          onChange={this.onEthnicGroupsChange}
-        />
+        <Field {...getFieldProps('father.maoriDescendant')} />
+        <Field {...getFieldProps('father.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
 
         { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
-          <div className="conditional-field">
-            <Field
-              name="father.ethnicityDescription"
-              component={renderField}
-              type="text"
-              ariaLabel={makeMandatoryAriaLabel("State other ethnicity")}
-              placeholder="Please describe the father’s ethnicity"
-              validate={[required, maxLength30, validCharStrict]}
-            />
-          </div>
+          <Field {...getFieldProps('father.ethnicityDescription')} />
         }
 
         <CitizenshipQuestions
           target="father"
+          schema={schema}
           {...this.props}
         />
 
-        <Field
-          name="father.daytimePhone"
-          component={renderField}
-          type="text"
-          label="Daytime contact phone number"
-          instructionText="Please include the area code or suffix"
-          validate={[validCharStrict]}
-          normalize={maxLength(20)}
-        />
-
-        <Field
-          name="father.alternativePhone"
-          component={renderField}
-          type="text"
-          label="Alternative contact phone number"
-          instructionText="Please include the area code or suffix"
-          validate={[validCharStrict]}
-          normalize={maxLength(20)}
-        />
-
-        <Field
-          name="father.email"
-          component={renderField}
-          type="email"
-          label="Email address"
-          instructionText=""
-          validate={[email]}
-          normalize={maxLength(60)}
-        />
+        <Field {...getFieldProps('father.daytimePhone')} />
+        <Field {...getFieldProps('father.alternativePhone')} />
+        <Field {...getFieldProps('father.email')} />
       </div>
     )
   }
@@ -325,14 +138,7 @@ class FatherDetailsForm extends Component {
         </div>
 
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
-          <Field
-            name="assistedHumanReproduction"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Is the child born as a result of an assisted human reproduction procedure (such as artificial insemination)?")}
-            options={yesNoOptions}
-            onChange={this.handleAssistedHumanReproductionChange}
-            validate={[required]}
-          />
+          <Field {...getFieldProps('assistedHumanReproduction')} onChange={this.handleAssistedHumanReproductionChange}/>
 
           { assistedHumanReproduction === 'yes' &&
             <div className="conditional-field">
@@ -340,9 +146,7 @@ class FatherDetailsForm extends Component {
                 If the mother married, or entered into a civil union or de facto relationship with a man who consented to the mother undergoing the procedure, that man's details should be entered under the father/other parent details. Note: The Donor is generally not the father on the birth certificate.
               </div>
               <Field
-                name="assistedHumanReproductionManConsented"
-                label="I am in a relationship with a man who consented to the procedure. I will name him as the child's father"
-                component={renderCheckbox}
+                {...getFieldProps('assistedHumanReproductionManConsented')}
                 disabled={assistedHumanReproductionWomanConsented || assistedHumanReproductionSpermDonor}
               />
             </div>
@@ -354,9 +158,7 @@ class FatherDetailsForm extends Component {
                 If the mother married or entered into a civil union or de facto relationship with a woman who consented to the mother undergoing the procedure, that woman's details should be entered under the father/other parent details. When you tick the box below all references to 'father' will be changed to 'other parent'.
               </div>
               <Field
-                name="assistedHumanReproductionWomanConsented"
-                label="I am in a relationship with a woman who consented to the procedure. I will name her as the child's other parent"
-                component={renderCheckbox}
+                {...getFieldProps('assistedHumanReproductionWomanConsented')}
                 disabled={assistedHumanReproductionManConsented || assistedHumanReproductionSpermDonor}
               />
             </div>
@@ -368,32 +170,19 @@ class FatherDetailsForm extends Component {
                 If the mother isn't in a relationship with a partner that consented to the mother undergoing the procedure, then you don't need to complete the father/other parent section - you will be able to skip this step and the next step.
               </div>
               <Field
-                name="assistedHumanReproductionSpermDonor"
-                label="I used a sperm donor on my own without a consenting partner. I do not know who the father of the child is"
-                component={renderCheckbox}
+                {...getFieldProps('assistedHumanReproductionSpermDonor')}
                 disabled={assistedHumanReproductionManConsented || assistedHumanReproductionWomanConsented}
               />
             </div>
           }
 
           { assistedHumanReproductionTouched &&
-            <Field
-              name="assistedHumanReproductionError"
-              component={renderError}
-              immediate={true}
-            />
+            <Field {...getFieldProps('assistedHumanReproductionError')} />
           }
 
           { assistedHumanReproduction === 'no' &&
             <div className="component-grouping">
-              <Field
-                name="fatherKnown"
-                component={renderRadioGroup}
-                label={makeMandatoryLabel("Is the father known?")}
-                instructionText="The mother does not need to be in a relationship with the father for him to be named on the birth certificate"
-                options={yesNoOptions}
-                validate={[required]}
-              />
+              <Field {...getFieldProps('fatherKnown')} />
 
               <div className="expandable-group secondary">
                 <Accordion>

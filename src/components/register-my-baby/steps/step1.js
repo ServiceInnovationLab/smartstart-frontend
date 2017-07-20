@@ -3,53 +3,15 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import set from 'lodash/set'
+import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
-import makeMandatoryLabel, { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
 import Accordion from '../accordion'
-import renderField from '../fields/render-field'
-import renderCustomSelect from '../fields/render-custom-select'
-import renderDatepicker from '../fields/render-datepicker'
-import renderBirthOrderSelector from '../fields/render-birth-order-selector'
-import renderCheckboxGroup from '../fields/render-checkbox-group'
-import renderRadioGroup from '../fields/render-radio-group'
-import renderPlacesAutocomplete from '../fields/render-places-autocomplete'
-import { required, requiredWithMessage, maxLength30, validAlpha, validDate, validCharStrict } from '../validate'
 import { maxLength } from '../normalize'
-import {
-  ethnicGroups as ethnicGroupOptions,
-  yesNo as yesNoOptions,
-  yesNoNotSure as yesNoNotSureOptions,
-  sexes as sexOptions,
-  birthPlaceCategories as birthPlaceCategoryOptions
-} from '../options'
-import {
-  REQUIRE_MESSAGE,
-  REQUIRE_MESSAGE_CHILD_FIRST_NAME,
-  REQUIRE_MESSAGE_STREET,
-  REQUIRE_MESSAGE_POSTCODE
-} from '../validation-messages'
+import validate from './validation'
+import schema from './schemas/step1'
 
-const validate = (values) => {
-  const errors = {}
-
-  const oneOfMultiple = get(values, 'child.oneOfMultiple')
-  const multipleBirthOrder = get(values, 'child.multipleBirthOrder')
-
-  if (oneOfMultiple === 'yes' && !multipleBirthOrder) {
-    set(errors, 'child.multipleBirthOrder', REQUIRE_MESSAGE)
-  }
-
-  const ethnicGroups = get(values, 'child.ethnicGroups')
-  if (!ethnicGroups || !ethnicGroups.length) {
-    set(errors, 'child.ethnicGroups', REQUIRE_MESSAGE)
-  }
-
-  return errors
-}
-
-const renderHospitalOption = option =>
-  <div>{option.name}, {option.location}</div>
+const getFieldProps = fieldName =>
+  omit(schema[fieldName], ['validate'])
 
 class ChildDetailsForm extends Component {
   constructor(props) {
@@ -161,42 +123,10 @@ class ChildDetailsForm extends Component {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <Field
-            name="child.firstNames"
-            component={renderField}
-            type="text"
-            placeholder="First name"
-            label={makeMandatoryLabel("Child's given name(s)")}
-            instructionText="Enter the child's first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate"
-            validate={[requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validAlpha]}
-            normalize={maxLength(75)}
-          />
-
-          <Field
-            name="child.surname"
-            component={renderField}
-            type="text"
-            placeholder="E.g Smith"
-            label={makeMandatoryLabel("Child's surname")}
-            validate={[required, validAlpha]}
-            normalize={maxLength(75)}
-          />
-
-          <Field
-            name="child.sex"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Child's sex")}
-            options={sexOptions}
-            validate={[required]}
-          />
-
-          <Field
-            name="child.stillBorn"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Was this child alive at birth?")}
-            options={yesNoOptions}
-            validate={[required]}
-          />
+          <Field {...getFieldProps('child.firstNames')} />
+          <Field {...getFieldProps('child.surname')} />
+          <Field {...getFieldProps('child.sex')} />
+          <Field {...getFieldProps('child.stillBorn')} />
 
           <div className="expandable-group secondary">
             <Accordion>
@@ -214,130 +144,43 @@ class ChildDetailsForm extends Component {
             </Accordion>
           </div>
 
-          <Field
-            name="child.birthDate"
-            component={renderDatepicker}
-            label={makeMandatoryLabel("The child's date of birth")}
-            validate={[required, validDate]}
-          />
-
-          <Field
-            name="child.oneOfMultiple"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Is this child one of a multiple birth (twins, triplets, etc)")}
-            options={yesNoOptions}
-            onChange={this.onMultipleBirthChange}
-            validate={[required]}
-          />
+          <Field {...getFieldProps('child.birthDate')} />
+          <Field {...getFieldProps('child.oneOfMultiple')} onChange={this.onMultipleBirthChange}/>
 
           { oneOfMultiple === 'yes' &&
             <div className="conditional-field">
-              <Field
-                name="child.multipleBirthOrder"
-                component={renderBirthOrderSelector}
-                label={makeMandatoryLabel("What is the birth order for this child?")}
-              />
+              <Field {...getFieldProps('child.multipleBirthOrder')} />
             </div>
           }
 
-          <Field
-            name="birthPlace.category"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Where was the child born?")}
-            options={birthPlaceCategoryOptions}
-            onChange={this.onPlaceOfBirthChanged}
-            validate={[required]}
-          />
+          <Field {...getFieldProps('birthPlace.category')} onChange={this.onPlaceOfBirthChanged} />
 
           { birthPlaceCategory === 'hospital' &&
             <div className="conditional-field">
-              <Field
-                name="birthPlace.hospital"
-                component={renderCustomSelect}
-                options={this.props.birthFacilities}
-                valueKey="identifier"
-                labelKey="name"
-                placeholder="Please select"
-                optionRenderer={renderHospitalOption}
-                valueRenderer={renderHospitalOption}
-                searchable={true}
-                label={makeMandatoryLabel("Hospital name")}
-                validate={[required]}
-              />
+              <Field {...getFieldProps('birthPlace.hospital')} options={this.props.birthFacilities} />
             </div>
           }
 
           { birthPlaceCategory === 'home' &&
             <div className="conditional-field">
-              <Field
-                name="birthPlace.home.line1"
-                component={renderPlacesAutocomplete}
-                type="text"
-                label={makeMandatoryLabel("Street number and Street name")}
-                onPlaceSelect={this.onPlaceSelect}
-                validate={[requiredWithMessage(REQUIRE_MESSAGE_STREET)]}
-                normalize={maxLength(33)}
-              />
-              <Field
-                name="birthPlace.home.suburb"
-                component={renderField}
-                type="text"
-                label="Suburb"
-                normalize={maxLength(20)}
-              />
-              <Field
-                name="birthPlace.home.line2"
-                component={renderField}
-                type="text"
-                label={makeMandatoryLabel("Town/City and Postcode")}
-                validate={[requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)]}
-                normalize={maxLength(20)}
-              />
+              <Field {...getFieldProps('birthPlace.home.line1')} onPlaceSelect={this.onPlaceSelect} />
+              <Field {...getFieldProps('birthPlace.home.suburb')} />
+              <Field {...getFieldProps('birthPlace.home.line2')} />
             </div>
           }
 
           { birthPlaceCategory === 'other' &&
             <div className="conditional-field">
-              <Field
-                name="birthPlace.other"
-                component={renderField}
-                type="text"
-                instructionText="Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital."
-                ariaLabel={makeMandatoryAriaLabel("State other birth place")}
-                validate={[required, validCharStrict]}
-                normalize={maxLength(75)}
-              />
+              <Field {...getFieldProps('birthPlace.other')} />
             </div>
           }
 
-          <Field
-            name="child.maoriDescendant"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Is this child a descendant of a New Zealand Māori?")}
-            instructionText="This will not appear on the birth certificate"
-            options={yesNoNotSureOptions}
-            validate={[required]}
-          />
-
-          <Field
-            name="child.ethnicGroups"
-            component={renderCheckboxGroup}
-            label={makeMandatoryLabel("Which ethnic group(s) does this child belong to?")}
-            instructionText="Select as many boxes as you wish to describe the ethnic group(s) this child belongs to."
-            options={ethnicGroupOptions}
-            onChange={this.onEthnicGroupsChange}
-          />
+          <Field {...getFieldProps('child.maoriDescendant')} />
+          <Field {...getFieldProps('child.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
 
           { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
             <div className="conditional-field">
-              <Field
-                name="child.ethnicityDescription"
-                component={renderField}
-                type="text"
-                ariaLabel={makeMandatoryAriaLabel("State other ethnicity")}
-                placeholder="Please describe the child’s ethnicity"
-                validate={[required, maxLength30, validCharStrict]}
-              />
+              <Field {...getFieldProps('child.ethnicityDescription')} />
             </div>
           }
 

@@ -1,77 +1,18 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import get from 'lodash/get'
-import set from 'lodash/set'
+import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
-import makeMandatoryLabel from '../hoc/make-mandatory-label'
 import Accordion from '../accordion'
-import renderField from '../fields/render-field'
-import renderSelect from '../fields/render-select'
-import renderCheckbox from '../fields/render-checkbox'
-import renderRadioGroup from '../fields/render-radio-group'
 import {
-  yesNo as yesNoOptions,
   irdDeliveryAddresses
 } from '../options'
-import { required, requiredWithMessage, validIrd, validMsd } from '../validate'
-import {
-  REQUIRE_IRD_ADDRESS,
-  REQUIRE_AT_LEAST_ONE_MSD,
-  REQUIRE_MOTHER_EMAIL_IRD,
-  REQUIRE_FATHER_EMAIL_IRD
-} from '../validation-messages'
 
-/**
- * A normalizer function to mimic HTML5 `maxlength` behavior (refer to MSD & IRD field)
- */
-const maximum = (max) => (value, previousVal) => {
-  if (isNaN(value)) {
-    return previousVal;
-  }
+import validate from './validation'
+import schema from './schemas/step5'
 
-  return value <= max ? value : previousVal
-}
-
-const validate = (values) => {
-  const errors = {}
-
-  const irdApplyForNumber = get(values, 'ird.applyForNumber')
-  const irdNumberDeliveryAddress = get(values, 'ird.deliveryAddress')
-  const irdNumberByEmail = get(values, 'ird.numberByEmail')
-
-  if (
-    irdApplyForNumber === 'yes' &&
-    irdNumberByEmail === 'yes' &&
-    (
-      irdNumberDeliveryAddress === 'motherAddress' ||
-      irdNumberDeliveryAddress === 'fatherAddress'
-    )
-  ) {
-    if (irdNumberDeliveryAddress === 'motherAddress') {
-      const motherEmail = get(values, 'mother.email')
-      if (!motherEmail) {
-        set(errors, 'ird.numberByEmail', REQUIRE_MOTHER_EMAIL_IRD)
-      }
-    } else if (irdNumberDeliveryAddress === 'fatherAddress') {
-      const fatherEmail = get(values, 'father.email')
-      if (!fatherEmail) {
-        set(errors, 'ird.numberByEmail', REQUIRE_FATHER_EMAIL_IRD)
-      }
-    }
-  }
-
-
-  const notifyMsd = get(values, 'msd.notify')
-  const motherMsd = get(values, 'msd.mothersClientNumber')
-  const fatherMsd = get(values, 'msd.fathersClientNumber')
-
-  if (notifyMsd && (!motherMsd && !fatherMsd)) {
-    set(errors, 'msd.fathersClientNumber', REQUIRE_AT_LEAST_ONE_MSD)
-  }
-
-  return errors
-}
+const getFieldProps = fieldName =>
+  omit(schema[fieldName], ['validate'])
 
 class IrdMsdSharingForm extends Component {
   render() {
@@ -129,32 +70,14 @@ class IrdMsdSharingForm extends Component {
             </Accordion>
           </div>
 
-          <Field
-            name="ird.applyForNumber"
-            component={renderRadioGroup}
-            label={makeMandatoryLabel("Do you wish to apply for an IRD number for your child?")}
-            options={yesNoOptions}
-            validate={[required]}
-          />
+          <Field {...getFieldProps('ird.applyForNumber')} />
 
           { applyForNumber === 'yes' &&
             <div className="conditional-field">
-              <Field
-                name="ird.deliveryAddress"
-                component={renderSelect}
-                options={deliveryAddresses}
-                label={makeMandatoryLabel("Please choose an address Inland Revenue should post your child's IRD number to")}
-                validate={[requiredWithMessage(REQUIRE_IRD_ADDRESS)]}
-              />
+              <Field {...getFieldProps('ird.deliveryAddress')} options={deliveryAddresses} />
               {
                 deliveryAddress &&
-                <Field
-                  name="ird.numberByEmail"
-                  component={renderRadioGroup}
-                  label={makeMandatoryLabel("Do you also wish to receive your child's IRD number by email?")}
-                  options={yesNoOptions}
-                  validate={[required]}
-                />
+                <Field {...getFieldProps('ird.numberByEmail')} />
               }
 
               {
@@ -164,15 +87,7 @@ class IrdMsdSharingForm extends Component {
                 </span>
               }
 
-              <Field
-                name="ird.taxCreditIRDNumber"
-                component={renderField}
-                type="text"
-                instructionText="This will allow Inland Revenue to add the child's IRD number to your Working for Families details"
-                label="If you have applied for Working for Families Tax Credits for this child please provide your IRD number"
-                validate={[validIrd]}
-                normalize={maximum(999999999)}
-              />
+              <Field {...getFieldProps('ird.taxCreditIRDNumber')} />
             </div>
           }
 
@@ -207,32 +122,12 @@ class IrdMsdSharingForm extends Component {
             </Accordion>
           </div>
 
-          <Field
-            name="msd.notify"
-            label="I give permission for Births, Deaths and Marriages to notify the Ministry of Social Development of the birth of my child."
-            component={renderCheckbox}
-          />
+          <Field {...getFieldProps('msd.notify')} />
 
           { msdNotify &&
             <div className="conditional-field">
-              <Field
-                name="msd.mothersClientNumber"
-                component={renderField}
-                type="text"
-                label="Mother's MSD client number"
-                instructionText="Please provide the MSD client number for at least one parent"
-                validate={[validMsd]}
-                normalize={maximum(999999999)}
-              />
-              <Field
-                name="msd.fathersClientNumber"
-                component={renderField}
-                type="text"
-                label="Father/Other parent's MSD client number"
-                instructionText="Please provide the MSD client number for at least one parent"
-                validate={[validMsd]}
-                normalize={maximum(999999999)}
-              />
+              <Field {...getFieldProps('msd.mothersClientNumber')} />
+              <Field {...getFieldProps('msd.fathersClientNumber')} />
             </div>
           }
 
