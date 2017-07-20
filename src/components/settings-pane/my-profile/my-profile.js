@@ -241,7 +241,7 @@ export class MyProfile extends Component {
           </label>
           <div className="signup-section">
             <h4>Sign-up to reminders</h4>
-            <p>Sign-up to receive reminders from the SmartStart To Do list. A reminder is sent to you at the start of each pregnancy and new baby phase. You can unsubscribe here at any time.</p>
+            <p>Sign-up to reminders from the SmartStart To Do list. A reminder is sent to you at the start of each phase during your pregnancy and with a new baby. You can unsubscribe here at any time.</p>
             {!this.props.isLoggedIn ? <p>Please login to sign-up or update your details.</p> :
               <div>
                 <label>
