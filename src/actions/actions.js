@@ -262,15 +262,20 @@ export function addSubscribed (subscribed) {
 export function fetchPhaseMetadata () {
   return dispatch => {
     dispatch(requestPhaseMetadata())
-    return fetch('/api/phase-metadata/', { credentials: 'same-origin' })
-      .then(checkStatus)
-      .then(response => response.json())
-      .then(json => dispatch(receivePhaseMetadata(json)))
-      .catch(function () {
-        // a failure here is not critical enough to throw
-        // an applicationError - fake an empty response
-        dispatch(receivePhaseMetadata([]))
-      })
+    // this is the request that is made on every page load
+    // we need to set credentials: 'same-origin' to make the fetch
+    // aware of the cookie send back by Django backend
+    return fetch('/api/phase-metadata/', {
+      credentials: 'same-origin'
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+    .then(json => dispatch(receivePhaseMetadata(json)))
+    .catch(function () {
+      // a failure here is not critical enough to throw
+      // an applicationError - fake an empty response
+      dispatch(receivePhaseMetadata([]))
+    })
   }
 }
 

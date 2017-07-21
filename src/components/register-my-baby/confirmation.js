@@ -6,6 +6,7 @@ import {
   products as productOptions
 } from './options'
 import Spinner from '../spinner/spinner'
+import './confirmation.scss'
 
 class Confirmation extends Component {
   constructor(props) {
@@ -47,20 +48,25 @@ class Confirmation extends Component {
     const deliveryPrice = courierDelivery === 'standard' ? 0 : 5
     const totalPrice = (product && quantity) ? (product.price * quantity + deliveryPrice) : 0
 
+    let resultNotification;
+
+    if (product && !paymentSuccess) {
+      resultNotification = <div>
+        <div className="success"><strong>Success:</strong> Thanks for registering the birth of your baby. If we have any questions, we'll contact you.</div>
+        <div className="warning"><strong>Warning:</strong> Your birth certificate order has not been processed, probably because the payment method used was declined. You can order a certificate at a later time if you want to.</div>
+      </div>
+    } else {
+      resultNotification = <div className="instruction">
+        <strong>Thanks for registering the birth of your baby. If we have any questions, we'll contact you.</strong>
+        { product &&
+          <strong>Your baby's birth certificate will normally arrive within 10 working days (allowing time for postal delivery).</strong>
+        }
+      </div>
+    }
+
     return <div className="confirmation">
       <h2><span className="step-number"></span> Te haamauraa <br/> Confirmation</h2>
-      { (product && !paymentSuccess) ?
-        <div>
-          <div className="success"><strong>Success:</strong> Thanks for registering the birth of your baby. If we have any questions, we'll contact you.</div>
-          <div className="warning"><strong>Warning:</strong> Your birth certificate order has not been processed, probably because the payment method used was declined. You can order a certificate at a later time if you want to.</div>
-        </div> :
-        <div className="instruction">
-          <strong>Thanks for registering the birth of your baby. If we have any questions, we'll contact you.</strong>
-          { product &&
-            <strong>Your baby's birth certificate will normally arrive within 10 working days (allowing time for postal delivery).</strong>
-          }
-        </div>
-      }
+      { resultNotification }
       <div className="informative-text">
         Your reference number is: <strong>{sessionData.applicationReferenceNumber}</strong>
       </div>
@@ -95,7 +101,7 @@ class Confirmation extends Component {
         </Accordion.Toggle>
         <Accordion.Content>
           <p>
-            If you want to contact us about your baby's registration you can email <a href="mailto:bdm.nz@dia.govt.nz">bdm.nz@dia.govt.nz</a> or call free on 0800 225 255 (NZ only).
+            If you want to contact us about your baby's registration you can email <a href="mailto:bdm.nz@dia.govt.nz">bdm.nz@dia.govt.nz</a> or call free on <a href="tel:0800225255">0800 225 255</a> (NZ only).
           </p>
         </Accordion.Content>
       </Accordion>
@@ -154,7 +160,7 @@ class Confirmation extends Component {
           <div className="instruction">
             <strong>Do you know what services are available for parents in your area?</strong>
             <br/>
-            <a href="https://smartstart.services.govt.nz" target="_blank" rel="noreferrer noopener">Check out SmartStart</a>
+            <a href="https://smartstart.services.govt.nz">Check out SmartStart</a>
           </div>
         </div>
       </div>

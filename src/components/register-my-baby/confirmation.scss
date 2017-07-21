@@ -1,0 +1,91 @@
+@import 'variables';
+
+.confirmation {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 30px;
+
+  .step-number:after {
+    font-family: 'icomoon';
+    content: $icon-tick;
+    font-size: 16px;
+  }
+
+  .success,
+  .warning {
+    margin-bottom: 15px;
+  }
+
+  .aligner {
+    flex-direction: column;
+
+    .aligner-item {
+      max-width: 100%;
+    }
+
+    .instruction {
+      text-align: center;
+    }
+
+    img {
+      width: 150px;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  }
+
+  .order-summary {
+    margin: 30px 0;
+
+    .fail-payment {
+      border-top: 2px solid $form-warning-outline;
+      border-bottom: 2px solid $form-warning-outline;
+      background-color: $form-warning-bg;
+      justify-content: flex-end;
+
+      > strong {
+        position: relative;
+        display: block;
+        &::before {
+          font-family: 'icomoon';
+          font-size: 18px;
+          line-height: 18px;
+          position: absolute;
+          left: -25px;
+          top: 3px;
+          content: $icon-exclamation;
+          color: $form-error-outline;
+        }
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+  }
+
+  @media #{$desktop-and-above} {
+    .step-number:after {
+      font-size: 28px;
+    }
+
+    .aligner {
+      flex-direction: row;
+
+      img {
+        margin-right: 15px;
+        margin-bottom: 0;
+      }
+
+      .instruction {
+        text-align: left;
+      }
+    }
+
+    .print {
+      text-align: right;
+      button {
+        width: auto;
+      }
+    }
+  }
+}
