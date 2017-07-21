@@ -33,6 +33,10 @@ export const WARNING_NAME_CONTAINS_RANK = 'The name looks like it may include an
 export const WARNING_NAME_CONTAINS_OFFENSIVE = 'The name appears to contain a word or words that may cause offence to a reasonable person. The name may not be accepted for registration as it is, but you do have the opportunity to explain below your reasons for wanting your child to have a name that may contain an offensive term. Prior to registration, a Registrar will review the name(s) and your reasoning to ensure it is not undesirable in the public interest for the person to bear a name or combination of names.'
 export const WARNING_PARENT_SURNAME_MATCH = 'It appears that you have only entered the Mother\'s married surname. If the mother had a different surname at birth please enter that surname in the birth surname field. If, however, the mother\'s birth surname and current surname are the same then proceed with submitting the birth registration as it is.'
 
+export const DUPLICATE_APPLICATION_MESSAGE = <span>
+  It looks like you may have already submitted an application for this child. Please call us on <a href="tel:0800225225">0800 225 225</a> to discuss it further.
+</span>
+
 export const REQUIRE_MOTHER_EMAIL_IRD = <span>
   You have not supplied mother's email address, please add one to the contact details on
   &nbsp;<Link to={'/register-my-baby/mother-details?focus=mother.email'}>this step <span className="visuallyhidden">on the Mother details page</span></Link>

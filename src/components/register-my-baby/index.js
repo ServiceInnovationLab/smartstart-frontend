@@ -34,7 +34,7 @@ const stepNameByStep = invert(stepByStepName)
 
 const scrollToFirstError = () => {
   const firstErrorNode = document.querySelector('.has-error')
-  const firstErrorInput = document.querySelector('.has-error input, .has-error select')
+  const firstErrorInput = document.querySelector('.has-error input, .has-error select, .has-error textarea')
 
   if (!firstErrorNode) {
     return;

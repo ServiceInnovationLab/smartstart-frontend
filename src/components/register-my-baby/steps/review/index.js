@@ -28,13 +28,14 @@ class Review extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      validating: true
+      validating: true,
+      genericError: null
     }
     this.onValidate = this.onValidate.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.handleSubmit(this.onValidate)();
   }
 
@@ -42,13 +43,16 @@ class Review extends Component {
     return validateOnly(this.props.formState, this.props.csrfToken)
       .then(() => {
         this.setState({
-          validating: false
+          validating: false,
+          genericError: null
         })
       })
       .catch((err) => {
         this.setState({
-          validating: false
+          validating: false,
+          genericError: err.errors._error
         })
+
         throw err
       })
   }
@@ -68,6 +72,8 @@ class Review extends Component {
       countries, formState, submitErrors, syncWarnings,
       handleSubmit, submitting, error, onPrevious, onFieldEdit
     } = this.props
+
+    const genericError = this.state.genericError
 
     let declarationText = 'We, as the parents named on this notification, jointly submit this true and correct notification of the birth of our child for registration we both understand that it is an offence to provide false information – that every person who commits such an offence is liable on conviction to imprisonment for a term not exceeding 5 years.'
 
@@ -90,9 +96,9 @@ class Review extends Component {
         { (this.state.validating || submitting) ?
           <Spinner text="Checking your application ..."/> :
           <form onSubmit={handleSubmit(this.onSubmit)}>
-            { error &&
+            { (error || genericError) &&
               <div className="general-error">
-                { renderError({ meta: { touched: true, error }}) }
+                { renderError({ meta: { touched: true, error: error || genericError }}) }
               </div>
             }
 

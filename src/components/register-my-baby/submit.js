@@ -3,7 +3,10 @@ import get from 'lodash/get'
 import { checkStatus } from 'utils'
 import { SubmissionError } from 'redux-form';
 import { transform, transformFullSubmission, SERVER_FIELD_TO_FRONTEND_FIELD } from './transform'
-import { frontendMessageByErrorCode } from './validation-messages'
+import {
+  frontendMessageByErrorCode,
+  DUPLICATE_APPLICATION_MESSAGE
+} from './validation-messages'
 
 const getBaseUrl = () => {
   return window.location.protocol + '//' + window.location.host;
@@ -49,7 +52,7 @@ const toReduxFormSubmissionError = (json) => {
     }
 
     if (duplicate) {
-      set(consumableError, '_error', 'This is a duplicated submission. Please try again or contact us for more detail.')
+      set(consumableError, '_error', DUPLICATE_APPLICATION_MESSAGE)
     }
   } else {
     consumableError._error = 'An unexpected error has occurred.'
