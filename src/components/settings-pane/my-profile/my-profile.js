@@ -194,6 +194,11 @@ export class MyProfile extends Component {
     }
   }
 
+  formValidate () {
+    this.dueDateValidate()
+    this.emailValidate()
+  }
+
   dueDateChange (event) {
     // needed as per https://facebook.github.io/react/docs/forms.html#controlled-components
     // plus we need to trigger the validation once the state update has finished
@@ -201,7 +206,7 @@ export class MyProfile extends Component {
   }
 
   subscribedChange (event) {
-    this.setState({subscribedFieldValue: !this.state.subscribedFieldValue})
+    this.setState({subscribedFieldValue: !this.state.subscribedFieldValue}, this.formValidate.bind(this))
   }
 
   emailChange (event) {
