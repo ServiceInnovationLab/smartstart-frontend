@@ -12,6 +12,7 @@ export const PIWIK_TRACK = 'PIWIK_TRACK'
 export const SUPPLEMENTARY_OPEN = 'SUPPLEMENTARY_OPEN'
 export const SET_DUE_DATE = 'SET_DUE_DATE'
 export const SET_SUBSCRIBED = 'SET_SUBSCRIBED'
+export const SET_USER_EMAIL = 'SET_USER_EMAIL'
 export const REQUEST_PHASE_METADATA = 'REQUEST_PHASE_METADATA'
 export const RECEIVE_PHASE_METADATA = 'RECEIVE_PHASE_METADATA'
 export const SAVE_PERSONALISATION = 'SAVE_PERSONALISATION'
@@ -85,6 +86,13 @@ function setSubscribed (state) {
   return {
     type: SET_SUBSCRIBED,
     subscribed: state
+  }
+}
+
+function setEmailValue (email) {
+  return {
+    type: SET_USER_EMAIL,
+    email: email
   }
 }
 
@@ -367,10 +375,11 @@ export function fetchPersonalisationValues () {
         .then(checkStatus)
         .then(response => response.json())
         .then(json => {
-          let data = Object.assign({}, json.preferences)
+          // email
+          dispatch(setEmailValue(json.email))
 
-          // FIXME: confirm is email needs to be tracked
-          data.email = json.email
+          // personalisation values
+          let data = Object.assign({}, json.preferences)
 
           // clear the savedValues cookie
           Cookie.remove('savedValues', { path: '/' })
@@ -483,8 +492,6 @@ export function saveNewEmail(email) {
 }
 
 export function checkPendingEmails () {
-  const csrftoken = Cookie.load('csrftoken')
-
   return (dispatch, getState) => {
     const isLoggedIn = getState().personalisationActions.isLoggedIn
 

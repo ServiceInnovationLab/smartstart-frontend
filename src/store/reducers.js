@@ -8,6 +8,7 @@ import {
   PIWIK_TRACK,
   SUPPLEMENTARY_OPEN,
   SET_DUE_DATE,
+  SET_USER_EMAIL,
   REQUEST_PHASE_METADATA,
   RECEIVE_PHASE_METADATA,
   SAVE_PERSONALISATION,
@@ -46,6 +47,7 @@ function contentActions (state = {
 function personalisationActions (state = {
   isLoggedIn: false,
   dueDate: null,
+  userEmail: null,
   isFetchingPhaseMetadata: false,
   phaseMetadata: [],
   personalisationValues: {},
@@ -59,6 +61,10 @@ function personalisationActions (state = {
     case SET_DUE_DATE:
       return Object.assign({}, state, {
         dueDate: action.dueDate
+      })
+    case SET_USER_EMAIL:
+      return Object.assign({}, state, {
+        userEmail: action.email
       })
     case REQUEST_PHASE_METADATA:
       return Object.assign({}, state, {

@@ -15,7 +15,7 @@ export class MyProfile extends Component {
       dueDateFieldValue: '',
       subscribedFieldValue: false,
       newEmailFieldValue: '',
-      displayPendingEmailNotification: false,
+      unconfirmedEmail: ''
     }
 
     this.setFilterValuesFromStore = this.setFilterValuesFromStore.bind(this)
@@ -40,18 +40,22 @@ export class MyProfile extends Component {
     // otherwise display existing email in a field
     this.props.dispatch(checkPendingEmails()).then(emails => {
       if (emails.length > 0) {
-        this.setState({ newEmailFieldValue: emails[0].email })
+        this.setState({
+          newEmailFieldValue: emails[0].email,
+          unconfirmedEmail: emails[0].email
+        })
+
         // display message to user to remind that they have unconfirmed email
-        this.setState({ displayPendingEmailNotification: true })
+        this.setState({  })
       } else {
-        this.setState({ newEmailFieldValue: this.props.personalisationValues.email })
+        this.setState({ newEmailFieldValue: this.props.userEmail })
       }
     })
   }
 
   setFilterValuesFromStore (props) {
     let { isLoggedIn, personalisationValues, dispatch } = props
-    let { settings, email } = personalisationValues
+    let { settings } = personalisationValues
 
     // due date
     if (settings && settings.dd && isValidDate(settings.dd)) {
@@ -64,11 +68,11 @@ export class MyProfile extends Component {
 
     // subscribed value
     if (settings && settings.subscribed) {
-      //defaults to true
       this.setState({ subscribedFieldValue: settings.subscribed === 'true' })
       dispatch(addSubscribed(this.state.subscribedFieldValue))
     } else {
       if (isLoggedIn) {
+        //defaults to true
         this.setState({ subscribedFieldValue: true })
         dispatch(addSubscribed(this.state.subscribedFieldValue))
       }
@@ -84,7 +88,7 @@ export class MyProfile extends Component {
     let formIsValid = true
 
     let { dueDateFieldValue, subscribedFieldValue, newEmailFieldValue } = this.state
-    let { settings, email } = this.props.personalisationValues
+    let { settings } = this.props.personalisationValues
 
     // due date field
     if(this.dueDateValidate()) {
@@ -134,7 +138,8 @@ export class MyProfile extends Component {
 
     // send request
     if (formIsValid) {
-      if (email !== newEmailFieldValue && newEmailFieldValue !== '') {
+      if (this.props.userEmail !== newEmailFieldValue &&
+          this.state.unconfirmedEmail !== newEmailFieldValue && newEmailFieldValue !== '') {
         // track the event
         let piwikEvent = {
           'category': 'Profile Data',
@@ -205,13 +210,12 @@ export class MyProfile extends Component {
     this.setState({ dueDateFieldValue: event.target.value }, this.dueDateValidate.bind(this))
   }
 
-  subscribedChange (event) {
+  subscribedChange () {
     this.setState({subscribedFieldValue: !this.state.subscribedFieldValue}, this.formValidate.bind(this))
   }
 
   emailChange (event) {
     this.setState({ newEmailFieldValue: event.target.value }, this.emailValidate.bind(this))
-    this.setState({ displayPendingEmailNotification: false })
   }
 
   render () {
@@ -220,7 +224,7 @@ export class MyProfile extends Component {
       { 'is-open': this.props.shown }
     ),
     notificationClasses = classNames(
-      this.state.displayPendingEmailNotification ? 'success-message' : 'hidden'
+      this.state.unconfirmedEmail ? 'success-message' : 'hidden'
     )
 
 
@@ -272,7 +276,7 @@ export class MyProfile extends Component {
                 </label>
 
                 <div className={notificationClasses}>
-                    You need to confirm your email address before you can receive reminders to this address - you will have been sent an email with a confirmation link.
+                  You need to confirm your email address before you can receive reminders to this address - you will have been sent an email with a confirmation link.
                 </div>
               </div>
             }
@@ -294,14 +298,17 @@ function mapStateToProps (state) {
   } = state
   const {
     personalisationValues,
+    userEmail,
     isLoggedIn
   } = personalisationActions || {
     personalisationValues: {},
+    userEmail: '',
     isLoggedIn: false
   }
 
   return {
     personalisationValues,
+    userEmail,
     isLoggedIn
   }
 }
@@ -310,7 +317,9 @@ MyProfile.propTypes = {
   personalisationValues: PropTypes.object.isRequired,
   shown: PropTypes.bool.isRequired,
   profilePaneClose: PropTypes.func.isRequired,
-  dispatch: PropTypes.func
+  isLoggedIn: PropTypes.bool.isRequired,
+  userEmail: PropTypes.string,
+  dispatch: PropTypes.func,
 }
 
 export default connect(mapStateToProps)(MyProfile)
