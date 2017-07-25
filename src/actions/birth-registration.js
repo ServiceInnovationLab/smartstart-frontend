@@ -48,7 +48,11 @@ export function fetchBirthFacilities() {
       credentials: 'same-origin'
     })
     .then(checkStatus)
-    .then(response => response.json())
+    .then(response => {
+      const csrfToken = response.headers.get('X-XSRF-TOKEN')
+      dispatch(receiveCsrfToken(csrfToken))
+      return response.json()
+    })
     .then(json => dispatch(receiveBirthFacilities(json)))
     .catch(error => dispatch(applicationError(error)))
   }
