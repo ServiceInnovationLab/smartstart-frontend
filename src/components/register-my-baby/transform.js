@@ -18,13 +18,13 @@ import forOwn from 'lodash/forOwn'
  * STEP 2
  * [x] transform mother.ethnicGroups, move ethnicityDescription to ethnicGroups.other
  * [x] normalize birth date to correct format
- * [x] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenshipSource`
+ * [x] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenSource`
  *
  *
  * STEP 3
  * [x] transform father.ethnicGroups, move ethnicityDescription to ethnicGroups.other
  * [x] normalize birth date to correct format
- * [x] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenshipSource`
+ * [x] convert isPermanentResident/isNZRealmResident/isAuResidentOrCitizen to `nonCitizenSource`
  * [x] depends on:
  *
  *      - assistedHumanReproduction
@@ -156,13 +156,13 @@ const transformEthnicGroups = (target = {}) => {
 
 const transformCitizenshipSource = (target = {}) => {
   if (target.isPermanentResident) {
-    set(target, 'nonCitizenshipSource', 'permanentResident')
+    set(target, 'nonCitizenSource', 'permanentResident')
   } else if (target.isNZRealmResident) {
-    set(target, 'nonCitizenshipSource', 'pacificIslandResident')
+    set(target, 'nonCitizenSource', 'pacificIslandResident')
   } else if (target.isAuResidentOrCitizen) {
-    set(target, 'nonCitizenshipSource', 'australian')
+    set(target, 'nonCitizenSource', 'australian')
   } else {
-    set(target, 'nonCitizenshipSource', 'none')
+    set(target, 'nonCitizenSource', 'none')
   }
 
   unset(target, 'isPermanentResident')

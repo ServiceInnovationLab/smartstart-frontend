@@ -270,18 +270,18 @@ describe('Form Data Transformation', () => {
   })
 
 
-  describe('mother.nonCitizenshipSource', () => {
+  describe('mother.nonCitizenSource', () => {
     test('when isPermanentResident = true', () => {
       let transformedData = transform({ mother: { isPermanentResident: true } })
-      expect(transformedData.mother.nonCitizenshipSource).toEqual('permanentResident')
+      expect(transformedData.mother.nonCitizenSource).toEqual('permanentResident')
     })
     test('when isNZRealmResident = true', () => {
       let transformedData = transform({ mother: { isNZRealmResident: true } })
-      expect(transformedData.mother.nonCitizenshipSource).toEqual('pacificIslandResident')
+      expect(transformedData.mother.nonCitizenSource).toEqual('pacificIslandResident')
     })
     test('when isAuResidentOrCitizen = true', () => {
       let transformedData = transform({ mother: { isAuResidentOrCitizen: true } })
-      expect(transformedData.mother.nonCitizenshipSource).toEqual('australian')
+      expect(transformedData.mother.nonCitizenSource).toEqual('australian')
     })
     test('when isPermanentResident & isNZRealmResident & isAuResidentOrCitizen are both false', () => {
       let transformedData = transform({
@@ -291,7 +291,7 @@ describe('Form Data Transformation', () => {
           isAuResidentOrCitizen: false
         }
       })
-      expect(transformedData.mother.nonCitizenshipSource).toEqual('none')
+      expect(transformedData.mother.nonCitizenSource).toEqual('none')
     })
     test('remove helper properties: isPermanentResident/isNZRealmResident/isAuResidentOrCitizen', () => {
       let transformedData = transform({

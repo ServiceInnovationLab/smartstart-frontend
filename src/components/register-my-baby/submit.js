@@ -33,15 +33,21 @@ const toReduxFormSubmissionError = (json) => {
   if (statusCode === 400) {
     if (Array.isArray(errors)) {
       errors.forEach(error => {
-        const frontendMessage = frontendMessageByErrorCode[error.code] || frontendMessageByErrorCode[`${error.code}:${error.field}`]
-        const frontendField = SERVER_FIELD_TO_FRONTEND_FIELD[error.field] || error.field
+        let frontendMessage = frontendMessageByErrorCode[error.code] || frontendMessageByErrorCode[`${error.code}:${error.field}`]
+        let frontendField = SERVER_FIELD_TO_FRONTEND_FIELD[error.field] || error.field
 
-        if (!frontendMessage) {
-          throw new Error('NO_FRONTEND_ERROR_CODE_MAPPING')
-        }
-
-        if (!frontendMessage.message) {
-          frontendMessage.message = error.message
+        if (frontendMessage) {
+          // if no message is defined on frontend, we use server message
+          if (!frontendMessage.message) {
+            frontendMessage.message = error.message
+          }
+        } else {
+          console.warn('NO FRONTEND ERROR CODE MAPPING', error.code) // eslint-disable-line
+          // if no mapping is defined, we use server's message & type
+          frontendMessage = {
+            message: error.message,
+            type: error.type
+          }
         }
 
         const fieldErrors = get(consumableError, frontendField, [])
