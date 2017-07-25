@@ -260,7 +260,7 @@ export class MyProfile extends Component {
                     onChange={this.subscribedChange.bind(this)}
                     checked={this.state.subscribedFieldValue}
                     />
-                  Sign-up to SmartStart To Do list reminders
+                  I want to receive SmartStart To Do list reminders
                 </label>
                 <br />
                 <label>
