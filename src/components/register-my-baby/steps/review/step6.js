@@ -68,7 +68,7 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
         <div className="review-field">
           <div>
             <div>
-              <strong>Total cost</strong>
+              <strong>Total cost </strong>
               <span>${ totalPrice.toFixed(2) }</span>
             </div>
           </div>
