@@ -7,6 +7,7 @@ describe('Form Data Transformation', () => {
     test('value is derived from child.multipleBirthOrder', () => {
       const transformedData = transform({
         child: {
+          oneOfMultiple: 'yes',
           multipleBirthOrder: '1 of 2'
         }
       });
@@ -18,6 +19,7 @@ describe('Form Data Transformation', () => {
     test('value is 0 when child.multipleBirthOrder is empty', () => {
       const transformedData = transform({
         child: {
+          oneOfMultiple: 'yes',
           multipleBirthOrder: ''
         }
       });
@@ -251,25 +253,20 @@ describe('Form Data Transformation', () => {
       transformedData = transform({ msd: { notify: 'no' } })
       expect(transformedData.msd.notify).toEqual(false)
     })
-    test('declarationMade', () => {
-      let transformedData = transform({ declarationMade: 'yes' })
-      expect(transformedData.declarationMade).toEqual(true)
-      transformedData = transform({ declarationMade: 'no' })
-      expect(transformedData.declarationMade).toEqual(false)
-    })
-    test('certificateOrder.courierDelivery', () => {
-      let transformedData = transform({
-        orderBirthCertificate: 'yes',
-        certificateOrder: { courierDelivery: 'yes' }
-      })
-      expect(transformedData.certificateOrder.courierDelivery).toEqual(true)
+  })
 
-      transformedData = transform({
-        orderBirthCertificate: 'yes',
-        certificateOrder: { courierDelivery: 'no' }
-      })
-      expect(transformedData.certificateOrder.courierDelivery).toEqual(false)
+  test('convert certificateOrder.courierDelivery to boolean', () => {
+    let transformedData = transform({
+      orderBirthCertificate: 'yes',
+      certificateOrder: { courierDelivery: 'courier' }
     })
+    expect(transformedData.certificateOrder.courierDelivery).toEqual(true)
+
+    transformedData = transform({
+      orderBirthCertificate: 'yes',
+      certificateOrder: { courierDelivery: 'standard' }
+    })
+    expect(transformedData.certificateOrder.courierDelivery).toEqual(false)
   })
 
 

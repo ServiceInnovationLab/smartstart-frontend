@@ -60,6 +60,8 @@
   top: 100%;
   width: 100%;
   z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
 
   .Select-option {
     padding: 10px 15px;

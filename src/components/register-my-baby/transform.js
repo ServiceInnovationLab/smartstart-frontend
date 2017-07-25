@@ -90,8 +90,7 @@ export const transform = data => {
   update(transformedData, 'ird.applyForNumber', yesNoToBoolean)
   update(transformedData, 'ird.numberByEmail', yesNoToBoolean)
   update(transformedData, 'msd.notify', yesNoToBoolean)
-  update(transformedData, 'declarationMade', yesNoToBoolean)
-  update(transformedData, 'certificateOrder.courierDelivery', yesNoToBoolean)
+  update(transformedData, 'certificateOrder.courierDelivery', value => value === 'courier')
 
   transformEthnicGroups(transformedData.child)
   transformEthnicGroups(transformedData.mother)

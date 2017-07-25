@@ -111,7 +111,7 @@ class Confirmation extends Component {
         </Accordion.Toggle>
         <Accordion.Content>
           <p>
-            If you have applied for an IRD number for your baby, you should receive it within 15 working days. It will arrive separately to your baby's birth certificate. If you have any questions regarding an IRD number, please go to <a href="http://www.ird.govt.nz/how-to/irdnumber" target="_blank" rel="noreferrer noopener">www.ird.govt.nz/how-to/irdnumber</a>
+            If you have applied for an IRD number for your baby, you should receive it within 15 working days. It will arrive separately to your baby's birth certificate. If you have any questions regarding an IRD number, please go to <a href="http://www.ird.govt.nz/how-to/irdnumbers" target="_blank" rel="noreferrer noopener">www.ird.govt.nz/how-to/irdnumbers</a>
           </p>
         </Accordion.Content>
       </Accordion>
