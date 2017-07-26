@@ -10,6 +10,7 @@ import validateStep4 from './steps/validation/step4'
 import validateStep5 from './steps/validation/step5'
 import validateStep6 from './steps/validation/step6'
 
+const steps = [1, 2, 3, 4, 5, 6]
 const stepValidateFn = {
   '1': validateStep1,
   '2': validateStep2,
@@ -24,10 +25,11 @@ const isComplete = (formState, step) => {
   return Object.keys(errors).length === 0
 }
 
-const StepProgress = ({ step, isComplete, isCurrent, onStepClick }) => {
+const StepProgress = ({ step, isComplete, isCurrent, isClickable, onStepClick }) => {
   const stepClass = classNames(
     'form-wizard-step',
     { 'finished': !isCurrent && isComplete },
+    { 'clickable': isClickable },
     { 'current': isCurrent }
   )
   return <div
@@ -43,6 +45,7 @@ const StepProgress = ({ step, isComplete, isCurrent, onStepClick }) => {
 StepProgress.propTypes = {
   step: PropTypes.number,
   isComplete: PropTypes.bool,
+  isClickable: PropTypes.bool,
   isCurrent: PropTypes.bool,
   onStepClick: PropTypes.func
 }
@@ -55,19 +58,30 @@ class FormWizardProgress extends Component {
 
   navigateToStep(targetStep) {
     const { currentStep, formState } = this.props
-    const isCurrentStepComplete = isComplete(formState, currentStep)
-    const isTargetStepComplete = isComplete(formState, targetStep)
+    const isCurrentStepComplete = currentStep === 7 || isComplete(formState, currentStep)
 
     if (!isCurrentStepComplete) {
       this.props.onFailNavigationAttemp()
-    } else if (isTargetStepComplete) {
-      this.props.onNavigateToStep(targetStep)
+    } else {
+      // navigating to review step
+      // need to check that all other steps has completed
+      if (targetStep === 7) {
+        const everyStepComplete = steps.every(step => isComplete(formState, step))
+        if (everyStepComplete) {
+          this.props.onNavigateToStep(targetStep)
+        }
+      } else {
+        const isTargetStepComplete = isComplete(formState, targetStep)
+        if (isTargetStepComplete) {
+          this.props.onNavigateToStep(targetStep)
+        }
+      }
     }
   }
 
   render() {
-    const steps = [1, 2, 3, 4, 5, 6]
     const { currentStep, formState } = this.props
+    const everyStepComplete = steps.every(step => isComplete(formState, step))
 
     return (
       <div className="form-wizard-progress">
@@ -79,7 +93,13 @@ class FormWizardProgress extends Component {
               onStepClick={this.navigateToStep} />
           )
         }
-        <StepProgress step={7} isComplete={false} isCurrent={currentStep === 7} />
+        <StepProgress
+          step={7}
+          isComplete={false}
+          isClickable={everyStepComplete}
+          isCurrent={currentStep === 7}
+          onStepClick={this.navigateToStep}
+        />
       </div>
     )
   }
