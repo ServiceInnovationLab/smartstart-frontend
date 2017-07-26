@@ -1,18 +1,15 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
 import {
   irdDeliveryAddresses
 } from '../options'
-
 import validate from './validation'
 import schema from './schemas/step5'
+import getFieldProps from './get-field-props'
 
-const getFieldProps = fieldName =>
-  omit(schema[fieldName], ['validate'])
 
 class IrdMsdSharingForm extends Component {
   render() {
@@ -70,14 +67,14 @@ class IrdMsdSharingForm extends Component {
             </Accordion>
           </div>
 
-          <Field {...getFieldProps('ird.applyForNumber')} />
+          <Field {...getFieldProps(schema, 'ird.applyForNumber')} />
 
           { applyForNumber === 'yes' &&
             <div className="conditional-field">
-              <Field {...getFieldProps('ird.deliveryAddress')} options={deliveryAddresses} />
+              <Field {...getFieldProps(schema, 'ird.deliveryAddress')} options={deliveryAddresses} />
               {
                 deliveryAddress &&
-                <Field {...getFieldProps('ird.numberByEmail')} />
+                <Field {...getFieldProps(schema, 'ird.numberByEmail')} />
               }
 
               {
@@ -87,7 +84,7 @@ class IrdMsdSharingForm extends Component {
                 </span>
               }
 
-              <Field {...getFieldProps('ird.taxCreditIRDNumber')} />
+              <Field {...getFieldProps(schema, 'ird.taxCreditIRDNumber')} />
             </div>
           }
 
@@ -122,12 +119,12 @@ class IrdMsdSharingForm extends Component {
             </Accordion>
           </div>
 
-          <Field {...getFieldProps('msd.notify')} />
+          <Field {...getFieldProps(schema, 'msd.notify')} />
 
           { msdNotify &&
             <div className="conditional-field">
-              <Field {...getFieldProps('msd.mothersClientNumber')} />
-              <Field {...getFieldProps('msd.fathersClientNumber')} />
+              <Field {...getFieldProps(schema, 'msd.mothersClientNumber')} />
+              <Field {...getFieldProps(schema, 'msd.fathersClientNumber')} />
             </div>
           }
 

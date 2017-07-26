@@ -3,16 +3,13 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
 import CitizenshipQuestions from '../citizenship-questions'
 import { maxLength } from '../normalize'
 import validate from './validation'
 import warn from '../warn'
 import schema from './schemas/step2'
-
-const getFieldProps = fieldName =>
-  omit(schema[fieldName], ['validate'])
+import getFieldProps from './get-field-props'
 
 class MotherDetailsForm extends Component {
   constructor(props) {
@@ -59,30 +56,30 @@ class MotherDetailsForm extends Component {
       <div>
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">2</span> Whaea <br/> Mother</h2>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
-          <Field {...getFieldProps('mother.firstNames')} />
-          <Field {...getFieldProps('mother.surname')} />
-          <Field {...getFieldProps('mother.firstNamesAtBirth')} />
-          <Field {...getFieldProps('mother.surnameAtBirth')} />
-          <Field {...getFieldProps('mother.occupation')} />
-          <Field {...getFieldProps('mother.dateOfBirth')} />
-          <Field {...getFieldProps('mother.placeOfBirth')} />
-          <Field {...getFieldProps('mother.countryOfBirth')} />
+          <Field {...getFieldProps(schema, 'mother.firstNames')} />
+          <Field {...getFieldProps(schema, 'mother.surname')} />
+          <Field {...getFieldProps(schema, 'mother.firstNamesAtBirth')} />
+          <Field {...getFieldProps(schema, 'mother.surnameAtBirth')} />
+          <Field {...getFieldProps(schema, 'mother.occupation')} />
+          <Field {...getFieldProps(schema, 'mother.dateOfBirth')} />
+          <Field {...getFieldProps(schema, 'mother.placeOfBirth')} />
+          <Field {...getFieldProps(schema, 'mother.countryOfBirth')} />
 
           <fieldset>
             <legend>Home address</legend>
             <div className="input-groups">
-              <Field {...getFieldProps('mother.homeAddress.line1')} onPlaceSelect={this.onPlaceSelect}/>
-              <Field {...getFieldProps('mother.homeAddress.suburb')} />
-              <Field {...getFieldProps('mother.homeAddress.line2')} />
+              <Field {...getFieldProps(schema, 'mother.homeAddress.line1')} onPlaceSelect={this.onPlaceSelect}/>
+              <Field {...getFieldProps(schema, 'mother.homeAddress.suburb')} />
+              <Field {...getFieldProps(schema, 'mother.homeAddress.line2')} />
             </div>
           </fieldset>
 
 
-          <Field {...getFieldProps('mother.maoriDescendant')} />
-          <Field {...getFieldProps('mother.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
+          <Field {...getFieldProps(schema, 'mother.maoriDescendant')} />
+          <Field {...getFieldProps(schema, 'mother.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
 
           { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
-            <Field {...getFieldProps('mother.ethnicityDescription')} />
+            <Field {...getFieldProps(schema, 'mother.ethnicityDescription')} />
           }
 
           <CitizenshipQuestions
@@ -91,9 +88,9 @@ class MotherDetailsForm extends Component {
             {...this.props}
           />
 
-          <Field {...getFieldProps('mother.daytimePhone')} />
-          <Field {...getFieldProps('mother.alternativePhone')} />
-          <Field {...getFieldProps('mother.email')} />
+          <Field {...getFieldProps(schema, 'mother.daytimePhone')} />
+          <Field {...getFieldProps(schema, 'mother.alternativePhone')} />
+          <Field {...getFieldProps(schema, 'mother.email')} />
 
           <div className="form-actions">
             <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>

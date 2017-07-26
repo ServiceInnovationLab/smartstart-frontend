@@ -1,10 +1,9 @@
 import React, { PropTypes, Component } from 'react'
-import omit from 'lodash/omit'
 import { Field } from 'redux-form'
 import Accordion from './accordion'
+import getFieldProps from './steps/get-field-props'
 
 const prefix = (prefix, field) => prefix ? `${prefix}.${field}` : field
-const getFieldProps = (schema, fieldName) => omit(schema[fieldName], ['validate'])
 
 class CitizenshipQuestions extends Component {
   constructor(props) {

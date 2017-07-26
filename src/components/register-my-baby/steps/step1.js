@@ -3,15 +3,12 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
 import { maxLength } from '../normalize'
 import validate from './validation'
 import schema from './schemas/step1'
-
-const getFieldProps = fieldName =>
-  omit(schema[fieldName], ['validate'])
+import getFieldProps from './get-field-props'
 
 class ChildDetailsForm extends Component {
   constructor(props) {
@@ -123,10 +120,10 @@ class ChildDetailsForm extends Component {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <Field {...getFieldProps('child.firstNames')} />
-          <Field {...getFieldProps('child.surname')} />
-          <Field {...getFieldProps('child.sex')} />
-          <Field {...getFieldProps('child.stillBorn')} />
+          <Field {...getFieldProps(schema, 'child.firstNames')} />
+          <Field {...getFieldProps(schema, 'child.surname')} />
+          <Field {...getFieldProps(schema, 'child.sex')} />
+          <Field {...getFieldProps(schema, 'child.stillBorn')} />
 
           <div className="expandable-group secondary">
             <Accordion>
@@ -144,43 +141,43 @@ class ChildDetailsForm extends Component {
             </Accordion>
           </div>
 
-          <Field {...getFieldProps('child.birthDate')} />
-          <Field {...getFieldProps('child.oneOfMultiple')} onChange={this.onMultipleBirthChange}/>
+          <Field {...getFieldProps(schema, 'child.birthDate')} />
+          <Field {...getFieldProps(schema, 'child.oneOfMultiple')} onChange={this.onMultipleBirthChange}/>
 
           { oneOfMultiple === 'yes' &&
             <div className="conditional-field">
-              <Field {...getFieldProps('child.multipleBirthOrder')} />
+              <Field {...getFieldProps(schema, 'child.multipleBirthOrder')} />
             </div>
           }
 
-          <Field {...getFieldProps('birthPlace.category')} onChange={this.onPlaceOfBirthChanged} />
+          <Field {...getFieldProps(schema, 'birthPlace.category')} onChange={this.onPlaceOfBirthChanged} />
 
           { birthPlaceCategory === 'hospital' &&
             <div className="conditional-field">
-              <Field {...getFieldProps('birthPlace.hospital')} options={this.props.birthFacilities} />
+              <Field {...getFieldProps(schema, 'birthPlace.hospital')} options={this.props.birthFacilities} />
             </div>
           }
 
           { birthPlaceCategory === 'home' &&
             <div className="conditional-field">
-              <Field {...getFieldProps('birthPlace.home.line1')} onPlaceSelect={this.onPlaceSelect} />
-              <Field {...getFieldProps('birthPlace.home.suburb')} />
-              <Field {...getFieldProps('birthPlace.home.line2')} />
+              <Field {...getFieldProps(schema, 'birthPlace.home.line1')} onPlaceSelect={this.onPlaceSelect} />
+              <Field {...getFieldProps(schema, 'birthPlace.home.suburb')} />
+              <Field {...getFieldProps(schema, 'birthPlace.home.line2')} />
             </div>
           }
 
           { birthPlaceCategory === 'other' &&
             <div className="conditional-field">
-              <Field {...getFieldProps('birthPlace.other')} />
+              <Field {...getFieldProps(schema, 'birthPlace.other')} />
             </div>
           }
 
-          <Field {...getFieldProps('child.maoriDescendant')} />
-          <Field {...getFieldProps('child.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
+          <Field {...getFieldProps(schema, 'child.maoriDescendant')} />
+          <Field {...getFieldProps(schema, 'child.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
 
           { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
             <div className="conditional-field">
-              <Field {...getFieldProps('child.ethnicityDescription')} />
+              <Field {...getFieldProps(schema, 'child.ethnicityDescription')} />
             </div>
           }
 

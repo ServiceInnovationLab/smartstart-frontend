@@ -2,15 +2,12 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import times from 'lodash/times'
-import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
-
 import validate from './validation'
 import schema from './schemas/step4'
+import getFieldProps from './get-field-props'
 
-const getFieldProps = fieldName =>
-  omit(schema[fieldName], ['validate'])
 
 class ParentRelationshipForm extends Component {
   renderSiblings(otherChildren) {
@@ -20,9 +17,9 @@ class ParentRelationshipForm extends Component {
             <div key={idx}>
               <h4>Child {idx + 1}</h4>
               <div className="conditional-field" key={`siblings-${idx}`}>
-                <Field {...getFieldProps('siblings[].sex')} name={`siblings.[${idx}].sex`} />
-                <Field {...getFieldProps('siblings[].statusOfChild')} name={`siblings.[${idx}].statusOfChild`} />
-                <Field {...getFieldProps('siblings[].dateOfBirth')} name={`siblings.[${idx}].dateOfBirth`} />
+                <Field {...getFieldProps(schema, 'siblings[].sex')} name={`siblings.[${idx}].sex`} />
+                <Field {...getFieldProps(schema, 'siblings[].statusOfChild')} name={`siblings.[${idx}].statusOfChild`} />
+                <Field {...getFieldProps(schema, 'siblings[].dateOfBirth')} name={`siblings.[${idx}].dateOfBirth`} />
                 { idx === 0 &&
                   <div className="expandable-group secondary">
                     <Accordion>
@@ -76,17 +73,17 @@ class ParentRelationshipForm extends Component {
 
         { !isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
-            <Field {...getFieldProps('otherChildren')} />
+            <Field {...getFieldProps(schema, 'otherChildren')} />
 
             { this.renderSiblings(otherChildren) }
 
-            <Field {...getFieldProps('parentRelationship')} />
+            <Field {...getFieldProps(schema, 'parentRelationship')} />
 
             { (parentRelationship === 'marriage' || parentRelationship === 'civilUnion') &&
               <div className="conditional-field">
-                <Field {...getFieldProps('parentRelationship')} />
-                <Field {...getFieldProps('parentRelationshipDate')} />
-                <Field {...getFieldProps('parentRelationshipPlace')} />
+                <Field {...getFieldProps(schema, 'parentRelationship')} />
+                <Field {...getFieldProps(schema, 'parentRelationshipDate')} />
+                <Field {...getFieldProps(schema, 'parentRelationshipPlace')} />
               </div>
             }
 

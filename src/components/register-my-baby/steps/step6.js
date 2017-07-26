@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import omit from 'lodash/omit'
 import Accordion from '../accordion'
 import makeFocusable from '../hoc/make-focusable'
 import {
@@ -14,9 +13,7 @@ import './step6.scss'
 import { maxLength } from '../normalize'
 import validate from './validation'
 import schema from './schemas/step6'
-
-const getFieldProps = fieldName =>
-  omit(schema[fieldName], ['validate'])
+import getFieldProps from './get-field-props'
 
 
 class OrderCertificatesForm extends Component {
@@ -90,20 +87,20 @@ class OrderCertificatesForm extends Component {
           You're not required to buy a birth certificate but some people like to have one as a record or momento. To purchase a certificate online you will need a credit card.
         </div>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
-          <Field {...getFieldProps('orderBirthCertificate')} />
+          <Field {...getFieldProps(schema, 'orderBirthCertificate')} />
 
           { orderBirthCertificate === 'yes' &&
             <div className="component-grouping">
               <h4>Certificate details</h4>
 
-              <Field {...getFieldProps('certificateOrder.productCode')} />
+              <Field {...getFieldProps(schema, 'certificateOrder.productCode')} />
 
               <div className="birth-certificate-preview">
                 <img src={`${previewImage}`} alt={`${product ? product.label : 'default'}  preview`}/>
               </div>
 
-              <Field {...getFieldProps('certificateOrder.quantity')} />
-              <Field {...getFieldProps('certificateOrder.courierDelivery')} />
+              <Field {...getFieldProps(schema, 'certificateOrder.quantity')} />
+              <Field {...getFieldProps(schema, 'certificateOrder.courierDelivery')} />
 
               <div className="expandable-group secondary">
                 <Accordion>
@@ -136,9 +133,9 @@ class OrderCertificatesForm extends Component {
               }
               <h4>Delivery details</h4>
 
-              <Field {...getFieldProps('certificateOrder.deliveryName')} />
+              <Field {...getFieldProps(schema, 'certificateOrder.deliveryName')} />
               <Field
-                {...getFieldProps('certificateOrder.deliveryAddressType')}
+                {...getFieldProps(schema, 'certificateOrder.deliveryAddressType')}
                 options={deliveryAddresses}
                 onChange={this.onDeliveryAddressTypeChange}
               />
@@ -147,20 +144,20 @@ class OrderCertificatesForm extends Component {
                 <legend className="visuallyhidden">Delivery address</legend>
                 <div className="input-groups">
                   <Field
-                    {...getFieldProps('certificateOrder.deliveryAddress.line1')}
+                    {...getFieldProps(schema, 'certificateOrder.deliveryAddress.line1')}
                     onPlaceSelect={this.onPlaceSelect}
                   />
-                  <Field {...getFieldProps('certificateOrder.deliveryAddress.suburb')} />
-                  <Field {...getFieldProps('certificateOrder.deliveryAddress.line2')} />
+                  <Field {...getFieldProps(schema, 'certificateOrder.deliveryAddress.suburb')} />
+                  <Field {...getFieldProps(schema, 'certificateOrder.deliveryAddress.line2')} />
                 </div>
               </fieldset>
 
               <Field
-                {...getFieldProps('certificateOrder.deliveryAddress.countryCode')}
+                {...getFieldProps(schema, 'certificateOrder.deliveryAddress.countryCode')}
                 options={this.props.countries}
               />
 
-              <Field {...getFieldProps('certificateOrder.emailAddress')} />
+              <Field {...getFieldProps(schema, 'certificateOrder.emailAddress')} />
 
               <div className="informative-text">
                 You will be directed to a Payment Express hosted payment page for payment when you submit your birth registration.

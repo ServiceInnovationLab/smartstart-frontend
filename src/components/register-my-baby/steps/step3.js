@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import omit from 'lodash/omit'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
 import CitizenshipQuestions from '../citizenship-questions'
@@ -11,9 +10,7 @@ import { maxLength } from '../normalize'
 import warn from '../warn'
 import validate from './validation'
 import schema from './schemas/step3'
-
-const getFieldProps = fieldName =>
-  omit(schema[fieldName], ['validate'])
+import getFieldProps from './get-field-props'
 
 class FatherDetailsForm extends Component {
   constructor(props) {
@@ -79,31 +76,31 @@ class FatherDetailsForm extends Component {
     const { ethnicGroups } = this.props
     return (
       <div className="component-grouping">
-        <Field {...getFieldProps('father.firstNames')} />
-        <Field {...getFieldProps('father.surname')} />
-        <Field {...getFieldProps('father.firstNamesAtBirth')} />
-        <Field {...getFieldProps('father.surnameAtBirth')} />
-        <Field {...getFieldProps('father.occupation')} />
-        <Field {...getFieldProps('father.dateOfBirth')} />
-        <Field {...getFieldProps('father.placeOfBirth')} />
-        <Field {...getFieldProps('father.countryOfBirth')} />
+        <Field {...getFieldProps(schema, 'father.firstNames')} />
+        <Field {...getFieldProps(schema, 'father.surname')} />
+        <Field {...getFieldProps(schema, 'father.firstNamesAtBirth')} />
+        <Field {...getFieldProps(schema, 'father.surnameAtBirth')} />
+        <Field {...getFieldProps(schema, 'father.occupation')} />
+        <Field {...getFieldProps(schema, 'father.dateOfBirth')} />
+        <Field {...getFieldProps(schema, 'father.placeOfBirth')} />
+        <Field {...getFieldProps(schema, 'father.countryOfBirth')} />
 
         <fieldset>
           <legend>Home address</legend>
           <div className="input-groups">
-            <Field {...getFieldProps('parentSameAddress')} onChange={this.onParentSameAddressChange}/>
-            <Field {...getFieldProps('father.homeAddress.line1')} onPlaceSelect={this.onPlaceSelect}/>
-            <Field {...getFieldProps('father.homeAddress.suburb')} />
-            <Field {...getFieldProps('father.homeAddress.line2')} />
+            <Field {...getFieldProps(schema, 'parentSameAddress')} onChange={this.onParentSameAddressChange}/>
+            <Field {...getFieldProps(schema, 'father.homeAddress.line1')} onPlaceSelect={this.onPlaceSelect}/>
+            <Field {...getFieldProps(schema, 'father.homeAddress.suburb')} />
+            <Field {...getFieldProps(schema, 'father.homeAddress.line2')} />
           </div>
         </fieldset>
 
 
-        <Field {...getFieldProps('father.maoriDescendant')} />
-        <Field {...getFieldProps('father.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
+        <Field {...getFieldProps(schema, 'father.maoriDescendant')} />
+        <Field {...getFieldProps(schema, 'father.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
 
         { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
-          <Field {...getFieldProps('father.ethnicityDescription')} />
+          <Field {...getFieldProps(schema, 'father.ethnicityDescription')} />
         }
 
         <CitizenshipQuestions
@@ -112,9 +109,9 @@ class FatherDetailsForm extends Component {
           {...this.props}
         />
 
-        <Field {...getFieldProps('father.daytimePhone')} />
-        <Field {...getFieldProps('father.alternativePhone')} />
-        <Field {...getFieldProps('father.email')} />
+        <Field {...getFieldProps(schema, 'father.daytimePhone')} />
+        <Field {...getFieldProps(schema, 'father.alternativePhone')} />
+        <Field {...getFieldProps(schema, 'father.email')} />
       </div>
     )
   }
@@ -138,7 +135,7 @@ class FatherDetailsForm extends Component {
         </div>
 
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
-          <Field {...getFieldProps('assistedHumanReproduction')} onChange={this.handleAssistedHumanReproductionChange}/>
+          <Field {...getFieldProps(schema, 'assistedHumanReproduction')} onChange={this.handleAssistedHumanReproductionChange}/>
 
           { assistedHumanReproduction === 'yes' &&
             <div className="conditional-field">
@@ -146,7 +143,7 @@ class FatherDetailsForm extends Component {
                 If the mother married, or entered into a civil union or de facto relationship with a man who consented to the mother undergoing the procedure, that man's details should be entered under the father/other parent details. Note: The Donor is generally not the father on the birth certificate.
               </div>
               <Field
-                {...getFieldProps('assistedHumanReproductionManConsented')}
+                {...getFieldProps(schema, 'assistedHumanReproductionManConsented')}
                 disabled={assistedHumanReproductionWomanConsented || assistedHumanReproductionSpermDonor}
               />
             </div>
@@ -158,7 +155,7 @@ class FatherDetailsForm extends Component {
                 If the mother married or entered into a civil union or de facto relationship with a woman who consented to the mother undergoing the procedure, that woman's details should be entered under the father/other parent details. When you tick the box below all references to 'father' will be changed to 'other parent'.
               </div>
               <Field
-                {...getFieldProps('assistedHumanReproductionWomanConsented')}
+                {...getFieldProps(schema, 'assistedHumanReproductionWomanConsented')}
                 disabled={assistedHumanReproductionManConsented || assistedHumanReproductionSpermDonor}
               />
             </div>
@@ -170,19 +167,19 @@ class FatherDetailsForm extends Component {
                 If the mother isn't in a relationship with a partner that consented to the mother undergoing the procedure, then you don't need to complete the father/other parent section - you will be able to skip this step and the next step.
               </div>
               <Field
-                {...getFieldProps('assistedHumanReproductionSpermDonor')}
+                {...getFieldProps(schema, 'assistedHumanReproductionSpermDonor')}
                 disabled={assistedHumanReproductionManConsented || assistedHumanReproductionWomanConsented}
               />
             </div>
           }
 
           { assistedHumanReproductionTouched &&
-            <Field {...getFieldProps('assistedHumanReproductionError')} />
+            <Field {...getFieldProps(schema, 'assistedHumanReproductionError')} />
           }
 
           { assistedHumanReproduction === 'no' &&
             <div className="component-grouping">
-              <Field {...getFieldProps('fatherKnown')} />
+              <Field {...getFieldProps(schema, 'fatherKnown')} />
 
               <div className="expandable-group secondary">
                 <Accordion>
