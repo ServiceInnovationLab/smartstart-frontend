@@ -65,19 +65,11 @@ class RegisterMyBabyForm extends Component {
     this.handleSubmitFail = this.handleSubmitFail.bind(this)
     this.handleFieldReviewEdit = this.handleFieldReviewEdit.bind(this)
     this.submit = this.submit.bind(this)
+    this.goToStep = this.goToStep.bind(this)
     this.state = {
       step: 1,
       stepName: 'child-details',
       isReviewing: false,
-      steps: [
-        { icon: '', name: 'Child'},
-        { icon: '', name: 'Mother'},
-        { icon: '', name: 'Father'},
-        { icon: '', name: 'Others'},
-        { icon: '', name: 'IRD/MSD Sharing'},
-        { icon: '', name: 'Buy Birth Certificates'},
-        { icon: '', name: 'Review'}
-      ]
     }
   }
   nextStep() {
@@ -201,14 +193,19 @@ class RegisterMyBabyForm extends Component {
   }
 
   render() {
-    const { step, steps, isReviewing, animationClass = '' } = this.state
+    const { step, isReviewing, animationClass = '' } = this.state
 
     const searchParams = new URLSearchParams(this.props.location.search)
     const autoFocusField = searchParams.get('focus')
 
     return (
       <div>
-        <FormWizardProgress currentStep={step} steps={steps} />
+        <FormWizardProgress
+          currentStep={step}
+          onFailNavigationAttemp={() => window.setTimeout(scrollToFirstError, 200)}
+          onNavigateToStep={this.goToStep}
+        />
+
         <CSSTransitionGroup
           component="div"
           className={`slider-animation-container ${animationClass}`}

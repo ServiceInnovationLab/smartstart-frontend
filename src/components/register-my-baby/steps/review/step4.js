@@ -10,6 +10,8 @@ import {
   parentRelationships,
   getOptionDisplay
 } from '../../options'
+import schema from '../schemas/step4'
+import getFieldReviewProps from './get-field-review-props'
 
 const renderStep4Review = ({ formState, onEdit }) => {
   const isFormHidden = formState.fatherKnown === 'no' ||
@@ -30,8 +32,7 @@ const renderStep4Review = ({ formState, onEdit }) => {
     { !isFormHidden &&
       <div>
         <Field
-          label="Are there other children born from the same parent relationship?"
-          name="otherChildren"
+          {...getFieldReviewProps(schema, 'otherChildren')}
           component={renderFieldReview}
           section="parents-relationship"
           onEdit={onEdit}
@@ -41,21 +42,21 @@ const renderStep4Review = ({ formState, onEdit }) => {
             <div className="review-subfields" key={idx}>
               <h4>Child {idx + 1}</h4>
               <Field
-                label={`Sex of child ${idx + 1}`}
+                {...getFieldReviewProps(schema, 'siblings[].sex')}
                 name={`siblings.[${idx}].sex`}
                 component={renderSubFieldReview}
                 valueRenderer={getOptionDisplay(sexes)}
                 section="parents-relationship"
               />
               <Field
-                label="Is this child alive, since died, or were they stillborn?"
+                {...getFieldReviewProps(schema, 'siblings[].statusOfChild')}
                 name={`siblings.[${idx}].statusOfChild`}
                 component={renderSubFieldReview}
                 valueRenderer={getOptionDisplay(childStatuses)}
                 section="parents-relationship"
               />
               <Field
-                label="What is this child's date of birth?"
+                {...getFieldReviewProps(schema, 'siblings[].dateOfBirth')}
                 name={`siblings.[${idx}].dateOfBirth`}
                 component={renderSubFieldReview}
                 valueRenderer={formatDate}
@@ -66,8 +67,7 @@ const renderStep4Review = ({ formState, onEdit }) => {
         }
 
         <Field
-          label="What was the parents' relationship with each other at the time of the child's birth?"
-          name="parentRelationship"
+          {...getFieldReviewProps(schema, 'parentRelationship')}
           component={renderFieldReview}
           valueRenderer={getOptionDisplay(parentRelationships)}
           section="parents-relationship"
@@ -77,15 +77,13 @@ const renderStep4Review = ({ formState, onEdit }) => {
         { (formState.parentRelationship === 'marriage' || formState.parentRelationship === 'civilUnion') &&
           <div className="review-subfields">
             <Field
-              name="parentRelationshipDate"
-              label="Date of marriage/civil union"
+              {...getFieldReviewProps(schema, 'parentRelationshipDate')}
               component={renderSubFieldReview}
               valueRenderer={formatDate}
               section="parents-relationship"
             />
             <Field
-              name="parentRelationshipPlace"
-              label="Place of marriage/civil union"
+              {...getFieldReviewProps(schema, 'parentRelationshipPlace')}
               component={renderSubFieldReview}
               section="parents-relationship"
             />

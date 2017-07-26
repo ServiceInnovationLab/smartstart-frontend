@@ -11,6 +11,8 @@ import {
   birthCertificateDeliveryAddresses,
   getOptionDisplay
 } from '../../options'
+import schema from '../schemas/step6'
+import getFieldReviewProps from './get-field-review-props'
 
 const renderStep6Review = ({formState, onEdit, countries}) => {
   const product = formState.orderBirthCertificate === 'yes' ? find(products, { value: formState.certificateOrder.productCode }) : null
@@ -32,8 +34,7 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
       <button type="button" onClick={() => onEdit('buy-birth-certificates')} className="section-edit-btn">Edit</button>
     </div>
     <Field
-      name="orderBirthCertificate"
-      label="Do you want to order a birth certificate?"
+      {...getFieldReviewProps(schema, 'orderBirthCertificate')}
       component={renderFieldReview}
       valueRenderer={getOptionDisplay(yesNo)}
       section="buy-birth-certificates"
@@ -42,23 +43,20 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
     { formState.orderBirthCertificate === 'yes' &&
       <div>
         <Field
-          name="certificateOrder.productCode"
-          label="Choose your design"
+          {...getFieldReviewProps(schema, 'certificateOrder.productCode')}
           component={renderFieldReview}
           valueRenderer={() => selectedDesign}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
         <Field
-          name="certificateOrder.quantity"
-          label="Choose your quantity"
+          {...getFieldReviewProps(schema, 'certificateOrder.quantity')}
           component={renderFieldReview}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
         <Field
-          name="certificateOrder.courierDelivery"
-          label="Choose your delivery method"
+          {...getFieldReviewProps(schema, 'certificateOrder.courierDelivery')}
           component={renderFieldReview}
           valueRenderer={getOptionDisplay(deliveryMethods)}
           section="buy-birth-certificates"
@@ -76,23 +74,20 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
 
         <h4>Delivery details</h4>
         <Field
-          name="certificateOrder.deliveryName"
-          label="Delivery name"
+          {...getFieldReviewProps(schema, 'certificateOrder.deliveryName')}
           component={renderFieldReview}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
         <Field
-          name="certificateOrder.deliveryAddressType"
-          label="What address should we deliver to?"
+          {...getFieldReviewProps(schema, 'certificateOrder.deliveryAddressType')}
           component={renderFieldReview}
           valueRenderer={getOptionDisplay(birthCertificateDeliveryAddresses)}
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
         <Field
-          name="certificateOrder.deliveryAddress.line1"
-          label="What address should we deliver to?"
+          {...getFieldReviewProps(schema, 'certificateOrder.deliveryAddress.line1')}
           component={renderFieldReview}
           valueRenderer={() => formatAddress(formState.certificateOrder.deliveryAddress)}
           section="buy-birth-certificates"
@@ -100,8 +95,7 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
         />
 
         <Field
-          name="certificateOrder.deliveryAddress.countryCode"
-          label="Country (if not New Zealand)"
+          {...getFieldReviewProps(schema, 'certificateOrder.deliveryAddress.countryCode')}
           component={renderFieldReview}
           valueRenderer={() => deliveryCountry}
           section="buy-birth-certificates"
@@ -109,8 +103,7 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
         />
 
         <Field
-          name="certificateOrder.emailAddress"
-          label="Email address (for a tax receipt)"
+          {...getFieldReviewProps(schema, 'certificateOrder.emailAddress')}
           component={renderFieldReview}
           section="buy-birth-certificates"
           onEdit={onEdit}

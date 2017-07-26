@@ -12,6 +12,8 @@ import {
   citizenshipSources,
   getOptionDisplay
 } from '../../options'
+import schema from '../schemas/step3'
+import getFieldReviewProps from './get-field-review-props'
 
 const renderStep3Review = ({ formState, onEdit }) => {
     const { isCitizen, citizenshipSource } = formState.father || {};
@@ -22,8 +24,7 @@ const renderStep3Review = ({ formState, onEdit }) => {
       </div>
 
       <Field
-        label="Is the child born as a result of an assisted human reproduction procedure (such as artificial insemination)?"
-        name="assistedHumanReproduction"
+        {...getFieldReviewProps(schema, 'assistedHumanReproduction')}
         component={renderFieldReview}
         valueRenderer={getOptionDisplay(yesNo)}
         section="father-details"
@@ -33,22 +34,19 @@ const renderStep3Review = ({ formState, onEdit }) => {
       { formState.assistedHumanReproduction === 'yes' &&
         <div className="review-subfields">
           <Field
-            label="I am in a relationship with a man who consented to the procedure. I will name him as the child's father"
-            name="assistedHumanReproductionManConsented"
+            {...getFieldReviewProps(schema, 'assistedHumanReproductionManConsented')}
             component={renderSubFieldReview}
             valueRenderer={value => value ? 'Yes' : 'No'}
             section="father-details"
           />
           <Field
-            label="I am in a relationship with a woman who consented to the procedure. I will name her as the child's other parent"
-            name="assistedHumanReproductionWomanConsented"
+            {...getFieldReviewProps(schema, 'assistedHumanReproductionWomanConsented')}
             component={renderSubFieldReview}
             valueRenderer={value => value ? 'Yes' : 'No'}
             section="father-details"
           />
           <Field
-            label="I used a sperm donor on my own without a consenting partner. I do not know who the father of the child is"
-            name="assistedHumanReproductionSpermDonor"
+            {...getFieldReviewProps(schema, 'assistedHumanReproductionSpermDonor')}
             component={renderSubFieldReview}
             valueRenderer={value => value ? 'Yes' : 'No'}
             section="father-details"
@@ -58,8 +56,7 @@ const renderStep3Review = ({ formState, onEdit }) => {
 
       { formState.assistedHumanReproduction === 'no' &&
         <Field
-          label="Is the father known?"
-          name="fatherKnown"
+          {...getFieldReviewProps(schema, 'fatherKnown')}
           component={renderFieldReview}
           valueRenderer={getOptionDisplay(yesNo)}
           section="father-details"
@@ -80,65 +77,56 @@ const renderStep3Review = ({ formState, onEdit }) => {
         ) &&
         <div>
           <Field
-            label="All first name(s) father is currently known by"
-            name="father.firstNames"
+            {...getFieldReviewProps(schema, 'father.firstNames')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Surname of father (currently known by)"
-            name="father.surname"
+            {...getFieldReviewProps(schema, 'father.surname')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="All first name(s) of father at birth (if different from current name)"
-            name="father.firstNamesAtBirth"
+            {...getFieldReviewProps(schema, 'father.firstNamesAtBirth')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Surname of father at birth (if different from current name)"
-            name="father.surnameAtBirth"
+            {...getFieldReviewProps(schema, 'father.surnameAtBirth')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Usual occupation, profession or job of father"
-            name="father.occupation"
+            {...getFieldReviewProps(schema, 'father.occupation')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Father's date of birth"
-            name="father.dateOfBirth"
+            {...getFieldReviewProps(schema, 'father.dateOfBirth')}
             component={renderFieldReview}
             valueRenderer={formatDate}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Place of Birth - City/town"
-            name="father.placeOfBirth"
+            {...getFieldReviewProps(schema, 'father.placeOfBirth')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Place of Birth - Country (if born overseas)"
-            name="father.countryOfBirth"
+            {...getFieldReviewProps(schema, 'father.countryOfBirth')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Home address"
-            name="father.homeAddress.line1"
+            {...getFieldReviewProps(schema, 'father.homeAddress.line1')}
             component={renderFieldReview}
             valueRenderer={() => formatAddress(formState.father.homeAddress)}
             section="father-details"
@@ -147,16 +135,14 @@ const renderStep3Review = ({ formState, onEdit }) => {
           <Field name="father.homeAddress.suburb" component={renderReviewValidation} />
           <Field name="father.homeAddress.line2" component={renderReviewValidation} />
           <Field
-            label="Is the father a descendant of a New Zealand Māori?"
-            name="father.maoriDescendant"
+            {...getFieldReviewProps(schema, 'father.maoriDescendant')}
             component={renderFieldReview}
             valueRenderer={getOptionDisplay(yesNoNotSure)}
             section="father-details"
             onEdit={onEdit}
           />
           <Field
-            label="Which ethnic group(s) does the father belong to?"
-            name="father.ethnicGroups"
+            {...getFieldReviewProps(schema, 'father.ethnicGroups')}
             component={renderFieldReview}
             valueRenderer={value => value.map(getOptionDisplay(ethnicGroups)).join(', ')}
             section="father-details"
@@ -164,16 +150,14 @@ const renderStep3Review = ({ formState, onEdit }) => {
           />
           { formState.father.ethnicGroups && formState.father.ethnicGroups.indexOf('other') > -1 &&
             <Field
-              label="Please describe the father’s ethnicity"
-              name="father.ethnicityDescription"
+              {...getFieldReviewProps(schema, 'father.ethnicityDescription')}
               component={renderFieldReview}
               section="father-details"
               onEdit={onEdit}
             />
           }
           <Field
-            label="Is the father a New Zealand citizen?"
-            name="father.isCitizen"
+            {...getFieldReviewProps(schema, 'father.isCitizen')}
             component={renderFieldReview}
             valueRenderer={getOptionDisplay(yesNo)}
             section="father-details"
@@ -182,29 +166,25 @@ const renderStep3Review = ({ formState, onEdit }) => {
           { isCitizen === 'no' &&
             <div className="review-subfields">
               <Field
-                label="Is the father a New Zealand permanent resident?"
-                name="father.isPermanentResident"
+                {...getFieldReviewProps(schema, 'father.isPermanentResident')}
                 component={renderSubFieldReview}
                 valueRenderer={getOptionDisplay(yesNo)}
                 section="father-details"
               />
               <Field
-                label="Is the father a resident of the Cook Islands, Niue or Tokelau?"
-                name="father.isNZRealmResident"
+                {...getFieldReviewProps(schema, 'father.isNZRealmResident')}
                 component={renderSubFieldReview}
                 valueRenderer={getOptionDisplay(yesNo)}
                 section="father-details"
               />
               <Field
-                label="Is the father an Australian citizen or permanent resident of Australia?"
-                name="father.isAuResidentOrCitizen"
+                {...getFieldReviewProps(schema, 'father.isAuResidentOrCitizen')}
                 component={renderSubFieldReview}
                 valueRenderer={getOptionDisplay(yesNo)}
                 section="father-details"
               />
               <Field
-                label="Passport/travel document number the father entered New Zealand on:"
-                name="father.nonCitizenDocNumber"
+                {...getFieldReviewProps(schema, 'father.nonCitizenDocNumber')}
                 component={renderSubFieldReview}
                 section="father-details"
               />
@@ -214,8 +194,7 @@ const renderStep3Review = ({ formState, onEdit }) => {
           { isCitizen === 'yes' &&
             <div className="review-subfields">
               <Field
-                label="Father is"
-                name="father.citizenshipSource"
+                {...getFieldReviewProps(schema, 'father.citizenshipSource')}
                 component={renderSubFieldReview}
                 valueRenderer={getOptionDisplay(citizenshipSources)}
                 section="father-details"
@@ -224,8 +203,7 @@ const renderStep3Review = ({ formState, onEdit }) => {
                  citizenshipSource === 'bornInCookIslands' ||
                  citizenshipSource === 'bornInTokelau') &&
                 <Field
-                  label="Father's New Zealand passport number:"
-                  name="father.citizenshipPassportNumber"
+                  {...getFieldReviewProps(schema, 'father.citizenshipPassportNumber')}
                   component={renderSubFieldReview}
                   section="father-details"
                 />
@@ -239,24 +217,21 @@ const renderStep3Review = ({ formState, onEdit }) => {
           />
 
           <Field
-            name="father.daytimePhone"
-            label="Daytime contact phone number"
+            {...getFieldReviewProps(schema, 'father.daytimePhone')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
 
           <Field
-            name="father.alternativePhone"
-            label="Alternative contact phone number"
+            {...getFieldReviewProps(schema, 'father.alternativePhone')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}
           />
 
           <Field
-            name="father.email"
-            label="Email address"
+            {...getFieldReviewProps(schema, 'father.email')}
             component={renderFieldReview}
             section="father-details"
             onEdit={onEdit}

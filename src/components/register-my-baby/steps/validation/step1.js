@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 import check from './check'
-import  schema from '../schemas/step1'
+import schema from '../schemas/step1'
 
 const validate = (values) => {
   const errors = {}

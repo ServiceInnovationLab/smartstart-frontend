@@ -18,6 +18,8 @@ import {
   REQUIRE_EXPLAINATION
 } from '../../validation-messages'
 import { maxLength } from '../../normalize'
+import schema from '../schemas/step1'
+import getFieldReviewProps from './get-field-review-props'
 
 const renderBirthPlace = formState => category => {
   if (category === 'hospital') {
@@ -40,15 +42,13 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
     </div>
 
     <Field
-      label="Child's given names"
-      name="child.firstNames"
+      {...getFieldReviewProps(schema, 'child.firstNames')}
       component={renderFieldReview}
       section="child-details"
       onEdit={onEdit}
     />
     <Field
-      label="Child's surname"
-      name="child.surname"
+      {...getFieldReviewProps(schema, 'child.surname')}
       component={renderFieldReview}
       section="child-details"
       onEdit={onEdit}
@@ -66,32 +66,28 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
       </div>
     }
     <Field
-      label="Sex of child"
-      name="child.sex"
+      {...getFieldReviewProps(schema, 'child.sex')}
       component={renderFieldReview}
       valueRenderer={getOptionDisplay(sexes)}
       section="child-details"
       onEdit={onEdit}
     />
     <Field
-      label="Was this child alive at birth?"
-      name="child.stillBorn"
+      {...getFieldReviewProps(schema, 'child.stillBorn')}
       component={renderFieldReview}
       valueRenderer={getOptionDisplay(yesNo)}
       section="child-details"
       onEdit={onEdit}
     />
     <Field
-      label="The child's date of birth"
-      name="child.birthDate"
+      {...getFieldReviewProps(schema, 'child.birthDate')}
       component={renderFieldReview}
       valueRenderer={formatDate}
       section="child-details"
       onEdit={onEdit}
     />
     <Field
-      label="Is this child one of a multiple birth (twins, triplets, etc)"
-      name="child.oneOfMultiple"
+      {...getFieldReviewProps(schema, 'child.oneOfMultiple')}
       component={renderFieldReview}
       valueRenderer={getOptionDisplay(yesNo)}
       section="child-details"
@@ -99,16 +95,14 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
     />
     { formState.child.oneOfMultiple === 'yes' &&
       <Field
-        label="What is the birth order for this child?"
-        name="child.multipleBirthOrder"
+        {...getFieldReviewProps(schema, 'child.multipleBirthOrder')}
         component={renderFieldReview}
         section="child-details"
         onEdit={onEdit}
       />
     }
     <Field
-      label="Where was the child born?"
-      name="birthPlace.category"
+      {...getFieldReviewProps(schema, 'birthPlace.category')}
       component={renderFieldReview}
       valueRenderer={renderBirthPlace(formState)}
       section="child-details"
@@ -119,16 +113,14 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
     <Field name="birthPlace.home.line2" component={renderReviewValidation} />
     <Field name="birthPlace.other" component={renderReviewValidation} />
     <Field
-      label="Is this child a descendant of a New Zealand Māori?"
-      name="child.maoriDescendant"
+      {...getFieldReviewProps(schema, 'child.maoriDescendant')}
       component={renderFieldReview}
       valueRenderer={getOptionDisplay(yesNoNotSure)}
       section="child-details"
       onEdit={onEdit}
     />
     <Field
-      label="Which ethnic group(s) does this child belong to?"
-      name="child.ethnicGroups"
+      {...getFieldReviewProps(schema, 'child.ethnicGroups')}
       component={renderFieldReview}
       valueRenderer={value => value.map(getOptionDisplay(ethnicGroups)).join(', ')}
       section="child-details"
@@ -136,8 +128,7 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
     />
     { formState.child.ethnicGroups && formState.child.ethnicGroups.indexOf('other') > -1 &&
       <Field
-        label="Please describe the child’s ethnicity"
-        name="child.ethnicityDescription"
+        {...getFieldReviewProps(schema, 'child.ethnicityDescription')}
         component={renderFieldReview}
         section="child-details"
         onEdit={onEdit}

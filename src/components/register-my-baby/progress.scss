@@ -19,14 +19,6 @@
       margin-left: 5px;
     }
 
-    &.current {
-      color: $text-color;
-      font-weight: bold;
-      border-color: $form-teal-dark;
-      border-bottom: 1px solid white;
-      margin-bottom: -1px;
-    }
-
     &.finished {
       font-weight: bold;
       background-color: $form-teal-dark;
@@ -49,6 +41,14 @@
         background-color: $form-teal-hover;
         color: $text-color;
       }
+    }
+
+    &.current {
+      color: $text-color;
+      font-weight: bold;
+      border-color: $form-teal-dark;
+      border-bottom: 1px solid white;
+      margin-bottom: -1px;
     }
   }
 }

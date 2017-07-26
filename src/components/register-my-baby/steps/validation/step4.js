@@ -5,6 +5,16 @@ import  schema from '../schemas/step4'
 const validate = (values) => {
   const errors = {}
 
+  const fatherKnown = get(values, 'fatherKnown')
+  const assistedHumanReproduction = get(values, 'assistedHumanReproduction')
+  const assistedHumanReproductionSpermDonor = get(values, 'assistedHumanReproductionSpermDonor')
+
+  const isFormHidden = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
+
+  if (isFormHidden) {
+    return errors;
+  }
+
   const siblings = get(values, 'siblings')
 
   const parentRelationship = get(values, 'parentRelationship')
