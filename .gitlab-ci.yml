@@ -1,4 +1,10 @@
-# vim:ff=unix ts=2 sw=2 ai expandtab
-test_env_build:
+before_script:
+  - npm install
+
+lint:
   script:
-    - curl -X POST -F token=$GITLAB_PIPELINE_TRIGGER_TOKEN -F ref=master -F "variables[UPSTREAM_TRIGGER]=FRONTEND_PUSH" https://gitlab.catalyst.net.nz/api/v3/projects/42/trigger/builds
+    - npm run lint
+
+unit_test:
+  script:
+    - npm run test
