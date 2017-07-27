@@ -155,11 +155,11 @@ const transformEthnicGroups = (target = {}) => {
 }
 
 const transformCitizenshipSource = (target = {}) => {
-  if (target.isPermanentResident) {
+  if (target.isPermanentResident === 'yes') {
     set(target, 'nonCitizenSource', 'permanentResident')
-  } else if (target.isNZRealmResident) {
+  } else if (target.isNZRealmResident === 'yes') {
     set(target, 'nonCitizenSource', 'pacificIslandResident')
-  } else if (target.isAuResidentOrCitizen) {
+  } else if (target.isAuResidentOrCitizen === 'yes') {
     set(target, 'nonCitizenSource', 'australian')
   } else {
     set(target, 'nonCitizenSource', 'none')
@@ -168,6 +168,10 @@ const transformCitizenshipSource = (target = {}) => {
   unset(target, 'isPermanentResident')
   unset(target, 'isNZRealmResident')
   unset(target, 'isAuResidentOrCitizen')
+
+  if (target.isCitizen) {
+    unset(target, 'nonCitizenSource')
+  }
 
   return target
 }

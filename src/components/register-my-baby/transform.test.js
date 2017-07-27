@@ -271,24 +271,24 @@ describe('Form Data Transformation', () => {
 
 
   describe('mother.nonCitizenSource', () => {
-    test('when isPermanentResident = true', () => {
-      let transformedData = transform({ mother: { isPermanentResident: true } })
+    test('when isPermanentResident = yes', () => {
+      let transformedData = transform({ mother: { isPermanentResident: 'yes' } })
       expect(transformedData.mother.nonCitizenSource).toEqual('permanentResident')
     })
-    test('when isNZRealmResident = true', () => {
-      let transformedData = transform({ mother: { isNZRealmResident: true } })
+    test('when isNZRealmResident = yes', () => {
+      let transformedData = transform({ mother: { isNZRealmResident: 'yes' } })
       expect(transformedData.mother.nonCitizenSource).toEqual('pacificIslandResident')
     })
-    test('when isAuResidentOrCitizen = true', () => {
-      let transformedData = transform({ mother: { isAuResidentOrCitizen: true } })
+    test('when isAuResidentOrCitizen = yes', () => {
+      let transformedData = transform({ mother: { isAuResidentOrCitizen: 'yes' } })
       expect(transformedData.mother.nonCitizenSource).toEqual('australian')
     })
-    test('when isPermanentResident & isNZRealmResident & isAuResidentOrCitizen are both false', () => {
+    test('when isPermanentResident & isNZRealmResident & isAuResidentOrCitizen are both "no"', () => {
       let transformedData = transform({
         mother: {
-          isPermanentResident: false,
-          isNZRealmResident: false,
-          isAuResidentOrCitizen: false
+          isPermanentResident: 'no',
+          isNZRealmResident: 'no',
+          isAuResidentOrCitizen: 'no'
         }
       })
       expect(transformedData.mother.nonCitizenSource).toEqual('none')
@@ -296,14 +296,28 @@ describe('Form Data Transformation', () => {
     test('remove helper properties: isPermanentResident/isNZRealmResident/isAuResidentOrCitizen', () => {
       let transformedData = transform({
         mother: {
-          isPermanentResident: true,
-          isNZRealmResident: false,
-          isAuResidentOrCitizen: false
+          isPermanentResident: 'yes',
+          isNZRealmResident: 'no',
+          isAuResidentOrCitizen: 'no'
         }
       })
       expect(keys(transformedData.mother).indexOf('isPermanentResident')).toEqual(-1)
       expect(keys(transformedData.mother).indexOf('isNZRealmResident')).toEqual(-1)
       expect(keys(transformedData.mother).indexOf('isAuResidentOrCitizen')).toEqual(-1)
+    })
+    test('when mother is citizen, nonCitizenSource should be unset', () => {
+      let transformedData = transform({
+        mother: {
+          isCitizen: 'yes',
+          isPermanentResident: 'yes',
+          isNZRealmResident: 'no',
+          isAuResidentOrCitizen: 'no'
+        }
+      })
+      expect(keys(transformedData.mother).indexOf('isPermanentResident')).toEqual(-1)
+      expect(keys(transformedData.mother).indexOf('isNZRealmResident')).toEqual(-1)
+      expect(keys(transformedData.mother).indexOf('isAuResidentOrCitizen')).toEqual(-1)
+      expect(keys(transformedData.mother).indexOf('nonCitizenSource')).toEqual(-1)
     })
   })
 

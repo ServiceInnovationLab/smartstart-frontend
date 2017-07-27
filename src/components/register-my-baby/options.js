@@ -39,8 +39,8 @@ export const citizenshipSources = [
   { value: 'bornInNiue', display: 'Born in Niue' },
   { value: 'bornInCookIslands', display: 'Born in the Cook Islands' },
   { value: 'bornInTokelau', display: 'Born in Tokelau' },
-  { value: 'citizenByDescent', display: 'New Zealand citizen by Descent' },
-  { value: 'citizenByGrant', display: 'New Zealand citizen by Grant' }
+  { value: 'byDescent', display: 'New Zealand citizen by Descent' },
+  { value: 'byGrant', display: 'New Zealand citizen by Grant' }
 ]
 
 export const childStatuses = [
