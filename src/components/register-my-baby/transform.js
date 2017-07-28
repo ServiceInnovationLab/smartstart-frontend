@@ -89,7 +89,6 @@ export const transform = data => {
   update(transformedData, 'fatherKnown', yesNoToBoolean)
   update(transformedData, 'ird.applyForNumber', yesNoToBoolean)
   update(transformedData, 'ird.numberByEmail', yesNoToBoolean)
-  update(transformedData, 'msd.notify', yesNoToBoolean)
   update(transformedData, 'certificateOrder.courierDelivery', value => value === 'courier')
 
   transformEthnicGroups(transformedData.child)
@@ -223,6 +222,8 @@ const cleanup = data => {
   const birthPlaceCategory = get(data, 'birthPlace.category')
   const oneOfMultiple = get(data, 'child.oneOfMultiple')
   const fatherKnown = get(data, 'fatherKnown')
+  const irdApplyForNumber = get(data, 'ird.applyForNumber')
+  const msdNotify = get(data, 'msd.notify')
   const orderBirthCertificate = get(data, 'orderBirthCertificate')
 
   if (birthPlaceCategory === 'home') {
@@ -247,6 +248,17 @@ const cleanup = data => {
     unset(data, 'parentRelationshipDate')
     unset(data, 'parentRelationshipPlace')
     unset(data, 'siblings')
+  }
+
+  if (!irdApplyForNumber) {
+    unset(data, 'ird.deliveryAddress')
+    unset(data, 'ird.numberByEmail')
+    unset(data, 'ird.taxCreditIRDNumber')
+  }
+
+  if (!msdNotify) {
+    unset(data, 'msd.mothersClientNumber')
+    unset(data, 'msd.fathersClientNumber')
   }
 
   if (orderBirthCertificate !== 'yes') {

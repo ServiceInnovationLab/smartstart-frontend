@@ -242,16 +242,10 @@ describe('Form Data Transformation', () => {
       expect(transformedData.ird.applyForNumber).toEqual(false)
     })
     test('ird.numberByEmail', () => {
-      let transformedData = transform({ ird: { numberByEmail: 'yes' } })
+      let transformedData = transform({ ird: { applyForNumber: 'yes', numberByEmail: 'yes' } })
       expect(transformedData.ird.numberByEmail).toEqual(true)
-      transformedData = transform({ ird: { numberByEmail: 'no' } })
+      transformedData = transform({ ird: { applyForNumber: 'yes', numberByEmail: 'no' } })
       expect(transformedData.ird.numberByEmail).toEqual(false)
-    })
-    test('msd.notify', () => {
-      let transformedData = transform({ msd: { notify: 'yes' } })
-      expect(transformedData.msd.notify).toEqual(true)
-      transformedData = transform({ msd: { notify: 'no' } })
-      expect(transformedData.msd.notify).toEqual(false)
     })
   })
 
@@ -533,6 +527,36 @@ describe('Form Data Transformation', () => {
           }
         })
         expect(keys(transformedData).indexOf('certificateOrder')).toEqual(-1)
+      })
+    })
+
+    describe('ird', () => {
+      test('must not send other ird fields when applyForNumber === no', () => {
+        let transformedData = transform({
+          ird: {
+            applyForNumber: 'no',
+            deliveryAddress: 'test',
+            numberByEmail: 'yes',
+            taxCreditIRDNumber: '123'
+          }
+        })
+        expect(keys(transformedData).indexOf('deliveryAddress')).toEqual(-1)
+        expect(keys(transformedData).indexOf('numberByEmail')).toEqual(-1)
+        expect(keys(transformedData).indexOf('taxCreditIRDNumber')).toEqual(-1)
+      })
+    })
+
+    describe('msd', () => {
+      test('must not send other msd fields when msd.notify === false', () => {
+        let transformedData = transform({
+          msd: {
+            notify: 'no',
+            mothersClientNumber: '123',
+            fathersClientNumber: '',
+          }
+        })
+        expect(keys(transformedData).indexOf('mothersClientNumber')).toEqual(-1)
+        expect(keys(transformedData).indexOf('fathersClientNumber')).toEqual(-1)
       })
     })
   })
