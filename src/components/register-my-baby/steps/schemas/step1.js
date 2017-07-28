@@ -7,7 +7,7 @@ import renderBirthOrderSelector from '../../fields/render-birth-order-selector'
 import renderCheckboxGroup from '../../fields/render-checkbox-group'
 import renderRadioGroup from '../../fields/render-radio-group'
 import renderPlacesAutocomplete from '../../fields/render-places-autocomplete'
-import { maxLength } from '../../normalize'
+import { combine, maxLength, titleCase } from '../../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
@@ -126,7 +126,7 @@ const fields = {
     type: 'text',
     label: makeMandatoryLabel('Street number and Street name'),
     onPlaceSelect: requireHandler,
-    normalize: maxLength(33),
+    normalize: combine(maxLength(33), titleCase),
     validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET)]
   },
 
@@ -135,7 +135,7 @@ const fields = {
     component: renderField,
     type: 'text',
     label: 'Suburb',
-    normalize: maxLength(20)
+    normalize: combine(maxLength(20), titleCase)
   },
 
   'birthPlace.home.line2': {
@@ -144,7 +144,7 @@ const fields = {
     type: 'text',
     label: makeMandatoryLabel('Town/City and Postcode'),
     validate: [requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)],
-    normalize: maxLength(20)
+    normalize: combine(maxLength(20), titleCase)
   },
 
   'birthPlace.other': {
@@ -156,7 +156,6 @@ const fields = {
     validate: [required, validCharStrict],
     normalize: maxLength(75)
   },
-
 
   'child.maoriDescendant': {
     name: 'child.maoriDescendant',

@@ -6,7 +6,7 @@ import renderRadioGroup from '../../fields/render-radio-group'
 import renderPlacesAutocomplete from '../../fields/render-places-autocomplete'
 import renderWarning from '../../fields/render-warning'
 import renderSelect from '../../fields/render-select'
-import { maxLength } from '../../normalize'
+import { combine, maxLength, titleCase } from '../../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
@@ -77,7 +77,7 @@ const fields = {
     placeholder: "e.g. Teacher",
     instructionText: "Please enter the mother's type of occupation not the name of the mother's employer",
     validate: [required, validCharStrict],
-    normalize: maxLength(60),
+    normalize: combine(maxLength(60), titleCase),
   },
   'mother.dateOfBirth': {
     name: "mother.dateOfBirth",
@@ -92,7 +92,7 @@ const fields = {
     label: makeMandatoryLabel("Place of Birth - City/town"),
     placeholder: "e.g. Auckland",
     validate: [required, validAlpha],
-    normalize: maxLength(40),
+    normalize: combine(maxLength(40), titleCase),
   },
   'mother.countryOfBirth': {
     name: "mother.countryOfBirth",
@@ -101,7 +101,7 @@ const fields = {
     label: "Place of Birth - Country (if born overseas)",
     placeholder: "e.g. Australia",
     validate: [validAlpha],
-    normalize: maxLength(19),
+    normalize: combine(maxLength(19), titleCase),
   },
   'mother.homeAddress.line1': {
     name: "mother.homeAddress.line1",
@@ -110,14 +110,14 @@ const fields = {
     label: makeMandatoryLabel("Street number and Street name"),
     onPlaceSelect: requireHandler,
     validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET)],
-    normalize: maxLength(50),
+    normalize: combine(maxLength(50), titleCase),
   },
   'mother.homeAddress.suburb': {
     name: "mother.homeAddress.suburb",
     component: renderField,
     type: "text",
     label: "Suburb",
-    normalize: maxLength(25),
+    normalize: combine(maxLength(25), titleCase),
   },
   'mother.homeAddress.line2': {
     name: "mother.homeAddress.line2",
@@ -125,7 +125,7 @@ const fields = {
     type: "text",
     label: makeMandatoryLabel("Town/City and Postcode"),
     validate: [requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)],
-    normalize: maxLength(75),
+    normalize: combine(maxLength(75), titleCase),
   },
   'mother.maoriDescendant': {
     name: "mother.maoriDescendant",

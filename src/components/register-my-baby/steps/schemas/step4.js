@@ -3,7 +3,7 @@ import renderField from '../../fields/render-field'
 import renderDatepicker from '../../fields/render-datepicker'
 import renderRadioGroup from '../../fields/render-radio-group'
 import renderSelect from '../../fields/render-select'
-import { maxLength } from '../../normalize'
+import { combine, maxLength, titleCase } from '../../normalize'
 import {
   sexes as sexOptions,
   childStatuses as childStatusOptions,
@@ -65,7 +65,7 @@ const fields = {
     label: makeMandatoryLabel("Place of marriage/civil union"),
     instructionText: "City or town and Country (if ceremony was performed overseas)",
     validate: [required, validCharStrict],
-    normalize: maxLength(60),
+    normalize: combine(maxLength(60), titleCase),
   }
 }
 
