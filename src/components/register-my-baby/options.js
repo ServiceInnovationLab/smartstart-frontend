@@ -8,7 +8,7 @@ export const yesNo = [
 export const yesNoNotSure = [
   { value: 'yes', display: 'Yes'},
   { value: 'no', display: 'No'},
-  { value: 'notsure', display: 'Not sure'}
+  { value: 'unknown', display: 'Not sure'}
 ]
 
 export const sexes = [
@@ -57,8 +57,8 @@ export const parentRelationships = [
 ]
 
 export const irdDeliveryAddresses = [
-  { value: 'motherAddress', display: 'Mother\'s' },
-  { value: 'fatherAddress', display: 'Father\'s' },
+  { value: 'mothersAddress', display: 'Mother\'s' },
+  { value: 'fathersAddress', display: 'Father\'s' },
   { value: 'birthCertificateAddress', display: 'Birth Certificate (if you order one)' }
 ]
 

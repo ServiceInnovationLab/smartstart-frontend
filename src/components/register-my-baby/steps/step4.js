@@ -81,7 +81,6 @@ class ParentRelationshipForm extends Component {
 
             { (parentRelationship === 'marriage' || parentRelationship === 'civilUnion') &&
               <div className="conditional-field">
-                <Field {...getFieldProps(schema, 'parentRelationship')} />
                 <Field {...getFieldProps(schema, 'parentRelationshipDate')} />
                 <Field {...getFieldProps(schema, 'parentRelationshipPlace')} />
               </div>
