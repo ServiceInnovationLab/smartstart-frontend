@@ -57,10 +57,10 @@ class FormWizardProgress extends Component {
   }
 
   navigateToStep(targetStep) {
-    const { currentStep, formState } = this.props
+    const { currentStep, isReviewing, formState } = this.props
     const isCurrentStepComplete = currentStep === 7 || isComplete(formState, currentStep)
 
-    if (!isCurrentStepComplete) {
+    if (isReviewing && !isCurrentStepComplete) {
       this.props.onFailNavigationAttemp()
     } else {
       // navigating to review step
@@ -85,13 +85,15 @@ class FormWizardProgress extends Component {
 
     return (
       <div className="form-wizard-progress">
-        { steps.map(step =>
-            <StepProgress step={step}
+        { steps.map(step => {
+            const stepComplete = isComplete(formState, step)
+            return <StepProgress step={step}
               key={step}
-              isComplete={isComplete(formState, step)}
+              isComplete={stepComplete}
+              isClickable={stepComplete}
               isCurrent={currentStep === step}
               onStepClick={this.navigateToStep} />
-          )
+          })
         }
         <StepProgress
           step={7}
@@ -108,6 +110,8 @@ class FormWizardProgress extends Component {
 FormWizardProgress.propTypes = {
   formState: PropTypes.object.isRequired,
   currentStep: PropTypes.number.isRequired,
+  isReviewing: PropTypes.bool,
+  isRequired: PropTypes.bool,
   onNavigateToStep: PropTypes.func,
   onFailNavigationAttemp: PropTypes.func
 }

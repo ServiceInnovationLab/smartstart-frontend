@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+import range from 'lodash/range'
 import check from './check'
 import  schema from '../schemas/step4'
 
@@ -8,6 +9,7 @@ const validate = (values) => {
   const fatherKnown = get(values, 'fatherKnown')
   const assistedHumanReproduction = get(values, 'assistedHumanReproduction')
   const assistedHumanReproductionSpermDonor = get(values, 'assistedHumanReproductionSpermDonor')
+  const otherChildren = get(values, 'otherChildren')
 
   const isFormHidden = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
 
@@ -15,14 +17,12 @@ const validate = (values) => {
     return errors;
   }
 
-  const siblings = get(values, 'siblings')
-
   const parentRelationship = get(values, 'parentRelationship')
 
   check('otherChildren')(schema, values, errors)
 
-  if (siblings && siblings.length) {
-    siblings.forEach((sibling, idx) => {
+  if (otherChildren > 0) {
+    range(otherChildren).forEach(idx => {
       check(`siblings.[${idx}].sex`)(schema, values, errors)
       check(`siblings.[${idx}].statusOfChild`)(schema, values, errors)
       check(`siblings.[${idx}].dateOfBirth`)(schema, values, errors)

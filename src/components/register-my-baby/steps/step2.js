@@ -93,7 +93,10 @@ class MotherDetailsForm extends Component {
           <Field {...getFieldProps(schema, 'mother.email')} />
 
           <div className="form-actions">
-            <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
+            { this.props.isReviewing ?
+              <button type="button" className="previous" onClick={handleSubmit(this.props.onPrevious)}>Back</button>:
+              <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
+            }
             <div>
               { this.props.isReviewing &&
                 <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>

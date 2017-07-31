@@ -105,7 +105,15 @@ class RegisterMyBabyForm extends Component {
   goToStep(step, replace = false, focus = '') {
     const stepName = stepNameByStep[step]
 
+    const currentStep = this.state.step;
+
     if (stepName) {
+      if (currentStep === 7 && step !== currentStep) {
+        this.setState({
+          isReviewing: true
+        });
+      }
+
       let url = `/register-my-baby/${stepName}`;
 
       if (focus) {
@@ -126,10 +134,6 @@ class RegisterMyBabyForm extends Component {
   }
 
   handleFieldReviewEdit(section, fieldName) {
-    this.setState({
-      isReviewing: true
-    });
-
     this.goToStep(stepByStepName[section], false, fieldName)
   }
 
@@ -202,6 +206,7 @@ class RegisterMyBabyForm extends Component {
       <div>
         <FormWizardProgress
           currentStep={step}
+          isReviewing={isReviewing}
           onFailNavigationAttemp={() => window.setTimeout(scrollToFirstError, 200)}
           onNavigateToStep={this.goToStep}
         />
