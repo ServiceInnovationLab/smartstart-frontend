@@ -113,7 +113,7 @@ describe('render card components', () => {
 
   test('it sorts non-chronological cards to the end', () => {
     // h2 is first, paragraph tag is second
-    expect(phase.children().at(2).prop('title')).toEqual('Test normal card')
-    expect(phase.children().at(3).prop('title')).toEqual('Test non chronological card')
+    expect(phase.children().at(1).prop('title')).toEqual('Test normal card')
+    expect(phase.children().at(2).prop('title')).toEqual('Test non chronological card')
   })
 })

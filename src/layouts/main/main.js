@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { piwikTrackPost } from 'actions/actions'
 import Header from 'layouts/header/header'
 import Footer from 'layouts/footer/footer'
 import SettingsPane from 'components/settings-pane/settings-pane'

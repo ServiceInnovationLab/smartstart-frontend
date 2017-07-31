@@ -2,7 +2,6 @@ import './feature-page.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { piwikTrackPost } from 'actions/actions'
 import { IndexLink } from 'react-router'
 import Header from 'layouts/header/header'
 import Footer from 'layouts/footer/footer'
