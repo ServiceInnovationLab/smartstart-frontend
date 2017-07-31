@@ -44,7 +44,17 @@ const invalidCharTest = (value, regex) => {
   const invalidMatches = value ? value.match(regex) : []
 
   if (invalidMatches && invalidMatches.length) {
-    return INVALID_CHAR_MESSAGE.replace('${invalid_matches}', uniq(invalidMatches).map(c => `'${c}'`).join(', '))
+    return INVALID_CHAR_MESSAGE.replace('{invalid_matches}',
+      uniq(invalidMatches)
+      .map(
+        // there are some quirks around replacing with a text contains `$` in it
+        // we need to use the pattern "$$" to correctly insert a "$"
+        // please refer here for more detail:
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
+        c => c === '$' ? `'$$'` : `'${c}'`
+      )
+      .join(', ')
+    )
   }
 }
 export const validAlpha = value => invalidCharTest(value, invalidAlphaRegex)
