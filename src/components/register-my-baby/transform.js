@@ -11,6 +11,7 @@ import forOwn from 'lodash/forOwn'
 
 /**
  * STEP 1
+ * [x] child.aliveAtBirth --> stillBorn
  * [x] child.multipleBirthOrder --> birthOrderNumber / birthOrderTotal
  * [x] normalize birth date to correct format
  * [x] transform child.ethnicGroups, move child.ethnicityDescription to child.ethnicGroups.other
@@ -82,7 +83,6 @@ export const transform = data => {
     update(sibling, 'dateOfBirth', formatDate)
   )
 
-  update(transformedData, 'child.stillBorn', yesNoToBoolean)
   update(transformedData, 'child.oneOfMultiple', yesNoToBoolean)
   update(transformedData, 'mother.isCitizen', yesNoToBoolean)
   update(transformedData, 'father.isCitizen', yesNoToBoolean)
@@ -90,6 +90,8 @@ export const transform = data => {
   update(transformedData, 'ird.applyForNumber', yesNoToBoolean)
   update(transformedData, 'ird.numberByEmail', yesNoToBoolean)
   update(transformedData, 'certificateOrder.courierDelivery', value => value === 'courier')
+
+  transformStillBorn(transformedData)
 
   transformEthnicGroups(transformedData.child)
   transformEthnicGroups(transformedData.mother)
@@ -129,6 +131,12 @@ const formatDate = date =>
 
 const yesNoToBoolean = value =>
   value === 'yes' ? true : false
+
+const transformStillBorn = data => {
+  const childAlive = get(data, 'child.aliveAtBirth') === 'yes'
+  set(data, 'child.stillBorn', !childAlive)
+  unset(data, 'child.aliveAtBirth')
+}
 
 const transformEthnicGroups = (target = {}) => {
   const ethnicGroupsObj = {

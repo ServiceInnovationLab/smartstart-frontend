@@ -3,6 +3,27 @@ import keys from 'lodash/keys'
 import moment from 'moment'
 
 describe('Form Data Transformation', () => {
+  describe('child stillBorn', () => {
+    test('should convert child.aliveAtBirth to child.stillBorn', () => {
+      let transformedData = transform({
+        child: { aliveAtBirth: 'yes' }
+      })
+      expect(transformedData.child.stillBorn).toEqual(false)
+
+      transformedData = transform({
+        child: { aliveAtBirth: 'no' }
+      })
+      expect(transformedData.child.stillBorn).toEqual(true)
+    })
+
+    test('should remove child.aliveAtBirth', () => {
+      let transformedData = transform({
+        child: { aliveAtBirth: 'no' }
+      })
+      expect(keys(transformedData.child).indexOf('aliveAtBirth')).toEqual(-1)
+    })
+  })
+
   describe('child.birthOrderNumber & child.birthOrderTotal', () => {
     test('value is derived from child.multipleBirthOrder', () => {
       const transformedData = transform({
@@ -183,17 +204,6 @@ describe('Form Data Transformation', () => {
   })
 
   describe('transform yes/no to boolean', () => {
-    test('child.stillBorn', () => {
-      let transformedData = transform({
-        child: { stillBorn: 'yes' }
-      })
-      expect(transformedData.child.stillBorn).toEqual(true)
-
-      transformedData = transform({
-        child: { stillBorn: 'no' }
-      })
-      expect(transformedData.child.stillBorn).toEqual(false)
-    })
     test('child.oneOfMultiple', () => {
       let transformedData = transform({
         child: { oneOfMultiple: 'yes' }

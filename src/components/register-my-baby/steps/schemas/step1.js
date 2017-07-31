@@ -67,7 +67,7 @@ const fields = {
   },
 
   'child.stillBorn': {
-    name: 'child.stillBorn',
+    name: 'child.aliveAtBirth',
     component: renderRadioGroup,
     label: makeMandatoryLabel('Was this child alive at birth?'),
     validate: [required],

@@ -145,8 +145,10 @@ class RegisterMyBabyForm extends Component {
             const productCode = get(submittedData, 'certificateOrder.productCode')
             const quantity = get(submittedData, 'certificateOrder.quantity')
             const courierDelivery = get(submittedData, 'certificateOrder.courierDelivery')
+            const stillBorn = get(submittedData, 'child.stillBorn')
             return rememberBroData({
               applicationReferenceNumber: result.response.applicationReferenceNumber,
+              stillBorn,
               productCode,
               quantity,
               courierDelivery
@@ -158,7 +160,8 @@ class RegisterMyBabyForm extends Component {
         }
 
         return rememberBroData({
-          applicationReferenceNumber: result.response.applicationReferenceNumber
+          applicationReferenceNumber: result.response.applicationReferenceNumber,
+          stillBorn: get(submittedData, 'child.stillBorn')
         })
         .then(() => {
           browserHistory.push('/register-my-baby/confirmation')

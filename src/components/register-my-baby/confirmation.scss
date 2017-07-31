@@ -16,6 +16,7 @@
   }
 
   .aligner {
+    margin-top: 30px;
     flex-direction: column;
 
     .aligner-item {
@@ -31,6 +32,10 @@
       margin-right: 0;
       margin-bottom: 15px;
     }
+  }
+
+  .print {
+    margin-top: 30px;
   }
 
   .informative-text,
