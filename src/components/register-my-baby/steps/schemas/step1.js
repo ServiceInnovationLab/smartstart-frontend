@@ -66,7 +66,7 @@ const fields = {
     options: sexOptions
   },
 
-  'child.stillBorn': {
+  'child.aliveAtBirth': {
     name: 'child.aliveAtBirth',
     component: renderRadioGroup,
     label: makeMandatoryLabel('Was this child alive at birth?'),

@@ -123,7 +123,7 @@ class ChildDetailsForm extends Component {
           <Field {...getFieldProps(schema, 'child.firstNames')} />
           <Field {...getFieldProps(schema, 'child.surname')} />
           <Field {...getFieldProps(schema, 'child.sex')} />
-          <Field {...getFieldProps(schema, 'child.stillBorn')} />
+          <Field {...getFieldProps(schema, 'child.aliveAtBirth')} />
 
           <div className="expandable-group secondary">
             <Accordion>

@@ -73,7 +73,7 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
       onEdit={onEdit}
     />
     <Field
-      {...getFieldReviewProps(schema, 'child.stillBorn')}
+      {...getFieldReviewProps(schema, 'child.aliveAtBirth')}
       component={renderFieldReview}
       valueRenderer={getOptionDisplay(yesNo)}
       section="child-details"

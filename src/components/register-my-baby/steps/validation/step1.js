@@ -11,7 +11,7 @@ const validate = (values) => {
   check('child.firstNames')(schema, values, errors)
   check('child.surname')(schema, values, errors)
   check('child.sex')(schema, values, errors)
-  check('child.stillBorn')(schema, values, errors)
+  check('child.aliveAtBirth')(schema, values, errors)
   check('child.birthDate')(schema, values, errors)
 
   if (oneOfMultiple === 'yes') {

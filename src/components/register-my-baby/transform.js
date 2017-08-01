@@ -60,7 +60,12 @@ export const FRONTEND_FIELD_TO_SERVER_FIELD = {
   'certificateOrder.deliveryAddress.suburb': 'certificateOrder.deliveryAddress.line2',
   'child.ethnicityDescription': 'child.ethnicGroups.other',
   'mother.ethnicityDescription': 'mother.ethnicGroups.other',
-  'father.ethnicityDescription': 'father.ethnicGroups.other'
+  'father.ethnicityDescription': 'father.ethnicGroups.other',
+  'child.aliveAtBirth': 'child.stillBorn'
+}
+
+export const FRONTEND_FIELD_TO_SERVER_FIELD_TRANSFORM = {
+  'child.stillBorn':  frontendValue => frontendValue !== 'yes'
 }
 
 export const SERVER_FIELD_TO_FRONTEND_FIELD = invert(FRONTEND_FIELD_TO_SERVER_FIELD)
@@ -90,8 +95,6 @@ export const transform = data => {
   update(transformedData, 'ird.applyForNumber', yesNoToBoolean)
   update(transformedData, 'ird.numberByEmail', yesNoToBoolean)
   update(transformedData, 'certificateOrder.courierDelivery', value => value === 'courier')
-
-  transformStillBorn(transformedData)
 
   transformEthnicGroups(transformedData.child)
   transformEthnicGroups(transformedData.mother)
@@ -131,12 +134,6 @@ const formatDate = date =>
 
 const yesNoToBoolean = value =>
   value === 'yes' ? true : false
-
-const transformStillBorn = data => {
-  const childAlive = get(data, 'child.aliveAtBirth') === 'yes'
-  set(data, 'child.stillBorn', !childAlive)
-  unset(data, 'child.aliveAtBirth')
-}
 
 const transformEthnicGroups = (target = {}) => {
   const ethnicGroupsObj = {
@@ -218,7 +215,12 @@ const transformFrontendFieldToServerField = data => {
 
   forOwn(FRONTEND_FIELD_TO_SERVER_FIELD, (serverField, frontendField) => {
     const value = get(snapshot, frontendField)
-    set(data, serverField, value)
+    const transformFunc = FRONTEND_FIELD_TO_SERVER_FIELD_TRANSFORM[serverField]
+    if (transformFunc) {
+      set(data, serverField, transformFunc(value))
+    } else {
+      set(data, serverField, value)
+    }
     unset(data, frontendField)
   })
 
