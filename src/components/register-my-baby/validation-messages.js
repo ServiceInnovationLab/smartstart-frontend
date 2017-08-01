@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import FatherText from './steps/schemas/father-text'
 
 export const REQUIRE_MESSAGE = 'This is a required field, please provide an answer'
 export const REQUIRE_MESSAGE_STREET = 'This is a required field, please enter a street address'
@@ -43,8 +44,8 @@ export const REQUIRE_MOTHER_EMAIL_IRD = <span>
 </span>
 
 export const REQUIRE_FATHER_EMAIL_IRD = <span>
-  You have not supplied father's email address, please add one to the contact details on
-  &nbsp;<Link to={'/register-my-baby/father-details?focus=father.email'}>this step <span className="visuallyhidden">on the Father details page</span></Link>
+  You have not supplied <FatherText />'s email address, please add one to the contact details on
+  &nbsp;<Link to={'/register-my-baby/father-details?focus=father.email'}>this step <span className="visuallyhidden">on the <FatherText /> details page</span></Link>
 </span>
 
 const EMPTY = ''

@@ -27,16 +27,16 @@ const validate = (values) => {
     irdApplyForNumber === 'yes' &&
     irdNumberByEmail === 'yes' &&
     (
-      irdNumberDeliveryAddress === 'motherAddress' ||
-      irdNumberDeliveryAddress === 'fatherAddress'
+      irdNumberDeliveryAddress === 'mothersAddress' ||
+      irdNumberDeliveryAddress === 'fathersAddress'
     )
   ) {
-    if (irdNumberDeliveryAddress === 'motherAddress') {
+    if (irdNumberDeliveryAddress === 'mothersAddress') {
       const motherEmail = get(values, 'mother.email')
       if (!motherEmail) {
         set(errors, 'ird.numberByEmail', REQUIRE_MOTHER_EMAIL_IRD)
       }
-    } else if (irdNumberDeliveryAddress === 'fatherAddress') {
+    } else if (irdNumberDeliveryAddress === 'fathersAddress') {
       const fatherEmail = get(values, 'father.email')
       if (!fatherEmail) {
         set(errors, 'ird.numberByEmail', REQUIRE_FATHER_EMAIL_IRD)

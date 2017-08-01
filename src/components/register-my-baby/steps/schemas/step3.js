@@ -1,3 +1,4 @@
+import React from 'react'
 import makeMandatoryLabel, { makeMandatoryAriaLabel } from '../../hoc/make-mandatory-label'
 import renderField from '../../fields/render-field'
 import renderDatepicker from '../../fields/render-datepicker'
@@ -8,6 +9,7 @@ import renderCheckbox from '../../fields/render-checkbox'
 import renderWarning from '../../fields/render-warning'
 import renderError from '../../fields/render-error'
 import renderSelect from '../../fields/render-select'
+import FatherText from './father-text'
 import { combine, maxLength, titleCase } from '../../normalize'
 import {
   ethnicGroups as ethnicGroupOptions,
@@ -80,7 +82,7 @@ const fields = {
     name: "father.firstNames",
     component: renderField,
     type: "text",
-    label: makeMandatoryLabel("All first name(s) father is currently known by"),
+    label: makeMandatoryLabel(<span>All first name(s) <FatherText /> is currently known by</span>),
     instructionText: "Enter all current first and given names. If any differ from names given at birth, those names can be entered below.",
     validate: [required, validAlpha],
     normalize: maxLength(75),
@@ -89,7 +91,7 @@ const fields = {
     name: "father.surname",
     component: renderField,
     type: "text",
-    label: makeMandatoryLabel("Surname of father (currently known by)"),
+    label: makeMandatoryLabel(<span>Surname of <FatherText /> (currently known by)</span>),
     instructionText: "Enter all current surnames or family names. If any differ from names at birth, those names can be entered below.",
     validate: [required, validAlpha],
     normalize: maxLength(75),
@@ -98,7 +100,7 @@ const fields = {
     name: "father.firstNamesAtBirth",
     component: renderField,
     type: "text",
-    label: "All first name(s) of father at birth (if different from current name)",
+    label: <span>All first name(s) of <FatherText /> at birth (if different from current name)</span>,
     instructionText: "Enter the name given at birth (if it differs from the above). If adopted, please enter the name/s given when adopted not before adoption (if known)",
     validate: [validAlpha],
   },
@@ -106,7 +108,7 @@ const fields = {
     name: "father.surnameAtBirth",
     component: renderField,
     type: "text",
-    label: "Surname of father at birth (if different from current name)",
+    label: <span>Surname of <FatherText /> at birth (if different from current name)</span>,
     instructionText: "Enter the surname or family name at birth (if it differs). If adopted, please enter the surname when adopted not before adoption (if known)",
     validate: [validAlpha],
     normalize: maxLength(75),
@@ -115,16 +117,16 @@ const fields = {
     name: "father.occupation",
     component: renderField,
     type: "text",
-    label: makeMandatoryLabel("Usual occupation, profession or job of father"),
+    label: makeMandatoryLabel(<span>Usual occupation, profession or job of <FatherText /></span>),
     placeholder: "e.g. Teacher",
-    instructionText: "Please enter the father's type of occupation not the name of the father's employer",
+    instructionText: <span>Please enter the father's type of occupation not the name of the <FatherText />'s employer</span>,
     validate: [required, validCharStrict],
     normalize: combine(maxLength(60), titleCase),
   },
   'father.dateOfBirth': {
     name: "father.dateOfBirth",
     component: renderDatepicker,
-    label: makeMandatoryLabel("Father's date of birth"),
+    label: makeMandatoryLabel(<span><FatherText capitalize />'s date of birth</span>),
     validate: [required, validDate, olderThan(10), youngerThan(100)],
   },
   'father.placeOfBirth': {
@@ -178,7 +180,7 @@ const fields = {
   'father.maoriDescendant': {
     name: "father.maoriDescendant",
     component: renderRadioGroup,
-    label: makeMandatoryLabel("Is the father a descendant of a New Zealand Māori?"),
+    label: makeMandatoryLabel(<span>Is the <FatherText /> a descendant of a New Zealand Māori?</span>),
     instructionText: "This will not appear on the birth certificate",
     options: yesNoNotSureOptions,
     validate: [required],
@@ -186,8 +188,8 @@ const fields = {
   'father.ethnicGroups': {
     name: "father.ethnicGroups",
     component: renderCheckboxGroup,
-    label: makeMandatoryLabel("Which ethnic group(s) does the father belong to?"),
-    instructionText: "Select as many boxes as you wish to describe the ethnic group(s) the father belongs to.",
+    label: makeMandatoryLabel(<span>Which ethnic group(s) does the <FatherText /> belong to?</span>),
+    instructionText: <span>Select as many boxes as you wish to describe the ethnic group(s) the <FatherText /> belongs to.</span>,
     options: ethnicGroupOptions,
     validate: [required],
     onChange: requireHandler,
@@ -196,15 +198,15 @@ const fields = {
     name: "father.ethnicityDescription",
     component: renderField,
     type: "text",
-    placeholder: "Please describe the father’s ethnicity",
+    placeholder: <span>Please describe the <FatherText />’s ethnicity</span>,
     ariaLabel: makeMandatoryAriaLabel("State other ethnicity"),
     validate: [required, maxLength30, validCharStrict],
   },
   'father.isCitizen': {
     name: 'father.isCitizen',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Is the father a New Zealand citizen?`),
-    instructionText: `Please indicate the father's citizenship or immigration status.`,
+    label: makeMandatoryLabel(<span>Is the <FatherText /> a New Zealand citizen?</span>),
+    instructionText: <span>Please indicate the <FatherText />'s citizenship or immigration status.</span>,
     options: yesNoOptions,
     validate: [required],
     onChange: requireHandler,
@@ -212,7 +214,7 @@ const fields = {
   'father.isPermanentResident': {
     name: 'father.isPermanentResident',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Is the father a New Zealand permanent resident?`),
+    label: makeMandatoryLabel(<span>Is the <FatherText /> a New Zealand permanent resident?</span>),
     options: yesNoOptions,
     validate: [required],
     onChange: requireHandler,
@@ -220,7 +222,7 @@ const fields = {
   'father.isNZRealmResident': {
     name: 'father.isNZRealmResident',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Is the father a resident of the Cook Islands, Niue or Tokelau?`),
+    label: makeMandatoryLabel(<span>Is the <FatherText /> a resident of the Cook Islands, Niue or Tokelau?</span>),
     options: yesNoOptions,
     validate: [required],
     onChange: requireHandler,
@@ -228,7 +230,7 @@ const fields = {
   'father.isAuResidentOrCitizen': {
     name: 'father.isAuResidentOrCitizen',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Is the father an Australian citizen or permanent resident of Australia?`),
+    label: makeMandatoryLabel(<span>Is the <FatherText /> an Australian citizen or permanent resident of Australia?</span>),
     options: yesNoOptions,
     validate: [required],
     onChange: requireHandler,
@@ -236,7 +238,7 @@ const fields = {
   'father.nonCitizenDocNumber': {
     name: 'father.nonCitizenDocNumber',
     component: renderField,
-    label: makeMandatoryLabel(`Enter the passport/travel document number the father entered New Zealand on:`),
+    label: makeMandatoryLabel(<span>Enter the passport/travel document number the <FatherText /> entered New Zealand on:</span>),
     type: "text",
     validate: [required, validCharStrict],
     normalize: maxLength(9),
@@ -248,15 +250,15 @@ const fields = {
   'father.citizenshipSource': {
     name: 'father.citizenshipSource',
     component: renderSelect,
-    label: makeMandatoryLabel(`Father is either`),
-    instructionText: `Please indicate how the father is a New Zealand citizen`,
+    label: makeMandatoryLabel(<span><FatherText capitalize /> is either</span>),
+    instructionText: <span>Please indicate how the <FatherText /> is a New Zealand citizen</span>,
     options: citizenshipSourceOptions,
     validate: [required],
   },
   'father.citizenshipPassportNumber': {
     name: 'father.citizenshipPassportNumber',
     component: renderField,
-    label: makeMandatoryLabel(`Enter the father's New Zealand passport number`),
+    label: makeMandatoryLabel(<span>Enter the <FatherText />'s New Zealand passport number</span>),
     type: "text",
     validate: [required, validCharStrict],
     normalize: maxLength(9),

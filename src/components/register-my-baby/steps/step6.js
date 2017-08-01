@@ -7,7 +7,7 @@ import Accordion from '../accordion'
 import makeFocusable from '../hoc/make-focusable'
 import {
   products as productOptions,
-  birthCertificateDeliveryAddresses
+  getBirthCertificateDeliveryAddresses
 } from '../options'
 import './step6.scss'
 import { maxLength } from '../normalize'
@@ -67,8 +67,8 @@ class OrderCertificatesForm extends Component {
 
   render() {
     const {
-      orderBirthCertificate, productCode, quantity, courierDelivery, fatherKnown,
-      assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting
+      orderBirthCertificate, productCode, quantity, courierDelivery, fatherKnown, handleSubmit, submitting,
+      assistedHumanReproduction, assistedHumanReproductionSpermDonor, assistedHumanReproductionWomanConsented
     } = this.props
     const product = productCode ? find(productOptions, { value: productCode }) : null
     const previewImage = product ? product.imageSrc : '/assets/img/certificates/birth-certificate-preview.png'
@@ -76,9 +76,12 @@ class OrderCertificatesForm extends Component {
     const totalPrice = (product && quantity) ? (product.price * quantity + deliveryPrice) : 0
 
     const hideFatherOption = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
+    const isOtherParent = assistedHumanReproduction === 'yes' && assistedHumanReproductionWomanConsented
+    const birthCertificateDeliveryAddresses = getBirthCertificateDeliveryAddresses(isOtherParent)
+
     const deliveryAddresses = hideFatherOption ?
-    birthCertificateDeliveryAddresses.filter(opt => opt.value !== 'father') :
-    birthCertificateDeliveryAddresses
+      birthCertificateDeliveryAddresses.filter(opt => opt.value !== 'father') :
+      birthCertificateDeliveryAddresses
 
     return (
       <div id="step-6">
@@ -198,6 +201,7 @@ OrderCertificatesForm.propTypes = {
   fatherKnown: PropTypes.string,
   assistedHumanReproduction: PropTypes.string,
   assistedHumanReproductionSpermDonor: PropTypes.bool,
+  assistedHumanReproductionWomanConsented: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
   isReviewing: PropTypes.bool,
@@ -235,6 +239,7 @@ OrderCertificatesForm = connect(
     fatherKnown: selector(state, 'fatherKnown'),
     assistedHumanReproduction: selector(state, 'assistedHumanReproduction'),
     assistedHumanReproductionSpermDonor: selector(state, 'assistedHumanReproductionSpermDonor'),
+    assistedHumanReproductionWomanConsented: selector(state, 'assistedHumanReproductionWomanConsented'),
   })
 )(OrderCertificatesForm)
 

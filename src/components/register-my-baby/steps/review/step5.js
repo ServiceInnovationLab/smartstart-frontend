@@ -3,13 +3,15 @@ import { Field } from 'redux-form'
 import renderFieldReview from '../../fields/render-review-field'
 import {
   yesNo,
-  irdDeliveryAddresses,
+  getIrdDeliveryAddresses,
   getOptionDisplay
 } from '../../options'
 import schema from '../schemas/step5'
 import getFieldReviewProps from './get-field-review-props'
 
 const renderStep5Review = ({ formState, onEdit }) => {
+  const isOtherParent = formState.assistedHumanReproduction === 'yes' && formState.assistedHumanReproductionWomanConsented
+  const irdDeliveryAddresses = getIrdDeliveryAddresses(isOtherParent)
   return <div className="review-section">
     <div className="section-heading">
       <h3>Te Reo Title <br/> Other services</h3>

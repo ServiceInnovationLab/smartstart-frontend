@@ -1,8 +1,10 @@
+import React from 'react'
 import makeMandatoryLabel from '../../hoc/make-mandatory-label'
 import renderField from '../../fields/render-field'
 import renderSelect from '../../fields/render-select'
 import renderCheckbox from '../../fields/render-checkbox'
 import renderRadioGroup from '../../fields/render-radio-group'
+import FatherText from './father-text'
 import {
   yesNo as yesNoOptions
 } from '../../options'
@@ -61,7 +63,7 @@ const fields = {
     name: "msd.fathersClientNumber",
     component: renderField,
     type: "text",
-    label: "Father/Other parent's MSD client number",
+    label: <span><FatherText capitalize />'s MSD client number</span>,
     instructionText: "Please provide the MSD client number for at least one parent",
     validate: [validMsd],
     normalize: maximum(999999999),

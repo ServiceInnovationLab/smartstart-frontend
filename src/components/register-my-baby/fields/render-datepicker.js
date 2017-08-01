@@ -111,12 +111,13 @@ class SimpleDatePicker extends Component {
 
   render() {
     const { day, month, year, days, months, years } = this.state
-    const { ariaDescribedBy } = this.props;
+    const { name, ariaDescribedBy } = this.props;
     return (
       <div>
         <span className="styled-select">
           <select
             value={day || ''}
+            name={`${name}-day`}
             onChange={this.handleChange('day')}
             onBlur={this.handleBlur}
             ref={ daySelect => this.daySelect = daySelect }
@@ -134,6 +135,7 @@ class SimpleDatePicker extends Component {
         <span className="styled-select">
           <select
             value={month === 0 ? month : (month ||  '')}
+            name={`${name}-month`}
             onChange={this.handleChange('month')}
             onBlur={this.handleBlur}
             ref={ monthSelect => this.monthSelect = monthSelect }
@@ -151,6 +153,7 @@ class SimpleDatePicker extends Component {
         <span className="styled-select">
           <select
             value={year || ''}
+            name={`${name}-year`}
             onChange={this.handleChange('year')}
             onBlur={this.handleBlur}
             ref={ yearSelect => this.yearSelect = yearSelect }
@@ -175,6 +178,7 @@ SimpleDatePicker.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
+  name: PropTypes.string,
   ariaDescribedBy: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
@@ -188,6 +192,7 @@ const renderDatepicker = ({ input, label, meta: { touched, error, warning, form 
       <div>
         <SimpleDatePicker
           value={input.value || null}
+          name={input.name}
           onChange={input.onChange}
           onBlur={input.onBlur}
           ariaDescribedBy={`${form}-${input.name}-desc`}

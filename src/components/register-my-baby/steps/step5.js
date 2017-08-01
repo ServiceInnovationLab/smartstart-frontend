@@ -4,7 +4,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
 import {
-  irdDeliveryAddresses
+  getIrdDeliveryAddresses
 } from '../options'
 import validate from './validation'
 import schema from './schemas/step5'
@@ -14,11 +14,14 @@ import getFieldProps from './get-field-props'
 class IrdMsdSharingForm extends Component {
   render() {
     const {
-      applyForNumber, deliveryAddress, numberByEmail, msdNotify, fatherKnown,
-      assistedHumanReproduction, assistedHumanReproductionSpermDonor, handleSubmit, submitting
+      applyForNumber, deliveryAddress, numberByEmail, msdNotify, fatherKnown, handleSubmit, submitting,
+      assistedHumanReproduction, assistedHumanReproductionSpermDonor, assistedHumanReproductionWomanConsented
     } = this.props
 
     const hideFatherOption = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)
+    const isOtherParent = assistedHumanReproduction === 'yes' && assistedHumanReproductionWomanConsented
+    const irdDeliveryAddresses = getIrdDeliveryAddresses(isOtherParent)
+
     const deliveryAddresses = hideFatherOption ?
       irdDeliveryAddresses.filter(opt => opt.value !== 'fatherAddress') :
       irdDeliveryAddresses
@@ -154,6 +157,7 @@ IrdMsdSharingForm.propTypes = {
   fatherKnown: PropTypes.string,
   assistedHumanReproduction: PropTypes.string,
   assistedHumanReproductionSpermDonor: PropTypes.bool,
+  assistedHumanReproductionWomanConsented: PropTypes.bool,
   onSubmit: PropTypes.func,
   onPrevious: PropTypes.func,
   isReviewing: PropTypes.bool,
@@ -182,6 +186,7 @@ IrdMsdSharingForm = connect(
     fatherKnown: selector(state, 'fatherKnown'),
     assistedHumanReproduction: selector(state, 'assistedHumanReproduction'),
     assistedHumanReproductionSpermDonor: selector(state, 'assistedHumanReproductionSpermDonor'),
+    assistedHumanReproductionWomanConsented: selector(state, 'assistedHumanReproductionWomanConsented'),
   })
 )(IrdMsdSharingForm)
 

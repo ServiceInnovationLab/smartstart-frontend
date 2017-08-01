@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+import cloneDeep from 'lodash/cloneDeep'
 
 export const yesNo = [
   { value: 'yes', display: 'Yes'},
@@ -62,11 +63,35 @@ export const irdDeliveryAddresses = [
   { value: 'birthCertificateAddress', display: 'Birth Certificate (if you order one)' }
 ]
 
+export const getIrdDeliveryAddresses = otherParent => {
+  if (!otherParent) {
+    return irdDeliveryAddresses
+  }
+  return cloneDeep(irdDeliveryAddresses).map(opt => {
+    if (opt.value === 'fathersAddress') {
+      opt.display = 'Other parent\'s'
+    }
+    return opt
+  })
+}
+
 export const birthCertificateDeliveryAddresses = [
   { value: 'mother', display: 'Mother\'s' },
   { value: 'father', display: 'Father\'s' },
   { value: 'other', display: 'Other' }
 ]
+
+export const getBirthCertificateDeliveryAddresses = otherParent => {
+  if (!otherParent) {
+    return birthCertificateDeliveryAddresses
+  }
+  return cloneDeep(birthCertificateDeliveryAddresses).map(opt => {
+    if (opt.value === 'father') {
+      opt.display = 'Other parent\'s'
+    }
+    return opt
+  })
+}
 
 export const products = [
   { value: 'BC05', label: 'All Blacks NZ (limited time only)', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-allblacks.png' },

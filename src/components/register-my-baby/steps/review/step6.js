@@ -8,7 +8,7 @@ import {
   yesNo,
   products,
   deliveryMethods,
-  birthCertificateDeliveryAddresses,
+  getBirthCertificateDeliveryAddresses,
   getOptionDisplay
 } from '../../options'
 import schema from '../schemas/step6'
@@ -27,6 +27,8 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
   const totalPrice = (product && quantity) ? (product.price * quantity + deliveryPrice) : 0
   const deliveryCountryCode = get(formState, 'certificateOrder.deliveryAddress.countryCode')
   const deliveryCountry = deliveryCountryCode ? get(find(countries, { code: deliveryCountryCode}), 'name') : null
+  const isOtherParent = formState.assistedHumanReproduction === 'yes' && formState.assistedHumanReproductionWomanConsented
+  const birthCertificateDeliveryAddresses = getBirthCertificateDeliveryAddresses(isOtherParent)
 
   return <div className="review-section">
     <div className="section-heading">

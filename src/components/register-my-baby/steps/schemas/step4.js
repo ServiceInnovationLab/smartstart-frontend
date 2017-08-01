@@ -1,8 +1,10 @@
+import React from 'react'
 import makeMandatoryLabel from '../../hoc/make-mandatory-label'
 import renderField from '../../fields/render-field'
 import renderDatepicker from '../../fields/render-datepicker'
 import renderRadioGroup from '../../fields/render-radio-group'
 import renderSelect from '../../fields/render-select'
+import FatherText from './father-text'
 import { combine, maxLength, titleCase } from '../../normalize'
 import {
   sexes as sexOptions,
@@ -22,7 +24,7 @@ const fields = {
     options: [0, 1, 2, 3, 4, 5, 6, 7, 8],
     renderEmptyOption: false,
     label: makeMandatoryLabel("Are there other children born from the same parent relationship?"),
-    instructionText: "Select the number of other children with the same mother and father. If this is the first child together then go to the next question",
+    instructionText: <span>Select the number of other children with the same mother and <FatherText />. If this is the first child together then go to the next question</span>,
     validate: [required],
   },
   'siblings[].sex': {
