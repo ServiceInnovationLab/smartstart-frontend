@@ -50,16 +50,21 @@ class Confirmation extends Component {
 
     let resultNotification;
 
+    const outstandingPaymentMsg = 'Your birth certificate order has not been processed, probably because the payment method used was declined. You can order a certificate at a later time if you want to.'
+
     if (product && !paymentSuccess) {
       resultNotification = <div>
-        <div className="success">
-          <strong>Success: </strong>
-          { stillBorn ?
-            <span>We understand this is a difficult time. Thank you for registering your baby.</span>:
+        { stillBorn ?
+          <div className="instruction">We understand this is a difficult time. Thank you for registering your baby.</div> :
+          <div className="success">
+            <strong>Success: </strong>
             <span>Thanks for registering the birth of your baby. If we have any questions, we'll contact you.</span>
-          }
-        </div>
-        <div className="warning"><strong>Warning: </strong>Your birth certificate order has not been processed, probably because the payment method used was declined. You can order a certificate at a later time if you want to.</div>
+          </div>
+        }
+        { stillBorn ?
+          <div>{outstandingPaymentMsg}</div> :
+          <div className="warning"><strong>Warning: </strong>{outstandingPaymentMsg}</div>
+        }
       </div>
     } else {
       resultNotification = <div className="instruction">
