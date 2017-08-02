@@ -1,6 +1,3 @@
-import toLower from 'lodash/toLower'
-import startCase from 'lodash/startCase'
-
 export const combine = (...normalizers) => (value, previousVal) => {
   normalizers.forEach(normalize =>
     value = normalize(value, previousVal)
@@ -23,16 +20,17 @@ export const maximum = (max) => (value, previousVal) => {
   return value <= max ? value : previousVal
 }
 
-export const titleCase = value => {
-  const spacesInTheEndMatches  = (value || '').match(/\s+$/)
+/**
+ * Copy of bro-api's implementation
+ */
+export const titleCase = (value = '') => {
+  value = value.toLowerCase()
 
-  let suffix = ''
-  if (spacesInTheEndMatches && spacesInTheEndMatches.length) {
-    suffix = spacesInTheEndMatches[0]
-  }
+  let titleCased = value.replace(
+    /(^[a-z])|(\s+[a-z])/g,
+    letter => letter.toUpperCase()
+  )
 
-  // lodash stripe out the trailing spaces after `startCase`
-  // we need to preserve this otherwise user can't type space at all
-  return `${startCase(toLower(value))}${suffix}`
+  return titleCased
 }
 
