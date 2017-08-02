@@ -186,7 +186,7 @@ class RegisterMyBabyForm extends Component {
       this.goToStep(1, true)
     }
 
-    animateScroll.scrollToTop({ duration: 300 })
+    //animateScroll.scrollToTop({ duration: 300 })
   }
 
   componentWillReceiveProps(nextProps) {

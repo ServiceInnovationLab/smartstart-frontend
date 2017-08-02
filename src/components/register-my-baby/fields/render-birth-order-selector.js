@@ -128,10 +128,10 @@ BirthOrderSelector.propTypes = {
   onBlur: PropTypes.func
 }
 
-const renderBirthOrderSelector = ({ input, label, meta: { touched, error, warning, form } }) => (
+const renderBirthOrderSelector = ({ input, label, instructionText, meta: { touched, error, warning, form } }) => (
   <fieldset>
     <legend>{label}</legend>
-    <div className="instruction-text">If this child was the second born of triplets select 2 of 3</div>
+    { instructionText && <div className="instruction-text">{instructionText}</div> }
     <div className={`input-group ${hasError({ touched, error }) ? 'has-error' : ''}`}>
       <div>
         <BirthOrderSelector {...input} ariaDescribedBy={`${form}-${input.name}-desc`} />
@@ -147,6 +147,7 @@ const renderBirthOrderSelector = ({ input, label, meta: { touched, error, warnin
 renderBirthOrderSelector.propTypes = {
   input: PropTypes.object,
   label: PropTypes.node,
+  instructionText: PropTypes.string,
   meta: PropTypes.object
 }
 

@@ -41,9 +41,9 @@ const fields = {
     name: 'child.firstNames',
     component: renderField,
     type: 'text',
-    placeholder: 'First name',
+    placeholder: 'E.g. Jane Mary',
     label: makeMandatoryLabel('Child\'s given name(s)'),
-    instructionText: 'Enter the child\'s first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate',
+    instructionText: 'Enter the child\'s first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate.',
     validate: [requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validAlpha],
     normalize: maxLength(75)
   },
@@ -54,6 +54,7 @@ const fields = {
     type: 'text',
     placeholder: 'E.g Smith',
     label: makeMandatoryLabel('Child\'s surname'),
+    instructionText: 'Enter the child\'s surname or family name(s).',
     validate: [required, validAlpha],
     normalize: maxLength(75)
   },
@@ -77,14 +78,14 @@ const fields = {
   'child.birthDate': {
     name: 'child.birthDate',
     component: renderDatepicker,
-    label: makeMandatoryLabel('The child\'s date of birth'),
+    label: makeMandatoryLabel('Child\'s date of birth'),
     validate: [required, validDate]
   },
 
   'child.oneOfMultiple': {
     name: 'child.oneOfMultiple',
     component: renderRadioGroup,
-    label: makeMandatoryLabel('Is this child one of a multiple birth (twins, triplets, etc)'),
+    label: makeMandatoryLabel('Is this child one of multiple birth of twins, triplets, etc?'),
     options: yesNoOptions,
     onChange: requireHandler,
     validate: [required]
@@ -94,6 +95,7 @@ const fields = {
     name: 'child.multipleBirthOrder',
     component: renderBirthOrderSelector,
     label: makeMandatoryLabel('What is the birth order for this child?'),
+    instructionText: 'Enter the birth order number of the child you are registering first, followed by the number of children in the multiple birth e.g. if the child was the second twin born select \'2 of 2\'.',
     validate: [required]
   },
 
@@ -125,6 +127,7 @@ const fields = {
     component: renderPlacesAutocomplete,
     type: 'text',
     label: makeMandatoryLabel('Street number and Street name'),
+    placeholder: 'Begin typing the address ...',
     onPlaceSelect: requireHandler,
     normalize: combine(maxLength(33), titleCase),
     validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET)]
@@ -151,7 +154,8 @@ const fields = {
     name: 'birthPlace.other',
     component: renderField,
     type: 'text',
-    instructionText: 'Describe the circumstances of the birth. If you went to a hospital please include the name of the hospital.',
+    instructionText: 'Describe where you gave birth, and name the hospital you eventually went to for treatment (if applicable).',
+    placeholder: 'e.g. In Ambulance On The Way To Auckland Hospital',
     ariaLabel: makeMandatoryAriaLabel('State other birth place'),
     validate: [required, validCharStrict],
     normalize: maxLength(75)
@@ -160,8 +164,8 @@ const fields = {
   'child.maoriDescendant': {
     name: 'child.maoriDescendant',
     component: renderRadioGroup,
-    label: makeMandatoryLabel('Is this child a descendant of a New Zealand Māori?'),
-    instructionText: 'This will not appear on the birth certificate',
+    label: makeMandatoryLabel('Is this child the descendant of a New Zealand Māori?'),
+    instructionText: 'This information won\'t be printed on the birth certificate; it\'s just for statistical purposes.',
     options: yesNoNotSureOptions,
     validate: [required]
   },
@@ -169,8 +173,8 @@ const fields = {
   'child.ethnicGroups': {
     name: 'child.ethnicGroups',
     component: renderCheckboxGroup,
-    label: makeMandatoryLabel('Which ethnic group(s) does this child belong to?'),
-    instructionText: 'Select as many boxes as you wish to describe the ethnic group(s) this child belongs to.',
+    label: makeMandatoryLabel('Which ethnic group or groups does this child belong to?'),
+    instructionText: 'Select as many boxes as you\'d like to describe your child\'s ethnicity.',
     options: ethnicGroupOptions,
     onChange: requireHandler,
     validate: [required]
@@ -180,8 +184,9 @@ const fields = {
     name: 'child.ethnicityDescription',
     component: renderField,
     type: 'text',
-    ariaLabel: makeMandatoryAriaLabel('State other ethnicity'),
-    placeholder: 'Please describe the child’s ethnicity',
+    ariaLabel: makeMandatoryAriaLabel('Please describe the child\'s ethnicity.'),
+    instructionText: 'This information helps other government agencies to get a clearer picture of our society so that health, education and other needs in your area can be planned for.',
+    placeholder: 'Please describe the child\'s ethnicity.',
     validate: [required, maxLength30, validCharStrict]
   }
 }

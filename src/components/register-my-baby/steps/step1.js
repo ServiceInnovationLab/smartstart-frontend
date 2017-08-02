@@ -79,9 +79,7 @@ class ChildDetailsForm extends Component {
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">1</span> Tamaiti <br/> Child</h2>
 
         <div className="instruction">
-          <strong>Birth Registration is when you officially give your child a legal name.</strong><br/>
-          <strong>The name should include a family name and one or more given names.</strong><br/>
-          <strong>The child’s name will be registered exactly as you describe it here. There is a cost to change the name once it has been registered.</strong>
+          <strong>This section is where you officially register the details of your child. The name you choose for them should include a surname, and one or more given names.</strong>
         </div>
 
         <div className="expandable-group primary">
@@ -90,31 +88,32 @@ class ChildDetailsForm extends Component {
               What names are unacceptable?
             </Accordion.Toggle>
             <Accordion.Content>
-              <p>The name or combination of names may not be acceptable if:</p>
+              <p>The name or combination of names you choose may not be acceptable if:</p>
+
               <ul>
-                <li>It is offensive; or</li>
-                <li>it is unreasonably long; or</li>
-                <li>it includes or resembles an official title or rank; or</li>
-                <li>Is spelt with numbers or symbols (e.g V8)</li>
+                <li>it's offensive; or</li>
+                <li>it's unreasonably long (it should be less than 70 characters long, including spaces); or</li>
+                <li>it includes or resembles an official title or rank (i.e. Justice, or Sir); or</li>
+                <li>it's spelt with a combination of numbers or symbols (e.g. V8)</li>
               </ul>
             </Accordion.Content>
           </Accordion>
 
           <Accordion>
             <Accordion.Toggle>
-              Can I enter names with macrons and international characters?
+              Can I use names with macrons, hyphens, and international characters?
             </Accordion.Toggle>
             <Accordion.Content>
-              <p>You may use macrons and international characters in your child’s name. The child’s name will use these characters on the birth certificate.</p>
+              <p>You can use macrons (e.g. Hūmārire), hyphens (e.g. Mary-ann), umlauts (e.g. Zoë), and some international characters in your child's name. The child's name will have these characters when the birth certificate is printed.</p>
             </Accordion.Content>
           </Accordion>
 
           <Accordion>
             <Accordion.Toggle>
-              Can I give my child a single name?
+              Can I give my child one name?
             </Accordion.Toggle>
             <Accordion.Content>
-              <p>Your child may have a single name where religious or philosophical beliefs or cultural traditions require the child to have one name. In these cases please describe the reasons for a single name.</p>
+              <p>Your child may have one name where religious, philosophical, or cultural beliefs and traditions require it. In these cases, please use the - symbol to replace the name that you will not use (i.e. First name or surname). In the Declaration section of this form, please tell us why you want to give your child one name.</p>
             </Accordion.Content>
           </Accordion>
         </div>
@@ -131,12 +130,14 @@ class ChildDetailsForm extends Component {
                 What is a stillbirth?
               </Accordion.Toggle>
               <Accordion.Content>
-                <p>A baby is stillborn if the baby is not alive at birth when born, and either;</p>
+                <p>A baby is stillborn if the baby is not alive at birth, and either:</p>
                 <ul>
                   <li>weighed 400g or more at birth, or</li>
-                  <li>the baby is delivered after the 20th week of the pregnancy</li>
+                  <li>the baby is delivered after the 20th week of the pregnancy.</li>
                 </ul>
-                <p>You still need to register the birth. If you don’t want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field. A pregnancy miscarriage occurs when the baby is not born alive, and the before the 20th week of the pregnancy.</p>
+                <p>You still need to register the birth. If you don't want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field.</p>
+                <strong>What about a miscarriage?</strong>
+                <p>A pregnancy is termed a miscarriage if the baby is not born alive, and is born before the 20th week of the pregnancy. You don't have to register the baby if you have suffered a miscarriage.</p>
               </Accordion.Content>
             </Accordion>
           </div>
