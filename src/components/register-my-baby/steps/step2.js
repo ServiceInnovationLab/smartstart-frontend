@@ -4,6 +4,7 @@ import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import makeFocusable from '../hoc/make-focusable'
+import Accordion from '../accordion'
 import CitizenshipQuestions from '../citizenship-questions'
 import { maxLength } from '../normalize'
 import validate from './validation'
@@ -24,7 +25,7 @@ class MotherDetailsForm extends Component {
       previousVal && previousVal.indexOf('other') > -1 &&
       newVal && newVal.indexOf('other') === -1
     ) {
-      this.props.change('ethnicityDescription', '')
+      this.props.change('mother.ethnicityDescription', '')
     }
   }
 
@@ -55,12 +56,30 @@ class MotherDetailsForm extends Component {
     return (
       <div>
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">2</span> Whaea <br/> Mother</h2>
+
+        <div className="instruction">
+          <strong>This section is where you give the details of the child's mother.</strong>
+        </div>
+
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field {...getFieldProps(schema, 'mother.firstNames')} />
           <Field {...getFieldProps(schema, 'mother.surname')} />
           <Field {...getFieldProps(schema, 'mother.firstNamesAtBirth')} />
           <Field {...getFieldProps(schema, 'mother.surnameAtBirth')} />
           <Field {...getFieldProps(schema, 'mother.occupation')} />
+
+
+          <div className="expandable-group secondary">
+            <Accordion>
+              <Accordion.Toggle>
+                What if the mother doesn’t have an occupation?
+              </Accordion.Toggle>
+              <Accordion.Content>
+                <p>If the mother isn't currently employed, you can enter something like 'mother', 'home-maker', or 'unemployed'.</p>
+              </Accordion.Content>
+            </Accordion>
+          </div>
+
           <Field {...getFieldProps(schema, 'mother.dateOfBirth')} />
           <Field {...getFieldProps(schema, 'mother.placeOfBirth')} />
           <Field {...getFieldProps(schema, 'mother.countryOfBirth')} />
@@ -79,7 +98,9 @@ class MotherDetailsForm extends Component {
           <Field {...getFieldProps(schema, 'mother.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
 
           { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
-            <Field {...getFieldProps(schema, 'mother.ethnicityDescription')} />
+            <div className="conditional-field">
+              <Field {...getFieldProps(schema, 'mother.ethnicityDescription')} />
+            </div>
           }
 
           <CitizenshipQuestions

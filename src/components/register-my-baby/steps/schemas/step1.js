@@ -127,7 +127,7 @@ const fields = {
     component: renderPlacesAutocomplete,
     type: 'text',
     label: makeMandatoryLabel('Street number and Street name'),
-    placeholder: 'Begin typing the address ...',
+    instructionText: "Begin typing your home address, and select it from the options that appear.",
     onPlaceSelect: requireHandler,
     normalize: combine(maxLength(33), titleCase),
     validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET)]
