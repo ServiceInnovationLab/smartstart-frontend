@@ -87,7 +87,7 @@ class OrderCertificatesForm extends Component {
       <div id="step-6">
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">6</span> Tono i te tiwhikete whanau <br/> Order a birth certificate</h2>
         <div className="informative-text">
-          You're not required to buy a birth certificate but some people like to have one as a record or momento. To purchase a certificate online you will need a credit card.
+          You can order a birth certificate or move on to reviewing your registration. To purchase a certificate online you will need a credit card.
         </div>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
           <Field {...getFieldProps(schema, 'orderBirthCertificate')} />
@@ -111,7 +111,7 @@ class OrderCertificatesForm extends Component {
                     What if I want to send the certificate overseas?
                   </Accordion.Toggle>
                   <Accordion.Content>
-                    <p>If you want to send the certificate to an address outside New Zealand, select Standard delivery and we will contact you to discuss the applicable charges.</p>
+                    <p>If you want to send the certificate to an address outside New Zealand, select the standard delivery option.</p>
                   </Accordion.Content>
                 </Accordion>
               </div>
