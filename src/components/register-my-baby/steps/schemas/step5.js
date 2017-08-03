@@ -40,7 +40,7 @@ const fields = {
     name: "ird.taxCreditIRDNumber",
     component: renderField,
     type: "text",
-    instructionText: "This will allow Inland Revenue to add the child's IRD number to your Working for Families details",
+    instructionText: "This will allow Inland Revenue to add the child's IRD number to your Working for Families details.",
     label: "If you have applied for Working for Families Tax Credits for this child please provide your IRD number",
     validate: [validIrd],
     normalize: maximum(999999999),
