@@ -30,7 +30,7 @@ const fields = {
   'siblings[].sex': {
     name: "siblings[].sex",
     component: renderRadioGroup,
-    label: makeMandatoryLabel("Sex"),
+    label: makeMandatoryLabel("Sex of child"),
     options: sexOptions,
     validate: [required],
   },
@@ -66,6 +66,7 @@ const fields = {
     type: "text",
     label: makeMandatoryLabel("Place of marriage/civil union"),
     instructionText: "City or town and Country (if ceremony was performed overseas)",
+    placeholder: "eg. Fiji",
     validate: [required, validCharStrict],
     normalize: combine(maxLength(60), titleCase),
   }

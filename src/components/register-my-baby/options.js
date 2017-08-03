@@ -54,7 +54,7 @@ export const parentRelationships = [
   { value: 'marriage', display: 'Marriage' },
   { value: 'civilUnion', display: 'Civil Union' },
   { value: 'deFacto', display: 'De Facto Relationship' },
-  { value: 'none', display: 'Not married/in a Civil Union/De Facto Relationship' }
+  { value: 'none', display: 'None of the above' }
 ]
 
 export const irdDeliveryAddresses = [

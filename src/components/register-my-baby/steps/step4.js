@@ -27,12 +27,14 @@ class ParentRelationshipForm extends Component {
                         What is a stillbirth?
                       </Accordion.Toggle>
                       <Accordion.Content>
-                        <p>A baby is stillborn if the baby is not alive at birth when born, and either;</p>
+                        <p>A baby is stillborn if the baby is not alive at birth, and either:</p>
                         <ul>
                           <li>weighed 400g or more at birth, or</li>
-                          <li>the baby is delivered after the 20th week of the pregnancy</li>
+                          <li>the baby is delivered after the 20th week of the pregnancy.</li>
                         </ul>
-                        <p>You still need to register the birth. If you don’t want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field. A pregnancy miscarriage occurs when the baby is not born alive, and the before the 20th week of the pregnancy.</p>
+                        <p>You still need to register the birth. If you don't want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field.</p>
+                        <strong>What about a miscarriage?</strong>
+                        <p>A pregnancy is termed a miscarriage if the baby is not born alive, and is born before the 20th week of the pregnancy. You don't have to register the baby if you have suffered a miscarriage.</p>
                       </Accordion.Content>
                     </Accordion>
                   </div>
@@ -52,6 +54,9 @@ class ParentRelationshipForm extends Component {
     return (
       <div>
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">4</span> Hononga mātua <br/> Parent's relationship</h2>
+        <div className="informative-text">
+          This section is where you give information on the relationship of the parents, including other children from the same relationship.
+        </div>
         { isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
             <div className="informative-text">
@@ -92,7 +97,15 @@ class ParentRelationshipForm extends Component {
                   What is a de facto relationship?
                 </Accordion.Toggle>
                 <Accordion.Content>
-                  <p>Not every relationship where two people live together (and are not married, nor in a civil union) is a de facto relationship under the law. Being in a de facto relationship depends on the couple's circumstances, including the couple's ages, the length of the relationship, the degree to which the couple are mutually committed to a shared life together, and the extent to which they make their relationship known publicly, for example, to friends and family. It is important that you know whether or not you are in a de facto relationship before you tick the de facto relationship box. If you are unsure whether you are in a de facto relationship, you should get advice from a lawyer.</p>
+                  <p>Not every relationship where two people live together (and aren't married, or in a civil union) is a de facto relationship under the law.</p>
+                  <p>Being considered to be in a de facto relationship depends on a number of things, including:</p>
+                  <ul>
+                    <li>the couple's circumstances, including their ages;</li>
+                    <li>the length of their relationship;</li>
+                    <li>how committed the couple are to a sharing a life together; and</li>
+                    <li>how public they make their relationship to friends and family.</li>
+                  </ul>
+                  <p>It's important that you know whether or not you are in a de facto relationship before you select the de facto relationship option. If you're unsure you should get advice from a lawyer.</p>
                 </Accordion.Content>
               </Accordion>
             </div>
