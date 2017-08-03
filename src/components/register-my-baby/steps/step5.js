@@ -28,7 +28,7 @@ class IrdMsdSharingForm extends Component {
 
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">5</span> Te Reo Title <br/> Other services</h2>
+        <h2><span className="visuallyhidden">Step</span> <span className="step-number">5</span> Ētahi atu ratonga <br/> Other services</h2>
         <div className="informative-text">
           If you want to, you can use this section to share your child's birth with government agencies.
         </div>

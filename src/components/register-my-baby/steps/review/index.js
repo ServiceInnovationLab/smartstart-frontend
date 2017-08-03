@@ -86,7 +86,7 @@ class Review extends Component {
 
     return (
       <div id="step-review">
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">7</span> Maori text here <br/> Review</h2>
+        <h2><span className="visuallyhidden">Step</span> <span className="step-number">7</span> Arotake <br/> Review</h2>
         <div className="instruction">
           Before you send the baby's details in to us for registration, take a minute to check that all the details you've put in are correct.
         </div>

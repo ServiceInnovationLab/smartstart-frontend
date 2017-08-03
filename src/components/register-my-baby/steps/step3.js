@@ -143,7 +143,7 @@ class FatherDetailsForm extends Component {
 
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">3</span> Matua <br/> Father/Other parent</h2>
+        <h2><span className="visuallyhidden">Step</span> <span className="step-number">3</span>Matua/Tētahi Atu Matua <br/> Father/Other parent</h2>
 
         <div className="informative-text">
           This section is where you give the details of the child's Father (if known), or the other parent of the child.<br/>
