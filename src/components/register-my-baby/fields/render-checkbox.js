@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import renderError, { hasError } from './render-error'
 import renderWarning from './render-warning'
 
-const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error, warning } }) => (
+const renderCheckbox = ({ input, label, instructionText, disabled, meta: { form, touched, error, warning } }) => (
   <div className={`input-group checkbox ${hasError({ touched, error }) ? 'has-error' : ''}`}>
     <label>
       <input
@@ -15,6 +15,7 @@ const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error, 
       />
       <span>{label}</span>
     </label>
+    { instructionText && <div className="instruction-text">{instructionText}</div> }
 
     <div id={`${form}-${input.name}-desc`}>
       { renderError({ meta: { touched, error } }) }
@@ -26,6 +27,7 @@ const renderCheckbox = ({ input, label, disabled, meta: { form, touched, error, 
 renderCheckbox.propTypes = {
   input: PropTypes.object,
   label: PropTypes.node,
+  instructionText: PropTypes.string,
   disabled: PropTypes.bool,
   meta: PropTypes.object
 }
