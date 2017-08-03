@@ -88,10 +88,11 @@ class Review extends Component {
       <div id="step-review">
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">7</span> Maori text here <br/> Review</h2>
         <div className="instruction">
-          Please take this opportunity to review the information you are providing - and make any changes you want to - before it is sent to the Registry of Births, Deaths and Marriages. If you are happy with all your answers then review and accept the legal declaration and click on the 'Register this birth' button at the bottom of the page to submit your child's birth registration.
+          Before you send the baby's details in to us for registration, take a minute to check that all the details you've put in are correct.
         </div>
         <div className="informative-text">
-          In a small number of cases Registry staff may need to make contact regarding a registration and you may need to provide further information and/or a statutory declaration.
+          Clicking the 'Register this birth' button at the bottom of this page will send the information through to the Registry of Births, Deaths and Marriages for registration.<br/><br/>
+          Check the information you're sending carefully. The Registry may make enquiries to be sure that the details provided are correct, and you may have to provide further information.
         </div>
         { (this.state.validating || submitting) ?
           <Spinner text="Checking your application ..."/> :
@@ -116,7 +117,7 @@ class Review extends Component {
             />
 
             <Field
-              label="Any other information you want to advise us of? (600 Characters)"
+              label="Any other information you want to advise us of? (600 characters)"
               name="otherInformation"
               component={renderTextarea}
               validate={[validCharRelax]}

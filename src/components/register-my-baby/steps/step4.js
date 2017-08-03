@@ -54,9 +54,6 @@ class ParentRelationshipForm extends Component {
     return (
       <div>
         <h2><span className="visuallyhidden">Step</span> <span className="step-number">4</span> Hononga mātua <br/> Parent's relationship</h2>
-        <div className="informative-text">
-          This section is where you give information on the relationship of the parents, including other children from the same relationship.
-        </div>
         { isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
             <div className="informative-text">
@@ -78,6 +75,10 @@ class ParentRelationshipForm extends Component {
 
         { !isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
+            <div className="informative-text">
+              This section is where you give information on the relationship of the parents, including other children from the same relationship.
+            </div>
+
             <Field {...getFieldProps(schema, 'otherChildren')} />
 
             { this.renderSiblings(otherChildren) }
