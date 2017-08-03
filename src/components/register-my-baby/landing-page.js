@@ -25,7 +25,7 @@ class RegisterMyBabyLandingPage extends Component {
     return (
       <div className="landing-page">
         <h3>
-          He whakaaturanga o te Rēhita Whānautanga o te tamaiti i whānau i Aotearoa <br/>
+          Te Whakamōhio i te Whānautanga mō te Rēhita <br/>
           Notification of Birth for Registration
         </h3>
         <div className="divider" />
