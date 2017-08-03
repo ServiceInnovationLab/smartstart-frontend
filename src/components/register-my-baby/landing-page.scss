@@ -1,0 +1,25 @@
+@import 'variables';
+
+.landing-page {
+  h5 {
+    margin: 30px 0;
+  }
+
+  .welcome-action {
+    color: $welcome-button-color;
+    font-weight: 500;
+    text-decoration: none;
+    background-color: $welcome-button-bg-color;
+    padding: 10px 30px 10px 30px;
+    border-radius: 18px;
+    position: relative;
+    margin-right: $welcome-buttons-margin-right;
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+
+    @media #{$desktop-and-above} {
+      width: 300px;
+    }
+  }
+}

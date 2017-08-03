@@ -28,7 +28,7 @@ class FatherDetailsForm extends Component {
       previousVal && previousVal.indexOf('other') > -1 &&
       newVal && newVal.indexOf('Other') === -1
     ) {
-      this.props.change('ethnicityDescription', '')
+      this.props.change('father.ethnicityDescription', '')
     }
   }
 
