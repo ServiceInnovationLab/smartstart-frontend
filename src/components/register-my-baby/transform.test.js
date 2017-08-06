@@ -393,7 +393,7 @@ describe('Form Data Transformation', () => {
       expect(keys(transformedData.certificateOrder).indexOf('deliveryAddressType')).toEqual(-1)
     })
 
-    test('copy deliveryAddress.line2 to deliveryAddress.suburbTownPostCode', () => {
+    test('copy deliveryAddress.line2 to deliveryAddress.suburbTownPostcode', () => {
       let transformedData = transform({
         orderBirthCertificate: 'yes',
         certificateOrder: {
@@ -404,7 +404,7 @@ describe('Form Data Transformation', () => {
           }
         }
       })
-      expect(transformedData.certificateOrder.deliveryAddress.suburbTownPostCode).toEqual('town postalcode')
+      expect(transformedData.certificateOrder.deliveryAddress.suburbTownPostcode).toEqual('town postalcode')
     })
     test('copy deliveryAddress.suburb to deliveryAddress.line2', () => {
       let transformedData = transform({
