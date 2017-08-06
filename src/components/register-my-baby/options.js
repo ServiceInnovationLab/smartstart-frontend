@@ -94,11 +94,11 @@ export const getBirthCertificateDeliveryAddresses = otherParent => {
 }
 
 export const products = [
-  { value: 'BC05', label: 'All Blacks NZ (limited time only)', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-allblacks.png' },
+  { value: 'ZBPD', label: 'All Blacks NZ (limited time only)', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-allblacks.png' },
   { value: 'ZBFD', label: 'Forest', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-forest.png' },
   { value: 'ZBBD', label: 'Beach', price: 35, imageSrc: '/assets/img/certificates/birth-certificate-beach.png' },
   { value: 'ZBBC', label: 'Standard', price: 33, imageSrc: '/assets/img/certificates/birth-certificate-standard.png' },
-  { value: 'BC06', label: 'Standard & All Blacks NZ', subLabel: 'Two certificate package', price: 55, imageSrc: '/assets/img/certificates/birth-certificate-standard-and-allblacks.png' },
+  { value: 'ZBPP', label: 'Standard & All Blacks NZ', subLabel: 'Two certificate package', price: 55, imageSrc: '/assets/img/certificates/birth-certificate-standard-and-allblacks.png' },
   { value: 'ZBFP', label: 'Standard & Forest', subLabel: 'Two certificate package', price: 55, imageSrc: '/assets/img/certificates/birth-certificate-standard-and-forest.png' },
   { value: 'ZBBP', label: 'Standard & Beach', subLabel: 'Two certificate package', price: 55, imageSrc: '/assets/img/certificates/birth-certificate-standard-and-beach.png' }
 ]
