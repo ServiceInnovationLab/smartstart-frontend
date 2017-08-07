@@ -20,7 +20,6 @@ import {
   validAlpha,
   validDate,
   validCharStrict,
-  olderThan,
   youngerThan,
   email
 } from '../../validate'
@@ -87,7 +86,7 @@ const fields = {
     name: "mother.dateOfBirth",
     component: renderDatepicker,
     label: makeMandatoryLabel("Mother's date of birth"),
-    validate: [required, validDate, olderThan(10), youngerThan(100)],
+    validate: [required, validDate, youngerThan(100)],
   },
   'mother.placeOfBirth': {
     name: "mother.placeOfBirth",

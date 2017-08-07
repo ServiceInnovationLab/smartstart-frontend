@@ -1,6 +1,11 @@
+import moment from 'moment'
 import get from 'lodash/get'
+import set from 'lodash/set'
 import check from './check'
 import  schema from '../schemas/step2'
+import {
+  MIN_10_AGE_MOTHER_MESSAGE
+} from '../../validation-messages'
 
 const validate = (values) => {
   const errors = {}
@@ -24,6 +29,28 @@ const validate = (values) => {
 
   check('mother.maoriDescendant')(schema, values, errors)
   check('mother.ethnicGroups')(schema, values, errors)
+
+
+  let childBirthDate = get(values, 'child.birthDate')
+  let motherBirthDate = get(values, 'mother.dateOfBirth')
+
+  if (childBirthDate && motherBirthDate) {
+    if (typeof motherBirthDate === 'string') {
+      motherBirthDate = moment(motherBirthDate)
+    }
+
+    if (typeof childBirthDate === 'string') {
+      childBirthDate = moment(childBirthDate)
+    }
+
+    if (
+      motherBirthDate.isValid() &&
+      childBirthDate.isValid() &&
+      childBirthDate.diff(motherBirthDate, 'years') < 10
+    ) {
+      set(errors, 'mother.dateOfBirth', MIN_10_AGE_MOTHER_MESSAGE)
+    }
+  }
 
   if (ethnicGroups && ethnicGroups.length && ethnicGroups.indexOf('other') > -1) {
     check('mother.ethnicityDescription')(schema, values, errors)

@@ -3,10 +3,8 @@ import React, { PropTypes } from 'react'
 export const hasError = ({ touched, error }) => {
   return touched && error && (
     typeof error === 'string' ||
-    (
-      Array.isArray(error) &&
-      error.some(err => err.type === 'error')
-    )
+    !Array.isArray(error) ||
+    error.some(err => err.type === 'error')
   )
 }
 

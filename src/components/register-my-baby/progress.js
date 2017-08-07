@@ -60,7 +60,7 @@ class FormWizardProgress extends Component {
     const { currentStep, isReviewing, formState } = this.props
     const isCurrentStepComplete = currentStep === 7 || isComplete(formState, currentStep)
 
-    if (isReviewing && !isCurrentStepComplete) {
+    if ((isReviewing || targetStep > currentStep) && !isCurrentStepComplete) {
       this.props.onFailNavigationAttemp()
     } else {
       // navigating to review step

@@ -5,9 +5,9 @@ import times from 'lodash/times'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
 import validate from './validation'
+import warn from '../warn'
 import schema from './schemas/step4'
 import getFieldProps from './get-field-props'
-
 
 class ParentRelationshipForm extends Component {
   renderSiblings(otherChildren) {
@@ -149,7 +149,8 @@ ParentRelationshipForm = reduxForm({
   form: 'registration',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
+  warn
 })(ParentRelationshipForm)
 
 
