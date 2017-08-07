@@ -1,8 +1,7 @@
-import moment from 'moment'
 import get from 'lodash/get'
 import range from 'lodash/range'
 import check from './check'
-import  schema from '../schemas/step4'
+import schema from '../schemas/step4'
 
 const validate = (values) => {
   const errors = {}
@@ -41,5 +40,3 @@ const validate = (values) => {
 }
 
 export default validate
-
-
