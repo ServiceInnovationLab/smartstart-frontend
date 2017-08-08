@@ -3,7 +3,8 @@ import find from 'lodash/find'
 import Accordion from './accordion'
 import { retrieveBroData } from '../../actions/birth-registration'
 import {
-  products as productOptions
+  products as productOptions,
+  courierDeliveryPrice
 } from './options'
 import Spinner from '../spinner/spinner'
 import './confirmation.scss'
@@ -45,7 +46,7 @@ class Confirmation extends Component {
     const { productCode, courierDelivery, quantity, stillBorn } = sessionData
 
     const product = productCode ? find(productOptions, { value: productCode }) : null
-    const deliveryPrice = courierDelivery === 'standard' ? 0 : 5
+    const deliveryPrice = courierDelivery ? courierDeliveryPrice : 0
     const totalPrice = (product && quantity) ? (product.price * quantity + deliveryPrice) : 0
 
     let resultNotification;

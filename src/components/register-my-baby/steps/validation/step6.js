@@ -18,7 +18,7 @@ const validate = (values) => {
     check('certificateOrder.deliveryAddress.line1')(schema, values, errors)
     check('certificateOrder.deliveryAddress.suburb')(schema, values, errors)
     check('certificateOrder.deliveryAddress.line2')(schema, values, errors)
-    check('certificateOrder.deliveryAddress.email')(schema, values, errors)
+    check('certificateOrder.emailAddress')(schema, values, errors)
   }
 
   return errors

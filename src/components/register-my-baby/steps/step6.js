@@ -7,6 +7,7 @@ import Accordion from '../accordion'
 import makeFocusable from '../hoc/make-focusable'
 import {
   products as productOptions,
+  courierDeliveryPrice,
   getBirthCertificateDeliveryAddresses
 } from '../options'
 import './step6.scss'
@@ -72,7 +73,7 @@ class OrderCertificatesForm extends Component {
     } = this.props
     const product = productCode ? find(productOptions, { value: productCode }) : null
     const previewImage = product ? product.imageSrc : '/assets/img/certificates/birth-certificate-preview.png'
-    const deliveryPrice = courierDelivery === 'standard' ? 0 : 5
+    const deliveryPrice = courierDelivery === 'standard' ? 0 : courierDeliveryPrice
     const totalPrice = (product && quantity) ? (product.price * quantity + deliveryPrice) : 0
 
     const hideFatherOption = fatherKnown === 'no' || (assistedHumanReproduction === 'yes' && assistedHumanReproductionSpermDonor)

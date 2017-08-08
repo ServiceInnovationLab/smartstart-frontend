@@ -9,6 +9,7 @@ import {
   products,
   deliveryMethods,
   getBirthCertificateDeliveryAddresses,
+  courierDeliveryPrice,
   getOptionDisplay
 } from '../../options'
 import schema from '../schemas/step6'
@@ -17,7 +18,7 @@ import getFieldReviewProps from './get-field-review-props'
 const renderStep6Review = ({formState, onEdit, countries}) => {
   const product = formState.orderBirthCertificate === 'yes' ? find(products, { value: formState.certificateOrder.productCode }) : null
   const quantity = formState.orderBirthCertificate === 'yes' ? formState.certificateOrder.quantity : 0
-  const deliveryPrice = formState.orderBirthCertificate === 'yes' ? (formState.certificateOrder.courierDelivery === 'standard' ? 0 : 5) : 0
+  const deliveryPrice = formState.orderBirthCertificate === 'yes' ? (formState.certificateOrder.courierDelivery === 'standard' ? 0 : courierDeliveryPrice) : 0
   const selectedDesign = product ? <span>
     <span>{product.label}</span>
     { product.subLabel &&
