@@ -235,6 +235,7 @@ const cleanup = data => {
   const irdApplyForNumber = get(data, 'ird.applyForNumber')
   const msdNotify = get(data, 'msd.notify')
   const orderBirthCertificate = get(data, 'orderBirthCertificate')
+  const parentRelationship = get(data, 'parentRelationship')
 
   if (birthPlaceCategory === 'home') {
     unset(data, 'birthPlace.hospital')
@@ -258,6 +259,11 @@ const cleanup = data => {
     unset(data, 'parentRelationshipDate')
     unset(data, 'parentRelationshipPlace')
     unset(data, 'siblings')
+  }
+
+  if (fatherKnown && (parentRelationship !== 'marriage' && parentRelationship !== 'civilUnion')) {
+    unset(data, 'parentRelationshipDate')
+    unset(data, 'parentRelationshipPlace')
   }
 
   if (!irdApplyForNumber) {

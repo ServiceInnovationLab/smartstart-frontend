@@ -110,6 +110,7 @@ describe('Form Data Transformation', () => {
     test('format parentRelationshipDate', () => {
       const transformedData = transform({
         fatherKnown: 'yes',
+        parentRelationship: 'marriage',
         parentRelationshipDate: moment('2000-06-23')
       });
 
@@ -525,6 +526,19 @@ describe('Form Data Transformation', () => {
           }
         })
         expect(keys(transformedData).indexOf('father')).toEqual(-1)
+      })
+    })
+
+    describe('parentRelationship', () => {
+      test('must not send parentRelationshipDate & parentRelationshipPlace when relationship !== marriage && relationship !== civilUnion', () => {
+        let transformedData = transform({
+          fatherKnown: 'yes',
+          parentRelationship: 'deFacto',
+          parentRelationshipDate: moment('2017-06-23'),
+          parentRelationshipPlace: 'foo',
+        })
+        expect(keys(transformedData).indexOf('parentRelationshipDate')).toEqual(-1)
+        expect(keys(transformedData).indexOf('parentRelationshipPlace')).toEqual(-1)
       })
     })
 
