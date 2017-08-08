@@ -41,7 +41,7 @@ class RegisterMyBabyLandingPage extends Component {
           <li>credit card details to pay for the birth certificate (if you choose to order one).</li>
         </ul>
 
-        <h5>Take care with this form - it's against the law to give false information, and you'll need to pay to correct mistakes.</h5>
+        <h5>Take care with this form - it's against the law to give false information, and you may need to pay to correct mistakes.</h5>
         <h5>This form will take approximately 10 minutes to complete.</h5>
         <h5>Ready to get started?</h5>
 

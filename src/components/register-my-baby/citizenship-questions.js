@@ -66,7 +66,7 @@ class CitizenshipQuestions extends Component {
         <div className="expandable-group secondary">
           <Accordion>
             <Accordion.Toggle>
-              What makes a child born a New Zealand citizen?
+              Is your child entitled to be a New Zealand Citizen?
             </Accordion.Toggle>
             <Accordion.Content>
               <p>A child born in New Zealand is a New Zealand citizen at birth only if:</p>

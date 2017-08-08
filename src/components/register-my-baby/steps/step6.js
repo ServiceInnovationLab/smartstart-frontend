@@ -136,6 +136,9 @@ class OrderCertificatesForm extends Component {
                 </div>
               }
               <h4>Delivery details</h4>
+              <div className="instruction">
+                Tell us where you would like us to send the birth certificate.
+              </div>
 
               <Field {...getFieldProps(schema, 'certificateOrder.deliveryName')} />
               <Field

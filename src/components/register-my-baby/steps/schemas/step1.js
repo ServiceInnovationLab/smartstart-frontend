@@ -43,7 +43,7 @@ const fields = {
     type: 'text',
     placeholder: 'E.g. Jane Mary',
     label: makeMandatoryLabel('Child\'s given name(s)'),
-    instructionText: 'Enter the child\'s first name(s) and any middle names. The order you enter the names here is how they will appear on the birth certificate.',
+    instructionText: 'Enter the child\'s first name(s) and any middle names. The child\'s names will appear on the birth certificate in the order that you enter them here.',
     validate: [requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validAlpha],
     normalize: maxLength(75)
   },
@@ -114,7 +114,7 @@ const fields = {
     options: [],
     valueKey: 'identifier',
     labelKey: 'name',
-    placeholder: 'Please select',
+    placeholder: 'Please select ...',
     optionRenderer: renderHospitalOption,
     valueRenderer: renderHospitalOption,
     searchable: true,
@@ -127,7 +127,7 @@ const fields = {
     component: renderPlacesAutocomplete,
     type: 'text',
     label: makeMandatoryLabel('Street number and Street name'),
-    instructionText: "Begin typing your address, and select it from the options that appear.",
+    instructionText: 'Begin typing your address, and select it from the options that appear. If required you can edit the address after you\'ve picked one.',
     onPlaceSelect: requireHandler,
     normalize: combine(maxLength(33), titleCase),
     validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET)]
@@ -185,8 +185,8 @@ const fields = {
     component: renderField,
     type: 'text',
     ariaLabel: makeMandatoryAriaLabel('Please describe the child\'s ethnicity.'),
-    instructionText: 'This information helps other government agencies to get a clearer picture of our society so that health, education and other needs in your area can be planned for.',
-    placeholder: 'Please describe the child\'s ethnicity.',
+    instructionText: 'Please describe the child\’s ethnicity. This information helps other government agencies to get a clearer picture of our society so that health, education and other needs in your area can be planned for.',
+    placeholder: 'e.g. South African Thai',
     validate: [required, maxLength30, validCharStrict]
   }
 }

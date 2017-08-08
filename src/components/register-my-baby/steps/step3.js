@@ -155,30 +155,17 @@ class FatherDetailsForm extends Component {
 
           { assistedHumanReproduction === 'yes' &&
             <div className="conditional-field">
+              <div className="instruction-text">
+                Select one of the following to describe your relationship.  The option you select will change how the father/other parent details are completed.
+              </div>
               <Field
                 {...getFieldProps(schema, 'assistedHumanReproductionManConsented')}
                 disabled={assistedHumanReproductionWomanConsented || assistedHumanReproductionSpermDonor}
               />
-              <div className="instruction-text">
-                The mother is in a relationship with a man who consented to the procedure. He'll be named as the child’s father.
-              </div>
-            </div>
-          }
-
-          { assistedHumanReproduction === 'yes' &&
-            <div className="conditional-field">
-              <div className="informative-text">
-                The mother is in a relationship with a woman who consented to the procedure. She'll be named as the child’s other parent.
-              </div>
               <Field
                 {...getFieldProps(schema, 'assistedHumanReproductionWomanConsented')}
                 disabled={assistedHumanReproductionManConsented || assistedHumanReproductionSpermDonor}
               />
-            </div>
-          }
-
-          { assistedHumanReproduction === 'yes' &&
-            <div className="conditional-field">
               <Field
                 {...getFieldProps(schema, 'assistedHumanReproductionSpermDonor')}
                 disabled={assistedHumanReproductionManConsented || assistedHumanReproductionWomanConsented}
@@ -204,7 +191,7 @@ class FatherDetailsForm extends Component {
                     <p>These could include:</p>
                     <ul>
                       <li>You're in a different relationship now</li>
-                      <li>You're in a relationship with a woman and you want her to be the child's other parent</li>
+                      <li>You're in a relationship with a woman and you want her to be named as the child's other parent</li>
                       <li>Naming the father may put you in danger</li>
                       <li>You can't be sure this person is definitely the father</li>
                     </ul>
