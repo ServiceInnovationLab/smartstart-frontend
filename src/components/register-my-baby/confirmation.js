@@ -210,7 +210,7 @@ class Confirmation extends Component {
       }
 
       <div className="print">
-        <button type="button">Print</button>
+        <button type="button" onClick={() => window.print()}>Print</button>
       </div>
     </div>
   }

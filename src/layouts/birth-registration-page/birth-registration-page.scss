@@ -545,6 +545,12 @@
       }
     }
   }
+
+  @media print {
+    .main-nav {
+      display: none;
+    }
+  }
 }
 
 .places-autocomplete {

@@ -98,4 +98,14 @@
       }
     }
   }
+
+  @media print {
+    h2 {
+      padding: 0;
+    }
+    .step-number,
+    .print {
+      display: none;
+    }
+  }
 }
