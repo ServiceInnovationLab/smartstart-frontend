@@ -1,6 +1,7 @@
 import Cookie from 'react-cookie'
 import { checkStatus } from 'utils'
 import { applicationError } from './actions'
+import fetchWithRetry from 'fetch-retry'
 
 export const REQUEST_BIRTH_FACILITIES = 'REQUEST_BIRTH_FACILITIES'
 export const RECEIVE_BIRTH_FACILITIES = 'RECEIVE_BIRTH_FACILITIES'
@@ -44,8 +45,10 @@ function receiveCsrfToken(token) {
 export function fetchBirthFacilities() {
   return dispatch => {
     dispatch(requestBirthFacilities())
-    return fetch('/birth-registration-api/ReferenceData/birth-facilities', {
-      credentials: 'same-origin'
+    return fetchWithRetry('/birth-registration-api/ReferenceData/birth-facilities', {
+      credentials: 'same-origin',
+      retries: 3,
+      retryDelay: 500
     })
     .then(checkStatus)
     .then(response => {
@@ -61,8 +64,10 @@ export function fetchBirthFacilities() {
 export function fetchCountries() {
   return dispatch => {
     dispatch(requestCountries())
-    return fetch('/birth-registration-api/ReferenceData/countries', {
-      credentials: 'same-origin'
+    return fetchWithRetry('/birth-registration-api/ReferenceData/countries', {
+      credentials: 'same-origin',
+      retries: 3,
+      retryDelay: 500
     })
     .then(checkStatus)
     .then(response => {
@@ -76,8 +81,10 @@ export function fetchCountries() {
 }
 
 export function retrieveBroData() {
-  return fetch('/api/sessions/bro_application/', {
-    credentials: 'same-origin'
+  return fetchWithRetry('/api/sessions/bro_application/', {
+    credentials: 'same-origin',
+    retries: 3,
+    retryDelay: 500
   })
   .then(checkStatus)
   .then(response => response.json());
@@ -87,7 +94,7 @@ export function rememberBroData(data) {
   const djangoCsrfToken = Cookie.load('csrftoken')
 
   // the api need a forward slash in the end
-  return fetch('/api/sessions/bro_application/', {
+  return fetchWithRetry('/api/sessions/bro_application/', {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
@@ -95,6 +102,8 @@ export function rememberBroData(data) {
       'X-CSRFToken': djangoCsrfToken
     },
     credentials: 'same-origin',
+    retries: 3,
+    retryDelay: 500,
     body: JSON.stringify(data)
   })
   .then(checkStatus)

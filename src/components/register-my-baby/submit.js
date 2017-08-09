@@ -1,3 +1,4 @@
+import fetchWithRetry from 'fetch-retry'
 import set from 'lodash/set'
 import get from 'lodash/get'
 import { checkStatus } from 'utils'
@@ -79,13 +80,15 @@ export function validateOnly(formState, csrfToken) {
     transformedData.confirmationUrlFailure = ''
   }
 
-  return fetch('/birth-registration-api/Births/birth-registrations', {
+  return fetchWithRetry('/birth-registration-api/Births/birth-registrations', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
+    retries: 3,
+    retryDelay: 500,
     body: JSON.stringify(transformedData)
   })
   .then(checkStatus)
@@ -113,13 +116,15 @@ export function fullSubmit(formState, csrfToken) {
     transformedData.confirmationUrlFailure = ''
   }
 
-  return fetch('/birth-registration-api/Births/birth-registrations', {
+  return fetchWithRetry('/birth-registration-api/Births/birth-registrations', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
+    retries: 3,
+    retryDelay: 500,
     body: JSON.stringify(transformedData)
   })
   .then(checkStatus)
