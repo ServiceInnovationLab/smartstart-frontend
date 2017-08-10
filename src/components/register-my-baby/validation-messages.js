@@ -55,7 +55,7 @@ export const REQUIRE_FATHER_EMAIL_IRD = <span>
 const EMPTY = ''
 
 export const frontendMessageByErrorCode = {
-  'wdatet_parent_young': { message: EMPTY, type: 'warning' }, // parent relationship marriage date
+  'wdatet_parent_young': { message: MIN_10_AGE_MOTHER_MESSAGE, type: 'error' }, // parent relationship marriage date
   '10010': { message: EMPTY, type: 'warning' }, // title case
 
   'ethnic:child.ethnicGroups': { message: REQUIRE_MESSAGE, type: 'error' },
