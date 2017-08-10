@@ -68,15 +68,13 @@ class Confirmation extends Component {
         }
       </div>
     } else {
-      resultNotification = <div className="instruction">
-        <strong>
-          { stillBorn ?
-            <span>We understand this is a difficult time. Thank you for registering your baby.</span>:
-            <span>Thanks for registering the birth of your baby. If we have any questions, we'll contact you.</span>
-          }
-        </strong>
+      resultNotification = <div>
+        { stillBorn ?
+          <div className="instruction">We understand this is a difficult time. Thank you for registering your baby.</div>:
+          <div className="instruction">Thanks for registering the birth of your baby. If we have any questions, we'll contact you.</div>
+        }
         { product &&
-          <strong>Your baby's birth certificate will normally arrive within 10 working days (allowing time for postal delivery).</strong>
+          <div>Your baby's birth certificate will normally arrive within 10 working days (allowing time for postal delivery).</div>
         }
       </div>
     }
