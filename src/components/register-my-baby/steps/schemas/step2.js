@@ -77,7 +77,7 @@ const fields = {
     component: renderField,
     type: "text",
     label: makeMandatoryLabel("Usual occupation, profession or job of mother"),
-    placeholder: "e.g. Teacher",
+    placeholder: "e.g. Engineer",
     instructionText: "Enter the occupation or job title. You don't need to include the name of the employer.",
     validate: [required, validCharStrict],
     normalize: combine(maxLength(60), titleCase),

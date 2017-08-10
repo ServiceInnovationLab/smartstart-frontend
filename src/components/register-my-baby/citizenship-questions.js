@@ -75,7 +75,11 @@ class CitizenshipQuestions extends Component {
                 <li>is entitled under the Immigration Act 2009 to be in New Zealand indefinitely (a permanent resident), or</li>
                 <li>is entitled to reside indefinitely in the Cook Islands, Niue or Tokelau.</li>
               </ul>
-              <p>If you are unsure about your citizenship status, contact the Citizenship Office: Freephone <strong>0800 22 51 51</strong>.</p>
+              <p>
+                If you are unsure about your citizenship status, try our citizenship tool
+                <a href="https://www.govt.nz/browse/nz-passports-and-citizenship/getting-nz-citizenship/check-if-you-are-a-citizen/" target="_blank" rel="noreferrer noopener">https://www.govt.nz/browse/nz-passports-and-citizenship/getting-nz-citizenship/check-if-you-are-a-citizen/</a>
+                or contact the Citizenship Office: Freephone <strong>0800 22 51 51</strong>.
+              </p>
             </Accordion.Content>
           </Accordion>
         </div>

@@ -47,19 +47,28 @@ const fields = {
   },
   'assistedHumanReproductionManConsented': {
     name: "assistedHumanReproductionManConsented",
-    label: "The mother is in a relationship with a man who consented to the procedure. Complete the father step with his details.",
+    label: <div>
+      <div>The mother is in a legal relationship (married, entered into a civil union or de facto relationship) with a man, who consented to the procedure.</div>
+      <div>Complete the father step using his details.</div>
+    </div>,
     component: renderCheckbox,
     disabled: false,
   },
   'assistedHumanReproductionWomanConsented': {
     name: "assistedHumanReproductionWomanConsented",
-    label: "The mother is in a relationship with a woman who consented to the procedure. Complete the other parent step with her details.",
+    label: <div>
+      <div>The mother is in a legal relationship with a woman, who consented to the procedure.</div>
+      <div>Complete the other parent step using her details.</div>
+    </div>,
     component: renderCheckbox,
     disabled: false,
   },
   'assistedHumanReproductionSpermDonor': {
     name: "assistedHumanReproductionSpermDonor",
-    label: "The mother used a sperm donor without a consenting partner. The father is not known.",
+    label: <div>
+      <div>The mother is not in a legal relationship.</div>
+      <div>You do not complete the father/other parent or parental relationship steps.</div>
+    </div>,
     component: renderCheckbox,
     disabled: false,
   },
@@ -121,7 +130,7 @@ const fields = {
     component: renderField,
     type: "text",
     label: makeMandatoryLabel(<span>Usual occupation, profession or job of <FatherText /></span>),
-    placeholder: "e.g. Nurse",
+    placeholder: "e.g. Engineer",
     instructionText: "Enter the occupation or job title. You don't need to include the name of the employer.",
     validate: [required, validCharStrict],
     normalize: combine(maxLength(60), titleCase),

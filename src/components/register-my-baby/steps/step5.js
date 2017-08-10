@@ -44,8 +44,13 @@ class IrdMsdSharingForm extends Component {
                 Who is eligible to apply for an IRD number for their child?
               </Accordion.Toggle>
               <Accordion.Content>
-                <p>If one of the parents is a NZ or Australian citizen, or has NZ or Australian permanent residency, or is a resident of the Cook Islands, Tokelau, or Niue, then you can apply for an IRD number for the child from Inland Revenue.</p>
-                <p>If none of the parents are NZ or Australian citizens, or have NZ or Australian permanent residency, or are a resident of the Cook Islands, Tokelau, or Niue, then you are not be able to apply for an IRD number using this birth registration form.</p>
+                <p>If one of the parents is:</p>
+                <ul>
+                  <li>a NZ or Australian citizen, or</li>
+                  <li>has NZ or Australian permanent residency, or</li>
+                  <li>is a resident of the Cook Islands, Tokelau, or Niue,</li>
+                </ul>
+                <p>then the easiest way for you to get an IRD number for your child is by using this birth registration form.  It doesn’t cost anything  to apply for an IRD number and it saves you having to get another set of forms to apply for it later.</p>
               </Accordion.Content>
             </Accordion>
 

@@ -178,27 +178,7 @@ class FatherDetailsForm extends Component {
           }
 
           { assistedHumanReproduction === 'no' &&
-            <div className="component-grouping">
-              <Field {...getFieldProps(schema, 'fatherKnown')} />
-
-              <div className="expandable-group secondary">
-                <Accordion>
-                  <Accordion.Toggle>
-                    What if I don't want to name the child's father or other parent?
-                  </Accordion.Toggle>
-                  <Accordion.Content>
-                    <p>If you know who the father is, there may be reasons that you are reluctant to include them in the registration of birth.</p>
-                    <p>These could include:</p>
-                    <ul>
-                      <li>You're in a different relationship now</li>
-                      <li>You're in a relationship with a woman and you want her to be named as the child's other parent</li>
-                      <li>Naming the father may put you in danger</li>
-                      <li>You can't be sure this person is definitely the father</li>
-                    </ul>
-                  </Accordion.Content>
-                </Accordion>
-              </div>
-            </div>
+            <Field {...getFieldProps(schema, 'fatherKnown')} />
           }
 
           {

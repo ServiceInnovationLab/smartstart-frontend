@@ -137,7 +137,7 @@ class ChildDetailsForm extends Component {
                 </ul>
                 <p>You still need to register the birth. If you don't want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field.</p>
                 <strong>What about a miscarriage?</strong>
-                <p>A pregnancy is termed a miscarriage if the baby is not born alive, and is born before the 20th week of the pregnancy. You don't have to register the baby if you have suffered a miscarriage.</p>
+                <p>A pregnancy is termed a miscarriage if the baby is not born alive, and is born before the 21st week of the pregnancy and weighed less than 400grams. You don't have to register the baby if you have suffered a miscarriage.</p>
               </Accordion.Content>
             </Accordion>
           </div>
