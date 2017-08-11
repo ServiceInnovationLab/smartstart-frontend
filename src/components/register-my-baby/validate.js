@@ -5,7 +5,6 @@ import {
   REQUIRE_MESSAGE,
   INVALID_EMAIL_MESSAGE,
   INVALID_NUMBER_MESSAGE,
-  EXCEED_MAXLENGTH_MESSAGE,
   INVALID_CHAR_MESSAGE,
   INVALID_DATE_MESSAGE,
   INVALID_IRD_MESSAGE,
@@ -25,11 +24,6 @@ export const required = value =>
 
 export const requiredWithMessage = message => value =>
   (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '')) ? message : undefined
-
-export const maxLength = max => value =>
-  value && value.length > max ? EXCEED_MAXLENGTH_MESSAGE.replace('{max}', max) : undefined
-
-export const maxLength30 = maxLength(30)
 
 export const number = value => value && isNaN(Number(value)) ? INVALID_NUMBER_MESSAGE : undefined
 

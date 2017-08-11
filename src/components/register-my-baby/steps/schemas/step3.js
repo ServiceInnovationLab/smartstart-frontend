@@ -20,7 +20,6 @@ import {
 import {
   required,
   requiredWithMessage,
-  maxLength30,
   validAlpha,
   validDate,
   validCharStrict,
@@ -214,7 +213,8 @@ const fields = {
     placeholder: "eg. Somali, Thai",
     instructionText: <span>Please describe the <FatherText />'s ethnicity. This information helps other government agencies to get a clearer picture of our society so that health, education and other needs in your area can be planned for.</span>,
     ariaLabel: makeMandatoryAriaLabel("State other ethnicity"),
-    validate: [required, maxLength30, validCharStrict],
+    validate: [required, validCharStrict],
+    normalize: maxLength(30)
   },
   'father.isCitizen': {
     name: 'father.isCitizen',
