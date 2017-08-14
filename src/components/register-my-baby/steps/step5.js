@@ -23,7 +23,7 @@ class IrdMsdSharingForm extends Component {
     const irdDeliveryAddresses = getIrdDeliveryAddresses(isOtherParent)
 
     const deliveryAddresses = hideFatherOption ?
-      irdDeliveryAddresses.filter(opt => opt.value !== 'fatherAddress') :
+      irdDeliveryAddresses.filter(opt => opt.value !== 'fathersAddress') :
       irdDeliveryAddresses
 
     return (
@@ -44,9 +44,9 @@ class IrdMsdSharingForm extends Component {
                 Who is eligible to apply for an IRD number for their child?
               </Accordion.Toggle>
               <Accordion.Content>
-                <p>If one of the parents is:</p>
+                <p>If one of the parents:</p>
                 <ul>
-                  <li>a NZ or Australian citizen, or</li>
+                  <li>is a NZ or Australian citizen, or</li>
                   <li>has NZ or Australian permanent residency, or</li>
                   <li>is a resident of the Cook Islands, Tokelau, or Niue,</li>
                 </ul>

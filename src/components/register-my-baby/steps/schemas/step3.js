@@ -48,7 +48,7 @@ const fields = {
     name: "assistedHumanReproductionManConsented",
     label: <div>
       <div>The mother is in a legal relationship (married, entered into a civil union or de facto relationship) with a man, who consented to the procedure.</div>
-      <div>Complete the father step using his details.</div>
+      <div>Complete the father questions using his details.</div>
     </div>,
     component: renderCheckbox,
     disabled: false,
@@ -57,7 +57,7 @@ const fields = {
     name: "assistedHumanReproductionWomanConsented",
     label: <div>
       <div>The mother is in a legal relationship with a woman, who consented to the procedure.</div>
-      <div>Complete the other parent step using her details.</div>
+      <div>Complete the other parent questions using her details.</div>
     </div>,
     component: renderCheckbox,
     disabled: false,
@@ -66,7 +66,7 @@ const fields = {
     name: "assistedHumanReproductionSpermDonor",
     label: <div>
       <div>The mother is not in a legal relationship.</div>
-      <div>You do not complete the father/other parent or parental relationship steps.</div>
+      <div>You do not complete the father/other parent or parental relationship questions.</div>
     </div>,
     component: renderCheckbox,
     disabled: false,

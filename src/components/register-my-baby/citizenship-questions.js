@@ -69,11 +69,11 @@ class CitizenshipQuestions extends Component {
               Is your child entitled to be a New Zealand Citizen?
             </Accordion.Toggle>
             <Accordion.Content>
-              <p>A child born in New Zealand is a New Zealand citizen at birth only if:</p>
+              <p>A child born in New Zealand is a New Zealand citizen at birth only if at least one parent is:</p>
               <ul>
-                <li>at least one parent is a New Zealand citizen, or</li>
-                <li>is entitled under the Immigration Act 2009 to be in New Zealand indefinitely (a permanent resident), or</li>
-                <li>is entitled to reside indefinitely in the Cook Islands, Niue or Tokelau.</li>
+                <li>A New Zealand Citizen, or</li>
+                <li>Entitled under the Immigration Act 2009 to be in NZ indefinitely (a permanent resident), or</li>
+                <li>Entitled to reside indefinitely in the Cook Islands, Niue or Tokelau.</li>
               </ul>
               <p>
                 If you are unsure about your citizenship status, try our citizenship tool

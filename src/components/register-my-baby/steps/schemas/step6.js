@@ -142,7 +142,7 @@ const fields = {
     component: renderField,
     type: "email",
     label: "Email address",
-    instructionText: "If you want tax receipt. Please include an email address.",
+    instructionText: "If you want tax receipt, please include an email address.",
     validate: [email],
     normalize: maxLength(60),
   }

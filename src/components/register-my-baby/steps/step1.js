@@ -113,7 +113,7 @@ class ChildDetailsForm extends Component {
               Can I give my child one name?
             </Accordion.Toggle>
             <Accordion.Content>
-              <p>Your child may have one name where religious, philosophical, or cultural beliefs and traditions require it. In these cases, please use the - symbol to replace the name that you will not use (i.e. First name or surname). In the Declaration section of this form, please tell us why you want to give your child one name.</p>
+              <p>Your child may have one name where religious, philosophical, or cultural beliefs and traditions require it. In these cases, please use the - symbol to replace the name that you will not use (i.e. first name or surname). In the Declaration section of this form, please tell us why you want to give your child one name.</p>
             </Accordion.Content>
           </Accordion>
         </div>
@@ -137,7 +137,7 @@ class ChildDetailsForm extends Component {
                 </ul>
                 <p>You still need to register the birth. If you don't want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field.</p>
                 <strong>What about a miscarriage?</strong>
-                <p>A pregnancy is termed a miscarriage if the baby is not born alive, and is born before the 21st week of the pregnancy and weighed less than 400grams. You don't have to register the baby if you have suffered a miscarriage.</p>
+                <p>A pregnancy is termed a miscarriage if the baby is not born alive, is born before the 21st week of the pregnancy, and weighed less than 400grams. You don't have to register the baby if you have suffered a miscarriage.</p>
               </Accordion.Content>
             </Accordion>
           </div>

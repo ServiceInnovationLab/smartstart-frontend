@@ -85,7 +85,7 @@ class RegisterMyBabyLandingPage extends Component {
             </Accordion.Toggle>
             <Accordion.Content>
               <p>If you're an existing Ministry of Social Development (MSD) client you can also use this form to notify MSD of the birth of your baby. They can determine how your new baby might change your benefits and services. </p>
-              <p>You don't need to order a birth certificate to apply for an IRD number.</p>
+              <p>You don't need to order a birth certificate to notify MSD.</p>
             </Accordion.Content>
           </Accordion>
         </div>
