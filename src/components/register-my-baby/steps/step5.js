@@ -28,8 +28,13 @@ class IrdMsdSharingForm extends Component {
 
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">5</span> Ētahi atu ratonga <br/> Other services</h2>
-        <div className="informative-text">
+        <h2 className="step-heading">
+          <span className="visuallyhidden">Step</span>
+          <span className="step-number">5</span>
+          Ētahi atu ratonga <br/>
+          <span className="english">Other services</span>
+        </h2>
+        <div className="informative-text intro">
           If you want to, you can use this section to share your child's birth with government agencies.
         </div>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>

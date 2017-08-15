@@ -19,7 +19,10 @@ const renderStep3Review = ({ formState, onEdit }) => {
     const { isCitizen, citizenshipSource } = formState.father || {};
     return <div className="review-section">
       <div className="section-heading">
-        <h3>Matua <br/> Father/Other parent</h3>
+        <h3>
+          Matua/Tētahi Atu Matua <br/>
+          <span className="subtitle">Father/Other parent</span>
+        </h3>
         <button type="button" onClick={() => onEdit('father-details')} className="section-edit-btn">Edit</button>
       </div>
 

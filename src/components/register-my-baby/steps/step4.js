@@ -53,10 +53,15 @@ class ParentRelationshipForm extends Component {
 
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">4</span> Hononga mātua <br/> Parents' relationship</h2>
+        <h2 className="step-heading">
+          <span className="visuallyhidden">Step</span>
+          <span className="step-number">4</span>
+          Hononga mātua <br/>
+          <span className="english">Parents' relationship</span>
+        </h2>
         { isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
-            <div className="informative-text">
+            <div className="informative-text intro">
               You indicated that the father is not known, so you do not need to complete this step.
               <br/>
               Just select <strong>Next</strong> to continue on or <strong>Back</strong> if you wish to change anything on the step before.

@@ -115,7 +115,9 @@ class FatherDetailsForm extends Component {
         <Field {...getFieldProps(schema, 'father.ethnicGroups')} onChange={this.onEthnicGroupsChange} />
 
         { ethnicGroups && ethnicGroups.indexOf('other') > -1 &&
-          <Field {...getFieldProps(schema, 'father.ethnicityDescription')} />
+          <div className="conditional-field">
+            <Field {...getFieldProps(schema, 'father.ethnicityDescription')} />
+          </div>
         }
 
         <CitizenshipQuestions
@@ -143,9 +145,14 @@ class FatherDetailsForm extends Component {
 
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">3</span>Matua/Tētahi Atu Matua <br/> Father/Other parent</h2>
+        <h2 className="step-heading">
+          <span className="visuallyhidden">Step</span>
+          <span className="step-number">3</span>
+          Matua/Tētahi Atu Matua <br/>
+          <span className="english">Father/Other parent</span>
+        </h2>
 
-        <div className="informative-text">
+        <div className="informative-text intro">
           This section is where you give the details of the child's Father (if known), or the other parent of the child.<br/>
           If you don’t know who the father is you must still register the child – just read and answer the questions below.
         </div>

@@ -24,10 +24,10 @@ class RegisterMyBabyLandingPage extends Component {
   render() {
     return (
       <div className="landing-page">
-        <h3>
+        <h2>
           Te Whakamōhio i te Whānautanga mō te Rēhita <br/>
-          Notification of Birth for Registration
-        </h3>
+          <span className="english">Notification of Birth for Registration</span>
+        </h2>
         <div className="divider" />
         <div className="informative-text">
           Every birth in New Zealand must be registered by law. It's free to register your baby, but there's a charge if you want to order a birth certificate. You must fill in all the questions in this form (unless the question says it's optional).

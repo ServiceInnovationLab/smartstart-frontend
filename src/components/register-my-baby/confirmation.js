@@ -80,7 +80,11 @@ class Confirmation extends Component {
     }
 
     return <div className="confirmation">
-      <h2><span className="step-number"></span> Te haamauraa <br/> Confirmation</h2>
+      <h2 className="step-heading">
+        <span className="step-number"></span>
+        Te haamauraa <br/>
+        <span className="subtitle">Confirmation</span>
+      </h2>
 
       { resultNotification }
 

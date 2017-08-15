@@ -21,7 +21,10 @@ const renderStep2Review = ({ formState, onEdit }) => {
   } = formState.mother;
   return <div className="review-section">
     <div className="section-heading">
-      <h3>Whaea <br/> Mother</h3>
+      <h3>
+        Whaea <br/>
+        <span className="subtitle">Mother</span>
+      </h3>
       <button type="button" onClick={() => onEdit('mother-details')} className="section-edit-btn">Edit</button>
     </div>
 

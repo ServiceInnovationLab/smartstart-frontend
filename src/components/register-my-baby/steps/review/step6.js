@@ -34,7 +34,10 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
 
   return <div className="review-section">
     <div className="section-heading">
-      <h3>Tono i te tiwhikete whanau <br/> Order a birth certificate</h3>
+      <h3>
+        Te tono i te tiwhikete whānautanga <br/>
+        <span className="subtitle">Order a birth certificate</span>
+      </h3>
       <button type="button" onClick={() => onEdit('buy-birth-certificates')} className="section-edit-btn">Edit</button>
     </div>
     <Field

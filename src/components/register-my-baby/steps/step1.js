@@ -76,10 +76,15 @@ class ChildDetailsForm extends Component {
 
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">1</span> Tamaiti <br/> Child</h2>
+        <h2 className="step-heading">
+          <span className="visuallyhidden">Step</span>
+          <span className="step-number">1</span>
+          Tamaiti <br/>
+          <span className="english">Child</span>
+        </h2>
 
         <div className="instruction">
-          <strong>This section is where you officially register the details of your child. The name you choose for them should include a surname, and one or more given names.</strong>
+          This section is where you officially register the details of your child. The name you choose for them should include a surname, and one or more given names.
         </div>
 
         <div className="expandable-group primary">

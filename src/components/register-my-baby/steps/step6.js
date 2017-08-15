@@ -86,8 +86,13 @@ class OrderCertificatesForm extends Component {
 
     return (
       <div id="step-6">
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">6</span> Te tono i te tiwhikete whānautanga <br/> Order a birth certificate</h2>
-        <div className="informative-text">
+        <h2 className="step-heading">
+          <span className="visuallyhidden">Step</span>
+          <span className="step-number">6</span>
+          Te tono i te tiwhikete whānautanga <br/>
+          <span className="english">Order a birth certificate</span>
+        </h2>
+        <div className="informative-text intro">
           You can order a birth certificate or move on to reviewing your registration. To purchase a certificate online you will need a credit card.
         </div>
         <form onSubmit={handleSubmit(this.props.onSubmit)}>
@@ -95,7 +100,7 @@ class OrderCertificatesForm extends Component {
 
           { orderBirthCertificate === 'yes' &&
             <div className="component-grouping">
-              <h4>Certificate details</h4>
+              <h4 className="section-heading">Certificate details</h4>
 
               <Field {...getFieldProps(schema, 'certificateOrder.productCode')} />
 
@@ -135,8 +140,8 @@ class OrderCertificatesForm extends Component {
                   </ul>
                 </div>
               }
-              <h4>Delivery details</h4>
-              <div className="instruction">
+              <h4 className="section-heading">Delivery details</h4>
+              <div className="instruction-text">
                 Tell us where you would like us to send the birth certificate.
               </div>
 

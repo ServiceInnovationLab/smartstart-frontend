@@ -14,7 +14,10 @@ const renderStep5Review = ({ formState, onEdit }) => {
   const irdDeliveryAddresses = getIrdDeliveryAddresses(isOtherParent)
   return <div className="review-section">
     <div className="section-heading">
-      <h3>Te Reo Title <br/> Other services</h3>
+      <h3>
+        Ētahi atu ratonga <br/>
+        <span className="subtitle">Other services</span>
+      </h3>
       <button type="button" onClick={() => onEdit('other-services')} className="section-edit-btn">Edit</button>
     </div>
 

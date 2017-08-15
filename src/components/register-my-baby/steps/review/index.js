@@ -104,11 +104,16 @@ class Review extends Component {
 
     return (
       <div id="step-review">
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">7</span> Arotake <br/> Review</h2>
+        <h2 className="step-heading">
+          <span className="visuallyhidden">Step</span>
+          <span className="step-number">7</span>
+          Arotake <br/>
+          <span className="english">Review</span>
+        </h2>
         <div className="instruction">
           Before you send the baby's details in to us for registration, take a minute to check that all the details you've put in are correct.
         </div>
-        <div className="informative-text">
+        <div className="informative-text intro">
           Clicking the 'Register this birth' button at the bottom of this page will send the information through to the Registry of Births, Deaths and Marriages for registration.<br/><br/>
           Check the information you're sending carefully. The Registry may make enquiries to be sure that the details provided are correct, and you may have to provide further information.
         </div>

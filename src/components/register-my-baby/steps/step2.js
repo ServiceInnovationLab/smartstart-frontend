@@ -55,7 +55,12 @@ class MotherDetailsForm extends Component {
     const { ethnicGroups, handleSubmit, submitting } = this.props
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">2</span> Whaea <br/> Mother</h2>
+        <h2 className="step-heading">
+          <span className="visuallyhidden">Step</span>
+          <span className="step-number">2</span>
+          Whaea <br/>
+          <span className="english">Mother</span>
+        </h2>
 
         <div className="instruction">
           <strong>This section is where you give the details of the child's mother.</strong>

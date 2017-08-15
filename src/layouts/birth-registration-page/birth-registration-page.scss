@@ -1,6 +1,8 @@
 @import 'variables';
 
 .birth-registration-page {
+  min-width: 320px;
+
   h2 {
     position: relative;
     padding-left: 58px;
@@ -17,19 +19,25 @@
       height: 38px;
       width: 38px;
       border-radius: 38px;
-      background-color: $form-teal-dark;
+      background-color: $form-teal;
       color: #fff;
       text-align: center;
+    }
 
-      &::before {
-        content: '';
-        border: 1px solid $form-teal-dark;
-        height: 200%;
-        margin-top: -50%;
-        position: absolute;
-        left: 50%;
-        z-index: -1;
-      }
+    &.step-heading::before {
+      content: '';
+      border: 1px solid $form-teal;
+      position: absolute;
+      z-index: -1;
+      left: 18px;
+      top: 8px;
+      bottom: 8px;
+    }
+
+    .english {
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 5px;
     }
 
     @media #{$desktop-and-above} {
@@ -38,10 +46,20 @@
       > .step-number {
         width: 64px;
         height: 64px;
-        font-size: 40px;
+        font-size: 36px;
         line-height: 64px;
       }
+
+      &.step-heading::before {
+        left: 32px;
+        top: 10px;
+        bottom: 10px;
+      }
     }
+  }
+
+  h4.section-heading {
+    margin-top: 50px;
   }
 
   .unavailable-notice {
@@ -51,13 +69,25 @@
   }
 
   .instruction {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26px;
+    margin-bottom: 40px;
+
+    @media #{$desktop-and-above} {
+      font-size: 22px;
+      line-height: 28px;
+    }
   }
 
   .informative-text {
     background-color: $form-informative-background;
     padding: 20px;
+
+    &.intro {
+      font-size: 18px;
+      line-height: 1.5;
+    }
   }
 
   button {
@@ -67,6 +97,9 @@
     color: #fff;
     margin-bottom: 10px;
     min-width: auto;
+    font-size: 18px;
+    padding: 9px 20px;
+    line-height: 20px;
 
     &:hover {
       color: #fff;
@@ -74,16 +107,28 @@
       background-color: darken($form-teal-dark, 5%);
     }
 
+    &.next {
+      padding-right: 18px;
+    }
+
+    &.previous {
+      padding-left: 18px;
+    }
+
     &.next::after {
       font-family: 'icomoon';
       content: $icon-arrow-right;
-      margin-left: 10px;
+      font-size: 20px;
+      margin-left: 18px;
+      vertical-align: top;
     }
 
     &.previous::before {
       font-family: 'icomoon';
       content: $icon-arrow-left;
-      margin-right: 10px;
+      font-size: 20px;
+      margin-right: 18px;
+      vertical-align: top;
     }
   }
 
@@ -92,7 +137,7 @@
   .warning,
   .info {
     font-size: 16px;
-    padding: 5px 8px 5px 40px;
+    padding: 8px 8px 8px 40px;
     position: relative;
     display: block;
 
@@ -102,7 +147,7 @@
       line-height: 18px;
       position: absolute;
       left: 10px;
-      top: 7px;
+      top: 10px;
       content: $icon-exclamation;
       color: $form-error-outline;
     }
@@ -150,11 +195,16 @@
     border-bottom: 1px solid $form-lighter-border-color;
     margin-top: 48px;
     padding-bottom: 20px;
+    line-height: 1.5;
 
     input,
     textarea,
     label {
       margin: 0;
+    }
+
+    label {
+      line-height: 1.5;
     }
 
     input[type="text"],
@@ -173,13 +223,33 @@
     }
 
     select {
+      color: $text-color;
       display: inline-block;
       font-size: $font-size-base;
       font-family: $font-family-base;
       height: $form-input-height;
       padding: 6px 9px;
-      background-color: #fff;
       border-radius: 5px;
+      border: 1px solid $form-border-color;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      appearance: none;
+      background-color: #fff;
+      padding-right: 30px;
+      background-image: url('/assets/img/select-arrow.svg'); // 26x26px
+      background-repeat: no-repeat;
+      background-position: 100% 8px;
+
+      &:hover {
+        cursor: pointer;
+        background-image: url('/assets/img/select-arrow-hover.svg'); // 26x26px
+      }
+
+      // remove dropdown on ie
+      &::-ms-expand {
+        display: none;
+      }
+
     }
 
     .styled-select + .styled-select {
@@ -221,8 +291,6 @@
 
       legend {
         font-size: 16px;
-        line-height: 1em;
-        margin-bottom: .5em;
         font-weight: 500;
         padding: 0;
       }
@@ -236,8 +304,8 @@
 
       > label {
         font-size: 16px;
-        margin-bottom: .5em;
         text-align: left;
+        vertical-align: top;
       }
 
       > div {
@@ -255,7 +323,7 @@
         span.error,
         span.warning {
           flex: 1 0 auto;
-          margin-top: 10px;
+          margin-top: 15px;
         }
       }
 
@@ -335,6 +403,10 @@
       display: inline-block;
       cursor: pointer;
 
+      @media #{$desktop-and-above} {
+        min-width: 70px;
+      }
+
       input[type="radio"] {
         position: absolute;
         left: -9999px;
@@ -343,7 +415,10 @@
       > span {
         display: inline-block;
         border: 1px solid $form-border-color;
-        padding: 9.5px 12px;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        padding: 8px 20px;
 
         @media #{$desktop-and-above} {
           padding: 9.5px 20px;
@@ -363,7 +438,7 @@
       }
 
       input:focus + span {
-        outline: rgb(59, 153, 252) auto 5px;
+        outline: $form-teal-dark dotted 2px;
       }
 
       &:first-child {
@@ -399,9 +474,10 @@
       cursor: pointer;
       display: flex;
       align-items: center;
-      padding-left: 39px;
-      margin-bottom: 5px;
-      min-height: 34px;
+      padding-left: 52px;
+      margin-bottom: 15px;
+      min-height: 40px;
+      font-size: 16px;
 
       input[type="checkbox"] {
         position: absolute;
@@ -412,8 +488,8 @@
         content: "";
         border: 1px solid $form-border-color;
         background: transparent;
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
         border-radius: 5px;
         position: absolute;
         top: 50%;
@@ -428,7 +504,7 @@
 
       input[type="checkbox"]:checked + span::after{
         font-family: 'icomoon';
-        font-size: 18px;
+        font-size: 22px;
         content: $icon-tick;
         position: absolute;
         left: 8px;
@@ -449,7 +525,7 @@
       }
 
       input:focus + span {
-        outline: rgb(59, 153, 252) auto 5px;
+        outline: $form-teal-dark dotted 2px;
       }
 
       &:hover {

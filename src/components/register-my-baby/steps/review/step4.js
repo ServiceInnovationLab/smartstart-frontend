@@ -19,7 +19,10 @@ const renderStep4Review = ({ formState, onEdit }) => {
 
   return <div className="review-section">
     <div className="section-heading">
-      <h3>Hononga mātua <br/> Parent's relationship</h3>
+      <h3>
+        Hononga mātua <br/>
+        <span className="subtitle">Parent's relationship</span>
+      </h3>
       <button type="button" onClick={() => onEdit('parents-relationship')} className="section-edit-btn">Edit</button>
     </div>
 
