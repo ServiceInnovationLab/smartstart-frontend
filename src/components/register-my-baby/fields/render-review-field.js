@@ -11,7 +11,7 @@ const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta:
     valueDisplay = input.value
   }
 
-  return <div className="review-field">
+  return <div className="review-field" data-field-name={input.name}>
     <div className="review-field-content">
       <div>
         <strong>{label}</strong>

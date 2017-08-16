@@ -11,7 +11,7 @@ const renderSubFieldReview = ({ input, valueRenderer, label, meta: { error, warn
     valueDisplay = input.value
   }
 
-  return <div className="review-subfield">
+  return <div className="review-subfield" data-field-name={input.name}>
     <div>
       <strong>{label}</strong>
       { valueDisplay ?
