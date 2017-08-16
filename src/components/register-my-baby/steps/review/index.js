@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import {
   Field, reduxForm, getFormValues, getFormSyncErrors,
   getFormSubmitErrors, getFormSyncWarnings, SubmissionError
@@ -29,8 +30,10 @@ class Review extends Component {
     super(props)
     this.state = {
       validating: true,
-      genericError: null
+      genericError: null,
+      connectionError: null
     }
+    this.retryConnection = this.retryConnection.bind(this)
     this.onValidate = this.onValidate.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -39,18 +42,24 @@ class Review extends Component {
     this.props.handleSubmit(this.onValidate)();
   }
 
+  retryConnection() {
+    this.props.handleSubmit(this.onValidate)();
+  }
+
   onValidate() {
     return validateOnly(this.props.formState, this.props.csrfToken)
       .then(() => {
         this.setState({
           validating: false,
-          genericError: null
+          genericError: null,
+          connectionError: null
         })
       })
       .catch((err) => {
         this.setState({
           validating: false,
-          genericError: err.errors._error
+          genericError: err.errors._error,
+          connectionError: err.errors._connection_error
         })
 
         throw err
@@ -73,7 +82,16 @@ class Review extends Component {
       handleSubmit, submitting, error, onPrevious, onFieldEdit
     } = this.props
 
-    const genericError = this.state.genericError
+    const { genericError, connectionError } = this.state
+
+    if (connectionError) {
+      return <div className="unavailable-notice">
+        <h2>Sorry!</h2>
+        <div className="informative-text">
+          It looks like we are unable to connect right now. We're working on getting back online as soon as possible. Wait a couple of minutes and <Link to={'/register-my-baby/review'} onClick={this.retryConnection}>retry</Link> the connection.
+        </div>
+      </div>
+    }
 
     let declarationText = 'We, as the parents named on this notification, jointly submit this true and correct notification of the birth of our child for registration we both understand that it is an offence to provide false information – that every person who commits such an offence is liable on conviction to imprisonment for a term not exceeding 5 years.'
 

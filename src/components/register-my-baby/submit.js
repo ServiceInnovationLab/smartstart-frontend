@@ -61,8 +61,10 @@ const toReduxFormSubmissionError = (json) => {
     if (duplicate) {
       set(consumableError, '_error', DUPLICATE_APPLICATION_MESSAGE)
     }
-  } else {
-    consumableError._error = 'An unexpected error has occurred.'
+  } else if (statusCode > 400 && statusCode < 500) {
+    set(consumableError, '_error', 'An unexpected error has occurred.')
+  } else if (statusCode >= 500 ){
+    set(consumableError, '_connection_error', 'An unexpected error has occurred.')
   }
 
   return consumableError
@@ -99,6 +101,8 @@ export function validateOnly(formState, csrfToken) {
         .then(errorJSON => {
           const reduxFormConsumableError = toReduxFormSubmissionError(errorJSON)
           throw new SubmissionError(reduxFormConsumableError)
+        }, () => {
+          throw new SubmissionError({ _connection_error: 'Unexpected error' })
         })
     }
   })
@@ -141,6 +145,8 @@ export function fullSubmit(formState, csrfToken) {
         .then(errorJSON => {
           const reduxFormConsumableError = toReduxFormSubmissionError(errorJSON)
           throw new SubmissionError(reduxFormConsumableError)
+        }, () => {
+          throw new SubmissionError({ _connection_error: 'Unexpected error' })
         })
     }
   })

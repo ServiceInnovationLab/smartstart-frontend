@@ -22,8 +22,12 @@ import {
   GET_PIWIK_ID
 } from 'actions/actions'
 import {
+  REQUEST_BIRTH_FACILITIES,
   RECEIVE_BIRTH_FACILITIES,
+  FAILURE_BIRTH_FACILITIES,
+  REQUEST_COUNTRIES,
   RECEIVE_COUNTRIES,
+  FAILURE_COUNTRIES,
   RECEIVE_CSRF_TOKEN
 } from 'actions/birth-registration'
 
@@ -187,16 +191,42 @@ function birthRegistration (state = {
   savedRegistrationForm: initialRegistrationFormState
 }, action) {
   switch (action.type) {
+    case REQUEST_BIRTH_FACILITIES:
+      return {
+        ...state,
+        fetchingBirthFacilities: true
+      };
     case RECEIVE_BIRTH_FACILITIES:
       return {
         ...state,
+        fetchingBirthFacilities: false,
         birthFacilities: action.payload.response
+      };
+
+    case REQUEST_COUNTRIES:
+      return {
+        ...state,
+        fetchingCountries: true
       };
     case RECEIVE_COUNTRIES:
       return {
         ...state,
+        fetchingCountries: false,
         countries: action.payload.response
       };
+
+    case FAILURE_BIRTH_FACILITIES:
+      return {
+        ...state,
+        fetchingBirthFacilities: false,
+      };
+
+    case FAILURE_COUNTRIES:
+      return {
+        ...state,
+        fetchingCountries: false
+      };
+
     case RECEIVE_CSRF_TOKEN:
       return {
         ...state,

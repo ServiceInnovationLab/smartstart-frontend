@@ -3,7 +3,7 @@ import { getFormValues } from 'redux-form'
 import URLSearchParams from 'url-search-params'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
 import get from 'lodash/get'
@@ -16,6 +16,7 @@ import Step4 from './steps/step4'
 import Step5 from './steps/step5'
 import Step6 from './steps/step6'
 import Review from './steps/review/index'
+import Spinner from '../spinner/spinner'
 import { fullSubmit } from './submit'
 import { piwikTrackPost } from '../../actions/actions'
 import { fetchBirthFacilities, fetchCountries, rememberBroData } from '../../actions/birth-registration'
@@ -66,6 +67,7 @@ class RegisterMyBabyForm extends Component {
     this.handleFieldReviewEdit = this.handleFieldReviewEdit.bind(this)
     this.submit = this.submit.bind(this)
     this.goToStep = this.goToStep.bind(this)
+    this.retry = this.retry.bind(this)
     this.state = {
       step: 1,
       stepName: 'child-details',
@@ -199,11 +201,30 @@ class RegisterMyBabyForm extends Component {
     }
   }
 
+  retry() {
+    this.props.fetchBirthFacilities();
+    this.props.fetchCountries();
+  }
+
   render() {
     const { step, isReviewing, animationClass = '' } = this.state
+    const { birthFacilities, countries, fetchingBirthFacilities, fetchingCountries } = this.props
 
     const searchParams = new URLSearchParams(this.props.location.search)
     const autoFocusField = searchParams.get('focus')
+
+    if (fetchingBirthFacilities || fetchingCountries) {
+      return <Spinner text="Please wait ..."/>
+    }
+
+    if(!birthFacilities || !birthFacilities.length || !countries || !countries.length) {
+      return <div className="unavailable-notice">
+        <h2>Sorry!</h2>
+        <div className="informative-text">
+          Birth registration online is currently unavailable. Right now we're working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/register-my-baby/child-details'} onClick={this.retry}>try again</Link> shortly.
+        </div>
+      </div>
+    }
 
     return (
       <div>
@@ -245,8 +266,12 @@ RegisterMyBabyForm.propTypes = {
   location: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   savedRegistrationForm: PropTypes.object,
+  birthFacilities: PropTypes.array,
+  countries: PropTypes.array,
   fetchBirthFacilities: PropTypes.func,
   fetchCountries: PropTypes.func,
+  fetchingBirthFacilities: PropTypes.bool,
+  fetchingCountries: PropTypes.bool,
   formState: PropTypes.object,
   csrfToken: PropTypes.string,
   piwikTrackPost: PropTypes.func
@@ -254,6 +279,10 @@ RegisterMyBabyForm.propTypes = {
 
 const mapStateToProps = (state) => ({
   savedRegistrationForm: get(state, 'birthRegistration.savedRegistrationForm'),
+  fetchingBirthFacilities: get(state, 'birthRegistration.fetchingBirthFacilities'),
+  fetchingCountries: get(state, 'birthRegistration.fetchingCountries'),
+  birthFacilities: get(state, 'birthRegistration.birthFacilities'),
+  countries: get(state, 'birthRegistration.countries'),
   formState: getFormValues('registration')(state),
   csrfToken: get(state, 'birthRegistration.csrfToken')
 })

@@ -1,13 +1,14 @@
 import Cookie from 'react-cookie'
 import { checkStatus } from 'utils'
-import { applicationError } from './actions'
 import fetchWithRetry from 'fetch-retry'
 
 export const REQUEST_BIRTH_FACILITIES = 'REQUEST_BIRTH_FACILITIES'
 export const RECEIVE_BIRTH_FACILITIES = 'RECEIVE_BIRTH_FACILITIES'
-export const RECEIVE_CSRF_TOKEN = 'RECEIVE_CSRF_TOKEN'
+export const FAILURE_BIRTH_FACILITIES = 'FAILURE_BIRTH_FACILITIES'
 export const REQUEST_COUNTRIES = 'REQUEST_COUNTRIES'
 export const RECEIVE_COUNTRIES = 'RECEIVE_COUNTRIES'
+export const FAILURE_COUNTRIES = 'FAILURE_COUNTRIES'
+export const RECEIVE_CSRF_TOKEN = 'RECEIVE_CSRF_TOKEN'
 
 function requestBirthFacilities() {
   return {
@@ -22,6 +23,12 @@ function receiveBirthFacilities(payload) {
   }
 }
 
+function failureBirthFacilities() {
+  return {
+    type: FAILURE_BIRTH_FACILITIES
+  }
+}
+
 function requestCountries() {
   return {
     type: REQUEST_COUNTRIES
@@ -32,6 +39,12 @@ function receiveCountries(payload) {
   return {
     type: RECEIVE_COUNTRIES,
     payload
+  }
+}
+
+function failureCountries() {
+  return {
+    type: FAILURE_COUNTRIES
   }
 }
 
@@ -57,7 +70,7 @@ export function fetchBirthFacilities() {
       return response.json()
     })
     .then(json => dispatch(receiveBirthFacilities(json)))
-    .catch(error => dispatch(applicationError(error)))
+    .catch(() => dispatch(failureBirthFacilities()))
   }
 }
 
@@ -76,7 +89,7 @@ export function fetchCountries() {
       return response.json()
     })
     .then(json => dispatch(receiveCountries(json)))
-    .catch(error => dispatch(applicationError(error)))
+    .catch(() => dispatch(failureCountries()))
   }
 }
 
