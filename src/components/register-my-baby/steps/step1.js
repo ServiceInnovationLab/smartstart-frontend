@@ -184,12 +184,12 @@ class ChildDetailsForm extends Component {
 
           <div className="form-actions">
             <div />
-            <div>
-              { this.props.isReviewing &&
+            <button type="submit" className="next" disabled={submitting}>Next</button>
+            { this.props.isReviewing &&
+              <div className="review-btn-positioner">
                 <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
-              }
-              <button type="submit" className="next" disabled={submitting}>Next</button>
-            </div>
+              </div>
+            }
           </div>
         </form>
       </div>

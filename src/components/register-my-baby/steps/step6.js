@@ -172,16 +172,16 @@ class OrderCertificatesForm extends Component {
             </div>
           }
           <div className="form-actions">
+            { this.props.isReviewing &&
+              <div className="review-btn-positioner">
+                <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
+              </div>
+            }
             { this.props.isReviewing ?
               <button type="button" className="previous" onClick={handleSubmit(this.props.onPrevious)}>Back</button>:
               <button type="button" className="previous" onClick={this.props.onPrevious}>Back</button>
             }
-            <div>
-              { this.props.isReviewing &&
-                <button type="button" className="review" onClick={handleSubmit(this.props.onComebackToReview)}>Return to review</button>
-              }
-              <button type="submit" className="next" disabled={submitting}>Next</button>
-            </div>
+            <button type="submit" className="next" disabled={submitting}>Next</button>
           </div>
         </form>
       </div>

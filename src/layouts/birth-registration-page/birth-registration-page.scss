@@ -185,12 +185,27 @@
     }
 
     .form-actions {
-      margin-top: 60px;
+      margin-top: 80px;
       display: flex;
       justify-content: space-between;
+      position: relative;
 
-      button + button {
-        margin-left: 10px;
+      .review-btn-positioner {
+        position: absolute;
+        top: -50px;
+        width: 100%;
+
+        > button {
+          width: 100%;
+        }
+      }
+
+      @media #{$desktop-and-above} {
+        .review-btn-positioner {
+          top: 0;
+          right: 130px;
+          width: auto;
+        }
       }
     }
 
