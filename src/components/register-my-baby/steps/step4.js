@@ -53,7 +53,7 @@ class ParentRelationshipForm extends Component {
 
     return (
       <div>
-        <h2><span className="visuallyhidden">Step</span> <span className="step-number">4</span> Hononga mātua <br/> Parent's relationship</h2>
+        <h2><span className="visuallyhidden">Step</span> <span className="step-number">4</span> Hononga mātua <br/> Parents' relationship</h2>
         { isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
             <div className="informative-text">

@@ -60,8 +60,8 @@ class IrdMsdSharingForm extends Component {
               </Accordion.Toggle>
               <Accordion.Content>
                 <p>You will need an IRD number for your child if you wish to open a bank account or Kiwisaver in their name, or if you are applying for Working for Families Tax Credits.</p>
-                <p>If you have already applied for Working for Families tax credit for your child, make sure you include your IRD number below. Inland Revenue needs this to give you the payments. When your child is given an IRD number, Inland Revenue will add it to your Working for Families registration details for you.</p>
-                <p>If you apply for your child's IRD number, Births, Deaths and Marriages will provide Birth Registration information to Inland Revenue so that it can create your child’s IRD number and help protect it from misuse.</p>
+                <p>If you have already applied for Working for Families tax credits (WfFTC) for your child, make sure you include your IRD number below. Inland Revenue needs this to give you the payments. When your child is given an IRD number, Inland Revenue will add it to your WfFTC registration details for you.</p>
+                <p>If you apply for your child's IRD number, Births, Deaths and Marriages will provide Birth Registration information to Inland Revenue so that they can create your child’s IRD number and help protect it from misuse.</p>
                 <p>For more information:</p>
                 <ul>
                   <li>on how this information is used and protected go to <a href="https://www.ird.govt.nz/privacy" target="_blank" rel="noreferrer noopener">www.ird.govt.nz/privacy</a></li>
@@ -120,7 +120,7 @@ class IrdMsdSharingForm extends Component {
           { msdNotify &&
             <div className="conditional-field">
               <div className="info">
-                The Ministry of Social Development (MSD) will use the birth of child information that you agreed to provide to MSD to determine eligibility to payments and or services. MSD may need to contact you and / or ask for further verification to help them determine this. The Ministry of Social Development includes Work and Income, MSD Housing Assessment, Senior Services, StudyLink and other service lines. The legislation administered by the Ministry of Social Development allows MSD to check the information that you provide. This may happen when you apply for assistance and at any time after that.
+                The Ministry of Social Development (MSD) will use the birth of child information that you agreed to provide to MSD to determine eligibility to payments and or services. MSD may need to contact you and / or ask for further verification to help them determine this. The Ministry of Social Development includes Work and Income, MSD Housing Assessment, Senior Services, StudyLink and other service lines. The legislation administered by the MSD allows them to check the information that you provide. This may happen when you apply for assistance and at any time after that.
               </div>
               <Field {...getFieldProps(schema, 'msd.mothersClientNumber')} />
               <Field {...getFieldProps(schema, 'msd.fathersClientNumber')} />

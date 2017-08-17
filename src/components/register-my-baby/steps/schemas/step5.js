@@ -26,7 +26,7 @@ const fields = {
     name: "ird.deliveryAddress",
     component: renderSelect,
     options: [],
-    label: makeMandatoryLabel("Please choose an address Inland Revenue should post your child's IRD number to"),
+    label: makeMandatoryLabel("Please choose an address IR should post your child's IRD number to"),
     validate: [requiredWithMessage(REQUIRE_IRD_ADDRESS)],
   },
   'ird.numberByEmail': {

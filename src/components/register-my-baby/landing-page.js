@@ -74,7 +74,12 @@ class RegisterMyBabyLandingPage extends Component {
               Can I apply for an IRD number for my child?
             </Accordion.Toggle>
             <Accordion.Content>
-              <p>You can apply for an IRD number for your baby in this form, if one of the parents is a New Zealand or Australian citizen, has permanent residency, or is a resident of the Cook Islands, Tokelau or Niue.</p>
+              <p>You can apply for an IRD number for your baby in this form, if one of the parents:</p>
+              <ul>
+                <li>is a New Zealand or Australian citizen, or</li>
+                <li>has permanent residency, or</li>
+                <li>is a resident of the Cook Islands, Tokelau or Niue.</li>
+              </ul>
               <p>You don't need to order a birth certificate to apply for an IRD number.</p>
             </Accordion.Content>
           </Accordion>
