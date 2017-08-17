@@ -57,6 +57,7 @@ const validate = (values) => {
     check('father.placeOfBirth')(schema, values, errors)
     check('father.homeAddress.line1')(schema, values, errors)
     check('father.homeAddress.line2')(schema, values, errors)
+    check('father.homeAddress.suburb')(schema, values, errors)
 
     check('father.maoriDescendant')(schema, values, errors)
     check('father.ethnicGroups')(schema, values, errors)

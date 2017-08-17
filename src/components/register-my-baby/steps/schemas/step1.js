@@ -129,7 +129,7 @@ const fields = {
     instructionText: 'Begin typing your address, and select it from the options that appear. If required you can edit the address after you\'ve picked one.',
     onPlaceSelect: requireHandler,
     normalize: combine(maxLength(33), titleCase),
-    validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET)]
+    validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET), validCharStrict]
   },
 
   'birthPlace.home.suburb': {
@@ -137,7 +137,8 @@ const fields = {
     component: renderField,
     type: 'text',
     label: 'Suburb',
-    normalize: combine(maxLength(20), titleCase)
+    normalize: combine(maxLength(20), titleCase),
+    validate: [required, validCharStrict]
   },
 
   'birthPlace.home.line2': {
@@ -145,7 +146,7 @@ const fields = {
     component: renderField,
     type: 'text',
     label: makeMandatoryLabel('Town/City and Postcode'),
-    validate: [requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)],
+    validate: [requiredWithMessage(REQUIRE_MESSAGE_POSTCODE), validCharStrict],
     normalize: combine(maxLength(20), titleCase)
   },
 

@@ -171,7 +171,7 @@ const fields = {
     label: makeMandatoryLabel("Street number and Street name"),
     instructionText: "Begin typing your address, and select it from the options that appear. If required you can edit the address after you\'ve picked one.",
     onPlaceSelect: requireHandler,
-    validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET)],
+    validate: [requiredWithMessage(REQUIRE_MESSAGE_STREET), validCharStrict],
     normalize: combine(maxLength(50), titleCase),
   },
   'father.homeAddress.suburb': {
@@ -179,6 +179,7 @@ const fields = {
     component: renderField,
     type: "text",
     label: "Suburb",
+    validate: [validCharStrict],
     normalize: combine(maxLength(25), titleCase),
   },
   'father.homeAddress.line2': {
@@ -186,7 +187,7 @@ const fields = {
     component: renderField,
     type: "text",
     label: makeMandatoryLabel("Town/City and Postcode"),
-    validate: [requiredWithMessage(REQUIRE_MESSAGE_POSTCODE)],
+    validate: [requiredWithMessage(REQUIRE_MESSAGE_POSTCODE), validCharStrict],
     normalize: combine(maxLength(75), titleCase),
   },
   'father.maoriDescendant': {

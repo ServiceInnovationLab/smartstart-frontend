@@ -3,6 +3,7 @@ import { Field } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import renderFieldReview from '../../fields/render-review-field'
+import renderReviewValidation from '../../fields/render-review-validation'
 import { formatAddress } from './utils'
 import {
   yesNo,
@@ -96,6 +97,8 @@ const renderStep6Review = ({formState, onEdit, countries}) => {
           section="buy-birth-certificates"
           onEdit={onEdit}
         />
+        <Field name="certificateOrder.deliveryAddress.suburb" component={renderReviewValidation} />
+        <Field name="certificateOrder.deliveryAddress.line2" component={renderReviewValidation} />
 
         <Field
           {...getFieldReviewProps(schema, 'certificateOrder.deliveryAddress.countryCode')}
@@ -123,4 +126,3 @@ renderStep6Review.propTypes = {
 }
 
 export default renderStep6Review
-

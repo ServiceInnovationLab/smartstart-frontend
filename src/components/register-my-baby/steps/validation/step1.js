@@ -27,6 +27,7 @@ const validate = (values) => {
   else if (get(values, 'birthPlace.category') === 'home') {
     check('birthPlace.home.line1')(schema, values, errors)
     check('birthPlace.home.line2')(schema, values, errors)
+    check('birthPlace.home.suburb')(schema, values, errors)
   }
   else if (get(values, 'birthPlace.category') === 'other') {
     check('birthPlace.home.other')(schema, values, errors)

@@ -26,6 +26,7 @@ const validate = (values) => {
   check('mother.placeOfBirth')(schema, values, errors)
   check('mother.homeAddress.line1')(schema, values, errors)
   check('mother.homeAddress.line2')(schema, values, errors)
+  check('mother.homeAddress.suburb')(schema, values, errors)
 
   check('mother.maoriDescendant')(schema, values, errors)
   check('mother.ethnicGroups')(schema, values, errors)
