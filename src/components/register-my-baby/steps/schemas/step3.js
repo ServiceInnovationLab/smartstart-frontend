@@ -119,7 +119,7 @@ const fields = {
     component: renderField,
     type: "text",
     label: <span>Surname of <FatherText /> at birth</span>,
-    instructionText: <span>You only need to complete this section if the <FatherText />'s surname at birth was different to their current surname. If the father was adopted, please enter the surname given after adoption.</span>,
+    instructionText: <span>You only need to complete this section if the <FatherText />'s surname at birth was different to their current surname. If the <FatherText /> was adopted, please enter the surname given after adoption.</span>,
     placeholder: "eg. Smith",
     validate: [validAlpha],
     normalize: maxLength(75),
