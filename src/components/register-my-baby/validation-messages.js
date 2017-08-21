@@ -14,6 +14,7 @@ export const REQUIRE_MESSAGE_POSTCODE = 'This is a required field, please enter 
 export const REQUIRE_MESSAGE_CHILD_FIRST_NAME = 'This is a required field, please provide an answer. If you want your child to have a single name enter a dash (-) in the given names field.'
 export const REQUIRE_IRD_ADDRESS = 'This is a required field, please choose an address to post your child\'s IRD number to.'
 export const REQUIRE_AT_LEAST_ONE_MSD = 'Please provide the MSD client number for at least one parent.'
+export const REQUIRE_EMAIL_ADDRESS = 'Please supply an email address.'
 export const REQUIRE_DECLARATION = 'You must agree to the declaration above.'
 
 export const INVALID_EMAIL_MESSAGE = 'This is not a valid email address, please re-enter the email address.'
@@ -48,6 +49,11 @@ export const REQUIRE_MOTHER_EMAIL_IRD = <span>
 export const REQUIRE_FATHER_EMAIL_IRD = <span>
   You have not supplied <FatherText />'s email address, please add one to the contact details on
   &nbsp;<Link to={'/register-my-baby/father-details?focus=father.email'}>this step <span className="visuallyhidden">on the <FatherText /> details page.</span></Link>
+</span>
+
+export const REQUIRE_BIRTH_CERTIFICATE_ORDER = <span>
+  You have indicated that you want us to send your IR number to your birth certificate order address. Please change your address choice for your child's IR
+  number <Link to={'/register-my-baby/other-services?focus=ird.deliveryAddress'}>here <span className="visuallyhidden">on the Other Services page</span></Link>.
 </span>
 
 const EMPTY = ''
