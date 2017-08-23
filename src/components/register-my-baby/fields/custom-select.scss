@@ -14,6 +14,18 @@
     padding: 7px 15px;
   }
 
+  .Select-value {
+    width: 90%;
+    .Select-value-label {
+      white-space: nowrap;
+      > div {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
   div[role=combobox] {
     @include visuallyhidden;
     @include visuallyhidden-focusable;
@@ -147,6 +159,11 @@
     .Select-control {
       height: 42px;
     }
+
+    .Select-multi-value-wrapper {
+      width: 100%;
+    }
+
     .Select-value, .Select-placeholder {
       position: absolute;
       top: 0;
@@ -159,6 +176,7 @@
       height: 42px;
       padding-left: 10px;
       padding-right: 10px;
+      width: 100%;
 
       input {
         background: none transparent;
@@ -166,6 +184,7 @@
         border: none;
         line-height: 42px;
         height: 42px;
+        width: 100% !important;
 
         &:focus {
           outline: none;

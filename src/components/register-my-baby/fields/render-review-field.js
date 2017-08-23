@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import renderError from './render-error'
 import renderWarning from './render-warning'
+import { getTextContent } from '../../../utils'
 
 const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta: { error, warning } }) => {
   let valueDisplay;
@@ -23,7 +24,7 @@ const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta:
       <button type="button"
         className="field-edit-btn"
         onClick={() => onEdit(section, input.name)}
-        aria-label={`Edit ${label}`}
+        aria-label={`Edit ${getTextContent(label)}`}
       >
         Edit
       </button>

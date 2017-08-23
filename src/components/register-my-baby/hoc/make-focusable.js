@@ -20,6 +20,16 @@ const focusToField = (fieldName) => {
   node.focus()
 }
 
+const focusToFirstField = () => {
+  const node = document.querySelector('form *[name]')
+
+  if (!node) {
+    return
+  }
+
+  node.focus();
+}
+
 /**
  * A Higher Order Component to add the scroll-and-focus behavior to an existing component.
  * It needs the `autoFocusField` props, and if specified, will scroll-and-focus to that field when mounted
@@ -32,6 +42,10 @@ function makeFocusable(WrappedComponent) {
         // we need to wait for all the elements are rendered & ready for calculating position
         window.setTimeout(() => {
           focusToField(autoFocusField)
+        }, 300)
+      } else {
+        window.setTimeout(() => {
+          focusToFirstField()
         }, 300)
       }
     }
