@@ -32,7 +32,7 @@ export const email = value =>
   INVALID_EMAIL_MESSAGE : undefined
 
 const invalidAlphaRegex = /[^a-zA-Z\-'ÀÁÂÃÄÅÇÈÉÊÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸàáâãäåçèéêëìíîïñòóðõöùúûüýÿĀāĒēĪīŌōŪū\s]/g
-const invalidCharStrictRegex = /[^a-zA-Z0-9\-'ÀÁÂÃÄÅÇÈÉÊÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸàáâãäåçèéêëìíîïñòóðõöùúûüýÿĀāĒēĪīŌōŪū\s]/g
+const invalidCharStrictRegex = /[^a-zA-Z0-9\-/'ÀÁÂÃÄÅÇÈÉÊÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸàáâãäåçèéêëìíîïñòóðõöùúûüýÿĀāĒēĪīŌōŪū\s]/g
 const invalidCharRelaxRegex = /[~!@#$%^&*()+={}\[\]|:;<>]/g
 const invalidCharTest = (value, regex) => {
   const invalidMatches = value ? value.match(regex) : []
