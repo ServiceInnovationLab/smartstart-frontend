@@ -24,6 +24,8 @@ const validate = (values) => {
   check('mother.occupation')(schema, values, errors)
   check('mother.dateOfBirth')(schema, values, errors)
   check('mother.placeOfBirth')(schema, values, errors)
+  check('mother.countryOfBirth')(schema, values, errors)
+
   check('mother.homeAddress.line1')(schema, values, errors)
   check('mother.homeAddress.line2')(schema, values, errors)
   check('mother.homeAddress.suburb')(schema, values, errors)
