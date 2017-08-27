@@ -1,13 +1,14 @@
 import 'index.scss'
 
 import React, { PropTypes } from 'react'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, IndexRedirect, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import Container from 'containers/container'
 import Main from 'layouts/main/main'
 import MetadataPage from 'layouts/metadata-page/metadata-page'
 import FeaturePage from 'layouts/feature-page/feature-page'
 import BirthRegistrationPage from 'layouts/birth-registration-page/birth-registration-page'
+import ServicesPage from 'layouts/services/services'
 import BabyNames from 'components/baby-names/baby-names'
 import RegisterMyBabyLandingPage from 'components/register-my-baby/landing-page'
 import RegisterMyBaby from 'components/register-my-baby'
@@ -42,9 +43,11 @@ const Root = (props) => (
           <Route path=':stepName' component={RegisterMyBaby} />
         </Route>
         <Route path='news' component={FeaturePage}>
+          <IndexRedirect to="/news/baby-names" />
           <Route path='baby-names' component={BabyNames} />
           <Route path='*' component={BabyNames} />
         </Route>
+        <Route path='services' component={ServicesPage} />
         {metadataRoutes}
         <Route path='*' component={Main} />
       </Route>
