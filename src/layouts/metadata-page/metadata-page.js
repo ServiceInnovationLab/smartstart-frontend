@@ -8,7 +8,7 @@ import Footer from 'layouts/footer/footer'
 import Spinner from 'components/spinner/spinner'
 import Error from 'components/error/error'
 import SiteMetadataCard from 'components/card/site-metadata-card/site-metadata-card'
-import { routeTagMapping } from 'index'
+import { routeTagMapping } from 'containers/root'
 
 class MetadataPage extends Component {
   render () {
