@@ -47,7 +47,7 @@ const Root = (props) => (
           <Route path='baby-names' component={BabyNames} />
           <Route path='*' component={BabyNames} />
         </Route>
-        <Route path='services' component={ServicesPage} />
+        <Route path='services-near-me' component={ServicesPage} />
         {metadataRoutes}
         <Route path='*' component={Main} />
       </Route>

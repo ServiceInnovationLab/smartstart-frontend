@@ -30,6 +30,10 @@ import {
   FAILURE_COUNTRIES,
   RECEIVE_CSRF_TOKEN
 } from 'actions/birth-registration'
+import {
+  REQUEST_SERVICES_API,
+  RECEIVE_SERVICES_API
+} from 'actions/services'
 
 function contentActions (state = {
   isFetching: false,
@@ -237,6 +241,25 @@ function birthRegistration (state = {
   }
 }
 
+function servicesActions (state = {
+  isFetching: false,
+  directory: []
+}, action) {
+  switch (action.type) {
+    case REQUEST_SERVICES_API:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case RECEIVE_SERVICES_API:
+      return Object.assign({}, state, {
+        isFetching: false,
+        directory: action.data
+      })
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   contentActions,
   personalisationActions,
@@ -244,7 +267,8 @@ const rootReducer = combineReducers({
   settingsDisplayActions,
   supplementaryContentActions,
   form: formReducer,
-  birthRegistration
+  birthRegistration,
+  servicesActions
 })
 
 export default rootReducer

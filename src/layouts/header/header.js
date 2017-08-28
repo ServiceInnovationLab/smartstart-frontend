@@ -118,8 +118,8 @@ class Header extends Component {
         <nav className='main-nav' data-test='main-navigation' role='navigation'>
           <div className='page-header-inner'>
             <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
-            <Link to={'/services'} activeClassName='active'>Services</Link>
             <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
+            <Link to={'/services-near-me'} activeClassName='active'>Services near me</Link>
             <Link to={'/news/baby-names'} activeClassName='active'>Top baby names</Link>
           </div>
         </nav>
