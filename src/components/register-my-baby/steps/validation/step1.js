@@ -30,7 +30,7 @@ const validate = (values) => {
     check('birthPlace.home.suburb')(schema, values, errors)
   }
   else if (get(values, 'birthPlace.category') === 'other') {
-    check('birthPlace.home.other')(schema, values, errors)
+    check('birthPlace.other')(schema, values, errors)
   }
 
   check('child.maoriDescendant')(schema, values, errors)
