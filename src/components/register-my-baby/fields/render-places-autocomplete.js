@@ -86,7 +86,7 @@ class renderPlacesAutocomplete extends Component {
     }
   }
 
-  // redux-form's onChange signature is differrent with Autosuggest
+  // redux-form's onChange signature is different with Autosuggest
   onChange(event, { newValue }) {
     this.props.input.onChange(newValue)
   }
