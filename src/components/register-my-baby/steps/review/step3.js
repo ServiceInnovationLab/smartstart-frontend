@@ -5,10 +5,10 @@ import renderSubFieldReview from '../../fields/render-review-subfield'
 import renderReviewValidation from '../../fields/render-review-validation'
 import { formatAddress, formatDate } from './utils'
 import renderWarning from '../../fields/render-warning'
+import { renderEthnicGroupsValue } from './step1'
 import {
   yesNo,
   yesNoNotSure,
-  ethnicGroups,
   citizenshipSources,
   getOptionDisplay
 } from '../../options'
@@ -147,18 +147,10 @@ const renderStep3Review = ({ formState, onEdit }) => {
           <Field
             {...getFieldReviewProps(schema, 'father.ethnicGroups')}
             component={renderFieldReview}
-            valueRenderer={value => value.map(getOptionDisplay(ethnicGroups)).join(', ')}
+            valueRenderer={renderEthnicGroupsValue(formState, 'father')}
             section="father-details"
             onEdit={onEdit}
           />
-          { formState.father.ethnicGroups && formState.father.ethnicGroups.indexOf('other') > -1 &&
-            <Field
-              {...getFieldReviewProps(schema, 'father.ethnicityDescription')}
-              component={renderFieldReview}
-              section="father-details"
-              onEdit={onEdit}
-            />
-          }
           <Field
             {...getFieldReviewProps(schema, 'father.isCitizen')}
             component={renderFieldReview}

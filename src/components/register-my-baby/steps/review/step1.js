@@ -31,6 +31,20 @@ const renderBirthPlace = formState => category => {
   }
 }
 
+export const renderEthnicGroupsValue = (formState, target) => value => {
+  let ethnicGroupDisplays
+
+  if (value && value.indexOf('other') > -1) {
+    value = value.filter(val => val !== 'other')
+    ethnicGroupDisplays = value.map(getOptionDisplay(ethnicGroups))
+    ethnicGroupDisplays.push(formState[target].ethnicityDescription)
+  } else {
+    ethnicGroupDisplays = value.map(getOptionDisplay(ethnicGroups))
+  }
+
+  return ethnicGroupDisplays.join(', ')
+}
+
 const renderStep1Review = ({formState, submitErrors, onEdit}) => {
   const firstNamesWarning = get(submitErrors, 'child.firstNames')
   const surnameWarning = get(submitErrors, 'child.surname')
@@ -125,18 +139,10 @@ const renderStep1Review = ({formState, submitErrors, onEdit}) => {
     <Field
       {...getFieldReviewProps(schema, 'child.ethnicGroups')}
       component={renderFieldReview}
-      valueRenderer={value => value.map(getOptionDisplay(ethnicGroups)).join(', ')}
+      valueRenderer={renderEthnicGroupsValue(formState, 'child')}
       section="child-details"
       onEdit={onEdit}
     />
-    { formState.child.ethnicGroups && formState.child.ethnicGroups.indexOf('other') > -1 &&
-      <Field
-        {...getFieldReviewProps(schema, 'child.ethnicityDescription')}
-        component={renderFieldReview}
-        section="child-details"
-        onEdit={onEdit}
-      />
-    }
   </div>
 }
 
