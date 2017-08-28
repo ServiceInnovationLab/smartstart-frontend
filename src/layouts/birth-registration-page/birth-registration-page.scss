@@ -644,8 +644,54 @@
   }
 
   @media print {
+    font-size: 14px;
+
+    h2 {
+      margin: 0 0 15px 0;
+      font-size: 28px;
+    }
+
+    a:after {
+      content: '';
+      width: 5px;
+    }
+
+    .expandable {
+      page-break-inside: avoid;
+      border-top: none;
+      margin-bottom: 15px !important;
+
+      > .content {
+        padding: 0;
+      }
+    }
+
+    .expandable-title {
+      min-height: 0;
+      padding: 0 !important;
+    }
+
     .main-nav {
       display: none;
+    }
+
+    .instruction,
+    .informative-text {
+      font-size: 14px !important;
+      margin: 5px 0 !important;
+      padding: 0 !important;
+    }
+
+    .confirmation {
+      .order-summary {
+        margin: 15px 0 30px 0;
+
+        ul {
+          > li {
+            padding: 5px 0;
+          }
+        }
+      }
     }
   }
 }
