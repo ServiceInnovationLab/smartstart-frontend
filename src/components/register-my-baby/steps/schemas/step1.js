@@ -23,7 +23,7 @@ import {
   validCharStrict
 } from '../../validate'
 import {
-  REQUIRE_MESSAGE_CHILD_FIRST_NAME,
+  REQUIRE_MESSAGE_CHILD_NAME,
   REQUIRE_MESSAGE_STREET,
   REQUIRE_MESSAGE_POSTCODE
 } from '../../validation-messages'
@@ -43,7 +43,7 @@ const fields = {
     placeholder: 'e.g. Jane Mary',
     label: makeMandatoryLabel('Child\'s given name(s)'),
     instructionText: 'Enter the child\'s first name(s) and any middle names. The child\'s names will appear on the birth certificate in the order that you enter them here.',
-    validate: [requiredWithMessage(REQUIRE_MESSAGE_CHILD_FIRST_NAME), validAlpha],
+    validate: [requiredWithMessage(REQUIRE_MESSAGE_CHILD_NAME), validAlpha],
     normalize: maxLength(75)
   },
 
@@ -54,7 +54,7 @@ const fields = {
     placeholder: 'e.g Smith',
     label: makeMandatoryLabel('Child\'s surname'),
     instructionText: 'Enter the child\'s surname or family name(s).',
-    validate: [required, validAlpha],
+    validate: [requiredWithMessage(REQUIRE_MESSAGE_CHILD_NAME), validAlpha],
     normalize: maxLength(75)
   },
 
