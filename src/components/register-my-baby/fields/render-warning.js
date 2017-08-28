@@ -17,7 +17,7 @@ const renderWarning = ({ meta: { error, warning } }) => {
   }
 
   return <div>
-    { typeof warning === 'string' ?
+    { (typeof warning === 'string' || React.isValidElement(warning)) ?
       <span className="warning"><strong>Warning:</strong> {warning}</span> : false
     }
     { Array.isArray(warning) ?

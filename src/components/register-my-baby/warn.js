@@ -1,7 +1,9 @@
 import get from 'lodash/get'
 import set from 'lodash/set'
+import trim from 'lodash/trim'
 import {
-  WARNING_CITIZENSHIP
+  WARNING_CITIZENSHIP,
+  WARNING_PARENT_SURNAME_MATCH
 } from './validation-messages'
 
 const motherWarn = (values) => {
@@ -25,9 +27,15 @@ const motherWarn = (values) => {
 const fatherWarn = (values) => {
   const warnings = {}
 
+  const fatherSurname = trim(get(values, 'father.surname'))
+  const motherSurname = trim(get(values, 'mother.surname'))
   const isPermanentResident = get(values, 'father.isPermanentResident')
   const isNZRealmResident = get(values, 'father.isNZRealmResident')
   const isAuResidentOrCitizen = get(values, 'father.isAuResidentOrCitizen')
+
+  if (fatherSurname && fatherSurname === motherSurname) {
+    set(warnings, 'father.surname', WARNING_PARENT_SURNAME_MATCH)
+  }
 
   if (
     isPermanentResident === 'no' &&
@@ -36,6 +44,7 @@ const fatherWarn = (values) => {
   ) {
     set(warnings, 'father.citizenshipWarning', WARNING_CITIZENSHIP)
   }
+
   return warnings
 }
 

@@ -35,7 +35,10 @@ export const MIN_16_AGE_RELATIONSHIP_DATE_MESSAGE = 'Date of event must be at le
 
 export const WARNING_NAME_CONTAINS_RANK = 'The name may includes an official title or rank. If you wish your child to have this name you should include your reasons in the box below.'
 export const WARNING_NAME_CONTAINS_OFFENSIVE = 'The name may be undesirable in the public interest as it might cause offence to a reasonable person. The name may not be accepted for registration as it is. A Registrar will review the name(s). If you wish your child to have this name you should include your reasons in the box below.'
-export const WARNING_PARENT_SURNAME_MATCH = 'Both parents have the same surname. If the mother is using a married name please provide your birth names.'
+export const WARNING_PARENT_SURNAME_MATCH = <span>
+  Both parents have the same surname. If the mother is using a married name please provide your birth names.
+  Return to Mother's <Link to={'/register-my-baby/mother-details?focus=mother.surname'}>name</Link>.
+</span>
 
 export const DUPLICATE_APPLICATION_MESSAGE = <span>
   It looks like you may have already submitted an application for this child. Please call us on <a href="tel:0800225225">0800 225 225</a> to discuss it further.
