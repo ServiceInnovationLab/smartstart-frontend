@@ -26,7 +26,7 @@ const fields = {
     name: "ird.deliveryAddress",
     component: renderSelect,
     options: [],
-    label: makeMandatoryLabel("Please choose an address IR should post your child's IRD number to"),
+    label: makeMandatoryLabel("Please choose an address IR should post your child's IRD number to."),
     validate: [requiredWithMessage(REQUIRE_IRD_ADDRESS)],
   },
   'ird.numberByEmail': {
@@ -41,7 +41,7 @@ const fields = {
     component: renderField,
     type: "text",
     instructionText: "This will allow Inland Revenue to add the child's IRD number to your Working for Families details.",
-    label: "If you have applied for Working for Families Tax Credits for this child please provide your IRD number",
+    label: "If you have applied for Working for Families Tax Credits for this child please provide your IRD number.",
     validate: [validIrd],
     normalize: maximum(999999999),
   },

@@ -51,9 +51,9 @@ class IrdMsdSharingForm extends Component {
               <Accordion.Content>
                 <p>If one of the parents:</p>
                 <ul>
-                  <li>is a NZ or Australian citizen, or</li>
-                  <li>has NZ or Australian permanent residency, or</li>
-                  <li>is a resident of the Cook Islands, Tokelau, or Niue,</li>
+                  <li>is a NZ or Australian citizen; or</li>
+                  <li>has NZ or Australian permanent residency; or</li>
+                  <li>is a resident of the Cook Islands, Tokelau, or Niue.</li>
                 </ul>
                 <p>then the easiest way for you to get an IRD number for your child is by using this birth registration form.  It doesn’t cost anything  to apply for an IRD number and it saves you having to get another set of forms to apply for it later.</p>
               </Accordion.Content>

@@ -99,7 +99,7 @@ class ChildDetailsForm extends Component {
                 <li>it's offensive; or</li>
                 <li>it's unreasonably long (it should be less than 70 characters long, including spaces); or</li>
                 <li>it includes or resembles an official title or rank (i.e. Justice, or Sir); or</li>
-                <li>it's spelt with a combination of numbers or symbols (e.g. V8)</li>
+                <li>it's spelt with a combination of numbers or symbols (e.g. V8).</li>
               </ul>
             </Accordion.Content>
           </Accordion>
@@ -137,7 +137,7 @@ class ChildDetailsForm extends Component {
               <Accordion.Content>
                 <p>A baby is stillborn if the baby is not alive at birth, and either:</p>
                 <ul>
-                  <li>weighed 400g or more at birth, or</li>
+                  <li>weighed 400g or more at birth; or</li>
                   <li>the baby is delivered after the 20th week of the pregnancy.</li>
                 </ul>
                 <p>You still need to register the birth. If you don't want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field.</p>

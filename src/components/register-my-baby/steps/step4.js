@@ -29,7 +29,7 @@ class ParentRelationshipForm extends Component {
                       <Accordion.Content>
                         <p>A baby is stillborn if the baby is not alive at birth, and either:</p>
                         <ul>
-                          <li>weighed 400g or more at birth, or</li>
+                          <li>weighed 400g or more at birth; or</li>
                           <li>the baby is delivered after the 20th week of the pregnancy.</li>
                         </ul>
                         <p>You still need to register the birth. If you don't want to give the baby a first name, you can choose to leave that field blank by adding a dash (-) into the field.</p>
