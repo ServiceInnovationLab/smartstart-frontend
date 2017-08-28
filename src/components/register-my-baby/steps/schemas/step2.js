@@ -61,6 +61,7 @@ const fields = {
     instructionText: "You only need to complete this section if the mother's first names at birth are different from their current names (as above). If the mother was adopted, please enter the names given after adoption.",
     placeholder: "e.g. Sarah Jane",
     validate: [validAlpha],
+    normalize: maxLength(75),
   },
   'mother.surnameAtBirth': {
     name: "mother.surnameAtBirth",

@@ -114,6 +114,7 @@ const fields = {
     instructionText: <span>You only need to complete this section if the <FatherText />'s first names at birth are different from their current names (as above). If the <FatherText /> was adopted, please enter the names given after adoption.</span>,
     placeholder: "eg. Michael James",
     validate: [validAlpha],
+    normalize: maxLength(75),
   },
   'father.surnameAtBirth': {
     name: "father.surnameAtBirth",
