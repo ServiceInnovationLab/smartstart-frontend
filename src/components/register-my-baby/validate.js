@@ -34,6 +34,7 @@ export const email = value =>
 const invalidAlphaRegex = /[^a-zA-Z\-'ÀÁÂÃÄÅÇÈÉÊÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸàáâãäåçèéêëìíîïñòóðõöùúûüýÿĀāĒēĪīŌōŪū\s]/g
 const invalidCharStrictRegex = /[^a-zA-Z0-9\-/'ÀÁÂÃÄÅÇÈÉÊÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸàáâãäåçèéêëìíîïñòóðõöùúûüýÿĀāĒēĪīŌōŪū\s]/g
 const invalidCharRelaxRegex = /[~!@#$%^&*()+={}\[\]|:;<>]/g
+const invalidPhoneNumberRegex = /[^0-9\s]/g
 const invalidCharTest = (value, regex) => {
   const invalidMatches = value ? value.match(regex) : []
 
@@ -54,6 +55,7 @@ const invalidCharTest = (value, regex) => {
 export const validAlpha = value => invalidCharTest(value, invalidAlphaRegex)
 export const validCharStrict = value => invalidCharTest(value, invalidCharStrictRegex)
 export const validCharRelax = value => invalidCharTest(value, invalidCharRelaxRegex)
+export const validPhoneNumber = value => invalidCharTest(value, invalidPhoneNumberRegex)
 
 export const validDate = value => {
   if (!value) {

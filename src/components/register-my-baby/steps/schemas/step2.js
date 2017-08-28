@@ -20,7 +20,8 @@ import {
   validDate,
   validCharStrict,
   youngerThan,
-  email
+  email,
+  validPhoneNumber
 } from '../../validate'
 import {
   REQUIRE_MESSAGE_STREET,
@@ -225,7 +226,7 @@ const fields = {
     label: "Daytime contact number",
     instructionText: "Please include the area code or suffix, but don't use brackets or spaces.",
     placeholder: "e.g. 041234567",
-    validate: [validCharStrict],
+    validate: [validPhoneNumber],
     normalize: maxLength(20),
   },
   'mother.alternativePhone': {
@@ -235,7 +236,7 @@ const fields = {
     label: "Alternative contact number",
     instructionText: "Please include the area code or suffix, but don't use brackets or spaces.",
     placeholder: "e.g. 0211234567",
-    validate: [validCharStrict],
+    validate: [validPhoneNumber],
     normalize: maxLength(20),
   },
   'mother.email': {
