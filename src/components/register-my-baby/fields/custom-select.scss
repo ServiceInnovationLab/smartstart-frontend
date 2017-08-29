@@ -14,8 +14,12 @@
     padding: 7px 15px;
   }
 
+  .Select-multi-value-wrapper {
+    width: 100%;
+  }
+
   .Select-value {
-    width: 90%;
+    width: 100%;
     .Select-value-label {
       white-space: nowrap;
       > div {
