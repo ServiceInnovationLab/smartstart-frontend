@@ -123,7 +123,7 @@ const fields = {
     type: "text",
     label: "Suburb",
     validate: [required, validCharStrict],
-    normalize: combine(maxLength(25), titleCase),
+    normalize: combine(maxLength(24), titleCase),
   },
   'mother.homeAddress.line2': {
     name: "mother.homeAddress.line2",

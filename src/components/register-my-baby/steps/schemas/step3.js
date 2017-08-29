@@ -183,7 +183,7 @@ const fields = {
     type: "text",
     label: "Suburb",
     validate: [validCharStrict],
-    normalize: combine(maxLength(25), titleCase),
+    normalize: combine(maxLength(24), titleCase),
   },
   'father.homeAddress.line2': {
     name: "father.homeAddress.line2",
