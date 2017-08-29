@@ -154,7 +154,7 @@ const fields = {
     name: "mother.ethnicityDescription",
     component: renderField,
     type: "text",
-    placeholder: "eg. Somali, Thai",
+    placeholder: "e.g. Somali, Thai",
     instructionText: "Please describe the mother's ethnicity. This information helps other government agencies to get a clearer picture of our society so that health, education and other needs in your area can be planned for.",
     ariaLabel: makeMandatoryAriaLabel("Please describe the mother's ethnicity."),
     validate: [required, validCharStrict],

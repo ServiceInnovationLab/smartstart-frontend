@@ -66,7 +66,7 @@ const fields = {
     type: "text",
     label: makeMandatoryLabel("Place of marriage/civil union"),
     instructionText: "City or town and Country (if ceremony was performed overseas)",
-    placeholder: "eg. Fiji",
+    placeholder: "e.g. Fiji",
     validate: [required, validCharStrict],
     normalize: combine(maxLength(60), titleCase),
   }
