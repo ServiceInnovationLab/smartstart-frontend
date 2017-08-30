@@ -106,7 +106,7 @@ class IrdMsdSharingForm extends Component {
           <div className="expandable-group secondary">
             <Accordion>
               <Accordion.Toggle>
-                Why should let I MSD know about the birth of my child?
+                Why should I let MSD know about the birth of my child?
               </Accordion.Toggle>
               <Accordion.Content>
                 <p>Birth, Deaths and Marriages (BDM) can notify MSD for you when the birth is registered, if you want us to.</p>

@@ -51,7 +51,7 @@ const fields = {
     name: 'child.surname',
     component: renderField,
     type: 'text',
-    placeholder: 'e.g Smith',
+    placeholder: 'e.g. Smith',
     label: makeMandatoryLabel('Child\'s surname'),
     instructionText: 'Enter the child\'s surname or family name(s).',
     validate: [requiredWithMessage(REQUIRE_MESSAGE_CHILD_NAME), validAlpha],
