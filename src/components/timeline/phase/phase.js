@@ -94,29 +94,37 @@ export class Phase extends Component {
   }
 
   render () {
-    const { cards, number, title, id } = this.props
+    const { cards, number, title, maoriTitle, id } = this.props
     let normalCards = []
     let nonChronologicalCards = []
+    let titleDisplay = title
     let dateClasses = classNames('phase-date', { 'hidden': !this.state.formattedDate })
     let phaseClasses = classNames('phase', 'phase-' + number)
 
     cards.map(card => {
       if (!card.elements) { card.elements = [] } // a card can be empty
+      if (!card.maoriLabel) { card.maoriLabel = '' } // cope with missing maoriLabel
 
       // some cards need to be moved outside the chronological flow of the phase
       if (card.tags.indexOf('boac_presentation::non-chronological') >= 0) {
         nonChronologicalCards.push(<NonChronologicalCard key={card.id} id={card.id} title={card.label} elements={card.elements} />)
       } else {
-        normalCards.push(<Card key={card.id} id={card.id} title={card.label} elements={card.elements} />)
+        normalCards.push(<Card key={card.id} id={card.id} title={card.label} maoriTitle={card.maoriLabel} elements={card.elements} />)
       }
     })
+
+    if (maoriTitle) {
+      titleDisplay = (
+        <span>{maoriTitle}<br /><span className='english'>{title}</span></span>
+      )
+    }
 
     return (
       <div className={phaseClasses} data-test='phase'>
         <ScrollableAnchor id={id.toString()}>
           <div>
             <h2 data-test='phaseTitle'>
-              {title}
+              {titleDisplay}
             </h2>
             <p className={dateClasses}>{this.state.formattedDate}</p>
           </div>
@@ -149,6 +157,7 @@ function mapStateToProps (state) {
 }
 
 Phase.propTypes = {
+  maoriTitle: PropTypes.string,
   title: PropTypes.string.isRequired,
   cards: PropTypes.array.isRequired,
   number: PropTypes.number.isRequired,

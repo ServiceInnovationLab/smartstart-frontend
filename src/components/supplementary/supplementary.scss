@@ -24,8 +24,12 @@
     padding: 40px 0;
     margin-bottom: 30px + $supplementary-arrow;
 
+    .english {
+      font-weight: 500;
+    }
+
     @media #{$desktop-and-above} {
-      font-size: 38px;
+      font-size: 32px;
       margin-bottom: 60px + $supplementary-arrow-desktop;
     }
 

@@ -61,6 +61,7 @@
   }
 
   > div > h2 {
+    font-size: 30px;
     text-align: center;
     margin-top: 0;
     margin-bottom: 20px;
@@ -69,6 +70,7 @@
     z-index: $z-index-phase-header-content;
 
     @media #{$desktop-and-above} {
+      font-size: 42px;
       max-width: $phase-content-width-desktop;
       padding-left: 0;
       padding-right: 0;
@@ -77,6 +79,10 @@
       margin-right: auto;
       margin-bottom: 40px;
       position: relative; // on desktop, illustrations positioned to max-content width
+    }
+
+    .english {
+      font-weight: 500;
     }
 
     @media print {
@@ -188,20 +194,36 @@
 }
 
 .phase-date {
+  position: relative;
   font-family: $font-family-headers;
   font-weight: 500;
   font-size: 22px;
   text-align: center;
-  margin-top: -20px;
   margin-bottom: 20px;
   padding-left: $timeline-spacing + ($timeline-line-left-mobile / 2);
   padding-right: $timeline-spacing - ($timeline-line-left-mobile / 2);
 
   @media #{$desktop-and-above} {
     font-size: 28px;
-    margin-top: -40px;
+    margin-top: -10px;
     margin-bottom: 40px;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    background-color: $accent-color-dark;
+
+    @media #{$desktop-and-above} {
+      top: -10px;
+      left: calc(50% - 25px);
+    }
   }
 }

@@ -15,10 +15,20 @@ export class Card extends Component {
   }
 
   render () {
+    let titleDisplay = this.props.title
+
+    if (this.props.maoriTitle) {
+      titleDisplay = (
+        <span>{this.props.maoriTitle}<br /><span className='english'>{this.props.title}</span></span>
+      )
+    }
+
     return (
       <ScrollableAnchor id={this.props.id.toString()} >
         <div className='card' data-test='card'>
-          <h3 data-test='cardTitle'>{this.props.title}</h3>
+          <h3 data-test='cardTitle'>
+            {titleDisplay}
+          </h3>
           {this.props.elements.map(element =>
             this.elementType(element)
           )}
@@ -29,6 +39,7 @@ export class Card extends Component {
 }
 
 Card.propTypes = {
+  maoriTitle: PropTypes.string,
   title: PropTypes.string.isRequired,
   elements: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired
