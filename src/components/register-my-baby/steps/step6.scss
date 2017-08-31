@@ -1,0 +1,45 @@
+@import 'variables';
+
+.birth-certificate-preview {
+  background: $form-informative-background;
+  padding: 20px;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.product-select {
+  .Select {
+    @media #{$desktop-and-above} {
+      width: 370px;
+    }
+  }
+}
+
+.quantity-select {
+  .Select {
+    @media #{$desktop-and-above} {
+      width: 110px;
+    }
+  }
+}
+
+.order-summary {
+  ul {
+    padding: 0;
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-top: 1px solid $border-color;
+
+      &:last-child {
+        border-bottom: 1px solid $border-color;
+        background: $form-informative-background;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,71 @@
+@import 'variables';
+
+.form-wizard-progress {
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid $form-teal;
+  margin: 35px 0;
+
+  @media #{$desktop-and-above} {
+    margin-bottom: 50px;
+  }
+
+  .form-wizard-step {
+    flex: 1;
+    text-align: center;
+    border: 1px solid $border-color;
+    color: darken($border-color, 20%);
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 5px;
+    font-size: 18px;
+
+    + .form-wizard-step {
+      margin-left: 5px;
+    }
+
+    &.clickable {
+      border-color: $form-teal;
+      color: $text-color;
+      font-weight: bold;
+      &:hover {
+        cursor: pointer;
+        background-color: $form-teal-hover;
+        color: $text-color;
+      }
+    }
+
+    &.finished {
+      font-weight: bold;
+      background-color: $form-teal;
+      color: white;
+      border-color: $form-teal;
+
+      .form-wizard-step-icon span {
+        display: none;
+      }
+
+      .form-wizard-step-icon:before {
+        font-family: 'icomoon';
+        font-size: 1em;
+        content: $icon-tick;
+        display: block;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $form-teal-hover;
+        color: $text-color;
+      }
+    }
+
+    &.current {
+      color: $text-color;
+      font-weight: bold;
+      border-color: $form-teal;
+      border-bottom: 1px solid white;
+      margin-bottom: -1px;
+    }
+  }
+}

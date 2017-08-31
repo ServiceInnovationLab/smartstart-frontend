@@ -33,10 +33,10 @@
 
 @font-face {
     font-family: icomoon;
-    src:url('/assets/fonts/icomoon.eot?babynames');
-    src:url('/assets/fonts/icomoon.eot?babynames#iefix') format('embedded-opentype'),
-        url('/assets/fonts/icomoon.woff?babynames') format('woff'),
-        url('/assets/fonts/icomoon.ttf?babynames') format('truetype');
+    src:url('/assets/fonts/icomoon.eot?bro');
+    src:url('/assets/fonts/icomoon.eot?bro#iefix') format('embedded-opentype'),
+        url('/assets/fonts/icomoon.woff?bro') format('woff'),
+        url('/assets/fonts/icomoon.ttf?bro') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -56,6 +56,7 @@
 }
 
 @import 'variables';
+@import 'mixins';
 // Do NOT include further imports unless the base styles have a direct dependency
 
 html {
@@ -181,6 +182,10 @@ a {
       }
     }
   }
+}
+
+strong {
+  font-weight: 500;
 }
 
 blockquote {
@@ -337,7 +342,8 @@ label {
   @extend h5;
 }
 
-input {
+input,
+textarea {
   font-family: $font-family-base;
   font-size: $font-size-base;
   display: inline-block;
@@ -358,6 +364,13 @@ input {
   }
 }
 
+[placeholder] {
+  text-overflow: ellipsis;
+}
+
+::placeholder {
+  text-overflow: ellipsis;
+}
 
 // HELPER CLASSES from HTML5 Boilerplate
 
@@ -366,29 +379,13 @@ input {
   display: none !important;
 }
 
-// Hide only visually, but have it available for screen readers
-// http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
 .visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  @include visuallyhidden;
 }
 
-// Extends the .visuallyhidden class to allow the element to be focusable
-// https://www.drupal.org/node/897638
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
+  @include visuallyhidden-focusable;
 }
 
 // Hide visually and from screen readers, but maintain layout

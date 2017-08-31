@@ -57,3 +57,43 @@ export function routerScrollHandler () {
     window.scrollTo(0, 0)
   }
 }
+
+
+// Get textContent out of a React's component
+export function getTextContent(rootChild) {
+  let res = ''
+
+  const rr = (child) => {
+    if (typeof child === 'string' || typeof child === 'number') {
+      res += child
+    } else if (Array.isArray(child)) {
+      child.forEach(c => rr(c))
+    } else if (child && child.props) {
+      const { children } = child.props
+      if (Array.isArray(children)) {
+        children.forEach(c => rr(c) )
+      } else {
+        rr(children)
+      }
+    }
+  }
+
+  rr(rootChild)
+
+  return res
+}
+
+// reference: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+export function findClosestDomElement(node, selector) {
+    let matches = document.querySelectorAll(selector);
+    let i;
+
+    do {
+        i = matches.length;
+        while (--i >= 0 && matches.item(i) !== node) {
+          // empty
+        }
+    } while ((i < 0) && (node = node.parentElement))
+
+    return node
+}

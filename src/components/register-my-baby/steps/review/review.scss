@@ -1,0 +1,117 @@
+@import 'variables';
+
+.review-section {
+  background-color: $form-informative-background;
+  padding: 30px;
+  margin-bottom: 60px;
+
+  h3 {
+    font-weight: 700;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 15px;
+
+    .subtitle {
+      font-weight: 500;
+    }
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  button.section-edit-btn {
+    padding: 5px 10px;
+    border: 1px solid darken($form-teal-dark, 5%);
+    border-radius: 5px;
+    background-color: $form-teal-dark;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+
+    &:hover {
+      background-color: darken($form-teal-dark, 5%);
+    }
+  }
+
+  .warning,
+  .error {
+    margin-bottom: 20px;
+  }
+}
+
+.review-field {
+  > div.review-field-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-top: 1px solid #ccc;
+    > div {
+      flex: 1 0 60%;
+      display: flex;
+      flex-direction: column;
+
+      > span {
+        word-break: break-all;
+        // non standard for webkit
+        word-break: break-word;
+        hyphens: auto;
+      }
+    }
+
+    button.field-edit-btn {
+      padding: 5px 10px;
+      margin-left: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      text-decoration: none;
+      color: $text-color;
+      font-size: 16px;
+
+      &:hover {
+        color: $text-color;
+        border: 1px solid #ccc;
+        background-color: $form-teal-hover;
+      }
+    }
+  }
+
+  > span {
+    display: block;
+  }
+
+  em {
+    color: $text-shade-color;
+  }
+}
+
+.review-subfields {
+  border-left: 2px solid $border-color;
+  padding-left: 20px;
+  margin-bottom: 20px;
+
+  .review-subfield {
+    > div > strong {
+      margin-right: 5px;
+    }
+    > span {
+      display: block;
+    }
+  }
+}
+
+#step-review {
+  .review-section {
+    .conditional-field {
+      margin-top: 0;
+
+      .input-group {
+        margin-top: 0;
+      }
+    }
+  }
+}

@@ -1,19 +1,5 @@
 @import 'variables';
 
-.site-metadata,
-.back-to-main {
-  max-width: $desktop-max-content-width;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 15px;
-
-  @media only screen and (min-width: #{$desktop-max-content-width}) {
-    padding: 15px #{$indent * 2} 15px 20px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
 @media print {
   .back-to-main {
     display: none;

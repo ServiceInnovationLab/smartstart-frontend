@@ -118,6 +118,7 @@ class Header extends Component {
         <nav className='main-nav' data-test='main-navigation' role='navigation'>
           <div className='page-header-inner'>
             <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
+            <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
             <Link to={'news/baby-names'} activeClassName='active'>Top baby names</Link>
           </div>
         </nav>
@@ -131,8 +132,7 @@ Header.propTypes = {
   authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
-  ]),
-  showBanner: PropTypes.bool
+  ])
 }
 
 export default Header

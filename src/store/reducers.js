@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import {
   REQUEST_API,
   RECEIVE_API,
@@ -20,6 +21,15 @@ import {
   CLOSE_TODO,
   GET_PIWIK_ID
 } from 'actions/actions'
+import {
+  REQUEST_BIRTH_FACILITIES,
+  RECEIVE_BIRTH_FACILITIES,
+  FAILURE_BIRTH_FACILITIES,
+  REQUEST_COUNTRIES,
+  RECEIVE_COUNTRIES,
+  FAILURE_COUNTRIES,
+  RECEIVE_CSRF_TOKEN
+} from 'actions/birth-registration'
 
 function contentActions (state = {
   isFetching: false,
@@ -156,12 +166,85 @@ function supplementaryContentActions (state = {
   }
 }
 
+/*
+ * If we have a saved state of form, here is where we load that state into upon initialization
+ *
+ * A saved state should following this structure:
+ *
+ * {
+ *   step: number, // current step at the time of save
+ *   data: object  // current form state at the time of save
+ * }
+ */
+
+const initialRegistrationFormState = {
+  otherChildren: 0,
+  certificateOrder: {
+    courierDelivery: 'standard'
+  }
+}
+
+function birthRegistration (state = {
+  birthFacilities: [],
+  countries: [],
+  csrfToken: '',
+  savedRegistrationForm: initialRegistrationFormState
+}, action) {
+  switch (action.type) {
+    case REQUEST_BIRTH_FACILITIES:
+      return {
+        ...state,
+        fetchingBirthFacilities: true
+      };
+    case RECEIVE_BIRTH_FACILITIES:
+      return {
+        ...state,
+        fetchingBirthFacilities: false,
+        birthFacilities: action.payload.response
+      };
+
+    case REQUEST_COUNTRIES:
+      return {
+        ...state,
+        fetchingCountries: true
+      };
+    case RECEIVE_COUNTRIES:
+      return {
+        ...state,
+        fetchingCountries: false,
+        countries: action.payload.response
+      };
+
+    case FAILURE_BIRTH_FACILITIES:
+      return {
+        ...state,
+        fetchingBirthFacilities: false,
+      };
+
+    case FAILURE_COUNTRIES:
+      return {
+        ...state,
+        fetchingCountries: false
+      };
+
+    case RECEIVE_CSRF_TOKEN:
+      return {
+        ...state,
+        csrfToken: action.token
+      };
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   contentActions,
   personalisationActions,
   applicationActions,
   settingsDisplayActions,
-  supplementaryContentActions
+  supplementaryContentActions,
+  form: formReducer,
+  birthRegistration
 })
 
 export default rootReducer

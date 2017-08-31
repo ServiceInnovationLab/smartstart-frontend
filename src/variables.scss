@@ -16,6 +16,7 @@ $accent-color-light:   #d1e8e5;
 // base colors
 $background-color:     #ffffff;
 $text-color:           #4f4b46;
+$text-shade-color:     #777777;
 $link-color:           #285a9b;
 $link-color-hover:     $realme-dark-blue;
 $error-background:     #D25151;
@@ -90,6 +91,11 @@ $non-chronological-nested-accordion-open-color: $accent-color-light;
 // expandables and checkboxes
 $expandable-larger-font-size:   18px;
 $expandable-larger-line-height: 22px;
+$expandable-larger-height: 54px;
+
+$expandable-smaller-font-size:   16px;
+$expandable-smaller-line-height: 18px;
+$expandable-smaller-height: 42px;
 
 $left-side-curve-width: 40px;
 
@@ -104,6 +110,24 @@ $supplementary-content-background-color:  #fef9f1;
 $supplementary-nested-accordion-color:          #e8e5e5;
 $supplementary-nested-accordion-open-color:     $supplementary-header-color;
 $supplementary-nested-content-background-color: #feefd6;
+
+// form
+$form-input-height: 42px;
+$form-border-color: #9ea6ae;
+$form-lighter-border-color: #d2d2d2;
+$form-error-bg: #fce7e6;
+$form-error-outline: $error-outline;
+$form-warning-bg: #fbebda;
+$form-warning-outline: #e95e20;
+$form-info-bg: #e4f3fd;
+$form-info-outline: #285a9b;
+$form-success-bg: #e0f0ee;
+$form-success-outline: $accent-color-dark;
+$form-teal: #66b4b7;
+$form-teal-dark: #487f80;
+$form-teal-hover: #e0efee;
+$form-informative-background: #f6f5f5;
+$form-disabled-color: #ccc;
 
 // footer
 $footer-background-color:     $realme-dark-blue;
@@ -128,16 +152,20 @@ $z-index-settings-pane-open: 4;
 $z-index-settings-pane-fixed: 5;
 
 // icons
-$icon-accordian-close:  '\e900';
-$icon-accordian-open:   '\e901';
-$icon-external-link:    '\e902';
-$icon-personalise:      '\e903';
-$icon-todo:             '\e906';
-$icon-timeline:         '\e907';
-$icon-theme-finance:    '\e904';
-$icon-theme-health:     '\e905';
-$icon-next:             '\e909';
-$icon-arrow:            '\e908';
-$icon-tick:             '\e90a';
-$icon-facebook:         '\e90b';
-$icon-twitter:          '\e90c';
+$icon-facebook:         '\e900';
+$icon-twitter:          '\e901';
+$icon-tick:             '\e902';
+$icon-next:             '\e903';
+$icon-arrow:            '\e904';
+$icon-todo:             '\e905';
+$icon-timeline:         '\e906';
+$icon-accordian-close:  '\e907';
+$icon-accordian-open:   '\e908';
+$icon-external-link:    '\e909';
+$icon-success:          '\e910';
+$icon-personalise:      '\e90a';
+$icon-theme-finance:    '\e90b';
+$icon-theme-health:     '\e90c';
+$icon-exclamation:      '\e90d';
+$icon-arrow-right:      '\e90e';
+$icon-arrow-left:       '\e90f';

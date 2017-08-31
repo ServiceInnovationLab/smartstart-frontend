@@ -1,0 +1,206 @@
+@import 'variables';
+@import 'mixins';
+
+// this is the styling for react-select lib
+.Select-control {
+  border: 1px solid $form-border-color;
+  border-radius: 5px;
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .Select-value, .Select-placeholder {
+    padding: 7px 15px;
+  }
+
+  .Select-multi-value-wrapper {
+    width: 100%;
+  }
+
+  .Select-value {
+    width: 100%;
+    .Select-value-label {
+      white-space: nowrap;
+      > div {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  div[role=combobox] {
+    @include visuallyhidden;
+    @include visuallyhidden-focusable;
+    position: absolute;
+  }
+
+  .Select-clear-zone {
+    display: none;
+    position: absolute;
+    right: 30px;
+
+    > a {
+      color: #999;
+      text-decoration: none;
+
+      &:after {
+        font-family: 'icomoon' !important;
+        content: "\E908";
+        font-size: 20px;
+        line-height: 20px;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        margin-top: -14px;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  em {
+    color: #777;
+  }
+}
+
+.Select-menu-outer {
+  border: 1px solid $border-color;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+
+  .Select-option {
+    padding: 10px 15px;
+    &.is-focused {
+      background-color: $form-teal-hover;
+      cursor: pointer;
+    }
+  }
+
+  .Select-noresults {
+    padding: 10px 15px;
+  }
+
+  em {
+    color: #777;
+  }
+}
+
+.Select-arrow-zone {
+  cursor: pointer;
+  display: table-cell;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 25px;
+  padding-right: 5px;
+}
+
+.Select-arrow {
+  border-color: #999 transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 2.5px;
+  display: inline-block;
+  height: 0;
+  width: 0;
+  position: relative;
+}
+
+.Select-placeholder {
+  color: #aaa;
+}
+
+.Select {
+  position: relative;
+
+  &.is-focused {
+    .Select-control {
+      border-color: $form-teal-dark;
+      outline: -webkit-focus-ring-color auto 5px;
+    }
+  }
+
+  &.is-open {
+    .Select-control {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom: none;
+    }
+    .Select-menu-outer {
+      box-shadow: 0 2px 3px 0 rgba(34,36,38,.15);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.is-open,
+  &:hover {
+    .Select-control,
+    .Select-menu-outer {
+      border-color: $form-teal-dark;
+    }
+    .Select-arrow {
+      border-top-color: #666;
+    }
+    .Select-clear-zone > a {
+      color: #666;
+    }
+  }
+
+  &.is-searchable {
+    .Select-control {
+      height: 42px;
+    }
+
+    .Select-multi-value-wrapper {
+      width: 100%;
+    }
+
+    .Select-value, .Select-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 10px 0 10px;
+      line-height: 42px;
+    }
+
+    .Select-input {
+      height: 42px;
+      padding-left: 10px;
+      padding-right: 10px;
+      width: 100%;
+
+      input {
+        background: none transparent;
+        padding: 0;
+        border: none;
+        line-height: 42px;
+        height: 42px;
+        width: 100% !important;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  &.has-value {
+    .Select-clear-zone {
+      display: block;
+    }
+  }
+}
+

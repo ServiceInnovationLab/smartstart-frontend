@@ -1,6 +1,7 @@
 import './welcome.scss'
 
 import React, { PropTypes, Component } from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
 import Messages from 'components/messages/messages'
@@ -67,7 +68,7 @@ class Welcome extends Component {
             <a href='#' onClick={this.profileClick} aria-controls='my-profile' role='button' className='welcome-action welcome-action-personalise'>Add your due date</a>
             <JumpNav />
             <a href='#' onClick={this.todoClick} aria-controls='todo-list' role='button' className='welcome-action welcome-action-todo-list'>Check your To Do list</a>
-            <a href='#161' onClick={this.registerClick} role='button' className='welcome-action welcome-action-register-birth'>Register birth online</a>
+            <Link onClick={this.registerClick} to={'register-my-baby'} className='welcome-action welcome-action-register-birth'>Register birth online</Link>
 
             <Messages />
           </div>
