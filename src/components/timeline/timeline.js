@@ -130,7 +130,8 @@ class Timeline extends Component {
           let nextPhaseID = phases[index + 1] ? phases[index + 1].id : 'when-you-need-support'
 
           if (!phase.elements) { phase.elements = [] } // a phase can be empty
-          return <Phase key={phase.id} id={phase.id} title={phase.label} cards={phase.elements} number={index + 1} prevPhaseID={prevPhaseID} nextPhaseID={nextPhaseID} ref={(ref) => { this.phaseRefs.set(index, ref) }} />
+          if (!phase.maoriLabel) { phase.maoriLabel = '' } // cope with missing maoriLabel
+          return <Phase key={phase.id} id={phase.id} title={phase.label} maoriTitle={phase.maoriLabel} cards={phase.elements} number={index + 1} prevPhaseID={prevPhaseID} nextPhaseID={nextPhaseID} ref={(ref) => { this.phaseRefs.set(index, ref) }} />
         })}
       </div>
     )
