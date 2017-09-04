@@ -33,7 +33,7 @@ export const MIN_10_AGE_FATHER_MESSAGE = <span>
 export const MAX_100_AGE_MESSAGE = 'Parent\'s age cannot be greater than 100 years, please check the date entered.'
 export const MIN_16_AGE_RELATIONSHIP_DATE_MESSAGE = 'Date of event must be at least sixteen years after parent\'s dates of birth.'
 
-export const WARNING_NAME_CONTAINS_RANK = 'The name may includes an official title or rank. If you wish your child to have this name you should include your reasons in the box below.'
+export const WARNING_NAME_CONTAINS_RANK = 'The name may include an official title or rank. If you wish your child to have this name you should include your reasons in the box below.'
 export const WARNING_NAME_CONTAINS_OFFENSIVE = 'The name may be undesirable in the public interest as it might cause offence to a reasonable person. The name may not be accepted for registration as it is. A Registrar will review the name(s). If you wish your child to have this name you should include your reasons in the box below.'
 export const WARNING_PARENT_SURNAME_MATCH = <span>
   Both parents have the same surname. If the mother is using a married name please provide your birth names.

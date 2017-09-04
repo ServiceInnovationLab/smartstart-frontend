@@ -3,7 +3,7 @@ import { getFormValues } from 'redux-form'
 import URLSearchParams from 'url-search-params'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
-import { browserHistory, Link } from 'react-router'
+import { Link } from 'react-router'
 import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
 import get from 'lodash/get'
@@ -38,7 +38,7 @@ const scrollToFirstError = () => {
   const firstErrorInput = document.querySelector('.has-error input, .has-error select, .has-error textarea')
 
   if (!firstErrorNode) {
-    return;
+    return
   }
 
   const bodyRect = document.body.getBoundingClientRect()
@@ -51,7 +51,7 @@ const scrollToFirstError = () => {
     elemRect = firstErrorNode.getBoundingClientRect()
   }
 
-  const offset = elemRect.top - bodyRect.top;
+  const offset = elemRect.top - bodyRect.top
 
   animateScroll.scrollTo(offset, { smooth: true })
   firstErrorInput.focus()
@@ -107,16 +107,16 @@ class RegisterMyBabyForm extends Component {
   goToStep(step, replace = false, focus = '') {
     const stepName = stepNameByStep[step]
 
-    const currentStep = this.state.step;
+    const currentStep = this.state.step
 
     if (stepName) {
       if (currentStep === 7 && step !== currentStep) {
         this.setState({
           isReviewing: true
-        });
+        })
       }
 
-      let url = `/register-my-baby/${stepName}`;
+      let url = `/register-my-baby/${stepName}`
 
       if (focus) {
         url += `?focus=${focus}`
@@ -156,8 +156,8 @@ class RegisterMyBabyForm extends Component {
               courierDelivery
             })
             .then(() => {
-              window.location = result.response.paymentURL;
-            });
+              window.location = result.response.paymentURL
+            })
           }
         }
 
@@ -166,14 +166,14 @@ class RegisterMyBabyForm extends Component {
           stillBorn: get(submittedData, 'child.stillBorn')
         })
         .then(() => {
-          browserHistory.push('/register-my-baby/confirmation')
-        });
-      });
+          window.location = '/register-my-baby/confirmation'
+        })
+      })
   }
 
   componentWillMount() {
-    this.props.fetchBirthFacilities();
-    this.props.fetchCountries();
+    this.props.fetchBirthFacilities()
+    this.props.fetchCountries()
   }
 
   componentDidMount() {
@@ -202,8 +202,8 @@ class RegisterMyBabyForm extends Component {
   }
 
   retry() {
-    this.props.fetchBirthFacilities();
-    this.props.fetchCountries();
+    this.props.fetchBirthFacilities()
+    this.props.fetchCountries()
   }
 
   render() {
