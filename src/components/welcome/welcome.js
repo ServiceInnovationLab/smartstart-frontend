@@ -60,7 +60,7 @@ class Welcome extends Component {
         <div className='welcome-pane-wrapper'>
 
           <div className='welcome-intro'>
-            <h2>Welcome to SmartStart</h2>
+            <h2>Nau mai ki SmartStart<br /><span className='english'>Welcome to SmartStart</span></h2>
             <p>SmartStart provides step-by-step information and support to help you access the right services for you and your baby.</p>
           </div>
 
