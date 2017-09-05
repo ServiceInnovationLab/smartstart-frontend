@@ -61,9 +61,9 @@ class OrderCertificatesForm extends Component {
       suburb = this.props.fatherAddressSuburb
     }
 
-    this.props.change('certificateOrder.deliveryAddress.line1', line1)
-    this.props.change('certificateOrder.deliveryAddress.line2', line2)
-    this.props.change('certificateOrder.deliveryAddress.suburb', suburb)
+    this.props.change('certificateOrder.deliveryAddress.line1', maxLength(45)(line1))
+    this.props.change('certificateOrder.deliveryAddress.line2', maxLength(30)(line2))
+    this.props.change('certificateOrder.deliveryAddress.suburb', maxLength(30)(suburb))
   }
 
   render() {
