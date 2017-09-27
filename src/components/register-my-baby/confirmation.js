@@ -123,7 +123,7 @@ class Confirmation extends Component {
         </Accordion.Toggle>
         <Accordion.Content>
           <p>
-            If you want to contact us about your baby's registration you can email <a href="mailto:bdm.nz@dia.govt.nz">bdm.nz@dia.govt.nz</a> or call free on <a href="tel:0800225255">0800 225 255</a> (NZ only).
+            If you want to contact us about your baby's registration you can email <a href="mailto:bdm.nz@dia.govt.nz">bdm.nz@dia.govt.nz</a> or call free on <a href="tel:0800225252">0800 225 252</a> (NZ only).
           </p>
         </Accordion.Content>
       </Accordion>

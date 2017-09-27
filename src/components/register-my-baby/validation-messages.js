@@ -41,7 +41,7 @@ export const WARNING_PARENT_SURNAME_MATCH = <span>
 </span>
 
 export const DUPLICATE_APPLICATION_MESSAGE = <span>
-  It looks like you may have already submitted an application for this child. Please call us on <a href="tel:0800225225">0800 225 225</a> to discuss it further.
+  It looks like you may have already submitted an application for this child. Please call us on <a href="tel:0800225252">0800 225 252</a> to discuss it further.
 </span>
 
 export const REQUIRE_MOTHER_EMAIL_IRD = <span>
