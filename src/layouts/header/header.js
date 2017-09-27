@@ -119,7 +119,7 @@ class Header extends Component {
           <div className='page-header-inner'>
             <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
             <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
-            <Link to={'news/baby-names'} activeClassName='active'>Top baby names</Link>
+            <Link to={'/news/baby-names'} activeClassName='active'>Top baby names</Link>
           </div>
         </nav>
       </header>
