@@ -29,11 +29,12 @@ const fatherWarn = (values) => {
 
   const fatherSurname = trim(get(values, 'father.surname'))
   const motherSurname = trim(get(values, 'mother.surname'))
+  const motherSurnameAtBirth = trim(get(values, 'mother.surnameAtBirth'))
   const isPermanentResident = get(values, 'father.isPermanentResident')
   const isNZRealmResident = get(values, 'father.isNZRealmResident')
   const isAuResidentOrCitizen = get(values, 'father.isAuResidentOrCitizen')
 
-  if (fatherSurname && fatherSurname === motherSurname) {
+  if (fatherSurname && fatherSurname === motherSurname && !motherSurnameAtBirth) {
     set(warnings, 'father.surname', WARNING_PARENT_SURNAME_MATCH)
   }
 
