@@ -90,7 +90,7 @@ class BabyNames extends Component {
             <li><a href='/assets/files/Top-baby-Girl-names-1999-2016.pdf'>Top 100 girls’ names (pdf 58kb)</a></li>
             <li><a href='/assets/files/Top-baby-Boy-names-1999-2016.pdf'>Top 100 boys’ names (pdf 58kb)</a></li>
             <li><a href='/assets/files/Top-baby-names-1954-2016.xlsx'>Top 100 girls’ and boys’ names since 1954 (xlsx 303kb)</a></li>
-            <li><a href='https://www.dia.govt.nz/press.nsf/d77da9b523f12931cc256ac5000d19b6/3a6c1923b85f3819cc257f48008050eb!OpenDocument'>Top 20 Māori boys’ and girls’ names for 2015</a></li>
+            <li><a href='https://www.dia.govt.nz/press.nsf/d77da9b523f12931cc256ac5000d19b6/98fbaca367aaef57cc25819a00791da3'>Most popular Māori baby names for 2016</a></li>
           </ul>
 
           <h5>Share this with your friends</h5>
