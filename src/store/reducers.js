@@ -28,6 +28,9 @@ import {
   REQUEST_COUNTRIES,
   RECEIVE_COUNTRIES,
   FAILURE_COUNTRIES,
+  REQUEST_BRO_DATA,
+  RECEIVE_BRO_DATA,
+  FAILURE_BRO_DATA,
   RECEIVE_CSRF_TOKEN
 } from 'actions/birth-registration'
 import {
@@ -183,16 +186,14 @@ function supplementaryContentActions (state = {
  */
 
 const initialRegistrationFormState = {
-  otherChildren: 0,
-  certificateOrder: {
-    courierDelivery: 'standard'
-  }
+  certificateOrder: { }
 }
 
 function birthRegistration (state = {
   birthFacilities: [],
   countries: [],
   csrfToken: '',
+  fetchingFormState: false,
   savedRegistrationForm: initialRegistrationFormState
 }, action) {
   switch (action.type) {
@@ -220,6 +221,18 @@ function birthRegistration (state = {
         countries: action.payload.response
       };
 
+    case REQUEST_BRO_DATA:
+      return {
+        ...state,
+        fetchingFormState: true
+      };
+    case RECEIVE_BRO_DATA:
+      return {
+        ...state,
+        fetchingFormState: false,
+        savedRegistrationForm: {...action.payload}
+      };
+
     case FAILURE_BIRTH_FACILITIES:
       return {
         ...state,
@@ -230,6 +243,12 @@ function birthRegistration (state = {
       return {
         ...state,
         fetchingCountries: false
+      };
+
+    case FAILURE_BRO_DATA:
+      return {
+        ...state,
+        fetchingFormState: false
       };
 
     case RECEIVE_CSRF_TOKEN:

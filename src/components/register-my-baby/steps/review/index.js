@@ -165,7 +165,7 @@ class Review extends Component {
 }
 
 Review.propTypes = {
-  countries: PropTypes.object,
+  countries: PropTypes.array,
   formState: PropTypes.object,
   syncErrors: PropTypes.object,
   submitErrors: PropTypes.object,

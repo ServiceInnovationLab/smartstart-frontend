@@ -5,6 +5,7 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
+import SaveAsDraftButton from '../save-as-draft-button'
 import CitizenshipQuestions from '../citizenship-questions'
 import { maxLength } from '../normalize'
 import warn from '../warn'
@@ -151,6 +152,7 @@ class FatherDetailsForm extends Component {
           Matua/Tētahi Atu Matua <br/>
           <span className="english">Father/Other parent</span>
         </h2>
+        <SaveAsDraftButton step="3" />
 
         <div className="informative-text intro">
           This section is where you give the details of the child's Father (if known), or the other parent of the child.<br/>
@@ -253,6 +255,7 @@ FatherDetailsForm = reduxForm({
 const selector = formValueSelector('registration')
 FatherDetailsForm = connect(
   state => ({
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm'),
     motherHomeAddress: selector(state, 'mother.homeAddress'),
     ethnicGroups: selector(state, 'father.ethnicGroups'),
     isCitizen: selector(state, 'father.isCitizen'),

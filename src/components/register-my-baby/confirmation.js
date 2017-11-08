@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import find from 'lodash/find'
 import Accordion from './accordion'
-import { retrieveBroData } from '../../actions/birth-registration'
+import { retrieveBroData, rememberBroData } from '../../actions/birth-registration'
 import {
   products as productOptions,
   courierDeliveryPrice
@@ -25,10 +25,14 @@ class Confirmation extends Component {
         if (!result || !result.applicationReferenceNumber) {
           throw new Error();
         }
+
         this.setState({
           retrieving: false,
           sessionData: result
         });
+
+        // clear user session data
+        rememberBroData({})
       })
       .catch(() => {
         window.location = '/'

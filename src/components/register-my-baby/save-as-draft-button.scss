@@ -1,0 +1,37 @@
+@import 'variables';
+
+.save-as-draft-wrapper {
+  margin-bottom: 50px;
+  .success, .error {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.birth-registration-page .save-as-draft {
+  width: 100%;
+  text-align: right;
+  button {
+    font-size: 1em;
+    background: none;
+    color: $text-color;
+    border-width: 0px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    border-bottom: 1px solid white;
+    padding: 0 5px;
+    margin-right: 20px;
+    &:hover {
+      background: none;
+      color: $text-color;
+      border-bottom: 1px solid $text-color;
+      border-radius: 0px;
+    }
+    &:before {
+      font-family: 'icomoon' !important;
+      content: $icon-save;
+      margin-right: 4px;
+      text-decoration: none;
+    }
+  }
+}

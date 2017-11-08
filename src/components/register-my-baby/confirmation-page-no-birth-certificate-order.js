@@ -5,5 +5,3 @@ const renderPage = () =>
   <Confirmation />
 
 export default renderPage
-
-

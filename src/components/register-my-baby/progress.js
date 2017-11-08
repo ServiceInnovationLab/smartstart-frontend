@@ -9,9 +9,26 @@ import validateStep3 from './steps/validation/step3'
 import validateStep4 from './steps/validation/step4'
 import validateStep5 from './steps/validation/step5'
 import validateStep6 from './steps/validation/step6'
+import step1Fields from './steps/schemas/step1'
+import step2Fields from './steps/schemas/step2'
+import step3Fields from './steps/schemas/step3'
+import step4Fields from './steps/schemas/step4'
+import step5Fields from './steps/schemas/step5'
+import step6Fields from './steps/schemas/step6'
+
 
 const steps = [1, 2, 3, 4, 5, 6]
-const stepValidateFn = {
+
+const stepFieldsSchemas = {
+  '1': step1Fields,
+  '2': step2Fields,
+  '3': step3Fields,
+  '4': step4Fields,
+  '5': step5Fields,
+  '6': step6Fields
+}
+
+export const stepValidateFn = {
   '1': validateStep1,
   '2': validateStep2,
   '3': validateStep3,
@@ -54,6 +71,18 @@ class FormWizardProgress extends Component {
   constructor(props) {
     super(props)
     this.navigateToStep = this.navigateToStep.bind(this)
+    this.isEditable = this.isEditable.bind(this)
+  }
+
+  isEditable = (formState, step) => {
+    if (formState) {
+      const fields = Object.keys(stepFieldsSchemas[step])
+      const savedFields = Object.keys(formState)
+
+      return fields.some(f => savedFields.includes(f.split('.')[0]))
+    } else {
+      return false
+    }
   }
 
   navigateToStep(targetStep) {
@@ -71,8 +100,8 @@ class FormWizardProgress extends Component {
           this.props.onNavigateToStep(targetStep)
         }
       } else {
-        const isTargetStepComplete = isComplete(formState, targetStep)
-        if (isTargetStepComplete) {
+        const isEditable = this.isEditable(formState, targetStep);
+        if (isEditable) {
           this.props.onNavigateToStep(targetStep)
         }
       }
@@ -87,10 +116,11 @@ class FormWizardProgress extends Component {
       <div className="form-wizard-progress">
         { steps.map(step => {
             const stepComplete = isComplete(formState, step)
+            const isClickable = this.isEditable(formState, step)
             return <StepProgress step={step}
               key={step}
               isComplete={stepComplete}
-              isClickable={stepComplete}
+              isClickable={isClickable}
               isCurrent={currentStep === step}
               onStepClick={this.navigateToStep} />
           })
@@ -108,7 +138,7 @@ class FormWizardProgress extends Component {
 }
 
 FormWizardProgress.propTypes = {
-  formState: PropTypes.object.isRequired,
+  formState: PropTypes.object,
   currentStep: PropTypes.number.isRequired,
   isReviewing: PropTypes.bool,
   isRequired: PropTypes.bool,

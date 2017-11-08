@@ -37,7 +37,7 @@ const renderSelect = ({ input, label, placeholder, instructionText, options, ren
 renderSelect.propTypes = {
   input: PropTypes.object,
   label: PropTypes.node,
-  instructionText: PropTypes.string,
+  instructionText: PropTypes.element,
   placeholder: PropTypes.string,
   renderEmptyOption: PropTypes.bool,
   options: PropTypes.array,

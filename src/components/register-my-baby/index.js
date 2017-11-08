@@ -19,7 +19,7 @@ import Review from './steps/review/index'
 import Spinner from '../spinner/spinner'
 import { fullSubmit } from './submit'
 import { piwikTrackPost } from '../../actions/actions'
-import { fetchBirthFacilities, fetchCountries, rememberBroData } from '../../actions/birth-registration'
+import { fetchBirthFacilities, fetchCountries, rememberBroData, fetchBroData } from '../../actions/birth-registration'
 
 const stepByStepName = {
   'child-details': 1,
@@ -123,6 +123,10 @@ class RegisterMyBabyForm extends Component {
       }
 
       this.props.router[replace ? 'replace': 'push'](url)
+
+      // save form
+
+      return rememberBroData({...this.props.savedRegistrationForm, ...this.props.formState})
     }
   }
 
@@ -174,21 +178,7 @@ class RegisterMyBabyForm extends Component {
   componentWillMount() {
     this.props.fetchBirthFacilities()
     this.props.fetchCountries()
-  }
-
-  componentDidMount() {
-    const { params, savedRegistrationForm } = this.props
-    const { stepName } = params
-
-    const step = stepByStepName[stepName]
-
-    if (step && savedRegistrationForm && savedRegistrationForm.step === step) {
-      this.goToStep(step)
-    } else {
-      this.goToStep(1, true)
-    }
-
-    animateScroll.scrollToTop({ duration: 300 })
+    this.props.fetchBroData()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -208,12 +198,12 @@ class RegisterMyBabyForm extends Component {
 
   render() {
     const { step, isReviewing, animationClass = '' } = this.state
-    const { birthFacilities, countries, fetchingBirthFacilities, fetchingCountries } = this.props
+    const { birthFacilities, countries, fetchingBirthFacilities, fetchingCountries, fetchingFormState } = this.props
 
     const searchParams = new URLSearchParams(this.props.location.search)
     const autoFocusField = searchParams.get('focus')
 
-    if (fetchingBirthFacilities || fetchingCountries) {
+    if (fetchingBirthFacilities || fetchingCountries || fetchingFormState) {
       return <Spinner text="Please wait ..."/>
     }
 
@@ -270,7 +260,9 @@ RegisterMyBabyForm.propTypes = {
   countries: PropTypes.array,
   fetchBirthFacilities: PropTypes.func,
   fetchCountries: PropTypes.func,
+  fetchBroData: PropTypes.func,
   fetchingBirthFacilities: PropTypes.bool,
+  fetchingFormState: PropTypes.bool,
   fetchingCountries: PropTypes.bool,
   formState: PropTypes.object,
   csrfToken: PropTypes.string,
@@ -280,6 +272,7 @@ RegisterMyBabyForm.propTypes = {
 const mapStateToProps = (state) => ({
   savedRegistrationForm: get(state, 'birthRegistration.savedRegistrationForm'),
   fetchingBirthFacilities: get(state, 'birthRegistration.fetchingBirthFacilities'),
+  fetchingFormState: get(state, 'birthRegistration.fetchingFormState'),
   fetchingCountries: get(state, 'birthRegistration.fetchingCountries'),
   birthFacilities: get(state, 'birthRegistration.birthFacilities'),
   countries: get(state, 'birthRegistration.countries'),
@@ -292,6 +285,7 @@ RegisterMyBabyForm = connect(
   {
     fetchBirthFacilities,
     fetchCountries,
+    fetchBroData,
     piwikTrackPost
   }
 )(RegisterMyBabyForm)

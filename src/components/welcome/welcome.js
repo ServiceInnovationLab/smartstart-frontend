@@ -4,7 +4,7 @@ import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
-import Messages from 'components/messages/messages'
+import SecondaryLogin from 'components/secondary-login/secondary-login'
 import JumpNav from 'components/welcome/jump-nav/jump-nav'
 
 class Welcome extends Component {
@@ -72,7 +72,10 @@ class Welcome extends Component {
               <Link onClick={this.registerClick} to={'register-my-baby'} className='welcome-action welcome-action-register-birth'>Register birth online</Link>
             </div>
 
-            <Messages />
+            {Object.getOwnPropertyNames(this.props.personalisationValues).length > 0 ? <SecondaryLogin /> :
+              <p className="message">
+                Login with RealMe to access and save your SmartStart profile and To Do list.
+              </p>}
           </div>
         </div>
       </div>
@@ -80,11 +83,12 @@ class Welcome extends Component {
   }
 }
 
-function mapStateToProps () {
-  return {}
-}
+const mapStateToProps = state => ({
+  personalisationValues: state.personalisationActions.personalisationValues || {}
+})
 
 Welcome.propTypes = {
+  personalisationValues: PropTypes.object,
   dispatch: PropTypes.func
 }
 

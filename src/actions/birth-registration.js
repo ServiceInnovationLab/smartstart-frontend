@@ -10,6 +10,10 @@ export const RECEIVE_COUNTRIES = 'RECEIVE_COUNTRIES'
 export const FAILURE_COUNTRIES = 'FAILURE_COUNTRIES'
 export const RECEIVE_CSRF_TOKEN = 'RECEIVE_CSRF_TOKEN'
 
+export const REQUEST_BRO_DATA = 'REQUEST_BRO_DATA'
+export const RECEIVE_BRO_DATA = 'RECEIVE_BRO_DATA'
+export const FAILURE_BRO_DATA = 'FAILURE_BRO_DATA'
+
 function requestBirthFacilities() {
   return {
     type: REQUEST_BIRTH_FACILITIES
@@ -45,6 +49,25 @@ function receiveCountries(payload) {
 function failureCountries() {
   return {
     type: FAILURE_COUNTRIES
+  }
+}
+
+function requestBroData() {
+  return {
+    type: REQUEST_BRO_DATA
+  }
+}
+
+function receiveBroData(payload) {
+  return {
+    type: RECEIVE_BRO_DATA,
+    payload
+  }
+}
+
+function failureBroData() {
+  return {
+    type: FAILURE_BRO_DATA
   }
 }
 
@@ -94,7 +117,7 @@ export function fetchCountries() {
 }
 
 export function retrieveBroData() {
-  return fetchWithRetry('/api/sessions/bro_application/', {
+  return fetchWithRetry('/api/bro-form/data/', {
     credentials: 'same-origin',
     retries: 3,
     retryDelay: 500
@@ -103,11 +126,21 @@ export function retrieveBroData() {
   .then(response => response.json());
 }
 
+export function fetchBroData() {
+  return dispatch => {
+    dispatch(requestBroData())
+
+    retrieveBroData()
+      .then(data => dispatch(receiveBroData(data)))
+      .catch(() => dispatch(failureBroData()))
+    }
+}
+
 export function rememberBroData(data) {
   const djangoCsrfToken = Cookie.load('csrftoken')
 
   // the api need a forward slash in the end
-  return fetchWithRetry('/api/sessions/bro_application/', {
+  return fetchWithRetry('/api/bro-form/data/', {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',

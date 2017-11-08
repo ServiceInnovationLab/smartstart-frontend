@@ -5,6 +5,7 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
+import SaveAsDraftButton from '../save-as-draft-button'
 import CitizenshipQuestions from '../citizenship-questions'
 import { maxLength } from '../normalize'
 import validate from './validation'
@@ -61,6 +62,7 @@ class MotherDetailsForm extends Component {
           Whaea <br/>
           <span className="english">Mother</span>
         </h2>
+        <SaveAsDraftButton step="2" />
 
         <div className="instruction">
           <strong>This section is where you give the details of the child's mother.</strong>
@@ -165,6 +167,7 @@ MotherDetailsForm = reduxForm({
 const selector = formValueSelector('registration')
 MotherDetailsForm = connect(
   state => ({
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm'),
     ethnicGroups: selector(state, 'mother.ethnicGroups'),
     isCitizen: selector(state, 'mother.isCitizen'),
     isPermanentResident: selector(state, 'mother.isPermanentResident'),

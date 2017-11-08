@@ -1,4 +1,4 @@
-import './messages.scss'
+import './secondary-login.scss'
 import './realme-login-primary.scss'
 
 import React, { PropTypes, Component } from 'react'
@@ -6,12 +6,11 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { piwikTrackPost } from 'actions/actions'
 
-class Messages extends Component {
+class SecondaryLogin extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      initialLoginMessageShown: true,
       insistentLoginMessageShown: false,
       loggedInMessageShown: false,
       realmeHelpShown: false,
@@ -24,31 +23,22 @@ class Messages extends Component {
   }
 
   componentWillMount () {
-    this.checkIfRealMeLoginShouldBeShown(this.props.isLoggedIn, this.props.personalisationValues)
+    this.checkIfRealMeLoginShouldBeShown(this.props.isLoggedIn)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.checkIfRealMeLoginShouldBeShown(nextProps.isLoggedIn, nextProps.personalisationValues)
+    this.checkIfRealMeLoginShouldBeShown(nextProps.isLoggedIn)
   }
 
-  checkIfRealMeLoginShouldBeShown (isLoggedIn, personalisationValues) {
-    // to know which message to show, we just need to know if a) user is logged in and b) if there is any state
+  checkIfRealMeLoginShouldBeShown (isLoggedIn) {
     if (isLoggedIn) {
       this.setState({
-        initialLoginMessageShown: false,
         insistentLoginMessageShown: false,
         loggedInMessageShown: true
       })
-    } else if (!isLoggedIn && Object.getOwnPropertyNames(personalisationValues).length > 0) {
-      this.setState({
-        initialLoginMessageShown: false,
-        insistentLoginMessageShown: true,
-        loggedInMessageShown: false
-      })
     } else {
       this.setState({
-        initialLoginMessageShown: true,
-        insistentLoginMessageShown: false,
+        insistentLoginMessageShown: true,
         loggedInMessageShown: false
       })
     }
@@ -85,39 +75,32 @@ class Messages extends Component {
   }
 
   render () {
-    let initialLoginMessageClasses = classNames(
-      'message',
-      { 'hidden': !this.state.initialLoginMessageShown }
-    )
-    let insistentLoginMessageClasses = classNames(
+    const insistentLoginMessageClasses = classNames(
       'message',
       { 'hidden': !this.state.insistentLoginMessageShown }
     )
-    let loggedInMessageClasses = classNames(
+    const loggedInMessageClasses = classNames(
       'message',
       { 'hidden': !this.state.loggedInMessageShown }
     )
-    let realmeHelpClasses = classNames(
+    const realmeHelpClasses = classNames(
       'concertina',
       { 'is-expanded': this.state.realmeHelpShown }
     )
-    let realmeHelpContentClasses = classNames(
+    const realmeHelpContentClasses = classNames(
       'concertina-content',
       { 'hidden': !this.state.realmeHelpShown }
     )
-    let messageContainerClasses = classNames(
-      'messages',
+    const messageContainerClasses = classNames(
+      'secondary-login',
       { 'hidden': !(this.state.insistentLoginMessageShown || this.state.loggedInMessageShown) }
     )
 
     return (
       <div>
-        <p className={initialLoginMessageClasses}>
-          Login with RealMe to access and save your SmartStart profile and To Do list.
-        </p>
-
         <div className={messageContainerClasses}>
           <div className={insistentLoginMessageClasses}>
+            <h5>Log in with RealMe.</h5>
             <p>To save your changes for your next visit you need to log in with RealMe.</p>
             <a className='button realme-primary-login-button ext-link-icon' href='/login/' onClick={this.loginAction}>
               Login
@@ -152,28 +135,13 @@ class Messages extends Component {
   }
 }
 
-function mapStateToProps (state) {
-  const {
-    personalisationActions
-  } = state
-  const {
-    isLoggedIn,
-    personalisationValues
-  } = personalisationActions || {
-    isLoggedIn: false,
-    personalisationValues: {}
-  }
+const mapStateToProps = state => ({
+    isLoggedIn: state.personalisationActions.isLoggedIn || false
+})
 
-  return {
-    isLoggedIn,
-    personalisationValues
-  }
-}
-
-Messages.propTypes = {
+SecondaryLogin.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  personalisationValues: PropTypes.object.isRequired,
   dispatch: PropTypes.func
 }
 
-export default connect(mapStateToProps)(Messages)
+export default connect(mapStateToProps)(SecondaryLogin)

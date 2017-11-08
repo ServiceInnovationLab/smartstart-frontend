@@ -35,7 +35,7 @@ const requireHandler = () => {
   throw new Error('REQUIRE_A_HANDLER_FUNCTION')
 }
 
-const fields = {
+export const fields = {
   'child.firstNames': {
     name: 'child.firstNames',
     component: renderField,

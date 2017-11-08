@@ -3,6 +3,12 @@ import { connect } from 'react-redux'
 import { fetchContent, checkAuthCookie, fetchPhaseMetadata, getPiwikID, piwikTrackPost, fetchPersonalisationValues } from 'actions/actions'
 
 class Container extends Component {
+  // TODO include based on env
+  promptOnLeave(event) {
+    event.preventDefault();
+    return event.returnValue = true;
+  }
+
   componentDidMount () {
     const { dispatch } = this.props
 
@@ -21,6 +27,18 @@ class Container extends Component {
       // basic piwik logging
       dispatch(piwikTrackPost('Load site'))
     })
+
+    // only block reload for production
+    // dev need live reload
+    if (process.env.NODE_ENV === 'production') {
+      window.addEventListener('beforeunload', this.promptOnLeave)
+    }
+  }
+
+  componentWillUnmount() {
+    if (process.env.NODE_ENV === 'production') {
+      window.removeEventListener('beforeunload', this.promptOnLeave)
+    }
   }
 
   render () {

@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import rootReducer from 'store/reducers'
 
 export default function configureStore (preloadedState) {
   const middleware = [ thunkMiddleware ]
 
   if (process.env.NODE_ENV !== 'production') {
-    middleware.push(logger)
+    middleware.push(createLogger({ diff: true, collapsed: true }))
   }
 
   // Enabling the interaction with Redux Dev Tools extension.
