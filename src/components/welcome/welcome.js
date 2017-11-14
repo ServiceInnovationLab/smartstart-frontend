@@ -4,7 +4,7 @@ import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
-import SecondaryLogin from 'components/secondary-login/secondary-login'
+import PrimaryLogin from 'components/primary-login/primary-login'
 import JumpNav from 'components/welcome/jump-nav/jump-nav'
 
 class Welcome extends Component {
@@ -72,7 +72,7 @@ class Welcome extends Component {
               <Link onClick={this.registerClick} to={'register-my-baby'} className='welcome-action welcome-action-register-birth'>Register birth online</Link>
             </div>
 
-            {Object.getOwnPropertyNames(this.props.personalisationValues).length > 0 ? <SecondaryLogin /> :
+            {Object.getOwnPropertyNames(this.props.personalisationValues).length > 0 ? <PrimaryLogin /> :
               <p className="message">
                 Login with RealMe to access and save your SmartStart profile and To Do list.
               </p>}

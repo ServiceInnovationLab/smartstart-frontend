@@ -7,6 +7,7 @@ import { Link } from 'react-router'
 import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
 import get from 'lodash/get'
+import deepmerge from 'deepmerge'
 import { animateScroll } from 'react-scroll'
 import FormWizardProgress from './progress'
 import Step1 from './steps/step1'
@@ -105,6 +106,7 @@ class RegisterMyBabyForm extends Component {
   }
 
   goToStep(step, replace = false, focus = '') {
+    const { savedRegistrationForm, formState } = this.props
     const stepName = stepNameByStep[step]
 
     const currentStep = this.state.step
@@ -122,11 +124,18 @@ class RegisterMyBabyForm extends Component {
         url += `?focus=${focus}`
       }
 
-      this.props.router[replace ? 'replace': 'push'](url)
+      if (replace) {
+        this.props.router['replace'](url)
+      } else {
+        this.props.router['push'](url)
 
-      // save form
-
-      return rememberBroData({...this.props.savedRegistrationForm, ...this.props.formState})
+        // save form
+        // we are saving max step
+        return rememberBroData({
+          step: step > savedRegistrationForm.step ? step : savedRegistrationForm.step,
+          data: deepmerge.all([savedRegistrationForm.data, formState])
+        })
+      }
     }
   }
 
@@ -153,11 +162,14 @@ class RegisterMyBabyForm extends Component {
             const courierDelivery = get(submittedData, 'certificateOrder.courierDelivery')
             const stillBorn = get(submittedData, 'child.stillBorn')
             return rememberBroData({
-              applicationReferenceNumber: result.response.applicationReferenceNumber,
-              stillBorn,
-              productCode,
-              quantity,
-              courierDelivery
+              step: this.props.savedRegistrationForm.step,
+              data: {
+                applicationReferenceNumber: result.response.applicationReferenceNumber,
+                stillBorn,
+                productCode,
+                quantity,
+                courierDelivery,
+              }
             })
             .then(() => {
               window.location = result.response.paymentURL
@@ -166,8 +178,11 @@ class RegisterMyBabyForm extends Component {
         }
 
         return rememberBroData({
-          applicationReferenceNumber: result.response.applicationReferenceNumber,
-          stillBorn: get(submittedData, 'child.stillBorn')
+          step: this.props.savedRegistrationForm.step,
+          data: {
+            applicationReferenceNumber: result.response.applicationReferenceNumber,
+            stillBorn: get(submittedData, 'child.stillBorn')
+          }
         })
         .then(() => {
           window.location = '/register-my-baby/confirmation'
@@ -185,10 +200,19 @@ class RegisterMyBabyForm extends Component {
     const nextStepName = get(nextProps, 'params.stepName')
     const currentStepName = get(this.state, 'stepName')
 
+    const currentStep = this.props.savedRegistrationForm.step
+    const nextStep = nextProps.savedRegistrationForm.step
+    if (currentStep !== nextStep) {
+      this.goToStep(nextStep, true)
+    }
+
+
     if (nextStepName && nextStepName !== currentStepName) {
       const step = stepByStepName[nextStepName]
       this.setState({ step, stepName: nextStepName })
     }
+
+
   }
 
   retry() {

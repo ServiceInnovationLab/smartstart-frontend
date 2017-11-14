@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getFormValues } from 'redux-form'
 import get from 'lodash/get'
+import deepmerge from 'deepmerge'
 import { connect } from 'react-redux'
 import { rememberBroData } from 'actions/birth-registration'
-import SecondaryLogin from 'components/secondary-login/secondary-login'
+import PrimaryLogin from 'components/primary-login/primary-login'
 import { stepValidateFn } from './progress'
 
-import './save-as-draft-button.scss'
+import './save-as-draft.scss'
 
-class SaveAsDraftButton extends Component {
+class SaveAsDraft extends Component {
   constructor(props) {
     super(props)
 
@@ -51,20 +52,26 @@ class SaveAsDraftButton extends Component {
   handleClick(e) {
     e.preventDefault()
 
-    const { savedRegistrationForm, isLoggedIn } = this.props
+    const { savedRegistrationForm, isLoggedIn, step } = this.props
     // check form fields to save
     const currentValidFields = this.getValidFields()
 
     if (isLoggedIn) {
-      return rememberBroData({ ...savedRegistrationForm, ...currentValidFields })
+      return rememberBroData({
+        step: step,
+        data: deepmerge.all([savedRegistrationForm.data, currentValidFields])
+      })
         // display prompt and remove after 3 sec
-        .then(() => this.setState({ showSuccessPrompt: true}), setTimeout(() => this.setState({ showSuccessPrompt: false }), 3000))
-        .catch(() => this.setState({ showErrorPrompt: true}), setTimeout(() => this.setState({ showErrorPrompt: false }), 3000))
+        .then(() => this.setState({ showSuccessPrompt: true}), setTimeout(() => this.setState({ showSuccessPrompt: false }), 7000))
+        .catch(() => this.setState({ showErrorPrompt: true}), setTimeout(() => this.setState({ showErrorPrompt: false }), 7000))
     } else {
       this.setState({ showLoginPrompt: true })
 
       // still try to save silently for anonymous user
-      return rememberBroData({ ...savedRegistrationForm, ...currentValidFields })
+      return rememberBroData({
+        step: step > savedRegistrationForm.step ? step : savedRegistrationForm.step,
+        data: deepmerge.all([savedRegistrationForm.data, currentValidFields])
+      })
     }
   }
 
@@ -73,16 +80,18 @@ class SaveAsDraftButton extends Component {
     const { showLoginPrompt, showSuccessPrompt, showErrorPrompt } = this.state
     return (
       <div className="save-as-draft-wrapper">
-        <div className="save-as-draft-button"> <button onClick={this.handleClick.bind(this)}> Save as draft </button> </div>
-        {showLoginPrompt && <SecondaryLogin />}
+        <div className="save-as-draft">
+          <button onClick={this.handleClick.bind(this)}> <span>Save as draft</span> </button>
+        </div>
+        {showLoginPrompt && <PrimaryLogin />}
         {showSuccessPrompt &&  <div className="success"> Your birth registration form has been saved as a draft. </div>}
-        {showErrorPrompt && <div className="error"> There has been a problem with saving your data. </div>}
+        {showErrorPrompt && <div className="error"> There has been a problem with saving your data. Try again later. </div>}
       </div>
     )
   }
 }
 
-SaveAsDraftButton.propTypes = {
+SaveAsDraft.propTypes = {
   step: PropTypes.string.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   savedRegistrationForm: PropTypes.object.isRequired,
@@ -94,4 +103,4 @@ const mapStateToProps = state => ({
   savedRegistrationForm: get(state, 'birthRegistration.savedRegistrationForm'),
   formState: getFormValues('registration')(state)
 })
-export default connect(mapStateToProps)(SaveAsDraftButton)
+export default connect(mapStateToProps)(SaveAsDraft)

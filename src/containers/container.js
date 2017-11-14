@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { fetchContent, checkAuthCookie, fetchPhaseMetadata, getPiwikID, piwikTrackPost, fetchPersonalisationValues } from 'actions/actions'
 
 class Container extends Component {
-  // TODO include based on env
   promptOnLeave(event) {
     event.preventDefault();
     return event.returnValue = true;

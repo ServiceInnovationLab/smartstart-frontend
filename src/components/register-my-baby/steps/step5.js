@@ -4,7 +4,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import get from 'lodash/get'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
-import SaveAsDraftButton from '../save-as-draft-button'
+import SaveAsDraft from '../save-as-draft'
 import {
   getIrdDeliveryAddresses
 } from '../options'
@@ -36,7 +36,7 @@ class IrdMsdSharingForm extends Component {
           Ētahi atu ratonga <br/>
           <span className="english">Other services</span>
         </h2>
-        <SaveAsDraftButton step="5" />
+        <SaveAsDraft step="5" />
 
         <div className="informative-text intro">
           If you want to, you can use this section to share your child's birth with government agencies.
@@ -184,7 +184,7 @@ const selector = formValueSelector('registration')
 
 IrdMsdSharingForm = connect(
   state => ({
-    initialValues: get(state, 'birthRegistration.savedRegistrationForm'),
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm.data'),
     applyForNumber: selector(state, 'ird.applyForNumber'),
     deliveryAddress: selector(state, 'ird.deliveryAddress'),
     numberByEmail: selector(state, 'ird.numberByEmail'),

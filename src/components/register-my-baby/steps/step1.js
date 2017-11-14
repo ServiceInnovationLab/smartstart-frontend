@@ -5,7 +5,7 @@ import find from 'lodash/find'
 import get from 'lodash/get'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
-import SaveAsDraftButton from '../save-as-draft-button'
+import SaveAsDraft from '../save-as-draft'
 import { maxLength } from '../normalize'
 import validate from './validation'
 import schema from './schemas/step1'
@@ -83,7 +83,7 @@ class ChildDetailsForm extends Component {
           Tamaiti <br/>
           <span className="english">Child</span>
         </h2>
-        <SaveAsDraftButton step="1" />
+        <SaveAsDraft step="1" />
 
         <div className="instruction">
           This section is where you officially register the details of your child. The name you choose for them should include a surname, and one or more given names.
@@ -233,7 +233,7 @@ const selector = formValueSelector('registration')
 ChildDetailsForm = connect(
   state => ({
     birthFacilities: get(state, 'birthRegistration.birthFacilities'),
-    initialValues: get(state, 'birthRegistration.savedRegistrationForm'),
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm.data'),
     oneOfMultiple: selector(state, 'child.oneOfMultiple'),
     birthPlaceCategory: selector(state, 'birthPlace.category'),
     ethnicGroups: selector(state, 'child.ethnicGroups') || []

@@ -4,7 +4,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import Accordion from '../accordion'
-import SaveAsDraftButton from '../save-as-draft-button'
+import SaveAsDraft from '../save-as-draft'
 import makeFocusable from '../hoc/make-focusable'
 import {
   products as productOptions,
@@ -93,7 +93,7 @@ class OrderCertificatesForm extends Component {
           Te tono i te tiwhikete whānautanga <br/>
           <span className="english">Order a birth certificate</span>
         </h2>
-        <SaveAsDraftButton step="6" />
+        <SaveAsDraft step="6" />
 
         <div className="informative-text intro">
           You can order a birth certificate or move on to reviewing your registration. To purchase a certificate online you will need a credit card.
@@ -236,7 +236,7 @@ const selector = formValueSelector('registration')
 
 OrderCertificatesForm = connect(
   state => ({
-    initialValues: get(state, 'birthRegistration.savedRegistrationForm'),
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm.data'),
     countries: get(state, 'birthRegistration.countries'),
     orderBirthCertificate: selector(state, 'orderBirthCertificate'),
     productCode: selector(state, 'certificateOrder.productCode'),

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getFormValues } from 'redux-form'
 import classNames from 'classnames'
+import get from 'lodash/get'
 import './progress.scss'
 import validateStep1 from './steps/validation/step1'
 import validateStep2 from './steps/validation/step2'
@@ -9,25 +10,9 @@ import validateStep3 from './steps/validation/step3'
 import validateStep4 from './steps/validation/step4'
 import validateStep5 from './steps/validation/step5'
 import validateStep6 from './steps/validation/step6'
-import step1Fields from './steps/schemas/step1'
-import step2Fields from './steps/schemas/step2'
-import step3Fields from './steps/schemas/step3'
-import step4Fields from './steps/schemas/step4'
-import step5Fields from './steps/schemas/step5'
-import step6Fields from './steps/schemas/step6'
 
 
 const steps = [1, 2, 3, 4, 5, 6]
-
-const stepFieldsSchemas = {
-  '1': step1Fields,
-  '2': step2Fields,
-  '3': step3Fields,
-  '4': step4Fields,
-  '5': step5Fields,
-  '6': step6Fields
-}
-
 export const stepValidateFn = {
   '1': validateStep1,
   '2': validateStep2,
@@ -71,22 +56,10 @@ class FormWizardProgress extends Component {
   constructor(props) {
     super(props)
     this.navigateToStep = this.navigateToStep.bind(this)
-    this.isEditable = this.isEditable.bind(this)
-  }
-
-  isEditable = (formState, step) => {
-    if (formState) {
-      const fields = Object.keys(stepFieldsSchemas[step])
-      const savedFields = Object.keys(formState)
-
-      return fields.some(f => savedFields.includes(f.split('.')[0]))
-    } else {
-      return false
-    }
   }
 
   navigateToStep(targetStep) {
-    const { currentStep, isReviewing, formState } = this.props
+    const { currentStep, isReviewing, formState, savedStep } = this.props
     const isCurrentStepComplete = currentStep === 7 || isComplete(formState, currentStep)
 
     if ((isReviewing || targetStep > currentStep) && !isCurrentStepComplete) {
@@ -100,8 +73,8 @@ class FormWizardProgress extends Component {
           this.props.onNavigateToStep(targetStep)
         }
       } else {
-        const isEditable = this.isEditable(formState, targetStep);
-        if (isEditable) {
+        const isTargetStepComplete = isComplete(formState, targetStep)
+        if (savedStep === targetStep || isTargetStepComplete) {
           this.props.onNavigateToStep(targetStep)
         }
       }
@@ -109,14 +82,14 @@ class FormWizardProgress extends Component {
   }
 
   render() {
-    const { currentStep, formState } = this.props
+    const { currentStep, formState, savedStep } = this.props
     const everyStepComplete = steps.every(step => isComplete(formState, step))
 
     return (
       <div className="form-wizard-progress">
         { steps.map(step => {
             const stepComplete = isComplete(formState, step)
-            const isClickable = this.isEditable(formState, step)
+            const isClickable = savedStep === step || stepComplete
             return <StepProgress step={step}
               key={step}
               isComplete={stepComplete}
@@ -140,6 +113,7 @@ class FormWizardProgress extends Component {
 FormWizardProgress.propTypes = {
   formState: PropTypes.object,
   currentStep: PropTypes.number.isRequired,
+  savedStep: PropTypes.number,
   isReviewing: PropTypes.bool,
   isRequired: PropTypes.bool,
   onNavigateToStep: PropTypes.func,
@@ -147,7 +121,8 @@ FormWizardProgress.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  formState: getFormValues('registration')(state)
+  formState: getFormValues('registration')(state),
+  savedStep: get(state, 'birthRegistration.savedRegistrationForm.step'),
 })
 
 export default connect(mapStateToProps)(FormWizardProgress)

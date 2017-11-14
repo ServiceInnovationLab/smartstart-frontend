@@ -5,7 +5,7 @@ import times from 'lodash/times'
 import get from 'lodash/get'
 import makeFocusable from '../hoc/make-focusable'
 import Accordion from '../accordion'
-import SaveAsDraftButton from '../save-as-draft-button'
+import SaveAsDraft from '../save-as-draft'
 import validate from './validation'
 import warn from '../warn'
 import schema from './schemas/step4'
@@ -62,7 +62,7 @@ class ParentRelationshipForm extends Component {
           <span className="english">Parents' relationship</span>
         </h2>
 
-        <SaveAsDraftButton step="4" />
+        <SaveAsDraft step="4" />
 
         { isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>
@@ -168,7 +168,7 @@ const selector = formValueSelector('registration')
 
 ParentRelationshipForm = connect(
   state => ({
-    initialValues: get(state, 'birthRegistration.savedRegistrationForm'),
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm.data'),
     parentRelationship: selector(state, 'parentRelationship'),
     otherChildren: parseInt(selector(state, 'otherChildren')),
     fatherKnown: selector(state, 'fatherKnown'),

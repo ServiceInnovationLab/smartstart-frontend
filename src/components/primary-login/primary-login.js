@@ -1,4 +1,4 @@
-import './secondary-login.scss'
+import './primary-login.scss'
 import './realme-login-primary.scss'
 
 import React, { PropTypes, Component } from 'react'
@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { piwikTrackPost } from 'actions/actions'
 
-class SecondaryLogin extends Component {
+class PrimaryLogin extends Component {
   constructor (props) {
     super(props)
 
@@ -92,7 +92,7 @@ class SecondaryLogin extends Component {
       { 'hidden': !this.state.realmeHelpShown }
     )
     const messageContainerClasses = classNames(
-      'secondary-login',
+      'primary-login',
       { 'hidden': !(this.state.insistentLoginMessageShown || this.state.loggedInMessageShown) }
     )
 
@@ -139,9 +139,9 @@ const mapStateToProps = state => ({
     isLoggedIn: state.personalisationActions.isLoggedIn || false
 })
 
-SecondaryLogin.propTypes = {
+PrimaryLogin.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   dispatch: PropTypes.func
 }
 
-export default connect(mapStateToProps)(SecondaryLogin)
+export default connect(mapStateToProps)(PrimaryLogin)
