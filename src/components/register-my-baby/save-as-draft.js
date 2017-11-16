@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getFormValues } from 'redux-form'
 import get from 'lodash/get'
-import deepmerge from 'deepmerge'
 import { connect } from 'react-redux'
 import { rememberBroData } from 'actions/birth-registration'
 import PrimaryLogin from 'components/primary-login/primary-login'
-import { stepValidateFn } from './progress'
 
 import './save-as-draft.scss'
 
@@ -19,59 +17,24 @@ class SaveAsDraft extends Component {
       showSuccessPrompt: false,
       showErrorPrompt: false
     }
-
-    this.getValidFields = this.getValidFields.bind(this)
   }
 
-  getValidFields() {
-    let currentValidFields = {...this.props.formState}
-    const fieldErrors = stepValidateFn[this.props.step](currentValidFields)
-    if (Object.keys(fieldErrors).length) {
-      for (let group in fieldErrors) {
-        if (typeof fieldErrors[group] === 'object') {
-            for (let field in fieldErrors[group]) {
-              if (currentValidFields[group] && currentValidFields[group][field]) {
-                delete currentValidFields[group][field]
-              }
-            }
-            if (!Object.keys(group).length) {
-              if (currentValidFields[group]) {
-                delete currentValidFields[group]
-              }
-            }
-        } else {
-          if (currentValidFields[group]) {
-            delete currentValidFields[group]
-          }
-        }
-      }
-    }
-
-    return currentValidFields
-  }
   handleClick(e) {
     e.preventDefault()
 
-    const { savedRegistrationForm, isLoggedIn, step } = this.props
-    // check form fields to save
-    const currentValidFields = this.getValidFields()
+    const { isLoggedIn, step, formState, rememberBroData } = this.props
 
     if (isLoggedIn) {
-      return rememberBroData({
-        step: step,
-        data: deepmerge.all([savedRegistrationForm.data, currentValidFields])
-      })
-        // display prompt and remove after 3 sec
-        .then(() => this.setState({ showSuccessPrompt: true}), setTimeout(() => this.setState({ showSuccessPrompt: false }), 7000))
-        .catch(() => this.setState({ showErrorPrompt: true}), setTimeout(() => this.setState({ showErrorPrompt: false }), 7000))
+      const maxStep = step > this.props.maxStep ? step : this.props.maxStep
+      return rememberBroData({ step: maxStep, data: formState })
+        .then(() => this.setState({ showSuccessPrompt: true}), setTimeout(() => this.setState({ showSuccessPrompt: false }), 10000))
+        .catch(() => this.setState({ showErrorPrompt: true}), setTimeout(() => this.setState({ showErrorPrompt: false }), 10000))
     } else {
       this.setState({ showLoginPrompt: true })
 
       // still try to save silently for anonymous user
-      return rememberBroData({
-        step: step > savedRegistrationForm.step ? step : savedRegistrationForm.step,
-        data: deepmerge.all([savedRegistrationForm.data, currentValidFields])
-      })
+      const maxStep = step > this.props.maxStep ? step : this.props.maxStep
+      return rememberBroData({ step: maxStep, data: formState })
     }
   }
 
@@ -92,15 +55,16 @@ class SaveAsDraft extends Component {
 }
 
 SaveAsDraft.propTypes = {
-  step: PropTypes.string.isRequired,
+  step: PropTypes.number.isRequired,
+  maxStep: PropTypes.number.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  savedRegistrationForm: PropTypes.object.isRequired,
+  rememberBroData: PropTypes.func.isRequired,
   formState: PropTypes.object
 }
 
 const mapStateToProps = state => ({
   isLoggedIn: get(state, 'personalisationActions.isLoggedIn'),
-  savedRegistrationForm: get(state, 'birthRegistration.savedRegistrationForm'),
+  maxStep: get(state, 'birthRegistration.savedRegistrationForm.step'),
   formState: getFormValues('registration')(state)
 })
-export default connect(mapStateToProps)(SaveAsDraft)
+export default connect(mapStateToProps, { rememberBroData })(SaveAsDraft)

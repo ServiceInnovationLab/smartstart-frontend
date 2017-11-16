@@ -62,7 +62,7 @@ class ParentRelationshipForm extends Component {
           <span className="english">Parents' relationship</span>
         </h2>
 
-        <SaveAsDraft step="4" />
+        <SaveAsDraft step={4} />
 
         { isFormHidden &&
           <form onSubmit={handleSubmit(this.props.onSubmit)}>

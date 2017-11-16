@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import find from 'lodash/find'
+import get from 'lodash/get'
 import Accordion from './accordion'
-import { retrieveBroData, rememberBroData } from '../../actions/birth-registration'
+import { rememberBroData, fetchBroData } from '../../actions/birth-registration'
+import { initialRegistrationFormState } from '../../store/reducers'
 import {
   products as productOptions,
   courierDeliveryPrice
@@ -20,23 +23,29 @@ class Confirmation extends Component {
   }
 
   componentWillMount() {
-    retrieveBroData()
-      .then(result => {
-        if (!result || !result.applicationReferenceNumber) {
-          throw new Error();
-        }
+    this.props.fetchBroData()
+  }
 
+  componentWillReceiveProps(nextProps) {
+    const { fetchingFormState, formState } = nextProps
+
+    if (!fetchingFormState) {
+      if (formState && formState.applicationReferenceNumber) {
         this.setState({
           retrieving: false,
-          sessionData: result
+          sessionData: formState
         });
-
-        // clear user session data
-        rememberBroData({})
-      })
-      .catch(() => {
+      } else {
+        // redirect if not fetching and no data
+        // either user not allowed to see this page or error occured file fetching
         window.location = '/'
-      });
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    // clear user session data
+    this.props.rememberBroData(initialRegistrationFormState)
   }
 
   render() {
@@ -46,7 +55,6 @@ class Confirmation extends Component {
     if (!sessionData) {
       return <Spinner text="Retrieving application ..."/>
     }
-
     const { productCode, courierDelivery, quantity, stillBorn } = sessionData
 
     const product = productCode ? find(productOptions, { value: productCode }) : null
@@ -224,7 +232,14 @@ class Confirmation extends Component {
 }
 
 Confirmation.propTypes = {
-  paymentSuccess: PropTypes.bool
+  paymentSuccess: PropTypes.bool,
+  fetchBroData: PropTypes.func.isRequired,
+  fetchingFormState: PropTypes.bool.isRequired,
+  formState: PropTypes.object.isRequired,
+  rememberBroData: PropTypes.func.isRequired
 }
-
-export default Confirmation
+const mapStateToProps = state => ({
+  fetchingFormState: get(state, 'birthRegistration.fetchingFormState'),
+  formState: get(state, 'birthRegistration.savedRegistrationForm.data')
+})
+export default connect(mapStateToProps, { rememberBroData, fetchBroData } )(Confirmation)

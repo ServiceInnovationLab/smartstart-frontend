@@ -116,42 +116,45 @@ export function fetchCountries() {
   }
 }
 
-export function retrieveBroData() {
-  return fetchWithRetry('/api/bro-form/data/', {
-    credentials: 'same-origin',
-    retries: 3,
-    retryDelay: 500
-  })
-  .then(checkStatus)
-  .then(response => response.json());
-}
-
 export function fetchBroData() {
   return dispatch => {
     dispatch(requestBroData())
 
-    retrieveBroData()
-      .then(data => dispatch(receiveBroData(data)))
+    return fetchWithRetry('/api/bro-form/data/', {
+      credentials: 'same-origin',
+      retries: 3,
+      retryDelay: 500
+    })
+      .then(checkStatus)
+      .then(response => response.json())
+      .then(data => {
+        dispatch(receiveBroData(data))
+        return Promise.resolve(data)
+      })
       .catch(() => dispatch(failureBroData()))
-    }
+  }
 }
 
 export function rememberBroData(data) {
-  const djangoCsrfToken = Cookie.load('csrftoken')
+  return dispatch => {
+    const djangoCsrfToken = Cookie.load('csrftoken')
 
-  // the api need a forward slash in the end
-  return fetchWithRetry('/api/bro-form/data/', {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'X-CSRFToken': djangoCsrfToken
-    },
-    credentials: 'same-origin',
-    retries: 3,
-    retryDelay: 500,
-    body: JSON.stringify(data)
-  })
-  .then(checkStatus)
-  .then(response => response.json());
+    // the api need a forward slash in the end
+    return fetchWithRetry('/api/bro-form/data/', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': djangoCsrfToken
+      },
+      credentials: 'same-origin',
+      retries: 3,
+      retryDelay: 500,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+    .then(() => dispatch(receiveBroData(data)))
+    .then(() => Promise.resolve())
+  }
 }

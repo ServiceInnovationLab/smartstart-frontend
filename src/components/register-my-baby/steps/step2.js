@@ -62,7 +62,7 @@ class MotherDetailsForm extends Component {
           Whaea <br/>
           <span className="english">Mother</span>
         </h2>
-        <SaveAsDraft step="2" />
+        <SaveAsDraft step={2} />
 
         <div className="instruction">
           <strong>This section is where you give the details of the child's mother.</strong>

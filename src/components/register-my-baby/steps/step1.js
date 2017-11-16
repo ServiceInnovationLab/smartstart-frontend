@@ -83,7 +83,7 @@ class ChildDetailsForm extends Component {
           Tamaiti <br/>
           <span className="english">Child</span>
         </h2>
-        <SaveAsDraft step="1" />
+        <SaveAsDraft step={1} />
 
         <div className="instruction">
           This section is where you officially register the details of your child. The name you choose for them should include a surname, and one or more given names.

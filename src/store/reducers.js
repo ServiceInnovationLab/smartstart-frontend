@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import deepmerge from 'deepmerge'
 import {
   REQUEST_API,
   RECEIVE_API,
@@ -186,8 +185,8 @@ function supplementaryContentActions (state = {
  * }
  */
 
- const initialRegistrationFormState = {
-   step: 1,
+ export const initialRegistrationFormState = {
+   step: 0,
    data: {
      otherChildren: 0,
      certificateOrder: {
@@ -237,7 +236,7 @@ function birthRegistration (state = {
       return {
         ...state,
         fetchingFormState: false,
-        savedRegistrationForm: deepmerge.all([state.savedRegistrationForm, action.payload])
+        savedRegistrationForm: Object.keys(action.payload).length ? {...action.payload} : state.savedRegistrationForm
       };
 
     case FAILURE_BIRTH_FACILITIES:

@@ -36,7 +36,7 @@ class IrdMsdSharingForm extends Component {
           Ētahi atu ratonga <br/>
           <span className="english">Other services</span>
         </h2>
-        <SaveAsDraft step="5" />
+        <SaveAsDraft step={5} />
 
         <div className="informative-text intro">
           If you want to, you can use this section to share your child's birth with government agencies.

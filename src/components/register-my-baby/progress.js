@@ -11,9 +11,8 @@ import validateStep4 from './steps/validation/step4'
 import validateStep5 from './steps/validation/step5'
 import validateStep6 from './steps/validation/step6'
 
-
 const steps = [1, 2, 3, 4, 5, 6]
-export const stepValidateFn = {
+const stepValidateFn = {
   '1': validateStep1,
   '2': validateStep2,
   '3': validateStep3,
@@ -59,7 +58,7 @@ class FormWizardProgress extends Component {
   }
 
   navigateToStep(targetStep) {
-    const { currentStep, isReviewing, formState, savedStep } = this.props
+    const { currentStep, isReviewing, formState, savedRegistrationForm } = this.props
     const isCurrentStepComplete = currentStep === 7 || isComplete(formState, currentStep)
 
     if ((isReviewing || targetStep > currentStep) && !isCurrentStepComplete) {
@@ -73,8 +72,10 @@ class FormWizardProgress extends Component {
           this.props.onNavigateToStep(targetStep)
         }
       } else {
-        const isTargetStepComplete = isComplete(formState, targetStep)
-        if (savedStep === targetStep || isTargetStepComplete) {
+        const stepComplete = isComplete(formState, targetStep)
+        const isClickable = stepComplete || targetStep === savedRegistrationForm.step
+
+        if (isClickable) {
           this.props.onNavigateToStep(targetStep)
         }
       }
@@ -82,14 +83,15 @@ class FormWizardProgress extends Component {
   }
 
   render() {
-    const { currentStep, formState, savedStep } = this.props
+    const { currentStep, formState, savedRegistrationForm } = this.props
     const everyStepComplete = steps.every(step => isComplete(formState, step))
 
     return (
       <div className="form-wizard-progress">
         { steps.map(step => {
             const stepComplete = isComplete(formState, step)
-            const isClickable = savedStep === step || stepComplete
+            const isClickable = stepComplete || savedRegistrationForm.step === step
+
             return <StepProgress step={step}
               key={step}
               isComplete={stepComplete}
@@ -113,7 +115,7 @@ class FormWizardProgress extends Component {
 FormWizardProgress.propTypes = {
   formState: PropTypes.object,
   currentStep: PropTypes.number.isRequired,
-  savedStep: PropTypes.number,
+  savedRegistrationForm: PropTypes.object.isRequired,
   isReviewing: PropTypes.bool,
   isRequired: PropTypes.bool,
   onNavigateToStep: PropTypes.func,
@@ -122,7 +124,7 @@ FormWizardProgress.propTypes = {
 
 const mapStateToProps = (state) => ({
   formState: getFormValues('registration')(state),
-  savedStep: get(state, 'birthRegistration.savedRegistrationForm.step'),
+  savedRegistrationForm: get(state, 'birthRegistration.savedRegistrationForm')
 })
 
 export default connect(mapStateToProps)(FormWizardProgress)

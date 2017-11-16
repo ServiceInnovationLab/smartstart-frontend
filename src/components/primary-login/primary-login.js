@@ -75,23 +75,23 @@ class PrimaryLogin extends Component {
   }
 
   render () {
-    const insistentLoginMessageClasses = classNames(
+    let insistentLoginMessageClasses = classNames(
       'message',
       { 'hidden': !this.state.insistentLoginMessageShown }
     )
-    const loggedInMessageClasses = classNames(
+    let loggedInMessageClasses = classNames(
       'message',
       { 'hidden': !this.state.loggedInMessageShown }
     )
-    const realmeHelpClasses = classNames(
+    let realmeHelpClasses = classNames(
       'concertina',
       { 'is-expanded': this.state.realmeHelpShown }
     )
-    const realmeHelpContentClasses = classNames(
+    let realmeHelpContentClasses = classNames(
       'concertina-content',
       { 'hidden': !this.state.realmeHelpShown }
     )
-    const messageContainerClasses = classNames(
+    let messageContainerClasses = classNames(
       'primary-login',
       { 'hidden': !(this.state.insistentLoginMessageShown || this.state.loggedInMessageShown) }
     )

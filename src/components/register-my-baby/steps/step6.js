@@ -93,7 +93,7 @@ class OrderCertificatesForm extends Component {
           Te tono i te tiwhikete whānautanga <br/>
           <span className="english">Order a birth certificate</span>
         </h2>
-        <SaveAsDraft step="6" />
+        <SaveAsDraft step={6} />
 
         <div className="informative-text intro">
           You can order a birth certificate or move on to reviewing your registration. To purchase a certificate online you will need a credit card.

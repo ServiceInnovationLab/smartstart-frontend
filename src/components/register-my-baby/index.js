@@ -7,7 +7,6 @@ import { Link } from 'react-router'
 import scriptLoader from 'react-async-script-loader'
 import invert from 'lodash/invert'
 import get from 'lodash/get'
-import deepmerge from 'deepmerge'
 import { animateScroll } from 'react-scroll'
 import FormWizardProgress from './progress'
 import Step1 from './steps/step1'
@@ -106,7 +105,7 @@ class RegisterMyBabyForm extends Component {
   }
 
   goToStep(step, replace = false, focus = '') {
-    const { savedRegistrationForm, formState } = this.props
+    const { formState, maxStep, rememberBroData } = this.props
     const stepName = stepNameByStep[step]
 
     const currentStep = this.state.step
@@ -131,10 +130,10 @@ class RegisterMyBabyForm extends Component {
 
         // save form
         // we are saving max step
-        return rememberBroData({
-          step: step > savedRegistrationForm.step ? step : savedRegistrationForm.step,
-          data: deepmerge.all([savedRegistrationForm.data, formState])
-        })
+        const stepToSave = step > maxStep ? step : maxStep
+
+        return rememberBroData({ step: stepToSave, data: formState })
+
       }
     }
   }
@@ -153,40 +152,26 @@ class RegisterMyBabyForm extends Component {
   }
 
   submit() {
-    return fullSubmit(this.props.formState, this.props.csrfToken)
-      .then(({ submittedData, result }) => {
-        if (submittedData.certificateOrder) {
-          if (result.response && result.response.paymentURL) {
-            const productCode = get(submittedData, 'certificateOrder.productCode')
-            const quantity = get(submittedData, 'certificateOrder.quantity')
-            const courierDelivery = get(submittedData, 'certificateOrder.courierDelivery')
-            const stillBorn = get(submittedData, 'child.stillBorn')
-            return rememberBroData({
-              step: this.props.savedRegistrationForm.step,
-              data: {
-                applicationReferenceNumber: result.response.applicationReferenceNumber,
-                stillBorn,
-                productCode,
-                quantity,
-                courierDelivery,
-              }
-            })
-            .then(() => {
-              window.location = result.response.paymentURL
-            })
+    const { rememberBroData, formState, csrfToken } = this.props
+    return fullSubmit(formState, csrfToken)
+      .then(({ result }) => {
+        // mutate applicationReferenceNumber
+        const { response } = result || {}
+        const { applicationReferenceNumber, paymentURL } = response
+
+        if (formState.certificateOrder) {
+          if (paymentURL) {
+            return rememberBroData({ step: 7, data: {...formState, applicationReferenceNumber } })
+              .then(() => {
+                window.location = result.response.paymentURL
+              })
           }
         }
 
-        return rememberBroData({
-          step: this.props.savedRegistrationForm.step,
-          data: {
-            applicationReferenceNumber: result.response.applicationReferenceNumber,
-            stillBorn: get(submittedData, 'child.stillBorn')
-          }
-        })
-        .then(() => {
-          window.location = '/register-my-baby/confirmation'
-        })
+        return rememberBroData({ step: 7, data: {...formState, applicationReferenceNumber } })
+          .then(() => {
+            window.location = '/register-my-baby/confirmation'
+          })
       })
   }
 
@@ -199,25 +184,27 @@ class RegisterMyBabyForm extends Component {
   componentWillReceiveProps(nextProps) {
     const nextStepName = get(nextProps, 'params.stepName')
     const currentStepName = get(this.state, 'stepName')
+    const step = stepByStepName[nextStepName]
 
-    const currentStep = this.props.savedRegistrationForm.step
-    const nextStep = nextProps.savedRegistrationForm.step
-    if (currentStep !== nextStep) {
-      this.goToStep(nextStep, true)
+    if (step) {
+      if (nextStepName && nextStepName !== currentStepName) {
+        this.setState({ step, stepName: nextStepName })
+      }
+
+      // when saved data arrives check if user progressed as far as desired step
+      // if no, redirect user to max step
+      if (!this.props.maxStep && nextProps.maxStep && step > nextProps.maxStep) {
+        this.goToStep(nextProps.maxStep, true)
+      }
+    } else {
+      this.goToStep(1, true)
     }
-
-
-    if (nextStepName && nextStepName !== currentStepName) {
-      const step = stepByStepName[nextStepName]
-      this.setState({ step, stepName: nextStepName })
-    }
-
-
   }
 
   retry() {
     this.props.fetchBirthFacilities()
     this.props.fetchCountries()
+    this.props.fetchBroData()
   }
 
   render() {
@@ -279,12 +266,13 @@ RegisterMyBabyForm.propTypes = {
   params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
-  savedRegistrationForm: PropTypes.object,
+  maxStep: PropTypes.number,
   birthFacilities: PropTypes.array,
   countries: PropTypes.array,
   fetchBirthFacilities: PropTypes.func,
   fetchCountries: PropTypes.func,
   fetchBroData: PropTypes.func,
+  rememberBroData: PropTypes.func,
   fetchingBirthFacilities: PropTypes.bool,
   fetchingFormState: PropTypes.bool,
   fetchingCountries: PropTypes.bool,
@@ -294,7 +282,7 @@ RegisterMyBabyForm.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  savedRegistrationForm: get(state, 'birthRegistration.savedRegistrationForm'),
+  maxStep: get(state, 'birthRegistration.savedRegistrationForm.step'),
   fetchingBirthFacilities: get(state, 'birthRegistration.fetchingBirthFacilities'),
   fetchingFormState: get(state, 'birthRegistration.fetchingFormState'),
   fetchingCountries: get(state, 'birthRegistration.fetchingCountries'),
@@ -310,6 +298,7 @@ RegisterMyBabyForm = connect(
     fetchBirthFacilities,
     fetchCountries,
     fetchBroData,
+    rememberBroData,
     piwikTrackPost
   }
 )(RegisterMyBabyForm)

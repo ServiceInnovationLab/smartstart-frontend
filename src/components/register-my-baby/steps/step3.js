@@ -152,7 +152,7 @@ class FatherDetailsForm extends Component {
           Matua/Tētahi Atu Matua <br/>
           <span className="english">Father/Other parent</span>
         </h2>
-        <SaveAsDraft step="3" />
+        <SaveAsDraft step={3} />
 
         <div className="informative-text intro">
           This section is where you give the details of the child's Father (if known), or the other parent of the child.<br/>
