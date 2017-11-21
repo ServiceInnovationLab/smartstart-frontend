@@ -33,7 +33,7 @@ class Confirmation extends Component {
       if (formState && formState.applicationReferenceNumber) {
         this.setState({
           retrieving: false,
-          sessionData: formState
+          sessionData: formState.certificateOrder
         });
       } else {
         // redirect if not fetching and no data
