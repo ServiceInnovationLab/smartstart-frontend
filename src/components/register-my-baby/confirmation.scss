@@ -43,6 +43,18 @@
     margin: 30px 0;
   }
 
+  .order-certificate {
+    background-color: $supplementary-content-background-color;
+    padding: 30px;
+
+    span {
+      font-size: $expandable-larger-font-size;
+      line-height: $expandable-larger-line-height;
+      font-weight: bold;
+      padding: 20px;
+    }
+  }
+
   .order-summary {
     margin: 30px 0;
 

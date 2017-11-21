@@ -35,7 +35,13 @@ class Confirmation extends Component {
   }
 
   render() {
+<<<<<<< 7af34c0c2c32cf54c4618b91ea4a903d19e1afc9
     const { paymentSuccess, fetchingFormState, formState } = this.props
+=======
+    const { sessionData } = this.state;
+    const { paymentSuccess } = this.props;
+    const payment = false;
+>>>>>>> Rearrange components to be clearer
 
     // initial form state is not empty
     if (fetchingFormState || !formState.applicationReferenceNumber) {
@@ -54,6 +60,21 @@ class Confirmation extends Component {
     let resultNotification;
 
     const outstandingPaymentMsg = 'Your birth certificate order has not been processed, probably because the payment method used was declined. You can order a certificate at a later time if you want to.'
+    const buyBirthCertificate = <div>
+                                  <p>
+                                    If you have already registered your baby, you are still able to order a birth certificate or extra certificates. You can do this by requesting an order over the phone, online, by post or in person.
+                                    <br/>
+                                    It costs:
+                                  </p>
+                                  <ul>
+                                    <li>$33 for a standard birth certificate</li>
+                                    <li>$35 for a decorative birth certificate, or</li>
+                                    <li>$55 for a pack that includes both a standard and a decorative birth certificate.</li>
+                                  </ul>
+                                  <p>
+                                    <a href="https://www.govt.nz/browse/nz-passports-and-citizenship/proving-and-protecting-your-identity/get-a-birth-certificate/#how-to-apply"  target="_blank" rel="noreferrer noopener">Get a birth certificate </a>
+                                  </p>
+                                </div>
 
     if (product && !paymentSuccess) {
       resultNotification = <div>
@@ -66,7 +87,13 @@ class Confirmation extends Component {
         }
         { stillBorn ?
           <div>{outstandingPaymentMsg}</div> :
-          <div className="warning"><strong>Warning: </strong>{outstandingPaymentMsg}</div>
+          <div>
+            <div className="warning"><strong>Warning: </strong>{outstandingPaymentMsg}</div>
+            <div className="order-certificate">
+              <span>How do I buy a birth certificate?</span>
+              { buyBirthCertificate }
+            </div>
+          </div>
         }
       </div>
     } else {
@@ -172,7 +199,7 @@ class Confirmation extends Component {
         </Accordion>
       }
 
-      { ((stillBorn && product) || (!stillBorn)) &&
+      { ((stillBorn && product) || !stillBorn || paymentSuccess) &&
         <Accordion>
           <Accordion.Toggle>
             { product ?
@@ -181,20 +208,7 @@ class Confirmation extends Component {
             }
           </Accordion.Toggle>
           <Accordion.Content>
-            <p>
-              If you have already registered your baby, you are still able to order a birth certificate or extra certificates. You can do this by requesting an order over the phone, online, by post or in person.
-              <br/>
-              It costs:
-            </p>
-            <ul>
-              <li>$33 for a standard birth certificate</li>
-              <li>$35 for a decorative birth certificate, or</li>
-              <li>$55 for a pack that includes both a standard and a decorative birth certificate.</li>
-            </ul>
-
-            <p>
-              <a href="https://www.govt.nz/browse/nz-passports-and-citizenship/proving-and-protecting-your-identity/get-a-birth-certificate/#how-to-apply"  target="_blank" rel="noreferrer noopener">Get a birth certificate </a>
-            </p>
+            { buyBirthCertificate }
           </Accordion.Content>
         </Accordion>
       }
