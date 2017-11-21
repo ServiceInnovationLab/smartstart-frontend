@@ -1,0 +1,29 @@
+@import 'variables';
+
+.marker {
+  width: 30px;
+  height: 30px;
+  background: $map-marker-color;
+  border-radius: 50% 50% 50% 0;
+  border: 1px solid darken($map-marker-color, 20%);
+  position: absolute;
+  transform: rotate(-45deg);
+  left: -15px;
+  top: -35px;
+
+  &:after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 7px 0 0 7px;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    background: $map-marker-selected-color;
+    border-color: darken($map-marker-selected-color, 10%);
+    cursor: pointer;
+  }
+}
