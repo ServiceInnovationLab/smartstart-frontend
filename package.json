@@ -49,6 +49,7 @@
     "extract-text-webpack-plugin": "~1.0.1",
     "fetch-retry": "~1.1.1",
     "geolib": "~2.0.23",
+    "google-map-react": "~0.25.0",
     "html-webpack-plugin": "~2.24.1",
     "is-git-clean": "~1.1.0",
     "jest": "~16.0.2",

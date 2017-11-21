@@ -2,9 +2,11 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import nl2br from 'react-nl2br'
 import geolib from 'geolib'
-import scriptLoader from 'react-async-script-loader'
 import { fetchServicesDirectory } from 'actions/services'
 import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
+import ResultMap from 'components/services/map'
+
+import './services.scss'
 
 const RESULTS_LIMIT = 50
 
@@ -21,31 +23,23 @@ class Services extends Component {
         warning: null,
         form: 'services'
       },
-      location: {latitude: null, longitude: null}
-      // location: {latitude: -41.295378, longitude: 174.778684} // TODO remove these Wellington test values
+      location: { latitude: null, longitude: null },
+      mapCenter: { lat: -41.295378, lng: 174.778684 },
+      mapZoom: 5
     }
 
     this.onLocationSelect = this.onLocationSelect.bind(this)
+    this.apiIsLoaded = this.apiIsLoaded.bind(this)
   }
 
   componentDidMount () {
-    const { isScriptLoaded, isScriptLoadSucceed, dispatch } = this.props
+    const { dispatch } = this.props
 
     dispatch(fetchServicesDirectory())
-
-    if (isScriptLoaded && isScriptLoadSucceed) {
-      this.setState({ locationApiLoaded: true })
-    }
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { isScriptLoaded, isScriptLoadSucceed } = nextProps
-
-    if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
-      if (isScriptLoadSucceed) {
-        this.setState({ locationApiLoaded: true })
-      }
-    }
+  apiIsLoaded () {
+    this.setState({ locationApiLoaded: true })
   }
 
   onLocationSelect (locationDetail) {
@@ -54,14 +48,21 @@ class Services extends Component {
         location: {
           latitude: locationDetail.geometry.location.lat(),
           longitude: locationDetail.geometry.location.lng()
-        }
+        },
+        mapCenter: {
+          lat: locationDetail.geometry.location.lat(),
+          lng: locationDetail.geometry.location.lng()
+        },
+        mapZoom: 11
       })
     }
   }
 
+  // TODO clear button for location
+
   computeDistances (directory, location) {
     if (!location.latitude || !location.longitude) {
-      return false
+      return null
     }
 
     directory.forEach(service => {
@@ -92,7 +93,7 @@ class Services extends Component {
 
   render () {
     const { directory } = this.props
-    const { locationApiLoaded, locationInput, location, locationMeta } = this.state
+    const { locationApiLoaded, locationInput, location, locationMeta, mapCenter, mapZoom } = this.state
 
     let results = this.computeDistances(directory, location)
 
@@ -108,6 +109,10 @@ class Services extends Component {
           onPlaceSelect={this.onLocationSelect}
           meta={locationMeta}
         />}
+
+        <div className='mapContainer'>
+          <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} />
+        </div>
 
         {results &&
           <p><em>Showing closest {results.length} results.</em></p>
@@ -151,8 +156,4 @@ Services.propTypes = {
   directory: PropTypes.array.isRequired,
 }
 
-Services = connect(mapStateToProps)(Services)
-
-export default scriptLoader(
-  `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`
-)(Services)
+export default connect(mapStateToProps)(Services)
