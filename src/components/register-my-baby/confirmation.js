@@ -35,13 +35,7 @@ class Confirmation extends Component {
   }
 
   render() {
-<<<<<<< 7af34c0c2c32cf54c4618b91ea4a903d19e1afc9
     const { paymentSuccess, fetchingFormState, formState } = this.props
-=======
-    const { sessionData } = this.state;
-    const { paymentSuccess } = this.props;
-    const payment = false;
->>>>>>> Rearrange components to be clearer
 
     // initial form state is not empty
     if (fetchingFormState || !formState.applicationReferenceNumber) {
@@ -89,12 +83,12 @@ class Confirmation extends Component {
           <div>{outstandingPaymentMsg}</div> :
           <div>
             <div className="warning"><strong>Warning: </strong>{outstandingPaymentMsg}</div>
-            <div className="order-certificate">
-              <span>How do I buy a birth certificate?</span>
-              { buyBirthCertificate }
-            </div>
           </div>
         }
+        <div className="order-certificate">
+          <span>How do I buy a birth certificate?</span>
+          { buyBirthCertificate }
+        </div>
       </div>
     } else {
       resultNotification = <div>
@@ -199,7 +193,7 @@ class Confirmation extends Component {
         </Accordion>
       }
 
-      { ((stillBorn && product) || !stillBorn || paymentSuccess) &&
+      { (((stillBorn && product) || !stillBorn) && paymentSuccess) &&
         <Accordion>
           <Accordion.Toggle>
             { product ?
