@@ -33,7 +33,7 @@ class Confirmation extends Component {
       if (formState && formState.applicationReferenceNumber) {
         this.setState({
           retrieving: false,
-          sessionData: formState.certificateOrder
+          sessionData: formState
         });
       } else {
         // redirect if not fetching and no data
@@ -55,7 +55,9 @@ class Confirmation extends Component {
     if (!sessionData) {
       return <Spinner text="Retrieving application ..."/>
     }
-    const { productCode, courierDelivery, quantity, stillBorn } = sessionData
+
+    const { certificateOrder, child: { stillBorn } } = sessionData
+    const { productCode, courierDelivery, quantity } = certificateOrder
 
     const product = productCode ? find(productOptions, { value: productCode }) : null
     const deliveryPrice = courierDelivery ? courierDeliveryPrice : 0
