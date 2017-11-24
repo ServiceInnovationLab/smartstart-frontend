@@ -22,7 +22,7 @@ const getConfirmationPaymentSuccessUrl = () => {
 }
 
 const getConfirmationPaymentFailureUrl = () => {
-  return getBaseUrl() + '/register-my-baby/confirmation-payment-outstanding';
+  return getBaseUrl() + '/register-my-baby/confirmation-payment-failure';
 }
 
 const toReduxFormSubmissionError = (json) => {

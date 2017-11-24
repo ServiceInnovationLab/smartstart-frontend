@@ -1,6 +1,10 @@
 @import 'variables';
 
 .confirmation {
+  &.retry {
+    margin-top: 50px;
+  }
+  
   border-bottom: 1px solid #ccc;
   padding-bottom: 30px;
 
@@ -85,6 +89,10 @@
   }
 
   @media #{$desktop-and-above} {
+    button {
+      width: auto;
+    }
+
     .step-number:after {
       font-size: 28px;
     }
