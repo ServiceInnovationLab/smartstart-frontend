@@ -19,12 +19,47 @@ import {
 import './services.scss'
 
 const RESULTS_LIMIT = 50
+const categories = [
+  {
+    'label': 'Parenting support',
+    'query': PARENTING_SUPPORT_QUERY
+  },
+  {
+    'label': 'Early childhood education',
+    'query': EARLY_ED_QUERY
+  },
+  {
+    'label': 'Breastfeeding support',
+    'query': BREAST_FEEDING_QUERY
+  },
+  {
+    'label': 'Antenatel classes',
+    'query': ANTENATEL_QUERY
+  },
+  {
+    'label': 'Miscarriage and stillbirth support',
+    'query': MISCARRIAGE_QUERY
+  },
+  {
+    'label': 'Postnatal depression support',
+    'query': MENTAL_HEALTH_QUERY
+  },
+  {
+    'label': 'Budgeting and financial help',
+    'query': BUDGETING_QUERY
+  },
+  {
+    'label': 'Well Child/Tamariki Ora providers',
+    'query': WELL_CHILD_QUERY
+  }
+]
 
 class Services extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
+      category: 0,
       locationApiLoaded: false,
       locationText: '',
       locationMeta: {
@@ -40,20 +75,28 @@ class Services extends Component {
     }
 
     this.onLocationSelect = this.onLocationSelect.bind(this)
+    this.onCategorySelect = this.onCategorySelect.bind(this)
     this.apiIsLoaded = this.apiIsLoaded.bind(this)
   }
 
   componentDidMount () {
-    const { dispatch } = this.props
-
-    dispatch(fetchServicesDirectory(BUDGETING_QUERY))
-
     // TODO do this for nextProps also
     this.showOnMap()
+    this.onCategorySelect(this.state.category)
   }
 
   apiIsLoaded () {
     this.setState({ locationApiLoaded: true })
+  }
+
+  onCategorySelect (category) {
+    // TODO spinner
+    // check if category is passed in from event or from componentDidMount
+    if (typeof category === 'object') {
+      category = category.target.value
+    }
+    this.setState({ category: category })
+    this.props.dispatch(fetchServicesDirectory(categories[category].query))
   }
 
   onLocationSelect (locationDetail) {
@@ -116,13 +159,20 @@ class Services extends Component {
 
   render () {
     const { directory } = this.props
-    const { locationApiLoaded, locationInput, location, locationMeta, mapCenter, mapZoom } = this.state
+    const { locationApiLoaded, locationInput, location, locationMeta, mapCenter, mapZoom, category } = this.state
 
     let results = this.computeDistances(directory, location)
 
     return (
       <div>
         <h2>Services near me</h2>
+
+        <label for="services-category">Category:</label>
+        <select id="services-category" value={category} onChange={this.onCategorySelect}>
+          {categories.map((categoryOption, index) => {
+            return (<option value={index} key={'category-' + index}>{categoryOption.label}</option>)
+          })}
+        </select>
 
         {locationApiLoaded && <LocationAutocomplete
           input={this.setupLocationInput()}
