@@ -5,25 +5,36 @@ import geolib from 'geolib'
 import { fetchServicesDirectory } from 'actions/services'
 import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
 import ResultMap from 'components/services/map'
+import {
+  PARENTING_SUPPORT_QUERY ,
+  EARLY_ED_QUERY,
+  BREAST_FEEDING_QUERY,
+  ANTENATEL_QUERY,
+  MISCARRIAGE_QUERY,
+  MENTAL_HEALTH_QUERY,
+  BUDGETING_QUERY,
+  WELL_CHILD_QUERY
+} from 'components/services/queries'
 
 import './services.scss'
 
 const RESULTS_LIMIT = 50
 
 class Services extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
       locationApiLoaded: false,
-      locationInputValue: '',
+      locationText: '',
       locationMeta: {
         touched: false,
         error: null,
         warning: null,
         form: 'services'
       },
-      location: { latitude: null, longitude: null },
+      // location: { latitude: null, longitude: null }, // TODO this should come from props
+      location: { latitude: -41.295378, longitude: 174.778684 }, // TODO remove this test data
       mapCenter: { lat: -41.295378, lng: 174.778684 },
       mapZoom: 5
     }
@@ -35,7 +46,10 @@ class Services extends Component {
   componentDidMount () {
     const { dispatch } = this.props
 
-    dispatch(fetchServicesDirectory())
+    dispatch(fetchServicesDirectory(BUDGETING_QUERY))
+
+    // TODO do this for nextProps also
+    this.showOnMap()
   }
 
   apiIsLoaded () {
@@ -48,12 +62,21 @@ class Services extends Component {
         location: {
           latitude: locationDetail.geometry.location.lat(),
           longitude: locationDetail.geometry.location.lng()
-        },
+        }
+      }, () => {
+        this.showOnMap()
+      })
+    }
+  }
+
+  showOnMap () {
+    if (this.state.location.latitude && this.state.location.longitude) {
+      this.setState({
         mapCenter: {
-          lat: locationDetail.geometry.location.lat(),
-          lng: locationDetail.geometry.location.lng()
+          lat: this.state.location.latitude,
+          lng: this.state.location.longitude
         },
-        mapZoom: 11
+        mapZoom: 13
       })
     }
   }
@@ -84,9 +107,9 @@ class Services extends Component {
     // usually backed by redux form
     return {
       name: 'location',
-      value: this.state.locationInputValue,
+      value: this.state.locationText,
       onChange: (value) => {
-        this.setState({ locationInputValue: value })
+        this.setState({ locationText: value })
       }
     }
   }
@@ -115,7 +138,7 @@ class Services extends Component {
         </div>
 
         {results &&
-          <p><em>Showing closest {results.length} results.</em></p>
+          <p><em>Showing closest {results.length} results of {directory.length}.</em></p>
         }
 
         {results && results.map(service => {

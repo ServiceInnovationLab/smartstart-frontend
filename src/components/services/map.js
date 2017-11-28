@@ -26,7 +26,7 @@ class ResultMap extends Component {
             key={index}
             lat={marker.LATITUDE}
             lng={marker.LONGITUDE}
-            text={marker.SERVICE_NAME}
+            title={marker.SERVICE_NAME}
           />
       })}
 
