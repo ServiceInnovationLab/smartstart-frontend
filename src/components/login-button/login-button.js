@@ -24,7 +24,7 @@ class LoginButton extends Component {
 
     // match standard piwik outlink delay
     window.setTimeout(() => {
-      window.location = '/login/'
+      window.location = `/login?next=${encodeURIComponent(window.location.pathname)}`
     }, 200)
   }
 

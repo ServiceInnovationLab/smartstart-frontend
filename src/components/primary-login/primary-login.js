@@ -57,7 +57,7 @@ class PrimaryLogin extends Component {
 
     // match standard piwik outlink delay
     window.setTimeout(() => {
-      window.location = `/login/?next=${encodeURIComponent(window.location.href)}`
+      window.location = `/login?next=${encodeURIComponent(window.location.pathname)}`
     }, 200)
   }
 
