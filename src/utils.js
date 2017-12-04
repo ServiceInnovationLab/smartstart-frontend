@@ -13,9 +13,20 @@ export function checkStatus (response) {
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
-    var error = new Error(response.statusText)
+    const { status } = response || {}
+
+    const errorMessage = response.statusText || 'Generic error'
+    const error = new Error(errorMessage)
     error.response = response
-    throw error
+    switch (status) {
+      case 410:
+        // we expect this error come only from failed payment
+        // redirecting to payment failed page
+        window.location.href = '/register-my-baby/confirmation-payment-outstanding'
+        break
+      default:
+        throw error
+    }
   }
 }
 

@@ -6,14 +6,19 @@ import Spinner from '../spinner/spinner'
 import { fetchBroData } from '../../actions/birth-registration'
 
 import './confirmation.scss'
-
+import { checkStatus } from 'utils'
 
 class PaymentFailPage extends React.Component {
   onRetry() {
     const { applicationReferenceNumber } = this.props.formState
 
     if (applicationReferenceNumber) {
-      window.location.href = `/birth-registration-api/Births/birth-registrations/${applicationReferenceNumber}/retry-payment/`
+      fetch(`/birth-registration-api/Births/birth-registrations/${applicationReferenceNumber}/retry-payment/`)
+        .then(checkStatus)
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = data && data.response ? data.response.paymentURL : '/'
+        })
     } else {
       // if we don't have application reference number
       //  go to home page
