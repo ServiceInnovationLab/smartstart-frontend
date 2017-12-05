@@ -154,21 +154,21 @@ class RegisterMyBabyForm extends Component {
   submit() {
     const { rememberBroData, formState, csrfToken } = this.props
     return fullSubmit(formState, csrfToken)
-      .then(({ result }) => {
+      .then(({ submittedData, result }) => {
         // mutate applicationReferenceNumber
         const { response } = result || {}
         const { applicationReferenceNumber, paymentURL } = response
 
-        if (formState.certificateOrder) {
+        if (submittedData.certificateOrder) {
           if (paymentURL) {
-            return rememberBroData({ step: 7, data: {...formState, applicationReferenceNumber } })
+            return rememberBroData({ step: 7, data: {...submittedData, applicationReferenceNumber } })
               .then(() => {
                 window.location = result.response.paymentURL
               })
           }
         }
 
-        return rememberBroData({ step: 7, data: {...formState, applicationReferenceNumber } })
+        return rememberBroData({ step: 7, data: {...submittedData, applicationReferenceNumber } })
           .then(() => {
             window.location = '/register-my-baby/confirmation'
           })

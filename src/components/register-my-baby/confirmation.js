@@ -13,15 +13,6 @@ import Spinner from '../spinner/spinner'
 import './confirmation.scss'
 
 class Confirmation extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      retrieving: true,
-      sessionData: null
-    };
-  }
-
   componentWillMount() {
     this.props.fetchBroData()
   }
@@ -30,12 +21,7 @@ class Confirmation extends Component {
     const { fetchingFormState, formState } = nextProps
 
     if (!fetchingFormState) {
-      if (formState && formState.applicationReferenceNumber) {
-        this.setState({
-          retrieving: false,
-          sessionData: formState
-        });
-      } else {
+      if (!formState  || !formState.applicationReferenceNumber) {
         // redirect if not fetching and no data
         // either user not allowed to see this page or error occured file fetching
         window.location = '/'
@@ -49,15 +35,17 @@ class Confirmation extends Component {
   }
 
   render() {
-    const { sessionData } = this.state;
-    const { paymentSuccess } = this.props;
+    const { paymentSuccess, fetchingFormState, formState } = this.props
 
-    if (!sessionData) {
+    // initial form state is not empty
+    if (fetchingFormState || !formState.applicationReferenceNumber) {
       return <Spinner text="Retrieving application ..."/>
     }
 
-    const { certificateOrder, child: { stillBorn } } = sessionData
-    const { productCode, courierDelivery, quantity } = certificateOrder
+    const { certificateOrder, child } = formState || {}
+    const { stillBorn } = child || {}
+
+    const { productCode, courierDelivery, quantity } = certificateOrder || {}
 
     const product = productCode ? find(productOptions, { value: productCode }) : null
     const deliveryPrice = courierDelivery ? courierDeliveryPrice : 0
@@ -103,7 +91,7 @@ class Confirmation extends Component {
       { resultNotification }
 
       <div className="informative-text">
-        Your reference number is: <strong>{sessionData.applicationReferenceNumber}</strong>
+        Your reference number is: <strong>{formState.applicationReferenceNumber}</strong>
       </div>
 
       { product &&
