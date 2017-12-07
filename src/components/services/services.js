@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import nl2br from 'react-nl2br'
 import geolib from 'geolib'
 import { fetchServicesDirectory } from 'actions/services'
 import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
 import ResultMap from 'components/services/map'
+import Provider from 'components/services/provider'
 import {
   PARENTING_SUPPORT_QUERY ,
   EARLY_ED_QUERY,
@@ -41,7 +41,7 @@ const categories = [
     'query': MISCARRIAGE_QUERY
   },
   {
-    'label': 'Postnatal depression support',
+    'label': 'Anxiety and depression support',
     'query': MENTAL_HEALTH_QUERY
   },
   {
@@ -126,23 +126,44 @@ class Services extends Component {
 
   // TODO clear button for location
 
-  computeDistances (directory, location) {
+  computeDistances (results, location) {
+    // this is kept separate from the service grouping loop so we can re-calculate
+    // distance without having to re-group services
     if (!location.latitude || !location.longitude) {
       return null
     }
 
-    directory.forEach(service => {
+    results.forEach(service => {
       service.latitude = service.LATITUDE
       service.longitude = service.LONGITUDE
       service.distance = geolib.getDistanceSimple(location, service, 100) // 100 = round to 0.1 of a km
       // TODO use https://www.npmjs.com/package/geolib#geoliborderbydistanceobject-latlng-mixed-coords
     })
 
-    directory.sort((a, b) => {
+    results.sort((a, b) => {
       return a.distance - b.distance;
     })
 
-    return directory.slice(0, RESULTS_LIMIT)
+    return results.slice(0, RESULTS_LIMIT)
+  }
+
+  groupServices (services) {
+    // this function relies on providers being adjacent in the directory data
+    let providers = []
+    services.forEach((service, index) =>  {
+      if (index > 1 && service.PROVIDER_NAME === services[index - 1].PROVIDER_NAME) {
+        // same provider as the last service
+        let last = providers.length - 1
+        if (typeof providers[last].otherServices === 'array') {
+          providers[last].otherServices.push(service)
+        } else {
+          providers[last].otherServices = [service]
+        }
+      } else {
+        providers.push(service)
+      }
+    })
+    return providers
   }
 
   setupLocationInput () {
@@ -161,13 +182,14 @@ class Services extends Component {
     const { directory } = this.props
     const { locationApiLoaded, locationInput, location, locationMeta, mapCenter, mapZoom, category } = this.state
 
-    let results = this.computeDistances(directory, location)
+    let results = this.groupServices(directory)
+    results = this.computeDistances(results, location)
 
     return (
       <div>
         <h2>Services near me</h2>
 
-        <label for="services-category">Category:</label>
+        <label htmlFor="services-category">Category:</label>
         <select id="services-category" value={category} onChange={this.onCategorySelect}>
           {categories.map((categoryOption, index) => {
             return (<option value={index} key={'category-' + index}>{categoryOption.label}</option>)
@@ -191,18 +213,8 @@ class Services extends Component {
           <p><em>Showing closest {results.length} results of {directory.length}.</em></p>
         }
 
-        {results && results.map(service => {
-          return [
-            <h3>{service.SERVICE_NAME}</h3>,
-            <h4>{service.PROVIDER_NAME}</h4>,
-            <h5>{service.distance/1000} km &mdash; {service.PHYSICAL_ADDRESS}</h5>,
-            <p><b>Purpose:</b> {nl2br(service.ORGANISATION_PURPOSE)}</p>,
-            <p><b>Service detail:</b> {nl2br(service.SERVICE_DETAIL)}</p>,
-            <p><a href={'tel:' + service.PUBLISHED_PHONE_1}>{service.PUBLISHED_PHONE_1}</a></p>,
-            <p><a href={'mailto:' + service.PUBLISHED_CONTACT_EMAIL_1}>{service.PUBLISHED_CONTACT_EMAIL_1}</a></p>,
-            <p>{nl2br(service.PROVIDER_CONTACT_AVAILABILITY)}</p>,
-            <p><a href='{service.PROVIDER_WEBSITE_1}'>{service.PROVIDER_WEBSITE_1}</a></p>
-          ]
+        {results && results.map((provider, index) => {
+          return <Provider key={'provider' + index} provider={provider} />
         })}
       </div>
     )

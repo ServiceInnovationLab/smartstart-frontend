@@ -170,6 +170,134 @@ export const MENTAL_HEALTH_QUERY = encodeURI(
 )
 
 
+export const MENTAL_HEALTH_QUERY2 = encodeURI(
+  `SELECT DISTINCT ${resultColumns} from ${dataset} WHERE ${removeNullResults} AND
+    (
+        LOWER("SERVICE_DETAIL") NOT LIKE '%eating disorder%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%eating disorder%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%sexual%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%sexual%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%youth%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%youth%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%HIV%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%HIV%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%teen%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%teen%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%earthquake%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%earthquake%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%older pe%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%older pe%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%workplace%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%workplace%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%gender%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%gender%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%homicide%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%homicide%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%budget%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%budget%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%work and income%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%work and income%'
+    ) AND (
+        "LEVEL_2_CATEGORY" LIKE '%Counselling%'
+      OR
+        "LEVEL_2_CATEGORY" LIKE '%Depression%'
+      OR
+        "LEVEL_2_CATEGORY" LIKE '%Disaster Recovery%'
+      OR
+        "LEVEL_2_CATEGORY" LIKE '%Anxiety Problems%'
+    )
+    ${orderBy}`
+)
+
+
+export const MENTAL_HEALTH_QUERY3 = encodeURI(
+  `SELECT DISTINCT ${resultColumns} from ${dataset} WHERE ${removeNullResults} AND
+    (
+        LOWER("SERVICE_DETAIL") NOT LIKE '%eating%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%eating%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%sexual%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%sexual%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%youth%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%youth%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%teen%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%teen%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%older%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%older%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%workplace%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%workplace%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%gender%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%gender%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%course%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%course%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%budget%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%budget%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%work and income%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%work and income%'
+    ) AND (
+        LOWER("SERVICE_DETAIL") LIKE '%mental%'
+      OR
+        LOWER("ORGANISATION_PURPOSE") LIKE '%mental%'
+      OR
+        LOWER("SERVICE_DETAIL") LIKE '%depression%'
+      OR
+        LOWER("ORGANISATION_PURPOSE") LIKE '%depression%'
+      OR
+        LOWER("SERVICE_DETAIL") LIKE '%distress%'
+      OR
+        LOWER("ORGANISATION_PURPOSE") LIKE '%distress%'
+    ) AND (
+        "LEVEL_2_CATEGORY" LIKE '%Counselling%'
+      OR
+        "LEVEL_2_CATEGORY" LIKE '%Depression%'
+      OR
+        "LEVEL_2_CATEGORY" LIKE '%Anxiety Problems%'
+    )
+    ${orderBy}`
+)
+
+
 export const BUDGETING_QUERY = encodeURI(
   `SELECT DISTINCT ${resultColumns} from ${dataset} WHERE ${removeNullResults} AND
     (
@@ -212,6 +340,12 @@ export const BUDGETING_QUERY = encodeURI(
         LOWER("SERVICE_DETAIL") NOT LIKE '%retirement%'
       AND
         LOWER("ORGANISATION_PURPOSE") NOT LIKE '%retirement%'
+      AND
+        LOWER("SERVICE_DETAIL") NOT LIKE '%pension%'
+      AND
+        LOWER("ORGANISATION_PURPOSE") NOT LIKE '%pension%'
+      AND
+        LOWER("PROVIDER_NAME") NOT LIKE 'work and income%'
     )
     ${orderBy}`
 )
@@ -223,13 +357,3 @@ export const WELL_CHILD_QUERY = encodeURI(
     )
     ${orderBy}`
 )
-
-  // (
-  //     "LEVEL_2_CATEGORY" LIKE '%Pregnancy%'
-  //   OR
-  //     "LEVEL_2_CATEGORY" LIKE '%Babies%'
-  //   OR
-  //     "LEVEL_2_CATEGORY" LIKE '%Young Parents%'
-  //   OR
-  //     "LEVEL_2_CATEGORY" LIKE '%Breast Feeding Support%'
-  // )
