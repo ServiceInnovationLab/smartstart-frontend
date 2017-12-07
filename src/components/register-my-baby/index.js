@@ -201,7 +201,7 @@ class RegisterMyBabyForm extends Component {
   }
 
   submit() {
-    const { rememberBroData, formState, csrfToken, router } = this.props
+    const { rememberBroData, formState, csrfToken } = this.props
 
     return fullSubmit(formState, csrfToken)
       .then(({ submittedData, result }) => {

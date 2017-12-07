@@ -20,8 +20,7 @@ export function checkStatus (response) {
     error.response = response
     switch (status) {
       case 410:
-        // we expect this error come only from failed payment
-        // redirecting to payment failed page
+        // we expect this error to come only from a timed out payment
         window.location.href = '/register-my-baby/confirmation-payment-outstanding'
         break
       default:

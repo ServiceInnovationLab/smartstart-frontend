@@ -22,7 +22,7 @@ const getConfirmationPaymentSuccessUrl = () => {
 }
 
 const getConfirmationPaymentFailureUrl = () => {
-  return getBaseUrl() + '/register-my-baby/confirmation-payment-failure';
+  return getBaseUrl() + '/register-my-baby/confirmation-payment-retry';
 }
 
 const toReduxFormSubmissionError = (json) => {

@@ -9,8 +9,19 @@ import './confirmation.scss'
 import { checkStatus } from 'utils'
 
 class PaymentFailPage extends React.Component {
+  componentWillMount() {
+    this.props.fetchBroData()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { confirmationData, fetchingSavedUserData } = nextProps
+    if (!fetchingSavedUserData && !confirmationData.applicationReferenceNumber) {
+      this.props.router['push']('/')
+    }
+  }
+
   onRetry() {
-    const { applicationReferenceNumber } = this.props.formState
+    const { applicationReferenceNumber } = this.props.confirmationData
 
     if (applicationReferenceNumber) {
       fetch(`/birth-registration-api/Births/birth-registrations/${applicationReferenceNumber}/retry-payment/`)
@@ -19,9 +30,11 @@ class PaymentFailPage extends React.Component {
         .then(data => {
           window.location.href = data && data.response ? data.response.paymentURL : '/'
         })
+        .catch(() => {
+          this.props.router['push'](`/register-my-baby/confirmation-payment-outstanding`)
+        })
     } else {
       // if we don't have application reference number
-      //  go to home page
       this.props.router['push']('/')
     }
   }
@@ -32,24 +45,12 @@ class PaymentFailPage extends React.Component {
     this.props.router['push'](`/register-my-baby/confirmation-payment-outstanding`)
   }
 
-
-  componentWillMount() {
-    this.props.fetchBroData()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { formState, fetchingFormState } = nextProps
-    if (!fetchingFormState && !formState.applicationReferenceNumber) {
-      this.props.router['push']('/')
-    }
-  }
-
   render() {
     const failedPaymentMsg =
-      `The payment for your birth certificate order has failed, probably because payment method used was declided.
+      `The payment for your birth certificate order has failed, probably because payment method used was declined.
       You can retry your payment now or cancel your birth certificate order and buy a certificate at a later date.`
 
-    if (this.props.fetchingFormState) {
+    if (this.props.fetchingSavedUserData) {
       return <Spinner text="Retrieving application ..."/>
     }
 
@@ -60,11 +61,11 @@ class PaymentFailPage extends React.Component {
         </div>
         <p>
           Note - if we get no response from you within the next five minutes
-          we will assume you no longer want your certificate order and will cancel the payment
+          we will assume you no longer want your certificate order and will cancel the payment.
         </p>
         <div className="form-actions">
           <button  type="button" onClick={this.onRetry.bind(this)}>Retry my payment</button>
-          <button  type="button" onClick={this.onCancel.bind(this)}>No, thanks - cancel my order</button>
+          <button  type="button" onClick={this.onCancel.bind(this)}>No, I'll just register the birth without buying a certificate</button>
         </div>
       </div>
     )
@@ -73,15 +74,15 @@ class PaymentFailPage extends React.Component {
 
 PaymentFailPage.propTypes = {
   router: PropTypes.object.isRequired,
-  formState: PropTypes.object.isRequired,
+  confirmationData: PropTypes.object.isRequired,
   fetchBroData: PropTypes.func.isRequired,
-  fetchingFormState: PropTypes.bool.isRequired,
+  fetchingSavedUserData: PropTypes.bool.isRequired,
 
 }
 
 const mapStateToProps = state => ({
-  fetchingFormState: get(state, 'birthRegistration.fetchingFormState'),
-  formState: get(state, 'birthRegistration.savedRegistrationForm.data') || {}
+  fetchingSavedUserData: get(state, 'birthRegistration.fetchingSavedUserData'),
+  confirmationData: get(state, 'birthRegistration.savedRegistrationForm.confirmationData') || {}
 })
 
 export default connect(mapStateToProps, { fetchBroData })(PaymentFailPage)
