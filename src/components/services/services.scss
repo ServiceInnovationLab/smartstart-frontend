@@ -5,5 +5,9 @@
   height: 400px;
 }
 
-
 // TODO unpick plain-layout-page right hand col
+
+// TODO remove this temp hack
+.places-autocomplete {
+  position: relative;
+}
