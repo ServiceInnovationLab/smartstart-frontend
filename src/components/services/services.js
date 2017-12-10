@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import geolib from 'geolib'
+import classNames from 'classnames'
 import { fetchServicesDirectory } from 'actions/services'
 import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
 import ResultMap from 'components/services/map'
@@ -59,7 +60,7 @@ class Services extends Component {
     super(props)
 
     this.state = {
-      category: 0,
+      category: '',
       locationApiLoaded: false,
       locationText: '',
       locationMeta: {
@@ -85,6 +86,11 @@ class Services extends Component {
     this.onCategorySelect(this.state.category)
   }
 
+  componentWillReceiveProps (nextProps) {
+    // hack to force google maps to redraw because we start with it hidden
+    window.dispatchEvent(new Event('resize'));
+  }
+
   apiIsLoaded () {
     this.setState({ locationApiLoaded: true })
   }
@@ -92,11 +98,15 @@ class Services extends Component {
   onCategorySelect (category) {
     // TODO spinner
     // check if category is passed in from event or from componentDidMount
-    if (typeof category === 'object') {
+    if (typeof category === 'object') { // from using the select
       category = category.target.value
     }
     this.setState({ category: category })
-    this.props.dispatch(fetchServicesDirectory(categories[category].query))
+
+    // only do the dispatch if the category is set, i.e. not '' the blank value
+    if (category !== '') {
+      this.props.dispatch(fetchServicesDirectory(categories[category].query))
+    }
   }
 
   onLocationSelect (locationDetail) {
@@ -111,6 +121,7 @@ class Services extends Component {
       })
     }
   }
+  // TODO clear button for location
 
   showOnMap () {
     if (this.state.location.latitude && this.state.location.longitude) {
@@ -123,8 +134,6 @@ class Services extends Component {
       })
     }
   }
-
-  // TODO clear button for location
 
   computeDistances (results, location) {
     // this is kept separate from the service grouping loop so we can re-calculate
@@ -185,12 +194,23 @@ class Services extends Component {
     let results = this.groupServices(directory)
     results = this.computeDistances(results, location)
 
+    let resultsClasses = classNames(
+      'results',
+      { 'hidden': !(category !== '' && location.latitude && location.longitude && results) }
+    )
+
+    let selectMoreInfoClasses = classNames(
+      'select-more-info',
+      { 'hidden': !!(category !== '' && location.latitude && location.longitude) }
+    )
+
     return (
       <div>
         <h2>Services near me</h2>
 
         <label htmlFor="services-category">Category:</label>
         <select id="services-category" value={category} onChange={this.onCategorySelect}>
+          <option value=''></option>
           {categories.map((categoryOption, index) => {
             return (<option value={index} key={'category-' + index}>{categoryOption.label}</option>)
           })}
@@ -205,17 +225,24 @@ class Services extends Component {
           meta={locationMeta}
         />}
 
-        <div className='mapContainer'>
-          <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} />
+        <div className={resultsClasses}>
+          <div className='mapContainer'>
+            <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} />
+          </div>
+
+          {results &&
+            <p><em>Showing closest {results.length} results of {directory.length}.</em></p>
+          }
+
+          {results && results.map((provider, index) => {
+            return <Provider key={'provider' + index} provider={provider} />
+          })}
         </div>
 
-        {results &&
-          <p><em>Showing closest {results.length} results of {directory.length}.</em></p>
-        }
+        <div className={selectMoreInfoClasses}>
+          <p>Select a category and location above.</p>
+        </div>
 
-        {results && results.map((provider, index) => {
-          return <Provider key={'provider' + index} provider={provider} />
-        })}
       </div>
     )
   }
