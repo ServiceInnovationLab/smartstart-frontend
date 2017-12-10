@@ -25,16 +25,28 @@ class Marker extends Component {
   }
 
   render () {
-    const infoBoxClasses = classNames(
-      'marker-info',
-      { 'is-open': this.state.infoShown }
+    const { title, id, website } = this.props
+    const markerClasses = classNames(
+      'marker-box',
+      { 'is-active': this.state.infoShown }
     )
 
     return (
-      <div className='marker-box'>
-        <div className='marker' onMouseOver={this.showInfo} onMouseOut={this.hideInfo}></div>
-        <div className={infoBoxClasses}>
-          {this.props.title}
+      <div className={markerClasses}>
+        <div className='marker-box-hover-wrapper' onMouseOver={this.showInfo} onMouseOut={this.hideInfo}>
+          <div className='marker'></div>
+          <div className='marker-info'>
+            <h5>{title}</h5>
+            <p>
+              <a href={'#' + id}>Find out more</a>
+              {website &&
+                <span>
+                  <br />
+                  <a href={website} target='_black' rel='noopener noreferrer'>Go to website</a>
+                </span>
+              }
+            </p>
+          </div>
         </div>
       </div>
     )
@@ -42,7 +54,9 @@ class Marker extends Component {
 }
 
 Marker.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  website: PropTypes.string
 }
 
 export default Marker

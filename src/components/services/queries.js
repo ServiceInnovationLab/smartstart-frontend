@@ -1,5 +1,6 @@
 const dataset = '"35de6bf8-b254-4025-89f5-da9eb6adf9a0"' // TODO bring from config
 const resultColumns = `
+  "FSD_ID",
   "PROVIDER_NAME",
   "ORGANISATION_PURPOSE",
   "SERVICE_NAME",
