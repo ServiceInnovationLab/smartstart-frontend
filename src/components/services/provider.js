@@ -23,7 +23,7 @@ class Provider extends Component {
     const { provider } = this.props
 
     return (
-      <div className='provider'>
+      <div id={provider.FSD_ID} className='provider'>
         <h3>{provider.PROVIDER_NAME}</h3>
         <h5>{provider.distance/1000} km &mdash; {provider.PHYSICAL_ADDRESS}</h5>
 

@@ -1,19 +1,37 @@
 @import 'variables';
 
+$info-box-width: 180px;
+$info-box-left-margin: 45px;
+
 .marker-box {
   position: relative;
+  width: 0;
+  height: 0;
+
+  &.is-active {
+    z-index: 1;
+  }
+}
+
+.marker-box-hover-wrapper {
+  min-width: 30px;
+  min-height: 36px;
+  transform: translate(-15px, -35px);
+  overflow: visible;
+
+  .is-active & {
+    width: $info-box-width + $info-box-left-margin;
+  }
 }
 
 .marker {
   width: 30px;
   height: 30px;
+  position: absolute;
   background: $map-marker-color;
   border-radius: 50% 50% 50% 0;
   border: 1px solid darken($map-marker-color, 20%);
-  position: absolute;
   transform: rotate(-45deg);
-  left: -15px;
-  top: -35px;
 
   &:after {
     content: '';
@@ -25,7 +43,7 @@
     border-radius: 50%;
   }
 
-  &:hover {
+  .is-active & {
     background: $map-marker-selected-color;
     border-color: darken($map-marker-selected-color, 10%);
     cursor: pointer;
@@ -35,17 +53,15 @@
 .marker-info {
   display: none;
 
-  &.is-open {
+  .is-active & {
     display: block;
-    position: absolute;
-    left: 30px;
-    top: -35px;
+    position: relative;
+    margin-left: $info-box-left-margin;
     background-color: #ffffff;
-    width: 150px;
+    width: $info-box-width;
     padding: 10px;
     font-family: $font-family-base;
     font-size: $font-size-base;
-    font-weight: bold;
 
     &::after {
       content: '';
@@ -58,5 +74,14 @@
       border-radius: 0 0 100% 0;
       background-color: #ffffff;
     }
+  }
+
+  h5 {
+    margin-top: 0;
+  }
+
+  p {
+    line-height: 1.5em;
+    margin-bottom: 0;
   }
 }
