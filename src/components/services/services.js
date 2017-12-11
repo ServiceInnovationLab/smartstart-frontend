@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import geolib from 'geolib'
 import classNames from 'classnames'
+import { browserHistory } from 'react-router'
 import { fetchServicesDirectory } from 'actions/services'
 import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
 import ResultMap from 'components/services/map'
@@ -20,40 +21,40 @@ import {
 import './services.scss'
 
 const RESULTS_LIMIT = 50
-const categories = [
-  {
+const categories = {
+  'parenting-support': {
     'label': 'Parenting support',
     'query': PARENTING_SUPPORT_QUERY
   },
-  {
+  'early-education': {
     'label': 'Early childhood education',
     'query': EARLY_ED_QUERY
   },
-  {
+  'breastfeeding': {
     'label': 'Breastfeeding support',
     'query': BREAST_FEEDING_QUERY
   },
-  {
+  'antenatal': {
     'label': 'Antenatel classes',
     'query': ANTENATEL_QUERY
   },
-  {
+  'miscarriage-support': {
     'label': 'Miscarriage and stillbirth support',
     'query': MISCARRIAGE_QUERY
   },
-  {
+  'mental-health': {
     'label': 'Anxiety and depression support',
     'query': MENTAL_HEALTH_QUERY
   },
-  {
+  'budgeting': {
     'label': 'Budgeting and financial help',
     'query': BUDGETING_QUERY
   },
-  {
+  'well-child': {
     'label': 'Well Child/Tamariki Ora providers',
     'query': WELL_CHILD_QUERY
   }
-]
+}
 
 class Services extends Component {
   constructor (props) {
@@ -81,14 +82,17 @@ class Services extends Component {
   }
 
   componentDidMount () {
-    // TODO do this for nextProps also
     this.showOnMap()
-    this.onCategorySelect(this.state.category)
+
+    if (this.props.category && categories[this.props.category]) {
+      this.onCategorySelect(this.props.category)
+    }
   }
 
   componentWillReceiveProps (nextProps) {
     // hack to force google maps to redraw because we start with it hidden
     window.dispatchEvent(new Event('resize'));
+    this.showOnMap()
   }
 
   apiIsLoaded () {
@@ -97,7 +101,7 @@ class Services extends Component {
 
   onCategorySelect (category) {
     // TODO spinner
-    // check if category is passed in from event or from componentDidMount
+    // check if category is passed in from event or from componentDidMount or route
     if (typeof category === 'object') { // from using the select
       category = category.target.value
     }
@@ -106,6 +110,9 @@ class Services extends Component {
     // only do the dispatch if the category is set, i.e. not '' the blank value
     if (category !== '') {
       this.props.dispatch(fetchServicesDirectory(categories[category].query))
+      browserHistory.push(`/services-near-me/${category}`)
+    } else {
+      browserHistory.push(`/services-near-me`)
     }
   }
 
@@ -211,8 +218,8 @@ class Services extends Component {
         <label htmlFor="services-category">Category:</label>
         <select id="services-category" value={category} onChange={this.onCategorySelect}>
           <option value=''></option>
-          {categories.map((categoryOption, index) => {
-            return (<option value={index} key={'category-' + index}>{categoryOption.label}</option>)
+          {Object.keys(categories).map(key => {
+            return (<option value={key} key={key}>{categories[key].label}</option>)
           })}
         </select>
 
@@ -231,7 +238,7 @@ class Services extends Component {
           </div>
 
           {results &&
-            <p><em>Showing closest {results.length} results of {directory.length}.</em></p>
+            <p><em>Showing closest {results.length} results of {results.length}.</em></p>
           }
 
           {results && results.map((provider, index) => {
@@ -264,8 +271,8 @@ function mapStateToProps (state) {
 }
 
 Services.propTypes = {
-  dispatch: PropTypes.func,
-  directory: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  directory: PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps)(Services)

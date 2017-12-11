@@ -8,15 +8,15 @@ import Services from 'components/services/services'
 
 class ServicesPage extends Component {
   render () {
-    const { isLoggedIn, authError } = this.props
+    const { isLoggedIn, authError, params } = this.props
 
     return (
       <div className='site-container-wrapper'>
         <div className='site-container'>
           <Header isLoggedIn={isLoggedIn} authError={authError} />
-          <div id='content' className="plain-layout-page">
-            <div className="page-content">
-              <Services  />
+          <div id='content' className='plain-layout-page'>
+            <div className='page-content'>
+              <Services category={params.category} />
             </div>
           </div>
         </div>
@@ -35,7 +35,8 @@ ServicesPage.propTypes = {
   authError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string
-  ])
+  ]),
+  params: PropTypes.object
 }
 
 export default connect(mapStateToProps)(ServicesPage)
