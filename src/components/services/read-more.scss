@@ -1,0 +1,21 @@
+@import 'variables';
+
+.read-more {
+  border: 0;
+  background-color: transparent;
+  padding: 10px 0;
+  min-width: auto;
+  display: block;
+
+  &::before {
+    content: '+ ';
+  }
+
+  &.hide::before {
+    content: '- ';
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+}

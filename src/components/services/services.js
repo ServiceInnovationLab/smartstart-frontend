@@ -110,9 +110,9 @@ class Services extends Component {
     // only do the dispatch if the category is set, i.e. not '' the blank value
     if (category !== '') {
       this.props.dispatch(fetchServicesDirectory(categories[category].query))
-      browserHistory.push(`/services-near-me/${category}`)
+      browserHistory.replace(`/services-near-me/${category}`)
     } else {
-      browserHistory.push(`/services-near-me`)
+      browserHistory.replace(`/services-near-me`)
     }
   }
 
