@@ -14,6 +14,12 @@
     }
   }
 
+  &.full-width .page-content {
+    @media only screen and (min-width: #{$desktop-max-content-width}) {
+      padding: 15px 20px 15px 20px;
+    }
+  }
+
   .divider {
     border-bottom: 1px solid #d2d2d2;
     margin-bottom: 30px;

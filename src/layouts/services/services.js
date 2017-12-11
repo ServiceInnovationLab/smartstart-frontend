@@ -14,7 +14,7 @@ class ServicesPage extends Component {
       <div className='site-container-wrapper'>
         <div className='site-container'>
           <Header isLoggedIn={isLoggedIn} authError={authError} />
-          <div id='content' className='plain-layout-page'>
+          <div id='content' className='plain-layout-page full-width'>
             <div className='page-content'>
               <Services category={params.category} />
             </div>
