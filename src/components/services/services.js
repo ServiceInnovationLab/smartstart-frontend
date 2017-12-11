@@ -213,7 +213,7 @@ class Services extends Component {
 
     return (
       <div>
-        <h2>Services near me</h2>
+        <h2>He ratonga e tata ana ki a au<br /><span className='english'>Services near me</span></h2>
 
         <label htmlFor="services-category">Category:</label>
         <select id="services-category" value={category} onChange={this.onCategorySelect}>
@@ -233,21 +233,24 @@ class Services extends Component {
         />}
 
         <div className={resultsClasses}>
-          <div className='mapContainer'>
-            <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} />
-          </div>
-
           {results &&
-            <p><em>Showing closest {results.length} results of {results.length}.</em></p>
+            <h3>Closest results near you [{results.length}/{directory.length}].</h3>
           }
 
-          {results && results.map((provider, index) => {
-            return <Provider key={'provider' + index} provider={provider} />
-          })}
+          <div className='provider-list'>
+            {results && results.map((provider, index) => {
+              return <Provider key={'provider' + index} provider={provider} />
+            })}
+          </div>
+
+          <div className='map-container'>
+            <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} />
+          </div>
         </div>
 
         <div className={selectMoreInfoClasses}>
-          <p>Select a category and location above.</p>
+          <h3>No results</h3>
+          <p>Please select a category and search for your address.</p>
         </div>
 
       </div>

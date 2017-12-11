@@ -1,1 +1,9 @@
 @import 'variables';
+
+.provider {
+  border-top: 1px solid $border-color;
+
+  &:last-child {
+    border-bottom: 1px solid $border-color;
+  }
+}

@@ -20,12 +20,11 @@ class Marker extends Component {
   }
 
   hideInfo () {
-    // TODO only hide if leave combined region of box AND marker
     this.setState({ infoShown: false })
   }
 
   render () {
-    const { title, id, website } = this.props
+    const { title, id, lat, lng } = this.props
     const markerClasses = classNames(
       'marker-box',
       { 'is-active': this.state.infoShown }
@@ -39,12 +38,8 @@ class Marker extends Component {
             <h5>{title}</h5>
             <p>
               <a href={'#' + id}>Find out more</a>
-              {website &&
-                <span>
-                  <br />
-                  <a href={website} target='_black' rel='noopener noreferrer'>Go to website</a>
-                </span>
-              }
+              <br />
+              <a href={`https://www.google.com/maps/dir/Current+Location/${lat},${lng}`} target='_blank' rel='noopener noreferrer'>Directions</a>
             </p>
           </div>
         </div>
@@ -56,7 +51,8 @@ class Marker extends Component {
 Marker.propTypes = {
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  website: PropTypes.string
+  lat: PropTypes.string.isRequired,
+  lng: PropTypes.string.isRequired
 }
 
 export default Marker

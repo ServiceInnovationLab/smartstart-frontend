@@ -1,13 +1,33 @@
 @import 'variables';
 
-.mapContainer {
-  width: 100%;
-  height: 400px;
-}
-
-// TODO unpick plain-layout-page right hand col
-
 // TODO remove this temp hack
 .places-autocomplete {
   position: relative;
+}
+
+.map-container {
+  width: 100%;
+  height: 400px;
+
+  @media only screen and (min-width: #{$desktop-max-content-width}) {
+    height: 650px;
+    width: 672px;
+    float: left;
+  }
+}
+
+.provider-list {
+  @media only screen and (min-width: #{$desktop-max-content-width}) {
+    width: 420px;
+    padding-right: 30px;
+    float: left;
+  }
+}
+
+.select-more-info {
+  text-align: center;
+
+  h3 {
+    margin-bottom: 0;
+  }
 }

@@ -27,7 +27,6 @@ class ResultMap extends Component {
             lat={marker.LATITUDE}
             lng={marker.LONGITUDE}
             title={marker.PROVIDER_NAME}
-            website={marker.PROVIDER_WEBSITE_1}
             id={marker.FSD_ID}
           />
       })}

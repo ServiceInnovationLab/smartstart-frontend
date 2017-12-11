@@ -23,28 +23,28 @@ class Provider extends Component {
 
     return (
       <div id={provider.FSD_ID} className='provider'>
-        <h3>{provider.PROVIDER_NAME}</h3>
-        <h5>{provider.distance/1000} km &mdash; {provider.PHYSICAL_ADDRESS}</h5>
+        <h4>{provider.PROVIDER_NAME}</h4>
+        <p><strong>{provider.PHYSICAL_ADDRESS} ({provider.distance/1000} km away) </strong></p>
 
         <p>{nl2br(provider.ORGANISATION_PURPOSE)}</p>
 
-        <p><a href={'tel:' + provider.PUBLISHED_PHONE_1}>{provider.PUBLISHED_PHONE_1}</a></p>
-        <p><a href={'mailto:' + provider.PUBLISHED_CONTACT_EMAIL_1}>{provider.PUBLISHED_CONTACT_EMAIL_1}</a></p>
-
-        <p>{nl2br(provider.PROVIDER_CONTACT_AVAILABILITY)}</p>
-
-
-        <p><a href='{provider.PROVIDER_WEBSITE_1}'>{provider.PROVIDER_WEBSITE_1}</a></p>
-
-        <h4>{this.isServiceIndentical(provider.PROVIDER_NAME, provider.SERVICE_NAME)}</h4>
+        <h5>{this.isServiceIndentical(provider.PROVIDER_NAME, provider.SERVICE_NAME)}</h5>
         <p>{nl2br(provider.SERVICE_DETAIL)}</p>
 
         {provider.otherServices && provider.otherServices.map(service => {
           return [
-            <h4>{this.isServiceIndentical(service.PROVIDER_NAME, service.SERVICE_NAME)}</h4>,
+            <h5>{this.isServiceIndentical(service.PROVIDER_NAME, service.SERVICE_NAME)}</h5>,
             <p>{nl2br(service.SERVICE_DETAIL)}</p>
           ]
         })}
+
+        {provider.PROVIDER_WEBSITE_1 && <p>Website: <a href={provider.PROVIDER_WEBSITE_1} target='_blank' rel='noopener noreferrer'>{provider.PROVIDER_WEBSITE_1}</a></p>}
+
+        {provider.PROVIDER_CONTACT_AVAILABILITY && <p>Opening hours: {nl2br(provider.PROVIDER_CONTACT_AVAILABILITY)}</p>}
+
+        {provider.PUBLISHED_PHONE_1 && <p>Phone: <a href={'tel:' + provider.PUBLISHED_PHONE_1}>{provider.PUBLISHED_PHONE_1}</a></p>}
+
+        {provider.PUBLISHED_CONTACT_EMAIL_1 && <p>Email: <a href={'mailto:' + provider.PUBLISHED_CONTACT_EMAIL_1}>{provider.PUBLISHED_CONTACT_EMAIL_1}</a></p>}
       </div>
     )
   }
