@@ -89,7 +89,7 @@ class Services extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps () {
     // hack to force google maps to redraw because we start with it hidden
     window.dispatchEvent(new Event('resize'));
     this.showOnMap()
@@ -170,7 +170,7 @@ class Services extends Component {
       if (index > 1 && service.PROVIDER_NAME === services[index - 1].PROVIDER_NAME) {
         // same provider as the last service
         let last = providers.length - 1
-        if (typeof providers[last].otherServices === 'array') {
+        if (Array.isArray(providers[last].otherServices)) {
           providers[last].otherServices.push(service)
         } else {
           providers[last].otherServices = [service]
@@ -196,7 +196,7 @@ class Services extends Component {
 
   render () {
     const { directory } = this.props
-    const { locationApiLoaded, locationInput, location, locationMeta, mapCenter, mapZoom, category } = this.state
+    const { locationApiLoaded, location, locationMeta, mapCenter, mapZoom, category } = this.state
 
     let results = this.groupServices(directory)
     results = this.computeDistances(results, location)
@@ -272,7 +272,8 @@ function mapStateToProps (state) {
 
 Services.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  directory: PropTypes.array.isRequired
+  directory: PropTypes.array.isRequired,
+  category: PropTypes.string
 }
 
 export default connect(mapStateToProps)(Services)

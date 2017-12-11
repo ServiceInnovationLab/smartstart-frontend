@@ -31,7 +31,7 @@ export function fetchServicesDirectory (query) {
       .then(checkStatus)
       .then(response => response.json())
       .then(json => dispatch(receiveServicesAPI(json)))
-      .catch(function (error) {
+      .catch(error => {
         // TODO what should we do for the error here?
       })
   }

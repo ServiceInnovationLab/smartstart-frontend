@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react'
-import classNames from 'classnames'
 import nl2br from 'react-nl2br'
 
 import './provider.scss'
@@ -40,7 +39,7 @@ class Provider extends Component {
         <h4>{this.isServiceIndentical(provider.PROVIDER_NAME, provider.SERVICE_NAME)}</h4>
         <p>{nl2br(provider.SERVICE_DETAIL)}</p>
 
-        {provider.otherServices && provider.otherServices.map((service, index) => {
+        {provider.otherServices && provider.otherServices.map(service => {
           return [
             <h4>{this.isServiceIndentical(service.PROVIDER_NAME, service.SERVICE_NAME)}</h4>,
             <p>{nl2br(service.SERVICE_DETAIL)}</p>
