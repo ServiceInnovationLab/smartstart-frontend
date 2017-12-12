@@ -22,7 +22,7 @@ const removeNullResults = `
   "LONGITUDE" != '0'`
 const orderBy = `
   ORDER BY
-    "LONGITUDE"`
+    "LONGITUDE", "FSD_ID"`
 
 // using select distinct (and not trying to return catergory data) means that
 // duplicate entries (across returned values) will be dropped

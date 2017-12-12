@@ -73,7 +73,8 @@ class Services extends Component {
       // location: { latitude: null, longitude: null }, // TODO this should come from props
       location: { latitude: -41.295378, longitude: 174.778684 }, // TODO remove this test data
       mapCenter: { lat: -41.295378, lng: 174.778684 },
-      mapZoom: 5
+      mapZoom: 5,
+      results: null
     }
 
     this.onLocationSelect = this.onLocationSelect.bind(this)
@@ -89,10 +90,18 @@ class Services extends Component {
     }
   }
 
-  componentWillReceiveProps () {
+  componentWillReceiveProps (nextProps) {
     // hack to force google maps to redraw because we start with it hidden
     window.dispatchEvent(new Event('resize'));
     this.showOnMap()
+
+    // this is the earliest that we recieve the dispatch with the directory
+    if (nextProps.directory) {
+      let results = this.groupServices(nextProps.directory)
+      this.setState({
+        results: this.computeDistances(results)
+      })
+    }
   }
 
   apiIsLoaded () {
@@ -142,9 +151,11 @@ class Services extends Component {
     }
   }
 
-  computeDistances (results, location) {
+  computeDistances (results) {
     // this is kept separate from the service grouping loop so we can re-calculate
     // distance without having to re-group services
+
+    const { location } = this.state
     if (!location.latitude || !location.longitude) {
       return null
     }
@@ -196,10 +207,7 @@ class Services extends Component {
 
   render () {
     const { directory } = this.props
-    const { locationApiLoaded, location, locationMeta, mapCenter, mapZoom, category } = this.state
-
-    let results = this.groupServices(directory)
-    results = this.computeDistances(results, location)
+    const { category, locationApiLoaded, location, locationMeta, mapCenter, mapZoom, results } = this.state
 
     let resultsClasses = classNames(
       'results',
@@ -213,8 +221,6 @@ class Services extends Component {
 
     return (
       <div>
-        <h2>He ratonga e tata ana ki a au<br /><span className='english'>Services near me</span></h2>
-
         <label htmlFor="services-category">Category:</label>
         <select id="services-category" value={category} onChange={this.onCategorySelect}>
           <option value=''></option>

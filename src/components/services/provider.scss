@@ -6,4 +6,13 @@
   &:last-child {
     border-bottom: 1px solid $border-color;
   }
+
+  .details p {
+    margin: 6px 0;
+
+    .details-title {
+      font-weight: 500;
+      margin-right: 6px;
+    }
+  }
 }
