@@ -6,6 +6,8 @@ import Header from 'layouts/header/header'
 import Footer from 'layouts/footer/footer'
 import Services from 'components/services/services'
 
+import './services.scss'
+
 class ServicesPage extends Component {
   render () {
     const { isLoggedIn, authError, params } = this.props
@@ -14,7 +16,16 @@ class ServicesPage extends Component {
       <div className='site-container-wrapper'>
         <div className='site-container'>
           <Header isLoggedIn={isLoggedIn} authError={authError} />
-          <div id='content' className='plain-layout-page full-width'>
+          <div className='services-header'>
+            <div className='services-header-inner'>
+              <h2>
+                He ratonga e tata ana ki a au<br />
+                <span className='english'>Services near me</span>
+              </h2>
+              <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sed lectus sit amet arcu porta ultrices. In sed auctor leo. Aliquam erat volutpat.</p>
+            </div>
+          </div>
+          <div id='content' className='plain-layout-page full-width services-page'>
             <div className='page-content'>
               <Services category={params.category} />
             </div>

@@ -112,10 +112,6 @@
         color: $print-text-color;
       }
 
-      .english {
-        font-weight: 500;
-      }
-
       @media #{$desktop-and-above} {
         font-size: 42px;
       }

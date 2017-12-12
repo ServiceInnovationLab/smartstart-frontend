@@ -4,6 +4,7 @@ $tablet-and-above:     'only screen and (min-width: 768px)';
 $tablet-only:          'only screen and (min-width: 768px and max-width: 991px)';
 $desktop-and-above:    'only screen and (min-width: 992px)';
 $high-res:             'only screen and (min-resolution: 2dppx)';
+$high-res-desktop:     'only screen and (min-width: 992px) and (min-resolution: 2dppx)';
 
 // brand colors
 $realme-dark-blue:     #3e4d5d;
@@ -129,7 +130,8 @@ $form-teal-hover: #e0efee;
 $form-informative-background: #f6f5f5;
 $form-disabled-color: #ccc;
 
-// map
+// services and map
+$services-background: #ecf6ca;
 $map-marker-color: #ED9159;
 $map-marker-selected-color: #D25656;
 
@@ -173,3 +175,5 @@ $icon-theme-health:     '\e90c';
 $icon-exclamation:      '\e90d';
 $icon-arrow-right:      '\e90e';
 $icon-arrow-left:       '\e90f';
+$icon-map-pin:          '\e913';
+$icon-list:             '\e912';

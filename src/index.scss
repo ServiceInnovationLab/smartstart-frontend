@@ -368,6 +368,13 @@ textarea {
   }
 }
 
+select {
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  font-weight: 500;
+  padding: 6px;
+}
+
 [placeholder] {
   text-overflow: ellipsis;
 }

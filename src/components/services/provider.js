@@ -39,21 +39,32 @@ class Provider extends Component {
           ]
         })}
 
-        {provider.PROVIDER_WEBSITE_1 &&
-          <p>Website: <a href={provider.PROVIDER_WEBSITE_1} target='_blank' rel='noopener noreferrer'>{provider.PROVIDER_WEBSITE_1}</a></p>
-        }
-
-        {provider.PROVIDER_CONTACT_AVAILABILITY &&
-          <p>Opening hours: {nl2br(provider.PROVIDER_CONTACT_AVAILABILITY)}</p>
-        }
-
-        {provider.PUBLISHED_PHONE_1 &&
-          <p>Phone: <a href={'tel:' + provider.PUBLISHED_PHONE_1}>{provider.PUBLISHED_PHONE_1}</a></p>
-        }
-
-        {provider.PUBLISHED_CONTACT_EMAIL_1 &&
-          <p>Email: <a href={'mailto:' + provider.PUBLISHED_CONTACT_EMAIL_1}>{provider.PUBLISHED_CONTACT_EMAIL_1}</a></p>
-        }
+        <div className='details'>
+          {provider.PROVIDER_WEBSITE_1 &&
+            <p>
+              <span className='details-title'>Website:</span>
+              <a href={provider.PROVIDER_WEBSITE_1} target='_blank' rel='noopener noreferrer'>{provider.PROVIDER_WEBSITE_1}</a>
+            </p>
+          }
+          {provider.PUBLISHED_PHONE_1 &&
+            <p>
+              <span className='details-title'>Phone:</span>
+              <a href={'tel:' + provider.PUBLISHED_PHONE_1}>{provider.PUBLISHED_PHONE_1}</a>
+            </p>
+          }
+          {provider.PUBLISHED_CONTACT_EMAIL_1 &&
+            <p>
+              <span className='details-title'>Email:</span>
+              <a href={'mailto:' + provider.PUBLISHED_CONTACT_EMAIL_1}>{provider.PUBLISHED_CONTACT_EMAIL_1}</a>
+            </p>
+          }
+          {provider.PROVIDER_CONTACT_AVAILABILITY &&
+            <p>
+              <span className='details-title'>Opening hours:</span>
+              {nl2br(provider.PROVIDER_CONTACT_AVAILABILITY)}
+            </p>
+          }
+        </div>
       </div>
     )
   }
