@@ -62,6 +62,7 @@ class Services extends Component {
 
     this.state = {
       category: '',
+      listView: true,
       locationApiLoaded: false,
       locationText: '',
       locationMeta: {
@@ -74,16 +75,19 @@ class Services extends Component {
       location: { latitude: -41.295378, longitude: 174.778684 }, // TODO remove this test data
       mapCenter: { lat: -41.295378, lng: 174.778684 },
       mapZoom: 5,
-      results: null
+      results: []
     }
 
     this.onLocationSelect = this.onLocationSelect.bind(this)
     this.onCategorySelect = this.onCategorySelect.bind(this)
     this.apiIsLoaded = this.apiIsLoaded.bind(this)
     this.showOnMap = this.showOnMap.bind(this)
+    this.clickListTab = this.clickListTab.bind(this)
+    this.clickMapTab = this.clickMapTab.bind(this)
   }
 
   componentDidMount () {
+    // TODO set location from props if it exists
     this.showOnMap(this.state.location)
 
     if (this.props.category && categories[this.props.category]) {
@@ -149,6 +153,10 @@ class Services extends Component {
           lng: location.longitude
         },
         mapZoom: 13
+      }, () => {
+        if (this.state.listView) {
+          this.clickMapTab()
+        }
       })
     }
   }
@@ -207,25 +215,49 @@ class Services extends Component {
     }
   }
 
+  clickListTab () {
+    this.setState({
+      listView: true
+    })
+  }
+
+  clickMapTab () {
+    this.setState({
+      listView: false
+    }, () => {
+      // hack to force google maps to redraw because it was hidden
+      window.dispatchEvent(new Event('resize'));
+    })
+  }
+
   render () {
     const { directory } = this.props
-    const { category, locationApiLoaded, location, locationMeta, mapCenter, mapZoom, results } = this.state
+    const { category, listView, locationApiLoaded, location, locationMeta, mapCenter, mapZoom, results } = this.state
 
-    let resultsClasses = classNames(
+    const resultsClasses = classNames(
       'results',
-      { 'hidden': !(category !== '' && location.latitude && location.longitude && results) }
+      { 'hidden': !(category !== '' && location.latitude && location.longitude && results.length) }
     )
-
-    let selectMoreInfoClasses = classNames(
+    const selectMoreInfoClasses = classNames(
       'select-more-info',
       { 'hidden': !!(category !== '' && location.latitude && location.longitude) }
     )
+    const listViewClasses = classNames(
+      'provider-list',
+      { 'inactive': !listView }
+    )
+    const mapViewClasses = classNames(
+      'map-container',
+      { 'inactive': listView }
+    )
+    const listTabClasses = classNames({ 'active': listView })
+    const mapTabClasses = classNames({ 'active': !listView })
 
     return (
       <div>
         <label htmlFor="services-category">Category:</label>
         <select id="services-category" value={category} onChange={this.onCategorySelect}>
-          <option value=''></option>
+          <option value=''>Please select a category</option>
           {Object.keys(categories).map(key => {
             return (<option value={key} key={key}>{categories[key].label}</option>)
           })}
@@ -241,18 +273,21 @@ class Services extends Component {
         />}
 
         <div className={resultsClasses}>
-          {results &&
-            <h3>Closest results near you [{results.length}/{directory.length}].</h3>
-          }
+          <h3>Closest results near you [{results.length}/{directory.length}].</h3>
 
-          <div className='provider-list'>
-            {results && results.map((provider, index) => {
+          <div className='map-list-tabs' aria-hidden='true'>
+            <button onClick={this.clickListTab} className={listTabClasses}>List view</button>
+            <button onClick={this.clickMapTab} className={mapTabClasses}>Map view</button>
+          </div>
+
+          <div className={listViewClasses}>
+            {results.length && results.map((provider, index) => {
               return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
             })}
           </div>
 
-          <div className='map-container'>
-            <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} />
+          <div className={mapViewClasses} aria-hidden='true'>
+            <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
           </div>
         </div>
 

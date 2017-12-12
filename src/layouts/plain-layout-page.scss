@@ -5,16 +5,16 @@
     max-width: $desktop-max-content-width;
     margin-left: auto;
     margin-right: auto;
-    padding: 15px;
+    padding: $mobile-content-gutter;
 
     @media only screen and (min-width: #{$desktop-max-content-width}) {
-      padding: 15px #{$indent * 2} 15px 20px;
+      padding: 15px #{$indent * 2} 15px $desktop-content-gutter;
     }
   }
 
   &.full-width .page-content {
     @media only screen and (min-width: #{$desktop-max-content-width}) {
-      padding: 15px 20px;
+      padding: 15px $desktop-content-gutter;
     }
   }
 

@@ -24,7 +24,7 @@ class Marker extends Component {
   }
 
   render () {
-    const { title, id, lat, lng } = this.props
+    const { title, id, lat, lng, showList } = this.props
     const markerClasses = classNames(
       'marker-box',
       { 'is-active': this.state.infoShown }
@@ -37,7 +37,7 @@ class Marker extends Component {
           <div className='marker-info'>
             <h5>{title}</h5>
             <p>
-              <a href={'#' + id}>Find out more</a>
+              <a href={'#' + id} onClick={showList}>Find out more</a>
               <br />
               <a href={`https://www.google.com/maps/dir/Current+Location/${lat},${lng}`} target='_blank' rel='noopener noreferrer'>Directions</a>
             </p>
@@ -52,7 +52,8 @@ Marker.propTypes = {
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   lat: PropTypes.string.isRequired,
-  lng: PropTypes.string.isRequired
+  lng: PropTypes.string.isRequired,
+  showList: PropTypes.func.isRequired
 }
 
 export default Marker
