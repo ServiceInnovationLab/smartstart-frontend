@@ -7,6 +7,22 @@
     border-bottom: 1px solid $border-color;
   }
 
+  h4 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+
+  .location {
+    font-weight: 500;
+
+    a {
+      color: $text-color;
+    }
+  }
+
   .details p {
     margin: 6px 0;
 

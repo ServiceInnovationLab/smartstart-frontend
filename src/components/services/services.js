@@ -80,10 +80,11 @@ class Services extends Component {
     this.onLocationSelect = this.onLocationSelect.bind(this)
     this.onCategorySelect = this.onCategorySelect.bind(this)
     this.apiIsLoaded = this.apiIsLoaded.bind(this)
+    this.showOnMap = this.showOnMap.bind(this)
   }
 
   componentDidMount () {
-    this.showOnMap()
+    this.showOnMap(this.state.location)
 
     if (this.props.category && categories[this.props.category]) {
       this.onCategorySelect(this.props.category)
@@ -93,10 +94,11 @@ class Services extends Component {
   componentWillReceiveProps (nextProps) {
     // hack to force google maps to redraw because we start with it hidden
     window.dispatchEvent(new Event('resize'));
-    this.showOnMap()
+    this.showOnMap(this.state.location)
 
-    // this is the earliest that we recieve the dispatch with the directory
-    if (nextProps.directory) {
+    // this is the earliest that we recieve the data back from the dispatch
+    // we only need to recompute distances and grouping if we switched datasets
+    if (nextProps.directory && nextProps.directory !== this.props.directory) {
       let results = this.groupServices(nextProps.directory)
       this.setState({
         results: this.computeDistances(results)
@@ -133,18 +135,18 @@ class Services extends Component {
           longitude: locationDetail.geometry.location.lng()
         }
       }, () => {
-        this.showOnMap()
+        this.showOnMap(this.state.location)
       })
     }
   }
   // TODO clear button for location
 
-  showOnMap () {
-    if (this.state.location.latitude && this.state.location.longitude) {
+  showOnMap (location) {
+    if (location.latitude && location.longitude) {
       this.setState({
         mapCenter: {
-          lat: this.state.location.latitude,
-          lng: this.state.location.longitude
+          lat: location.latitude,
+          lng: location.longitude
         },
         mapZoom: 13
       })
@@ -245,7 +247,7 @@ class Services extends Component {
 
           <div className='provider-list'>
             {results && results.map((provider, index) => {
-              return <Provider key={'provider' + index} provider={provider} />
+              return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
             })}
           </div>
 

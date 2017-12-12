@@ -58,7 +58,7 @@ class ReadMore extends Component {
             </span>
             <span className={wholeClasses}>{nl2br(text)}</span>
             <button className={buttonClasses} onClick={this.toggleMore}>
-              {moreHidden ? 'read more' : 'hide'}
+              {moreHidden ? 'More information' : 'Hide information'}
             </button>
           </p>
         </div>

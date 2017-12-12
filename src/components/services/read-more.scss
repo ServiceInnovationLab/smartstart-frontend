@@ -6,13 +6,20 @@
   padding: 10px 0;
   min-width: auto;
   display: block;
+  font-weight: 400;
+  color: $text-color;
 
-  &::before {
-    content: '+ ';
+  &::after {
+    font-family: 'icomoon' !important;
+    content: $icon-accordian-open;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.2s ease;
   }
 
-  &.hide::before {
-    content: '- ';
+  &.hide::after {
+    transform: rotate(45deg);
   }
 
   &:active {

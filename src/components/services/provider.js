@@ -8,8 +8,7 @@ class Provider extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-    }
+    this.setLocation = this.setLocation.bind(this)
   }
 
   isServiceIndentical (provName, serviceName) {
@@ -19,13 +18,25 @@ class Provider extends Component {
     return serviceName
   }
 
+  setLocation (event) {
+    event.preventDefault()
+    const newLocation = {
+      latitude: parseFloat(this.props.provider.LATITUDE),
+      longitude: parseFloat(this.props.provider.LONGITUDE)
+    }
+    this.props.recenterMap(newLocation)
+  }
+
   render () {
     const { provider } = this.props
 
     return (
       <div id={provider.FSD_ID} className='provider'>
         <h4>{provider.PROVIDER_NAME}</h4>
-        <p><strong>{provider.PHYSICAL_ADDRESS} ({provider.distance/1000} km away) </strong></p>
+
+        <p className='location'>
+          {provider.PHYSICAL_ADDRESS} ({provider.distance/1000} km away) <a aria-hidden='true' href='#' onClick={this.setLocation}>show on map</a>
+        </p>
 
         <ReadMore text={provider.ORGANISATION_PURPOSE} />
 
@@ -71,7 +82,8 @@ class Provider extends Component {
 }
 
 Provider.propTypes = {
-  provider: PropTypes.object.isRequired
+  provider: PropTypes.object.isRequired,
+  recenterMap: PropTypes.func.isRequired
 }
 
 export default Provider
