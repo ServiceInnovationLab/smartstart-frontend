@@ -20,6 +20,7 @@ import Spinner from '../spinner/spinner'
 import { fullSubmit } from './submit'
 import { piwikTrackPost } from '../../actions/actions'
 import { fetchBirthFacilities, fetchCountries, rememberBroData, fetchBroData } from '../../actions/birth-registration'
+import { initialRegistrationFormState } from '../../store/reducers'
 
 const stepByStepName = {
   'child-details': 1,
@@ -71,9 +72,58 @@ class RegisterMyBabyForm extends Component {
     this.state = {
       step: 1,
       stepName: 'child-details',
-      isReviewing: false,
+      isReviewing: false
     }
   }
+
+  componentWillMount() {
+    this.props.fetchBirthFacilities()
+    this.props.fetchCountries()
+    this.props.fetchBroData()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextStepName = get(nextProps, 'params.stepName')
+    const currentStepName = get(this.state, 'stepName')
+    const step = stepByStepName[nextStepName]
+    // match open tab to url
+    if (step && nextStepName && nextStepName !== currentStepName) {
+      this.setState({ step, stepName: nextStepName })
+    }
+  }
+
+  componentDidMount() {
+    const { params } = this.props
+    const { stepName } = params
+
+    if (!stepByStepName[stepName]) {
+      this.goToStep(1, true)
+    }
+
+    animateScroll.scrollToTop({ duration: 300 })
+  }
+
+  componentDidUpdate(prevProps) {
+    const { savedUserData, fetchingSavedUserData } = this.props
+    const { confirmationData, step: maxStep } = savedUserData
+
+    if (prevProps.fetchingSavedUserData && !fetchingSavedUserData) {
+      if (confirmationData) {
+        // if we have confirmation data saved
+        // the form has been submitted already and should be refreshed
+        this.props.rememberBroData(initialRegistrationFormState)
+        this.goToStep(1, true)
+      }
+
+      // when saved data arrives check if user progressed as far as desired step
+      if (maxStep) {
+        this.goToStep(maxStep, true)
+      }
+
+      animateScroll.scrollToTop({ duration: 300 })
+    }
+  }
+
   nextStep() {
     this.props.piwikTrackPost('Register My Baby', {
       'category': 'RegisterMyBaby',
@@ -105,11 +155,11 @@ class RegisterMyBabyForm extends Component {
   }
 
   goToStep(step, replace = false, focus = '') {
-    const { formState, maxStep, rememberBroData } = this.props
+    const { formState, savedUserData, rememberBroData } = this.props
+    const { step: maxStep } = savedUserData
     const stepName = stepNameByStep[step]
 
     const currentStep = this.state.step
-
     if (stepName) {
       if (currentStep === 7 && step !== currentStep) {
         this.setState({
@@ -128,9 +178,8 @@ class RegisterMyBabyForm extends Component {
       } else {
         this.props.router['push'](url)
 
-        // save form
-        // we are saving max step
-        const stepToSave = step > maxStep ? step : maxStep
+        // save step if we navigating to the new tab for the first time
+        const stepToSave = maxStep && step > maxStep ? step : maxStep
 
         return rememberBroData({ step: stepToSave, data: formState })
 
@@ -155,50 +204,37 @@ class RegisterMyBabyForm extends Component {
     const { rememberBroData, formState, csrfToken } = this.props
     return fullSubmit(formState, csrfToken)
       .then(({ submittedData, result }) => {
-        // mutate applicationReferenceNumber
-        const { response } = result || {}
-        const { applicationReferenceNumber, paymentURL } = response
-
-        if (submittedData.certificateOrder) {
-          if (paymentURL) {
-            return rememberBroData({ step: 7, data: {...submittedData, applicationReferenceNumber } })
-              .then(() => {
-                window.location = result.response.paymentURL
-              })
-          }
-        }
-
-        return rememberBroData({ step: 7, data: {...submittedData, applicationReferenceNumber } })
-          .then(() => {
-            window.location = '/register-my-baby/confirmation'
+      if (submittedData.certificateOrder) {
+        if (result.response && result.response.paymentURL) {
+          const productCode = get(submittedData, 'certificateOrder.productCode')
+          const quantity = get(submittedData, 'certificateOrder.quantity')
+          const courierDelivery = get(submittedData, 'certificateOrder.courierDelivery')
+          const stillBorn = get(submittedData, 'child.stillBorn')
+          return rememberBroData({
+            confirmationData: {
+              applicationReferenceNumber: result.response.applicationReferenceNumber,
+              stillBorn,
+              productCode,
+              quantity,
+              courierDelivery
+            }
           })
+          .then(() => {
+            window.location = result.response.paymentURL
+          })
+        }
+      }
+
+      return rememberBroData({
+        confirmationData: {
+          applicationReferenceNumber: result.response.applicationReferenceNumber,
+          stillBorn: get(submittedData, 'child.stillBorn')
+        }
       })
-  }
-
-  componentWillMount() {
-    this.props.fetchBirthFacilities()
-    this.props.fetchCountries()
-    this.props.fetchBroData()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const nextStepName = get(nextProps, 'params.stepName')
-    const currentStepName = get(this.state, 'stepName')
-    const step = stepByStepName[nextStepName]
-
-    if (step) {
-      if (nextStepName && nextStepName !== currentStepName) {
-        this.setState({ step, stepName: nextStepName })
-      }
-
-      // when saved data arrives check if user progressed as far as desired step
-      // if no, redirect user to max step
-      if (!this.props.maxStep && nextProps.maxStep && step > nextProps.maxStep) {
-        this.goToStep(nextProps.maxStep, true)
-      }
-    } else {
-      this.goToStep(1, true)
-    }
+      .then(() => {
+        window.location = '/register-my-baby/confirmation'
+      })
+    })
   }
 
   retry() {
@@ -209,12 +245,12 @@ class RegisterMyBabyForm extends Component {
 
   render() {
     const { step, isReviewing, animationClass = '' } = this.state
-    const { birthFacilities, countries, fetchingBirthFacilities, fetchingCountries, fetchingFormState } = this.props
+    const { birthFacilities, countries, fetchingBirthFacilities, fetchingCountries, fetchingSavedUserData } = this.props
 
     const searchParams = new URLSearchParams(this.props.location.search)
     const autoFocusField = searchParams.get('focus')
 
-    if (fetchingBirthFacilities || fetchingCountries || fetchingFormState) {
+    if (fetchingBirthFacilities || fetchingCountries || fetchingSavedUserData) {
       return <Spinner text="Please wait ..."/>
     }
 
@@ -266,7 +302,6 @@ RegisterMyBabyForm.propTypes = {
   params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
-  maxStep: PropTypes.number,
   birthFacilities: PropTypes.array,
   countries: PropTypes.array,
   fetchBirthFacilities: PropTypes.func,
@@ -274,17 +309,18 @@ RegisterMyBabyForm.propTypes = {
   fetchBroData: PropTypes.func,
   rememberBroData: PropTypes.func,
   fetchingBirthFacilities: PropTypes.bool,
-  fetchingFormState: PropTypes.bool,
+  fetchingSavedUserData: PropTypes.bool,
   fetchingCountries: PropTypes.bool,
   formState: PropTypes.object,
+  savedUserData: PropTypes.object,
   csrfToken: PropTypes.string,
   piwikTrackPost: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
-  maxStep: get(state, 'birthRegistration.savedRegistrationForm.step'),
+  savedUserData: get(state, 'birthRegistration.savedRegistrationForm') || {},
   fetchingBirthFacilities: get(state, 'birthRegistration.fetchingBirthFacilities'),
-  fetchingFormState: get(state, 'birthRegistration.fetchingFormState'),
+  fetchingSavedUserData: get(state, 'birthRegistration.fetchingSavedUserData'),
   fetchingCountries: get(state, 'birthRegistration.fetchingCountries'),
   birthFacilities: get(state, 'birthRegistration.birthFacilities'),
   countries: get(state, 'birthRegistration.countries'),

@@ -18,10 +18,10 @@ class Confirmation extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { fetchingFormState, formState } = nextProps
+    const { fetchingSavedUserData, confirmationData } = nextProps
 
-    if (!fetchingFormState) {
-      if (!formState  || !formState.applicationReferenceNumber) {
+    if (!fetchingSavedUserData) {
+      if (!confirmationData  || !confirmationData.applicationReferenceNumber) {
         // redirect if not fetching and no data
         // either user not allowed to see this page or error occured file fetching
         window.location = '/'
@@ -35,17 +35,14 @@ class Confirmation extends Component {
   }
 
   render() {
-    const { paymentSuccess, fetchingFormState, formState } = this.props
+    const { paymentSuccess, fetchingSavedUserData, confirmationData } = this.props
 
     // initial form state is not empty
-    if (fetchingFormState || !formState.applicationReferenceNumber) {
+    if (fetchingSavedUserData || !confirmationData.applicationReferenceNumber) {
       return <Spinner text="Retrieving application ..."/>
     }
 
-    const { certificateOrder, child } = formState || {}
-    const { stillBorn } = child || {}
-
-    const { productCode, courierDelivery, quantity } = certificateOrder || {}
+    const { applicationReferenceNumber, stillBorn, productCode, courierDelivery, quantity } = confirmationData
 
     const product = productCode ? find(productOptions, { value: productCode }) : null
     const deliveryPrice = courierDelivery ? courierDeliveryPrice : 0
@@ -69,7 +66,6 @@ class Confirmation extends Component {
                                     <a href="https://www.govt.nz/browse/nz-passports-and-citizenship/proving-and-protecting-your-identity/get-a-birth-certificate/#how-to-apply"  target="_blank" rel="noreferrer noopener">Get a birth certificate </a>
                                   </p>
                                 </div>
-
     if (product && !paymentSuccess) {
       resultNotification = <div>
         { stillBorn ?
@@ -112,7 +108,7 @@ class Confirmation extends Component {
       { resultNotification }
 
       <div className="informative-text">
-        Your reference number is: <strong>{formState.applicationReferenceNumber}</strong>
+        Your reference number is: <strong>{applicationReferenceNumber}</strong>
       </div>
 
       { product &&
@@ -232,12 +228,12 @@ class Confirmation extends Component {
 Confirmation.propTypes = {
   paymentSuccess: PropTypes.bool,
   fetchBroData: PropTypes.func.isRequired,
-  fetchingFormState: PropTypes.bool.isRequired,
-  formState: PropTypes.object.isRequired,
+  fetchingSavedUserData: PropTypes.bool.isRequired,
+  confirmationData: PropTypes.object.isRequired,
   rememberBroData: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
-  fetchingFormState: get(state, 'birthRegistration.fetchingFormState'),
-  formState: get(state, 'birthRegistration.savedRegistrationForm.data')
+  fetchingSavedUserData: get(state, 'birthRegistration.fetchingSavedUserData'),
+  confirmationData: get(state, 'birthRegistration.savedRegistrationForm.confirmationData') || {}
 })
 export default connect(mapStateToProps, { rememberBroData, fetchBroData } )(Confirmation)

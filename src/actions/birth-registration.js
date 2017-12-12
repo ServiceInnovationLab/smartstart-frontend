@@ -139,6 +139,9 @@ export function rememberBroData(data) {
   return dispatch => {
     const djangoCsrfToken = Cookie.load('csrftoken')
 
+    // update data regardless status of post
+    dispatch(receiveBroData(data))
+
     // the api need a forward slash in the end
     return fetchWithRetry('/api/bro-form/data/', {
       method: 'PUT',
@@ -152,9 +155,6 @@ export function rememberBroData(data) {
       retryDelay: 500,
       body: JSON.stringify(data)
     })
-    .then(checkStatus)
-    .then(response => response.json())
-    .then(() => dispatch(receiveBroData(data)))
     .then(() => Promise.resolve())
   }
 }

@@ -186,7 +186,7 @@ function supplementaryContentActions (state = {
  */
 
  export const initialRegistrationFormState = {
-   step: 0,
+   step: 1,
    data: {
      otherChildren: 0,
      certificateOrder: {
@@ -199,7 +199,7 @@ function birthRegistration (state = {
   birthFacilities: [],
   countries: [],
   csrfToken: '',
-  fetchingFormState: false,
+  fetchingSavedUserData: false,
   savedRegistrationForm: initialRegistrationFormState
 }, action) {
   switch (action.type) {
@@ -230,12 +230,12 @@ function birthRegistration (state = {
     case REQUEST_BRO_DATA:
       return {
         ...state,
-        fetchingFormState: true
+        fetchingSavedUserData: true
       };
     case RECEIVE_BRO_DATA:
       return {
         ...state,
-        fetchingFormState: false,
+        fetchingSavedUserData: false,
         savedRegistrationForm: Object.keys(action.payload).length ? {...action.payload} : state.savedRegistrationForm
       };
 
@@ -254,7 +254,7 @@ function birthRegistration (state = {
     case FAILURE_BRO_DATA:
       return {
         ...state,
-        fetchingFormState: false
+        fetchingSavedUserData: false
       };
 
     case RECEIVE_CSRF_TOKEN:
