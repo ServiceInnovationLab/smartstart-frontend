@@ -3,6 +3,16 @@
 .provider {
   border-top: 1px solid $border-color;
 
+  &:first-child {
+    border-top: 0 none;
+    margin-top: 30px;
+
+    @media #{$desktop-and-above} {
+      margin-top: 0;
+      border-top: 1px solid $border-color;
+    }
+  }
+
   &:last-child {
     border-bottom: 1px solid $border-color;
   }

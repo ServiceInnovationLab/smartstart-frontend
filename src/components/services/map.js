@@ -4,7 +4,7 @@ import Marker from 'components/services/marker'
 
 class ResultMap extends Component {
   render() {
-    const { apiIsLoaded, zoom, center, markers } = this.props
+    const { apiIsLoaded, zoom, center, markers, showList } = this.props
     const options = {
       fullscreenControl: false // need to disable until https://github.com/istarkov/google-map-react/pull/452 is merged
     }
@@ -28,6 +28,7 @@ class ResultMap extends Component {
             lng={marker.LONGITUDE}
             title={marker.PROVIDER_NAME}
             id={marker.FSD_ID}
+            showList={showList}
           />
       })}
 
@@ -38,6 +39,7 @@ class ResultMap extends Component {
 
 ResultMap.propTypes = {
   apiIsLoaded: PropTypes.func.isRequired,
+  showList: PropTypes.func.isRequired,
   center: PropTypes.object,
   zoom: PropTypes.number,
   markers: PropTypes.array

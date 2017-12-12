@@ -1,24 +1,28 @@
 @import 'variables';
 
+$list-column-width: 420px;
+
 // TODO remove this temp hack
 .places-autocomplete {
   position: relative;
 }
 
 .map-container {
-  width: 100%;
+  width: calc(100% + #{$mobile-content-gutter * 2});
+  position: relative;
+  left: -$mobile-content-gutter;
   height: 400px;
 
-  @media only screen and (min-width: #{$desktop-max-content-width}) {
+  @media #{$desktop-and-above} {
     height: 650px;
-    width: 672px;
+    width: calc(100% - #{$list-column-width});
     float: left;
   }
 }
 
 .provider-list {
-  @media only screen and (min-width: #{$desktop-max-content-width}) {
-    width: 420px;
+  @media #{$desktop-and-above} {
+    width: $list-column-width;
     padding-right: 30px;
     float: left;
   }
@@ -35,5 +39,57 @@
 .services-page {
   label {
     margin-right: 10px;
+  }
+}
+
+.map-list-tabs {
+  width: calc(100% + #{$mobile-content-gutter * 2});
+  position: relative;
+  left: -$mobile-content-gutter;
+  border-bottom: 1px solid $border-color;
+
+  @media #{$desktop-and-above} {
+    display: none;
+  }
+
+  button {
+    display: inline-block;
+    width: 50%;
+    border: 0;
+    border-radius: 0;
+    padding: 20px;
+    min-width: auto;
+    font-size: 18px;
+    font-weight: 500;
+    color: $text-color;
+    background-color: transparent;
+
+    &:active,
+    &.active {
+      background-color: $border-color;
+    }
+
+    &::before {
+      font-family: 'icomoon' !important;
+      font-size: 20px;
+      content: $icon-list;
+      display: inline-block;
+      margin-right: 10px;
+      position: relative;
+      top: 2px;
+    }
+
+    &:last-child::before {
+      content: $icon-map-pin;
+    }
+  }
+}
+
+.provider-list.inactive,
+.map-container.inactive {
+  display: none;
+
+  @media #{$desktop-and-above} {
+    display: block;
   }
 }
