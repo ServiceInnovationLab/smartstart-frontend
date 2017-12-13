@@ -98,7 +98,7 @@ class Services extends Component {
 
   componentWillReceiveProps (nextProps) {
     // hack to force google maps to redraw because we start with it hidden
-    window.dispatchEvent(new Event('resize'));
+    window.dispatchEvent(new Event('resize'))
     this.showOnMap(this.state.location)
 
     // this is the earliest that we recieve the data back from the dispatch
