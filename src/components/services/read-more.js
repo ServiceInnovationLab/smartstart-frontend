@@ -28,10 +28,12 @@ class ReadMore extends Component {
     const { moreHidden } = this.state
 
     let truncatedClasses = classNames(
+      'truncated-text',
       { 'hidden': !moreHidden }
     )
 
     let wholeClasses = classNames(
+      'whole-text',
       { 'hidden': moreHidden }
     )
 
