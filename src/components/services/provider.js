@@ -35,7 +35,7 @@ class Provider extends Component {
         <h4>{provider.PROVIDER_NAME}</h4>
 
         <p className='location'>
-          {provider.PHYSICAL_ADDRESS} ({provider.distance/1000} km away) <a aria-hidden='true' href='#map' onClick={this.setLocation}>show on map</a>
+          {provider.PHYSICAL_ADDRESS} ({Number(provider.distance/1000).toFixed(1)} km away) <a aria-hidden='true' href='#map' onClick={this.setLocation}>show on map</a>
         </p>
 
         <ReadMore text={provider.ORGANISATION_PURPOSE} />
