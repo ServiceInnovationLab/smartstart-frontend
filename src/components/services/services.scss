@@ -63,6 +63,10 @@ $list-column-width: 420px;
     display: none;
   }
 
+  @media print {
+    display: none;
+  }
+
   button {
     display: inline-block;
     width: 50%;
@@ -102,5 +106,17 @@ $list-column-width: 420px;
 
   @media #{$desktop-and-above} {
     display: block;
+  }
+}
+
+.provider-list.inactive {
+  @media print {
+    display: block;
+  }
+}
+
+.map-container {
+  @media print {
+    display: none;
   }
 }

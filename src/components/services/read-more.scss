@@ -25,4 +25,20 @@
   &:active {
     background-color: transparent;
   }
+
+  @media print {
+    display: none;
+  }
+}
+
+.truncated-text {
+  @media print {
+    display: none;
+  }
+}
+
+.whole-text {
+  @media print {
+    display: block !important;
+  }
 }
