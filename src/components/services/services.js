@@ -8,6 +8,7 @@ import { fetchServicesDirectory } from 'actions/services'
 import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
 import ResultMap from 'components/services/map'
 import Provider from 'components/services/provider'
+import Spinner from 'components/spinner/spinner'
 import {
   PARENTING_SUPPORT_QUERY ,
   EARLY_ED_QUERY,
@@ -72,11 +73,12 @@ class Services extends Component {
         warning: null,
         form: 'services'
       },
-      // location: { latitude: null, longitude: null }, // TODO this should come from props
-      location: { latitude: -41.295378, longitude: 174.778684 }, // TODO remove this test data
+      location: { latitude: null, longitude: null }, // TODO this should come from props
       mapCenter: { lat: -41.295378, lng: 174.778684 },
       mapZoom: 5,
-      results: []
+      results: [],
+      groupedResults: [], // store this to save having to recalc grouping when change location
+      loading: false
     }
 
     this.onLocationSelect = this.onLocationSelect.bind(this)
@@ -97,18 +99,27 @@ class Services extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    // hack to force google maps to redraw because we start with it hidden
-    window.dispatchEvent(new Event('resize'))
-    this.showOnMap(this.state.location)
+    let hasDirectoryDataChanged = !!(nextProps.directory && nextProps.directory !== this.props.directory)
 
-    // this is the earliest that we recieve the data back from the dispatch
-    // we only need to recompute distances and grouping if we switched datasets
-    if (nextProps.directory && nextProps.directory !== this.props.directory) {
-      let results = this.groupServices(nextProps.directory)
+    if (hasDirectoryDataChanged) {
+      // this is the earliest that we recieve the data back from the dispatch
+      // we only need to recompute grouping if we switched datasets
       this.setState({
-        results: this.computeDistances(results)
+        loading: false,
+        groupedResults: this.groupServices(nextProps.directory)
+      }, () => {
+        this.computeDistances(this.state.groupedResults)
       })
     }
+
+    if (this.state.category === '') {
+      this.setState({ loading: false })
+    }
+  }
+
+  componentDidUpdate () {
+    // hack to force google maps to redraw because we start with it hidden
+    window.dispatchEvent(new Event('resize'))
   }
 
   apiIsLoaded () {
@@ -116,7 +127,6 @@ class Services extends Component {
   }
 
   onCategorySelect (category) {
-    // TODO spinner
     // check if category is passed in from event or from componentDidMount or route
     if (typeof category === 'object') { // from using the select
       category = category.target.value
@@ -125,6 +135,7 @@ class Services extends Component {
 
     // only do the dispatch if the category is set, i.e. not '' the blank value
     if (category !== '') {
+      this.setState({ loading: true })
       this.props.dispatch(fetchServicesDirectory(categories[category].query))
       browserHistory.replace(`/services-near-me/${category}`)
     } else {
@@ -140,10 +151,12 @@ class Services extends Component {
           longitude: locationDetail.geometry.location.lng()
         }
       }, () => {
-        this.showOnMap(this.state.location)
+        // we need to re-calculate distances
+        this.computeDistances(this.state.groupedResults)
       })
     }
   }
+
   // TODO clear button for location
 
   showOnMap (location) {
@@ -168,7 +181,8 @@ class Services extends Component {
 
     const { location } = this.state
     if (!location.latitude || !location.longitude) {
-      return null
+      this.setState({ results: [] })
+      return
     }
 
     results.forEach(service => {
@@ -182,7 +196,11 @@ class Services extends Component {
       return a.distance - b.distance;
     })
 
-    return results.slice(0, RESULTS_LIMIT)
+    this.setState({
+      results: results.slice(0, RESULTS_LIMIT)
+    }, () => {
+      this.showOnMap(this.state.location)
+    })
   }
 
   groupServices (services) {
@@ -233,11 +251,11 @@ class Services extends Component {
 
   render () {
     const { directory } = this.props
-    const { category, listView, locationApiLoaded, location, locationMeta, mapCenter, mapZoom, results } = this.state
+    const { category, listView, locationApiLoaded, location, locationMeta, mapCenter, mapZoom, results, loading } = this.state
 
     const resultsClasses = classNames(
       'results',
-      { 'hidden': !(category !== '' && location.latitude && location.longitude && results.length) }
+      { 'hidden': !(category !== '' && location.latitude && location.longitude && results.length && !loading) }
     )
     const selectMoreInfoClasses = classNames(
       'select-more-info',
@@ -272,6 +290,8 @@ class Services extends Component {
           onPlaceSelect={this.onLocationSelect}
           meta={locationMeta}
         />}
+
+        {loading && location.latitude && location.longitude && <Spinner />}
 
         <div className={resultsClasses}>
           <h3>Closest results near you [{results.length}/{directory.length}].</h3>
