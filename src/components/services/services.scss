@@ -7,6 +7,18 @@ $list-column-width: 420px;
   position: relative;
 }
 
+.results-layout {
+  @media #{$desktop-and-above} {
+    display: flex;
+  }
+}
+
+.map-container-wrapper {
+  @media #{$desktop-and-above} {
+    width: calc(100% - #{$list-column-width});
+  }
+}
+
 .map-container {
   width: calc(100% + #{$mobile-content-gutter * 2});
   position: relative;
@@ -14,9 +26,9 @@ $list-column-width: 420px;
   height: 400px;
 
   @media #{$desktop-and-above} {
+    width: 100%;
+    left: 0;
     height: 650px;
-    width: calc(100% - #{$list-column-width});
-    float: left;
   }
 }
 
@@ -24,7 +36,6 @@ $list-column-width: 420px;
   @media #{$desktop-and-above} {
     width: $list-column-width;
     padding-right: 30px;
-    float: left;
   }
 }
 

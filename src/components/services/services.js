@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import geolib from 'geolib'
 import classNames from 'classnames'
 import { browserHistory } from 'react-router'
+import { StickyContainer, Sticky } from 'react-sticky'
 import { fetchServicesDirectory } from 'actions/services'
 import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
 import ResultMap from 'components/services/map'
@@ -280,14 +281,26 @@ class Services extends Component {
             <button onClick={this.clickMapTab} className={mapTabClasses}>Map view</button>
           </div>
 
-          <div className={listViewClasses}>
-            {results.length && results.map((provider, index) => {
-              return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
-            })}
-          </div>
+          <div className='results-layout'>
+            <div className={listViewClasses}>
+              {results.length && results.map((provider, index) => {
+                return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
+              })}
+            </div>
 
-          <div className={mapViewClasses} aria-hidden='true'>
-            <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
+            <StickyContainer className='map-container-wrapper'>
+              <Sticky>
+                {
+                  ({ style }) => {
+                    return (
+                      <div style={style} className={mapViewClasses} aria-hidden='true'>
+                        <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
+                      </div>
+                    )
+                  }
+                }
+              </Sticky>
+            </StickyContainer>
           </div>
         </div>
 
