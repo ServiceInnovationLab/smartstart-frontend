@@ -77,7 +77,7 @@ class Services extends Component {
       mapCenter: { lat: -41.295378, lng: 174.778684 },
       mapZoom: 5,
       results: [],
-      groupedResults: [], // store this to save having to recalc grouping when change location
+      groupedResults: [],
       loading: false
     }
 
@@ -106,7 +106,7 @@ class Services extends Component {
       // we only need to recompute grouping if we switched datasets
       this.setState({
         loading: false,
-        groupedResults: this.groupServices(nextProps.directory)
+        groupedResults: this.groupServices(nextProps.directory) // store so no re-grouping when location changes
       }, () => {
         this.computeDistances(this.state.groupedResults)
       })
@@ -176,25 +176,17 @@ class Services extends Component {
   }
 
   computeDistances (results) {
-    // this is kept separate from the service grouping loop so we can re-calculate
-    // distance without having to re-group services
+    // this is kept separate from the service grouping loop so we can
+    // re-calculate distance without having to re-group services
 
     const { location } = this.state
+
     if (!location.latitude || !location.longitude) {
       this.setState({ results: [] })
       return
     }
 
-    results.forEach(service => {
-      service.latitude = service.LATITUDE
-      service.longitude = service.LONGITUDE
-      service.distance = geolib.getDistanceSimple(location, service, 100) // 100 = round to 0.1 of a km
-      // TODO use https://www.npmjs.com/package/geolib#geoliborderbydistanceobject-latlng-mixed-coords
-    })
-
-    results.sort((a, b) => {
-      return a.distance - b.distance;
-    })
+    results = geolib.orderByDistance(location, results)
 
     this.setState({
       results: results.slice(0, RESULTS_LIMIT)
@@ -207,8 +199,12 @@ class Services extends Component {
     // this function relies on providers being adjacent in the directory data
     let providers = []
     services.forEach((service, index) =>  {
+      // do some setup for computeDistances
+      service.latitude = service.LATITUDE
+      service.longitude = service.LONGITUDE
+
+      // check if it is the same provider as the last service
       if (index > 1 && service.PROVIDER_NAME === services[index - 1].PROVIDER_NAME) {
-        // same provider as the last service
         let last = providers.length - 1
         if (Array.isArray(providers[last].otherServices)) {
           providers[last].otherServices.push(service)
