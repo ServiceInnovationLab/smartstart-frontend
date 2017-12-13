@@ -61,7 +61,7 @@ $info-box-left-margin: 45px;
     margin-left: $info-box-left-margin;
     background-color: #ffffff;
     width: $info-box-width;
-    padding: 10px;
+    padding: 10px 25px 10px 10px;
     font-family: $font-family-base;
     font-size: $font-size-base;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.4);
@@ -79,7 +79,7 @@ $info-box-left-margin: 45px;
       box-shadow: -3px -3px 3px 0 rgba(0,0,0,0.2);
     }
 
-    @media only screen and (min-width: #{$desktop-max-content-width}) {
+    @media #{$desktop-and-above} {
       left: 0;
       top: -10px;
 
@@ -96,7 +96,6 @@ $info-box-left-margin: 45px;
   }
 
   &.show-close {
-    padding-right: 25px;
 
     .close-button {
       display: inline-block;
@@ -110,6 +109,10 @@ $info-box-left-margin: 45px;
         font-size: 20px;
         display: inline-block;
         margin-left: 10px;
+
+        @media #{$desktop-and-above} {
+          font-size: 14px;
+        }
       }
     }
   }

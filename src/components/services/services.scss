@@ -57,7 +57,7 @@ $list-column-width: 420px;
   width: calc(100% + #{$mobile-content-gutter * 2});
   position: relative;
   left: -$mobile-content-gutter;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 2px solid $card-background-color;
 
   @media #{$desktop-and-above} {
     display: none;
@@ -76,12 +76,13 @@ $list-column-width: 420px;
     min-width: auto;
     font-size: 18px;
     font-weight: 500;
-    color: $text-color;
     background-color: transparent;
+    color: lighten($text-color, 20%);
 
     &:active,
     &.active {
-      background-color: $border-color;
+      background-color: $card-background-color;
+      color: $text-color;
     }
 
     &::before {
