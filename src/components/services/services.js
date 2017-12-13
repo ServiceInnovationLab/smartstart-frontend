@@ -73,7 +73,7 @@ class Services extends Component {
         warning: null,
         form: 'services'
       },
-      location: { latitude: null, longitude: null }, // TODO this should come from props
+      location: { latitude: null, longitude: null },
       mapCenter: { lat: -41.295378, lng: 174.778684 },
       mapZoom: 5,
       results: [],
@@ -290,7 +290,7 @@ class Services extends Component {
         {loading && location.latitude && location.longitude && <Spinner />}
 
         <div className={resultsClasses}>
-          <h3>Closest results near you [{results.length}/{directory.length}].</h3>
+          <h3>Closest results near you</h3>
 
           <div className='map-list-tabs' aria-hidden='true'>
             <button onClick={this.clickListTab} className={listTabClasses}>List view</button>
