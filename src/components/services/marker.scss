@@ -91,6 +91,29 @@ $info-box-left-margin: 45px;
     }
   }
 
+  .close-button {
+    display: none;
+  }
+
+  &.show-close {
+    padding-right: 25px;
+
+    .close-button {
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      &::after {
+        font-family: 'icomoon' !important;
+        content: $icon-accordian-close;
+        font-size: 20px;
+        display: inline-block;
+        margin-left: 10px;
+      }
+    }
+  }
+
   h5 {
     margin-top: 0;
     margin-bottom: 10px;
