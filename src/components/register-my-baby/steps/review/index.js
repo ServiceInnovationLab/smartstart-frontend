@@ -166,7 +166,7 @@ class Review extends Component {
 
 Review.propTypes = {
   countries: PropTypes.array,
-  formState: PropTypes.object,
+  formState: PropTypes.object.isRequired,
   syncErrors: PropTypes.object,
   submitErrors: PropTypes.object,
   syncWarnings: PropTypes.object,
@@ -192,7 +192,8 @@ Review = reduxForm({
 
 Review = connect(
   state => ({
-    formState: getFormValues('registration')(state),
+    initialValues: get(state, 'birthRegistration.savedRegistrationForm.data'),
+    formState: getFormValues('registration')(state) || {},
     csrfToken: get(state, 'birthRegistration.csrfToken'),
     syncErrors: getFormSyncErrors('registration')(state),
     submitErrors: getFormSubmitErrors('registration')(state),
