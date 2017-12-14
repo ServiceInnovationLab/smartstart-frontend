@@ -354,7 +354,7 @@ textarea {
   margin-top: 20px;
   margin-bottom: 30px;
   border: 2px solid transparent;
-  border-radius: 5px;
+  border-radius: $form-field-border-radius;
   padding: 10px 20px;
   position: relative;
   left: -2px;
