@@ -40,10 +40,6 @@ const categories = {
     'label': 'Antenatel classes',
     'query': ANTENATEL_QUERY
   },
-  'miscarriage-support': {
-    'label': 'Miscarriage and stillbirth support',
-    'query': MISCARRIAGE_QUERY
-  },
   'mental-health': {
     'label': 'Anxiety and depression support',
     'query': MENTAL_HEALTH_QUERY
@@ -82,6 +78,7 @@ class Services extends Component {
     this.showOnMap = this.showOnMap.bind(this)
     this.clickListTab = this.clickListTab.bind(this)
     this.clickMapTab = this.clickMapTab.bind(this)
+    this.clearLocation = this.clearLocation.bind(this)
   }
 
   componentDidMount () {
@@ -158,7 +155,12 @@ class Services extends Component {
     })
   }
 
-  // TODO clear button for location
+  clearLocation () {
+    this.setState({
+      locationText: '',
+      location: { latitude: null, longitude: null }
+    })
+  }
 
   showOnMap (location) {
     if (location.latitude && location.longitude) {
@@ -245,6 +247,10 @@ class Services extends Component {
       'select-more-info',
       { 'hidden': !!(category !== '' && location.latitude && location.longitude) }
     )
+    const locationClearClasses = classNames(
+      'inline-clear-field',
+      { 'hidden': locationText === ''}
+    )
     const listViewClasses = classNames(
       'provider-list',
       { 'inactive': !listView }
@@ -258,24 +264,37 @@ class Services extends Component {
 
     return (
       <div>
-        <label className='services-category' data-test='services-category'>Category:
-        <select value={category} onChange={this.onCategorySelect}>
-          <option value=''>Please select a category</option>
-          {Object.keys(categories).map(key => {
-            return (<option value={key} key={key}>{categories[key].label}</option>)
-          })}
-        </select>
-        </label>
+        <div className='services-controls clearfix'>
+          <div className='services-category'>
+            <label data-test='services-category' htmlFor='services-category-field'>
+              Category:
+            </label>
+            <select value={category} onChange={this.onCategorySelect} id='services-category-field'>
+              <option value=''>Please select a category</option>
+              {Object.keys(categories).map(key => {
+                return (<option value={key} key={key}>{categories[key].label}</option>)
+              })}
+            </select>
+          </div>
 
-        {locationApiLoaded && <label className='services-location' data-test='services-location'>
-        Location: <LocationAutosuggest
-          onPlaceSelect={this.onLocationSelect}
-          inputProps={{
-            value: locationText,
-            onChange: this.onLocationTextChange,
-            autoComplete: 'off'
-          }}
-        /></label>}
+          {locationApiLoaded && <div className='services-location'>
+            <label data-test='services-location' htmlFor='services-location-field'>
+              Location:
+            </label>
+            <LocationAutosuggest
+              id='services-location-field'
+              onPlaceSelect={this.onLocationSelect}
+              inputProps={{
+                value: locationText,
+                onChange: this.onLocationTextChange,
+                autoComplete: 'off'
+              }}
+            />
+            <button onClick={this.clearLocation} className={locationClearClasses}>
+              <span className='visuallyhidden'>Clear location</span>
+            </button>
+          </div>}
+        </div>
 
         {loading && location.latitude && location.longitude && <Spinner />}
 

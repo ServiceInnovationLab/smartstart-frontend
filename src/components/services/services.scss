@@ -3,8 +3,6 @@
 $list-column-width: 420px;
 
 .services-category {
-  display: block;
-
   @media #{$desktop-and-above} {
     display: inline-flex;
     align-items: baseline;
@@ -25,8 +23,7 @@ $list-column-width: 420px;
 }
 
 .services-location {
-  display: block;
-  margin-top: 35px;
+  position: relative;
 
   @media #{$desktop-and-above} {
     display: flex;
@@ -39,6 +36,7 @@ $list-column-width: 420px;
 
     @media #{$desktop-and-above} {
       margin-left: 15px;
+      flex-grow: 1;
     }
 
     input {
@@ -46,7 +44,7 @@ $list-column-width: 420px;
       border: 1px solid $border-color;
       font-size: $font-size-base;
       font-weight: 500;
-      padding: 11px;
+      padding: 11px 35px 11px 11px;
       width: 100%;
     }
 
@@ -190,5 +188,34 @@ $list-column-width: 420px;
 .map-container {
   @media print {
     display: none;
+  }
+}
+
+.inline-clear-field {
+  border: 0;
+  border-radius: 0 $form-field-border-radius $form-field-border-radius 0;
+  background-color: white;
+  padding: 10px 10px;
+  min-width: auto;
+  display: block;
+  font-weight: 400;
+  color: $text-color;
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+
+  &:active {
+    background-color: white;
+  }
+
+  @media #{$desktop-and-above} {
+    bottom: 5px;
+  }
+
+  &::before {
+    font-family: 'icomoon' !important;
+    content: $icon-accordian-close;
+    font-size: 17px;
+    display: inline-block;
   }
 }
