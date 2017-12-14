@@ -22,7 +22,7 @@ class ServicesPage extends Component {
                 He ratonga e tata ana ki a au<br />
                 <span className='english'>Services near me</span>
               </h2>
-              <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sed lectus sit amet arcu porta ultrices. In sed auctor leo. Aliquam erat volutpat.</p>
+              <p>Choose a category and enter your location to find services and support closest to you.</p>
             </div>
           </div>
           <div id='content' className='plain-layout-page full-width services-page'>

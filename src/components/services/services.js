@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { browserHistory } from 'react-router'
 import { StickyContainer, Sticky } from 'react-sticky'
 import { fetchServicesDirectory } from 'actions/services'
-import LocationAutocomplete from 'components/register-my-baby/fields/render-places-autocomplete'
+import LocationAutosuggest from 'components/location-autosuggest/location-autosuggest'
 import ResultMap from 'components/services/map'
 import Provider from 'components/services/provider'
 import Spinner from 'components/spinner/spinner'
@@ -67,12 +67,6 @@ class Services extends Component {
       listView: true,
       locationApiLoaded: false,
       locationText: '',
-      locationMeta: {
-        touched: false,
-        error: null,
-        warning: null,
-        form: 'services'
-      },
       location: { latitude: null, longitude: null },
       mapCenter: { lat: -41.295378, lng: 174.778684 },
       mapZoom: 5,
@@ -82,6 +76,7 @@ class Services extends Component {
     }
 
     this.onLocationSelect = this.onLocationSelect.bind(this)
+    this.onLocationTextChange = this.onLocationTextChange.bind(this)
     this.onCategorySelect = this.onCategorySelect.bind(this)
     this.apiIsLoaded = this.apiIsLoaded.bind(this)
     this.showOnMap = this.showOnMap.bind(this)
@@ -157,6 +152,12 @@ class Services extends Component {
     }
   }
 
+  onLocationTextChange (event, { newValue }) {
+    this.setState({
+      locationText: newValue
+    })
+  }
+
   // TODO clear button for location
 
   showOnMap (location) {
@@ -218,18 +219,6 @@ class Services extends Component {
     return providers
   }
 
-  setupLocationInput () {
-    // this is a hack to get around the fact we're using a component that is
-    // usually backed by redux form
-    return {
-      name: 'location',
-      value: this.state.locationText,
-      onChange: (value) => {
-        this.setState({ locationText: value })
-      }
-    }
-  }
-
   clickListTab () {
     this.setState({
       listView: true
@@ -246,8 +235,7 @@ class Services extends Component {
   }
 
   render () {
-    const { directory } = this.props
-    const { category, listView, locationApiLoaded, location, locationMeta, mapCenter, mapZoom, results, loading } = this.state
+    const { category, listView, locationApiLoaded, location, locationText, mapCenter, mapZoom, results, loading } = this.state
 
     const resultsClasses = classNames(
       'results',
@@ -270,22 +258,24 @@ class Services extends Component {
 
     return (
       <div>
-        <label htmlFor="services-category">Category:</label>
-        <select id="services-category" value={category} onChange={this.onCategorySelect}>
+        <label className='services-category' data-test='services-category'>Category:
+        <select value={category} onChange={this.onCategorySelect}>
           <option value=''>Please select a category</option>
           {Object.keys(categories).map(key => {
             return (<option value={key} key={key}>{categories[key].label}</option>)
           })}
         </select>
+        </label>
 
-        {locationApiLoaded && <LocationAutocomplete
-          input={this.setupLocationInput()}
-          label='Location:'
-          instructionText=''
-          placeholder='Start typing an address then pick a location'
+        {locationApiLoaded && <label className='services-location' data-test='services-location'>
+        Location: <LocationAutosuggest
           onPlaceSelect={this.onLocationSelect}
-          meta={locationMeta}
-        />}
+          inputProps={{
+            value: locationText,
+            onChange: this.onLocationTextChange,
+            autoComplete: 'off'
+          }}
+        /></label>}
 
         {loading && location.latitude && location.longitude && <Spinner />}
 
@@ -293,12 +283,12 @@ class Services extends Component {
           <h3>Closest results near you</h3>
 
           <div className='map-list-tabs' aria-hidden='true'>
-            <button onClick={this.clickListTab} className={listTabClasses}>List view</button>
-            <button onClick={this.clickMapTab} className={mapTabClasses}>Map view</button>
+            <button onClick={this.clickListTab} className={listTabClasses} data-test='services-list-tab'>List view</button>
+            <button onClick={this.clickMapTab} className={mapTabClasses} data-test='services-map-tab'>Map view</button>
           </div>
 
           <div className='results-layout'>
-            <div className={listViewClasses}>
+            <div className={listViewClasses} data-test='services-list'>
               {results.length && results.map((provider, index) => {
                 return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
               })}
@@ -309,7 +299,7 @@ class Services extends Component {
                 {
                   ({ style }) => {
                     return (
-                      <div style={style} className={mapViewClasses} aria-hidden='true'>
+                      <div style={style} className={mapViewClasses} aria-hidden='true' data-test='services-map'>
                         <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
                       </div>
                     )
@@ -320,7 +310,7 @@ class Services extends Component {
           </div>
         </div>
 
-        <div className={selectMoreInfoClasses}>
+        <div className={selectMoreInfoClasses} data-test='services-no-results'>
           <h3>No results</h3>
           <p>Please select a category and search for your address.</p>
         </div>
