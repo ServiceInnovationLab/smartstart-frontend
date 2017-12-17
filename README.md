@@ -70,11 +70,6 @@ Note: Node is not required in production but it is required to make the build.
 Alternatively, you can run a variant of these commands to use a local data
 fixture (as opposed to whatever the default API endpoint is):
 
-`npm run start:testdata`
-
-This is also a recent snapshot of the govt.nz content available locally by
-using:
-
 `npm run start:snapshot`
 
 ## Creating a build for deployment
@@ -87,18 +82,18 @@ be added, with the short hash of the most recent git commit.
 
 ### Required command line arguments for the build
 
-There are two required command line arguements that must be provided with the
+There are two required command line arguments that must be provided with the
 `npm run build` command. A set of command line arguments specified to npm run
-needs a preceeding ` -- ` first.
+needs a preceding ` -- ` first.
 
 #### endpoint
 
 This specifies the path to the content API. It should be a local path, or an
 URL.
 
-For example for the govt.nz test API endpoint:
+For example for the govt.nz API endpoint:
 
-`npm run build -- --endpoint https://govtnz-test1.cwp.govt.nz/BoacAPI/v1/all`
+`npm run build -- --endpoint https://www.govt.nz/BoacAPI/v1/all`
 
 #### piwik
 
@@ -110,11 +105,11 @@ For example for the development servers Piwik ID number:
 
 #### A full example
 
-`npm run build -- --piwik 1 --endpoint /assets/test-data.json`
+`npm run build -- --piwik 2 --endpoint /assets/snapshot-data.json`
 
 ### Building locally
 
 If you want to mimic the Ansible build process locally, there are two shortcut
-commands for common local configuration: `npm run build:testdata` and `npm run
-build:externalprod` which point to the local test data and govt.nz's API
+commands for common local configuration: `npm run build:snapshot` and `npm run
+build:remotecontent` which point to the local data snapshot and govt.nz's API
 respectively.
