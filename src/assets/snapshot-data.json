@@ -1,28 +1,30 @@
 {
   "phases": [
     {
-      "lastEdited": "2016-09-21 14:26:48",
+      "lastEdited": "2017-08-31 08:54:05",
       "created": "2016-09-20 12:26:12",
       "label": "Pregnancy weeks 0-14",
-      "version": 21,
+      "maoriLabel": "Ngā wiki 0-14 o te hapūtanga",
+      "version": 35,
       "id": 95,
-      "containedElementIDs": ":47:38:233:",
+      "containedElementIDs": ":47:757:38:233:793:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 13:49:34",
+          "lastEdited": "2017-08-31 08:53:58",
           "created": "2016-09-20 11:40:30",
           "label": "Choose a lead maternity carer (LMC)",
-          "version": 21,
+          "maoriLabel": "Kōwhiria he kaitiaki whakawhānau",
+          "version": 48,
           "id": 47,
           "containedElementIDs": ":335:50:329:332:545:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 13:49:35",
+              "lastEdited": "2017-08-31 08:53:59",
               "created": "2016-09-21 15:01:17",
               "label": "Choose a lead maternity carer",
-              "version": 6,
+              "version": 29,
               "id": 335,
               "text": "Choose a lead maternity carer",
               "tags": [
@@ -31,31 +33,31 @@
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 13:49:34",
+              "lastEdited": "2017-08-31 08:53:58",
               "created": "2016-09-20 11:41:56",
-              "version": 13,
+              "version": 36,
               "id": 50,
-              "content": "<p>As soon as you know you're pregnant you need to choose a lead maternity carer (LMC). LMCs are:</p><ul><li>registered midwives</li><li>obstetricians (doctors who specialise in pregnancy and childbirth)</li><li>family doctors who provide maternity care.</li></ul><p>If you're a New Zealand citizen or permanent resident you'll get free or subsidised maternity care unless you choose an obstetrician.</p>",
+              "content": "<p>As soon as you know you're pregnant you need to choose a lead maternity carer (LMC). LMCs are:</p><ul><li>registered midwives</li><li>obstetricians (doctors who specialise in pregnancy and childbirth)</li><li>family doctors who provide maternity care.</li></ul><p>If you're a NZ citizen or permanent resident you'll get free maternity care unless you choose a private obstetrician or private sonographer.</p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 13:49:34",
+              "lastEdited": "2017-08-31 08:53:59",
               "created": "2016-09-21 14:59:22",
               "label": "Who can get free or subsidised maternity care",
-              "version": 10,
+              "version": 33,
               "id": 329,
-              "content": "<p>You'll get free or subsidised maternity care if either you or your partner are:</p><ul><li>a New Zealand citizen or permanent resident</li><li>an Australian citizen or permanent resident who's lived, or intends to live, in New Zealand for 2 years or more</li><li>under 17 and your parent or guardian is eligible</li><li>a work visa holder who's eligible to be here for 2 years or more</li><li>an interim visa holder who was eligible on the visa you had before</li><li>a New Zealand Aid Programme student</li><li>a Commonwealth scholarship student</li><li>a refugee or protected person, or in the process of applying or appealing for refugee or protection status</li><li>a victim of people trafficking.</li></ul>",
+              "content": "<p>You'll get free or subsidised maternity care if either you or your partner are one of the following:</p><ul><li>a New Zealand citizen or permanent resident</li><li>an Australian citizen or permanent resident who's lived, or intends to live, in New Zealand for 2 years or more</li><li>under 17 and your parent or guardian is eligible</li><li>a work visa holder who's eligible to be here for 2 years or more</li><li>an interim visa holder who was eligible on the visa you had before</li><li>a New Zealand Aid Programme student</li><li>a Commonwealth scholarship student</li><li>a refugee or protected person, or in the process of applying or appealing for refugee or protection status</li><li>a victim of people trafficking.</li></ul>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 13:49:34",
+              "lastEdited": "2017-08-31 08:53:59",
               "created": "2016-09-21 15:00:04",
               "label": "What an LMC does",
-              "version": 9,
+              "version": 32,
               "id": 332,
               "content": "<p>Your LMC will:</p><ul><li>provide care throughout your pregnancy</li><li>provide information about choices you can make, for example where to have your baby</li><li>be with you when you give birth</li><li>provide care to you and your baby for 4-6 weeks after the birth</li><li>refer you or your baby to a specialist, if needed.</li></ul><p>Talk to your doctor or nurse about choosing an LMC, or visit the Find a Midwife website to search for registered midwives in your area.</p>",
               "tags": [
@@ -64,10 +66,10 @@
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 13:49:35",
+              "lastEdited": "2017-08-31 08:53:59",
               "created": "2016-09-23 11:54:07",
               "label": "Find a midwife",
-              "version": 4,
+              "version": 27,
               "id": 545,
               "internalLinkPageID": 0,
               "externalURL": "http://www.findyourmidwife.co.nz/",
@@ -81,22 +83,22 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 11:55:56",
-          "created": "2016-09-20 11:20:50",
-          "label": "Decide what screening to have",
-          "version": 15,
-          "id": 38,
-          "containedElementIDs": ":41:",
+          "lastEdited": "2017-04-04 11:08:38",
+          "created": "2016-12-02 14:15:27",
+          "label": "Becoming a dad",
+          "version": 9,
+          "id": 757,
+          "containedElementIDs": ":760:",
           "tags": [
             "boac_presentation::non-chronological"
           ],
           "elements": [
             {
-              "lastEdited": "2016-09-23 11:55:56",
-              "created": "2016-09-20 11:24:55",
-              "version": 11,
-              "id": 41,
-              "content": "<p>You can get screening and tests to check the health of you and your baby at different stages of your pregnancy. You may need to pay for scans. Talk to your LMC about what scans and tests you should have.</p>\n<p>The first test you can get is a free blood test. Your doctor or LMC can refer you for this test.</p>\n<p><a href=\"https://www.nsu.govt.nz/resources/antenatal-blood-test-fact-sheet\">First antenatal blood test</a></p>\n<h5>Further screening</h5>\n<p>You'll be told about other screening you can get during your pregnancy, including screening for Down syndrome and other conditions. You&rsquo;ll be offered:</p>\n<ul>\n<li>first trimester combined screening &mdash; this involves a second free blood test, and a scan that you may have to pay for</li>\n<li>another free blood test in your second trimester.</li>\n</ul>\n<p><a href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/antenatal-screening-down-syndrome-and-other-conditions\">Antenatal screening for Down syndrome and other conditions</a></p>",
+              "lastEdited": "2017-04-04 11:08:38",
+              "created": "2016-12-02 14:16:04",
+              "version": 6,
+              "id": 760,
+              "content": "<p>Now is a good time to explore what kind of dad you want to be. To understand more about what your partner is going through and how you can support her, there are websites which can offer guidance on what you can expect, including:</p><ul><li>being ready for the birth</li><li>looking after your relationship</li><li>reflecting on the role model you want to follow as a dad</li><li>becoming a stepfather.</li></ul><p><span style=\"text-decoration: underline;\" data-mce-style=\"text-decoration: underline;\"><a href=\"https://resources.skip.org.nz/home/ResourceSearchForm?Topics=27&amp;Types=51&amp;Languages=3&amp;Search=&amp;action_ResourceSearchResults=Find\" data-mce-href=\"https://resources.skip.org.nz/home/ResourceSearchForm?Topics=27&amp;Types=51&amp;Languages=3&amp;Search=&amp;action_ResourceSearchResults=Find\">A dad's survival guide</a></span></p><p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/advice-dads\" data-mce-href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/advice-dads\">Advice for dads</a></p><p><a href=\"http://www.greatfathers.org.nz/greatfathers\" data-mce-href=\"http://www.greatfathers.org.nz/greatfathers\">GreatFathers</a></p>",
               "tags": [],
               "type": "richtext"
             }
@@ -104,35 +106,93 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 13:44:32",
-          "created": "2016-09-21 14:02:29",
-          "label": "Your health while you’re pregnant",
-          "version": 48,
-          "id": 233,
-          "containedElementIDs": ":236:239:",
+          "lastEdited": "2016-10-18 14:40:24",
+          "created": "2016-09-20 11:20:50",
+          "label": "Decide what screening to have",
+          "version": 16,
+          "id": 38,
+          "containedElementIDs": ":41:",
           "tags": [
             "boac_presentation::non-chronological"
           ],
           "elements": [
             {
-              "lastEdited": "2016-09-23 13:44:32",
+              "lastEdited": "2016-10-18 14:40:24",
+              "created": "2016-09-20 11:24:55",
+              "version": 12,
+              "id": 41,
+              "content": "<p>You can get screening and tests to check the health of you and your baby at different stages of your pregnancy. You may need to pay for scans. Talk to your LMC about what scans and tests you should have.</p>\n<p>The first test you can get is a free blood test. Your doctor or LMC can refer you for this test.</p>\n<p><a href=\"https://www.nsu.govt.nz/system/files/resources/antenatalbloodtests19jan16.pdf\">First antenatal blood test</a></p>\n<h5>Further screening</h5>\n<p>You'll be told about other screening you can get during your pregnancy, including screening for Down syndrome and other conditions. You&rsquo;ll be offered:</p>\n<ul>\n<li>first trimester combined screening &mdash; this involves a second free blood test, and a scan that you may have to pay for</li>\n<li>another free blood test in your second trimester.</li>\n</ul>\n<p><a href=\"https://www.nsu.govt.nz/pregnancy-newborn-screening/antenatal-screening-down-syndrome-and-other-conditions\">Antenatal screening for Down syndrome and other conditions</a></p>",
+              "tags": [],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-02-20 14:22:39",
+          "created": "2016-09-21 14:02:29",
+          "label": "Your health while you’re pregnant",
+          "version": 55,
+          "id": 233,
+          "containedElementIDs": ":236:239:782:",
+          "tags": [
+            "boac_presentation::non-chronological"
+          ],
+          "elements": [
+            {
+              "lastEdited": "2017-02-20 14:22:39",
               "created": "2016-09-21 14:04:13",
-              "version": 35,
+              "version": 41,
               "id": 236,
               "content": "<p>You can get advice and help to protect your health while you're pregnant &mdash; including:</p>\n<ul>\n<li>getting the right nutrients</li>\n<li>eating and handling food that is safe for your baby</li>\n<li>not smoking, drinking alcohol or doing drugs</li>\n<li>getting immunised for influenza (flu) and whooping cough.</li>\n</ul>\n<p><a href=\"https://www.healthed.govt.nz/resource/eating-healthy-pregnant-womenng%C4%81-kai-totika-m%C4%81-te-wahine-hap%C5%AB\">What to eat for a healthy pregnancy</a></p>\n<p><a href=\"http://www.mpi.govt.nz/food-safety/pregnant-and-at-risk-people/food-and-pregnancy/\">Food safety for pregnant women</a></p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/folic-acid-iodine-and-vitamin-d\">Getting folic acid, iodine and Vitamin D</a></p>\n<p><a href=\"http://www.quit.org.nz/23/reasons-to-quit/pregnancy-breastfeeding\">Help to quit smoking</a></p>\n<p><a href=\"http://alcoholdrughelp.org.nz/\">Help to quit alcohol and drugs</a></p>\n<p><a href=\"../#110\">Immunisations for flu and whooping cough</a></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 13:44:32",
+              "lastEdited": "2017-02-20 14:22:39",
               "created": "2016-09-21 14:05:39",
               "label": "If you have morning sickness",
-              "version": 34,
+              "version": 40,
               "id": 239,
               "content": "<p>You can also get advice about how to cope with morning sickness and when to ask for help.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/morning-sickness\">Coping with morning sickness</a></p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-02-20 14:22:39",
+              "created": "2017-02-20 14:11:28",
+              "label": "Physical activity during pregnancy",
+              "version": 6,
+              "id": 782,
+              "content": "<p>It's important to stay active and healthy during your pregnancy as it can have a positive impact on both you and your baby, and can help to prepare your body for birth.</p>\n<p>A Green Prescription (GRx) is a health professional's written advice to a pregnant woman to be physically active and improve her nutrition, as part of her overall health management. Women who are overweight or obese, or who have gestational diabetes, type 2 diabetes, high blood pressure or depression are most likely to benefit from GRx.</p>\n<p>Your LMC can refer you to your local GRx provider.</p>\n<p><a href=\"http://www.health.govt.nz/our-work/preventative-health-wellness/physical-activity/green-prescriptions/how-green-prescription-works\">How the Green Prescription works</a></p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/being-active-during-pregnancy\">Being active during pregnancy</a></p>\n<p><a href=\"http://www.pregnancyexercise.co.nz/\">Pregnancy exercise</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-06-09 15:17:36",
+          "created": "2017-06-09 11:42:40",
+          "label": "Antenatal depression and anxiety",
+          "version": 15,
+          "id": 793,
+          "containedElementIDs": ":796:",
+          "tags": [
+            "boac_presentation::non-chronological"
+          ],
+          "elements": [
+            {
+              "lastEdited": "2017-06-09 15:17:36",
+              "created": "2017-06-09 11:43:52",
+              "version": 12,
+              "id": 796,
+              "content": "<p>Antenatal depression and anxiety affects some parents during pregnancy.</p>\n<h5>Signs</h5>\n<p>Pregnancy is a time of change for you, your partner and your family/whānau. It's normal to feel unsure, anxious or worried during pregnancy. If these feelings last longer than a few weeks they could be signs of antenatal depression or anxiety.</p>\n<p>Signs include:</p>\n<ul>\n<li>panic attacks</li>\n<li>constant worrying, often about fears for the health or wellbeing of your baby</li>\n<li>feeling sad or crying a lot</li>\n<li>feeling nervous or panicky</li>\n<li>withdrawing from friends and family</li>\n<li>engaging in more risk taking behaviour (for example alcohol or drug use)</li>\n<li>thoughts of death or suicide.</li>\n</ul>\n<p><a href=\"http://www.pada.nz/families/perinatal-conditions/antenatal-depression/\">More about antenatal anxiety and depression</a></p>\n<h5>Getting help</h5>\n<p>There are treatments, support and services available to help you through this experience.</p>\n<p>Talk to:</p>\n<ul>\n<li>your midwife or obstetrician</li>\n<li>your family doctor or practice nurse</li>\n<li>your partner</li>\n<li>a trusted friend or family member</li>\n<li>other parents who have recovered from antenatal depression or anxiety.</li>\n</ul>\n<p>You can also call the depression or Plunket advice lines:</p>\n<p>Depression Helpline freephone: 0800 111 757<br />Plunketline freephone: 0800 933 922</p>",
+              "tags": [],
               "type": "richtext"
             }
           ],
@@ -142,273 +202,74 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-20 17:22:02",
+      "lastEdited": "2017-08-31 09:01:16",
       "created": "2016-09-20 14:28:21",
       "label": "Pregnancy weeks 15-30",
-      "version": 14,
+      "maoriLabel": "Ngā wiki 15-30 o te hapūtanga",
+      "version": 18,
       "id": 101,
-      "containedElementIDs": ":119:122:125:128:131:134:116:113:110:104:107:",
+      "containedElementIDs": ":104:110:116:113:119:122:125:128:131:134:107:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 13:50:22",
-          "created": "2016-09-20 15:02:12",
-          "label": "Check what financial help you can get",
-          "version": 17,
-          "id": 119,
-          "containedElementIDs": ":430:358:",
+          "lastEdited": "2017-11-17 09:54:24",
+          "created": "2016-09-20 14:29:45",
+          "label": "Book antenatal classes",
+          "maoriLabel": "Te tāpui akoranga whānautanga",
+          "version": 24,
+          "id": 104,
+          "containedElementIDs": ":421:424:427:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 13:50:23",
-              "created": "2016-09-22 15:57:52",
-              "label": "Check what financial help you can get",
-              "version": 4,
-              "id": 430,
-              "text": "Check what financial help you can get",
-              "tags": [
-                "boac_presentation::task"
-              ],
-              "type": "text"
-            },
-            {
-              "lastEdited": "2016-09-23 13:50:22",
-              "created": "2016-09-22 11:38:53",
-              "version": 10,
-              "id": 358,
-              "content": "<p><span>Depending on your circumstances, you might be able to get help from IRD and Work and Income.</span></p>",
-              "tags": [],
-              "type": "richtext"
-            }
-          ],
-          "type": "card"
-        },
-        {
-          "lastEdited": "2016-09-27 13:27:38",
-          "created": "2016-09-20 15:04:56",
-          "label": "Working for Families Tax Credits",
-          "version": 38,
-          "id": 122,
-          "containedElementIDs": ":137:140:143:146:149:361:",
-          "tags": [],
-          "elements": [
-            {
-              "lastEdited": "2016-09-27 13:27:38",
-              "created": "2016-09-20 15:09:47",
-              "version": 30,
-              "id": 137,
-              "content": "<p>Working for Families is a payment to help parents with the costs of raising children. It's made up of 4 tax credits &mdash; you might be eligible for 1 or more of these.</p>",
-              "tags": [],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-27 13:27:38",
-              "created": "2016-09-20 17:14:05",
-              "label": "Family tax credit",
-              "version": 29,
-              "id": 140,
-              "content": "<p>Family tax credit is&nbsp;the main payment most families with dependent children can get.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/understanding/all-about/ftc/\">Family tax credit</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-27 13:27:38",
-              "created": "2016-09-20 17:14:37",
-              "label": "In-work tax credit",
-              "version": 28,
-              "id": 143,
-              "content": "<p>In-work tax credit is for families who are in paid work.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/understanding/all-about/iwtc/\">In-work tax credit&nbsp;</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-27 13:27:38",
-              "created": "2016-09-20 17:15:18",
-              "label": "Parental tax credit",
-              "version": 27,
-              "id": 146,
-              "content": "<p>Parental tax credit is for families who don't qualify for paid parental leave and who don't get Work and Income benefits.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/understanding/all-about/ptc/\">Parental tax credit</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-27 13:27:38",
-              "created": "2016-09-20 17:15:58",
-              "label": "Minimum family tax credit",
-              "version": 26,
-              "id": 149,
-              "content": "<p>Minimum family tax credit tops up the annual income for families with dependent children who earn less than $23,764 after tax.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/understanding/all-about/min-ftc/\">Minimum family tax credit</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-27 13:27:38",
-              "created": "2016-09-22 12:38:14",
+              "lastEdited": "2017-11-17 09:54:24",
+              "created": "2016-09-22 15:54:09",
               "version": 19,
-              "id": 361,
-              "content": "<h4>How much you get</h4>\n<p>The amount you can get depends on:</p>\n<ul>\n<li>your annual family income</li>\n<li>the source of your income</li>\n<li>the number of dependent children in your care, and</li>\n<li>how old these children are.</li>\n</ul>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/how-to-apply/how-to-estimate/\">Estimate your annual family income</a></p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/calculator-wfftc-estimate-2017.html\">Estimate your entitlement</a></p>\n<h4>How to apply</h4>\n<p>Apply for all Working for Families Tax Credits in a single application to IRD.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/how-to-apply/applying/\">Applying for Working for Families Tax Credits</a></p>",
-              "tags": [],
-              "type": "richtext"
-            }
-          ],
-          "type": "card"
-        },
-        {
-          "lastEdited": "2016-09-23 12:00:14",
-          "created": "2016-09-20 15:05:15",
-          "label": "Help with housing costs",
-          "version": 16,
-          "id": 125,
-          "containedElementIDs": ":364:367:",
-          "tags": [],
-          "elements": [
-            {
-              "lastEdited": "2016-09-23 12:00:14",
-              "created": "2016-09-22 13:34:40",
-              "version": 10,
-              "id": 364,
-              "content": "<p><span>Work and Income offers an Accommodation Supplement to help with the costs of rent, board and home ownership.</span></p>",
+              "id": 421,
+              "content": "<p><span>Antenatal classes <span>(also called pregnancy and parenting education)&nbsp;</span>teach you about pregnancy, labour, birth, breastfeeding and looking after a young baby. You can get free classes through District Health Boards (DHBs) or pay for classes with private providers.</span></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 12:00:14",
-              "created": "2016-09-22 13:35:23",
-              "label": "Accommodation Supplement",
-              "version": 8,
-              "id": 367,
-              "content": "<h5>Who can get it</h5>\n<p>You might get an Accommodation Supplement if you:</p>\n<ul>\n<li>are aged 16 or over</li>\n<li>are an NZ citizen or permanent resident</li>\n<li>normally live in NZ and intend to stay here</li>\n<li>aren't paying rent for a Housing NZ or other social housing property.</li>\n</ul>\n<h5>How much you get</h5>\n<p>How much you get depends on:</p>\n<ul>\n<li>you and your partner's income</li>\n<li>you and your partner's assets</li>\n<li>your accommodation costs</li>\n<li>your family circumstances</li>\n<li>where you live.</li>\n</ul>\n<h5>Call for an assessment</h5>\n<p>You can call Work and Income and get assessed for the Accommodation Supplement over the phone. When you call, have with you your:</p>\n<ul>\n<li>income (before tax)</li>\n<li>rent or board costs</li>\n<li>mortgage costs and council rates if you own your home</li>\n<li>insurance costs</li>\n<li>any other accommodation costs.</li>\n</ul>\n<p>Freephone: 0800 559 009</p>\n<p><a href=\"http://www.workingforfamilies.govt.nz/calculator/index.jsp\">Accommodation Supplement calculator (Working for Families website)</a></p>\n<p><a href=\"http://www.workandincome.govt.nz/products/a-z-benefits/accommodation-supplement.html#null\">More about Accommodation Supplement</a></p>",
+              "lastEdited": "2017-11-17 09:54:24",
+              "created": "2016-09-22 15:54:41",
+              "label": "Antenatal classes by DHB",
+              "version": 18,
+              "id": 424,
+              "content": "<p><a href=\"http://www.healthpoint.co.nz/community-health-services/community-health/auckland-dhb-antenatal-classes-pregnancy/\">Auckland DHB</a></p>\n<p><a href=\"http://www.bopdhb.govt.nz/health-advice/having-a-baby/\">Bay of Plenty DHB</a></p>\n<p><a href=\"http://www.cdhb.health.nz/Hospitals-Services/maternity-services/Childbirth/Pages/default.aspx\">Canterbury DHB</a></p>\n<p><a href=\"http://www.findamidwife.org.nz/ccdhb-pregnancy-services/\">Capital and Coast DHB</a></p>\n<p><a href=\"http://www.countiesmanukau.health.nz/our-services/womens-health/maternity-services/\">Counties Manukau DHB</a></p>\n<p><a href=\"http://www.ourhealthhb.nz/health-services/hawkes-bay-maternity/pregnancy-and-parenting/\">Hawkes Bay DHB</a></p>\n<p><a href=\"http://www.huttmaternity.org.nz/content/3163daa4-3b2b-4b81-b073-f659dc421b29.html\">Hutt Valley DHB</a></p>\n<p><a href=\"http://www.lakesdhb.govt.nz/Article.aspx?Id=9199\">Lakes District DHB</a></p>\n<p><a href=\"http://www.midcentraldhb.govt.nz/HealthServices/WomensHealth/MaternityServices/Pages/Finding-a-Midwife-and-Antenatal-Care.aspx\">Mid Central DHB</a></p>\n<p><a href=\"http://www.nmdhb.govt.nz/health-services/family-health-services/maternity/antenatal-classes-and-education/\">Nelson-Marlborough DHB</a></p>\n<p><a href=\"http://www.northlanddhb.org.nz/Services/AZ/MaternityServiceWhangarei.aspx\">Northland DHB</a></p>\n<p><span><a href=\"http://www.scdhb.health.nz/services/womens-health/maternity-and-newborn\">South Canterbury DHB</a></span></p>\n<p><span><a href=\"http://www.southerndhb.govt.nz/index.php?page=2605\">Southern DHB</a></span></p>\n<p><a href=\"http://www.tdh.org.nz/patients-and-visitors/our-services/women-child-and-youth/\">Tairawhiti DHB</a></p>\n<p><span><a href=\"http://www.tdhb.org.nz/services/maternity/antenatal_classes.shtml\">Taranaki DHB</a></span></p>\n<p><span><a href=\"http://www.waikatodhb.health.nz/directory-of-our-services/womens-health/midwifery/\">Waikato DHB</a></span></p>\n<p><a href=\"http://www.wairarapamaternity.org.nz/content/104a0bf3-41ba-45b0-86f3-a82fe1cb2ca5.html\">Wairarapa DHB</a></p>\n<p><a href=\"https://www.healthpoint.co.nz/community-health-services/community-health/waitemata-dhb-antenatal-classes-pregnancy/\">Waitemata DHB</a></p>\n<p><a href=\"http://www.westcoastdhb.org.nz/services/maternity/pregnancy-and-parenting-education/default.asp\">West Coast DHB</a></p>\n<p><a href=\"http://www.wrhn.org.nz/services/pregnancy-and-parenting\">Whanganui DHB</a></p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-11-17 09:54:24",
+              "created": "2016-09-22 15:55:19",
+              "version": 17,
+              "id": 427,
+              "content": "<p><span>Free classes fill up quickly, so book early in your second trimester (around week 16) to get your preferred class. The best time to attend antenatal classes is early in your third trimester (from week 27).</span></p>",
+              "tags": [],
               "type": "richtext"
             }
           ],
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 12:01:14",
-          "created": "2016-09-20 15:05:27",
-          "label": "Help with health costs",
+          "lastEdited": "2017-08-31 08:55:58",
+          "created": "2016-09-20 14:59:37",
+          "label": "Immunisations for whooping cough and influenza (flu)",
+          "maoriLabel": "Rongoā āraimate mare motu, rewharewha",
           "version": 8,
-          "id": 128,
-          "containedElementIDs": ":373:376:",
+          "id": 110,
+          "containedElementIDs": ":418:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 12:01:14",
-              "created": "2016-09-22 13:38:39",
-              "version": 4,
-              "id": 373,
-              "content": "<p><span>Community Services Cards help New Zealanders on a low to middle income with cheaper health costs.</span></p>",
-              "tags": [],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-23 12:01:14",
-              "created": "2016-09-22 13:39:13",
-              "label": "Community Services Card",
-              "version": 3,
-              "id": 376,
-              "content": "<h5>What it is</h5>\n<p>A Community Services Card reduces the costs of some healthcare services, including:</p>\n<ul>\n<li>prescriptions</li>\n<li>visits to after-hours doctors or a doctor who's not your usual doctor</li>\n<li>glasses for children under 16</li>\n<li>emergency dental treatment.</li>\n</ul>\n<h5>Who can get it</h5>\n<p>You might be able to get a Community Services Card if you're:</p>\n<ul>\n<li>18 or older</li>\n<li>on a low to middle-income</li>\n<li>a NZ citizen or permanent resident</li>\n<li>normally live in NZ and intend to stay here.</li>\n</ul>\n<h5>How much you get</h5>\n<p>You'll still pay for healthcare services, but the card gives you a discount on the costs you'd otherwise pay.</p>\n<p><a href=\"http://www.workandincome.govt.nz/products/a-z-benefits/community-services-card.html#null\">More about the Community Services Card</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            }
-          ],
-          "type": "card"
-        },
-        {
-          "lastEdited": "2016-09-23 12:03:32",
-          "created": "2016-09-20 15:05:36",
-          "label": "Help for single parents",
-          "version": 9,
-          "id": 131,
-          "containedElementIDs": ":379:382:385:",
-          "tags": [],
-          "elements": [
-            {
-              "lastEdited": "2016-09-23 12:03:32",
-              "created": "2016-09-22 15:06:28",
-              "version": 4,
-              "id": 379,
-              "content": "<p><span>Sole Parent Support is a payment of up to $325.98 a week (after tax) for single parents and sole caregivers of dependent children under 14.</span></p>",
-              "tags": [],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-23 12:03:32",
-              "created": "2016-09-22 15:07:06",
-              "label": "Sole Parent Support payment",
-              "version": 3,
-              "id": 382,
-              "content": "<h5>Who can get it</h5>\n<p>You may get Sole Parent Support if you are:</p>\n<ul>\n<li>19 or older</li>\n<li>a single parent or caregiver of 1 or more children under 14</li>\n<li>don't have enough money to support yourself</li>\n<li>an NZ citizen or permanent resident who has been here for at least 2 years and who normally lives here.</li>\n</ul>\n<p>If you've lived in NZ for less than 2 years, call Work and Income to find out if you could still be eligible.</p>\n<p>Freephone: 0800 559 009</p>\n<p>Only 1 parent or caregiver can get Sole Parent Support. Shared care of your child could affect your payments.</p>\n<h5>How much you get</h5>\n<p>You'll get a weekly payment of up to $325.98 after tax. You'll also get help to:</p>\n<ul>\n<li>find part-time work if your youngest child is 3 or older</li>\n<li>get ready for future work if your youngest child is under 3.</li>\n</ul>\n<p><a href=\"http://www.workandincome.govt.nz/products/benefit-rates/benefit-rates-april-2016.html#null\">Benefit rates</a></p>\n<p><a href=\"http://www.workandincome.govt.nz/products/a-z-benefits/sole-parent-support.html#null\">More about Sole Parent Support</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-23 12:03:33",
-              "created": "2016-09-22 15:07:48",
-              "label": "Calculating child support",
-              "version": 2,
-              "id": 385,
-              "content": "<p>If you and your partner aren't together anymore, you might be eligible for or need to pay child support.</p>\n<p><a href=\"http://www.ird.govt.nz/childsupport/\">More about child support</a></p>\n<p>Work out how much you should get or how much you have to pay.</p>\n<p><a href=\"http://www.ird.govt.nz/calculators/tool-name/tools-c/calculator-child-support-liability-entitlement.html\">IRD child support calculator</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            }
-          ],
-          "type": "card"
-        },
-        {
-          "lastEdited": "2016-09-23 12:01:59",
-          "created": "2016-09-20 15:05:48",
-          "label": "Help paying for childcare",
-          "version": 9,
-          "id": 134,
-          "containedElementIDs": ":388:391:394:",
-          "tags": [],
-          "elements": [
-            {
-              "lastEdited": "2016-09-23 12:01:59",
-              "created": "2016-09-22 15:09:25",
-              "version": 4,
-              "id": 388,
-              "content": "<p><span>If you have a dependant child who's under 5 &mdash; or under 6 if you get a Child Disability Allowance for them &mdash; you might be able to get a Childcare Subsidy. They need to be in approved care for at least 3 hours a week.</span></p>",
-              "tags": [],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-23 12:01:59",
-              "created": "2016-09-22 15:10:01",
-              "label": "Childcare Subsidy",
-              "version": 3,
-              "id": 391,
-              "content": "<h5>What it is</h5>\n<p>Childcare Subsidy is a payment that helps families with the cost of pre-school childcare.</p>\n<h5>Who can get it</h5>\n<p>Your child has to be in approved care for at least 3 hours a week and you must be:</p>\n<ul>\n<li>on a low or middle income</li>\n<li>an NZ citizen or permanent resident, and</li>\n<li>the main person who looks after the child.</li>\n</ul>\n<p>If you're not working or studying, you may get a childcare subsidy for up to 9 hours a week.</p>\n<p>If you&rsquo;re working, studying or there are special circumstances that mean you need childcare, you can get it for up to 50 hours a week.</p>\n<h5>How much you get</h5>\n<p>How much you get depends on:</p>\n<ul>\n<li>the size of your family</li>\n<li>your income</li>\n<li>how many hours a week your child goes to the childcare provider.</li>\n</ul>\n<p>All subsidies are paid directly to the childcare provider.</p>\n<p><a href=\"http://www.workandincome.govt.nz/individuals/a-z-benefits/childcare-subsidy.html\">More about childcare subsidy</a></p>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-23 12:02:00",
-              "created": "2016-09-22 15:10:28",
-              "label": "20 hours free early childhood education",
-              "version": 2,
-              "id": 394,
-              "content": "<p>All 3, 4 and 5-year-olds can get free early childhood education (ECE) for 6 hours a day &mdash; up to 20 hours a week from ECE providers.</p>\n<p><a href=\"http://www.educationcounts.govt.nz/find-an-els\">Find an approved service that offers 20 Hours ECE</a></p>",
+              "lastEdited": "2017-08-31 08:55:58",
+              "created": "2016-09-22 15:53:00",
+              "version": 5,
+              "id": 418,
+              "content": "<p>Immunisations help protect you and your baby before and after birth. While you're pregnant, you can get:</p>\n<ul>\n<li>free whooping cough immunisation between 28 and 38 weeks of your pregnancy</li>\n<li>free flu immunisation during the flu season &mdash; usually early March to August.</li>\n</ul>\n<p>You need to be immunised during each pregnancy, even if you've been immunised before.</p>\n<p>Talk to your doctor, nurse or LMC about getting immunised.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/healthy-living/immunisation/immunisation-pregnant-women\">Immunisations while pregnant</a></p>",
               "tags": [],
               "type": "richtext"
             }
@@ -416,28 +277,29 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 13:22:39",
+          "lastEdited": "2017-08-31 09:01:26",
           "created": "2016-09-20 15:01:34",
           "label": "Taking parental leave",
-          "version": 11,
+          "maoriLabel": "Te whakatā tiaki pēpi",
+          "version": 14,
           "id": 116,
           "containedElementIDs": ":409:412:415:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 13:22:39",
+              "lastEdited": "2017-08-31 09:01:26",
               "created": "2016-09-22 15:17:36",
-              "version": 8,
+              "version": 11,
               "id": 409,
-              "content": "<p>Parental leave is leave you can take from work to care for your new child. You'll need to apply for parental leave to your employer, in writing, at least 3 months before your baby is due.</p>\n<h4>Paid parental leave</h4>\n<p>As part of your parental leave, you'll probably be eligible for paid parental leave (a government payment) for the first 18 weeks.</p>\n<p><a href=\"../#content-397\">Paid parental leave</a></p>",
+              "content": "<p>Parental leave is leave you can take from work to care for your new child. You'll need to apply for parental leave to your employer, in writing, at least 3 months before your baby is due.</p><p>As part of your parental leave, you'll probably be eligible for paid parental leave (a government payment) for the first 18 weeks.</p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 13:22:39",
+              "lastEdited": "2017-08-31 09:01:26",
               "created": "2016-09-22 15:17:37",
               "label": "When you're eligible and what you'll get",
-              "version": 8,
+              "version": 11,
               "id": 412,
               "content": "<p>To be eligible for parental leave, you must have worked for the same employer for at least an average of 10 hours a week for the 6 months before your baby's due date &mdash; or the date you become permanently responsible for the care of a child under 6.</p>\n<p>If you've worked for your employer:</p>\n<ul>\n<li>for more than 6 months, but less than 12 months, you'll get:\n<ul>\n<li>18 weeks of government-paid parental leave, and</li>\n<li>8 weeks unpaid leave as well, up to 26 weeks leave in total</li>\n</ul>\n</li>\n<li>for 12 months or more, you'll get:\n<ul>\n<li>18 weeks of government-paid parental leave</li>\n<li>up to 34 weeks unpaid leave after the paid leave ends.</li>\n</ul>\n</li>\n</ul>\n<p>You can transfer some or all of your parental leave entitlements to your partner &mdash; as long as your partner meets the eligibility criteria.</p>\n<p><a href=\"https://www.employment.govt.nz/leave-and-holidays/parental-leave/how-to-apply-for-parental-leave/\">Taking parental leave</a></p>",
               "tags": [
@@ -446,10 +308,10 @@
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 13:22:39",
+              "lastEdited": "2017-08-31 09:01:26",
               "created": "2016-09-22 15:17:37",
               "label": "If you're eligible for paid parental leave but not for leave from your employer",
-              "version": 8,
+              "version": 11,
               "id": 415,
               "content": "<p>If you're eligible for government-paid parental leave but not for parental leave from your employer, you can ask your employer for negotiated carer leave. This allows you to take time off work and get your parental leave payment.</p>\n<p>You'll have to ask in writing at least 3 months before your baby is due.</p>\n<p>Your employer can refuse your request, but only on specific grounds and they must tell you in writing.</p>\n<p><a href=\"https://www.employment.govt.nz/leave-and-holidays/parental-leave/types-of-parental-leave/\">Taking negotiated carer leave</a></p>",
               "tags": [
@@ -461,19 +323,20 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-28 13:12:39",
+          "lastEdited": "2017-08-31 08:56:10",
           "created": "2016-09-20 15:00:18",
           "label": "Paid parental leave ",
-          "version": 18,
+          "maoriLabel": "Te whai utu mō te whakatā tiaki pēpi",
+          "version": 24,
           "id": 113,
           "containedElementIDs": ":433:397:400:403:406:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-28 13:12:40",
+              "lastEdited": "2017-08-31 08:56:10",
               "created": "2016-09-22 15:58:35",
               "label": "Check what parental leave you can get",
-              "version": 8,
+              "version": 14,
               "id": 433,
               "text": "Check what parental leave you can get",
               "tags": [
@@ -482,42 +345,42 @@
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-28 13:12:40",
+              "lastEdited": "2017-08-31 08:56:10",
               "created": "2016-09-22 15:13:36",
-              "version": 13,
+              "version": 19,
               "id": 397,
-              "content": "<p><span>Paid parental leave (PPL) is a government payment for eligible new parents and caregivers of up to $527.72 a week <span>(</span><span>before t</span><span>a</span><span>x)</span>&nbsp;for 18 weeks.</span></p>",
+              "content": "<p><span>Paid parental leave (PPL) is a government payment for eligible new parents and caregivers of up to $538.55 a week <span>(</span><span>before t</span><span>a</span><span>x)</span>&nbsp;for 18 weeks.</span></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-28 13:12:40",
+              "lastEdited": "2017-08-31 08:56:10",
               "created": "2016-09-22 15:13:36",
               "label": "Who can get it",
-              "version": 13,
+              "version": 19,
               "id": 400,
-              "content": "<p>You can get paid parental leave if:</p>\n<ul>\n<li>you're a pregnant mother or primary carer</li>\n<li>you have 1 or more employers or you're self-employed</li>\n<li>in the 52 weeks before your baby's due date, you've worked for at least:\n<ul>\n<li>an average of 10 hours a week for 26 weeks.</li>\n</ul>\n</li>\n</ul>\n<p>You can choose to transfer some or all of your paid parental leave entitlement to your eligible partner.</p>\n<p>You can only get parental leave payments while you aren&rsquo;t working. You might also be entitled to unpaid parental leave from your employer of up to 52 weeks &mdash; including the 18 weeks you receive a payment for.</p>\n<p><a href=\"../#content-409\">Taking parental leave</a>&nbsp;</p>\n<p>If you don't meet the criteria for paid parental leave, you might be able to get the Working for Families parental tax credit. Even if you can get parental leave, you may be better off getting a tax credit.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/understanding/all-about/ptc/\">More about parental tax credit</a></p>",
+              "content": "<p>You can get paid parental leave if:</p>\n<ul>\n<li>you're a pregnant mother or primary carer</li>\n<li>you have 1 or more employers or you're self-employed</li>\n<li>in the 52 weeks before your baby's due date, you've worked for at least:\n<ul>\n<li>an average of 10 hours a week for 26 weeks.</li>\n</ul>\n</li>\n</ul>\n<p>You can choose to transfer some or all of your paid parental leave entitlement to your eligible partner.</p>\n<p>You can only get parental leave payments while you aren&rsquo;t working. You might also be entitled to unpaid parental leave from your employer of up to 52 weeks &mdash; including the 18 weeks you receive a payment for.</p>\n<p>If you don't meet the criteria for paid parental leave, you might be able to get the Working for Families parental tax credit. Even if you can get parental leave, you may be better off getting a tax credit.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/understanding/all-about/ptc/\">More about parental tax credit</a></p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-28 13:12:40",
+              "lastEdited": "2017-08-31 08:56:10",
               "created": "2016-09-22 15:13:36",
               "label": "How much you get",
-              "version": 13,
+              "version": 19,
               "id": 403,
-              "content": "<p>PPL payments equal your normal pay up to a current maximum of $527.72 a week before tax. The minimum payment is $152.50 each week before tax.</p><p>It's paid into your bank account every 2 weeks.</p>",
+              "content": "<p>PPL payments equal your normal pay up to a current maximum of $538.55 a week before tax. The minimum payment is $157.50 each week before tax.</p><p>It's paid into your bank account every 2 weeks.</p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-28 13:12:40",
+              "lastEdited": "2017-08-31 08:56:10",
               "created": "2016-09-22 15:13:37",
-              "version": 13,
+              "version": 19,
               "id": 406,
               "content": "<p><a href=\"http://www.ird.govt.nz/yoursituation-ind/parents/parents-paid-parental-leave.html\">More about paid parental leave</a></p>\n<p><a href=\"http://www.ird.govt.nz/forms-guides/number/forms-800-899/ir880-form-paid-parental-leave-app.html\">Apply for paid parental leave</a></p>",
               "tags": [],
@@ -527,20 +390,86 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-22 15:56:51",
-          "created": "2016-09-20 14:59:37",
-          "label": "Immunisations for whooping cough and influenza (flu)",
-          "version": 6,
-          "id": 110,
-          "containedElementIDs": ":418:",
+          "lastEdited": "2017-08-31 08:54:35",
+          "created": "2016-09-20 15:02:12",
+          "label": "Check what financial help you can get",
+          "maoriLabel": "Tirohia ngā āwhina ā-pūtea ka taea",
+          "version": 27,
+          "id": 119,
+          "containedElementIDs": ":430:358:718:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-22 15:56:51",
-              "created": "2016-09-22 15:53:00",
+              "lastEdited": "2017-08-31 08:54:35",
+              "created": "2016-09-22 15:57:52",
+              "label": "Check what financial help you can get",
+              "version": 13,
+              "id": 430,
+              "text": "Check what financial help you can get",
+              "tags": [
+                "boac_presentation::task"
+              ],
+              "type": "text"
+            },
+            {
+              "lastEdited": "2017-08-31 08:54:35",
+              "created": "2016-09-22 11:38:53",
+              "version": 19,
+              "id": 358,
+              "content": "<p>Depending on your circumstances, you might be able to get help from Inland Revenue and Ministry of Social Development. Both working and non-working parents may be eligible for financial help with the costs of raising children, housing, health, childcare and parental leave, as well as solo parent support.</p>\n<p>Planning and budgeting for baby&rsquo;s arrival can seem like a daunting task, but there are plenty of helpful resources available that can make this easier.&nbsp;</p>\n<p>To help out with budgeting and working out the general costs that come with having a baby, Sorted have information and a budgeting tool&nbsp;that can help give you a realistic idea of what to expect.</p>",
+              "tags": [],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:54:35",
+              "created": "2016-11-28 16:11:35",
               "version": 3,
-              "id": 418,
-              "content": "<p>Immunisations help protect you and your baby before and after birth. While you're pregnant, you can get:</p>\n<ul>\n<li>free whooping cough immunisation between 28 and 38 weeks of your pregnancy</li>\n<li>free flu immunisation during the flu season &mdash; usually early March to August.</li>\n</ul>\n<p>You need to be immunised during each pregnancy, even if you've been immunised before.</p>\n<p>Talk to your doctor, nurse or LMC about getting immunised.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/healthy-living/immunisation/immunisation-pregnant-women\">Immunisations while pregnant</a></p>",
+              "id": 718,
+              "internalLinkPageID": 0,
+              "externalURL": "https://www.sorted.org.nz/guides/baby-on-the-way",
+              "linkText": "Staying sorted financially when baby comes",
+              "tags": [],
+              "type": "url"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-31 09:02:04",
+          "created": "2016-09-20 15:04:56",
+          "label": "Working for Families Tax Credits",
+          "maoriLabel": "Ngā Whiwhinga Tāke Working for Families",
+          "version": 50,
+          "id": 122,
+          "containedElementIDs": ":137:586:361:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 09:02:04",
+              "created": "2016-09-20 15:09:47",
+              "version": 40,
+              "id": 137,
+              "content": "<p>Working for Families is a payment to help parents with the costs of raising children. It's made up of 4 tax credits &mdash; you might be eligible for 1 or more of these if you care for children who are 18 or younger.</p>",
+              "tags": [],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 09:02:04",
+              "created": "2016-10-26 15:01:49",
+              "version": 8,
+              "id": 586,
+              "internalLinkPageID": 0,
+              "externalURL": "http://www.ird.govt.nz/wff-tax-credits/?id=201405MegaMenu",
+              "linkText": "Understanding Working for Families Tax Credits",
+              "tags": [],
+              "type": "url"
+            },
+            {
+              "lastEdited": "2017-08-31 09:02:04",
+              "created": "2016-09-22 12:38:14",
+              "version": 29,
+              "id": 361,
+              "content": "<h4>How much you get</h4>\n<p>The amount you can get depends on:</p>\n<ul>\n<li>your annual family income</li>\n<li>the source of your income</li>\n<li>the number of dependent children in your care, and</li>\n<li>how old these children are.</li>\n</ul>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/how-to-apply/how-to-estimate/\">Estimate your annual family income</a></p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/calculator-estimate-your-working-for-families-tax-credits.html?=wfftc-home-promo\">Estimate your entitlement</a></p>\n<h4>How to apply</h4>\n<p>Apply for all Working for Families Tax Credits in a single application to Inland Revenue.</p>\n<p><a href=\"http://www.ird.govt.nz/wff-tax-credits/how-to-apply/applying/\">Applying for Working for Families Tax Credits</a></p>\n<p class=\"MsoNormal\">&nbsp;</p>",
               "tags": [],
               "type": "richtext"
             }
@@ -548,41 +477,157 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-22 16:14:48",
-          "created": "2016-09-20 14:29:45",
-          "label": "Book antenatal classes",
-          "version": 9,
-          "id": 104,
-          "containedElementIDs": ":421:424:427:",
+          "lastEdited": "2017-08-31 08:55:42",
+          "created": "2016-09-20 15:05:15",
+          "label": "Help with housing costs",
+          "maoriLabel": "Ngā āwhina utu whare",
+          "version": 20,
+          "id": 125,
+          "containedElementIDs": ":364:367:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-22 16:14:48",
-              "created": "2016-09-22 15:54:09",
-              "version": 4,
-              "id": 421,
-              "content": "<p><span>Antenatal classes teach you about pregnancy, labour, birth, breastfeeding and looking after a young baby. You can get limited free classes through most District Health Boards (DHBs) or pay for classes with private providers.</span></p>",
+              "lastEdited": "2017-08-31 08:55:42",
+              "created": "2016-09-22 13:34:40",
+              "version": 14,
+              "id": 364,
+              "content": "<p><span>Ministry of Social Development offers an Accommodation Supplement to help with the costs of rent, board and home ownership.</span></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-22 16:14:48",
-              "created": "2016-09-22 15:54:41",
-              "label": "Antenatal classes by DHB",
-              "version": 3,
-              "id": 424,
-              "content": "<p><a href=\"http://www.adhb.health.nz/our-services/a-z-services/maternity-care/\">Auckland DHB</a></p>\n<p><a href=\"http://www.bopdhb.govt.nz/health-advice/having-a-baby/\">Bay of Plenty DHB</a></p>\n<p><a href=\"http://www.cdhb.health.nz/Hospitals-Services/maternity-services/Maternity%20Services/Pages/Parent-Education-Classes.aspx\">Canterbury DHB</a></p>\n<p><a href=\"http://www.findamidwife.org.nz/ccdhb-pregnancy-services/\">Capital and Coast DHB</a></p>\n<p><a href=\"http://www.countiesmanukau.health.nz/our-services/womens-health/maternity-services/\">Counties Manukau DHB</a></p>\n<p><a href=\"http://www.ourhealthhb.nz/health-services/hawkes-bay-maternity/maternity-care-in-hawkes-bay/\">Hawkes Bay DHB</a></p>\n<p><a href=\"http://www.huttmaternity.org.nz/content/3163daa4-3b2b-4b81-b073-f659dc421b29.html\">Hutt Valley DHB</a></p>\n<p><a href=\"http://www.lakesdhb.govt.nz/Article.aspx?Id=9199\">Lakes District DHB</a></p>\n<p><a href=\"http://www.midcentraldhb.govt.nz/healthservices/womenshealth/maternityservices/Pages/default.aspx\">Mid Central DHB</a></p>\n<p><a href=\"http://www.nmdhb.govt.nz/health-services/family-health-services/maternity/i-am-pregnant-what-next/\">Nelson-Marlborough DHB</a></p>\n<p><a href=\"http://www.northlanddhb.org.nz/Services/AZ/MaternityServiceWhangarei.aspx\">Northland DHB</a></p>\n<p><a href=\"http://www.tdh.org.nz/patients-and-visitors/our-services/women-child-and-youth/\">Tairawhiti DHBoard</a></p>\n<p><a href=\"http://www.wairarapamaternity.org.nz/content/default.html\">Wairarapa DHB</a></p>\n<p><a href=\"http://www.waitematadhb.govt.nz/hospitals-clinics/clinics-services/maternity-services/maternity-services/\">Waitemata DHB</a></p>\n<p><a href=\"http://www.westcoastdhb.org.nz/services/maternity/im-pregnant-what-next/default.asp\">West Coast DHB</a></p>\n<p><a href=\"http://www.wdhb.org.nz/content/page/find-a-gp-or-midwife/m/313/\">Whanganui District Health Board</a></p>\n<p><span>If your DHB isn't on this list, you may still be able to get free antenatal classes. Talk to your lead maternity carer about classes in your area.</span></p>",
+              "lastEdited": "2017-08-31 08:55:42",
+              "created": "2016-09-22 13:35:23",
+              "label": "Accommodation Supplement",
+              "version": 12,
+              "id": 367,
+              "content": "<h5>Who can get it</h5>\n<p>You might get an Accommodation Supplement if you:</p>\n<ul>\n<li>are aged 16 or over</li>\n<li>are an NZ citizen or permanent resident</li>\n<li>normally live in NZ and intend to stay here</li>\n<li>aren't paying rent for a Housing NZ or other social housing property.</li>\n</ul>\n<h5>How much you get</h5>\n<p>How much you get depends on:</p>\n<ul>\n<li>you and your partner's income</li>\n<li>you and your partner's assets</li>\n<li>your accommodation costs</li>\n<li>your family circumstances</li>\n<li>where you live.</li>\n</ul>\n<h5>Call for an assessment</h5>\n<p>You can call Ministry of Social Development&nbsp;and get assessed for the Accommodation Supplement over the phone. When you call, have with you your:</p>\n<ul>\n<li>income (before tax)</li>\n<li>rent or board costs</li>\n<li>mortgage costs and council rates if you own your home</li>\n<li>insurance costs</li>\n<li>any other accommodation costs.</li>\n</ul>\n<p>Freephone: 0800 559 009</p>\n<p><a href=\"http://www.workingforfamilies.govt.nz/calculator/index.jsp\">Accommodation Supplement calculator (Working for Families website)</a></p>\n<p><a href=\"http://www.workandincome.govt.nz/products/a-z-benefits/accommodation-supplement.html#null\">More about Accommodation Supplement</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-31 08:55:34",
+          "created": "2016-09-20 15:05:27",
+          "label": "Help with health costs",
+          "maoriLabel": "Ngā āwhina utu hauora",
+          "version": 12,
+          "id": 128,
+          "containedElementIDs": ":373:376:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 08:55:34",
+              "created": "2016-09-22 13:38:39",
+              "version": 8,
+              "id": 373,
+              "content": "<p><span>Community Services Cards help New Zealanders on a low to middle income with cheaper health costs.</span></p>",
+              "tags": [],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:55:34",
+              "created": "2016-09-22 13:39:13",
+              "label": "Community Services Card",
+              "version": 7,
+              "id": 376,
+              "content": "<h5>What it is</h5>\n<p>A Community Services Card reduces the costs of some healthcare services, including:</p>\n<ul>\n<li>prescriptions</li>\n<li>visits to after-hours doctors or a doctor who's not your usual doctor</li>\n<li>glasses for children under 16</li>\n<li>emergency dental treatment.</li>\n</ul>\n<h5>Who can get it</h5>\n<p>You may get the Community Services Card if you are:</p>\n<ul>\n<li>16 years or over (not a dependent child)</li>\n<li>on a low to middle-income</li>\n<li>a NZ citizen or permanent resident</li>\n<li>normally live in NZ and intend to stay here</li>\n<li>have, or have applied for, refugee or protection status.</li>\n</ul>\n<p>If you're 16-17, you may be able to get a card if you are studying full-time at a university or polytechnic.</p>\n<h5>How much you get</h5>\n<p>You'll still pay for healthcare services, but the card gives you a discount on the costs you'd otherwise pay.</p>\n<p><a href=\"http://www.workandincome.govt.nz/products/a-z-benefits/community-services-card.html#null\">More about the Community Services Card</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-31 08:54:44",
+          "created": "2016-09-20 15:05:36",
+          "label": "Help for single parents",
+          "maoriLabel": "He āwhina mō ngā mātua takitahi",
+          "version": 16,
+          "id": 131,
+          "containedElementIDs": ":379:382:385:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 08:54:44",
+              "created": "2016-09-22 15:06:28",
+              "version": 11,
+              "id": 379,
+              "content": "<p><span>Sole Parent Support is a payment of up to $329.57 a week (after tax) for single parents and sole caregivers of dependent children under 14.</span></p>",
+              "tags": [],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:54:44",
+              "created": "2016-09-22 15:07:06",
+              "label": "Sole Parent Support payment",
+              "version": 10,
+              "id": 382,
+              "content": "<h5>Who can get it</h5>\n<p>You may get Sole Parent Support if you are:</p>\n<ul>\n<li>20 or older</li>\n<li>a single parent or caregiver of 1 or more children under 14</li>\n<li>don't have enough money to support yourself</li>\n<li>an NZ citizen or permanent resident who has been here for at least 2 years and who normally lives here.</li>\n</ul>\n<p>If you've lived in NZ for less than 2 years, call the Ministry of Social Development to find out if you could still be eligible.</p>\n<p>Freephone: 0800 559 009</p>\n<p>Only 1 parent or caregiver can get Sole Parent Support. Shared care of your child could affect your payments.</p>\n<h5>How much you get</h5>\n<p>You'll get a weekly payment of up to $329.57 after tax. You'll also get help to:</p>\n<ul>\n<li>find part-time work if your youngest child is 3 or older</li>\n<li>get ready for future work if your youngest child is under 3.</li>\n</ul>\n<p><span style=\"text-decoration: underline;\"><a href=\"https://www.workandincome.govt.nz/products/benefit-rates/benefit-rates-april-2017.html#null\">Benefit rates</a></span></p>\n<p><a href=\"http://www.workandincome.govt.nz/products/a-z-benefits/sole-parent-support.html#null\">More about Sole Parent Support</a></p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-22 16:14:49",
-              "created": "2016-09-22 15:55:19",
-              "version": 2,
-              "id": 427,
-              "content": "<p><span>Free classes fill up quickly, so book early in your second trimester (around week 16) to get your preferred class. The best time to attend antenatal classes is early in your third trimester (from week 27).</span></p>",
+              "lastEdited": "2017-08-31 08:54:44",
+              "created": "2016-09-22 15:07:48",
+              "label": "Calculating child support",
+              "version": 9,
+              "id": 385,
+              "content": "<p>If you and your partner aren't together anymore, you might be eligible for or need to pay child support.</p>\n<p><a href=\"http://www.ird.govt.nz/childsupport/\">More about child support</a></p>\n<p>Work out how much you should get or how much you have to pay.</p>\n<p><a href=\"http://www.ird.govt.nz/calculators/tool-name/tools-c/calculator-child-support-liability-entitlement.html\">Inland Revenue child support calculator</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-31 08:55:26",
+          "created": "2016-09-20 15:05:48",
+          "label": "Help paying for childcare",
+          "maoriLabel": "He āwhina utu tiaki tamariki",
+          "version": 12,
+          "id": 134,
+          "containedElementIDs": ":388:391:394:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 08:55:26",
+              "created": "2016-09-22 15:09:25",
+              "version": 7,
+              "id": 388,
+              "content": "<p><span>If you have a dependent child who's under 5 &mdash; or under 6 if you get a Child Disability Allowance for them &mdash; you might be able to get a Childcare Subsidy. They need to be in approved care for at least 3 hours a week.</span></p>",
+              "tags": [],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:55:26",
+              "created": "2016-09-22 15:10:01",
+              "label": "Childcare Subsidy",
+              "version": 6,
+              "id": 391,
+              "content": "<h5>What it is</h5>\n<p>Childcare Subsidy is a payment that helps families with the cost of pre-school childcare.</p>\n<h5>Who can get it</h5>\n<p>Your child has to be in approved care for at least 3 hours a week and you must be:</p>\n<ul>\n<li>on a low or middle income</li>\n<li>an NZ citizen or permanent resident, and</li>\n<li>the main person who looks after the child.</li>\n</ul>\n<p>If you're not working or studying, you may get a childcare subsidy for up to 9 hours a week.</p>\n<p>If you&rsquo;re working, studying or there are special circumstances that mean you need childcare, you can get it for up to 50 hours a week.</p>\n<h5>How much you get</h5>\n<p>How much you get depends on:</p>\n<ul>\n<li>the size of your family</li>\n<li>your income</li>\n<li>how many hours a week your child goes to the childcare provider.</li>\n</ul>\n<p>All subsidies are paid directly to the childcare provider.</p>\n<p><a href=\"http://www.workandincome.govt.nz/individuals/a-z-benefits/childcare-subsidy.html\">More about childcare subsidy</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:55:26",
+              "created": "2016-09-22 15:10:28",
+              "label": "20 hours free early childhood education",
+              "version": 5,
+              "id": 394,
+              "content": "<p>All 3, 4 and 5-year-olds can get free early childhood education (ECE) for 6 hours a day &mdash; up to 20 hours a week from ECE providers.</p>\n<p><a href=\"http://www.educationcounts.govt.nz/find-an-els\">Find an approved service that offers 20 Hours ECE</a></p>",
               "tags": [],
               "type": "richtext"
             }
@@ -590,19 +635,20 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 14:23:55",
+          "lastEdited": "2017-08-31 09:01:33",
           "created": "2016-09-20 14:59:05",
-          "label": "Find out about RealMe",
-          "version": 23,
+          "label": "Use RealMe and set up a verified identity",
+          "maoriLabel": "Whakamahia RealMe, whakaritea he tuakiri manatoko",
+          "version": 30,
           "id": 107,
-          "containedElementIDs": ":551:436:439:442:",
+          "containedElementIDs": ":551:436:439:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 14:23:55",
+              "lastEdited": "2017-08-31 09:01:33",
               "created": "2016-09-23 14:22:29",
               "label": "Verify your identity with RealMe",
-              "version": 2,
+              "version": 8,
               "id": 551,
               "text": "Verify your identity with RealMe",
               "tags": [
@@ -611,33 +657,21 @@
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 14:23:55",
+              "lastEdited": "2017-08-31 09:01:33",
               "created": "2016-09-22 16:19:27",
-              "version": 16,
+              "version": 22,
               "id": 436,
-              "content": "<p>RealMe gives you a single login to multiple online services, and if you upgrade to a RealMe verified identity it can also work as your online identity for other services.</p>\n<p>SmartStart doesn&rsquo;t currently use RealMe verified identity. SmartStart&nbsp;uses your RealMe login to save details into Your Profile, or to access the details you&rsquo;ve already saved.</p>\n<p>If you already have your identity linked to your RealMe account, you won&rsquo;t be asked to share your identity details with us.</p>",
+              "content": "<p>RealMe provides the easiest and most secure way for New Zealanders to manage their identities online. RealMe also gives you a single login to multiple online services, including allowing you to save and access your information in SmartStart.</p>\n<p>With RealMe verified identity you have access to a whole range of online services that would otherwise require you to visit the organisation in person &ndash; so you can skip the queues and spend more time doing the things you want.<br /><br />You can use your RealMe verified identity to do things like:</p>\n<ul>\n<li>open a bank account with BNZ</li>\n<li>apply for a student loan or allowance</li>\n<li>enrol to vote</li>\n<li>order birth, death and marriage certificates.</li>\n</ul>\n<p>More services are being added all the time.</p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 14:23:55",
+              "lastEdited": "2017-08-31 09:01:33",
               "created": "2016-09-22 16:23:41",
-              "label": "RealMe Verified Identity",
-              "version": 14,
+              "label": "Set up a RealMe verified identity",
+              "version": 20,
               "id": 439,
-              "content": "<p>A RealMe verified identity allows you to securely and safely prove who you are online to participating organisations.</p>\n<p>You then have access to a whole range of online services that would otherwise require you to visit the organisation in person &ndash; so you can skip the queues and spend more time doing the things you want.</p>\n<p>You can use your verified RealMe identity to do things like:</p>\n<ul>\n<li>open a bank account with BNZ</li>\n<li>apply for a student loan or allowance</li>\n<li>enrol to vote</li>\n<li>order birth, death and marriage certificates.</li>\n</ul>",
-              "tags": [
-                "boac_presentation::auxiliary"
-              ],
-              "type": "richtext"
-            },
-            {
-              "lastEdited": "2016-09-23 14:23:55",
-              "created": "2016-09-22 16:27:52",
-              "label": "How do I get verified?",
-              "version": 12,
-              "id": 442,
-              "content": "<p>Having your verified identity set up and ready to go will save you time when you need it.</p>\n<p>You&rsquo;ll need to:</p>\n<ul>\n<li>have or create a RealMe login &ndash; username and password set up with second factor authentication</li>\n<li>apply online via the RealMe website &ndash; with an existing identity document</li>\n<li>visit a participating NZ Post store &ndash; to have a photo taken to prove you&rsquo;re the same person who applied online.</li>\n</ul>\n<p>You'll then receive an email within five working days to confirm your identity has been added to your RealMe account.</p>\n<p><a href=\"https://www.realme.govt.nz/what-it-is/verify-your-identity/\">More about verifying your identity</a></p>",
+              "content": "<p>If you don&rsquo;t have a RealMe verified identity now is a good time to set one up.</p>\n<p>Having your RealMe verified identity set up and ready to go will save you time when you need it.</p>\n<p>You&rsquo;ll need to:</p>\n<ul>\n<li>have or create a RealMe account &ndash; with a username and password. You&rsquo;ll need your mobile phone for second-factor authentication</li>\n<li>apply online via the RealMe website &ndash; with an existing identity document</li>\n<li>visit a participating NZ Post store &ndash; to have a photo taken to prove you&rsquo;re the same person who applied online.</li>\n</ul>\n<p>You'll then receive an email within five working days to confirm your identity has been added to your RealMe account.</p>\n<p>If you&rsquo;re renewing your passport online, you can verify your identity with RealMe at the same time &ndash; no extra photo required.</p>\n<p><a href=\"https://www.realme.govt.nz/what-it-is/\">Create a RealMe logon</a></p>\n<p><a href=\"https://www.realme.govt.nz/what-it-is/verify-your-identity/\">Apply for a RealMe verified identity</a></p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
@@ -650,19 +684,20 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-21 13:52:02",
+      "lastEdited": "2017-08-31 09:03:05",
       "created": "2016-09-20 17:22:49",
       "label": "Pregnancy weeks 31 to birth",
-      "version": 4,
+      "maoriLabel": "Mai i te wiki 31 ki te whānautanga",
+      "version": 6,
       "id": 152,
       "containedElementIDs": ":197:155:158:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 12:45:52",
+          "lastEdited": "2016-12-02 09:37:14",
           "created": "2016-09-21 13:11:21",
           "label": "Health services your baby can be enrolled in",
-          "version": 27,
+          "version": 30,
           "id": 197,
           "containedElementIDs": ":548:200:212:",
           "tags": [
@@ -670,33 +705,33 @@
           ],
           "elements": [
             {
-              "lastEdited": "2016-09-23 12:45:52",
+              "lastEdited": "2016-12-02 09:37:14",
               "created": "2016-09-23 12:29:27",
-              "version": 5,
+              "version": 8,
               "id": 548,
               "content": "<p>Your baby can get free and subsidised healthcare if they're enrolled&nbsp;with participating healthcare providers.</p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 12:45:52",
+              "lastEdited": "2016-12-02 09:37:14",
               "created": "2016-09-21 13:14:17",
               "label": "Enrol your child with a family doctor",
-              "version": 15,
+              "version": 18,
               "id": 200,
-              "content": "<p>As soon as your baby is born, enrol them with a family doctor if they're not already enrolled.</p>\n<p>Most family doctors give free visits for enrolled children under 13. To find a family doctor, talk to:</p>\n<p>your midwife or obstetrician</p>\n<ul>\n<li>your Well Child Tamariki Ora nurse</li>\n<li>your local District Health Board.</li>\n</ul>\n<p><a href=\"http://healthpages.co.nz/directory/categories/doctors-general-practices?address=\">Find doctors and general practices in your area</a></p>\n<p><a href=\"http://www.health.govt.nz/new-zealand-health-system/key-health-sector-organisations-and-people/district-health-boards/district-health-board-websites\">Find your local District Health Board</a></p>\n<p>Once they're enrolled, children under 13 can get:</p>\n<ul>\n<li>free immunisations at 6 weeks, 3 months and 5 months</li>\n<li>free prescriptions for most medicines</li>\n<li>free visits to their family doctor</li>\n<li>free visits to their nearest participating after-hours clinic.</li>\n</ul>\n<p>To find your nearest participating after-hours clinic, talk to:</p>\n<ul>\n<li>your family doctor or pharmacist, or</li>\n<li>call Healthline: freephone 0800 611 116.</li>\n</ul>",
+              "content": "<p>As soon as your baby is born, enrol them with a family doctor if they're not already enrolled.</p>\n<p>Most family doctors give free visits for enrolled children under 13. To find a family doctor, talk to:</p>\n<ul>\n<li>your midwife or obstetrician</li>\n<li>your Well Child Tamariki Ora nurse</li>\n<li>your local District Health Board.</li>\n</ul>\n<p><a href=\"http://healthpages.co.nz/directory/categories/doctors-general-practices?address=\">Find doctors and general practices in your area</a></p>\n<p><a href=\"http://www.health.govt.nz/new-zealand-health-system/key-health-sector-organisations-and-people/district-health-boards/district-health-board-websites\">Find your local District Health Board</a></p>\n<p>Once they're enrolled, children under 13 can get free:</p>\n<ul>\n<li>immunisations at 6 weeks, 3 months and 5 months</li>\n<li>prescriptions for most medicines</li>\n<li>visits to their family doctor</li>\n<li>visits to their nearest participating after-hours clinic.</li>\n</ul>\n<p>To find your nearest participating after-hours clinic, talk to:</p>\n<ul>\n<li>your family doctor or pharmacist, or</li>\n<li>call Healthline: freephone 0800 611 116.</li>\n</ul>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 12:45:52",
+              "lastEdited": "2016-12-02 09:37:14",
               "created": "2016-09-21 13:23:44",
               "label": "Free dental care for children",
-              "version": 10,
+              "version": 13,
               "id": 212,
-              "content": "<p>Most NZ children are enrolled at birth to get free dental services until they turn 18. You'll need to give permission to enrol your child.</p>\n<p>Free services include:</p>\n<ul>\n<li>regular check-ups</li>\n<li>cleaning</li>\n<li>X-rays</li>\n<li>preventative treatments like fluoride or fissure sealants</li>\n<li>fillings and extractions.</li>\n</ul>\n<p>A child usually has their first check-up when they're 12 to 18 months old.</p>\n<p>If you haven't received a letter or pack about your child's teeth by their first birthday, enrol them by calling 0800 Talk Teeth (0800 825 583).</p>\n<p><a href=\"http://www.health.govt.nz/your-health/services-and-support/health-care-services/visiting-dentist/publicly-funded-dental-care\">Publicly funded dental care for kids</a></p>",
+              "content": "<p>Most NZ children are enrolled at birth to get free dental services until they turn 18. You'll need to give permission to enrol your child.</p>\n<p>Free services include:</p>\n<ul>\n<li>regular check-ups</li>\n<li>cleaning</li>\n<li>X-rays</li>\n<li>preventative treatments like fluoride varnishes or fissure sealants</li>\n<li>fillings and extractions.</li>\n</ul>\n<p>A child usually has their first check-up when they're 12 to 18 months old.</p>\n<p>If you haven't received a letter or pack about your child's teeth by their first birthday, enrol them by calling 0800 Talk Teeth (0800 825 583).</p>\n<p><a href=\"http://www.health.govt.nz/your-health/services-and-support/health-care-services/visiting-dentist/publicly-funded-dental-care\">Publicly funded dental care for kids</a></p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
@@ -706,19 +741,20 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 13:51:28",
+          "lastEdited": "2017-08-31 09:02:29",
           "created": "2016-09-20 17:23:05",
           "label": "Get a car seat ready",
-          "version": 9,
+          "maoriLabel": "Whakaritea he tūru haumaru",
+          "version": 11,
           "id": 155,
           "containedElementIDs": ":227:218:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 13:51:28",
+              "lastEdited": "2017-08-31 09:02:29",
               "created": "2016-09-21 13:44:18",
               "label": "Get a car seat ready",
-              "version": 3,
+              "version": 5,
               "id": 227,
               "text": "Get a car seat ready",
               "tags": [
@@ -727,9 +763,9 @@
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 13:51:28",
+              "lastEdited": "2017-08-31 09:02:29",
               "created": "2016-09-21 13:29:10",
-              "version": 5,
+              "version": 7,
               "id": 218,
               "content": "<p>If you have a car, you&rsquo;ll need to install a child restraint &mdash; like a car seat or an infant capsule &mdash; for your baby.</p>\n<p>You can rent or buy a restraint. You'll need either an infant capsule, or a car seat that's suitable for newborns. Make sure it fits in your car before you buy or rent it.</p>\n<p>If you're buying a second-hand car seat or capsule, check that it:</p>\n<ul>\n<li>has an approved safety standard label</li>\n<li>has an instruction book from the manufacturer</li>\n<li>hasn&rsquo;t been in a crash</li>\n<li>isn't frayed on the harness straps</li>\n<li>has no rust on any metal parts</li>\n<li>has buckles that click shut properly</li>\n<li>isn't past its expiry date.</li>\n</ul>\n<p>Before you leave the hospital, make sure your baby is correctly fitted in the car seat or capsule.</p>\n<p><a href=\"http://www.nzta.govt.nz/safety/vehicle-safety/safety-belts-and-restraints/child-restraints/find-a-child-restraint-technician/\">Find a child restraint technician</a></p>\n<p><a href=\"http://www.nzta.govt.nz/safety/vehicle-safety/safety-belts-and-restraints/child-restraints/using-child-restraints-in-new-zealand/\">Car seat requirements for babies and children</a></p>",
               "tags": [],
@@ -739,19 +775,20 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 13:51:47",
+          "lastEdited": "2017-08-31 09:02:18",
           "created": "2016-09-20 17:25:31",
           "label": "Choose a Well Child Tamariki Ora provider",
-          "version": 15,
+          "maoriLabel": "Kōwhiria he kaiwhakarato Tamariki Ora",
+          "version": 18,
           "id": 158,
           "containedElementIDs": ":230:221:224:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 13:51:47",
+              "lastEdited": "2017-08-31 09:02:18",
               "created": "2016-09-21 13:45:16",
               "label": "Choose a Well Child Tamariki Ora provider",
-              "version": 4,
+              "version": 7,
               "id": 230,
               "text": "Join Well Child Tamariki Ora",
               "tags": [
@@ -760,19 +797,19 @@
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 13:51:47",
+              "lastEdited": "2017-08-31 09:02:18",
               "created": "2016-09-21 13:38:09",
-              "version": 8,
+              "version": 11,
               "id": 221,
-              "content": "<p>Well Child Tamariki Ora is a free service of health checks, visits and support for all children under 5.</p>\n<p>Join a Well Child Tamariki Ora provider &mdash; like Plunket or an iwi or Pacific health service &mdash; as soon as your baby is born. Your lead maternity carer or your hospital will give you the forms to join.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-you-and-your-child/well-child-tamariki-ora-visits/find-well-child-tamariki-ora-provider\">Find a Well Child Tamariki Ora provider in your region</a></p>",
+              "content": "<p>Well Child Tamariki Ora is a free service of health checks, visits and support for all children under 5.</p>\n<p>Join a Well Child Tamariki Ora provider as soon as your baby is born. Your lead maternity carer or your hospital will give you the forms to join.</p>\n<p>Plunket is one provider of Well Child Tamariki Ora, but you can choose another provider such as an iwi or Pacific health service.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-you-and-your-child/well-child-tamariki-ora-visits/find-well-child-tamariki-ora-provider\">Find a Well Child Tamariki Ora provider in your region</a></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 13:51:47",
+              "lastEdited": "2017-08-31 09:02:18",
               "created": "2016-09-21 13:39:01",
               "label": "What you'll get",
-              "version": 7,
+              "version": 10,
               "id": 224,
               "content": "<p>When you join Well Child Tamariki Ora you'll get:</p>\n<ul>\n<li>free health checks for you and your baby from a nurse or registered health practitioner</li>\n<li>information on breastfeeding and safe sleep practices</li>\n<li>information on protecting and improving your child's health and development</li>\n<li>a book to track your child's progress and health record</li>\n<li>help to find any other information or services you need.</li>\n</ul>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-you-and-your-child/well-child-tamariki-ora-visits\">Well Child Tamariki Ora visits</a></p>",
               "tags": [
@@ -787,119 +824,126 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 11:45:33",
+      "lastEdited": "2017-08-31 08:52:43",
       "created": "2016-09-23 11:45:09",
       "label": "Baby’s due date",
-      "version": 3,
+      "maoriLabel": "Te wā whānau kua whakaritea",
+      "version": 5,
       "id": 542,
       "containedElementIDs": "::",
       "tags": [],
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-28 14:09:02",
+      "lastEdited": "2017-09-29 15:33:22",
       "created": "2016-09-20 14:00:39",
       "label": "New baby weeks 1-6",
-      "version": 8,
+      "maoriLabel": "Ngā wiki 1-6 o te pēpi hou",
+      "version": 21,
       "id": 98,
-      "containedElementIDs": ":161:562:164:167:170:173:176:179:",
+      "containedElementIDs": ":161:787:164:733:170:167:562:803:173:176:179:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 15:13:02",
+          "lastEdited": "2017-09-14 14:29:11",
           "created": "2016-09-20 17:26:33",
           "label": "Register the birth",
-          "version": 47,
+          "maoriLabel": "Rēhitatia te whānautanga",
+          "version": 103,
           "id": 161,
-          "containedElementIDs": ":340:343:346:349:352:355:274:277:280:554:",
+          "containedElementIDs": ":340:343:346:349:352:355:274:277:280:574:577:580:583:554:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 15:13:02",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 15:51:03",
               "label": "Register the birth",
-              "version": 24,
+              "version": 79,
               "id": 340,
-              "text": "Register the birth",
+              "text": "Register the birth. At the same time you can:",
               "tags": [
                 "boac_presentation::task"
               ],
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 15:13:02",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 15:53:13",
-              "version": 20,
+              "version": 75,
               "id": 343,
-              "content": "<p><span>Other tasks you can do while you're registering the birth.</span></p>",
+              "content": "<p><span>You need to register the birth of your baby within 2 months of the birth. It's free to register the birth but you have to pay for a birth certificate. You can register your baby's birth and order a birth certificate (if you choose) online.</span></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 15:13:02",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 15:54:29",
               "label": "Apply for an IRD number for your child",
-              "version": 19,
+              "version": 74,
               "id": 346,
               "text": "Apply for an IRD number for your child.",
               "tags": [
+                "boac_presentation::subtask",
                 "boac_presentation::task"
               ],
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 15:13:03",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 15:55:19",
               "label": "Add your child to your Working for Families application",
-              "version": 17,
+              "version": 72,
               "id": 349,
               "text": "Add your child to your Working for Families application.",
               "tags": [
+                "boac_presentation::subtask",
                 "boac_presentation::task"
               ],
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 15:13:03",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 15:56:06",
-              "label": "If you're on a benefit, tell Work and Income your child has been born",
-              "version": 16,
+              "label": "If you're on a benefit, tell the Ministry of Social Development your child has been born",
+              "version": 71,
               "id": 352,
-              "text": "If you're on a benefit, tell Work and Income your child has been born.",
+              "text": "If you're on a benefit, tell the Ministry of Social Development your child has been born.",
               "tags": [
+                "boac_presentation::subtask",
                 "boac_presentation::task"
               ],
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 15:13:03",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 15:56:45",
               "label": "Order a birth certificate",
-              "version": 15,
+              "version": 70,
               "id": 355,
               "text": "Order a birth certificate.",
               "tags": [
+                "boac_presentation::subtask",
                 "boac_presentation::task"
               ],
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 15:13:02",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 14:35:47",
-              "version": 30,
+              "version": 85,
               "id": 274,
-              "content": "<p><span>You can register your baby's birth &mdash; and order a birth certificate &mdash; online. You need to register within 2 months of the birth. It's free to register the birth but you have to pay for a birth certificate.</span></p>",
+              "content": "<p><span>When you register your baby's birth there are other services you can do at the same time.</span></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 15:13:02",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 14:36:28",
               "label": "Register the birth online",
-              "version": 29,
+              "version": 84,
               "id": 277,
               "internalLinkPageID": 0,
-              "externalURL": "https://registermybaby.dia.govt.nz/birth.m",
+              "externalURL": "https://smartstart.services.govt.nz/register-my-baby",
               "linkText": "Register the birth online",
               "tags": [
                 "boac_presentation::link-button"
@@ -907,19 +951,67 @@
               "type": "url"
             },
             {
-              "lastEdited": "2016-09-23 15:13:02",
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-21 14:36:44",
-              "version": 28,
+              "version": 83,
               "id": 280,
-              "content": "<p>When you register your baby you can also:&nbsp;</p>\n<ul>\n<li>apply for&nbsp;your baby&rsquo;s birth certificate&nbsp;&mdash;&nbsp;this costs $26.50 or $39.80 for a pack that includes a decorative birth certificate</li>\n<li>apply for&nbsp;an&nbsp;IRD&nbsp;number for your baby &mdash; you&rsquo;ll need this to claim Working for Families payments or to open a KiwiSaver or bank account in their name</li>\n<li>if you're on a benefit &mdash;&nbsp;tell Work and Income your child has been born. Work and Income can add your child to your benefit&nbsp;and you won't need to give them a birth certificate.</li>\n</ul>",
+              "content": "<h4>Other services you can do at the same time</h4>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 15:13:03",
+              "lastEdited": "2017-09-14 14:29:11",
+              "created": "2016-10-21 13:49:15",
+              "label": "Apply for an IRD number for your baby",
+              "version": 53,
+              "id": 574,
+              "content": "<p><span>You can apply for an IRD number for your baby when you register their birth. </span></p><p><span>You'll need an IRD number for your baby if you want to:</span></p><ul><li><span>claim Working for Families Tax Credits payments</span></li><li>open a KiwiSaver account in their name</li><li>open a bank account in their name. &nbsp;&nbsp;</li></ul>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-09-14 14:29:11",
+              "created": "2016-10-21 13:49:15",
+              "label": "Update your Working for Families Tax Credits for your baby",
+              "version": 53,
+              "id": 577,
+              "content": "<p><span>If you're registered for Working for Families Tax Credits (WfFTC) you should contact Inland Revenue to add your baby to your records. </span></p>\n<p><span>Inland Revenue will start WfFTC payments, but you&rsquo;ll need an IRD number for your baby for the payments to continue.</span></p>\n<p><span>When you register your baby's birth you can:</span></p>\n<ul>\n<li><span>apply for their IRD number at the same time, and</span></li>\n<li><span>add them to your records by including your own IRD number on their birth registration. </span></li>\n</ul>\n<p><span>If you're not registered for WfFTC, you may be entitled to receive payments.</span></p>\n<p><a class=\"external-link\" title=\"Follow link\" href=\"http://www.ird.govt.nz/wff-tax-credits/understanding/eligible/\" rel=\"nofollow\">Find out if you're entitled to receive WfFTC</a></p>\n<p><span style=\"font-size: 10.0pt; font-family: 'Arial','sans-serif';\"><a href=\"http://www.ird.govt.nz/contact-us/?id=globalnav\">Contact IRD</a></span></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-09-14 14:29:12",
+              "created": "2016-10-21 13:49:15",
+              "label": "Add your baby to your Ministry of Social Development benefit",
+              "version": 53,
+              "id": 580,
+              "content": "<p>If you're an existing Ministry of Social Development (MSD) client you can choose to notify MSD your baby has been born when you register their birth.</p><p>When MSD receive your notification and baby's birth record from Births Deaths and Marriages, they will contact you to discuss how your new baby changes your benefits and services.</p><p>If you choose this option, you won't need to provide MSD with a birth certificate for your baby and you may not need to visit an MSD office.</p><p>You will need to provide your MSD client number on your baby's birth registration.</p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-09-14 14:29:12",
+              "created": "2016-10-21 13:49:15",
+              "label": "Order your baby's birth certificate",
+              "version": 53,
+              "id": 583,
+              "content": "<p>It costs:</p>\n<ul>\n<li>$33 for a standard birth certificate</li>\n<li>$35 for a decorative birth certificate, or</li>\n<li>$55 for a pack that includes both a standard and a decorative birth certificate.</li>\n</ul>\n<p>You can order and pay for a birth certificate when you register your baby's birth.&nbsp;</p>\n<p>If you have already registered your baby, you are still able to order a birth certificate. You can do this by requesting an order over the phone, online, by post or in person.</p>\n<p><a href=\"https://www.govt.nz/browse/nz-passports-and-citizenship/proving-and-protecting-your-identity/get-a-birth-certificate/#how-to-apply\">Get a birth certificate</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-09-14 14:29:11",
               "created": "2016-09-23 15:12:37",
               "label": "Registering your new baby and getting a birth certificate",
-              "version": 2,
+              "version": 57,
               "id": 554,
               "internalLinkPageID": 0,
               "externalURL": "https://www.govt.nz/browse/family-and-whanau/having-a-baby/registering-a-new-baby-and-getting-a-birth-certificate/#how-to-register-your-baby",
@@ -931,20 +1023,21 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-28 14:07:43",
-          "created": "2016-09-28 14:07:29",
-          "label": "Apply for a child passport",
-          "version": 4,
-          "id": 562,
-          "containedElementIDs": ":565:",
+          "lastEdited": "2017-09-15 10:51:14",
+          "created": "2017-04-05 16:15:55",
+          "label": "Choose a baby name",
+          "maoriLabel": "Te kōwhiri ingoa pēpi",
+          "version": 20,
+          "id": 787,
+          "containedElementIDs": ":790:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-28 14:07:43",
-              "created": "2016-09-28 14:07:43",
-              "version": 1,
-              "id": 565,
-              "content": "<p>Babies and children under 16 must travel on their own passports. A parent or legal guardian has to give consent for the passport to be issued. You need to complete an application form.</p>\n<p><a href=\"https://www.passports.govt.nz/vwluResources/child-form.pdf/%24file/child-form.pdf\">Application for a New Zealand child passport (PDF 1.4 MB)</a></p>\n<p>You can't apply for a child's passport online. You can complete an application form online but you'll need to print it off, sign it and either send or take it into the Department of Internal Affairs.</p>\n<p>It costs $105 and takes up to 10 working days for the passport to be issued. It will cost more if you're applying from overseas or need an urgent passport.</p>",
+              "lastEdited": "2017-09-15 10:51:14",
+              "created": "2017-04-05 16:17:28",
+              "version": 17,
+              "id": 790,
+              "content": "<p>Birth registration is when you officially give your child a legal name. Every baby born in New Zealand must be registered with Births, Deaths and Marriages &mdash; usually within 2 months of being born. This means that there's still some time after the birth for the important decision of choosing a name.</p>\n<p><span>If you're looking for ideas, the Department of Internal Affairs releases all of the top baby names recorded in New Zealand each year.</span></p>\n<p><span><a href=\"https://smartstart.services.govt.nz/news/baby-names/\">Top baby names from 1954 to 2016</a></span></p>\n<p><span style=\"font-size: 10.5pt; font-family: Arial, sans-serif; color: #333333; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><a href=\"https://www.dia.govt.nz/press.nsf/d77da9b523f12931cc256ac5000d19b6/98fbaca367aaef57cc25819a00791da3\">Most popular Māori baby names for 2016</a></span></p>",
               "tags": [],
               "type": "richtext"
             }
@@ -952,30 +1045,31 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-10-05 14:04:17",
+          "lastEdited": "2017-12-07 16:09:56",
           "created": "2016-09-20 17:26:52",
           "label": "Breastfeeding",
-          "version": 21,
+          "maoriLabel": "Te ngote ū",
+          "version": 28,
           "id": 164,
           "containedElementIDs": ":286:292:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-10-05 14:04:17",
+              "lastEdited": "2017-12-07 16:09:56",
               "created": "2016-09-21 14:39:26",
-              "version": 12,
+              "version": 19,
               "id": 286,
-              "content": "<p>The Ministry of Health recommends that you breastfeed your baby. Breastfeeding:</p>\n<ul>\n<li>provides all the food and fluid your baby needs for around their first 6 months</li>\n<li>can protect your baby from sickness and dying suddenly in their sleep</li>\n<li>helps your baby feel safe and secure.</li>\n</ul>\n<p>Breastfeeding can be hard at first. Your LMC will help you prepare for breastfeeding and can help you with breastfeeding once your baby is born.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/breastfeeding-perfect-you-and-your-baby/how-breastfeed\">How to breastfeed</a></p>",
+              "content": "<p>The Ministry of Health recommends that you breastfeed your baby. Breastfeeding:</p>\n<ul>\n<li>provides all the food and fluid your baby needs for around their first 6 months</li>\n<li>can protect your baby from sickness and dying suddenly in their sleep</li>\n<li>helps your baby feel safe and secure.</li>\n</ul>\n<p>Breastfeeding can be hard at first. Your LMC will help you prepare for breastfeeding and can help you with breastfeeding once your baby is born.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/breastfeeding-perfect-you-and-your-baby/how-breastfeed\">How to breastfeed</a></p>\n<p><a href=\"http://www.breastfednz.co.nz\">BreastFedNZ breastfeeding app</a></p>\n<p><a href=\"http://www.lalecheleague.org.nz/get-help\">Find your local La Leche League group</a></p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-10-05 14:04:18",
+              "lastEdited": "2017-12-07 16:09:56",
               "created": "2016-09-21 14:40:31",
               "label": "If you can't breastfeed",
-              "version": 10,
+              "version": 17,
               "id": 292,
-              "content": "<p><span>You can use donated breast milk or infant formula. Infant formula is the only suitable breast milk substitute for babies under 1.</span></p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/breastfeeding-perfect-you-and-your-baby/donated-breast-milk\">Donated breast milk</a></p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/formula-feeding\">Formula feeding</a></p>",
+              "content": "<p>You can use donated breast milk or infant formula. Infant formula is the only suitable breast milk substitute for babies under 1.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/breastfeeding-perfect-you-and-your-baby/donated-breast-milk\">Donated breast milk</a></p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/formula-feeding\">Formula feeding</a></p>",
               "tags": [
                 "boac_presentation::auxiliary"
               ],
@@ -985,20 +1079,89 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-21 15:47:39",
-          "created": "2016-09-20 17:27:03",
-          "label": "Parenting classes and support",
-          "version": 18,
-          "id": 167,
-          "containedElementIDs": ":301:",
+          "lastEdited": "2017-08-31 08:53:46",
+          "created": "2016-12-01 16:13:30",
+          "label": "Safe sleeping",
+          "maoriLabel": "Te moe haumaru",
+          "version": 34,
+          "id": 733,
+          "containedElementIDs": ":736:763:742:745:748:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-21 15:47:39",
-              "created": "2016-09-21 14:45:51",
-              "version": 9,
-              "id": 301,
-              "content": "<p>Plunket provides free classes for parents about child development and parenting from birth until your child starts school.</p>\n<p><a href=\"http://www.plunket.org.nz/what-we-do/what-we-offer/parenting-education/parenting-education-programme-pepe/\">Plunket Parenting Education Programme</a></p>\n<p><a href=\"http://www.plunket.org.nz/plunket-near-you/?region=&amp;service=Parenting+education\">Find a Plunket centre</a></p>\n<p>The Family Services Directory lists family services and support in your area. You can also call Healthline or Plunketline for advice about your child's health and development.</p>\n<p><a href=\"https://www.familyservices.govt.nz/directory/\">Family Services Directory</a></p>\n<p>Healthline freephone: 0800 611 116</p>\n<p>Plunketline freephone: 0800 933 922</p>",
+              "lastEdited": "2017-08-31 08:53:46",
+              "created": "2016-12-01 16:14:01",
+              "version": 24,
+              "id": 736,
+              "content": "<p>Keeping your baby safe in bed is essential to their health and wellbeing and in bringing you peace of mind. This is very easy to achieve for you and your baby.</p>\n<p>Ensure that your baby is sleeping in a safe way by making sure that they:</p>\n<ul>\n<li>always sleep on their back to keep their airways open and clear</li>\n<li>are in their own bassinet, cot or other baby bed that is free from other people who might lay on top of them</li>\n<li>are put back in their own bed after feeding &ndash; don&rsquo;t fall asleep with them</li>\n<li>have clothing and bedding that keeps them at a comfortable temperature &ndash; one more layer of clothing than you would wear is enough; too many layers can make your baby hot and upset them</li>\n<li>are in a smoke free environment to allow baby to breathe air free of smoke</li>\n<li>have a parent who is alert to their baby&rsquo;s needs and free from alcohol and drugs</li>\n<li>have their baby&rsquo;s bed in the parents&rsquo; room at night for the first six months of life.&nbsp;</li>\n</ul>",
+              "tags": [],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:53:47",
+              "created": "2016-12-02 15:07:05",
+              "label": "Make sure baby's bed is safe",
+              "version": 6,
+              "id": 763,
+              "content": "<p>Baby&rsquo;s bed is safe when:</p>\n<ul>\n<li>it has a firm and flat mattress &ndash; to keep baby&rsquo;s airways open and clear</li>\n<li>it has no gaps between the frame and the mattress &ndash; that could trap or wedge baby</li>\n<li>it is close to the parents/caregivers at night for the first 6 months since birth</li>\n<li>there is nothing in the bed that might cover baby&rsquo;s face, lift their head or choke them &ndash; no pillows, toys, loose bedding, bumper pads or necklaces (including amber beads and &lsquo;teething&rsquo; necklaces).</li>\n</ul>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:53:47",
+              "created": "2016-12-01 16:45:16",
+              "label": "Safe wrapping",
+              "version": 16,
+              "id": 742,
+              "content": "<p>Wrapping/swaddling your baby is a useful method to help baby settle and sleep on their back. This method can help to reduce the risk of Sudden Infant Death Syndrome (SIDS) and development dysplasia of the hip.</p>\n<p><a href=\"http://www.sidsandkids.org.nz/safe-wrapping/\">Wrapping your baby safely</a></p>\n<p>&nbsp;</p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:53:47",
+              "created": "2016-12-01 16:46:53",
+              "version": 12,
+              "id": 745,
+              "internalLinkPageID": 0,
+              "externalURL": "https://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/first-6-weeks/keeping-baby-safe-their-own-bed-first-6-weeks",
+              "linkText": "Keeping baby safe in bed",
+              "tags": [],
+              "type": "url"
+            },
+            {
+              "lastEdited": "2017-08-31 08:53:47",
+              "created": "2016-12-01 16:47:47",
+              "version": 10,
+              "id": 748,
+              "internalLinkPageID": 0,
+              "externalURL": "https://www.plunket.org.nz/your-child/newborn-to-6-weeks/sleep/",
+              "linkText": "More sleep advice - baby's sleeping patterns",
+              "tags": [],
+              "type": "url"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-31 08:53:08",
+          "created": "2016-09-20 17:27:20",
+          "label": "Coping with a crying baby",
+          "maoriLabel": "Te whakarata pēpi tangitangi",
+          "version": 21,
+          "id": 170,
+          "containedElementIDs": ":319:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 08:53:08",
+              "created": "2016-09-21 14:48:50",
+              "version": 14,
+              "id": 319,
+              "content": "<p><strong><span data-redactor-tag=\"strong\">If you ever think your baby has been hurt, call 111.</span></strong></p>\n<p>All babies cry and sometimes it's hard to work out why they're crying. To help stop your baby crying, you could try:</p>\n<ul>\n<li>feeding your baby</li>\n<li>holding them close &mdash; you could use a sling or front pack</li>\n<li>rocking your baby in the pram</li>\n<li>going out for a walk or drive</li>\n<li>playing some music or white noise.</li>\n</ul>\n<p><strong><span data-redactor-tag=\"strong\">If your baby&rsquo;s cry is unusual &mdash; for example, piercing and high pitched &mdash; take them to a doctor straight away.</span></strong></p>\n<p>It can be really hard when your baby keeps crying and you don't know why and nothing you do helps. Sometimes it's best to put your baby down gently in a safe place, walk away and take a break.</p>\n<p>You can also talk to your midwife or Well Child Tamariki Ora nurse about how to calm your baby. </p>\n<p>PlunketLine is another service available to all families, whānau and caregivers, 24 hours a day, 7 days a week. Calls are free from cell phones.</p>\n<p>PlunketLine freephone: 0800 933 922</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/coping-crying-baby\">Coping with a crying baby</a></p>\n<p>Never ever shake a baby. Never leave a baby alone with anyone who might lose control. A single moment of losing control can damage a baby forever. Babies can die if they're shaken.</p>\n<p><a href=\"http://www.kidshealth.org.nz/shaken-baby-syndrome\">Shaken baby syndrome</a></p>",
               "tags": [],
               "type": "richtext"
             }
@@ -1006,20 +1169,66 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-21 15:41:14",
-          "created": "2016-09-20 17:27:20",
-          "label": "Coping with a crying baby",
-          "version": 15,
-          "id": 170,
-          "containedElementIDs": ":319:",
+          "lastEdited": "2017-08-31 08:53:30",
+          "created": "2016-09-20 17:27:03",
+          "label": "Parenting classes and support",
+          "maoriLabel": "He akoranga, he tautoko tiaki tamariki",
+          "version": 22,
+          "id": 167,
+          "containedElementIDs": ":301:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-21 15:41:14",
-              "created": "2016-09-21 14:48:50",
-              "version": 8,
-              "id": 319,
-              "content": "<p><strong><span data-redactor-tag=\"strong\">If you ever think your baby has been hurt, call 111.</span></strong></p>\n<p>All babies cry and sometimes it's hard to work out why they're crying. To help stop your baby crying, you could try:</p>\n<ul>\n<li>feeding your baby</li>\n<li>holding them close &mdash; you could use a sling or front pack</li>\n<li>rocking your baby in the pram</li>\n<li>going out for a walk or drive</li>\n<li>playing some music or white noise.</li>\n</ul>\n<p><strong><span data-redactor-tag=\"strong\">If your baby&rsquo;s cry is unusual &mdash; for example, piercing and high pitched &mdash; take them to a doctor straight away.</span></strong></p>\n<p>It can be really hard when your baby keeps crying and you don't know why and nothing you do helps. Sometimes it's best to put your baby down gently in a safe place, walk away and take a break.</p>\n<p>You can also talk to your midwife or Well Child Tamariki Ora nurse about how to calm your baby.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/first-year/helpful-advice-during-first-year/coping-crying-baby\">Coping with a crying baby</a></p>\n<p>Never ever shake a baby. Never leave a baby alone with anyone who might lose control. A single moment of losing control can damage a baby forever. Babies can die if they're shaken.</p>\n<p><a href=\"http://www.kidshealth.org.nz/shaken-baby-syndrome\">Shaken baby syndrome</a></p>",
+              "lastEdited": "2017-08-31 08:53:30",
+              "created": "2016-09-21 14:45:51",
+              "version": 13,
+              "id": 301,
+              "content": "<p>Plunket provides free classes for parents about child development and parenting from birth until your child starts school.</p>\n<p><a href=\"http://www.plunket.org.nz/what-we-do/what-we-offer/parenting-education/parenting-education-programme-pepe/\">Plunket Parenting Education Programme</a></p>\n<p><a href=\"http://www.plunket.org.nz/plunket-near-you/?region=&amp;service=Parenting+education\">Find a Plunket centre</a></p>\n<p>The Family Services Directory lists family services and support in your area. You can also call on Healthline, PlunketLine or Parent Helpline for advice about your child&rsquo;s health and development.</p>\n<p><a href=\"https://www.familyservices.govt.nz/directory/\">Family Services Directory</a></p>\n<p>Healthline freephone: 0800 611 116</p>\n<p>PlunketLine freephone: 0800 933 922</p>\n<p>Parent Helpline: 0800 568 856</p>",
+              "tags": [],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-31 08:52:50",
+          "created": "2016-09-28 14:07:29",
+          "label": "Apply for a child passport",
+          "maoriLabel": "Te tono i te uruwhenua tamaiti",
+          "version": 8,
+          "id": 562,
+          "containedElementIDs": ":565:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 08:52:50",
+              "created": "2016-09-28 14:07:43",
+              "version": 5,
+              "id": 565,
+              "content": "<p>Babies and children under 16 must travel on their own passports. A parent or legal guardian has to give consent for the passport to be issued. You need to complete an application form.</p>\n<p><a href=\"https://www.passports.govt.nz/assets/Uploads/Forms/Child.pdf\">Application for a New Zealand child passport (PDF 1.4 MB)</a></p>\n<p>You can't apply for a child's passport online. You can complete an application form online but you'll need to print it off, sign it and either send or take it into the Department of Internal Affairs.</p>\n<p>It costs $105 and takes up to 10 working days for the passport to be issued. It will cost more if you're applying from overseas or need an urgent passport.</p>",
+              "tags": [],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-09-29 15:32:44",
+          "created": "2017-09-29 15:26:57",
+          "label": "Sun protection",
+          "version": 6,
+          "id": 803,
+          "containedElementIDs": ":806:",
+          "tags": [
+            "boac_presentation::non-chronological"
+          ],
+          "elements": [
+            {
+              "lastEdited": "2017-09-29 15:32:44",
+              "created": "2017-09-29 15:26:58",
+              "version": 5,
+              "id": 806,
+              "content": "<p>Baby's skin is very fragile so try to keep them out of direct sunlight. This is especially important between 10am and 4pm from September to April.</p>\n<p>When baby starts moving try to cover up as much skin as possible and keep them in the shade. If you apply sunscreen, it's best to test it on a small patch of baby's skin before using regularly.</p>\n<p><a href=\"http://www.sunsmart.org.nz/be-sunsmart\">Be SunSmart</a></p>",
               "tags": [],
               "type": "richtext"
             }
@@ -1073,10 +1282,10 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 11:50:12",
+          "lastEdited": "2016-11-28 11:12:04",
           "created": "2016-09-20 17:28:05",
           "label": "Postnatal depression",
-          "version": 11,
+          "version": 12,
           "id": 179,
           "containedElementIDs": ":271:",
           "tags": [
@@ -1084,11 +1293,11 @@
           ],
           "elements": [
             {
-              "lastEdited": "2016-09-23 11:50:12",
+              "lastEdited": "2016-11-28 11:12:04",
               "created": "2016-09-21 14:34:09",
-              "version": 8,
+              "version": 9,
               "id": 271,
-              "content": "<p>Postnatal depression affects some parents in the first year after having a baby.</p><h5>Signs</h5><p>It's normal to feel down, unsure or anxious in the first few weeks after having your baby. If these feelings last longer than a few weeks they could be signs of postnatal depression.</p><p>Signs include:</p><ul><li>crying a lot</li><li>feeling hopeless, alone or guilty</li><li>feeling anxious when doing things you normally do with ease</li><li>feeling angry</li><li>not sleeping</li><li>feeling you're a bad parent</li><li>thoughts of harming you or your baby.</li></ul><h5>Getting help</h5><p>Postnatal depression is treated with medication and therapy. Talk to your:</p><ul><li>midwife or obstetrician</li><li>Well Child Tamariki Ora nurse</li><li>family doctor or practice nurse.</li></ul><p>You can also call the depression or Plunket advice lines:</p><ul><li>Depression Helpline freephone: 0800 111 757</li><li>Plunketline freephone: 0800 933 922</li></ul>",
+              "content": "<p>Postnatal depression affects some parents in the first year after having a baby.</p><h5>Signs</h5><p>It's normal to feel down, unsure or anxious in the first few weeks after having your baby. If these feelings last longer than a few weeks they could be signs of postnatal depression.</p><p>Signs include:</p><ul><li>crying a lot</li><li>feeling hopeless, alone or guilty</li><li>feeling anxious when doing things you normally do with ease</li><li>feeling angry</li><li>not sleeping</li><li>feeling you're a bad parent</li><li>thoughts of harming you or your baby.</li></ul><h5>Getting help</h5><p>Postnatal depression is treated with medication and therapy. Talk to your:</p><ul><li>midwife or obstetrician</li><li>Well Child Tamariki Ora nurse</li><li>family doctor or practice nurse.</li></ul><p>You can also call the depression or Plunket advice lines:</p><ul><li>Depression Helpline freephone: 0800 111 757</li><li>PlunketLine freephone: 0800 933 922</li></ul>",
               "tags": [],
               "type": "richtext"
             }
@@ -1099,14 +1308,107 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 11:05:28",
+      "lastEdited": "2017-08-31 08:52:15",
       "created": "2016-09-20 17:34:24",
       "label": "Baby 6 weeks to 3 months",
-      "version": 16,
+      "maoriLabel": "Te wiki 6 ki te marama 3 o te pēpi",
+      "version": 22,
       "id": 182,
-      "containedElementIDs": ":188:454:",
+      "containedElementIDs": ":454:764:188:",
       "tags": [],
       "elements": [
+        {
+          "lastEdited": "2017-08-31 08:51:55",
+          "created": "2016-09-22 16:46:21",
+          "label": "Check if the financial help you can get has changed",
+          "maoriLabel": "Tirohia me i hurihia ngā āwhina ā-pūtea",
+          "version": 19,
+          "id": 454,
+          "containedElementIDs": ":457:460:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 08:51:55",
+              "created": "2016-09-22 16:47:21",
+              "label": "Check if the financial help you can get has changed",
+              "version": 15,
+              "id": 457,
+              "text": "Check if the financial help you can get has changed",
+              "tags": [
+                "boac_presentation::task"
+              ],
+              "type": "text"
+            },
+            {
+              "lastEdited": "2017-08-31 08:51:55",
+              "created": "2016-09-22 17:02:18",
+              "version": 14,
+              "id": 460,
+              "content": "<p>Your circumstances may have changed and you could be eligible for different financial help.</p>\n<p><a href=\"../#content-358\">Check what you could get</a></p>",
+              "tags": [],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-31 08:52:25",
+          "created": "2016-12-02 15:19:48",
+          "label": "Help for children with special needs",
+          "maoriLabel": "He āwhina mō ngā tamariki matea tauwhāiti",
+          "version": 22,
+          "id": 764,
+          "containedElementIDs": ":767:770:773:776:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-08-31 08:52:25",
+              "created": "2016-12-02 15:20:44",
+              "version": 15,
+              "id": 767,
+              "content": "<p>Funding, services and support is available to help children with special needs and disabilities.</p>",
+              "tags": [],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:52:25",
+              "created": "2016-12-02 15:22:42",
+              "label": "Child Disability Allowance",
+              "version": 14,
+              "id": 770,
+              "content": "<p>The Child Disability Allowance is a fortnightly payment made to the main carer of a child or young person with a serious disability. It is paid in recognition of the extra care and attention needed for that child.</p>\n<p><a href=\"https://www.workandincome.govt.nz/products/a-z-benefits/child-disability-allowance.html\">More about Child Disability Allowance</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:52:25",
+              "created": "2016-12-02 15:28:39",
+              "label": "Early Intervention Service",
+              "version": 12,
+              "id": 773,
+              "content": "<p>The Early Intervention Service can work with children from birth until they start school. The service helps children who have a:</p>\n<ul>\n<li>disability</li>\n<li>communication difficulty</li>\n<li>developmental delay</li>\n<li>learning delay</li>\n<li>behaviour difficulty</li>\n</ul>\n<p>Children may receive support from:</p>\n<ul>\n<li>advisors on deaf children</li>\n<li>early intervention teachers</li>\n<li>education support workers</li>\n<li>kaitakawaenga (Māori cultural advisors)</li>\n<li>psychologists</li>\n<li>speech-language therapists.</li>\n</ul>\n<p>The Early Intervention teams work closely with specialists from the Ministry of Health, such as audiologists, physiotherapists, paediatricians, dieticians and occupational therapists to ensure children who need extra support are able to access it.</p>\n<p>The Early intervention service works with families and early childhood educators who ask for help when they are concerned about the learning and development of young children. This may concern a child&rsquo;s developmental delay, disability, behaviour and/or communication difficulties.</p>\n<p class=\"MsoNormal\"><a href=\"http://www.education.govt.nz/early-childhood/teaching-and-learning/learning-tools-and-resources/early-intervention/\">Early Intervention Service</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            },
+            {
+              "lastEdited": "2017-08-31 08:52:25",
+              "created": "2016-12-02 15:33:31",
+              "label": "Support for Parents",
+              "version": 10,
+              "id": 776,
+              "content": "<p>There are many organisations and groups around the country that you can get in touch with for practical support, advice, resources and contact details of specialists. It's really valuable to be able to talk with people who understand what it's like to parent a child with special education needs.</p>\n<p><a href=\"https://parents.education.govt.nz/learning-support/learning-support-needs/groups-that-can-support-you/\">Groups that can support you</a></p>",
+              "tags": [
+                "boac_presentation::auxiliary"
+              ],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
         {
           "lastEdited": "2016-09-23 11:42:43",
           "created": "2016-09-20 17:35:15",
@@ -1129,50 +1431,18 @@
             }
           ],
           "type": "card"
-        },
-        {
-          "lastEdited": "2016-09-23 13:52:52",
-          "created": "2016-09-22 16:46:21",
-          "label": "Check if the financial help you can get has changed",
-          "version": 17,
-          "id": 454,
-          "containedElementIDs": ":457:460:",
-          "tags": [],
-          "elements": [
-            {
-              "lastEdited": "2016-09-23 13:52:52",
-              "created": "2016-09-22 16:47:21",
-              "label": "Check if the financial help you can get has changed",
-              "version": 13,
-              "id": 457,
-              "text": "Check if the financial help you can get has changed",
-              "tags": [
-                "boac_presentation::task"
-              ],
-              "type": "text"
-            },
-            {
-              "lastEdited": "2016-09-23 13:52:52",
-              "created": "2016-09-22 17:02:18",
-              "version": 12,
-              "id": 460,
-              "content": "<p>Your circumstances may have changed and you could be eligible for different financial help.</p>\n<p><a href=\"../#content-358\">Check what you could get</a></p>",
-              "tags": [],
-              "type": "richtext"
-            }
-          ],
-          "type": "card"
         }
       ],
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 11:05:43",
+      "lastEdited": "2017-09-14 14:20:22",
       "created": "2016-09-22 16:44:46",
       "label": "Baby 3 months to 6 months",
-      "version": 8,
+      "maoriLabel": "Te marama 3 ki te marama 6 o te pēpi",
+      "version": 12,
       "id": 451,
-      "containedElementIDs": ":445:185:470:",
+      "containedElementIDs": ":445:185:797:470:",
       "tags": [],
       "elements": [
         {
@@ -1199,30 +1469,31 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 14:11:56",
+          "lastEdited": "2017-08-31 08:52:32",
           "created": "2016-09-20 17:34:42",
           "label": "Returning to work",
-          "version": 10,
+          "maoriLabel": "Te hoki ki te mahi",
+          "version": 15,
           "id": 185,
           "containedElementIDs": ":473:467:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 14:11:57",
+              "lastEdited": "2017-08-31 08:52:33",
               "created": "2016-09-23 10:07:48",
-              "label": "If you get Working for Families payments, let lRD know if your income changes",
-              "version": 4,
+              "label": "If you get Working for Families payments, let Inland Revenue know if your income changes",
+              "version": 9,
               "id": 473,
-              "text": "If you get Working for Families payments, let lRD know if your income changes",
+              "text": "If you get Working for Families payments, let Inland Revenue know if your income changes",
               "tags": [
                 "boac_presentation::task"
               ],
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 14:11:57",
+              "lastEdited": "2017-08-31 08:52:32",
               "created": "2016-09-23 10:02:08",
-              "version": 5,
+              "version": 10,
               "id": 467,
               "content": "<p>You have to give 21 days notice:</p>\n<ul>\n<li>before you return to work</li>\n<li>if you decide not to go back to work.</li>\n</ul>\n<p><a href=\"https://www.employment.govt.nz/leave-and-holidays/parental-leave/returning-to-work/\">Returning to work when your parental leave ends</a></p>\n<p>Your boss needs to provide a place for you to have a break and breastfeed or express milk. Breastfeeding or expressing breaks are taken on top of your rest and meal breaks and are unpaid unless otherwise agreed.</p>",
               "tags": [],
@@ -1232,19 +1503,42 @@
           "type": "card"
         },
         {
-          "lastEdited": "2016-09-23 14:12:28",
+          "lastEdited": "2017-09-14 14:33:49",
+          "created": "2017-09-14 14:12:37",
+          "label": "Safeguard those you love",
+          "maoriLabel": "Haumarutia te hunga e aroha ana koe",
+          "version": 7,
+          "id": 797,
+          "containedElementIDs": ":800:",
+          "tags": [],
+          "elements": [
+            {
+              "lastEdited": "2017-09-14 14:33:49",
+              "created": "2017-09-14 14:16:55",
+              "version": 4,
+              "id": 800,
+              "content": "<p>With a new baby it's important to make sure they're looked after if something happens to you. It's a good idea to plan and discuss:</p>\n<ul>\n<li>who you want to look after your children/dependents</li>\n<li>your financial plans to support those you'll leave behind</li>\n<li>your end of life preferences.</li>\n</ul>\n<p>You can create your plan in whatever way you feel most comfortable. You could have conversations with loved ones, write it down, or do it online in the Te Hokinga ā Wairua End of Life Service, using 'My plan'.</p>\n<p><a href=\"https://endoflife.services.govt.nz/create-my-plan\">Create My plan</a>&nbsp;</p>",
+              "tags": [],
+              "type": "richtext"
+            }
+          ],
+          "type": "card"
+        },
+        {
+          "lastEdited": "2017-08-30 09:42:50",
           "created": "2016-09-23 10:03:30",
           "label": "Help paying for childcare",
-          "version": 18,
+          "maoriLabel": "He āwhina utu tiaki tamariki",
+          "version": 21,
           "id": 470,
           "containedElementIDs": ":476:479:482:485:",
           "tags": [],
           "elements": [
             {
-              "lastEdited": "2016-09-23 14:12:28",
+              "lastEdited": "2017-08-30 09:42:50",
               "created": "2016-09-23 10:08:48",
               "label": "Check if you can get help paying for childcare",
-              "version": 10,
+              "version": 13,
               "id": 476,
               "text": "Check if you can get help paying for childcare",
               "tags": [
@@ -1253,19 +1547,19 @@
               "type": "text"
             },
             {
-              "lastEdited": "2016-09-23 14:12:28",
+              "lastEdited": "2017-08-30 09:42:50",
               "created": "2016-09-23 10:14:29",
-              "version": 8,
+              "version": 11,
               "id": 479,
-              "content": "<p>If you have a dependant child who's under 5 &mdash; or under 6 if you get a Child Disability Allowance for them &mdash; you might be able to get a Childcare Subsidy. They need to be in approved care for at least 3 hours a week.</p>",
+              "content": "<p>If you have a dependent child who's under 5 &mdash; or under 6 if you get a Child Disability Allowance for them &mdash; you might be able to get a Childcare Subsidy. They need to be in approved care for at least 3 hours a week.</p>",
               "tags": [],
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 14:12:28",
+              "lastEdited": "2017-08-30 09:42:50",
               "created": "2016-09-23 10:15:26",
               "label": "Childcare Subsidy",
-              "version": 6,
+              "version": 9,
               "id": 482,
               "content": "<h5>What it is</h5>\n<p>Childcare Subsidy is a payment that helps families with the cost of pre-school childcare.</p>\n<h5>Who can get it</h5>\n<p>Your child has to be in approved care for at least 3 hours a week and you must be:</p>\n<ul>\n<li>on a low or middle income</li>\n<li>an NZ citizen or permanent resident, and</li>\n<li>the main person who looks after the child.</li>\n</ul>\n<p>If you're not working or studying, you may get a childcare subsidy for up to 9 hours a week.</p>\n<p>If you&rsquo;re working, studying or there are special circumstances that mean you need childcare, you can get it for up to 50 hours a week.</p>\n<h5>How much you get</h5>\n<p>How much you get depends on:</p>\n<ul>\n<li>the size of your family</li>\n<li>your income</li>\n<li>how many hours a week your child goes to the childcare provider.</li>\n</ul>\n<p>All subsidies are paid directly to the childcare provider.</p>\n<p><a href=\"http://www.workandincome.govt.nz/individuals/a-z-benefits/childcare-subsidy.html\">More about childcare subsidy</a></p>",
               "tags": [
@@ -1274,10 +1568,10 @@
               "type": "richtext"
             },
             {
-              "lastEdited": "2016-09-23 14:12:28",
+              "lastEdited": "2017-08-30 09:42:50",
               "created": "2016-09-23 10:16:48",
               "label": "20 hours free early childhood education",
-              "version": 4,
+              "version": 7,
               "id": 485,
               "content": "<p>All 3, 4 and 5-year-olds can get free early childhood education (ECE) for 6 hours a day &mdash; up to 20 hours a week from ECE providers.</p>\n<p><a href=\"http://www.educationcounts.govt.nz/find-an-els\">Find an approved service that offers 20 Hours ECE</a></p>",
               "tags": [
@@ -1378,26 +1672,79 @@
           "qualifiedCode": "boac_presentation::copyright",
           "sort": 0,
           "description": null
+        },
+        {
+          "title": "Sub-task",
+          "code": "subtask",
+          "qualifiedCode": "boac_presentation::subtask",
+          "sort": 0,
+          "description": "A subtask"
         }
       ]
     }
   ],
   "supplementary": [
     {
-      "lastEdited": "2016-09-23 12:51:00",
+      "lastEdited": "2017-06-09 15:17:36",
+      "created": "2017-06-09 11:42:40",
+      "label": "Antenatal depression and anxiety",
+      "version": 15,
+      "id": 793,
+      "containedElementIDs": ":796:",
+      "tags": [
+        "boac_presentation::non-chronological"
+      ],
+      "elements": [
+        {
+          "lastEdited": "2017-06-09 15:17:36",
+          "created": "2017-06-09 11:43:52",
+          "version": 12,
+          "id": 796,
+          "content": "<p>Antenatal depression and anxiety affects some parents during pregnancy.</p>\n<h5>Signs</h5>\n<p>Pregnancy is a time of change for you, your partner and your family/whānau. It's normal to feel unsure, anxious or worried during pregnancy. If these feelings last longer than a few weeks they could be signs of antenatal depression or anxiety.</p>\n<p>Signs include:</p>\n<ul>\n<li>panic attacks</li>\n<li>constant worrying, often about fears for the health or wellbeing of your baby</li>\n<li>feeling sad or crying a lot</li>\n<li>feeling nervous or panicky</li>\n<li>withdrawing from friends and family</li>\n<li>engaging in more risk taking behaviour (for example alcohol or drug use)</li>\n<li>thoughts of death or suicide.</li>\n</ul>\n<p><a href=\"http://www.pada.nz/families/perinatal-conditions/antenatal-depression/\">More about antenatal anxiety and depression</a></p>\n<h5>Getting help</h5>\n<p>There are treatments, support and services available to help you through this experience.</p>\n<p>Talk to:</p>\n<ul>\n<li>your midwife or obstetrician</li>\n<li>your family doctor or practice nurse</li>\n<li>your partner</li>\n<li>a trusted friend or family member</li>\n<li>other parents who have recovered from antenatal depression or anxiety.</li>\n</ul>\n<p>You can also call the depression or Plunket advice lines:</p>\n<p>Depression Helpline freephone: 0800 111 757<br />Plunketline freephone: 0800 933 922</p>",
+          "tags": [],
+          "type": "richtext"
+        }
+      ],
+      "type": "card"
+    },
+    {
+      "lastEdited": "2016-10-18 15:03:19",
+      "created": "2016-10-18 15:03:18",
+      "label": "Postnatal depression",
+      "version": 2,
+      "id": 568,
+      "containedElementIDs": ":571:",
+      "tags": [
+        "boac_presentation::non-chronological"
+      ],
+      "elements": [
+        {
+          "lastEdited": "2016-10-18 15:03:19",
+          "created": "2016-10-18 15:03:19",
+          "version": 1,
+          "id": 571,
+          "content": "<p>Postnatal depression affects some parents in the first year after having a baby.</p>\n<h5>Signs</h5>\n<p>It's normal to feel down, unsure or anxious in the first few weeks after having your baby. If these feelings last longer than a few weeks they could be signs of postnatal depression.</p>\n<p>Signs include:</p>\n<ul>\n<li>crying a lot</li>\n<li>feeling hopeless, alone or guilty</li>\n<li>feeling anxious when doing things you normally do with ease</li>\n<li>feeling angry</li>\n<li>not sleeping</li>\n<li>feeling you're a bad parent</li>\n<li>thoughts of harming you or your baby.</li>\n</ul>\n<h5>Getting help</h5>\n<p>Postnatal depression is treated with medication and therapy. Talk to your:</p>\n<ul>\n<li>midwife or obstetrician</li>\n<li>Well Child Tamariki Ora nurse</li>\n<li>family doctor or practice nurse.</li>\n</ul>\n<p>You can also call the depression or Plunket advice lines:</p>\n<ul>\n<li>Depression Helpline freephone: 0800 111 757</li>\n<li>Plunketline freephone: 0800 933 922</li>\n</ul>",
+          "tags": [],
+          "type": "richtext"
+        }
+      ],
+      "type": "card"
+    },
+    {
+      "lastEdited": "2017-05-22 14:42:54",
       "created": "2016-09-23 10:20:07",
       "label": "Placing a child for adoption",
-      "version": 3,
+      "version": 7,
       "id": 488,
       "containedElementIDs": ":491:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 12:51:00",
+          "lastEdited": "2017-05-22 14:42:54",
           "created": "2016-09-23 10:20:08",
-          "version": 2,
+          "version": 6,
           "id": 491,
-          "content": "<p>An adoption social worker can help you decide whether adoption is right for you and your baby. They will discuss all the options with you and guide you through the process.</p>\n<p><a href=\"http://www.cyf.govt.nz/adoption/placing-your-child-for-adoption/index.html\">Placing a child for adoption</a></p>\n<h5>How it works</h5>\n<p>You choose the family who will adopt your baby.</p>\n<p>You&rsquo;ll be given profiles of different families who have been approved to adopt a child. Once you choose a family your social worker will let them know. You can meet them if you want to.</p>\n<p>Most new adoptions in New Zealand are open adoptions. The birth parents and adoptive parents know each other by name and often agree to ongoing contact.</p>\n<p>Once an adoptive person turns 20, they&rsquo;re entitled to information about their adoption. This can include their pre-adoptive birth certificate and other information held by Adoption Services.</p>",
+          "content": "<p>An adoption social worker can help you decide whether adoption is right for you and your baby. They will discuss all the options with you and guide you through the process.</p><p><a href=\"https://www.mvcot.govt.nz/adoption/overview\" data-mce-href=\"https://www.mvcot.govt.nz/adoption/overview\">Placing a child for adoption</a></p><h5>How it works</h5><p>You choose the family who will adopt your baby.</p><p>You’ll be given profiles of different families who have been approved to adopt a child. Once you choose a family your social worker will let them know. You can meet them if you want to.</p><p>Most new adoptions in New Zealand are open adoptions. The birth parents and adoptive parents know each other by name and often agree to ongoing contact.</p><p>Once an adoptive person turns 20, they’re entitled to information about their adoption. This can include their pre-adoptive birth certificate and other information held by Adoption Services.</p>",
           "tags": [],
           "type": "richtext"
         }
@@ -1405,20 +1752,20 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 15:26:11",
+      "lastEdited": "2017-07-05 13:24:04",
       "created": "2016-09-23 10:20:57",
       "label": "Whāngai",
-      "version": 5,
+      "version": 7,
       "id": 494,
       "containedElementIDs": ":497:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 15:26:11",
+          "lastEdited": "2017-07-05 13:24:04",
           "created": "2016-09-23 10:20:57",
-          "version": 4,
+          "version": 6,
           "id": 497,
-          "content": "<p>Whāngai is the Māori tradition of children being raised by someone other than their birth parents &mdash; usually by whānau or extended family.</p>\n<h5>How it works</h5>\n<p>It can be a short-term, long-term or permanent arrangement. In most cases whāngai takes place at birth, but it can also involve older children.</p>\n<p>Whāngai is informal. A whāngai placement is arranged directly between the birth parents and the mātua whāngai (the family who will raise the child). Child, Youth and Family do not need to be involved and the birth parents are still the child&rsquo;s legal guardians.</p>\n<p>A whāngai child usually knows its birth parents and has an ongoing relationship with them.</p>\n<p><a href=\"http://www.teara.govt.nz/en/whangai-customary-fostering-and-adoption/page-1\">Whāngai <span>&mdash;</span>&nbsp;customary fostering and adoption</a></p>",
+          "content": "<p>Whāngai is the Māori tradition of children being raised by someone other than their birth parents &mdash; usually by whānau or extended family.</p>\n<h5>How it works</h5>\n<p>It can be a short-term, long-term or permanent arrangement. In most cases whāngai takes place at birth, but it can also involve older children.</p>\n<p>Whāngai is informal. A whāngai placement is arranged directly between the birth parents and the mātua whāngai (the family who will raise the child). Child, Youth and Family do not need to be involved and the birth parents are still the child&rsquo;s legal guardians.</p>\n<p>A whāngai child usually knows its birth parents and has an ongoing relationship with them.</p>\n<p><span style=\"text-decoration: underline;\"><a href=\"https://www.teara.govt.nz/en/whangai-customary-fostering-and-adoption/page-1\">Whāngai&nbsp;&mdash;&nbsp;customary fostering and adoption</a></span></p>",
           "tags": [],
           "type": "richtext"
         }
@@ -1426,20 +1773,20 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 10:21:51",
+      "lastEdited": "2017-02-22 14:13:01",
       "created": "2016-09-23 10:21:50",
       "label": "Miscarriage and stillbirth",
-      "version": 2,
+      "version": 4,
       "id": 500,
       "containedElementIDs": ":503:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 10:21:51",
+          "lastEdited": "2017-02-22 14:13:01",
           "created": "2016-09-23 10:21:51",
-          "version": 1,
+          "version": 3,
           "id": 503,
-          "content": "<p>Losing a baby is very hard and unfortunately quite common &mdash; around 1 in 5 pregnancies end in miscarriage.</p>\n<p>Miscarriage is most common in the first 12 weeks of pregnancy, but can happen up until 20 weeks. Losing a baby after 20 weeks is a stillbirth, which is much less common than miscarriage &mdash; it affects about 1 in every 200 pregnancies.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-during-pregnancy/miscarriage-and-stillbirth\">Miscarriage and stillbirth</a></p>\n<p>If you're worried that something might be wrong, speak to your lead maternity carer.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/danger-signs-during-pregnancy?icn=promo-pregnancy&amp;ici=danger\">Danger signs during pregnancy</a></p>\n<p>If you've lost your baby and need support, there are several organisations you can contact.</p>\n<p><a href=\"http://www.sands.org.nz/\">Sands New Zealand</a><br /><a href=\"http://www.miscarriagesupport.org.nz/index.html\">Miscarriage Support</a><br /><a href=\"http://www.skylight.org.nz/\">Skylight</a></p>",
+          "content": "<p>Losing a baby is very hard and unfortunately quite common — around 1 in 5 pregnancies end in miscarriage.</p><p>Miscarriage is most common in the first 12 weeks of pregnancy, but can happen up until 20 weeks. Losing a baby after 20 weeks is a stillbirth, which is much less common than miscarriage — it affects about 1 in every 200 pregnancies.</p><p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-during-pregnancy/miscarriage-and-stillbirth\" data-mce-href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-during-pregnancy/miscarriage-and-stillbirth\">Miscarriage and stillbirth</a></p><p>If you're worried that something might be wrong, speak to your lead maternity carer.</p><p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/danger-signs-during-pregnancy?icn=promo-pregnancy&amp;ici=danger\" data-mce-href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/pregnancy/helpful-advice-during-pregnancy/danger-signs-during-pregnancy?icn=promo-pregnancy&amp;ici=danger\">Danger signs during pregnancy</a></p><p>If you've lost your baby and need support, there are several organisations you can contact.</p><p><a href=\"http://www.sands.org.nz/\" data-mce-href=\"http://www.sands.org.nz/\">Sands New Zealand</a></p><p><a href=\"https://www.miscarriagesupport.org.nz/\" data-mce-href=\"https://www.miscarriagesupport.org.nz/\">Miscarriage Support</a></p><p><a href=\"http://www.skylight.org.nz/\" data-mce-href=\"http://www.skylight.org.nz/\">Skylight</a></p><p class=\"MsoNormal\"><br></p>",
           "tags": [],
           "type": "richtext"
         }
@@ -1447,20 +1794,20 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 13:46:20",
+      "lastEdited": "2017-11-17 15:05:58",
       "created": "2016-09-23 10:22:55",
       "label": "Abortion",
-      "version": 4,
+      "version": 10,
       "id": 506,
       "containedElementIDs": ":509:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 13:46:20",
+          "lastEdited": "2017-11-17 15:05:58",
           "created": "2016-09-23 10:22:56",
-          "version": 3,
+          "version": 9,
           "id": 509,
-          "content": "<p>Abortion is legal in New Zealand and free to any pregnant NZ resident.</p>\n<p>If you're unsure about your pregnancy and considering an abortion, talk to a doctor or Family Planning as soon as you can. Early abortions are safer and you'll have more options.</p>\n<p><span data-redactor-tag=\"strong\">If you haven't confirmed your pregnancy, visit a doctor or Family Planning clinic to confirm it as soon as possible.</span></p>\n<p><a href=\"http://www.familyplanning.org.nz/clinics\">Find a Family Planning clinic</a></p>\n<p>Your doctor or Family Planning clinic can refer you to a health service that provides abortions. Abortion providers give free counselling to help you decide to end or continue with your pregnancy.</p>\n<p>Depending on where you live you may need to travel to an abortion service.</p>\n<p>There are 2 types of abortions:</p>\n<ul>\n<li>early medical abortion if you're less than 9 weeks pregnant</li>\n<li>surgical abortion if you're between 9 and 20 weeks of pregnancy. If you're more than 12 weeks pregnant only 4 places in NZ do abortions&nbsp;<span>&mdash;</span>&nbsp;in Auckland, Wellington, Christchurch and Dunedin.</li>\n</ul>\n<p><a href=\"http://abortion.org.nz/where-to-go/provider-locations\">Find an abortion provider</a></p>\n<p><a href=\"http://www.familyplanning.org.nz/advice/abortion\" target=\"_blank\">Abortion &mdash; Family Planning</a></p>\n<p><a href=\"http://abortion.org.nz/\">Abortion services in New Zealand</a></p>",
+          "content": "<p>Abortion is legal in New Zealand and free to any pregnant NZ resident.</p>\n<p>If you're unsure about your pregnancy and considering an abortion, talk to a doctor or Family Planning clinic as soon as you can &mdash; earlier confirmation may give you more options and time to consider the options available to you.</p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-fareast-language: EN-NZ;\"><a href=\"http://www.familyplanning.org.nz/clinics\">Find a Family Planning clinic</a></span></p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">Your doctor or Family Planning clinic can refer you to a health service that provides abortions. Abortion providers give free counselling to help you decide to end or continue with your pregnancy.</p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">Depending on where you live you may need to travel to an abortion service.</p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">There are 2 types of abortions:</p>\n<ul>\n<li class=\"MsoNormal\" style=\"margin-top: 7.5pt; margin-right: 0cm; margin-bottom: 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">early medical abortion if you're less than 9 weeks pregnant</li>\n<li class=\"MsoNormal\" style=\"margin-top: 7.5pt; margin-right: 0cm; margin-bottom: 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">surgical abortion if you're between 9 and 20 weeks of pregnancy. If you're more than 12 weeks pregnant only 4 places in NZ do abortions &mdash; in Auckland, Wellington, Christchurch and Dunedin.</li>\n</ul>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-fareast-language: EN-NZ;\"><a href=\"http://abortion.org.nz/where-to-go/provider-locations\">Find an abortion provider</a></span></p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-fareast-language: EN-NZ;\"><a href=\"http://www.familyplanning.org.nz/advice/abortion\">Abortion &mdash; Family Planning</a></span></p>\n<p><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-ansi-language: EN-NZ; mso-fareast-language: EN-NZ; mso-bidi-language: AR-SA;\"><a href=\"http://abortion.org.nz/\">Abortion services in New Zealand</a></span></p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">You are entitled to free counselling prior to an abortion. Follow up counselling may be available through your abortion provider. If you need further support, there are several organisations you can contact.</p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-fareast-language: EN-NZ;\"><a href=\"http://www.pregnancycounselling.org.nz/\">Pregnancy Counselling Services</a></span></p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-fareast-language: EN-NZ;\"><a href=\"http://www.pada.nz/\">Perinatal Anxiety &amp; Depression Aotearoa</a></span></p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-fareast-language: EN-NZ;\"><a href=\"https://skylight.org.nz/\">Skylight​​</a></span></p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">&nbsp;</p>\n<p class=\"MsoNormal\" style=\"margin: 7.5pt 0cm 0.0001pt; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">&nbsp;</p>\n<p><span style=\"font-size: 10.5pt; font-family: 'Arial','sans-serif'; mso-fareast-font-family: 'Times New Roman'; color: #333333; mso-ansi-language: EN-NZ; mso-fareast-language: EN-NZ; mso-bidi-language: AR-SA;\">​</span></p>",
           "tags": [],
           "type": "richtext"
         }
@@ -1468,28 +1815,28 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 15:25:00",
+      "lastEdited": "2017-09-08 10:10:13",
       "created": "2016-09-23 10:24:14",
       "label": "Family violence",
-      "version": 17,
+      "version": 20,
       "id": 512,
       "containedElementIDs": ":515:560:557:",
       "tags": [],
       "elements": [
         {
-          "lastEdited": "2016-09-23 15:25:00",
+          "lastEdited": "2017-09-08 10:10:13",
           "created": "2016-09-23 10:24:14",
-          "version": 13,
+          "version": 16,
           "id": 515,
-          "content": "<p><span data-redactor-tag=\"strong\">If you or someone else is in immediate danger, call 111 now.</span></p>\n<p>Being pregnant and having a baby can be stressful. For some families and couples, this is when family violence starts.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-you-and-your-child/family-violence-and-young-families\">Family violence and young families</a></p>\n<p>If you feel unsafe at home because of the actions of a partner or family member, you can get help. Talk to your midwife or obstetrician, Well Child Tamariki Ora Nurse, doctor or practice nurse, or someone else you trust.</p>\n<p>You can get free support &mdash; including counselling, emergency accommodation and police protection &mdash; if you or someone you know is affected by family violence. Find out more about keeping and you and your family safe.</p>",
+          "content": "<p><span data-redactor-tag=\"strong\">If you or someone else is in immediate danger, call 111 now.</span></p>\n<p>Being pregnant and having a baby can be stressful. For some families and couples, this is when family violence starts.</p>\n<p><a href=\"http://www.health.govt.nz/your-health/pregnancy-and-kids/services-and-support-you-and-your-child/family-violence-and-young-families\">Family violence and young families</a></p>\n<p>If you feel unsafe at home because of the actions of a partner or family member, you can get help. Talk to your midwife or obstetrician, Well Child Tamariki Ora Nurse, doctor or practice nurse, or someone else you trust.</p>\n<p>You can get free support &mdash; including counselling, emergency accommodation and police protection &mdash; if you or someone you know is affected by family violence. Find out more about keeping you and your family safe.</p>",
           "tags": [],
           "type": "richtext"
         },
         {
-          "lastEdited": "2016-09-23 15:25:01",
+          "lastEdited": "2017-09-08 10:10:13",
           "created": "2016-09-23 15:19:09",
           "label": "Services and support for people affected by domestic violence",
-          "version": 6,
+          "version": 9,
           "id": 560,
           "internalLinkPageID": 0,
           "externalURL": "https://www.govt.nz/browse/law-crime-and-justice/abuse-harassment-domestic-violence/domestic-or-family-violence/",
@@ -1498,11 +1845,11 @@
           "type": "url"
         },
         {
-          "lastEdited": "2016-09-23 15:25:01",
+          "lastEdited": "2017-09-08 10:10:13",
           "created": "2016-09-23 15:16:27",
-          "version": 8,
+          "version": 11,
           "id": 557,
-          "content": "<h5>Hide or delete the pages you've viewed</h5><p>You can hide or delete the pages you've viewed if you're worried about someone finding out what websites you've visited.</p><p><a href=\"http://areyouok.org.nz/cover-my-tracks/\" data-mce-href=\"http://areyouok.org.nz/cover-my-tracks/\">Hide or delete your page visits</a></p>",
+          "content": "<h5>Hide or delete the pages you've viewed</h5>\n<p>You can hide or delete the pages you've viewed if you're worried about someone finding out what websites you've visited.</p>\n<p><a href=\"http://areyouok.org.nz/i-need-help/experiencing-violence/staying-safe-online/\">Staying safe online</a></p>",
           "tags": [],
           "type": "richtext"
         }
@@ -1512,10 +1859,10 @@
   ],
   "about": [
     {
-      "lastEdited": "2016-09-23 10:54:51",
+      "lastEdited": "2017-08-31 09:04:00",
       "created": "2016-09-23 10:51:19",
       "label": "Your privacy",
-      "version": 3,
+      "version": 8,
       "id": 524,
       "containedElementIDs": ":527:",
       "tags": [
@@ -1523,11 +1870,11 @@
       ],
       "elements": [
         {
-          "lastEdited": "2016-09-23 10:54:51",
+          "lastEdited": "2017-08-31 09:04:00",
           "created": "2016-09-23 10:51:20",
-          "version": 2,
+          "version": 7,
           "id": 527,
-          "content": "<h3><span>Purpose</span></h3>\n<p>The purpose of this privacy policy is to let customers of the StartSmart website know when we may collect personal information and what we do with this information. We do not use, share or transfer personal information in connection with the site except as set out in this policy, or as otherwise set out somewhere on the site. This privacy statement applies to personal information collected through the StartSmart website:&nbsp;<a href=\"https://SmartStart.services.govt.nz\">https://SmartStart.services.govt.nz</a></p>\n<h3>Collection, storage and use</h3>\n<h4>No need to disclose personal information</h4>\n<p>You can use the website without disclosing your personal information. If you choose not to provide personal information to the website the information you access from the website will be generic.</p>\n<h4>Collection of personal information</h4>\n<p>The website provides information about services associated with the birth of a child. The site is operated by DIA with links to other agencies involved in the services, including Inland Revenue, Ministry of Health and Ministry of Social Development.</p>\n<p>Where you voluntarily choose to provide personal information we can develop a customer profile and provide information that is more relevant to your situation.</p>\n<p>This information may be viewable by site administrators, DIA staff (as appropriate) and third-party contractors who may administrate or work on the site. Third party contractors are subject to the DIA&rsquo;s information security and privacy requirements.</p>\n<p>The personal information that you provide is protected by your RealMe login.</p>\n<h4>Storage of personal information</h4>\n<p>When you provide personal information, it will be held by DIA. We will store and keep your personal information secure in accordance with the Privacy Act 1993.</p>\n<p>The Department takes information security seriously. Our systems, including any information you provide through the website and by other methods is monitored for security purposes.&nbsp;This may include monitoring and access by third parties that provide services to DIA. This monitoring ensures that your information and DIA&rsquo;s information and systems are kept safe.</p>\n<h4>Use of personal information</h4>\n<p>DIA will generally only use personal information provided to us through this website for the purpose you provided it (e.g. to administer, evaluate and improve the website, to improve our services, or to action or respond to the information provided).</p>\n<p>We will only use personal information provided to us through this website for other reasons permitted under the Privacy Act 1993 (e.g. with your consent, for a directly related purpose, or where the law permits or requires it).</p>\n<h3>Statistical information and cookies</h3>\n<h4>Statistical information collected</h4>\n<p>We may collect statistical information about your visit to help us improve the Site. This information is aggregated and doesn't identify you personally. It includes:</p>\n<ul>\n<li>your IP address (a reference to the computer you are using)</li>\n<li>the pages you accessed on our Site and the links you clicked on</li>\n<li>the date and time you visited the site your operating system (e.g., Windows XP, Mac OS X)</li>\n<li>the type and version of web browser you use (e.g. Internet Explorer11, Mozilla Firefox v47, chrome v48) other things like your screen resolution and the language setting of your browser.</li>\n</ul>\n<p>The statistical information referred to above will be viewable by website administrators and DIA staff. It may also be shared with other government agencies.</p>\n<h3>Records and disclosure statement Rights of access and correction</h3>\n<h4>Your rights</h4>\n<p>Under the Privacy Act 1993, you have the right to access and to request correction of any of your personal information provided to DIA in connection with your use of this site. If you would like to see or change your personal information DIA has stored, or if you have any concerns regarding your privacy, please contact us at the address below. DIA may require proof of your identity before being able to provide you with any personal information.</p>\n<p>The Privacy Officer&nbsp;<br />Department of Internal Affairs&nbsp;<br />PO Box 805 Wellington 6140&nbsp;<br />Phone:&nbsp;<a href=\"tel:+6444957200\">64 4 495 7200</a><br />Email:&nbsp;<a href=\"mailto:privacy@dia.govt.nz\">privacy@dia.govt.nz</a></p>\n<h3>Privacy Commissioner</h3>\n<p>If you're not satisfied with our response to any privacy-related concern you may have, you can contact the Privacy Commissioner:</p>\n<p><span>Office of the Privacy Commissioner&nbsp;<br /></span>PO Box 10-094 Wellington, New Zealand<br />Phone:&nbsp;<a href=\"tel:044747590\">04 474 7590</a><br />Enquiries Line (from Auckland):<a href=\"tel:093028655\">302 8655</a><br />Enquiries Line (from outside Auckland):&nbsp;<a href=\"tel:0800803909\">0800 803 909</a><br />Fax: 04 474 7595<br />Email:&nbsp;<a href=\"mailto:enquiries@privacy.org.nz\">enquiries@privacy.org.nz</a></p>",
+          "content": "<h3><span>Purpose</span></h3>\n<p>The purpose of this privacy policy is to let customers of the SmartStart website know when we may collect personal information and what we do with this information. We do not use, share or transfer personal information in connection with the site except as set out in this policy, or as otherwise set out somewhere on the site. This privacy statement applies to personal information collected through the SmartStart website:&nbsp;<a href=\"https://smartstart.services.govt.nz/\">https://SmartStart.services.govt.nz</a></p>\n<h3>Collection, storage and use</h3>\n<h4>No need to disclose personal information</h4>\n<p>You can use the website without disclosing your personal information. If you choose not to provide personal information to the website the information you access from the website will be generic.</p>\n<h4>Collection of personal information</h4>\n<p>The website provides information about services associated with the birth of a child. The site is operated by the Department of Internal Affairs (DIA) with links to other agencies involved in the services, including Inland Revenue, Ministry of Health and Ministry of Social Development.</p>\n<p>Where you voluntarily choose to provide personal information we can develop a customer profile and provide information that is more relevant to your situation. This information may be viewable by site administrators, DIA staff (as appropriate) and third-party contractors who may administrate or work on the site. Third party contractors are subject to the DIA&rsquo;s information security and privacy requirements.</p>\n<p>The personal information that you provide is protected by your RealMe login.</p>\n<h4>Storage of personal information</h4>\n<p>When you provide personal information, it will be held by DIA. We will store and keep your personal information secure in accordance with the Privacy Act 1993.</p>\n<p>The Department takes information security seriously. Our systems, including any information you provide through the website and by other methods is monitored for security purposes.&nbsp;This may include monitoring and access by third parties that provide services to DIA. This monitoring ensures that your information and DIA&rsquo;s information and systems are kept safe.</p>\n<h4>Use of personal information</h4>\n<p>DIA will generally only use personal information provided to us through this website for the purpose you provided it (e.g. to administer, evaluate and improve the website, to improve our services, or to action or respond to the information provided).</p>\n<p>We will only use personal information provided to us through this website for other reasons permitted under the Privacy Act 1993 (e.g. with your consent, for a directly related purpose, or where the law permits or requires it).</p>\n<p>If your device uses location services to provide your address or location, in order to access a list of locally available services, you need to know we use a Google Maps service to filter service options. Use of Google Maps is subject to Google&rsquo;s privacy policy (<a href=\"http://www.google.com/policies/privacy/\">http://www.google.com/policies/privacy/</a>) and the Google Maps Terms of Service (<a href=\"http://developers.google.com/maps/terms\">http://developers.google.com/maps/terms</a>).&nbsp;&nbsp;</p>\n<h4>Submission of personal information in registering your baby</h4>\n<p>Information regarding the registration of your child&rsquo;s birth is collected under the Births, Deaths, Marriages, and Relationships Registration Act 1995 ('the Act'). Both parents are primarily responsible for notifying the birth as soon as practicable. It is an offence, punishable by a fine, to fail or refuse to provide information for the registration of a birth.</p>\n<p>The citizenship or immigration details of the parent(s) of a child born on or after 1 January 2006 will be checked against databases held by the Department of Internal Affairs (Citizenship Office, Passports Office or Births, Deaths and Marriages), the Ministry of Business, Innovation and Employment (Immigration) and / or with registration authorities in the Cook Islands, Niue or Tokelau (where relevant). The information will be used to confirm whether your child is a New Zealand citizen by birth.</p>\n<h4>Saving and deletion of information in registering your baby</h4>\n<p>You may use your RealMe login to save a partially completed birth registration. This allows you to log in at a later time to complete a birth registration. The information you provide will be deleted after it has been submitted to the Department of Internal Affairs. Partially completed forms that have not been submitted will be automatically deleted after one year.</p>\n<h4>Sharing of information in registering your baby</h4>\n<p>If you decide to also apply for an IRD number for your child when registering your baby, Births, Deaths, and Marriages will give the information you have provided on this form to Inland Revenue for this purpose. After giving the information to Inland Revenue, Births, Deaths and Marriages will not retain details of your IRD number if you have provided it on this form.</p>\n<p>If you have decided to notify the Ministry of Social Development (MSD) of your child&rsquo;s birth, Births, Deaths and Marriages will provide MSD with information about the birth when the registration is complete. MSD will use this information to determine how your new baby changes the benefits and services you are entitled to.<br /> After giving the information to MSD, Births Deaths and Marriages will not retain details of your MSD client number if you provided it on this form.</p>\n<h4>Birth information records held by the Department of Internal Affairs</h4>\n<p>The birth information submitted to Births Deaths and Marriages will be held on a public register. The Act governs access to registered birth information. Information about a named individual may generally be accessed by any person upon application (e.g. as a certificate or printout). Information may be released for statistical, or genuine health or demographic research in the public interest, or to certain government agencies, as authorised by law. Information about why the information is collected, the government agencies that are authorised to receive the information, and about a person's right to access and, where appropriate, correct the information, is available on our web site&nbsp;<a href=\"http://www.bdm.govt.nz/\" target=\"_blank\">www.bdm.govt.nz</a>, or Freephone 0800 22 52 52.</p>\n<h3>Statistical information and cookies</h3>\n<h4>Statistical information collected</h4>\n<p>We may collect statistical information about your visit to help us improve the Site. This information is aggregated and doesn't identify you personally. It includes:</p>\n<ul type=\"disc\">\n<li>your IP address (a reference to the computer you are using)</li>\n<li>the pages you accessed on our Site and the links you clicked on</li>\n<li>the date and time you visited the site</li>\n<li>your operating system (e.g., Windows XP, Mac OS X)</li>\n<li>the type and version of web browser you use (e.g. Internet Explorer11, Mozilla Firefox v47, chrome v48)</li>\n<li>other things like your screen resolution and the language setting of your browser.</li>\n</ul>\n<p>The statistical information referred to above will be viewable by website administrators and DIA staff. It may also be shared with other government agencies.</p>\n<h3>Records and disclosure statement Rights of access and correction</h3>\n<h4>Your rights</h4>\n<p>Under the Privacy Act 1993, you have the right to access and to request correction of any of your personal information provided to DIA in connection with your use of this site. If you would like to see or change your personal information DIA has stored, or if you have any concerns regarding your privacy, please contact us at the address below. DIA may require proof of your identity before being able to provide you with any personal information.</p>\n<p>The Privacy Officer&nbsp;<br />Department of Internal Affairs&nbsp;<br />PO Box 805 Wellington 6140&nbsp;<br />Phone:&nbsp;<a href=\"tel:+6444957200\">64 4 495 7200</a><br />Email:&nbsp;<a href=\"mailto:privacy@dia.govt.nz\">privacy@dia.govt.nz</a></p>\n<h3>Privacy Commissioner</h3>\n<p>If you're not satisfied with our response to any privacy-related concern you may have, you can contact the Privacy Commissioner:</p>\n<p><span>Office of the Privacy Commissioner&nbsp;<br /></span>PO Box 10-094 Wellington, New Zealand<br />Phone:&nbsp;<a href=\"tel:044747590\">04 474 7590</a><br />Enquiries Line (from Auckland):<a href=\"tel:093028655\">302 8655</a><br />Enquiries Line (from outside Auckland):&nbsp;<a href=\"tel:0800803909\">0800 803 909</a><br />Fax: 04 474 7595<br />Email:&nbsp;<a href=\"mailto:enquiries@privacy.org.nz\">enquiries@privacy.org.nz</a></p>",
           "tags": [],
           "type": "richtext"
         }
@@ -1535,10 +1882,10 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-10-05 13:14:20",
+      "lastEdited": "2016-12-01 14:57:56",
       "created": "2016-09-23 10:52:14",
       "label": "Contact information",
-      "version": 5,
+      "version": 11,
       "id": 530,
       "containedElementIDs": ":533:",
       "tags": [
@@ -1546,11 +1893,11 @@
       ],
       "elements": [
         {
-          "lastEdited": "2016-10-05 13:14:20",
+          "lastEdited": "2016-12-01 14:57:56",
           "created": "2016-09-23 10:52:15",
-          "version": 4,
+          "version": 10,
           "id": 533,
-          "content": "<h3>SmartStart Contacts</h3>\n<p>SmartStart is a joint initiative between partner agencies responsible for services associated with the birth of a child:</p>\n<ul>\n<li>Department of Internal Affairs</li>\n<li>Ministry of Social Development</li>\n<li>Inland Revenue</li>\n<li>Ministry of Health</li>\n</ul>\n<table style=\"height: 163px; width: 312px;\">\n<tbody>\n<tr>\n<td colspan=\"2\">\n<p>For general enquiries related to Smartstart.Services.govt.nz</p>\n</td>\n</tr>\n<tr>\n<td>Freephone:</td>\n<td>0800SmartStart</td>\n</tr>\n<tr>\n<td>Phone</td>\n<td>&nbsp;+64 4 495 7200</td>\n</tr>\n<tr>\n<td>Email:</td>\n<td><a href=\"mailto:info@smartstart.govt.nz\">info@smartstart.govt.nz</a></td>\n</tr>\n<tr>\n<td>Street address</td>\n<td>Department of Internal Affairs<br />120 Victoria Street, Wellington 6011<br />PO Box 123<br />Wellington 6140</td>\n</tr>\n<tr>\n<td>Postal address</td>\n<td>\n<p>PO Box 805<br />Wellington 6140</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>If you are hearing impaired you can use&nbsp;<a href=\"http://www.nzrelay.co.nz/\">NZ Relay</a>&nbsp;to get in touch with us.</p>",
+          "content": "<h3>SmartStart Contacts</h3>\n<p>SmartStart is a joint initiative between partner agencies responsible for services associated with the birth of a child:</p>\n<ul>\n<li>Department of Internal Affairs</li>\n<li>Ministry of Social Development</li>\n<li>Inland Revenue</li>\n<li>Ministry of Health</li>\n</ul>\n<table style=\"height: 163px; width: 312px;\">\n<tbody>\n<tr>\n<td colspan=\"2\">\n<p>For general enquiries related to Smartstart.Services.govt.nz</p>\n</td>\n</tr>\n<tr>\n<td>Freephone:</td>\n<td>\n<p>0800 22 52 52</p>\n<p>Monday to Thursday 8am to 5pm, Friday 9am to 5pm</p>\n</td>\n</tr>\n<tr>\n<td>Email:</td>\n<td><a href=\"mailto:smartstart@dia.govt.nz\">smartstart@dia.govt.nz</a></td>\n</tr>\n<tr>\n<td>Street address:</td>\n<td>\n<p>Department of Internal Affairs<br />120 Victoria Street<br />Wellington 6011</p>\n</td>\n</tr>\n<tr>\n<td>Postal address:</td>\n<td>\n<p>Department of Internal Affairs<br />PO Box 10-526<br />Wellington 6143</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>If you are hearing impaired you can use <a href=\"http://www.nzrelay.co.nz/\">NZ Relay</a> to get in touch with us.</p>",
           "tags": [],
           "type": "richtext"
         }
@@ -1558,10 +1905,10 @@
       "type": "card"
     },
     {
-      "lastEdited": "2016-09-23 15:44:30",
+      "lastEdited": "2016-10-18 14:42:54",
       "created": "2016-09-23 10:53:28",
-      "label": "Copyright and attribution",
-      "version": 6,
+      "label": "Copyright andppre attribution",
+      "version": 7,
       "id": 536,
       "containedElementIDs": ":539:",
       "tags": [
@@ -1569,11 +1916,11 @@
       ],
       "elements": [
         {
-          "lastEdited": "2016-09-23 15:44:30",
+          "lastEdited": "2016-10-18 14:42:55",
           "created": "2016-09-23 10:53:29",
-          "version": 5,
+          "version": 6,
           "id": 539,
-          "content": "<p>Unless indicated below, or on specific items or collections of content:</p>\n<ul>\n<li>any copyright in content on Bundle is owned by the New Zealand Crown; and</li>\n<li>the Department of Internal Affairs (on behalf of the Crown) licenses you to copy, distribute and adapt that content in accordance with the Creative Commons Attribution (CC-BY) 3.0 New Zealand Licence.&nbsp;</li>\n</ul>\n<p>You should understand the terms of the licence, which requires that you attribute the content to the Crown and the Bundle website.</p>\n<p><a href=\"https://creativecommons.org/licenses/by/3.0/nz/\">CC-BY 3.0 NZ license terms&nbsp;</a></p>\n<p><strong>Exceptions</strong></p>\n<p>Copyright in photographs on Bundle is not owned, or licensed to you, by the Crown. Unless otherwise stated in relation to specific photographs, you cannot copy, distribute or adapt any photograph without the agreement of the copyright owner.</p>\n<p>The New Zealand Government logo, Coat of Arms and other logos, emblems and trade marks on Bundle are protected by law.&nbsp; You must not copy or use logo, emblem or trade mark without express permission and compliance with applicable laws.</p>",
+          "content": "<p>Unless indicated below, or on specific items or collections of content:</p>\n<ul>\n<li>any copyright in content on SmartStart is owned by the New Zealand Crown; and</li>\n<li>the Department of Internal Affairs (on behalf of the Crown) licenses you to copy, distribute and adapt that content in accordance with the Creative Commons Attribution (CC-BY) 3.0 New Zealand Licence.&nbsp;</li>\n</ul>\n<p>You should understand the terms of the licence, which requires that you attribute the content to the Crown and the SmartStart website.</p>\n<p><a href=\"https://creativecommons.org/licenses/by/3.0/nz/\">CC-BY 3.0 NZ license terms&nbsp;</a></p>\n<p><strong>Exceptions</strong></p>\n<p>Copyright in photographs on SmartStart&nbsp;is not owned, or licensed to you, by the Crown. Unless otherwise stated in relation to specific photographs, you cannot copy, distribute or adapt any photograph without the agreement of the copyright owner.</p>\n<p>The New Zealand Government logo, Coat of Arms and other logos, emblems and trade marks on SmartStart&nbsp;are protected by law.&nbsp; You must not copy or use logo, emblem or trade mark without express permission and compliance with applicable laws.</p>",
           "tags": [],
           "type": "richtext"
         }
