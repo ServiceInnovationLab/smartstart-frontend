@@ -9,16 +9,6 @@ import LocationAutosuggest from 'components/location-autosuggest/location-autosu
 import ResultMap from 'components/services/map'
 import Provider from 'components/services/provider'
 import Spinner from 'components/spinner/spinner'
-import {
-  PARENTING_SUPPORT_QUERY ,
-  EARLY_ED_QUERY,
-  BREAST_FEEDING_QUERY,
-  ANTENATEL_QUERY,
-  MISCARRIAGE_QUERY,
-  MENTAL_HEALTH_QUERY,
-  BUDGETING_QUERY,
-  WELL_CHILD_QUERY
-} from 'components/services/queries'
 
 import './services.scss'
 
@@ -26,31 +16,31 @@ const RESULTS_LIMIT = 50
 const categories = {
   'parenting-support': {
     'label': 'Parenting support',
-    'query': PARENTING_SUPPORT_QUERY
+    'query': '/api/request/service-locations/parenting-support'
   },
   'early-education': {
     'label': 'Early childhood education',
-    'query': EARLY_ED_QUERY
+    'query': '/api/request/service-locations/early-education'
   },
   'breastfeeding': {
     'label': 'Breastfeeding support',
-    'query': BREAST_FEEDING_QUERY
+    'query': '/api/request/service-locations/breastfeeding'
   },
   'antenatal': {
     'label': 'Antenatel classes',
-    'query': ANTENATEL_QUERY
+    'query': '/api/request/service-locations/antenatal'
   },
   'mental-health': {
     'label': 'Anxiety and depression support',
-    'query': MENTAL_HEALTH_QUERY
+    'query': '/api/request/service-locations/mental-health'
   },
   'budgeting': {
     'label': 'Budgeting and financial help',
-    'query': BUDGETING_QUERY
+    'query': '/api/request/service-locations/budgeting'
   },
   'well-child': {
     'label': 'Well Child/Tamariki Ora providers',
-    'query': WELL_CHILD_QUERY
+    'query': '/api/request/service-locations/well-child'
   }
 }
 
@@ -237,8 +227,14 @@ class Services extends Component {
   }
 
   render () {
+    const { directoryError } = this.props
     const { category, listView, locationApiLoaded, location, locationText, mapCenter, mapZoom, results, loading } = this.state
 
+    const loadErrorClasses = classNames(
+      'load-error',
+      { 'hidden': !directoryError }
+    )
+    const resultsWrapperClasses = classNames({ 'hidden': directoryError })
     const resultsClasses = classNames(
       'results',
       { 'hidden': !(category !== '' && location.latitude && location.longitude && results.length && !loading) }
@@ -296,42 +292,45 @@ class Services extends Component {
           </div>}
         </div>
 
-        {loading && location.latitude && location.longitude && <Spinner />}
+        <div className={loadErrorClasses}><h3>Unable to load</h3><p>Please try again shortly.</p></div>
+        <div className={resultsWrapperClasses}>
+          {loading && location.latitude && location.longitude && <Spinner />}
 
-        <div className={resultsClasses}>
-          <h3>Closest results near you</h3>
+          <div className={resultsClasses}>
+            <h3>Closest results near you</h3>
 
-          <div className='map-list-tabs' aria-hidden='true'>
-            <button onClick={this.clickListTab} className={listTabClasses} data-test='services-list-tab'>List view</button>
-            <button onClick={this.clickMapTab} className={mapTabClasses} data-test='services-map-tab'>Map view</button>
-          </div>
-
-          <div className='results-layout'>
-            <div className={listViewClasses} data-test='services-list'>
-              {results.length && results.map((provider, index) => {
-                return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
-              })}
+            <div className='map-list-tabs' aria-hidden='true'>
+              <button onClick={this.clickListTab} className={listTabClasses} data-test='services-list-tab'>List view</button>
+              <button onClick={this.clickMapTab} className={mapTabClasses} data-test='services-map-tab'>Map view</button>
             </div>
 
-            <StickyContainer className='map-container-wrapper'>
-              <Sticky>
-                {
-                  ({ style }) => {
-                    return (
-                      <div style={style} className={mapViewClasses} aria-hidden='true' data-test='services-map'>
-                        <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
-                      </div>
-                    )
-                  }
-                }
-              </Sticky>
-            </StickyContainer>
-          </div>
-        </div>
+            <div className='results-layout'>
+              <div className={listViewClasses} data-test='services-list'>
+                {results.length && results.map((provider, index) => {
+                  return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
+                })}
+              </div>
 
-        <div className={selectMoreInfoClasses} data-test='services-no-results'>
-          <h3>No results</h3>
-          <p>Please select a category and search for your address.</p>
+              <StickyContainer className='map-container-wrapper'>
+                <Sticky>
+                  {
+                    ({ style }) => {
+                      return (
+                        <div style={style} className={mapViewClasses} aria-hidden='true' data-test='services-map'>
+                          <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
+                        </div>
+                      )
+                    }
+                  }
+                </Sticky>
+              </StickyContainer>
+            </div>
+          </div>
+
+          <div className={selectMoreInfoClasses} data-test='services-no-results'>
+            <h3>No results</h3>
+            <p>Please select a category and search for your address.</p>
+          </div>
         </div>
 
       </div>
@@ -344,19 +343,23 @@ function mapStateToProps (state) {
     servicesActions
   } = state
   const {
-    directory
+    directory,
+    directoryError
   } = servicesActions || {
-    directory: []
+    directory: [],
+    directoryError: false
   }
 
   return {
-    directory
+    directory,
+    directoryError
   }
 }
 
 Services.propTypes = {
   dispatch: PropTypes.func.isRequired,
   directory: PropTypes.array.isRequired,
+  directoryError: PropTypes.bool.isRequired,
   category: PropTypes.string
 }
 

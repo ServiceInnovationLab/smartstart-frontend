@@ -32,7 +32,8 @@ import {
 } from 'actions/birth-registration'
 import {
   REQUEST_SERVICES_API,
-  RECEIVE_SERVICES_API
+  RECEIVE_SERVICES_API,
+  RECEIVE_SERVICES_API_ERROR
 } from 'actions/services'
 
 function contentActions (state = {
@@ -243,7 +244,8 @@ function birthRegistration (state = {
 
 function servicesActions (state = {
   isFetching: false,
-  directory: []
+  directory: [],
+  directoryError: false
 }, action) {
   switch (action.type) {
     case REQUEST_SERVICES_API:
@@ -253,7 +255,14 @@ function servicesActions (state = {
     case RECEIVE_SERVICES_API:
       return Object.assign({}, state, {
         isFetching: false,
-        directory: action.data
+        directory: action.data,
+        directoryError: false
+      })
+    case RECEIVE_SERVICES_API_ERROR:
+      return Object.assign({}, state, {
+        isFetching: false,
+        directory: [],
+        directoryError: true
       })
     default:
       return state
