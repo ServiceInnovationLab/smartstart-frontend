@@ -1,4 +1,3 @@
-/* globals google */
 import React, { PropTypes, Component } from 'react'
 import LocationAutosuggest from 'components/location-autosuggest/location-autosuggest'
 import renderError, { hasError } from './render-error'

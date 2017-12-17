@@ -3,9 +3,7 @@ import { checkStatus } from 'utils'
 
 export const REQUEST_SERVICES_API = 'REQUEST_SERVICES_API'
 export const RECEIVE_SERVICES_API = 'RECEIVE_SERVICES_API'
-
-// TODO make sure this is passed in from config?
-const SERVICES_ENDPOINT = 'https://catalogue.data.govt.nz/api/action/datastore_search_sql?sql='
+export const RECEIVE_SERVICES_API_ERROR = 'RECEIVE_SERVICES_API_ERROR'
 
 // Action types
 
@@ -22,17 +20,23 @@ function receiveServicesAPI (json) {
   }
 }
 
+function receiveServicesAPIError () {
+  return {
+    type: RECEIVE_SERVICES_API_ERROR
+  }
+}
+
 // Action creators
 
 export function fetchServicesDirectory (query) {
   return dispatch => {
     dispatch(requestServicesAPI())
-    return fetch(SERVICES_ENDPOINT + query) // TODO set in webpack config
+    return fetch(query)
       .then(checkStatus)
       .then(response => response.json())
       .then(json => dispatch(receiveServicesAPI(json)))
-      .catch(error => {
-        // TODO what should we do for the error here?
+      .catch(() => {
+        dispatch(receiveServicesAPIError())
       })
   }
 }
