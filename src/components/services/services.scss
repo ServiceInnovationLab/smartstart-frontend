@@ -15,6 +15,8 @@ $list-column-width: 420px;
     display: block;
     margin-top: 15px;
     width: 100%;
+    margin-bottom: 35px;
+    min-height: 42px;
 
     @media #{$desktop-and-above} {
       margin-left: 15px;
@@ -24,6 +26,7 @@ $list-column-width: 420px;
 
 .services-location {
   position: relative;
+  margin-bottom: 35px;
 
   @media #{$desktop-and-above} {
     display: flex;
