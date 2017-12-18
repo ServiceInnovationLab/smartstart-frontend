@@ -3,10 +3,24 @@
 .services-header {
   background-color: $services-background;
   overflow: hidden;
+  position: relative;
   margin-bottom: 40px;
 
   @media #{$desktop-and-above} {
     margin-bottom: 60px;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    background-image: url(/assets/img/header-reverse-curve.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: left bottom;
   }
 
   .services-header-inner {
@@ -14,6 +28,10 @@
     margin-left: auto;
     margin-right: auto;
     padding: 15px;
+
+    p {
+      margin-bottom: 40px;
+    }
 
     @media only screen and (min-width: #{$desktop-max-content-width}) {
       padding: 15px 20px;
