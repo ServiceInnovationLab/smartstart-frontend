@@ -38,8 +38,14 @@ class Review extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  componentDidMount() {
-    this.props.handleSubmit(this.onValidate)();
+  componentDidUpdate(prevProps) {
+    // send validation request only after
+    // form has been initialized
+    // we need to initialize the form because it might be automatically populated
+    // with a saved data from the user
+    if (Object.keys(prevProps.formState).length === 0 && Object.keys(this.props.formState).length > 0) {
+      this.props.handleSubmit(this.onValidate)();
+    }
   }
 
   retryConnection() {
