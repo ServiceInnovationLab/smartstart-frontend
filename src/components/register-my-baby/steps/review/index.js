@@ -38,9 +38,18 @@ class Review extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
+  componentDidMount() {
+    // validate form only when we have data in it
+    // it happens only when we navigating to review from other tab
+    // but not when we loading app on a review page (e.g. refresh and load saved state)
+    if (Object.keys(this.props.formState).length > 0) {
+      this.props.handleSubmit(this.onValidate)();
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    // send validation request only after
-    // form has been initialized
+    // revalidate form when we receive data from the backend
+
     // we need to initialize the form because it might be automatically populated
     // with a saved data from the user
     if (Object.keys(prevProps.formState).length === 0 && Object.keys(this.props.formState).length > 0) {
