@@ -7,12 +7,7 @@ let myProfile, dispatchMock, props
 beforeEach(() => {
   dispatchMock = jest.fn()
   props = {
-    personalisationValues: {
-      settings: {
-        dd: ''
-      },
-      email: ''
-    },
+    personalisationValues: {},
     dispatch: dispatchMock,
     shown: true,
     isLoggedIn: false,
@@ -92,10 +87,11 @@ describe('date validation and submit', () => {
     )
   })
 
-  describe('annonymous user', () => {
+  describe('anonymous user', () => {
 
     beforeEach(() => {
     })
+
     test('it should prevent submission if an invalid date is entered', () => {
       myProfile.find('input[type="date"]').simulate('change', {target: {value: 'invalid date'}})
 

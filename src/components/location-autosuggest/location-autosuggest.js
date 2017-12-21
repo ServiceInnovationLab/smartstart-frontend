@@ -34,6 +34,7 @@ class LocationAutosuggest extends Component {
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
     this.onSuggestionSelected = this.onSuggestionSelected.bind(this)
+    this.onBlur = this.onBlur.bind(this)
   }
 
   componentDidMount() {
@@ -92,6 +93,14 @@ class LocationAutosuggest extends Component {
     }
   }
 
+  onBlur() {
+    const { onNoSelection } = this.props
+
+    if (typeof onNoSelection === 'function') {
+      onNoSelection()
+    }
+  }
+
   render() {
     const { inputProps } = this.props
     const { suggestions } = this.state
@@ -104,7 +113,7 @@ class LocationAutosuggest extends Component {
         onSuggestionSelected={this.onSuggestionSelected}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
-        inputProps={{...inputProps}}
+        inputProps={{...inputProps, onBlur: this.onBlur}}
       />
     )
   }
@@ -112,7 +121,8 @@ class LocationAutosuggest extends Component {
 
 LocationAutosuggest.propTypes = {
   inputProps: PropTypes.object,
-  onPlaceSelect: PropTypes.func
+  onPlaceSelect: PropTypes.func,
+  onNoSelection: PropTypes.func
 }
 
 export default LocationAutosuggest

@@ -27,7 +27,7 @@ class JumpNav extends Component {
       let piwikEvent = {
         'category': 'Welcome',
         'action': 'Opened nav list',
-        'name': 'Find and use services'
+        'name': 'Go to stage'
       }
       // track the event
       if (this.state.linkListOpen) {
@@ -98,7 +98,7 @@ class JumpNav extends Component {
           aria-controls='jump-nav-list'
           aria-expanded={this.state.linkListOpen}
         >
-          <span className='visuallyhidden'>Toggle the quick nav menu to </span>Find and use services
+          <span className='visuallyhidden'>Toggle the quick nav menu to </span>Go to stage
         </a>
         <ol id='jump-nav-list' className={navLinksClasses} aria-hidden={!this.state.linkListOpen}>{navLinks}</ol>
       </nav>

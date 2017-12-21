@@ -95,7 +95,8 @@
     "globals": {
       "PIWIK_SITE": 2,
       "PIWIK_INSTANCE": "http://localhost/mock-piwik/",
-      "API_ENDPOINT": "/assets/test-data.json"
+      "API_ENDPOINT": "/assets/snapshot-data.json",
+      "GOOGLE_API_KEY": "blahblahblah"
     },
     "moduleDirectories": [
       "src",
