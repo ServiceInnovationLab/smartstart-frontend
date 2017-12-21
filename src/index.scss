@@ -384,6 +384,31 @@ select {
   text-overflow: ellipsis;
 }
 
+.inline-clear-field {
+  border: 0;
+  border-radius: 0 $form-field-border-radius $form-field-border-radius 0;
+  background-color: transparent;
+  padding: 10px 10px;
+  min-width: auto;
+  display: block;
+  font-weight: 400;
+  color: $text-color;
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+
+  &:active {
+    background-color: transparent;
+  }
+
+  &::before {
+    font-family: 'icomoon' !important;
+    content: $icon-accordian-close;
+    font-size: 17px;
+    display: inline-block;
+  }
+}
+
 // HELPER CLASSES from HTML5 Boilerplate
 
 // Hide visually and from screen readers

@@ -135,6 +135,14 @@
     }
   }
 
+  .welcome-actions {
+    @media only screen and (min-width: #{$desktop-max-content-width}) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
   .welcome-action {
     color: $welcome-button-color;
     font-weight: 500;
@@ -145,6 +153,7 @@
     position: relative;
     margin-right: $welcome-buttons-margin-right;
     margin-bottom: 15px;
+    min-width: 240px;
 
     @media #{$desktop-and-above} {
       margin-right: $welcome-desktop-buttons-margin-right;

@@ -10,3 +10,46 @@
 .error-message {
   margin-bottom: 10px;
 }
+
+.profile-label-help {
+  display: block;
+  font-weight: normal;
+  font-size: $font-size-base;
+  margin-top: 6px;
+}
+
+.location-field {
+  position: relative;
+
+  .inline-clear-field {
+    background-color: $settings-elements-bg-color;
+    color: $background-color;
+
+    &:active {
+      background-color: $settings-elements-bg-color;
+    }
+  }
+
+  input {
+    padding-right: 35px;
+  }
+
+  .react-autosuggest__container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .react-autosuggest__input {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .react-autosuggest__suggestions-container--open {
+    left: -2px;
+  }
+
+  .react-autosuggest__suggestions-list {
+    font-weight: normal;
+    font-size: $font-size-base;
+  }
+}

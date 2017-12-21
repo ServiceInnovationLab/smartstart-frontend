@@ -283,7 +283,8 @@ class Services extends Component {
               inputProps={{
                 value: locationText,
                 onChange: this.onLocationTextChange,
-                autoComplete: 'off'
+                autoComplete: 'off',
+                placeholder: 'Start typing an address'
               }}
             />
             <button onClick={this.clearLocation} className={locationClearClasses}>

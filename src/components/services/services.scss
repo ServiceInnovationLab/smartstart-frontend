@@ -77,6 +77,18 @@ $list-column-width: 420px;
   .results {
     margin-top: 50px;
   }
+
+  .inline-clear-field {
+    background-color: white;
+
+    &:active {
+      background-color: white;
+    }
+
+    @media #{$desktop-and-above} {
+      bottom: 5px;
+    }
+  }
 }
 
 .results-layout {
@@ -191,34 +203,5 @@ $list-column-width: 420px;
 .map-container {
   @media print {
     display: none;
-  }
-}
-
-.inline-clear-field {
-  border: 0;
-  border-radius: 0 $form-field-border-radius $form-field-border-radius 0;
-  background-color: white;
-  padding: 10px 10px;
-  min-width: auto;
-  display: block;
-  font-weight: 400;
-  color: $text-color;
-  position: absolute;
-  right: 3px;
-  bottom: 1px;
-
-  &:active {
-    background-color: white;
-  }
-
-  @media #{$desktop-and-above} {
-    bottom: 5px;
-  }
-
-  &::before {
-    font-family: 'icomoon' !important;
-    content: $icon-accordian-close;
-    font-size: 17px;
-    display: inline-block;
   }
 }
