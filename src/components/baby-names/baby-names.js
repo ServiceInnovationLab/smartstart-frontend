@@ -12,7 +12,7 @@ class BabyNames extends Component {
     this.state = {
       data: nameData,
       category: 'girls',
-      year: '2016'
+      year: '2017'
     }
 
     this.setCategory = this.setCategory.bind(this)
@@ -47,7 +47,7 @@ class BabyNames extends Component {
     return (
       <div>
         <div className='baby-names-header'>
-          <h2 className='baby-names-header-title'><span className='visuallyhidden'>New Zealand baby names 2016</span></h2>
+          <h2 className='baby-names-header-title'><span className='visuallyhidden'>New Zealand baby names 2017</span></h2>
           <div className='feature-page-content bubble-chart-container-wrapper'>
             <BubbleChart data={this.state.data} category={this.state.category} year={this.state.year} />
           </div>
@@ -69,17 +69,18 @@ class BabyNames extends Component {
           </label>
 
           <p className='bubble-chart-controls-help'>Use the controls above to switch between girls and boys names, and see the top ten for a previous year.</p>
+
           <h3>Top baby names</h3>
 
-          <h4 className='introtext'>The top baby names of 2016 have been released with Olivia and Oliver topping the list for a second year in a row.</h4>
+          <h4 className='introtext'>The top baby names of 2017 have been released with Charlotte and Oliver topping the list.</h4>
 
-          <p>Olivia and Oliver remained the most popular baby names in 2016, with Charlotte staying in second place for girls, and Jack for boys.</p>
+          <p>Oliver has remained the most popular boys name for the fifth year running, with Charlotte bumping Olivia down from the top spot to return as the most popular girls name for 2017.</p>
 
           <p>Each year, the Department of Internal Affairs releases a list of the most popular baby names for boys and girls registered in New Zealand.</p>
 
           <p>Registering your baby is free, and it’s an important step for all parents. Registration gives children their legal identity and the rights, responsibilities and access to support services associated with being a New Zealander.</p>
 
-          <blockquote>The top 100 names make up only a small proportion of all names given to babies, with over 18,000 unique first names registered for children born in 2016.</blockquote>
+          <blockquote>The top 100 names make up only a small proportion of all names given to babies, with nearly 13,000 unique first names registered for children born in 2017.</blockquote>
 
           <p>Having a baby can be a busy time for new and expectant parents, and it can be hard to keep track of everything you need to do - that’s where SmartStart can help.</p>
 
@@ -87,16 +88,16 @@ class BabyNames extends Component {
 
           <h5>New Zealand top baby names</h5>
           <ul>
-            <li><a href='/assets/files/Top-baby-Girl-names-1999-2016.pdf'>Top 100 girls’ names (pdf 58kb)</a></li>
-            <li><a href='/assets/files/Top-baby-Boy-names-1999-2016.pdf'>Top 100 boys’ names (pdf 58kb)</a></li>
-            <li><a href='/assets/files/Top-baby-names-1954-2016.xlsx'>Top 100 girls’ and boys’ names since 1954 (xlsx 303kb)</a></li>
+            <li><a href='/assets/files/Top-100-girls-names.pdf'>Top 100 girls’ names (pdf 134kb)</a></li>
+            <li><a href='/assets/files/Top-100-boys-names.pdf'>Top 100 boys’ names (pdf 133kb)</a></li>
+            <li><a href='/assets/files/Top-100-girls-and-boys-names-since-1954.xlsx'>Top 100 girls’ and boys’ names since 1954 (xlsx 266kb)</a></li>
             <li><a href='https://www.dia.govt.nz/press.nsf/d77da9b523f12931cc256ac5000d19b6/98fbaca367aaef57cc25819a00791da3'>Most popular Māori baby names for 2016</a></li>
           </ul>
 
           <h5>Share this with your friends</h5>
           <p className='social-media'>
             <a className='facebook' href='https://www.facebook.com/dialog/share?app_id=749135385236444&href=https%3A%2F%2Fsmartstart.services.govt.nz&redirect_uri=https%3A%2F%2Fsmartstart.services.govt.nz' target='_blank' rel='noreferrer noopener'><span className='visuallyhidden'>Share on Facebook</span></a>
-            <a className='twitter' href='https://twitter.com/intent/tweet?text=Find%20out%20the%20top%20baby%20names%20for%202016%20and%20the%20easiest%20way%20to%20get%20your%20baby%20off%20to%20the%20best%20possible%20start%20https%3A%2F%2Fsmartstart.services.govt.nz' target='_blank' rel='noreferrer noopener'><span className='visuallyhidden'>Share on Twitter</span></a>
+            <a className='twitter' href='https://twitter.com/intent/tweet?text=Find%20out%20the%20top%20baby%20names%20for%202017%20and%20the%20easiest%20way%20to%20get%20your%20baby%20off%20to%20the%20best%20possible%20start%20https%3A%2F%2Fsmartstart.services.govt.nz' target='_blank' rel='noreferrer noopener'><span className='visuallyhidden'>Share on Twitter</span></a>
           </p>
         </div>
       </div>
