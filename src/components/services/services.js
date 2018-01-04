@@ -61,8 +61,10 @@ class Services extends Component {
       loading: false
     }
 
+    this.setLocationFromStore = this.setLocationFromStore.bind(this)
     this.onLocationSelect = this.onLocationSelect.bind(this)
     this.onLocationTextChange = this.onLocationTextChange.bind(this)
+    this.onNoLocationSelect = this.onNoLocationSelect.bind(this)
     this.onCategorySelect = this.onCategorySelect.bind(this)
     this.apiIsLoaded = this.apiIsLoaded.bind(this)
     this.showOnMap = this.showOnMap.bind(this)
@@ -72,16 +74,17 @@ class Services extends Component {
   }
 
   componentDidMount () {
-    // TODO set location from props if it exists
-    this.showOnMap(this.state.location)
-
     if (this.props.category && categories[this.props.category]) {
       this.onCategorySelect(this.props.category)
+    }
+
+    if (this.props.personalisationValues.settings && this.props.personalisationValues.settings.loc) {
+      this.setLocationFromStore(this.props.personalisationValues.settings.loc)
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    let hasDirectoryDataChanged = !!(nextProps.directory && nextProps.directory !== this.props.directory)
+    const hasDirectoryDataChanged = !!(nextProps.directory && nextProps.directory !== this.props.directory)
 
     if (hasDirectoryDataChanged) {
       // this is the earliest that we recieve the data back from the dispatch
@@ -97,11 +100,26 @@ class Services extends Component {
     if (this.state.category === '') {
       this.setState({ loading: false })
     }
+
+    if (nextProps.personalisationValues.settings && nextProps.personalisationValues.settings.loc) {
+      this.setLocationFromStore(nextProps.personalisationValues.settings.loc)
+    }
   }
 
   componentDidUpdate () {
     // hack to force google maps to redraw because we start with it hidden
     window.dispatchEvent(new Event('resize'))
+  }
+
+  setLocationFromStore (location) {
+    if (location.text) {
+      this.setState({
+        location: { latitude: location.latitude, longitude: location.longitude, text: location.text },
+        locationText: location.text
+      }, () => {
+        this.showOnMap(this.state.location)
+      })
+    }
   }
 
   apiIsLoaded () {
@@ -143,6 +161,21 @@ class Services extends Component {
     this.setState({
       locationText: newValue
     })
+  }
+
+  onNoLocationSelect () {
+    // when clicking away from the control, blank it if a proper location hasn't
+    // yet been selected, or return to last selected value
+    if (!this.state.location.latitude) {
+      this.setState({
+        locationText: '',
+        location: { latitude: null, longitude: null, text: '' }
+      })
+    } else {
+      this.setState({
+        locationText: this.state.location.text
+      })
+    }
   }
 
   clearLocation () {
@@ -280,6 +313,7 @@ class Services extends Component {
             <LocationAutosuggest
               id='services-location-field'
               onPlaceSelect={this.onLocationSelect}
+              onNoSelection={this.onNoLocationSelect}
               inputProps={{
                 value: locationText,
                 onChange: this.onLocationTextChange,
@@ -341,7 +375,8 @@ class Services extends Component {
 
 function mapStateToProps (state) {
   const {
-    servicesActions
+    servicesActions,
+    personalisationActions
   } = state
   const {
     directory,
@@ -350,10 +385,16 @@ function mapStateToProps (state) {
     directory: [],
     directoryError: false
   }
+  const {
+    personalisationValues
+  } = personalisationActions || {
+    personalisationValues: {}
+  }
 
   return {
     directory,
-    directoryError
+    directoryError,
+    personalisationValues
   }
 }
 
@@ -361,7 +402,8 @@ Services.propTypes = {
   dispatch: PropTypes.func.isRequired,
   directory: PropTypes.array.isRequired,
   directoryError: PropTypes.bool.isRequired,
-  category: PropTypes.string
+  category: PropTypes.string,
+  personalisationValues: PropTypes.object
 }
 
 export default connect(mapStateToProps)(Services)
