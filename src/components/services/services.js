@@ -4,6 +4,7 @@ import geolib from 'geolib'
 import classNames from 'classnames'
 import { browserHistory } from 'react-router'
 import { StickyContainer, Sticky } from 'react-sticky'
+import scriptLoader from 'react-async-script-loader'
 import { fetchServicesDirectory } from 'actions/services'
 import LocationAutosuggest from 'components/location-autosuggest/location-autosuggest'
 import ResultMap from 'components/services/map'
@@ -51,14 +52,14 @@ class Services extends Component {
     this.state = {
       category: '',
       listView: true,
-      locationApiLoaded: false,
       locationText: '',
       location: { latitude: null, longitude: null },
       mapCenter: { lat: -41.295378, lng: 174.778684 },
       mapZoom: 5,
       results: [],
       groupedResults: [],
-      loading: false
+      loading: false,
+      googleLibAvailable: false
     }
 
     this.setLocationFromStore = this.setLocationFromStore.bind(this)
@@ -66,7 +67,6 @@ class Services extends Component {
     this.onLocationTextChange = this.onLocationTextChange.bind(this)
     this.onNoLocationSelect = this.onNoLocationSelect.bind(this)
     this.onCategorySelect = this.onCategorySelect.bind(this)
-    this.apiIsLoaded = this.apiIsLoaded.bind(this)
     this.showOnMap = this.showOnMap.bind(this)
     this.clickListTab = this.clickListTab.bind(this)
     this.clickMapTab = this.clickMapTab.bind(this)
@@ -74,18 +74,31 @@ class Services extends Component {
   }
 
   componentDidMount () {
-    if (this.props.category && categories[this.props.category]) {
-      this.onCategorySelect(this.props.category)
+    const { isScriptLoaded, isScriptLoadSucceed, category, personalisationValues } = this.props
+
+    if (isScriptLoaded && isScriptLoadSucceed) {
+      this.setState({ googleLibAvailable: true })
     }
 
-    if (this.props.personalisationValues.settings && this.props.personalisationValues.settings.loc) {
-      this.setLocationFromStore(this.props.personalisationValues.settings.loc)
+    if (category && categories[category]) {
+      this.onCategorySelect(category)
+    }
+
+    if (personalisationValues.settings && personalisationValues.settings.loc) {
+      this.setLocationFromStore(personalisationValues.settings.loc)
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    const hasDirectoryDataChanged = !!(nextProps.directory && nextProps.directory !== this.props.directory)
+    let hasDirectoryDataChanged = false
 
+    if (nextProps.isScriptLoaded && !this.props.isScriptLoaded) { // script load finished
+      if (nextProps.isScriptLoadSucceed) {
+        this.setState({ googleLibAvailable: true })
+      }
+    }
+
+    hasDirectoryDataChanged = !!(nextProps.directory && nextProps.directory !== this.props.directory)
     if (hasDirectoryDataChanged) {
       // this is the earliest that we recieve the data back from the dispatch
       // we only need to recompute grouping if we switched datasets
@@ -120,10 +133,6 @@ class Services extends Component {
         this.showOnMap(this.state.location)
       })
     }
-  }
-
-  apiIsLoaded () {
-    this.setState({ locationApiLoaded: true })
   }
 
   onCategorySelect (category) {
@@ -187,16 +196,19 @@ class Services extends Component {
 
   showOnMap (location) {
     if (location.latitude && location.longitude) {
+      // we always reset the mobile view to map when showing something on it
       this.setState({
-        mapCenter: {
-          lat: location.latitude,
-          lng: location.longitude
-        },
-        mapZoom: 13
+        listView: false
       }, () => {
-        if (this.state.listView) {
-          this.clickMapTab()
-        }
+        // it's very important to wait until the map is visible before trying
+        // to center it - otherwise the centering won't work properly
+        this.setState({
+          mapCenter: {
+            lat: location.latitude,
+            lng: location.longitude
+          },
+          mapZoom: 13
+        })
       })
     }
   }
@@ -255,13 +267,13 @@ class Services extends Component {
       listView: false
     }, () => {
       // hack to force google maps to redraw because it was hidden
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event('resize'))
     })
   }
 
   render () {
     const { directoryError } = this.props
-    const { category, listView, locationApiLoaded, location, locationText, mapCenter, mapZoom, results, loading } = this.state
+    const { category, listView, location, locationText, mapCenter, mapZoom, results, loading, googleLibAvailable } = this.state
 
     const loadErrorClasses = classNames(
       'load-error',
@@ -306,7 +318,7 @@ class Services extends Component {
             </select>
           </div>
 
-          {locationApiLoaded && <div className='services-location'>
+          {googleLibAvailable && <div className='services-location'>
             <label data-test='services-location' htmlFor='services-location-field'>
               Location:
             </label>
@@ -346,19 +358,19 @@ class Services extends Component {
                 })}
               </div>
 
-              <StickyContainer className='map-container-wrapper'>
+              {googleLibAvailable && <StickyContainer className='map-container-wrapper'>
                 <Sticky>
                   {
                     ({ style }) => {
                       return (
                         <div style={style} className={mapViewClasses} aria-hidden='true' data-test='services-map'>
-                          <ResultMap apiIsLoaded={this.apiIsLoaded} center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
+                          <ResultMap center={mapCenter} zoom={mapZoom} markers={results} showList={this.clickListTab} />
                         </div>
                       )
                     }
                   }
                 </Sticky>
-              </StickyContainer>
+              </StickyContainer>}
             </div>
           </div>
 
@@ -403,7 +415,11 @@ Services.propTypes = {
   directory: PropTypes.array.isRequired,
   directoryError: PropTypes.bool.isRequired,
   category: PropTypes.string,
-  personalisationValues: PropTypes.object
+  personalisationValues: PropTypes.object,
+  isScriptLoaded: PropTypes.bool,
+  isScriptLoadSucceed: PropTypes.bool
 }
 
-export default connect(mapStateToProps)(Services)
+export default scriptLoader(
+  `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`
+)(connect(mapStateToProps)(Services))
