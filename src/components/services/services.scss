@@ -98,20 +98,22 @@ $list-column-width: 420px;
 }
 
 .map-container-wrapper {
+  position: relative;
+  width: calc(100% + #{$mobile-content-gutter * 2});
+  left: -$mobile-content-gutter;
+
   @media #{$desktop-and-above} {
     width: calc(100% - #{$list-column-width});
+    left: 0;
   }
 }
 
 .map-container {
-  width: calc(100% + #{$mobile-content-gutter * 2});
-  position: relative;
-  left: -$mobile-content-gutter;
+  width: 100%;
   height: 400px;
 
   @media #{$desktop-and-above} {
     width: 100%;
-    left: 0;
     height: 650px;
   }
 }

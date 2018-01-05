@@ -3,23 +3,29 @@ import GoogleMapReact from 'google-map-react'
 import Marker from 'components/services/marker'
 
 class ResultMap extends Component {
+
   render() {
-    const { apiIsLoaded, zoom, center, markers, showList } = this.props
+    const { zoom, center, markers, showList } = this.props
     const options = {
-      fullscreenControl: false // need to disable until https://github.com/istarkov/google-map-react/pull/452 is merged
+      fullscreenControl: false // lack of inline styles makes this look broken
+    }
+    const googleMapLoader = () => {
+      // custom loader as we loaded the api via react-async-script-loader in parent
+      return new Promise((resolve, reject) => {
+        if (window.google && window.google.maps) {
+          resolve(window.google.maps)
+        } else {
+          reject('google maps object not found')
+        }
+      })
     }
 
     return (
       <GoogleMapReact
-        bootstrapURLKeys={{
-          key: GOOGLE_API_KEY,
-          libraries: 'places' // so we can use the script for the location autocomplete too
-        }}
-        onGoogleApiLoaded={apiIsLoaded}
-        yesIWantToUseGoogleMapApiInternals={true}
         center={center}
         zoom={zoom}
         options={options}
+        googleMapLoader={googleMapLoader}
       >
       {markers && markers.map((marker, index) => {
         return <Marker
@@ -38,7 +44,6 @@ class ResultMap extends Component {
 }
 
 ResultMap.propTypes = {
-  apiIsLoaded: PropTypes.func.isRequired,
   showList: PropTypes.func.isRequired,
   center: PropTypes.object,
   zoom: PropTypes.number,
