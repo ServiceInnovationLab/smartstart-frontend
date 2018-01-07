@@ -291,7 +291,7 @@ export class MyProfile extends Component {
   onNoLocationSelect () {
     // when clicking away from the control, blank it if a proper location hasn't
     // yet been selected, or return to last selected value
-    if (!this.state.location.latitude) {
+    if (!this.state.location.text) {
       this.setState({
         locationFieldValue: '',
         location: { latitude: null, longitude: null, text: '' }
