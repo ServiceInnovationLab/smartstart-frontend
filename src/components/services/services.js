@@ -68,6 +68,7 @@ class Services extends Component {
     this.onNoLocationSelect = this.onNoLocationSelect.bind(this)
     this.onCategorySelect = this.onCategorySelect.bind(this)
     this.showOnMap = this.showOnMap.bind(this)
+    this.changeTabAndShowOnMap = this.changeTabAndShowOnMap.bind(this)
     this.clickListTab = this.clickListTab.bind(this)
     this.clickMapTab = this.clickMapTab.bind(this)
     this.clearLocation = this.clearLocation.bind(this)
@@ -125,7 +126,7 @@ class Services extends Component {
   }
 
   setLocationFromStore (location) {
-    if (location.text) {
+    if (location.text && !this.state.location.text) {
       this.setState({
         location: { latitude: location.latitude, longitude: location.longitude, text: location.text },
         locationText: location.text
@@ -157,7 +158,8 @@ class Services extends Component {
       this.setState({
         location: {
           latitude: locationDetail.geometry.location.lat(),
-          longitude: locationDetail.geometry.location.lng()
+          longitude: locationDetail.geometry.location.lng(),
+          text: locationDetail.formatted_address
         }
       }, () => {
         // we need to re-calculate distances
@@ -175,7 +177,7 @@ class Services extends Component {
   onNoLocationSelect () {
     // when clicking away from the control, blank it if a proper location hasn't
     // yet been selected, or return to last selected value
-    if (!this.state.location.latitude) {
+    if (!this.state.location.text) {
       this.setState({
         locationText: '',
         location: { latitude: null, longitude: null, text: '' }
@@ -196,7 +198,21 @@ class Services extends Component {
 
   showOnMap (location) {
     if (location.latitude && location.longitude) {
-      // we always reset the mobile view to map when showing something on it
+      this.setState({
+        mapCenter: {
+          lat: location.latitude,
+          lng: location.longitude
+        },
+        mapZoom: 13
+      })
+    }
+  }
+
+  changeTabAndShowOnMap (location) {
+    // we need a separate function for use by the list so the normal showOnMap
+    // (which gets called from a lot of places) doesn't do the tab switch
+    if (location.latitude && location.longitude) {
+      // reset the mobile view to map
       this.setState({
         listView: false
       }, () => {
@@ -354,7 +370,7 @@ class Services extends Component {
             <div className='results-layout'>
               <div className={listViewClasses} data-test='services-list'>
                 {results.length && results.map((provider, index) => {
-                  return <Provider key={'provider' + index} provider={provider} recenterMap={this.showOnMap} />
+                  return <Provider key={'provider' + index} provider={provider} recenterMap={this.changeTabAndShowOnMap} />
                 })}
               </div>
 
