@@ -32,7 +32,7 @@ class LoginButton extends Component {
     return (
       <div className='realme-secondary-widget' data-test='login'>
         <a href='/login/' onClick={this.loginAction} className='ext-link-icon'>Login</a>
-        <a href='/login/' onClick={this.loginAction} className='ext-link-icon'>Create</a>
+        <a href='/login/' onClick={this.loginAction} className='ext-link-icon realme-create-secondary'>Create</a>
       </div>
     )
   }

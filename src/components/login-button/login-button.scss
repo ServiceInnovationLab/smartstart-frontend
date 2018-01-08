@@ -4,8 +4,8 @@
   background: url(/assets/img/realme/logo-simple-highres.png) no-repeat right top;
   background-size: auto 100%;
   padding-right: 28px;
-  // make sure smaller devices don't split up the controls
-  min-width: 146px;
+  // make sure smaller devices don't break to two lines
+  min-width: 102px;
 
   a {
     color: #ffffff;
@@ -13,14 +13,22 @@
     font-size: 15px;
     display: inline-block;
     padding-right: 20px;
-    margin-right: 10px;
     border-right: 1px solid $header-border-color;
+    margin-right: 10px;
 
     &:hover,
     &:active,
     &:visited {
       color: #ffffff;
       text-decoration: underline;
+    }
+
+    &.realme-create-secondary {
+      display: none;
+
+      @media #{$tablet-and-above} {
+        display: inline-block;
+      }
     }
   }
 }
