@@ -388,14 +388,15 @@ select {
   border: 0;
   border-radius: 0 $form-field-border-radius $form-field-border-radius 0;
   background-color: transparent;
-  padding: 10px 10px;
-  min-width: auto;
+  padding: 0;
+  min-width: 0;
   display: block;
   font-weight: 400;
   color: $text-color;
   position: absolute;
-  right: 3px;
-  bottom: 1px;
+  right: 14px;
+  bottom: 14px;
+  line-height: 14px;
 
   &:active {
     background-color: transparent;
@@ -406,6 +407,10 @@ select {
     content: $icon-accordian-close;
     font-size: 17px;
     display: inline-block;
+  }
+
+  @media #{$desktop-and-above} {
+    line-height: 19px;
   }
 }
 

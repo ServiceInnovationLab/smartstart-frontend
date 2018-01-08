@@ -49,6 +49,10 @@ $list-column-width: 420px;
       font-weight: 500;
       padding: 11px 35px 11px 11px;
       width: 100%;
+
+      &::-ms-clear {
+        display: none;
+      }
     }
 
     .react-autosuggest__suggestions-container--open {
@@ -76,18 +80,6 @@ $list-column-width: 420px;
 .services-page {
   .results {
     margin-top: 50px;
-  }
-
-  .inline-clear-field {
-    background-color: white;
-
-    &:active {
-      background-color: white;
-    }
-
-    @media #{$desktop-and-above} {
-      bottom: 5px;
-    }
   }
 }
 
