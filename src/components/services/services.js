@@ -120,11 +120,6 @@ class Services extends Component {
     }
   }
 
-  componentDidUpdate () {
-    // hack to force google maps to redraw because we start with it hidden
-    window.dispatchEvent(new Event('resize'))
-  }
-
   setLocationFromStore (location) {
     if (location.text && !this.state.location.text) {
       this.setState({
@@ -281,9 +276,6 @@ class Services extends Component {
   clickMapTab () {
     this.setState({
       listView: false
-    }, () => {
-      // hack to force google maps to redraw because it was hidden
-      window.dispatchEvent(new Event('resize'))
     })
   }
 
