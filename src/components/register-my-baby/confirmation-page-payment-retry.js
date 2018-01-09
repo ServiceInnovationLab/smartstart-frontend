@@ -20,6 +20,20 @@ class PaymentFailPage extends React.Component {
     }
   }
 
+  componentDidMount() {
+    // redirect to failed payment page just before session will expire
+    this.setState({
+      pageTimeout: setTimeout(() => {
+        window.location.href = '/register-my-baby/confirmation-payment-outstanding'
+      }, 28 * 60 * 1000) // 28 min
+    })
+  }
+
+  componentWillUnmount() {
+    // clear 28 min timeout that has been set on didMount
+    clearTimeout(this.state.pageTimeout)
+  }
+
   onRetry() {
     const { applicationReferenceNumber } = this.props.confirmationData
 
