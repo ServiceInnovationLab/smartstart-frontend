@@ -26,6 +26,7 @@ class ResultMap extends Component {
         zoom={zoom}
         options={options}
         googleMapLoader={googleMapLoader}
+        resetBoundsOnResize={true}
       >
       {markers && markers.map((marker, index) => {
         return <Marker
