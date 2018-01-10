@@ -128,16 +128,18 @@ export class MyProfile extends Component {
 
     // due date field
     if(this.dueDateValidate()) {
-      if (dueDateFieldValue && (!settings || dueDateFieldValue !== settings.dd)) {
+      if (!settings || dueDateFieldValue !== settings.dd) {
         valuesToSave.push({ 'group': 'settings', 'key': 'dd', 'val': dueDateFieldValue })
 
-        let piwikEvent = {
-          'category': 'Profile Data',
-          'action': 'Added',
-          'name': 'Due date'
+        if (dueDateFieldValue) {
+          let piwikEvent = {
+            'category': 'Profile Data',
+            'action': 'Added',
+            'name': 'Due date'
+          }
+          // track the event
+          this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
         }
-        // track the event
-        this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
 
         // update in store
         this.props.dispatch(addDueDate(this.state.dueDateFieldValue))
@@ -150,16 +152,18 @@ export class MyProfile extends Component {
 
     // location field
     // there is no validation for the location as only autocomplete values are allowed
-    if (location.text && (!settings || !settings.loc || (settings.loc && settings.loc.text !== location.text))) {
+    if (!settings || !settings.loc || (settings.loc && settings.loc.text !== location.text)) {
       valuesToSave.push({ 'group': 'settings', 'key': 'loc', 'val': location })
 
-      let piwikEvent = {
-        'category': 'Profile Data',
-        'action': 'Added',
-        'name': 'Location'
+      if (location.text) {
+        let piwikEvent = {
+          'category': 'Profile Data',
+          'action': 'Added',
+          'name': 'Location'
+        }
+        // track the event
+        this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
       }
-      // track the event
-      this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
     }
 
     // subscribed and email fields
@@ -171,13 +175,16 @@ export class MyProfile extends Component {
         // update in store
         this.props.dispatch(addSubscribed(this.state.subscribedFieldValue))
 
-        // track the event
-        let piwikEvent = {
-          'category': 'Profile Data',
-          'action': this.state.subscribedFieldValue ? 'checked' : 'unchecked',
-          'name': 'Subscribed'
+        if (settings.subscribed || subscribedFieldValue.toString() === 'checked') {
+          // if there was a previously stored value (which has now changed),
+          // or this is first time it was checked, track the event
+          let piwikEvent = {
+            'category': 'Profile Data',
+            'action': this.state.subscribedFieldValue ? 'checked' : 'unchecked',
+            'name': 'Subscribed'
+          }
+          this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
         }
-        this.props.dispatch(piwikTrackPost('Profile', piwikEvent))
       }
 
       // email field

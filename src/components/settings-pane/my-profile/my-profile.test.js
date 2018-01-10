@@ -107,7 +107,8 @@ describe('date validation and submit', () => {
       myProfile.find('form').simulate('submit')
 
       expect(profilePaneCloseMock).toHaveBeenCalled()
-      expect(dispatchMock.mock.calls.length).toEqual(1)
+      // one dispatch for updating the date to '' in timeline, one to save '' to store
+      expect(dispatchMock.mock.calls.length).toEqual(2)
     })
 
     test('it should submit if the date is valid', () => {
@@ -115,6 +116,8 @@ describe('date validation and submit', () => {
       myProfile.find('form').simulate('submit')
 
       expect(profilePaneCloseMock).toHaveBeenCalled()
+      // one to update the timeline date, one to record the addition of the
+      // date to piwik, one to save the values to the store
       expect(dispatchMock.mock.calls.length).toEqual(3)
     })
   })
