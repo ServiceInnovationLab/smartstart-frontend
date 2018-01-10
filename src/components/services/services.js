@@ -384,7 +384,15 @@ class Services extends Component {
 
           <div className={selectMoreInfoClasses} data-test='services-no-results'>
             <h3>No results</h3>
-            <p>Please select a category and search for your address.</p>
+            <p>
+              Please
+              <span className={category ? 'hidden' : ''}>
+                &nbsp;select a service category
+                <span className={(location.latitude && location.longitude) ? 'hidden' : ''}> and</span>
+              </span>
+              <span className={(location.latitude && location.longitude) ? 'hidden' : ''}> enter an address</span>
+              .
+            </p>
           </div>
         </div>
 
