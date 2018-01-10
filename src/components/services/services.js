@@ -429,5 +429,5 @@ Services.propTypes = {
 }
 
 export default scriptLoader(
-  `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`
+  `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&v=3.31`
 )(connect(mapStateToProps)(Services))
