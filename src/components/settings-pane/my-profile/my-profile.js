@@ -364,7 +364,7 @@ export class MyProfile extends Component {
             />
           </label>
           <br />
-          {googleLibAvailable && <div className='location-field'>
+          {googleLibAvailable && false && <div className='location-field'>
             <label>
               Your location
               <br />
