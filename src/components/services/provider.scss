@@ -28,10 +28,13 @@
   .location {
     font-weight: 500;
 
-    a {
+    .show-on-map {
       display: block;
-      color: $text-color;
-      font-weight: normal;
+
+      a {
+        color: $text-color;
+        font-weight: normal;
+      }
 
       &::before {
         font-family: 'icomoon' !important;
