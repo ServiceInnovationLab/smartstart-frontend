@@ -120,6 +120,17 @@ class Services extends Component {
     }
   }
 
+  componentDidUpdate () {
+    // hack to force google maps to redraw because we start with it hidden
+    try {
+      window.dispatchEvent(new Event('resize'))
+    } catch(error) {
+      // the above doesn't work in IE11, but it doesn't seem to need it because
+      // resetBoundsOnResize in the map options resolves the issue for IE
+      // so just eat the error silently
+    }
+  }
+
   setLocationFromStore (location) {
     if (location.text && !this.state.location.text) {
       this.setState({
