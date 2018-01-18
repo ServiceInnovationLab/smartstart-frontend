@@ -16,11 +16,11 @@ import Step4 from './steps/step4'
 import Step5 from './steps/step5'
 import Step6 from './steps/step6'
 import Review from './steps/review/index'
-import Spinner from '../spinner/spinner'
+import Spinner from 'components/spinner/spinner'
 import { fullSubmit } from './submit'
-import { piwikTrackPost } from '../../actions/actions'
-import { fetchBirthFacilities, fetchCountries, rememberBroData, fetchBroData } from '../../actions/birth-registration'
-import { initialRegistrationFormState } from '../../store/reducers'
+import { piwikTrackPost } from 'actions/application'
+import { fetchBirthFacilities, fetchCountries, rememberBroData, fetchBroData } from 'actions/birth-registration'
+import { initialRegistrationFormState } from 'store/reducers/birth-registration'
 
 const stepByStepName = {
   'child-details': 1,

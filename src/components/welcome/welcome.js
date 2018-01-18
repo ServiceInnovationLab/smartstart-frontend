@@ -3,7 +3,8 @@ import './welcome.scss'
 import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
+import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO } from 'actions/timeline'
+import { piwikTrackPost } from 'actions/application'
 import PrimaryLogin from 'components/primary-login/primary-login'
 import JumpNav from 'components/welcome/jump-nav/jump-nav'
 
@@ -84,7 +85,7 @@ class Welcome extends Component {
 }
 
 const mapStateToProps = state => ({
-  personalisationValues: state.personalisationActions.personalisationValues || {}
+  personalisationValues: state.personalisation.personalisationValues || {}
 })
 
 Welcome.propTypes = {

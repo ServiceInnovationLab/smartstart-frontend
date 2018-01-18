@@ -20,9 +20,9 @@ import {
 } from '../../validation-messages'
 import { validCharRelax } from '../../validate'
 import { maxLength } from '../../normalize'
-import Spinner from '../../../spinner/spinner'
+import Spinner from 'components/spinner/spinner'
 import { validateOnly } from '../../submit'
-import { fetchCountries } from '../../../../actions/birth-registration'
+import { fetchCountries } from 'actions/birth-registration'
 import './review.scss'
 
 class Review extends Component {

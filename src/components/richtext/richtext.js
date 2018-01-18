@@ -3,7 +3,7 @@ import './expandable.scss'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { piwikTrackPost } from 'actions/actions'
+import { piwikTrackPost } from 'actions/application'
 
 class Richtext extends Component {
   constructor (props) {

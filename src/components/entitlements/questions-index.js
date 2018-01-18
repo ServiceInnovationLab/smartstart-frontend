@@ -52,8 +52,8 @@ EntitlementsQuestions.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  fetchingSchema: get(state, 'entitlementsActions.fetchingSchema'),
-  schema: get(state, 'entitlementsActions.schema')
+  fetchingSchema: get(state, 'entitlements.fetchingSchema'),
+  schema: get(state, 'entitlements.schema')
 })
 
 export default connect(

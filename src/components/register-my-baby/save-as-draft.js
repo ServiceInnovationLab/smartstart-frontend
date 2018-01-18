@@ -63,7 +63,7 @@ SaveAsDraft.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: get(state, 'personalisationActions.isLoggedIn'),
+  isLoggedIn: get(state, 'personalisation.isLoggedIn'),
   maxStep: get(state, 'birthRegistration.savedRegistrationForm.step'),
   formState: getFormValues('registration')(state)
 })

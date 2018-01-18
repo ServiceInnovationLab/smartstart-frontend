@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import renderError from './render-error'
 import renderWarning from './render-warning'
-import { getTextContent } from '../../../utils'
+import { getTextContent } from 'utils'
 
 const renderFieldReview = ({ input, label, valueRenderer, onEdit, section, meta: { error, warning } }) => {
   let valueDisplay;

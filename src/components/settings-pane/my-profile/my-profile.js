@@ -3,7 +3,8 @@ import './my-profile.scss'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { addDueDate, addSubscribed, savePersonalisationValues, saveNewEmail, piwikTrackPost, checkPendingEmails } from 'actions/actions'
+import { addDueDate, addSubscribed, savePersonalisationValues, saveNewEmail, checkPendingEmails } from 'actions/personalisation'
+import { piwikTrackPost } from 'actions/application'
 import classNames from 'classnames'
 import scriptLoader from 'react-async-script-loader'
 import LocationAutosuggest from 'components/location-autosuggest/location-autosuggest'
@@ -434,13 +435,13 @@ export class MyProfile extends Component {
 
 function mapStateToProps (state) {
   const {
-    personalisationActions
+    personalisation
   } = state
   const {
     personalisationValues,
     userEmail,
     isLoggedIn
-  } = personalisationActions || {
+  } = personalisation || {
     personalisationValues: {},
     userEmail: '',
     isLoggedIn: false

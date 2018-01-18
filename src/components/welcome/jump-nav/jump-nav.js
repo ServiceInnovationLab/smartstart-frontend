@@ -3,7 +3,7 @@ import './jump-nav.scss'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { piwikTrackPost } from 'actions/actions'
+import { piwikTrackPost } from 'actions/application'
 
 class JumpNav extends Component {
   constructor (props) {
@@ -108,12 +108,12 @@ class JumpNav extends Component {
 
 function mapStateToProps (state) {
   const {
-    contentActions
+    timeline
   } = state
   const {
     phases,
     supplementary
-  } = contentActions || {
+  } = timeline || {
     phases: [],
     supplementary: []
   }

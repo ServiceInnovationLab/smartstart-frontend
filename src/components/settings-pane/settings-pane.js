@@ -5,7 +5,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import throttle from 'throttle-debounce/throttle'
-import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO, piwikTrackPost } from 'actions/actions'
+import { toggleSettings, OPEN_PROFILE, CLOSE_PROFILE, OPEN_TODO, CLOSE_TODO } from 'actions/timeline'
+import { piwikTrackPost } from 'actions/application'
 import MyProfile from 'components/settings-pane/my-profile/my-profile'
 import TodoList from 'components/settings-pane/todo-list/todo-list'
 
@@ -143,12 +144,12 @@ class SettingsPane extends Component {
 
 function mapStateToProps (state) {
   const {
-    settingsDisplayActions
+    timeline
   } = state
   const {
     profilePaneOpen,
     todoPaneOpen
-  } = settingsDisplayActions || {
+  } = timeline || {
     profilePaneOpen: false,
     todoPaneOpen: false
   }

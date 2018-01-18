@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchContent, checkAuthCookie, fetchPhaseMetadata, getPiwikID, piwikTrackPost, fetchPersonalisationValues } from 'actions/actions'
+import { fetchContent } from 'actions/timeline'
+import { checkAuthCookie, fetchPhaseMetadata, fetchPersonalisationValues } from 'actions/personalisation'
+import { piwikTrackPost, getPiwikID } from 'actions/application'
 
 class Container extends Component {
   componentDidMount () {
@@ -47,15 +49,15 @@ class Container extends Component {
 
 function mapStateToProps (state) {
   const {
-    contentActions,
-    personalisationActions,
-    applicationActions
+    timeline,
+    personalisation,
+    application
   } = state
   const {
     phases,
     supplementary,
     about
-  } = contentActions || {
+  } = timeline || {
     phases: [],
     supplementary: [],
     about: []
@@ -63,14 +65,14 @@ function mapStateToProps (state) {
   const {
     isLoggedIn,
     isFetchingPersonalisation
-  } = personalisationActions || {
+  } = personalisation || {
     isLoggedIn: false,
     isFetchingPersonalisation: false
   }
   const {
     error,
     authError
-  } = applicationActions || {
+  } = application || {
     error: false,
     authError: false
   }

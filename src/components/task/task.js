@@ -2,7 +2,8 @@ import './task.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { savePersonalisationValues, piwikTrackPost } from 'actions/actions'
+import { savePersonalisationValues } from 'actions/personalisation'
+import { piwikTrackPost } from 'actions/application'
 import classNames from 'classnames'
 
 class Task extends Component {
@@ -100,11 +101,11 @@ class Task extends Component {
 
 function mapStateToProps (state) {
   const {
-    personalisationActions
+    personalisation
   } = state
   const {
     personalisationValues
-  } = personalisationActions || {
+  } = personalisation || {
     personalisationValues: {}
   }
 

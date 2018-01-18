@@ -415,19 +415,19 @@ class Services extends Component {
 
 function mapStateToProps (state) {
   const {
-    servicesActions,
-    personalisationActions
+    services,
+    personalisation
   } = state
   const {
     directory,
     directoryError
-  } = servicesActions || {
+  } = services || {
     directory: [],
     directoryError: false
   }
   const {
     personalisationValues
-  } = personalisationActions || {
+  } = personalisation || {
     personalisationValues: {}
   }
 

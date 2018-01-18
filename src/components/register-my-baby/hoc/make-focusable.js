@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { animateScroll } from 'react-scroll'
-import { findClosestDomElement } from '../../../utils'
+import { findClosestDomElement } from 'utils'
 
 const focusToField = (fieldName) => {
   const node = document.querySelector(`[name="${fieldName}"], [name="${fieldName}[0]"], [name="${fieldName}-group"], [name="${fieldName}-day"]`)

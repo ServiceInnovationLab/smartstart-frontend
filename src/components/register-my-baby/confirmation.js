@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import Accordion from './accordion'
-import { rememberBroData, fetchBroData } from '../../actions/birth-registration'
-import { initialRegistrationFormState } from '../../store/reducers'
+import { rememberBroData, fetchBroData } from 'actions/birth-registration'
+import { initialRegistrationFormState } from 'store/reducers/birth-registration'
 import {
   products as productOptions,
   courierDeliveryPrice
 } from './options'
-import Spinner from '../spinner/spinner'
+import Spinner from 'components/spinner/spinner'
 import './confirmation.scss'
 
 class Confirmation extends Component {

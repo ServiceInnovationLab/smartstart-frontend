@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import Accordion from './accordion'
-import { piwikTrackPost } from '../../actions/actions'
 import get from 'lodash/get'
-import { fetchBroData } from '../../actions/birth-registration'
+import Accordion from './accordion'
+import { piwikTrackPost } from 'actions/application'
+import { fetchBroData } from 'actions/birth-registration'
 
 import './landing-page.scss'
 

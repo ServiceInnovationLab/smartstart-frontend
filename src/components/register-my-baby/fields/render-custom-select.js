@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Select from 'react-select'
-import { getTextContent } from '../../../utils'
+import { getTextContent } from 'utils'
 import renderError, { hasError } from './render-error'
 import renderWarning from './render-warning'
 import './custom-select.scss'
@@ -89,4 +89,3 @@ CustomSelect.propTypes = {
 }
 
 export default CustomSelect
-

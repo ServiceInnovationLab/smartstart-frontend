@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { piwikTrackPost } from 'actions/actions'
+import { piwikTrackPost } from 'actions/application'
 import Task from 'components/task/task'
 
 export class TodoList extends Component {
@@ -74,11 +74,11 @@ export class TodoList extends Component {
 
 function mapStateToProps (state) {
   const {
-    contentActions
+    timeline
   } = state
   const {
     phases
-  } = contentActions || {
+  } = timeline || {
     phases: []
   }
 
