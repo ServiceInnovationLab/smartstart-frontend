@@ -38,6 +38,11 @@ import {
   RECEIVE_SERVICES_API,
   RECEIVE_SERVICES_API_ERROR
 } from 'actions/services'
+import {
+  REQUEST_SCHEMA,
+  RECEIVE_SCHEMA,
+  FAILURE_SCHEMA
+} from 'actions/entitlements'
 
 function contentActions (state = {
   isFetching: false,
@@ -294,6 +299,32 @@ function servicesActions (state = {
   }
 }
 
+function entitlementsActions (state = {
+  fetchingSchema: false,
+  schema: []
+}, action) {
+  switch (action.type) {
+    case REQUEST_SCHEMA:
+      return {
+        ...state,
+        fetchingSchema: true
+      }
+    case RECEIVE_SCHEMA:
+      return {
+        ...state,
+        fetchingSchema: false,
+        schema: action.payload
+      }
+    case FAILURE_SCHEMA:
+      return {
+        ...state,
+        fetchingSchema: false
+      }
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   contentActions,
   personalisationActions,
@@ -302,7 +333,8 @@ const rootReducer = combineReducers({
   supplementaryContentActions,
   form: formReducer,
   birthRegistration,
-  servicesActions
+  servicesActions,
+  entitlementsActions
 })
 
 export default rootReducer
