@@ -1,7 +1,10 @@
 @import 'variables';
+@import 'mixins';
 
 .provider {
   border-top: 1px solid $border-color;
+  padding-top: 35px;
+  padding-bottom: 25px;
 
   &:first-child {
     border-top: 0 none;
@@ -18,15 +21,35 @@
   }
 
   h4 {
-    margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: $provider-text-color;
+    font-weight: bold;
+  }
+
+  h5 {
+    line-height: 1.45;
+    margin-top: 8px;
+    margin-bottom: 2px;
   }
 
   p {
-    margin: 10px 0;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .provider-hero {
+    border-left: 4px solid $provider-accent-color;
+    padding-left: 21px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
   }
 
   .location {
-    font-weight: 500;
+    font-weight: bold;
+    margin-bottom: 0;
 
     .show-on-map {
       display: block;
@@ -39,21 +62,56 @@
       &::before {
         font-family: 'icomoon' !important;
         font-size: 20px;
+        line-height: 26px; // same as parent
         content: $icon-map-pin;
         display: inline-block;
-        margin-right: 5px;
+        margin-right: 8px;
         position: relative;
         top: 2px;
+        font-weight: normal;
       }
     }
   }
 
-  .details p {
-    margin: 6px 0;
+  .details {
+    margin-top: 35px;
+
+    p {
+      margin: 6px 0;
+      padding-left: 30px;
+      position: relative;
+
+      &::before {
+        font-family: 'icomoon' !important;
+        font-size: 20px;
+        line-height: 26px; // same as parent
+        display: inline-block;
+        margin-right: 5px;
+        position: absolute;
+        left: 0;
+        top: -2px;
+        color: $provider-accent-color;
+      }
+      &.details-website::before {
+        content: $icon-pointer;
+      }
+      &.details-phone::before {
+        content: $icon-phone;
+      }
+      &.details-email::before {
+        content: $icon-email;
+      }
+      &.details-contact::before {
+        content: $icon-time;
+      }
+    }
 
     .details-title {
-      font-weight: 500;
-      margin-right: 6px;
+      @include visuallyhidden;
+    }
+
+    a {
+      color: $text-color;
     }
   }
 }
