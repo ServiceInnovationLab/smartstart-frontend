@@ -32,11 +32,13 @@ class Provider extends Component {
 
     return (
       <div id={provider.FSD_ID} className='provider'>
-        <h4>{provider.PROVIDER_NAME}</h4>
+        <div className="provider-hero">
+          <h4>{provider.PROVIDER_NAME}</h4>
 
-        <p className='location'>
-          {provider.PHYSICAL_ADDRESS} ({Number(provider.distance/1000).toFixed(1)} km away) <span aria-hidden='true' className='show-on-map'><a href='#map' onClick={this.setLocation}>show on map</a></span>
-        </p>
+          <p className='location'>
+            {provider.PHYSICAL_ADDRESS} ({Number(provider.distance/1000).toFixed(1)} km away) <span aria-hidden='true' className='show-on-map'><a href='#map' onClick={this.setLocation}>show on map</a></span>
+          </p>
+        </div>
 
         <ReadMore text={provider.ORGANISATION_PURPOSE} />
 
@@ -52,25 +54,25 @@ class Provider extends Component {
 
         <div className='details'>
           {provider.PROVIDER_WEBSITE_1 &&
-            <p>
+            <p className='details-website'>
               <span className='details-title'>Website:</span>
               <a href={provider.PROVIDER_WEBSITE_1} target='_blank' rel='noopener noreferrer'>{provider.PROVIDER_WEBSITE_1}</a>
             </p>
           }
           {provider.PUBLISHED_PHONE_1 &&
-            <p>
+            <p className='details-phone'>
               <span className='details-title'>Phone:</span>
               <a href={'tel:' + provider.PUBLISHED_PHONE_1}>{provider.PUBLISHED_PHONE_1}</a>
             </p>
           }
           {provider.PUBLISHED_CONTACT_EMAIL_1 &&
-            <p>
+            <p className='details-email'>
               <span className='details-title'>Email:</span>
               <a href={'mailto:' + provider.PUBLISHED_CONTACT_EMAIL_1}>{provider.PUBLISHED_CONTACT_EMAIL_1}</a>
             </p>
           }
           {provider.PROVIDER_CONTACT_AVAILABILITY &&
-            <p>
+            <p className='details-contact'>
               <span className='details-title'>Opening hours:</span>
               {nl2br(provider.PROVIDER_CONTACT_AVAILABILITY)}
             </p>
