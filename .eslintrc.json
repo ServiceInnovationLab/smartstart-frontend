@@ -25,7 +25,8 @@
       "PIWIK_INSTANCE": true,
       "PIWIK_SITE": true,
       "process": true,
-      "GOOGLE_API_KEY": true
+      "GOOGLE_API_KEY": true,
+      "RAAP_API_KEY": true
     },
     "rules": {
       "no-class-assign": "off"

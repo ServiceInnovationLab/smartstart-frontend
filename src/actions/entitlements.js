@@ -27,13 +27,12 @@ function failureSchema() {
 export function fetchSchema() {
   return dispatch => {
     dispatch(requestSchema())
-    // TODO bring url below from config or via caching? also auth token
     return fetchWithRetry('https://nz.raap.d61.io/api/v0/domain/nz-entitlements-eligibility/schema?criteria=draft', {
       retries: 3,
       retryDelay: 500,
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0Zjc5MzJjOC1jMGFhLTQwY2QtYWFmMy1mYjkzM2YyMWI0MDEiLCJleHAiOjE1MTg0NjIxMzMsImlhdCI6MTUxNjA0MjkzM30.-dXnWoQfUSv9dNyLnpm3vxSmRwYGdgmUL5BZrHtnjw8'
+        'Authorization': 'Bearer ' + RAAP_API_KEY
       }
     })
     .then(checkStatus)
