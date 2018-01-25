@@ -10,6 +10,7 @@ import LocationAutosuggest from 'components/location-autosuggest/location-autosu
 import ResultMap from 'components/services/map'
 import Provider from 'components/services/provider'
 import Spinner from 'components/spinner/spinner'
+import { stringToFloat } from 'utils'
 
 import './services.scss'
 
@@ -86,7 +87,7 @@ class Services extends Component {
     }
 
     if (personalisationValues.settings && personalisationValues.settings.loc) {
-      this.setLocationFromStore(personalisationValues.settings.loc)
+      this.setLocationFromStore(personalisationValues.settings)
     }
   }
 
@@ -116,7 +117,7 @@ class Services extends Component {
     }
 
     if (nextProps.personalisationValues.settings && nextProps.personalisationValues.settings.loc) {
-      this.setLocationFromStore(nextProps.personalisationValues.settings.loc)
+      this.setLocationFromStore(nextProps.personalisationValues.settings)
     }
   }
 
@@ -131,11 +132,11 @@ class Services extends Component {
     }
   }
 
-  setLocationFromStore (location) {
-    if (location.text && !this.state.location.text) {
+  setLocationFromStore (settings) {
+    if (settings.loc && !this.state.location.text) {
       this.setState({
-        location: { latitude: location.latitude, longitude: location.longitude, text: location.text },
-        locationText: location.text
+        location: { latitude: stringToFloat(settings.lat), longitude: stringToFloat(settings.lng), text: settings.loc },
+        locationText: settings.loc
       }, () => {
         this.showOnMap(this.state.location)
       })

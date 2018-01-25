@@ -393,7 +393,7 @@ export function fetchPersonalisationValues () {
           if (oldData) {
             // for each saved value, overwrite or create a new key in the api data result
             for (var group in oldData) {
-              // create the setting or checkboxes grouping if not yet preset
+              // create the setting or checkboxes grouping if not yet present
               if (!data[group]) {
                 data[group] = {}
               }
