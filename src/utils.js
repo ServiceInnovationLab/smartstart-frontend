@@ -58,8 +58,9 @@ export function routerScrollHandler () {
   }
 }
 
-
-// Get textContent out of a React's component
+// getTextContent
+//
+// get textContent out of a React component
 export function getTextContent(rootChild) {
   let res = ''
 
@@ -83,17 +84,40 @@ export function getTextContent(rootChild) {
   return res
 }
 
+// findClosestDomElement
+//
 // reference: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
 export function findClosestDomElement(node, selector) {
-    let matches = document.querySelectorAll(selector);
-    let i;
+  let matches = document.querySelectorAll(selector);
+  let i;
 
-    do {
-        i = matches.length;
-        while (--i >= 0 && matches.item(i) !== node) {
-          // empty
-        }
-    } while ((i < 0) && (node = node.parentElement))
+  do {
+    i = matches.length;
+    while (--i >= 0 && matches.item(i) !== node) {
+      // empty
+    }
+  } while ((i < 0) && (node = node.parentElement))
 
-    return node
+  return node
+}
+
+// floatToString
+//
+// this function is null-safe - will return an empty string
+export function floatToString(input) {
+  if (input) {
+    return input.toString()
+  }
+  return ''
+}
+
+// stringToFloat
+//
+// converts an empty string or other invalid inputs to null
+export function stringToFloat(input) {
+  let parsed = parseFloat(input)
+  if (isNaN(parsed)) {
+    return null
+  }
+  return parsed
 }

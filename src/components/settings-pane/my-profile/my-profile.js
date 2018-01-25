@@ -7,7 +7,7 @@ import { addDueDate, addSubscribed, savePersonalisationValues, saveNewEmail, piw
 import classNames from 'classnames'
 import scriptLoader from 'react-async-script-loader'
 import LocationAutosuggest from 'components/location-autosuggest/location-autosuggest'
-import { isValidDate, isValidEmail } from 'utils'
+import { isValidDate, isValidEmail, floatToString, stringToFloat } from 'utils'
 
 export class MyProfile extends Component {
   constructor (props) {
@@ -95,10 +95,10 @@ export class MyProfile extends Component {
     }
 
     // location
-    if (settings && settings.loc && settings.loc.text) {
+    if (settings && settings.loc && settings.lat && settings.lng) {
       this.setState({
-        location: { latitude: settings.loc.latitude, longitude: settings.loc.longitude, text: settings.loc.text },
-        locationFieldValue: settings.loc.text
+        location: { latitude: stringToFloat(settings.lat), longitude: stringToFloat(settings.lng), text: settings.loc },
+        locationFieldValue: settings.loc
       })
     }
 
@@ -108,7 +108,7 @@ export class MyProfile extends Component {
       dispatch(addSubscribed(this.state.subscribedFieldValue))
     } else {
       if (isLoggedIn) {
-        //defaults to true
+        // defaults to true
         this.setState({ subscribedFieldValue: true })
         dispatch(addSubscribed(this.state.subscribedFieldValue))
       }
@@ -153,7 +153,10 @@ export class MyProfile extends Component {
     // location field
     // there is no validation for the location as only autocomplete values are allowed
     if (!settings || !settings.loc || (settings.loc && settings.loc.text !== location.text)) {
-      valuesToSave.push({ 'group': 'settings', 'key': 'loc', 'val': location })
+      // backend only accepts key: string pairs so we need to restructure the data
+      valuesToSave.push({ 'group': 'settings', 'key': 'loc', 'val': location.text })
+      valuesToSave.push({ 'group': 'settings', 'key': 'lat', 'val': floatToString(location.latitude) })
+      valuesToSave.push({ 'group': 'settings', 'key': 'lng', 'val': floatToString(location.longitude) })
 
       if (location.text) {
         let piwikEvent = {
