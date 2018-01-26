@@ -186,7 +186,7 @@ function supplementaryContentActions (state = {
  */
 
  export const initialRegistrationFormState = {
-   step: 1,
+   step: 0,
    data: {
      otherChildren: 0,
      certificateOrder: {

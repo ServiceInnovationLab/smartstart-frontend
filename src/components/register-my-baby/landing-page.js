@@ -3,13 +3,22 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Accordion from './accordion'
 import { piwikTrackPost } from '../../actions/actions'
+import get from 'lodash/get'
+import { fetchBroData } from '../../actions/birth-registration'
+
 import './landing-page.scss'
 
-class RegisterMyBabyLandingPage extends Component {
+export class RegisterMyBabyLandingPage extends Component {
   constructor(props) {
     super(props)
 
     this.getStartedClick = this.getStartedClick.bind(this)
+    this.continueDraftClick = this.continueDraftClick.bind(this)
+    this.login = this.login.bind(this)
+  }
+
+  componentWillMount() {
+    this.props.dispatch(fetchBroData())
   }
 
   getStartedClick() {
@@ -21,7 +30,35 @@ class RegisterMyBabyLandingPage extends Component {
     this.props.dispatch(piwikTrackPost('Register My Baby', piwikEvent))
   }
 
+  continueDraftClick() {
+    const piwikEvent = {
+      'category': 'RegisterMyBaby',
+      'action': 'Click next',
+      'name': 'Continue draft'
+    }
+    this.props.dispatch(piwikTrackPost('Register My Baby', piwikEvent))
+  }
+
+  login() {
+    event.preventDefault()
+    const piwikEvent = {
+      'category': 'Login',
+      'action': 'Click',
+      'name': 'BRO Form login'
+    }
+
+    // track the event
+    this.props.dispatch(piwikTrackPost('BRO Form login', piwikEvent))
+
+    // match standard piwik outlink delay
+    window.setTimeout(() => {
+      window.location = `/login?next=${encodeURIComponent('/register-my-baby/child-details')}`
+    }, 200)
+  }
+
   render() {
+    const { isLoggedIn, hasSavedForm } = this.props
+
     return (
       <div className="landing-page">
         <h2>
@@ -43,9 +80,27 @@ class RegisterMyBabyLandingPage extends Component {
 
         <h5>Take care with this form - it's against the law to give false information, and you may need to pay to correct mistakes.</h5>
         <h5>This form will take approximately 10 minutes to complete.</h5>
+        <h5>You can save this form at any time to complete it later - just click 'save as draft' in the form.</h5>
         <h5>Ready to get started?</h5>
 
-        <Link to={'/register-my-baby/child-details'} role="button" className="welcome-action" onClick={this.getStartedClick}>Get started</Link>
+        {
+          isLoggedIn && hasSavedForm &&
+          <Link to={'/register-my-baby/child-details'} role="button" className="welcome-action" onClick={this.continueDraftClick}>Continue your saved draft</Link>
+        }
+
+        {
+          isLoggedIn && !hasSavedForm &&
+          <Link to={'/register-my-baby/child-details'} role="button" className="welcome-action" onClick={this.getStartedClick}>Start a new birth registration</Link>
+        }
+
+        {
+          !isLoggedIn &&
+          <div className="form-actions-wrapper">
+            <Link to={'/register-my-baby/child-details'} role="button" className="welcome-action" onClick={this.getStartedClick}>Start a new birth registration</Link>
+            <div>or</div>
+            <Link to={'/register-my-baby/child-details'} role="button" className="welcome-action" onClick={this.getStartedClick}>Continue your saved draft</Link>
+          </div>
+        }
 
 
         <div className="expandable-group primary">
@@ -101,9 +156,14 @@ class RegisterMyBabyLandingPage extends Component {
 }
 
 RegisterMyBabyLandingPage.propTypes = {
+  hasSavedForm: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   dispatch: PropTypes.func
 }
 
-const mapStateToProps = () => ({})
+const mapStateToProps = state => ({
+  isLoggedIn: get(state, 'personalisationActions.isLoggedIn'),
+  hasSavedForm: get(state, 'birthRegistration.savedRegistrationForm.step') > 0
+})
 
 export default connect(mapStateToProps)(RegisterMyBabyLandingPage)

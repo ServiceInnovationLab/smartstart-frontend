@@ -179,7 +179,7 @@ class RegisterMyBabyForm extends Component {
         this.props.router['push'](url)
 
         // save step if we navigating to the new tab for the first time
-        const stepToSave = maxStep && step > maxStep ? step : maxStep
+        const stepToSave = maxStep && maxStep > step ? maxStep : step
 
         return rememberBroData({ step: stepToSave, data: formState })
 
