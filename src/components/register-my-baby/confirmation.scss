@@ -4,7 +4,7 @@
   &.retry {
     margin-top: 50px;
   }
-  
+
   border-bottom: 1px solid #ccc;
   padding-bottom: 30px;
 
@@ -60,6 +60,16 @@
 
   .order-summary {
     margin: 30px 0;
+
+    @media print {
+      margin: 15px 0 30px 0;
+
+      ul {
+        > li {
+          padding: 5px 0;
+        }
+      }
+    }
 
     .fail-payment {
       border-top: 2px solid $form-warning-outline;

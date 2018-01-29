@@ -44,15 +44,17 @@ class EntitlementsQuestions extends Component {
     }
 
     return (
-      <form onSubmit={handleSubmit}>
-        <Field {...getFieldProps(fields, 'general.isNZResident')} />
+      <div className='form'>
+        <form onSubmit={handleSubmit}>
+          <Field {...getFieldProps(fields, 'general.isNZResident')} />
 
-        { isNZResident === 'true' &&
-          <div className="conditional-field">
-            <Field {...getFieldProps(fields, 'general.age')} />
-          </div>
-        }
-      </form>
+          { isNZResident === 'true' &&
+            <div className="conditional-field">
+              <Field {...getFieldProps(fields, 'general.age')} />
+            </div>
+          }
+        </form>
+      </div>
     )
   }
 }

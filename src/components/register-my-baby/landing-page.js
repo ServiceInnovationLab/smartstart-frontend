@@ -60,7 +60,7 @@ export class RegisterMyBabyLandingPage extends Component {
     const { isLoggedIn, hasSavedForm } = this.props
 
     return (
-      <div className="landing-page">
+      <div className="landing-page form">
         <h2>
           Te Whakamōhio i te Whānautanga mō te Rēhita <br/>
           <span className="english">Notification of Birth for Registration</span>

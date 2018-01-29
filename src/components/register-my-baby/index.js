@@ -265,7 +265,7 @@ class RegisterMyBabyForm extends Component {
     }
 
     return (
-      <div>
+      <div className='form'>
         <FormWizardProgress
           currentStep={step}
           isReviewing={isReviewing}
