@@ -22,16 +22,22 @@ class PaymentFailPage extends React.Component {
 
   componentDidMount() {
     // redirect to failed payment page just before session will expire
+    const checkInterval = 60 *1000 // 1 min
+    const delayInterval = 28 * 60 * 1000 // 28 min
+
     this.setState({
-      pageTimeout: setTimeout(() => {
-        window.location.href = '/register-my-baby/confirmation-payment-outstanding'
-      }, 28 * 60 * 1000) // 28 min
+      refreshAt: new Date().getTime() + delayInterval,
+      expiryChecker: setInterval(() => {
+        if (this.state.refreshAt < new Date().getTime()) {
+          window.location.href = '/register-my-baby/confirmation-payment-outstanding';
+        }
+      }, checkInterval)
     })
   }
 
   componentWillUnmount() {
     // clear 28 min timeout that has been set on didMount
-    clearTimeout(this.state.pageTimeout)
+    clearTimeout(this.state.expiryChecker)
   }
 
   onRetry() {
