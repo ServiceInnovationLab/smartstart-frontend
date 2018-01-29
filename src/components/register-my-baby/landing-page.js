@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import get from 'lodash/get'
-import Accordion from './accordion'
+import Accordion from 'components/form/accordion'
 import { piwikTrackPost } from 'actions/application'
 import { fetchBroData } from 'actions/birth-registration'
 

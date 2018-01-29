@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 import get from 'lodash/get'
-import makeMandatoryLabel from '../../hoc/make-mandatory-label'
-import renderTextarea from '../../fields/render-textarea'
-import renderFieldReview from '../../fields/render-review-field'
-import renderReviewValidation from '../../fields/render-review-validation'
+import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
+import renderTextarea from 'components/form/fields/render-textarea'
+import renderFieldReview from 'components/form/fields/render-review-field'
+import renderReviewValidation from 'components/form/fields/render-review-validation'
 import { formatAddress, formatDate } from './utils'
 import {
   sexes,

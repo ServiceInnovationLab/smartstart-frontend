@@ -2,26 +2,33 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { Link } from 'react-router'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { fetchSchema } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
+import getFieldProps from 'components/form/get-field-props'
+import fields from './fields'
 
 class EntitlementsQuestions extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.retry = this.retry.bind(this)
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.props.fetchSchema()
   }
 
-  retry() {
+  retry () {
     this.props.fetchSchema()
   }
 
-  render() {
-    const { schema, fetchingSchema } = this.props
+  onNZResidentChange () {
+
+  }
+
+  render () {
+    const { schema, fetchingSchema, handleSubmit, isNZResident } = this.props
 
     if (fetchingSchema) {
       return <Spinner text="Please wait ..."/>
@@ -37,9 +44,15 @@ class EntitlementsQuestions extends Component {
     }
 
     return (
-      <div>
-        <h3>question steps injected here :)</h3>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <Field {...getFieldProps(fields, 'general.isNZResident')} />
+
+        { isNZResident === 'true' &&
+          <div className="conditional-field">
+            <Field {...getFieldProps(fields, 'general.age')} />
+          </div>
+        }
+      </form>
     )
   }
 }
@@ -48,13 +61,22 @@ EntitlementsQuestions.propTypes = {
   params: PropTypes.object.isRequired,
   fetchSchema: PropTypes.func,
   fetchingSchema: PropTypes.bool,
-  schema: PropTypes.array
+  schema: PropTypes.array,
+  handleSubmit: PropTypes.func,
+  isNZResident: PropTypes.string
 }
+
+const selector = formValueSelector('entitlements')
 
 const mapStateToProps = (state) => ({
   fetchingSchema: get(state, 'entitlements.fetchingSchema'),
-  schema: get(state, 'entitlements.schema')
+  schema: get(state, 'entitlements.schema'),
+  isNZResident: selector(state, 'general.isNZResident')
 })
+
+EntitlementsQuestions = reduxForm({
+  form: 'entitlements'
+})(EntitlementsQuestions)
 
 export default connect(
   mapStateToProps,

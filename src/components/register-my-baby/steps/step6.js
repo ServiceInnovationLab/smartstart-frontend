@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import Accordion from '../accordion'
+import Accordion from 'components/form/accordion'
 import SaveAsDraft from '../save-as-draft'
-import makeFocusable from '../hoc/make-focusable'
+import makeFocusable from 'components/form/hoc/make-focusable'
 import {
   products as productOptions,
   courierDeliveryPrice,
@@ -15,7 +15,7 @@ import './step6.scss'
 import { maxLength } from '../normalize'
 import validate from './validation'
 import schema from './schemas/step6'
-import getFieldProps from './get-field-props'
+import getFieldProps from 'components/form/get-field-props'
 
 
 class OrderCertificatesForm extends Component {

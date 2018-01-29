@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { Field } from 'redux-form'
-import Accordion from './accordion'
-import getFieldProps from './steps/get-field-props'
+import Accordion from 'components/form/accordion'
+import getFieldProps from 'components/form/get-field-props'
 
 const prefix = (prefix, field) => prefix ? `${prefix}.${field}` : field
 

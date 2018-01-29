@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import Accordion from './accordion'
+import Accordion from 'components/form/accordion'
 import { rememberBroData, fetchBroData } from 'actions/birth-registration'
 import { initialRegistrationFormState } from 'store/reducers/birth-registration'
 import {

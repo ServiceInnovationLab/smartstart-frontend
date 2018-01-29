@@ -12,9 +12,9 @@ import renderStep3Review from './step3'
 import renderStep4Review from './step4'
 import renderStep5Review from './step5'
 import renderStep6Review from './step6'
-import renderTextarea from '../../fields/render-textarea'
-import renderCheckbox from '../../fields/render-checkbox'
-import renderError from '../../fields/render-error'
+import renderTextarea from 'components/form/fields/render-textarea'
+import renderCheckbox from 'components/form/fields/render-checkbox'
+import renderError from 'components/form/fields/render-error'
 import {
   REQUIRE_DECLARATION
 } from '../../validation-messages'

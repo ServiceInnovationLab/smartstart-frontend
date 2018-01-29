@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector} from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import makeFocusable from '../hoc/make-focusable'
-import Accordion from '../accordion'
+import makeFocusable from 'components/form/hoc/make-focusable'
+import Accordion from 'components/form/accordion'
 import SaveAsDraft from '../save-as-draft'
 import CitizenshipQuestions from '../citizenship-questions'
 import { maxLength } from '../normalize'
 import validate from './validation'
 import warn from '../warn'
 import schema from './schemas/step2'
-import getFieldProps from './get-field-props'
+import getFieldProps from 'components/form/get-field-props'
 
 class MotherDetailsForm extends Component {
   constructor(props) {

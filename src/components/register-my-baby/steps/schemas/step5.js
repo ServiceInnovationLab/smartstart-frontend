@@ -1,9 +1,9 @@
 import React from 'react'
-import makeMandatoryLabel from '../../hoc/make-mandatory-label'
-import renderField from '../../fields/render-field'
-import renderSelect from '../../fields/render-select'
-import renderCheckbox from '../../fields/render-checkbox'
-import renderRadioGroup from '../../fields/render-radio-group'
+import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
+import renderField from 'components/form/fields/render-field'
+import renderSelect from 'components/form/fields/render-select'
+import renderCheckbox from 'components/form/fields/render-checkbox'
+import renderRadioGroup from 'components/form/fields/render-radio-group'
 import FatherText from './father-text'
 import {
   yesNo as yesNoOptions
