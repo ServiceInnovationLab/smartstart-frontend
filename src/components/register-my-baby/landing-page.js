@@ -14,7 +14,7 @@ export class RegisterMyBabyLandingPage extends Component {
 
     this.getStartedClick = this.getStartedClick.bind(this)
     this.continueDraftClick = this.continueDraftClick.bind(this)
-    this.login = this.login.bind(this)
+    this.loginAction = this.loginAction.bind(this)
   }
 
   componentWillMount() {
@@ -39,7 +39,7 @@ export class RegisterMyBabyLandingPage extends Component {
     this.props.dispatch(piwikTrackPost('Register My Baby', piwikEvent))
   }
 
-  login() {
+  loginAction() {
     event.preventDefault()
     const piwikEvent = {
       'category': 'Login',
@@ -98,7 +98,7 @@ export class RegisterMyBabyLandingPage extends Component {
           <div className="form-actions-wrapper">
             <Link to={'/register-my-baby/child-details'} role="button" className="welcome-action" onClick={this.getStartedClick}>Start a new birth registration</Link>
             <div>or</div>
-            <Link to={'/register-my-baby/child-details'} role="button" className="welcome-action" onClick={this.getStartedClick}>Continue your saved draft</Link>
+            <a href='/login/' onClick={this.loginAction} className='welcome-action'>Continue your saved draft</a>
           </div>
         }
 
