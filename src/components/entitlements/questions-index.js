@@ -7,12 +7,14 @@ import { fetchSchema } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
 import getFieldProps from 'components/form/get-field-props'
 import fields from './fields'
+import validate from './validation'
 
 class EntitlementsQuestions extends Component {
   constructor (props) {
     super(props)
 
     this.retry = this.retry.bind(this)
+    this.submit = this.submit.bind(this)
   }
 
   componentWillMount () {
@@ -23,12 +25,12 @@ class EntitlementsQuestions extends Component {
     this.props.fetchSchema()
   }
 
-  onNZResidentChange () {
-
+  submit () {
+    // TODO do something useful with these! values is passed in
   }
 
   render () {
-    const { schema, fetchingSchema, handleSubmit, isNZResident } = this.props
+    const { schema, fetchingSchema, handleSubmit, isNZResident, submitting } = this.props
 
     if (fetchingSchema) {
       return <Spinner text="Please wait ..."/>
@@ -45,14 +47,21 @@ class EntitlementsQuestions extends Component {
 
     return (
       <div className='form'>
-        <form onSubmit={handleSubmit}>
-          <Field {...getFieldProps(fields, 'general.isNZResident')} />
+        <form onSubmit={handleSubmit(this.submit)}>
+          <Field {...getFieldProps(fields, 'applicant.isNZResident')} />
 
           { isNZResident === 'true' &&
-            <div className="conditional-field">
-              <Field {...getFieldProps(fields, 'general.age')} />
-            </div>
+            <Field {...getFieldProps(fields, 'applicant.normallyLivesInNZ')} />
           }
+
+          { isNZResident === 'true' &&
+            <Field {...getFieldProps(fields, 'applicant.age')} />
+          }
+
+          <div className="form-actions">
+            <div />
+            <button type="submit" className="next" disabled={submitting}>Results</button>
+          </div>
         </form>
       </div>
     )
@@ -65,6 +74,7 @@ EntitlementsQuestions.propTypes = {
   fetchingSchema: PropTypes.bool,
   schema: PropTypes.array,
   handleSubmit: PropTypes.func,
+  submitting: PropTypes.bool,
   isNZResident: PropTypes.string
 }
 
@@ -73,11 +83,12 @@ const selector = formValueSelector('entitlements')
 const mapStateToProps = (state) => ({
   fetchingSchema: get(state, 'entitlements.fetchingSchema'),
   schema: get(state, 'entitlements.schema'),
-  isNZResident: selector(state, 'general.isNZResident')
+  isNZResident: selector(state, 'applicant.isNZResident')
 })
 
 EntitlementsQuestions = reduxForm({
-  form: 'entitlements'
+  form: 'entitlements',
+  validate
 })(EntitlementsQuestions)
 
 export default connect(

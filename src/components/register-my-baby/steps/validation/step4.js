@@ -2,7 +2,7 @@ import moment from 'moment'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import range from 'lodash/range'
-import check from './check'
+import check from 'components/form/get-validation'
 import schema from '../schemas/step4'
 import {
   MIN_16_AGE_RELATIONSHIP_DATE_MESSAGE,

@@ -1,15 +1,15 @@
-import React from 'react'
-import makeMandatoryLabel, { makeMandatoryAriaLabel } from 'components/form/hoc/make-mandatory-label'
+import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
 import renderField from 'components/form/fields/render-field'
 import renderRadioGroup from 'components/form/fields/render-radio-group'
 
-export const required = value =>
+const required = value =>
   (
     typeof value === 'undefined' ||
     value === null ||
     (value.trim && value.trim() === '') ||
     (Array.isArray(value) && !value.length)
   ) ? `This is a required field, please provide an answer.` : undefined
+
 const number = value => value && isNaN(Number(value)) ? `This is not a valid number, please try again.` : undefined
 
 const maxLength = (max) => (value) => {
@@ -22,23 +22,31 @@ const booleanOptions = [
 ]
 
 export const fields = {
-  'general.age': {
-    name: 'general.age',
-    component: renderField,
-    type: 'text',
-    placeholder: 'e.g. 18',
-    label: makeMandatoryLabel(`What is your age?`),
-    instructionText: `Some instruction text`,
-    validate: [required, number],
-    normalize: maxLength(75)
-  },
-
-  'general.isNZResident': {
-    name: 'general.isNZResident',
+  'applicant.isNZResident': {
+    name: 'applicant.isNZResident',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are you a New Zealand resident?`),
+    label: makeMandatoryLabel(`Are you a New Zealand citizen or resident?`),
+    instructionText: `For at least X years`,
     validate: [required],
     options: booleanOptions
+  },
+
+  'applicant.normallyLivesInNZ': {
+    name: 'applicant.normallyLivesInNZ',
+    component: renderRadioGroup,
+    label: makeMandatoryLabel(`Do you normally live in New Zealand?`),
+    validate: [required],
+    options: booleanOptions
+  },
+
+  'applicant.age': {
+    name: 'applicant.age',
+    component: renderField,
+    type: 'number',
+    placeholder: 'e.g. 18',
+    label: makeMandatoryLabel(`How old are you?`),
+    validate: [required, number],
+    normalize: maxLength(3)
   }
 }
 

@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import check from './check'
+import check from 'components/form/get-validation'
 import schema from '../schemas/step1'
 
 const validate = (values) => {

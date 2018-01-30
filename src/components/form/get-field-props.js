@@ -12,9 +12,8 @@ export const preventBlurOnButtonClick = (e) => {
 const getFieldProps = (schema, fieldName) => (
   {
     onBlur: preventBlurOnButtonClick,
-    ...omit(schema[fieldName], ['validate'])
+    ...omit(schema[fieldName], ['validate']) // omit validate because we validate the whole form at once
   }
 )
 
 export default getFieldProps
-
