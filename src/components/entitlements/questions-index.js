@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { Link } from 'react-router'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import { fetchSchema } from 'actions/entitlements'
+import { fetchSchema, postToReasoner } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
 import getFieldProps from 'components/form/get-field-props'
 import fields from './fields'
 import validate from './validation'
+import transform from './transform'
 
 class EntitlementsQuestions extends Component {
   constructor (props) {
@@ -25,12 +26,15 @@ class EntitlementsQuestions extends Component {
     this.props.fetchSchema()
   }
 
-  submit () {
-    // TODO do something useful with these! values is passed in
+  submit (values) {
+    const { schema, postToReasoner } = this.props
+    // TODO we will need transformation step to groom the values before dispatching in future
+    postToReasoner(transform(values, schema))
+    // this.props.router['push']('results') // TODO only do this once data is back? if so need spinner here
   }
 
   render () {
-    const { schema, fetchingSchema, handleSubmit, isNZResident, submitting } = this.props
+    const { schema, fetchingSchema, handleSubmit, submitting, isNZResident, hasAccommodationCosts } = this.props
 
     if (fetchingSchema) {
       return <Spinner text="Please wait ..."/>
@@ -55,7 +59,23 @@ class EntitlementsQuestions extends Component {
           }
 
           { isNZResident === 'true' &&
-            <Field {...getFieldProps(fields, 'applicant.age')} />
+            <Field {...getFieldProps(fields, 'applicant.Age')} />
+          }
+
+          { isNZResident === 'true' &&
+            <Field {...getFieldProps(fields, 'applicant.hasAccommodationCosts')} />
+          }
+
+          { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
+            <Field {...getFieldProps(fields, 'applicant.hasSocialHousing')} />
+          }
+
+          { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
+            <Field {...getFieldProps(fields, 'applicant.receivesAccommodationSupport')} />
+          }
+
+          { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
+            <Field {...getFieldProps(fields, 'threshold.income.AccommodationSupplement')} />
           }
 
           <div className="form-actions">
@@ -69,10 +89,12 @@ class EntitlementsQuestions extends Component {
 }
 
 EntitlementsQuestions.propTypes = {
+  router: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   fetchSchema: PropTypes.func,
   fetchingSchema: PropTypes.bool,
   schema: PropTypes.array,
+  postToReasoner: PropTypes.func,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   isNZResident: PropTypes.string
@@ -83,7 +105,8 @@ const selector = formValueSelector('entitlements')
 const mapStateToProps = (state) => ({
   fetchingSchema: get(state, 'entitlements.fetchingSchema'),
   schema: get(state, 'entitlements.schema'),
-  isNZResident: selector(state, 'applicant.isNZResident')
+  isNZResident: selector(state, 'applicant.isNZResident'),
+  hasAccommodationCosts: selector(state, 'applicant.hasAccommodationCosts')
 })
 
 EntitlementsQuestions = reduxForm({
@@ -94,6 +117,7 @@ EntitlementsQuestions = reduxForm({
 export default connect(
   mapStateToProps,
   {
-    fetchSchema
+    fetchSchema,
+    postToReasoner
   }
 )(EntitlementsQuestions)

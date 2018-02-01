@@ -19,7 +19,7 @@ class EntitlementsPage extends Component {
             <div className='entitlements-header-inner'>
               <h2>
                 Title<br />
-                <span className='english'>Title in english</span>
+                <span className='english'>What financial help is available to me?</span>
               </h2>
               <p>Some description of what this thing is goes here.</p>
             </div>

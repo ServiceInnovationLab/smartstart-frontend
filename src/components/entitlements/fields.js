@@ -39,14 +39,47 @@ export const fields = {
     options: booleanOptions
   },
 
-  'applicant.age': {
-    name: 'applicant.age',
+  'applicant.Age': {
+    name: 'applicant.Age',
     component: renderField,
     type: 'number',
     placeholder: 'e.g. 18',
     label: makeMandatoryLabel(`How old are you?`),
     validate: [required, number],
     normalize: maxLength(3)
+  },
+
+  'applicant.hasAccommodationCosts': {
+    name: 'applicant.hasAccommodationCosts',
+    component: renderRadioGroup,
+    label: makeMandatoryLabel(`Do you have accomodation costs?`),
+    validate: [required],
+    options: booleanOptions
+  },
+
+  'applicant.hasSocialHousing': {
+    name: 'applicant.hasSocialHousing',
+    component: renderRadioGroup,
+    label: makeMandatoryLabel(`Do you pay rent to a social housing provider?`),
+    validate: [required],
+    options: booleanOptions
+  },
+
+  'applicant.receivesAccommodationSupport': {
+    name: 'applicant.receivesAccommodationSupport',
+    component: renderRadioGroup,
+    label: makeMandatoryLabel(`Do you receive any accommodation support, including from a spouse, from contracted carer or disability services or from any other source?`),
+    validate: [required],
+    options: booleanOptions
+  },
+
+  'threshold.income.AccommodationSupplement': {
+    name: 'threshold.income.AccommodationSupplement',
+    component: renderRadioGroup,
+    label: makeMandatoryLabel(`Do you meet the Accommodation Supplement cash threshold?`),
+    instructionText: `http://www.legislation.govt.nz/act/public/1964/0136/latest/DLM362884.html?search=sw_096be8ed816df160_16%2c200_25_se&p=1&sr=0 we should calculate this from the income question rather than asking a yes/no`,
+    validate: [required],
+    options: booleanOptions
   }
 }
 

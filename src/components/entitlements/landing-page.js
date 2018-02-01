@@ -19,7 +19,7 @@ class EntitlementsLandingPage extends Component {
         <p>Some other information probably.</p>
         <h5>Ready to get started?</h5>
 
-        <Link to={'/benefits-eligibility/questions'} role="button" className="welcome-action button" onClick={this.getStartedClick}>Get started</Link>
+        <Link to={'/financial-help/questions'} role="button" className="welcome-action button" onClick={this.getStartedClick}>Get started</Link>
 
       </div>
     )
