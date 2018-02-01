@@ -28,9 +28,8 @@ class EntitlementsQuestions extends Component {
 
   submit (values) {
     const { schema, postToReasoner } = this.props
-    // TODO we will need transformation step to groom the values before dispatching in future
     postToReasoner(transform(values, schema))
-    // this.props.router['push']('results') // TODO only do this once data is back? if so need spinner here
+    this.props.router['push']('/financial-help/results')
   }
 
   render () {
@@ -44,7 +43,7 @@ class EntitlementsQuestions extends Component {
       return <div className="unavailable-notice">
         <h2>Sorry!</h2>
         <div className="informative-text">
-          Benefits eligibility is currently unavailable. Right now we're working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/benefits-eligibility/questions'} onClick={this.retry}>try again</Link> shortly.
+          Benefits eligibility is currently unavailable. Right now we're working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
         </div>
       </div>
     }
@@ -97,7 +96,8 @@ EntitlementsQuestions.propTypes = {
   postToReasoner: PropTypes.func,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
-  isNZResident: PropTypes.string
+  isNZResident: PropTypes.string,
+  hasAccommodationCosts: PropTypes.string
 }
 
 const selector = formValueSelector('entitlements')

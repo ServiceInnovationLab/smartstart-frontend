@@ -35,7 +35,7 @@ function requestEligibility() {
 
 function receiveEligibility(payload) {
   return {
-    type: RECEIVE_SELIGIBILITY,
+    type: RECEIVE_ELIGIBILITY,
     payload
   }
 }
@@ -86,6 +86,6 @@ export function postToReasoner(body) {
       return response.json()
     })
     .then(json => dispatch(receiveEligibility(json)))
-    .catch(() =>  dispatch(failureEligibility()))
+    .catch(() => dispatch(failureEligibility()))
   }
 }

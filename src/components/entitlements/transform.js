@@ -1,4 +1,6 @@
 import deepMap from 'deep-map'
+import get from 'lodash/get'
+import set from 'lodash/set'
 
 // 1. change all strings to booleans, numbers etc
 // 2. if key is in schema, add to object to be sent
@@ -15,7 +17,6 @@ const transformType = (value) => {
   return value
 }
 
-
 const transform = (data, schema) => {
   let body = {}
 
@@ -24,22 +25,16 @@ const transform = (data, schema) => {
 
   // 2.
   schema.forEach(atom => {
-    let path = atom.name.split('.')
+    let valueFromForm = get(data, atom.name, null)
 
-    // all paths are either two or three levels deep
-    if (path.length === 2) {
-      if (data[path[0]] && typeof data[path[0]][path[1]] !== 'undefined') {
-        if (body[path[0]] === undefined) { body[path[0]] = {} }
-        body[path[0]][path[1]] = data[path[0]][path[1]]
-      }
-    } else if (path.length === 3) {
-      if (data[path[0]] && data[path[0]][path[1]] && typeof data[path[0]][path[1]][path[2]] !== 'undefined') {
-        if (body[path[0]] === undefined) { body[path[0]] = {} }
-        if (body[path[0]][path[1]] === undefined) { body[path[0]][path[1]] = {} }
-        body[path[0]][path[1]][path[2]] = data[path[0]][path[1]][path[2]]
-      }
+    if (valueFromForm !== null) {
+      set(body, atom.name, valueFromForm)
     }
   })
+
+  // 3.
+  // 3.a. we don't provide any cash threshold values, so just set them to true
+  set(body, 'threshold.cash.AccommodationSupplement', true)
 
   return body
 }
