@@ -53,6 +53,12 @@ class EntitlementsQuestions extends Component {
     return (
       <div className='form eligibility'>
         <form onSubmit={handleSubmit(this.submit)}>
+
+          <h3 className='section-heading'>
+            Your background<br />
+            <span className='english'>Your background</span>
+          </h3>
+
           <Field {...getFieldProps(fields, 'applicant.isNZResident')} />
 
           { isNZResident === 'true' &&
@@ -61,6 +67,13 @@ class EntitlementsQuestions extends Component {
 
           { isNZResident === 'true' &&
             <Field {...getFieldProps(fields, 'applicant.Age')} />
+          }
+
+          { isNZResident === 'true' &&
+            <h3 className='section-heading'>
+              Accommodation<br />
+              <span className='english'>Accommodation</span>
+            </h3>
           }
 
           { isNZResident === 'true' &&
@@ -93,8 +106,7 @@ class EntitlementsQuestions extends Component {
           }
 
           <div className="form-actions">
-            <div />
-            <button type="submit" className="next" disabled={submitting}>Results</button>
+            <button type="submit" className="next" disabled={submitting}>Submit your answers</button>
           </div>
         </form>
       </div>

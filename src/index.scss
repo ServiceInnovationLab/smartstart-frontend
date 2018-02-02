@@ -122,6 +122,10 @@ h3 {
   @media #{$desktop-and-above} {
     font-size: 32px;
   }
+
+  .english {
+    font-weight: 500;
+  }
 }
 
 h4, h5, h6 {
