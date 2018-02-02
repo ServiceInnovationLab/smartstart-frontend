@@ -9,7 +9,8 @@ class EntitlementsResults extends Component {
 
     this.state = {
       permitted: [],
-      forbidden: []
+      forbidden: [],
+      maybe: []
     }
 
     this.assessBenefits = this.assessBenefits.bind(this)
@@ -32,6 +33,7 @@ class EntitlementsResults extends Component {
   assessBenefits (benefits) {
     let newPermitted = []
     let newForbidden = []
+    let newMaybe = []
 
     for (let benefit in benefits) {
       benefits[benefit].forEach(result => {
@@ -48,18 +50,32 @@ class EntitlementsResults extends Component {
               newForbidden.push(benefit)
             }
           }
+        // also create a seperate list of incomplete permitted ones
+        // this will have false positives - things that are 'CONCLUSIVE''FORBIDDEN'
+        // so the maybe list requires further filtering
+        } else if (result.reasoningResult === 'INCOMPLETE') {
+          if (result.goal && result.goal.modality === 'PERMITTED') {
+            if (newMaybe.indexOf(benefit) === -1) {
+              newMaybe.push(benefit)
+            }
+          }
         }
       })
     }
+
+    // remove any maybes that are in the forbidden list
+    newMaybe = newMaybe.filter(benefit => newForbidden.indexOf(benefit) === -1)
+
     this.setState({
       permitted: newPermitted,
-      forbidden: newForbidden
+      forbidden: newForbidden,
+      maybe: newMaybe
     })
   }
 
   render () {
     const { fetchingEligibility } = this.props
-    const { permitted, forbidden } = this.state
+    const { permitted, forbidden, maybe } = this.state
 
     if (fetchingEligibility) {
       return <Spinner text="Please wait ..."/>
@@ -72,12 +88,17 @@ class EntitlementsResults extends Component {
       <div>
         <h3>Results</h3>
 
-        <h4>Eligible</h4>
+        {permitted.length > 0 && <h4>Likely eligible</h4>}
         {permitted.map((benefit, index) =>
           <p key={'permitted-' + index}>{benefit}</p>
         )}
 
-        <h4>Not eligible</h4>
+        {maybe.length > 0 && <h4>Maybe eligible</h4>}
+        {maybe.map((benefit, index) =>
+          <p key={'maybe-' + index}>{benefit}</p>
+        )}
+
+        {forbidden.length > 0 && <h4>Not eligible</h4>}
         {forbidden.map((benefit, index) =>
           <p key={'forbidden-' + index}>{benefit}</p>
         )}
