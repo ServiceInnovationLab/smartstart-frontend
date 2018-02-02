@@ -1,0 +1,80 @@
+// this file is included directly from index.scss to prevent duplication
+@import 'variables';
+
+// colour overrides from standard $form-teal-dark form colours
+.form.eligibility {
+  button {
+    background-color: $entitlements-form;
+    border-color: $entitlements-form;
+
+    &:hover {
+      border-color: darken($entitlements-form, 5%);
+      background-color: darken($entitlements-form, 5%);
+    }
+  }
+
+  form {
+    div.radio-group {
+      label {
+        input:checked + span {
+          background-color: $entitlements-form;
+          border-color: $entitlements-form;
+        }
+
+        input:focus + span {
+          outline-color: $entitlements-form;
+        }
+      }
+    }
+
+    div.checkbox-group,
+    div.checkbox {
+      label {
+        input[type="checkbox"]:checked + span::before{
+          background-color: $entitlements-form;
+          border-color: $entitlements-form;
+        }
+
+        input:focus + span {
+          outline-color: $entitlements-form;
+        }
+
+        &:hover {
+          input[type="checkbox"] + span::before {
+            background-color: $entitlements-form-hover;
+          }
+
+          input[type="checkbox"]:checked + span::before {
+            background-color: $entitlements-form;
+          }
+        }
+      }
+    }
+  }
+
+  .expandable {
+    border-top-color: $entitlements-accordian;
+
+    &:last-child {
+      border-bottom-color: $entitlements-accordian;
+    }
+
+    > .expandable-title-wrapper {
+      > .expandable-title {
+        background-color: transparent;
+        color: $text-color;
+      }
+    }
+
+    &.is-expanded {
+      > .expandable-title-wrapper > .expandable-title {
+        background-color: transparent;
+        color: $text-color;
+      }
+
+      > .content {
+        background-color: transparent;
+      }
+    }
+  }
+}

@@ -30,7 +30,6 @@ class EntitlementsResults extends Component {
   }
 
   assessBenefits (benefits) {
-    const { permitted, forbidden } = this.state
     let newPermitted = []
     let newForbidden = []
 
@@ -40,12 +39,12 @@ class EntitlementsResults extends Component {
         if (result.reasoningResult === 'CONCLUSIVE') {
           if (result.goal && result.goal.modality === 'PERMITTED') {
             // only add to the permitted list if it's not there already
-            if (permitted.indexOf(benefit) === -1 && newPermitted.indexOf(benefit) === -1) {
+            if (newPermitted.indexOf(benefit) === -1) {
               newPermitted.push(benefit)
             }
           } else {
             // only add to the forbidden list if it's not there already
-            if (forbidden.indexOf(benefit) === -1 && newForbidden.indexOf(benefit) === -1) {
+            if (newForbidden.indexOf(benefit) === -1) {
               newForbidden.push(benefit)
             }
           }
@@ -53,8 +52,8 @@ class EntitlementsResults extends Component {
       })
     }
     this.setState({
-      permitted: permitted.concat(newPermitted),
-      forbidden: forbidden.concat(newForbidden)
+      permitted: newPermitted,
+      forbidden: newForbidden
     })
   }
 

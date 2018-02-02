@@ -517,10 +517,10 @@
   }
 
   .expandable {
-    border-top: 1px solid $supplimentary-accordian-border-color;
+    border-top: 1px solid $supplementary-accordian-border-color;
 
     &:last-child {
-      border-bottom: 1px solid $supplimentary-accordian-border-color;
+      border-bottom: 1px solid $supplementary-accordian-border-color;
     }
 
     @media print {

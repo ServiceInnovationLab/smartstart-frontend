@@ -5,10 +5,12 @@ import { Link } from 'react-router'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { fetchSchema, postToReasoner } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
+import Accordion from 'components/form/accordion'
 import getFieldProps from 'components/form/get-field-props'
 import fields from './fields'
 import validate from './validation'
 import transform from './transform'
+import './questions-index.scss'
 
 class EntitlementsQuestions extends Component {
   constructor (props) {
@@ -49,7 +51,7 @@ class EntitlementsQuestions extends Component {
     }
 
     return (
-      <div className='form'>
+      <div className='form eligibility'>
         <form onSubmit={handleSubmit(this.submit)}>
           <Field {...getFieldProps(fields, 'applicant.isNZResident')} />
 
@@ -75,6 +77,19 @@ class EntitlementsQuestions extends Component {
 
           { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
             <Field {...getFieldProps(fields, 'threshold.income.AccommodationSupplement')} />
+          }
+
+          { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
+            <div className="expandable-group secondary">
+              <Accordion>
+                <Accordion.Toggle>
+                  How do we calculate the income threshold?
+                </Accordion.Toggle>
+                <Accordion.Content>
+                  <p><a href='http://www.legislation.govt.nz/act/public/1964/0136/latest/DLM362884.html?search=sw_096be8ed816df160_16%2c200_25_se&p=1&sr=0'>Link the legislation</a></p>
+                </Accordion.Content>
+              </Accordion>
+            </div>
           }
 
           <div className="form-actions">

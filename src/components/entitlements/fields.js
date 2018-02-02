@@ -77,7 +77,7 @@ export const fields = {
     name: 'threshold.income.AccommodationSupplement',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Do you meet the Accommodation Supplement cash threshold?`),
-    instructionText: `http://www.legislation.govt.nz/act/public/1964/0136/latest/DLM362884.html?search=sw_096be8ed816df160_16%2c200_25_se&p=1&sr=0 we should calculate this from the income question rather than asking a yes/no`,
+    instructionText: `We should calculate this from the income question rather than asking a yes/no!`,
     validate: [required],
     options: booleanOptions
   }
