@@ -126,6 +126,8 @@ const mapStateToProps = (state) => ({
 
 EntitlementsQuestions = reduxForm({
   form: 'entitlements',
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true,
   validate
 })(EntitlementsQuestions)
 

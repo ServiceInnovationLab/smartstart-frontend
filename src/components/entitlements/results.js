@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
+import { Link } from 'react-router'
 import Spinner from 'components/spinner/spinner'
 
 class EntitlementsResults extends Component {
@@ -102,6 +103,8 @@ class EntitlementsResults extends Component {
         {forbidden.map((benefit, index) =>
           <p key={'forbidden-' + index}>{benefit}</p>
         )}
+
+        <Link to={'/financial-help/questions'} role="button" className="button">Change my answers</Link>
 
       </div>
     )
