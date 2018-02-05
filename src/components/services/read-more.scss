@@ -1,0 +1,53 @@
+@import 'variables';
+
+.read-more {
+  border: 0;
+  background-color: $provider-read-more-bg;
+  line-height: 20px;
+  padding: 10px 20px 10px 10px;
+  min-width: auto;
+  display: block;
+  font-weight: 400;
+  color: $text-color;
+  border-radius: 0;
+  margin-top: 15px;
+  margin-bottom: 20px;
+
+  &::before {
+    font-family: 'icomoon' !important;
+    content: $icon-accordian-open;
+    color: $provider-text-color;
+    font-size: 14px;
+    display: inline-block;
+    margin-right: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  &.hide::before {
+    transform: rotate(45deg);
+  }
+
+  &:active {
+    background-color: transparent;
+
+    &::before {
+      color: transparent;
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.truncated-text {
+  @media print {
+    display: none;
+  }
+}
+
+.whole-text {
+  @media print {
+    display: block !important;
+  }
+}

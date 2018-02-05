@@ -1,0 +1,117 @@
+@import 'variables';
+@import 'mixins';
+
+.provider {
+  border-top: 1px solid $border-color;
+  padding-top: 35px;
+  padding-bottom: 25px;
+
+  &:first-child {
+    border-top: 0 none;
+    margin-top: 30px;
+
+    @media #{$desktop-and-above} {
+      margin-top: 0;
+      border-top: 1px solid $border-color;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $border-color;
+  }
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: $provider-text-color;
+    font-weight: bold;
+  }
+
+  h5 {
+    line-height: 1.45;
+    margin-top: 8px;
+    margin-bottom: 2px;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .provider-hero {
+    border-left: 4px solid $provider-accent-color;
+    padding-left: 21px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+  }
+
+  .location {
+    font-weight: bold;
+    margin-bottom: 0;
+
+    .show-on-map {
+      display: block;
+
+      a {
+        color: $text-color;
+        font-weight: normal;
+      }
+
+      &::before {
+        font-family: 'icomoon' !important;
+        font-size: 20px;
+        line-height: 26px; // same as parent
+        content: $icon-map-pin;
+        display: inline-block;
+        margin-right: 8px;
+        position: relative;
+        top: 2px;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .details {
+    margin-top: 35px;
+
+    p {
+      margin: 6px 0;
+      padding-left: 30px;
+      position: relative;
+
+      &::before {
+        font-family: 'icomoon' !important;
+        font-size: 20px;
+        line-height: 26px; // same as parent
+        display: inline-block;
+        margin-right: 5px;
+        position: absolute;
+        left: 0;
+        top: -2px;
+        color: $provider-accent-color;
+      }
+      &.details-website::before {
+        content: $icon-pointer;
+      }
+      &.details-phone::before {
+        content: $icon-phone;
+      }
+      &.details-email::before {
+        content: $icon-email;
+      }
+      &.details-contact::before {
+        content: $icon-time;
+      }
+    }
+
+    .details-title {
+      @include visuallyhidden;
+    }
+
+    a {
+      color: $text-color;
+    }
+  }
+}

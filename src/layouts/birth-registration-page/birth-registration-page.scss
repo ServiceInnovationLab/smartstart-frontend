@@ -2,6 +2,9 @@
 
 .birth-registration-page {
   min-width: 320px;
+}
+
+.birth-registration-page .page-content {
 
   h2 {
     position: relative;
@@ -35,7 +38,6 @@
     }
 
     .english {
-      font-weight: 500;
       display: inline-block;
       margin-top: 5px;
     }
@@ -153,7 +155,6 @@
     }
   }
 
-
   .general-error {
     margin-bottom: 20px;
   }
@@ -249,7 +250,6 @@
       &::-ms-expand {
         display: none;
       }
-
     }
 
     .styled-select + .styled-select {

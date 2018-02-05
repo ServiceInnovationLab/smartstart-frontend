@@ -264,7 +264,7 @@ export function fetchPhaseMetadata () {
     dispatch(requestPhaseMetadata())
     // this is the request that is made on every page load
     // we need to set credentials: 'same-origin' to make the fetch
-    // aware of the cookie send back by Django backend
+    // aware of the cookie sent back by Django backend
     return fetch('/api/phase-metadata/', {
       credentials: 'same-origin'
     })
@@ -393,7 +393,7 @@ export function fetchPersonalisationValues () {
           if (oldData) {
             // for each saved value, overwrite or create a new key in the api data result
             for (var group in oldData) {
-              // create the setting or checkboxes grouping if not yet preset
+              // create the setting or checkboxes grouping if not yet present
               if (!data[group]) {
                 data[group] = {}
               }

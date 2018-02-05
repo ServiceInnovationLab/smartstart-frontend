@@ -61,7 +61,6 @@
   }
 
   > div > h2 {
-    font-size: 30px;
     text-align: center;
     margin-top: 0;
     margin-bottom: 20px;
@@ -70,7 +69,6 @@
     z-index: $z-index-phase-header-content;
 
     @media #{$desktop-and-above} {
-      font-size: 42px;
       max-width: $phase-content-width-desktop;
       padding-left: 0;
       padding-right: 0;
@@ -79,10 +77,6 @@
       margin-right: auto;
       margin-bottom: 40px;
       position: relative; // on desktop, illustrations positioned to max-content width
-    }
-
-    .english {
-      font-weight: 500;
     }
 
     @media print {

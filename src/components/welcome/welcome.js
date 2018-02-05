@@ -65,10 +65,12 @@ class Welcome extends Component {
           </div>
 
           <div className='welcome-content' role='navigation'>
-            <a href='#' onClick={this.profileClick} aria-controls='my-profile' role='button' className='welcome-action welcome-action-personalise'>Add your due date</a>
-            <JumpNav />
-            <a href='#' onClick={this.todoClick} aria-controls='todo-list' role='button' className='welcome-action welcome-action-todo-list'>Check your To Do list</a>
-            <Link onClick={this.registerClick} to={'register-my-baby'} className='welcome-action welcome-action-register-birth'>Register birth online</Link>
+            <div className='welcome-actions'>
+              <a href='#' onClick={this.profileClick} aria-controls='my-profile' role='button' className='welcome-action welcome-action-personalise'>Add your due date</a>
+              <JumpNav />
+              <a href='#' onClick={this.todoClick} aria-controls='todo-list' role='button' className='welcome-action welcome-action-todo-list'>Check your To Do list</a>
+              <Link onClick={this.registerClick} to={'register-my-baby'} className='welcome-action welcome-action-register-birth'>Register birth online</Link>
+            </div>
 
             <Messages />
           </div>

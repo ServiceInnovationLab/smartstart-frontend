@@ -103,10 +103,14 @@ h3 {
 
 h2 {
   font-weight: bold;
-  font-size: 34px;
+  font-size: 30px;
 
   @media #{$desktop-and-above} {
-    font-size: 48px;
+    font-size: 42px;
+  }
+
+  .english {
+    font-weight: 500;
   }
 }
 
@@ -350,7 +354,7 @@ textarea {
   margin-top: 20px;
   margin-bottom: 30px;
   border: 2px solid transparent;
-  border-radius: 5px;
+  border-radius: $form-field-border-radius;
   padding: 10px 20px;
   position: relative;
   left: -2px;
@@ -364,12 +368,50 @@ textarea {
   }
 }
 
+select {
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  font-weight: 500;
+  color: $text-color;
+  padding: 6px;
+}
+
 [placeholder] {
   text-overflow: ellipsis;
 }
 
 ::placeholder {
   text-overflow: ellipsis;
+}
+
+.inline-clear-field {
+  border: 0;
+  border-radius: 0 $form-field-border-radius $form-field-border-radius 0;
+  background-color: transparent;
+  padding: 0;
+  min-width: 0;
+  display: block;
+  font-weight: 400;
+  color: $text-color;
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  line-height: 14px;
+
+  &:active {
+    background-color: transparent;
+  }
+
+  &::before {
+    font-family: 'icomoon' !important;
+    content: $icon-accordian-close;
+    font-size: 17px;
+    display: inline-block;
+  }
+
+  @media #{$desktop-and-above} {
+    line-height: 19px;
+  }
 }
 
 // HELPER CLASSES from HTML5 Boilerplate

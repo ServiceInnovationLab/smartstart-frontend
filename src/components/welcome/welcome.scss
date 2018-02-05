@@ -104,20 +104,11 @@
     }
 
     h2 {
-      font-size: 30px;
       margin-top: 0;
       margin-bottom: 15px;
 
       @media print {
         color: $print-text-color;
-      }
-
-      .english {
-        font-weight: 500;
-      }
-
-      @media #{$desktop-and-above} {
-        font-size: 42px;
       }
     }
 
@@ -144,6 +135,14 @@
     }
   }
 
+  .welcome-actions {
+    @media only screen and (min-width: #{$desktop-max-content-width}) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
   .welcome-action {
     color: $welcome-button-color;
     font-weight: 500;
@@ -154,6 +153,7 @@
     position: relative;
     margin-right: $welcome-buttons-margin-right;
     margin-bottom: 15px;
+    min-width: 240px;
 
     @media #{$desktop-and-above} {
       margin-right: $welcome-desktop-buttons-margin-right;

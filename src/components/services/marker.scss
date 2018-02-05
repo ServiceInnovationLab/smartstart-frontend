@@ -1,0 +1,133 @@
+@import 'variables';
+
+$info-box-width: 180px;
+$info-box-left-margin: 45px;
+
+.marker-box {
+  position: relative;
+  width: 0;
+  height: 0;
+
+  &.is-active {
+    z-index: 1;
+  }
+}
+
+.marker-box-hover-wrapper {
+  min-width: 30px;
+  min-height: 36px;
+  transform: translate(-15px, -35px);
+  overflow: visible;
+
+  .is-active & {
+    width: $info-box-width + $info-box-left-margin;
+  }
+}
+
+.marker {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  background: $map-marker-color;
+  border-radius: 50% 50% 50% 0;
+  border: 1px solid darken($map-marker-color, 20%);
+  transform: rotate(-45deg);
+
+  &:after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 7px 0 0 7px;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .is-active & {
+    background: $map-marker-selected-color;
+    border-color: darken($map-marker-selected-color, 10%);
+    cursor: pointer;
+  }
+}
+
+.marker-info {
+  display: none;
+
+  .is-active & {
+    display: block;
+    position: relative;
+    top: 50px;
+    left: calc(-50% - 8px);
+    margin-left: $info-box-left-margin;
+    background-color: #ffffff;
+    width: $info-box-width;
+    padding: 10px 25px 10px 10px;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.4);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -9px;
+      left: calc(50% - 10px);
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      border-radius: 0 0 100% 0;
+      background-color: #ffffff;
+      box-shadow: -3px -3px 3px 0 rgba(0,0,0,0.2);
+    }
+
+    @media #{$desktop-and-above} {
+      left: 0;
+      top: -10px;
+
+      &::after {
+        top: 15px;
+        left: -9px;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  .close-button {
+    display: none;
+  }
+
+  &.show-close {
+
+    .close-button {
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      &::after {
+        font-family: 'icomoon' !important;
+        content: $icon-accordian-close;
+        font-size: 20px;
+        display: inline-block;
+        margin-left: 10px;
+
+        @media #{$desktop-and-above} {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  p {
+    line-height: 1.5em;
+    margin: 0;
+  }
+
+  a {
+    color: $text-color;
+  }
+}

@@ -13,11 +13,13 @@ class Header extends Component {
     this.state = {
       authErrorShown: false,
       authErrorMessage: '',
-      authErrorIsFromIDP: false
+      authErrorIsFromIDP: false,
+      menuShown: false
     }
 
     this.clearMessage = this.clearMessage.bind(this)
     this.setAuthErrorMessage = this.setAuthErrorMessage.bind(this)
+    this.menuToggle = this.menuToggle.bind(this)
   }
 
   componentWillMount () {
@@ -79,29 +81,52 @@ class Header extends Component {
     })
   }
 
+  menuToggle (event) {
+    event.preventDefault()
+    this.setState({
+      menuShown: !this.state.menuShown
+    })
+  }
+
   render () {
     const { isLoggedIn } = this.props
-    let messageClasses = classNames(
+    const { menuShown } = this.state
+    const messageClasses = classNames(
       'page-header-error',
       { 'hidden': !this.state.authErrorShown },
       { 'realme-error': this.state.authErrorIsFromIDP }
     )
-    let loginClasses = classNames(
+    const loginClasses = classNames(
       'auth-controls',
       { 'hidden': isLoggedIn }
     )
-    let logoutClasses = classNames(
+    const logoutClasses = classNames(
       'auth-controls',
       { 'hidden': !isLoggedIn }
     )
+    const menuClasses = classNames(
+      'main-nav',
+      { 'mobile-menu-shown': menuShown }
+    )
+    const menuToggleClasses = classNames(
+      'nav-menu-button',
+      { 'mobile-menu-shown': menuShown }
+    )
+    const pageHeaderClasses = classNames(
+      'page-header',
+      { 'mobile-menu-shown': menuShown }
+    )
 
     return (
-      <header className='page-header'>
+      <header className={pageHeaderClasses}>
         <div className='page-header-inner'>
-          <h1>
-            <img src='/assets/img/smartstart-logo-print.svg' alt='logo - parent cradling child' />
-            <IndexLink to={'/'}>SmartStart</IndexLink>
-          </h1>
+          <div className='logo-and-menu-button'>
+            <button className={menuToggleClasses} onClick={this.menuToggle} aria-hidden='true'>Menu</button>
+            <h1>
+              <img src='/assets/img/smartstart-logo-print.svg' alt='logo - parent cradling child' />
+              <IndexLink to={'/'}>SmartStart</IndexLink>
+            </h1>
+          </div>
           <div className={loginClasses}>
             <LoginButton />
           </div>
@@ -109,19 +134,28 @@ class Header extends Component {
             <LogoutButton />
           </div>
         </div>
+        <nav className={menuClasses} data-test='main-navigation' role='navigation' aria-hidden='true'>
+          <div className='page-header-inner'>
+            <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
+            <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
+            <Link to={'/services-near-me'} activeClassName='active'>Services near me</Link>
+            <Link to={'/news/baby-names'} activeClassName='active'>Top baby names</Link>
+          </div>
+        </nav>
+        <nav className='visuallyhidden' role='navigation'>
+          <div className='page-header-inner'>
+            <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
+            <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
+            <Link to={'/services-near-me'} activeClassName='active'>Services near me</Link>
+            <Link to={'/news/baby-names'} activeClassName='active'>Top baby names</Link>
+          </div>
+        </nav>
         <div className={messageClasses}>
           <div className='page-header-inner'>
             <p>{this.state.authErrorMessage}</p>
             <a className='page-header-error-close' href='#' onClick={this.clearMessage}><span className='visuallyhidden'>Close message</span></a>
           </div>
         </div>
-        <nav className='main-nav' data-test='main-navigation' role='navigation'>
-          <div className='page-header-inner'>
-            <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
-            <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
-            <Link to={'/news/baby-names'} activeClassName='active'>Top baby names</Link>
-          </div>
-        </nav>
       </header>
     )
   }
