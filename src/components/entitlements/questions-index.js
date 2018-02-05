@@ -62,11 +62,10 @@ class EntitlementsQuestions extends Component {
           <Field {...getFieldProps(fields, 'applicant.isNZResident')} />
 
           { isNZResident === 'true' &&
-            <Field {...getFieldProps(fields, 'applicant.normallyLivesInNZ')} />
-          }
-
-          { isNZResident === 'true' &&
-            <Field {...getFieldProps(fields, 'applicant.Age')} />
+            <div className='component-grouping'>
+              <Field {...getFieldProps(fields, 'applicant.normallyLivesInNZ')} />
+              <Field {...getFieldProps(fields, 'applicant.Age')} />
+            </div>
           }
 
           { isNZResident === 'true' &&
@@ -81,27 +80,20 @@ class EntitlementsQuestions extends Component {
           }
 
           { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
-            <Field {...getFieldProps(fields, 'applicant.hasSocialHousing')} />
-          }
-
-          { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
-            <Field {...getFieldProps(fields, 'applicant.receivesAccommodationSupport')} />
-          }
-
-          { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
-            <Field {...getFieldProps(fields, 'threshold.income.AccommodationSupplement')} />
-          }
-
-          { isNZResident === 'true' && hasAccommodationCosts === 'true' &&
-            <div className="expandable-group secondary">
-              <Accordion>
-                <Accordion.Toggle>
+            <div className='component-grouping'>
+              <Field {...getFieldProps(fields, 'applicant.hasSocialHousing')} />
+              <Field {...getFieldProps(fields, 'applicant.receivesAccommodationSupport')} />
+              <Field {...getFieldProps(fields, 'threshold.income.AccommodationSupplement')} />
+              <div className="expandable-group secondary">
+                <Accordion>
+                  <Accordion.Toggle>
                   How do we calculate the income threshold?
-                </Accordion.Toggle>
-                <Accordion.Content>
-                  <p><a href='http://www.legislation.govt.nz/act/public/1964/0136/latest/DLM362884.html?search=sw_096be8ed816df160_16%2c200_25_se&p=1&sr=0'>Link the legislation</a></p>
-                </Accordion.Content>
-              </Accordion>
+                  </Accordion.Toggle>
+                  <Accordion.Content>
+                    <p><a href='http://www.legislation.govt.nz/act/public/1964/0136/latest/DLM362884.html?search=sw_096be8ed816df160_16%2c200_25_se&p=1&sr=0'>Link the legislation</a></p>
+                  </Accordion.Content>
+                </Accordion>
+              </div>
             </div>
           }
 
