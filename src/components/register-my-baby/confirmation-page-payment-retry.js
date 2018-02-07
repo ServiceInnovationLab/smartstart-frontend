@@ -22,8 +22,8 @@ class PaymentFailPage extends React.Component {
 
   componentDidMount() {
     // redirect to failed payment page just before session will expire
-    const checkInterval = 60 *1000 // 1 min
-    const delayInterval = 28 * 60 * 1000 // 28 min
+    const checkInterval = 60 * 1000 // 1 min
+    const delayInterval = 15 * 60 * 1000 // 15 min
 
     this.setState({
       refreshAt: new Date().getTime() + delayInterval,
