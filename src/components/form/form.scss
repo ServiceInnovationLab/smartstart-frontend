@@ -264,7 +264,10 @@
         margin-top: -20px;
       }
     }
+  }
 
+  form,
+  form .section {
     > div.input-group,
     > div.radio-group,
     > div.checkbox-group,
@@ -278,7 +281,9 @@
     div.component-grouping > fieldset {
       margin: 30px 0;
     }
+  }
 
+  form {
     div.conditional-field,
     fieldset > .input-groups {
       padding-left: 15px;

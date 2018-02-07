@@ -1,6 +1,38 @@
 // this file is included directly from index.scss to prevent duplication
 @import 'variables';
 
+.form.eligibility .section {
+  padding: 60px 0;
+
+  @media only screen and (min-width: #{$desktop-max-content-width}) {
+    width: 100vw;
+    position: relative;
+    right: calc(calc((100vw - #{$desktop-max-content-width}) / 2) + 20px);
+
+    .section-inner {
+      max-width: $desktop-max-content-width;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 15px #{$indent * 2} 15px $desktop-content-gutter;
+    }
+  }
+
+  @media only screen and (max-width: #{$desktop-max-content-width - 1px}) {
+    width: 100vw;
+    position: relative;
+    left: -15px;
+
+    .section-inner {
+      padding-left: $mobile-content-gutter;
+      padding-right: $mobile-content-gutter + 5px; // hack to account for scrollbar
+    }
+  }
+
+  &:nth-child(even) {
+    background-color: $entitlements-form-bg;
+  }
+}
+
 // colour overrides from standard $form-teal-dark form colours
 .form.eligibility {
   button {
@@ -14,6 +46,7 @@
   }
 
   form {
+    margin-top: 0;
     border-bottom: 0 none;
     padding-bottom: 0;
 

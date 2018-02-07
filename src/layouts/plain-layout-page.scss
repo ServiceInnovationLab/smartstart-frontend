@@ -1,6 +1,8 @@
 @import 'variables';
 
 .plain-layout-page {
+  overflow: hidden;
+
   .page-content {
     max-width: $desktop-max-content-width;
     margin-left: auto;
