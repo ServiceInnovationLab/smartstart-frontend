@@ -9,12 +9,18 @@ const validate = (values) => {
   const isNZResident = get(values, 'applicant.isNZResident')
   const hasDisability = get(values, 'applicant.disability')
   const relationshipStatus = get(values, 'applicant.relationshipStatus')
-  const numberOfChildren = get(values, 'applicant.numberOfChildren')
+  const childrenAmount = get(values, 'applicant.numberOfChildren')
+  const numberOfChildren = childrenAmount ? parseInt(childrenAmount, 10) : 0
   const childrenAges = get(values, 'children.ages')
   const childHasDisability = get(values, 'child.hasSeriousDisability')
   const requiresConstantCare = get(values, 'child.requiresConstantCare')
   const attendsECE = get(values, 'child.attendsECE')
   const hasAccommodationCosts = get(values, 'applicant.hasAccommodationCosts')
+  const allChildrenInTheirFullTimeCare = get(values, 'applicant.allChildrenInTheirFullTimeCare')
+  const gaveBirthToThisChild = get(values, 'applicant.gaveBirthToThisChild')
+  const isPrincipalCarerForOneYearFromApplicationDate = get(values, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
+  const workOrStudy = get(values, 'applicant.workOrStudy')
+  const expectingChild = get(values, 'applicant.expectingChild')
 
   // Your background
 
@@ -42,11 +48,11 @@ const validate = (values) => {
     check('applicant.numberOfChildren')(fields, values, errors)
   }
 
-  if (numberOfChildren && parseInt(numberOfChildren, 10) > 2) {
+  if (numberOfChildren > 2) {
     check('applicant.needsDomesticSupport﻿')(fields, values, errors)
   }
 
-  if (numberOfChildren && parseInt(numberOfChildren, 10) > 0) {
+  if (numberOfChildren > 0) {
     check('children.ages﻿')(fields, values, errors)
     check('child.hasSeriousDisability')(fields, values, errors)
   }
@@ -73,9 +79,54 @@ const validate = (values) => {
 
   // Your relationship to your children
 
+  if (numberOfChildren > 0) {
+    check('applicant.isPrincipalCarer')(fields, values, errors)
+    check('applicant.allChildrenInTheirFullTimeCare')(fields, values, errors)
+    check('applicant.gaveBirthToThisChild')(fields, values, errors)
+  }
+
+  if (allChildrenInTheirFullTimeCare === 'false') {
+    check('applicant.isPrincipalCarerForProportion')(fields, values, errors)
+  }
+
+  if (gaveBirthToThisChild === 'false') {
+    check('applicant.isPrincipalCarerForOneYearFromApplicationDate')(fields, values, errors)
+  }
+
+  if (isPrincipalCarerForOneYearFromApplicationDate === 'true') {
+    check('children.birthParents')(fields, values, errors)
+  }
+
   // Work/Study
 
+  if (isNZResident === 'true') {
+    check('applicant.workOrStudy')(fields, values, errors)
+  }
+
+  if (workOrStudy === 'study' || workOrStudy === 'both') {
+    check('applicant.isStudyingFullTime')(fields, values, errors)
+  }
+
+  if (workOrStudy === 'work' || workOrStudy === 'both') {
+    check('applicant.employmentStatus')(fields, values, errors)
+    check('applicant.worksWeeklyHours')(fields, values, errors)
+  }
+
+  if (expectingChild === 'true') {
+    check('applicant.meetsPaidParentalLeaveEmployedRequirements')(fields, values, errors)
+  }
+
   // Income
+
+  if (isNZResident === 'true') {
+    check('income.applicant')(fields, values, errors)
+    check('applicant.receivesIncomeTestedBenefit')(fields, values, errors)
+    check('applicant.holdsCommunityServicesCard')(fields, values, errors)
+  }
+
+  if (relationshipStatus && relationshipStatus !== 'single') {
+    check('income.spouse')(fields, values, errors)
+  }
 
   // Accomodation
 
@@ -86,7 +137,6 @@ const validate = (values) => {
   if (hasAccommodationCosts === 'true') {
     check('applicant.hasSocialHousing')(fields, values, errors)
     check('applicant.receivesAccommodationSupport')(fields, values, errors)
-    check('threshold.income.AccommodationSupplement')(fields, values, errors)
   }
 
   return errors
