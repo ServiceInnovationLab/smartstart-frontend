@@ -21,7 +21,7 @@ class EntitlementsPage extends Component {
                 See what financial help is available<br />
                 <span className='english'>See what financial help is available</span>
               </h2>
-              <p>Some description of what this thing is goes here.</p>
+              <p>Use this planning tool to see which benefits and payments you might be eligible for.</p>
             </div>
           </div>
           <div id='content' className='plain-layout-page full-width entitlements-page'>
