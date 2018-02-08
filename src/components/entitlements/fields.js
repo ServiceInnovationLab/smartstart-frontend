@@ -130,7 +130,7 @@ export const fields = {
   'applicant.isInadequatelySupportedByPartner': {
     name: 'applicant.isInadequatelySupportedByPartner',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are you living apart from, or lost the financial support of your partner?`),
+    label: makeMandatoryLabel(`Are you living apart from, or have you lost the financial support of your partner?`),
     validate: [required],
     options: booleanOptions
   },
@@ -243,7 +243,7 @@ export const fields = {
   'applicant.gaveBirthToThisChild': { // TODO this needs to map to more than one atom???
     name: 'applicant.gaveBirthToThisChild',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are you the birth/adoptive/step parent of all of your children?`),
+    label: makeMandatoryLabel(`Are you the birth, adoptive or step parent of all of your children?`),
     validate: [required],
     options: booleanOptions
   },
@@ -251,7 +251,7 @@ export const fields = {
   'applicant.isPrincipalCarerForOneYearFromApplicationDate': {
     name: 'applicant.isPrincipalCarerForOneYearFromApplicationDate',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Will the children you’re not the birth/adoptive/step parent of be staying in your care for more than 12 months?`),
+    label: makeMandatoryLabel(`Will the children you’re not the birth, adoptive or step parent of be staying in your care for more than 12 months?`),
     validate: [required],
     options: booleanOptions
   },

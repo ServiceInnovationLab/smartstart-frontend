@@ -92,6 +92,12 @@ class EntitlementsQuestions extends Component {
 
             <Field {...getFieldProps(fields, 'applicant.isNZResident')} />
 
+            { isNZResident === 'false' &&
+              <div className='instruction'>
+                Sorry, this form is intended...
+              </div>
+            }
+
             { isNZResident === 'true' &&
               <div className='component-grouping'>
                 <Field {...getFieldProps(fields, 'applicant.normallyLivesInNZ')} />
@@ -437,9 +443,11 @@ class EntitlementsQuestions extends Component {
           </div>
           }
 
-          <div className="form-actions">
-            <button type="submit" className="next" disabled={submitting}>Submit your answers</button>
-          </div>
+          { isNZResident === 'true' &&
+            <div className="form-actions">
+              <button type="submit" className="next" disabled={submitting}>Submit your answers</button>
+            </div>
+          }
         </form>
       </div>
     )
