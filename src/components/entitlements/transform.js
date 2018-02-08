@@ -1,7 +1,7 @@
 import deepMap from 'deep-map'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import unset from 'lodash/set'
+import unset from 'lodash/unset'
 
 // 1. change all strings to booleans, numbers etc
 // 2. if key is in schema, add to object to be sent
@@ -46,7 +46,7 @@ const transform = (data, schema) => {
     set(body, 'applicant.isUnableToSupportThemselves', true)
   }
   // 3.c. infer child.isDependent from numberOfChildren
-  if (data.applicant && data.applicant.numberOfChildren && data.applicant.numberOfChildren !== '0') {
+  if (data.applicant && data.applicant.numberOfChildren && data.applicant.numberOfChildren !== 0) {
     set(body, 'child.isDependent', true)
   }
   // 3.d. set child.Age based on the lowest provided value for children.ages
@@ -70,7 +70,13 @@ const transform = (data, schema) => {
   if (body.child && body.child.Age > 5 && data.child.constantCareUnderSix) {
     set(body, 'child.Age', 5)
   }
-  // 3.g. infer parents.areUnableToProvideSufficientCare
+  // 3.g. change WeeklyECEHours to a number
+  // TODO can we make WeeklyECEHours a boolean instead?
+  // this is a fudge, the number just needs to be above 3 right now
+  if (body.child && body.child.WeeklyECEHours) {
+    set(body, 'child.WeeklyECEHours', 10)
+  }
+  // 3.h. infer parents.areUnableToProvideSufficientCare
   if (data.children && data.children.birthParents) {
     if (
       data.children.birthParents.indexOf('family-breakdown') > -1 ||
@@ -79,7 +85,7 @@ const transform = (data, schema) => {
       set(body, 'parents.areUnableToProvideSufficientCare', true)
     }
   }
-  // 3.h. infer parents.areDeceasedMissingOrIncapableThroughDisability
+  // 3.i. infer parents.areDeceasedMissingOrIncapableThroughDisability
   if (data.children && data.children.birthParents) {
     if (
       data.children.birthParents.indexOf('not-found') > -1 ||
@@ -88,19 +94,19 @@ const transform = (data, schema) => {
       set(body, 'parents.areDeceasedMissingOrIncapableThroughDisability', true)
     }
   }
-  // 3.i. note that we DON'T sent income.ofApplicantAndSpouse directly: instead we
+  // 3.j. note that we DON'T sent income.ofApplicantAndSpouse directly: instead we
   // infer threshold.income.AccommodationSupplement based on income values
   // TODO calculate here! for now just hard code to true
   // TODO calculate if we meet other thresholds
   // TODO only use spouse income if applicant.relationshipStatus !=== 'single'
   set(body, 'threshold.income.AccommodationSupplement', true)
-  // 3.j. we don't provide any cash threshold values, so just set them to true
+  // 3.k. we don't provide any cash threshold values, so just set them to true
   // TODO any other cash thresholds should be set here
   set(body, 'threshold.cash.AccommodationSupplement', true)
-  // 3.k. we don't ask about medical certs, so hard code them to true
+  // 3.l. we don't ask about medical certs, so hard code them to true
   set(body, 'applicant.hasMedicalCertificate', true)
   set(body, 'child.hasMedicalCertification', true)
-  // 3.l. we don't ask about the applicant having recieved parental leave in the past, hard code to false
+  // 3.m. we don't ask about the applicant having recieved parental leave in the past, hard code to false
   set(body, 'applicant.hasReceivedPaidParentalLeavePayment', false)
 
 
@@ -115,11 +121,11 @@ const transform = (data, schema) => {
   }
   // 4.c. needsDomesticSupport
   if (data.applicant && data.applicant.numberOfChildren && parseInt(data.applicant.numberOfChildren, 10) < 3) {
-    unset(body, 'applicant.needsDomesticSupport﻿')
+    unset(body, 'applicant.needsDomesticSupport')
   }
   // 4.d. financiallyIndependant
   if (data.children && data.children.ages && data.children.ages.length && data.children.ages[data.children.ages.length - 1] < 16) {
-    unset(body, 'children.financiallyIndependant﻿')
+    unset(body, 'children.financiallyIndependant')
   }
   // 4.e. requiresConstantCare
   if (data.child && !data.child.hasSeriousDisability) {
@@ -136,7 +142,7 @@ const transform = (data, schema) => {
   // 4.g. isPrincipalCarerForOneYearFromApplicationDate and parents
   if (data.applicant && data.applicant.gaveBirthToThisChild) {
     unset(body, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
-    unset(body, 'parents.areUnableToProvideSufficientCare﻿')
+    unset(body, 'parents.areUnableToProvideSufficientCare')
     unset(body, 'parents.areDeceasedMissingOrIncapableThroughDisability')
   }
   // 4.h. areUnableToProvideSufficientCare areDeceasedMissingOrIncapableThroughDisability
@@ -156,6 +162,19 @@ const transform = (data, schema) => {
   // 4.k. meetsPaidParentalLeaveEmployedRequirements
   if (data.applicant && !data.applicant.expectingChild) {
     unset(body, 'applicant.meetsPaidParentalLeaveEmployedRequirements')
+  }
+  // 4.l. delete any empty objects (there should always be something in applicant)
+  if (body.parents && Object.keys(body.parents).length === 0) {
+    unset(body, 'parents')
+  }
+  if (body.child && Object.keys(body.child).length === 0) {
+    unset(body, 'child')
+  }
+  if (body.children && Object.keys(body.children).length === 0) {
+    unset(body, 'children')
+  }
+  if (body.threshold && Object.keys(body.threshold).length === 0) {
+    unset(body, 'threshold')
   }
 
   return body

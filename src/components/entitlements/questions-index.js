@@ -225,7 +225,7 @@ class EntitlementsQuestions extends Component {
                     </Accordion>
                   </div>
                 }
-                { attendsECE === 'true' &&
+                { underFives && attendsECE === 'true' &&
                   <div className='conditional-field'>
                     <Field {...getFieldProps(fields, 'child.WeeklyECEHours')} />
                   </div>
