@@ -5,7 +5,7 @@ import renderDatepicker from 'components/form/fields/render-datepicker'
 import renderRadioGroup from 'components/form/fields/render-radio-group'
 import renderSelect from 'components/form/fields/render-select'
 import FatherText from './father-text'
-import { combine, maxLength, titleCase } from '../../normalize'
+import { combine, maxLength, titleCase } from 'components/form/normalizers'
 import {
   sexes as sexOptions,
   childStatuses as childStatusOptions,
@@ -73,4 +73,3 @@ const fields = {
 }
 
 export default fields
-

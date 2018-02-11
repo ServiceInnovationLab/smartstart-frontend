@@ -3,20 +3,11 @@ import renderField from 'components/form/fields/render-field'
 import renderRadioGroup from 'components/form/fields/render-radio-group'
 import renderSelect from 'components/form/fields/render-select'
 import renderCheckboxGroup from 'components/form/fields/render-checkbox-group'
+import { maxLength } from 'components/form/normalizers'
+import { requiredWithMessage, numberWithMessage } from 'components/form/validators'
 
-const required = value =>
-  (
-    typeof value === 'undefined' ||
-    value === null ||
-    (value.trim && value.trim() === '') ||
-    (Array.isArray(value) && !value.length)
-  ) ? `This is a required field, please provide an answer.` : undefined
-
-const number = value => value && isNaN(Number(value)) ? `This is not a valid number, please try again.` : undefined
-
-const maxLength = (max) => (value) => {
-  return value.length <= max ? value : value.substring(0, max)
-}
+const required = requiredWithMessage(`This is a required field, please provide an answer.`)
+const number = numberWithMessage(`This is not a valid number, please try again.`)
 
 const booleanOptions = [
   { value: 'true', display: 'Yes'},

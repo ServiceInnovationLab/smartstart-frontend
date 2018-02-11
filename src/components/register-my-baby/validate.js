@@ -1,6 +1,7 @@
 import moment from 'moment'
 import uniq from 'lodash/uniq'
 import { validateIrdNumber, validateMsdNumber } from './modulus-11'
+import { requiredWithMessage, numberWithMessage } from 'components/form/validators'
 import {
   REQUIRE_MESSAGE,
   INVALID_EMAIL_MESSAGE,
@@ -14,18 +15,8 @@ import {
   MAX_AGE_MESSAGE
 } from './validation-messages'
 
-export const required = value =>
-  (
-    typeof value === 'undefined' ||
-    value === null ||
-    (value.trim && value.trim() === '') ||
-    (Array.isArray(value) && !value.length) // some field's value bind to an array eg.ethnicGroups
-  ) ? REQUIRE_MESSAGE : undefined
-
-export const requiredWithMessage = message => value =>
-  (typeof value === 'undefined' || value === null || (value.trim && value.trim() === '')) ? message : undefined
-
-export const number = value => value && isNaN(Number(value)) ? INVALID_NUMBER_MESSAGE : undefined
+export const required = requiredWithMessage(REQUIRE_MESSAGE)
+export const number = numberWithMessage(INVALID_NUMBER_MESSAGE)
 
 export const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?

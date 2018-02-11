@@ -8,8 +8,9 @@ import FatherText from './father-text'
 import {
   yesNo as yesNoOptions
 } from '../../options'
-import { required, requiredWithMessage, validIrd, validMsd } from '../../validate'
-import { maximum } from '../../normalize'
+import { requiredWithMessage } from 'components/form/validators'
+import { required, validIrd, validMsd } from '../../validate'
+import { maximum } from 'components/form/normalizers'
 import {
   REQUIRE_IRD_ADDRESS
 } from '../../validation-messages'

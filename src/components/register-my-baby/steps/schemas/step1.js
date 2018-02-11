@@ -7,7 +7,7 @@ import renderBirthOrderSelector from 'components/form/fields/render-birth-order-
 import renderCheckboxGroup from 'components/form/fields/render-checkbox-group'
 import renderRadioGroup from 'components/form/fields/render-radio-group'
 import renderPlacesAutocomplete from 'components/form/fields/render-places-autocomplete'
-import { combine, maxLength, titleCase } from '../../normalize'
+import { combine, maxLength, titleCase } from 'components/form/normalizers'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
@@ -15,9 +15,9 @@ import {
   sexes as sexOptions,
   birthPlaceCategories as birthPlaceCategoryOptions
 } from '../../options'
+import { requiredWithMessage } from 'components/form/validators'
 import {
   required,
-  requiredWithMessage,
   validAlpha,
   validDate,
   validCharStrict

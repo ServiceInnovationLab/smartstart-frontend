@@ -13,11 +13,12 @@ import {
   ethnicGroups,
   getOptionDisplay
 } from '../../options'
-import { requiredWithMessage, validCharRelax } from '../../validate'
+import { requiredWithMessage } from 'components/form/validators'
+import { validCharRelax } from '../../validate'
 import {
   REQUIRE_EXPLAINATION
 } from '../../validation-messages'
-import { maxLength } from '../../normalize'
+import { maxLength } from 'components/form/normalizers'
 import schema from '../schemas/step1'
 import getFieldReviewProps from './get-field-review-props'
 

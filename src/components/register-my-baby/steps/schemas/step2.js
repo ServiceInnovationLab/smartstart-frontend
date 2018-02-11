@@ -6,16 +6,16 @@ import renderRadioGroup from 'components/form/fields/render-radio-group'
 import renderPlacesAutocomplete from 'components/form/fields/render-places-autocomplete'
 import renderWarning from 'components/form/fields/render-warning'
 import renderSelect from 'components/form/fields/render-select'
-import { combine, maxLength, titleCase } from '../../normalize'
+import { combine, maxLength, titleCase } from 'components/form/normalizers'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
   yesNoNotSure as yesNoNotSureOptions,
   citizenshipSources as citizenshipSourceOptions
 } from '../../options'
+import { requiredWithMessage } from 'components/form/validators'
 import {
   required,
-  requiredWithMessage,
   validAlpha,
   validDate,
   validCharStrict,

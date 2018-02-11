@@ -12,7 +12,7 @@ import {
   getBirthCertificateDeliveryAddresses
 } from '../options'
 import './step6.scss'
-import { maxLength } from '../normalize'
+import { maxLength } from 'components/form/normalizers'
 import validate from './validation'
 import schema from './schemas/step6'
 import getFieldProps from 'components/form/get-field-props'

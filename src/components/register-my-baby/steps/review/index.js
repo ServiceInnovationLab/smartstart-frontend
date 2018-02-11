@@ -18,11 +18,11 @@ import renderError from 'components/form/fields/render-error'
 import {
   REQUIRE_DECLARATION
 } from '../../validation-messages'
-import { validCharRelax } from '../../validate'
-import { maxLength } from '../../normalize'
 import Spinner from 'components/spinner/spinner'
-import { validateOnly } from '../../submit'
+import { maxLength } from 'components/form/normalizers'
 import { fetchCountries } from 'actions/birth-registration'
+import { validCharRelax } from '../../validate'
+import { validateOnly } from '../../submit'
 import './review.scss'
 
 class Review extends Component {

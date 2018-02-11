@@ -10,16 +10,16 @@ import renderWarning from 'components/form/fields/render-warning'
 import renderError from 'components/form/fields/render-error'
 import renderSelect from 'components/form/fields/render-select'
 import FatherText from './father-text'
-import { combine, maxLength, titleCase } from '../../normalize'
+import { combine, maxLength, titleCase } from 'components/form/normalizers'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
   yesNoNotSure as yesNoNotSureOptions,
   citizenshipSources as citizenshipSourceOptions
 } from '../../options'
+import { requiredWithMessage } from 'components/form/validators'
 import {
   required,
-  requiredWithMessage,
   validAlpha,
   validDate,
   validCharStrict,

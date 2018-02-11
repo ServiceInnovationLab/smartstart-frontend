@@ -10,7 +10,7 @@ export const maxLength = (max) => (value) => {
 }
 
 /**
- * A normalizer function to mimic HTML5 `maxlength` behavior (refer to MSD & IRD field)
+ * A normalizer function to mimic HTML5 `maxlength` behavior (refer to BRO MSD & IRD field)
  */
 export const maximum = (max) => (value, previousVal) => {
   if (isNaN(value)) {
@@ -33,4 +33,3 @@ export const titleCase = (value = '') => {
 
   return titleCased
 }
-
