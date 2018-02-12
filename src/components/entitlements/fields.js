@@ -94,23 +94,15 @@ export const fields = {
     normalize: maxLength(3)
   },
 
-  'applicant.hasDisability': { // TODO confirm name for this atom
-    name: 'applicant.hasDisability',
-    component: renderRadioGroup,
-    label: makeMandatoryLabel(`Do you have a health condition, injury or disability?`),
-    validate: [required],
-    options: booleanOptions
-  },
-
   'applicant.hasSeriousDisability': {
     name: 'applicant.hasSeriousDisability',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Is your health condition, injury or disability permanent or severe?`),
+    label: makeMandatoryLabel(`Do you have a health condition, injury or disability that is permanent and severe?`),
     validate: [required],
     options: booleanOptions
   },
 
-  'applicant.relationshipStatus': { // TODO change to hasPartner?
+  'applicant.relationshipStatus': {
     name: 'applicant.relationshipStatus',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Do you have a partner?`),
@@ -126,7 +118,7 @@ export const fields = {
     options: booleanOptions
   },
 
-  'applicant.expectingChild': { // TODO confirm name for this atom
+  'applicant.expectingChild': {
     name: 'applicant.expectingChild',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Are you expecting a baby or planning to adopt a child?`),
@@ -137,7 +129,7 @@ export const fields = {
   'applicant.numberOfChildren': {
     name: 'applicant.numberOfChildren',
     component: renderSelect,
-    label: makeMandatoryLabel(`How many dependant children do you have in your care?`),
+    label: makeMandatoryLabel(`How many dependent children do you have in your care?`),
     options: numberOfChildren,
     validate: [required],
   },
@@ -154,7 +146,7 @@ export const fields = {
     name: 'children.ages',
     component: renderCheckboxGroup,
     label: makeMandatoryLabel(`Please select the age groups for all your children`),
-    instructionText: `You can select more than one`,
+    instructionText: `You can select more than one.`,
     options: ageGroups,
     validate: [required]
   },
@@ -178,7 +170,7 @@ export const fields = {
   'child.requiresConstantCare': {
     name: 'child.requiresConstantCare',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Do any of those children require constant care and attention?`),
+    label: makeMandatoryLabel(`Do any of those children require more constant care and attention than is normally expected?`),
     validate: [required],
     options: booleanOptions
   },
@@ -186,7 +178,7 @@ export const fields = {
   'child.constantCareUnderSix': {
     name: 'child.constantCareUnderSix',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are they under 6?`),
+    label: makeMandatoryLabel(`Are they under 6 years old?`),
     validate: [required],
     options: booleanOptions
   },
@@ -194,7 +186,7 @@ export const fields = {
   'child.attendsECE': {
     name: 'child.attendsECE',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Do any of your children go to an approved early childhood program?`),
+    label: makeMandatoryLabel(`Do any of your children go to a government-approved early childhood program?`),
     validate: [required],
     options: booleanOptions
   },
@@ -226,12 +218,12 @@ export const fields = {
   'applicant.isPrincipalCarerForProportion': {
     name: 'applicant.isPrincipalCarerForProportion',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are any of your children in your custody for more than 5 days every 2 weeks?`),
+    label: makeMandatoryLabel(`Are any of your children in your custody for more than 5 days every fortnight?`),
     validate: [required],
     options: booleanOptions
   },
 
-  'applicant.gaveBirthToThisChild': { // TODO this needs to map to more than one atom???
+  'applicant.gaveBirthToThisChild': {
     name: 'applicant.gaveBirthToThisChild',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Are you the birth, adoptive or step parent of all of your children?`),
@@ -242,7 +234,7 @@ export const fields = {
   'applicant.isPrincipalCarerForOneYearFromApplicationDate': {
     name: 'applicant.isPrincipalCarerForOneYearFromApplicationDate',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Will the children you’re not the birth, adoptive or step parent of be staying in your care for more than 12 months?`),
+    label: makeMandatoryLabel(`Of those that are not, will they be staying in your care for more than 12 months?`),
     validate: [required],
     options: booleanOptions
   },
@@ -250,15 +242,15 @@ export const fields = {
   'children.birthParents': {
     name: 'children.birthParents',
     component: renderCheckboxGroup,
-    label: makeMandatoryLabel(`What happened to the birth parents of the child/children you’re caring for?`),
-    instructionText: `You can select more than one`,
+    label: makeMandatoryLabel(`Why are the birth parents unable to care for the child/children you’re caring for?`),
+    instructionText: `You can select more than one.`,
     options: birthParents,
     validate: [required]
   },
 
   'applicant.workOrStudy': {
     name: 'applicant.workOrStudy',
-    component: renderRadioGroup,
+    component: renderSelect,
     label: makeMandatoryLabel(`What's your work/study situation?`),
     validate: [required],
     options: workOrStudyOptions
@@ -272,7 +264,7 @@ export const fields = {
     options: booleanOptions
   },
 
-  'applicant.employmentStatus': { // TODO change to a boolean?
+  'applicant.employmentStatus': {
     name: 'applicant.employmentStatus',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Do you work full-time?`),
@@ -301,7 +293,7 @@ export const fields = {
   'applicant.isStoppingWorkToCareForChild': {
     name: 'applicant.isStoppingWorkToCareForChild',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are you planning to stop working when your child is born or adopted?`),
+    label: makeMandatoryLabel(`Will you stop working when your child is born or adopted?`),
     validate: [required],
     options: booleanOptions
   },
@@ -364,14 +356,6 @@ export const fields = {
     name: 'applicant.hasSocialHousing',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Do you pay rent to a social housing provider?`),
-    validate: [required],
-    options: booleanOptions
-  },
-
-  'applicant.receivesAccommodationSupport': {
-    name: 'applicant.receivesAccommodationSupport',
-    component: renderRadioGroup,
-    label: makeMandatoryLabel(`Do you receive any accommodation support, including from a spouse, from contracted carer or disability services or from any other source?`),
     validate: [required],
     options: booleanOptions
   }

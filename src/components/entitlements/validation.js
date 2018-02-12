@@ -7,7 +7,6 @@ const validate = (values) => {
 
   // set up values that need to be used for conditions
   const isNZResident = get(values, 'applicant.isNZResident')
-  const hasDisability = get(values, 'applicant.disability')
   const relationshipStatus = get(values, 'applicant.relationshipStatus')
   const childrenAmount = get(values, 'applicant.numberOfChildren')
   const numberOfChildren = childrenAmount ? parseInt(childrenAmount, 10) : 0
@@ -29,11 +28,7 @@ const validate = (values) => {
   if (isNZResident === 'true') {
     check('applicant.normallyLivesInNZ')(fields, values, errors)
     check('applicant.Age')(fields, values, errors)
-    check('applicant.hasDisability')(fields, values, errors)
     check('applicant.relationshipStatus')(fields, values, errors)
-  }
-
-  if (hasDisability === 'true') {
     check('applicant.hasSeriousDisability')(fields, values, errors)
   }
 
@@ -136,7 +131,6 @@ const validate = (values) => {
 
   if (hasAccommodationCosts === 'true') {
     check('applicant.hasSocialHousing')(fields, values, errors)
-    check('applicant.receivesAccommodationSupport')(fields, values, errors)
   }
 
   return errors

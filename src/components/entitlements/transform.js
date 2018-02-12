@@ -45,9 +45,10 @@ const transform = (data, schema) => {
   if (data.applicant && data.applicant.hasSeriousDisability) {
     set(body, 'applicant.isUnableToSupportThemselves', true)
   }
-  // 3.c. infer child.isDependent from numberOfChildren
+  // 3.c. infer child.isDependent and applicant.isMaintainingChild from numberOfChildren
   if (data.applicant && data.applicant.numberOfChildren && data.applicant.numberOfChildren !== 0) {
     set(body, 'child.isDependent', true)
+    set(body, 'applicant.isMaintainingChild', true)
   }
   // 3.d. set child.Age based on the lowest provided value for children.ages
   // and set dependentsUnder14 using the same
@@ -71,7 +72,6 @@ const transform = (data, schema) => {
     set(body, 'child.Age', 5)
   }
   // 3.g. change WeeklyECEHours to a number
-  // TODO can we make WeeklyECEHours a boolean instead?
   // this is a fudge, the number just needs to be above 3 right now
   if (body.child && body.child.WeeklyECEHours) {
     set(body, 'child.WeeklyECEHours', 10)
@@ -116,34 +116,39 @@ const transform = (data, schema) => {
   set(body, 'recipient.prepareForEmployment', true)
   // 3.p. combine weekly hours into couple.worksWeeklyHours if applicant.relationshipStatus !== 'single'
   // TODO combine weekly hours into couple.worksWeeklyHours
+  // 3.q. infer applicant.receivesAccommodationSupport is true if they are a full time student
+  if (data.applicant && data.applicant.isStudyingFullTime) {
+    set(body, 'applicant.receivesAccommodationSupport', true)
+  }
+  // 3.u. applicant.isPrincipalCarerForProportion needs to be expressed as a number
+  if (data.applicant && data.applicant.isPrincipalCarerForProportion) {
+    set(body, 'applicant.isPrincipalCarerForProportion', 33)
+  }
 
 
   // 4.
-  // 4.a hasDisability
-  if (data.applicant && !data.applicant.hasDisability) {
-    unset(body, 'applicant.hasSeriousDisability')
-  }
-  // 4.b. relationshipStatus
+  // 4.a. isInadequatelySupportedByPartner and partner.worksWeeklyHours
   if (data.applicant && data.applicant.relationshipStatus === 'single') {
     unset(body, 'applicant.isInadequatelySupportedByPartner')
+    unset(body, 'partner.worksWeeklyHours')
   }
-  // 4.c. needsDomesticSupport
+  // 4.b. needsDomesticSupport
   if (data.applicant && data.applicant.numberOfChildren && data.applicant.numberOfChildren < 3) {
     unset(body, 'applicant.needsDomesticSupport')
   }
-  // 4.d. financiallyIndependant
+  // 4.c. financiallyIndependant
   if (data.children && data.children.ages && data.children.ages.length && data.children.ages[data.children.ages.length - 1] < 16) {
     unset(body, 'children.financiallyIndependant')
   }
-  // 4.e. requiresConstantCare
+  // 4.d. requiresConstantCare
   if (data.child && !data.child.hasSeriousDisability) {
     unset(body, 'child.requiresConstantCare')
   }
-  // 4.f. WeeklyECEHours
+  // 4.e. WeeklyECEHours
   if (data.child && !data.child.attendsECE) {
     unset(body, 'child.WeeklyECEHours')
   }
-  // 4.g. isPrincipalCarerForProportion
+  // 4.f. isPrincipalCarerForProportion
   if (data.applicant && data.applicant.allChildrenInTheirFullTimeCare) {
     unset(body, 'applicant.isPrincipalCarerForProportion')
   }
@@ -171,7 +176,18 @@ const transform = (data, schema) => {
   if (data.applicant && !data.applicant.expectingChild) {
     unset(body, 'applicant.meetsPaidParentalLeaveEmployedRequirements')
   }
-  // 4.l. delete any empty objects (there should always be something in applicant)
+  // 4.l. isStoppingWorkToCareForChild
+  if (
+      (data.applicant && (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither')) ||
+      (data.applicant && data.applicant.relationshipStatus === 'single')
+    ) {
+    unset(body, 'applicant.isStoppingWorkToCareForChild')
+  }
+  // 4.m. hasSocialHousing
+  if (data.applicant && !data.applicant.hasAccommodationCosts) {
+    unset(body, 'applicant.hasSocialHousing')
+  }
+  // 4.n. delete any empty objects (there should always be something in applicant)
   if (body.parents && Object.keys(body.parents).length === 0) {
     unset(body, 'parents')
   }
@@ -183,6 +199,9 @@ const transform = (data, schema) => {
   }
   if (body.threshold && Object.keys(body.threshold).length === 0) {
     unset(body, 'threshold')
+  }
+  if (body.partner && Object.keys(body.partner).length === 0) {
+    unset(body, 'partner')
   }
 
   return body

@@ -41,7 +41,6 @@ class EntitlementsQuestions extends Component {
       handleSubmit,
       submitting,
       isNZResident,
-      hasDisability,
       relationshipStatus,
       childrenAges,
       childHasDisability,
@@ -102,26 +101,19 @@ class EntitlementsQuestions extends Component {
               <div className='component-grouping'>
                 <Field {...getFieldProps(fields, 'applicant.normallyLivesInNZ')} />
                 <Field {...getFieldProps(fields, 'applicant.Age')} />
-                <Field {...getFieldProps(fields, 'applicant.hasDisability')} />
-                { hasDisability === 'true' &&
-                  <div className='conditional-field'>
-                    <Field {...getFieldProps(fields, 'applicant.hasSeriousDisability')} />
-                  </div>
-                }
-                { hasDisability === 'true' &&
-                  <div className="expandable-group secondary">
-                    <Accordion>
-                      <Accordion.Toggle>
-                      What does permanent or severe mean?
-                      </Accordion.Toggle>
-                      <Accordion.Content>
-                        <p>Permanent means that your condition, injury or disability will affect your health for more than 2 years.</p>
+                <Field {...getFieldProps(fields, 'applicant.hasSeriousDisability')} />
+                <div className="expandable-group secondary">
+                  <Accordion>
+                    <Accordion.Toggle>
+                    What does permanent or severe mean?
+                    </Accordion.Toggle>
+                    <Accordion.Content>
+                      <p>Permanent means that your condition, injury or disability will affect your health for more than 2 years.</p>
 
-                        <p>Severe means that it will also affect your ability to work 15 hours or more a week.</p>
-                      </Accordion.Content>
-                    </Accordion>
-                  </div>
-                }
+                      <p>Severe means that it will also affect your ability to work 15 hours or more a week.</p>
+                    </Accordion.Content>
+                  </Accordion>
+                </div>
                 <Field {...getFieldProps(fields, 'applicant.relationshipStatus')} />
                 { relationshipStatus && relationshipStatus !== 'single' &&
                   <div className='conditional-field'>
@@ -146,18 +138,18 @@ class EntitlementsQuestions extends Component {
             <div className="expandable-group secondary">
               <Accordion>
                 <Accordion.Toggle>
-                What does dependant children mean?
+                What does dependent children mean?
                 </Accordion.Toggle>
                 <Accordion.Content>
-                  <p>A dependant child is a child that is 18 and under, who you support financially, and who lives with you as a member of your family.</p>
+                  <p>A dependent child is a child that is 18 and under, who you support financially, and who lives with you as a member of your family.</p>
 
-                  <p>Dependant children include:</p>
+                  <p>Dependent children include:</p>
 
                   <ul>
                     <li>your own children</li>
                     <li>adopted children</li>
                     <li>step children</li>
-                    <li>children at boarding school </li>
+                    <li>children at boarding school</li>
                     <li>grandchildren/mokopuna.</li>
                   </ul>
                 </Accordion.Content>
@@ -196,6 +188,14 @@ class EntitlementsQuestions extends Component {
                 { childHasDisability === 'true' &&
                   <div className='conditional-field'>
                     <Field {...getFieldProps(fields, 'child.requiresConstantCare')} />
+                    <Accordion>
+                      <Accordion.Toggle>
+                      What does constant care and attention mean
+                      </Accordion.Toggle>
+                      <Accordion.Content>
+                        <p>This means a child that requires constant care and attention because of their disability, over and above that of a child of a similar age. It also means that they will be likely to need that care and attention for more than 12 months.</p>
+                      </Accordion.Content>
+                    </Accordion>
                     { requiresConstantCare === 'true' &&
                       <Field {...getFieldProps(fields, 'child.constantCareUnderSix')} />
                     }
@@ -250,7 +250,7 @@ class EntitlementsQuestions extends Component {
                 Am I the primary carer?
                 </Accordion.Toggle>
                 <Accordion.Content>
-                  <p>The primary carer is the person responsible for the day-to-day care of the children on a permanent basis.</p>
+                  <p>The primary carer is the person responsible for the day-to-day care of the children on a permanent basis. If you have a partner and you're both equally responsible for the care of your children, answer yes to this question.</p>
                 </Accordion.Content>
               </Accordion>
             </div>
@@ -276,6 +276,16 @@ class EntitlementsQuestions extends Component {
                 <Field {...getFieldProps(fields, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')} />
                 {isPrincipalCarerForOneYearFromApplicationDate === 'true' &&
                   <Field {...getFieldProps(fields, 'children.birthParents')} />
+                }
+                {isPrincipalCarerForOneYearFromApplicationDate === 'true' &&
+                  <Accordion>
+                    <Accordion.Toggle>
+                    Why do you need to know this information?
+                    </Accordion.Toggle>
+                    <Accordion.Content>
+                      <p>This information is needed to be able to provide you with accurate results. The benefits and/or payments you may be entitled to depend on why the birth parents are unable to care for their child/children.</p>
+                    </Accordion.Content>
+                  </Accordion>
                 }
               </div>
             }
@@ -417,7 +427,7 @@ class EntitlementsQuestions extends Component {
                   <ul>
                     <li>rent</li>
                     <li>board</li>
-                    <li>the costs of owning a home, e.g. a mortgage.</li>
+                    <li>the costs of owning a home, e.g. a mortgage, house insurance payments, annual council rates and essential repairs and maintenance.</li>
                   </ul>
                 </Accordion.Content>
               </Accordion>
@@ -441,7 +451,6 @@ class EntitlementsQuestions extends Component {
                     </Accordion.Content>
                   </Accordion>
                 </div>
-                <Field {...getFieldProps(fields, 'applicant.receivesAccommodationSupport')} />
               </div>
             }
           </div>
@@ -469,7 +478,6 @@ EntitlementsQuestions.propTypes = {
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   isNZResident: PropTypes.string,
-  hasDisability: PropTypes.string,
   relationshipStatus: PropTypes.string,
   numberOfChildren: PropTypes.string,
   childrenAges: PropTypes.array,
@@ -490,7 +498,6 @@ const mapStateToProps = (state) => ({
   fetchingSchema: get(state, 'entitlements.fetchingSchema'),
   schema: get(state, 'entitlements.schema'),
   isNZResident: selector(state, 'applicant.isNZResident'),
-  hasDisability: selector(state, 'applicant.hasDisability'),
   relationshipStatus: selector(state, 'applicant.relationshipStatus'),
   numberOfChildren: selector(state, 'applicant.numberOfChildren'),
   childrenAges: selector(state, 'children.ages'),
