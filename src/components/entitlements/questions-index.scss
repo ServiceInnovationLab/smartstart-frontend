@@ -115,19 +115,19 @@
 
     > .expandable-title-wrapper {
       > .expandable-title {
-        background-color: transparent;
+        background-color: lighten($entitlements-form, 50%);
         color: $text-color;
       }
     }
 
     &.is-expanded {
       > .expandable-title-wrapper > .expandable-title {
-        background-color: transparent;
+        background-color: lighten($entitlements-form, 50%);
         color: $text-color;
       }
 
       > .content {
-        background-color: transparent;
+        background-color: lighten($entitlements-form, 50%);
       }
     }
   }

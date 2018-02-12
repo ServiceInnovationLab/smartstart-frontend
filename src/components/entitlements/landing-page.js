@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Accordion from 'components/form/accordion'
 
+import './landing-page.scss'
+
 class EntitlementsLandingPage extends Component {
   constructor(props) {
     super(props)
@@ -16,12 +18,19 @@ class EntitlementsLandingPage extends Component {
 
   render() {
     return (
-      <div className="form">
-        <p>By answering the following questions, we’ll be able to work out what financial help you may or may not be eligible for. This is a planning tool that gives an indication of your eligibility, it won’t give you calculated figures.</p>
+      <div className="landing-page form eligibility">
+        <div className="instruction">
+          By answering the following questions, we’ll be able to work out what
+          financial help you may or may not be eligible for.
+        </div>
 
-        <p>You can see what you might be eligible for currently or in the future.</p>
+        <ul>
+          <li>This is a planning tool that gives an indication of your eligibility, it won’t give you calculated figures.</li>
+          <li>You can see what you might be eligible for currently or in the future.</li>
+          <li>The information you enter won’t be shared with anyone, all your details will be kept private (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</li>
+        </ul>
 
-        <p>The information you enter won’t be shared with anyone, all your details will be kept private (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</p>
+        <p className='time-estimate'>Time to complete is 5-8 minutes.</p>
 
         <div className="expandable-group">
           <Accordion>
@@ -34,15 +43,13 @@ class EntitlementsLandingPage extends Component {
                 <li>Child Care Subsidy</li>
                 <li>Child Disability Allowance</li>
                 <li>Community Services Card</li>
-                <li>Emergency Benefits</li>
                 <li>Job Seeker Support</li>
                 <li>Home Help</li>
-                <li>Paid Parental Leave</li>
                 <li>Orphans Benefit</li>
-                <li>OSCAR (Out of School Care and Recreation)</li>
                 <li>Sole Parent Support</li>
                 <li>Student Allowance</li>
                 <li>Supported Living Payment</li>
+                <li>Paid Parental Leave</li>
                 <li>Unsupported Childs Benefit</li>
                 <li>Working for Families Tax Credits</li>
                 <li>Young Parent Payment</li>
@@ -51,7 +58,7 @@ class EntitlementsLandingPage extends Component {
           </Accordion>
         </div>
 
-        <h6>Before you get started, check you have everything you need:</h6>
+        <h5>Before you get started, check you have everything you need:</h5>
 
         <ul>
           <li>your income information</li>
