@@ -163,7 +163,6 @@ class EntitlementsQuestions extends Component {
                 </Accordion.Content>
               </Accordion>
             </div>
-            {/* TODO add special message if numberOfChildren === 0 ? */}
             { numberOfChildren > 2 &&
               <div className='conditional-field'>
                 <Field {...getFieldProps(fields, 'applicant.needsDomesticSupport﻿')} />
@@ -319,6 +318,12 @@ class EntitlementsQuestions extends Component {
                 </Accordion.Content>
               </Accordion>
             </div>
+            }
+            {(workOrStudy === 'work' || workOrStudy === 'both') && expectingChild === 'true' &&
+              <Field {...getFieldProps(fields, 'applicant.isStoppingWorkToCareForChild')} />
+            }
+            { relationshipStatus && relationshipStatus !== 'single' &&
+              <Field {...getFieldProps(fields, 'partner.worksWeeklyHours')} />
             }
           </div>
           </div>

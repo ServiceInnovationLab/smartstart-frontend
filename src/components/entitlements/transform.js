@@ -94,20 +94,28 @@ const transform = (data, schema) => {
       set(body, 'parents.areDeceasedMissingOrIncapableThroughDisability', true)
     }
   }
-  // 3.j. note that we DON'T sent income.ofApplicantAndSpouse directly: instead we
+  // 3.j. note that we DON'T send income.ofApplicantAndSpouse directly: instead we
   // infer threshold.income.AccommodationSupplement based on income values
   // TODO calculate here! for now just hard code to true
   // TODO calculate if we meet other thresholds
-  // TODO only use spouse income if applicant.relationshipStatus !=== 'single'
+  // TODO only use spouse income if applicant.relationshipStatus !== 'single'
   set(body, 'threshold.income.AccommodationSupplement', true)
   // 3.k. we don't provide any cash threshold values, so just set them to true
-  // TODO any other cash thresholds should be set here
   set(body, 'threshold.cash.AccommodationSupplement', true)
+  set(body, 'threshold.cash.HomeHelp', true)
   // 3.l. we don't ask about medical certs, so hard code them to true
   set(body, 'applicant.hasMedicalCertificate', true)
   set(body, 'child.hasMedicalCertification', true)
   // 3.m. we don't ask about the applicant having recieved parental leave in the past, hard code to false
   set(body, 'applicant.hasReceivedPaidParentalLeavePayment', false)
+  // 3.n. if applicant answered yes to gaveBirthToThisChild set isParent to true also
+  if (data.applicant && data.applicant.gaveBirthToThisChild) {
+    set(body, 'applicant.isParent', true)
+  }
+  // 3.o. we don't ask about preparing for employment (for jobseekers) so hardcode to true
+  set(body, 'recipient.prepareForEmployment', true)
+  // 3.p. combine weekly hours into couple.worksWeeklyHours if applicant.relationshipStatus !== 'single'
+  // TODO combine weekly hours into couple.worksWeeklyHours
 
 
   // 4.
@@ -120,7 +128,7 @@ const transform = (data, schema) => {
     unset(body, 'applicant.isInadequatelySupportedByPartner')
   }
   // 4.c. needsDomesticSupport
-  if (data.applicant && data.applicant.numberOfChildren && parseInt(data.applicant.numberOfChildren, 10) < 3) {
+  if (data.applicant && data.applicant.numberOfChildren && data.applicant.numberOfChildren < 3) {
     unset(body, 'applicant.needsDomesticSupport')
   }
   // 4.d. financiallyIndependant

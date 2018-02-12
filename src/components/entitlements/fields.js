@@ -298,8 +298,26 @@ export const fields = {
     options: booleanOptions
   },
 
+  'applicant.isStoppingWorkToCareForChild': {
+    name: 'applicant.isStoppingWorkToCareForChild',
+    component: renderRadioGroup,
+    label: makeMandatoryLabel(`Are you planning to stop working when your child is born or adopted?`),
+    validate: [required],
+    options: booleanOptions
+  },
+
+  'partner.worksWeeklyHours': {
+    name: 'partner.worksWeeklyHours',
+    component: renderField,
+    type: 'number',
+    placeholder: 'e.g. 40',
+    label: makeMandatoryLabel(`How many hours a week does your partner work?`),
+    validate: [required, number],
+    normalize: maxLength(3)
+  },
+
   // TODO change up the components for these income fields
-  'income.applicant': {
+  'income.applicant': { // this is NOT a RaaP atom, we don't send it directly
     name: 'income.applicant',
     component: renderField,
     type: 'number',
@@ -309,7 +327,7 @@ export const fields = {
   },
 
   // TODO change up the components for these income fields
-  'income.spouse': {
+  'income.spouse': { // this is NOT a RaaP atom, we don't send it directly
     name: 'income.spouse',
     component: renderField,
     type: 'number',
