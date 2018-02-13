@@ -140,6 +140,12 @@
           }
         }
       }
+
+      @media #{$desktop-and-above} {
+        > div > div.checkboxes > label {
+          flex-grow: 0;
+        }
+      }
     }
   }
 
