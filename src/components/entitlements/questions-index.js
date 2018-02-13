@@ -53,12 +53,12 @@ class EntitlementsQuestions extends Component {
       expectingChild,
       hasAccommodationCosts
     } = this.props
-    const overFifteens = (
+    const overFifteens = !!(
       childrenAges &&
       childrenAges.length &&
       (parseInt(childrenAges[childrenAges.length - 1], 10) === 18)
     )
-    const underFives = (
+    const underFives = !!(
       childrenAges &&
       childrenAges.length &&
       (parseInt(childrenAges[0], 10) < 5)
@@ -93,7 +93,7 @@ class EntitlementsQuestions extends Component {
 
             { isNZResident === 'false' &&
               <div className='instruction'>
-                Sorry, this form is intended...
+                If you aren't a New Zealand citizen or resident, you aren't eligible for any of the benefits and payments covered by this tool.
               </div>
             }
 
