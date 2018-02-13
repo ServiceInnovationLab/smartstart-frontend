@@ -29,7 +29,7 @@ const categories = {
     'query': '/api/request/service-locations/breastfeeding'
   },
   'antenatal': {
-    'label': 'Antenatel classes',
+    'label': 'Antenatal classes',
     'query': '/api/request/service-locations/antenatal'
   },
   'mental-health': {
