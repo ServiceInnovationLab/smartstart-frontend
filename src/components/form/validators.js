@@ -12,4 +12,11 @@ export const requiredWithMessage = message => value =>
     (Array.isArray(value) && !value.length) // some field's values bind to an array eg.ethnicGroups
   ) ? message : undefined
 
-export const numberWithMessage = message => value => value && isNaN(Number(value)) ? message : undefined
+export const numberWithMessage = message => value =>
+  (
+    value &&
+    (
+      isNaN(parseInt(value, 10)) ||
+      parseInt(value, 10) < 0
+    )
+  ) ? message : undefined
