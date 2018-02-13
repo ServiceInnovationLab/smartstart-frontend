@@ -3,7 +3,7 @@
 // overrides of register-my-baby/landing-page.scss
 .entitlements-page .page-content .landing-page {
   @media only screen and (min-width: #{$desktop-max-content-width}) {
-    padding: 15px #{$indent * 2} 15px $desktop-content-gutter;
+    padding: 15px #{$indent * 2} 15px 0;
   }
 
   .welcome-action {

@@ -71,10 +71,10 @@ class EntitlementsQuestions extends Component {
 
     if(!schema || !schema.length) {
       return <div className="unavailable-notice">
-        <h2>Sorry!</h2>
-        <div className="informative-text">
+        <h3>Sorry!</h3>
+        <p>
           Benefits eligibility is currently unavailable. Right now we're working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
-        </div>
+        </p>
       </div>
     }
 
@@ -459,7 +459,7 @@ class EntitlementsQuestions extends Component {
 
           { isNZResident === 'true' &&
             <div className="form-actions">
-              <button type="submit" className="next" disabled={submitting}>Submit your answers</button>
+              <button type="submit" disabled={submitting}>Submit my answers</button>
             </div>
           }
         </form>
