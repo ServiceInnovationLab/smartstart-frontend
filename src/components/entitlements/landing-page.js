@@ -25,9 +25,10 @@ class EntitlementsLandingPage extends Component {
         </div>
 
         <ul>
-          <li>This is a planning tool that gives an indication of your eligibility, it won’t give you calculated figures.</li>
-          <li>You can see what you might be eligible for currently or in the future.</li>
-          <li>The information you enter won’t be shared with anyone, all your details will be kept private (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</li>
+          <li>This is a planning tool that gives an indication of your eligibility for certain benefits and payments and the maximum amounts you could receive.</li>
+          <li>It is intended for parents and expectant parents who are New Zealand citizens or residents.</li>
+          <li>You can see what you might be eligible for based on your current or future situation.</li>
+          <li>The information you enter isn’t stored and isn’t shared with anyone (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</li>
         </ul>
 
         <p className='time-estimate'>Time to complete is 5-8 minutes.</p>
@@ -38,6 +39,7 @@ class EntitlementsLandingPage extends Component {
             See what benefits and payments are included
             </Accordion.Toggle>
             <Accordion.Content>
+              <p>The benefits and payments included in this planning tool are provided by Work and Income and Inland Revenue. It doesn’t include all benefits and payments available in New Zealand.</p>
               <ul>
                 <li>Accommodation Supplement</li>
                 <li>Child Care Subsidy</li>
@@ -54,6 +56,19 @@ class EntitlementsLandingPage extends Component {
                 <li>Working for Families Tax Credits</li>
                 <li>Young Parent Payment</li>
               </ul>
+            </Accordion.Content>
+          </Accordion>
+          <Accordion>
+            <Accordion.Toggle>
+            Do you and your children need urgent financial help?
+            </Accordion.Toggle>
+            <Accordion.Content>
+              <p>If you aren’t currently receiving any benefit from Work and Income and need urgent financial help, you can apply for the emergency benefit. This is a one-off payment calculated based on your circumstances.</p>
+
+              <p>You’ll need to call Work and Income on <a href='tel:0800559009'>0800 559 009</a> to discuss your circumstances.</p>
+              <p>For other urgent help:</p>
+              <p>Call Citizens Advice Bureau on 0800 FOR CAB (<a href='tel:0800367222'>0800 367 222</a>)</p>
+              <p><a href='https://www.foodbank.co.nz/foodbanks'>https://www.foodbank.co.nz/foodbanks</a></p>
             </Accordion.Content>
           </Accordion>
         </div>
