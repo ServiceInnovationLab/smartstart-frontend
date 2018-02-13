@@ -85,13 +85,13 @@ const transform = (data, schema) => {
       set(body, 'parents.areUnableToProvideSufficientCare', true)
     }
   }
-  // 3.i. infer parents.areDeceasedMissingOrIncapableThroughDisability
+  // 3.i. infer parents.areDeceasedMissingOrIncapable
   if (data.children && data.children.birthParents) {
     if (
       data.children.birthParents.indexOf('not-found') > -1 ||
       data.children.birthParents.indexOf('died') > -1
     ) {
-      set(body, 'parents.areDeceasedMissingOrIncapableThroughDisability', true)
+      set(body, 'parents.areDeceasedMissingOrIncapable', true)
     }
   }
   // 3.j. note that we DON'T send income.ofApplicantAndSpouse directly: instead we
@@ -115,12 +115,25 @@ const transform = (data, schema) => {
   // 3.o. we don't ask about preparing for employment (for jobseekers) so hardcode to true
   set(body, 'recipient.prepareForEmployment', true)
   // 3.p. combine weekly hours into couple.worksWeeklyHours if applicant.relationshipStatus !== 'single'
-  // TODO combine weekly hours into couple.worksWeeklyHours
-  // 3.q. infer applicant.receivesAccommodationSupport is true if they are a full time student
-  if (data.applicant && data.applicant.isStudyingFullTime) {
-    set(body, 'applicant.receivesAccommodationSupport', true)
+  // and set default 0 values if not already defined
+  if (data.applicant && data.applicant.relationshipStatus !== 'single') {
+    if (
+      typeof data.applicant.worksWeeklyHours !== "undefined" &&
+      data.partner &&
+      typeof data.partner.worksWeeklyHours !== "undefined"
+    ) {
+      set(body, 'couple.worksWeeklyHours', data.applicant.worksWeeklyHours + data.partner.worksWeeklyHours)
+    } else if (typeof data.applicant.worksWeeklyHours !== "undefined") {
+      set(body, 'couple.worksWeeklyHours', data.applicant.worksWeeklyHours)
+    } else if (typeof data.partner.worksWeeklyHours !== "undefined") {
+      set(body, 'couple.worksWeeklyHours', data.partner.worksWeeklyHours)
+    } else {
+      set(body, 'applicant.worksWeeklyHours', 0)
+      set(body, 'partner.worksWeeklyHours', 0)
+      set(body, 'couple.worksWeeklyHours', 0)
+    }
   }
-  // 3.u. applicant.isPrincipalCarerForProportion needs to be expressed as a number
+  // 3.q. applicant.isPrincipalCarerForProportion needs to be expressed as a number
   if (data.applicant && data.applicant.isPrincipalCarerForProportion) {
     set(body, 'applicant.isPrincipalCarerForProportion', 33)
   }
@@ -142,7 +155,7 @@ const transform = (data, schema) => {
   }
   // 4.d. requiresConstantCare
   if (data.child && !data.child.hasSeriousDisability) {
-    unset(body, 'child.requiresConstantCare')
+    unset(body, 'child.requiresConstantCareAndAttention')
   }
   // 4.e. WeeklyECEHours
   if (data.child && !data.child.attendsECE) {
@@ -156,12 +169,12 @@ const transform = (data, schema) => {
   if (data.applicant && data.applicant.gaveBirthToThisChild) {
     unset(body, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
     unset(body, 'parents.areUnableToProvideSufficientCare')
-    unset(body, 'parents.areDeceasedMissingOrIncapableThroughDisability')
+    unset(body, 'parents.areDeceasedMissingOrIncapable')
   }
   // 4.h. areUnableToProvideSufficientCare areDeceasedMissingOrIncapableThroughDisability
   if (data.applicant && !data.applicant.isPrincipalCarerForOneYearFromApplicationDate) {
     unset(body, 'parents.areUnableToProvideSufficientCare')
-    unset(body, 'parents.areDeceasedMissingOrIncapableThroughDisability')
+    unset(body, 'parents.areDeceasedMissingOrIncapable')
   }
   // 4.i. isStudyingFullTime
   if (data.applicant && (data.applicant.workOrStudy === 'work' || data.applicant.workOrStudy === 'neither')) {

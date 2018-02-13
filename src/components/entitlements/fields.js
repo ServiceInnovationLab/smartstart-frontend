@@ -167,8 +167,8 @@ export const fields = {
     options: booleanOptions
   },
 
-  'child.requiresConstantCare': {
-    name: 'child.requiresConstantCare',
+  'child.requiresConstantCareAndAttention': {
+    name: 'child.requiresConstantCareAndAttention',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Do any of those children require more constant care and attention than is normally expected?`),
     validate: [required],
@@ -234,7 +234,7 @@ export const fields = {
   'applicant.isPrincipalCarerForOneYearFromApplicationDate': {
     name: 'applicant.isPrincipalCarerForOneYearFromApplicationDate',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Of those that are not, will they be staying in your care for more than 12 months?`),
+    label: makeMandatoryLabel(`Will the children you're not the birth, adoptive or step parent of, be staying in your care for more than 12 months?`),
     validate: [required],
     options: booleanOptions
   },
@@ -285,7 +285,7 @@ export const fields = {
   'applicant.meetsPaidParentalLeaveEmployedRequirements': {
     name: 'applicant.meetsPaidParentalLeaveEmployedRequirements',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Have you worked an average of 10 hours a week for at least 6 months out of the last year?`),
+    label: makeMandatoryLabel(`Have you worked an average of at least 10 hours a week for at least 6 months out of the last year?`),
     validate: [required],
     options: booleanOptions
   },

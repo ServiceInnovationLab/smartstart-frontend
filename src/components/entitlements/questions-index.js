@@ -187,7 +187,7 @@ class EntitlementsQuestions extends Component {
                 <Field {...getFieldProps(fields, 'child.hasSeriousDisability')} />
                 { childHasDisability === 'true' &&
                   <div className='conditional-field'>
-                    <Field {...getFieldProps(fields, 'child.requiresConstantCare')} />
+                    <Field {...getFieldProps(fields, 'child.requiresConstantCareAndAttention')} />
                     <Accordion>
                       <Accordion.Toggle>
                       What does constant care and attention mean
@@ -376,7 +376,7 @@ class EntitlementsQuestions extends Component {
             <div className="expandable-group secondary">
               <Accordion>
                 <Accordion.Toggle>
-                What's an income-tested benefit or payment?
+                What’s an income-tested benefit or payment?
                 </Accordion.Toggle>
                 <Accordion.Content>
                   <p>For tax purposes, an income-tested benefit or payment means any one of the following:</p>
@@ -502,7 +502,7 @@ const mapStateToProps = (state) => ({
   numberOfChildren: selector(state, 'applicant.numberOfChildren'),
   childrenAges: selector(state, 'children.ages'),
   childHasDisability: selector(state, 'child.hasSeriousDisability'),
-  requiresConstantCare: selector(state, 'child.requiresConstantCare'),
+  requiresConstantCare: selector(state, 'child.requiresConstantCareAndAttention'),
   attendsECE: selector(state, 'child.attendsECE'),
   allChildrenInTheirFullTimeCare: selector(state, 'applicant.allChildrenInTheirFullTimeCare'),
   gaveBirthToThisChild: selector(state, 'applicant.gaveBirthToThisChild'),

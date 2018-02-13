@@ -12,7 +12,7 @@ const validate = (values) => {
   const numberOfChildren = childrenAmount ? parseInt(childrenAmount, 10) : 0
   const childrenAges = get(values, 'children.ages')
   const childHasDisability = get(values, 'child.hasSeriousDisability')
-  const requiresConstantCare = get(values, 'child.requiresConstantCare')
+  const requiresConstantCare = get(values, 'child.requiresConstantCareAndAttention')
   const attendsECE = get(values, 'child.attendsECE')
   const hasAccommodationCosts = get(values, 'applicant.hasAccommodationCosts')
   const allChildrenInTheirFullTimeCare = get(values, 'applicant.allChildrenInTheirFullTimeCare')
@@ -57,7 +57,7 @@ const validate = (values) => {
   }
 
   if (childHasDisability === 'true') {
-    check('child.requiresConstantCare')(fields, values, errors)
+    check('child.requiresConstantCareAndAttention')(fields, values, errors)
   }
 
   if (requiresConstantCare === 'true') {
