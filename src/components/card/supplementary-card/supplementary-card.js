@@ -2,7 +2,8 @@ import './supplementary-card.scss'
 
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { activateSupplementary, piwikTrackPost } from 'actions/actions'
+import { activateSupplementary } from 'actions/timeline'
+import { piwikTrackPost } from 'actions/application'
 import Card from 'components/card/card'
 import classNames from 'classnames'
 import ScrollableAnchor from 'react-scrollable-anchor'
@@ -86,11 +87,11 @@ class SupplementaryCard extends Card {
 
 function mapStateToProps (state) {
   const {
-    supplementaryContentActions
+    timeline
   } = state
   const {
     activeSupplementary
-  } = supplementaryContentActions || {
+  } = timeline || {
     activeSupplementary: null
   }
 

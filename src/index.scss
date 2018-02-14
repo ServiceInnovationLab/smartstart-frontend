@@ -57,6 +57,7 @@
 
 @import 'variables';
 @import 'mixins';
+@import 'components/form/form';
 // Do NOT include further imports unless the base styles have a direct dependency
 
 html {
@@ -120,6 +121,10 @@ h3 {
 
   @media #{$desktop-and-above} {
     font-size: 32px;
+  }
+
+  .english {
+    font-weight: 500;
   }
 }
 

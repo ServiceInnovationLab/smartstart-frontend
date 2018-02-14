@@ -9,6 +9,10 @@ import MetadataPage from 'layouts/metadata-page/metadata-page'
 import FeaturePage from 'layouts/feature-page/feature-page'
 import BirthRegistrationPage from 'layouts/birth-registration-page/birth-registration-page'
 import ServicesPage from 'layouts/services/services'
+import EntitlementsPage from 'layouts/entitlements/entitlements'
+import EntitlementsLandingPage from 'components/entitlements/landing-page'
+import EntitlementsQuestions from 'components/entitlements/questions-index'
+import EntitlementsResults from 'components/entitlements/results'
 import BabyNames from 'components/baby-names/baby-names'
 import RegisterMyBabyLandingPage from 'components/register-my-baby/landing-page'
 import RegisterMyBaby from 'components/register-my-baby'
@@ -50,6 +54,11 @@ const Root = (props) => (
           <Route path='*' component={BabyNames} />
         </Route>
         <Route path='services-near-me(/:category)' component={ServicesPage} />
+        <Route path='financial-help' component={EntitlementsPage}>
+          <IndexRoute component={EntitlementsLandingPage} />
+          <Route path='questions(/:stepName)' component={EntitlementsQuestions} />
+          <Route path='results' component={EntitlementsResults} />
+        </Route>
         {metadataRoutes}
         <Route path='*' component={Main} />
       </Route>

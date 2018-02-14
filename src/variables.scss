@@ -107,7 +107,7 @@ $supplementary-background-color:          #fef4e3;
 $supplementary-header-color:              #fde4bb;
 $supplementary-arrow:                     $card-arrow;
 $supplementary-arrow-desktop:             $card-arrow-desktop;
-$supplimentary-accordian-border-color:    #fcc977;
+$supplementary-accordian-border-color:    #fcc977;
 $supplementary-content-background-color:  #fef9f1;
 
 $supplementary-nested-accordion-color:          #e8e5e5;
@@ -140,6 +140,18 @@ $map-marker-selected-color: #D25656;
 $provider-text-color: #7B9C35;
 $provider-accent-color: #a0c454;
 $provider-read-more-bg: #f5f4f4;
+
+// entitlements
+$entitlements-background: $accent-color-light;
+$entitlements-primary: #3E7AB1;
+$entitlements-secondary: #77a5d1;
+$entitlements-tertiary: #e3edf5;
+$entitlements-form-bg: #f1f6fa;
+$entitlements-form: $entitlements-primary;
+$entitlements-accordian: $entitlements-tertiary;
+$entitlements-accordian-border: $entitlements-secondary;
+$entitlements-form-hover: $entitlements-tertiary;
+$entitlements-subheadings: $entitlements-primary;
 
 // footer
 $footer-background-color:     $realme-dark-blue;

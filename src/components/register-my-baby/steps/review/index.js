@@ -12,17 +12,17 @@ import renderStep3Review from './step3'
 import renderStep4Review from './step4'
 import renderStep5Review from './step5'
 import renderStep6Review from './step6'
-import renderTextarea from '../../fields/render-textarea'
-import renderCheckbox from '../../fields/render-checkbox'
-import renderError from '../../fields/render-error'
+import renderTextarea from 'components/form/fields/render-textarea'
+import renderCheckbox from 'components/form/fields/render-checkbox'
+import renderError from 'components/form/fields/render-error'
 import {
   REQUIRE_DECLARATION
 } from '../../validation-messages'
+import Spinner from 'components/spinner/spinner'
+import { maxLength } from 'components/form/normalizers'
+import { fetchCountries } from 'actions/birth-registration'
 import { validCharRelax } from '../../validate'
-import { maxLength } from '../../normalize'
-import Spinner from '../../../spinner/spinner'
 import { validateOnly } from '../../submit'
-import { fetchCountries } from '../../../../actions/birth-registration'
 import './review.scss'
 
 class Review extends Component {

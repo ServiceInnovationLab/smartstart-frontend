@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
-import renderFieldReview from '../../fields/render-review-field'
+import renderFieldReview from 'components/form/fields/render-review-field'
 import {
   yesNo,
   getIrdDeliveryAddresses,

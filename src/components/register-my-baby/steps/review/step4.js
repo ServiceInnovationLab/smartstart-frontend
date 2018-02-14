@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 import times from 'lodash/times'
-import renderFieldReview from '../../fields/render-review-field'
-import renderSubFieldReview from '../../fields/render-review-subfield'
+import renderFieldReview from 'components/form/fields/render-review-field'
+import renderSubFieldReview from 'components/form/fields/render-review-subfield'
 import { formatDate } from './utils'
 import {
   sexes,

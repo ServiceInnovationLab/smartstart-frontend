@@ -1,0 +1,40 @@
+@import 'variables';
+
+// overrides of register-my-baby/landing-page.scss
+.entitlements-page .page-content .landing-page {
+  @media only screen and (min-width: #{$desktop-max-content-width}) {
+    padding: 15px #{$indent * 2} 15px 0;
+  }
+
+  .welcome-action {
+    background-color: $entitlements-form;
+    border-color: $entitlements-form;
+
+    &:hover {
+      border-color: $welcome-button-bg-color-hover;
+    }
+  }
+}
+
+// new things specific to the entitlements landing
+.entitlements-page .landing-page {
+  .time-estimate {
+    margin-top: 30px;
+    margin-bottom: 35px;
+
+    &::before {
+      content: $icon-time;
+      font-family: 'icomoon' !important;
+      font-size: 28px;
+      display: inline-block;
+      color: $entitlements-form;
+      position: relative;
+      top: 5px;
+      padding-right: 15px;
+    }
+  }
+
+  .expandable-group {
+    margin-bottom: 50px;
+  }
+}

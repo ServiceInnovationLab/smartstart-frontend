@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import Accordion from './accordion'
-import { piwikTrackPost } from '../../actions/actions'
 import get from 'lodash/get'
-import { fetchBroData } from '../../actions/birth-registration'
+import Accordion from 'components/form/accordion'
+import { piwikTrackPost } from 'actions/application'
+import { fetchBroData } from 'actions/birth-registration'
 
 import './landing-page.scss'
 
@@ -60,7 +60,7 @@ export class RegisterMyBabyLandingPage extends Component {
     const { isLoggedIn, hasSavedForm } = this.props
 
     return (
-      <div className="landing-page">
+      <div className="landing-page form">
         <h2>
           Te Whakamōhio i te Whānautanga mō te Rēhita <br/>
           <span className="english">Notification of Birth for Registration</span>

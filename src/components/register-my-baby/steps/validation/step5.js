@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 import set from 'lodash/set'
-import check from './check'
+import check from 'components/form/get-validation'
 import  schema from '../schemas/step5'
 import {
   REQUIRE_MOTHER_EMAIL_IRD,

@@ -140,12 +140,12 @@ export class Phase extends Component {
 
 function mapStateToProps (state) {
   const {
-    personalisationActions
+    personalisation
   } = state
   const {
     dueDate,
     phaseMetadata
-  } = personalisationActions || {
+  } = personalisation || {
     dueDate: null,
     phaseMetadata: []
   }

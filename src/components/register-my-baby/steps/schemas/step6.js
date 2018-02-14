@@ -1,11 +1,12 @@
 import React from 'react'
-import makeMandatoryLabel from '../../hoc/make-mandatory-label'
-import renderRadioGroup from '../../fields/render-radio-group'
-import renderCustomSelect from '../../fields/render-custom-select'
-import renderField from '../../fields/render-field'
-import renderPlacesAutocomplete from '../../fields/render-places-autocomplete'
-import { required, requiredWithMessage, email, validCharStrict } from '../../validate'
-import { maxLength } from '../../normalize'
+import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
+import renderRadioGroup from 'components/form/fields/render-radio-group'
+import renderCustomSelect from 'components/form/fields/render-custom-select'
+import renderField from 'components/form/fields/render-field'
+import renderPlacesAutocomplete from 'components/form/fields/render-places-autocomplete'
+import { requiredWithMessage } from 'components/form/validators'
+import { required, email, validCharStrict } from '../../validate'
+import { maxLength } from 'components/form/normalizers'
 import {
   yesNo as yesNoOptions,
   products as productOptions,

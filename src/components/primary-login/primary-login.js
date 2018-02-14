@@ -4,7 +4,7 @@ import './realme-login-primary.scss'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { piwikTrackPost } from 'actions/actions'
+import { piwikTrackPost } from 'actions/application'
 
 class PrimaryLogin extends Component {
   constructor (props) {
@@ -136,7 +136,7 @@ class PrimaryLogin extends Component {
 }
 
 const mapStateToProps = state => ({
-    isLoggedIn: state.personalisationActions.isLoggedIn || false
+    isLoggedIn: state.personalisation.isLoggedIn || false
 })
 
 PrimaryLogin.propTypes = {

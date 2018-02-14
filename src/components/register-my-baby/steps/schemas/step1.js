@@ -1,13 +1,13 @@
 import React from 'react'
-import makeMandatoryLabel, { makeMandatoryAriaLabel } from '../../hoc/make-mandatory-label'
-import renderField from '../../fields/render-field'
-import renderCustomSelect from '../../fields/render-custom-select'
-import renderDatepicker from '../../fields/render-datepicker'
-import renderBirthOrderSelector from '../../fields/render-birth-order-selector'
-import renderCheckboxGroup from '../../fields/render-checkbox-group'
-import renderRadioGroup from '../../fields/render-radio-group'
-import renderPlacesAutocomplete from '../../fields/render-places-autocomplete'
-import { combine, maxLength, titleCase } from '../../normalize'
+import makeMandatoryLabel, { makeMandatoryAriaLabel } from 'components/form/hoc/make-mandatory-label'
+import renderField from 'components/form/fields/render-field'
+import renderCustomSelect from 'components/form/fields/render-custom-select'
+import renderDatepicker from 'components/form/fields/render-datepicker'
+import renderBirthOrderSelector from 'components/form/fields/render-birth-order-selector'
+import renderCheckboxGroup from 'components/form/fields/render-checkbox-group'
+import renderRadioGroup from 'components/form/fields/render-radio-group'
+import renderPlacesAutocomplete from 'components/form/fields/render-places-autocomplete'
+import { combine, maxLength, titleCase } from 'components/form/normalizers'
 import {
   ethnicGroups as ethnicGroupOptions,
   yesNo as yesNoOptions,
@@ -15,9 +15,9 @@ import {
   sexes as sexOptions,
   birthPlaceCategories as birthPlaceCategoryOptions
 } from '../../options'
+import { requiredWithMessage } from 'components/form/validators'
 import {
   required,
-  requiredWithMessage,
   validAlpha,
   validDate,
   validCharStrict

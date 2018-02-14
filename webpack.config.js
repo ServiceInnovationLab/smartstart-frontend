@@ -1,5 +1,3 @@
-/* globals API_PATH:true, PIWIK_SITE:true */
-
 const autoprefixer = require('autoprefixer')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -10,6 +8,13 @@ const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
 const yargs = require('yargs').argv
+
+let localConfig = {}
+try {
+  localConfig = require('./local-config')
+} catch(error) {
+  // continue with localConfig defined as {}
+}
 
 const piwikInstance = 'https://analytics.smartstart.services.govt.nz/piwik.php'
 
@@ -24,9 +29,13 @@ const PATHS = {
   dist: path.join(__dirname, './dist')
 }
 
+let API_PATH, PIWIK_SITE, GOOGLE_API_KEY, RAAP_API_KEY
+
 // determine which api endpoint to use
 if (yargs.endpoint) {
   API_PATH = yargs.endpoint
+} else if (localConfig.endpoint) {
+  API_PATH = localConfig.endpoint
 } else {
   throw new Error('API endpoint not specified')
 }
@@ -34,12 +43,29 @@ if (yargs.endpoint) {
 // determine which piwik site to use
 if (yargs.piwik) {
   PIWIK_SITE = yargs.piwik
+} else if (localConfig.piwik) {
+  PIWIK_SITE = localConfig.piwik
 } else {
   throw new Error('Piwik site ID not specified')
 }
 
 // API for loading Google Maps JavaScript API
-const GOOGLE_API_KEY = yargs.google_api_key || 'AIzaSyBm3adi63TaMp3sjs3g0OnOjPX0DqJZLx4'
+if (yargs.google_api_key) {
+  GOOGLE_API_KEY = yargs.google_api_key
+} else if (localConfig.google_api_key) {
+  GOOGLE_API_KEY = localConfig.google_api_key
+} else {
+  GOOGLE_API_KEY = ''
+}
+
+// API for loading RaaP for entitlements queries
+if (yargs.google_api_key) {
+  RAAP_API_KEY = yargs.raap_api_key
+} else if (localConfig.raap_api_key) {
+  RAAP_API_KEY = localConfig.raap_api_key
+} else {
+  RAAP_API_KEY = ''
+}
 
 // config that is shared between all types of build
 const common = {
@@ -128,7 +154,8 @@ switch (runCommand) {
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
           PIWIK_INSTANCE: JSON.stringify(piwikInstance),
-          GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY)
+          GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY),
+          RAAP_API_KEY: JSON.stringify(RAAP_API_KEY)
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
@@ -179,7 +206,8 @@ switch (runCommand) {
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
           PIWIK_INSTANCE: JSON.stringify(piwikInstance),
-          GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY)
+          GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY),
+          RAAP_API_KEY: JSON.stringify(RAAP_API_KEY)
         })
       ],
 

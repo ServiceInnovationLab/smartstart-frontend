@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 import renderError, { hasError } from './render-error'
 import renderWarning from './render-warning'
-import { makeMandatoryAriaLabel } from '../hoc/make-mandatory-label'
+import { makeMandatoryAriaLabel } from 'components/form/hoc/make-mandatory-label'
 
 const DAYS = []
 const MONTHS = [

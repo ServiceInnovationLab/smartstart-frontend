@@ -1,11 +1,11 @@
 import React from 'react'
-import makeMandatoryLabel from '../../hoc/make-mandatory-label'
-import renderField from '../../fields/render-field'
-import renderDatepicker from '../../fields/render-datepicker'
-import renderRadioGroup from '../../fields/render-radio-group'
-import renderSelect from '../../fields/render-select'
+import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
+import renderField from 'components/form/fields/render-field'
+import renderDatepicker from 'components/form/fields/render-datepicker'
+import renderRadioGroup from 'components/form/fields/render-radio-group'
+import renderSelect from 'components/form/fields/render-select'
 import FatherText from './father-text'
-import { combine, maxLength, titleCase } from '../../normalize'
+import { combine, maxLength, titleCase } from 'components/form/normalizers'
 import {
   sexes as sexOptions,
   childStatuses as childStatusOptions,
@@ -73,4 +73,3 @@ const fields = {
 }
 
 export default fields
-

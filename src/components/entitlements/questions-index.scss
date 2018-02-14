@@ -1,0 +1,180 @@
+// this file is included directly from index.scss to prevent duplication
+@import 'variables';
+
+.entitlements-page .unavailable-notice {
+  @media only screen and (min-width: #{$desktop-max-content-width}) {
+    padding: 15px #{$indent * 2} 15px 20px;
+  }
+}
+
+.form.eligibility .section {
+  padding: 60px 0;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  @media only screen and (min-width: #{$desktop-max-content-width}) {
+    width: 100vw;
+    position: relative;
+    right: calc(calc((100vw - #{$desktop-max-content-width}) / 2) + 20px);
+
+    .section-inner {
+      max-width: $desktop-max-content-width;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 15px #{$indent * 2} 15px 20px;
+    }
+  }
+
+  @media only screen and (max-width: #{$desktop-max-content-width - 1px}) {
+    width: 100vw;
+    position: relative;
+    left: -15px;
+
+    .section-inner {
+      padding-left: $mobile-content-gutter;
+      padding-right: $mobile-content-gutter + 5px; // hack to account for scrollbar
+    }
+  }
+
+  &:nth-child(even) {
+    background-color: $entitlements-form-bg;
+  }
+}
+
+// colour overrides from standard $form-teal-dark form colours
+.form.eligibility {
+  button {
+    background-color: $entitlements-form;
+    border-color: $entitlements-form;
+
+    &:hover {
+      border-color: darken($entitlements-form, 5%);
+      background-color: darken($entitlements-form, 5%);
+    }
+
+    &:focus {
+      color: $background-color;
+    }
+  }
+
+  form {
+    margin-top: 0;
+    border-bottom: 0 none;
+    padding-bottom: 0;
+
+    .section-heading {
+      margin-top: 150px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    div.input-group {
+      > div {
+        @media #{$tablet-and-above} {
+          display: inline-block;
+        }
+      }
+    }
+
+    button {
+      margin: 0;
+      min-width: 100%;
+
+      @media #{$tablet-and-above} {
+        min-width: 260px;
+      }
+    }
+
+    div.radio-group {
+      label {
+        > span {
+          background-color: $background-color;
+        }
+
+        &:hover {
+          > span {
+            background-color: $entitlements-form-hover;
+          }
+        }
+
+        input:checked + span {
+          background-color: $entitlements-form;
+          border-color: $entitlements-form;
+        }
+
+        input:focus + span {
+          outline-color: $entitlements-form;
+        }
+      }
+    }
+
+    div.checkbox-group,
+    div.checkbox {
+      label {
+        span::before {
+          background-color: $background-color;
+        }
+
+        input[type="checkbox"]:checked + span::before{
+          background-color: $entitlements-form;
+          border-color: $entitlements-form;
+        }
+
+        input:focus + span {
+          outline-color: $entitlements-form;
+        }
+
+        &:hover {
+          input[type="checkbox"] + span::before {
+            background-color: $entitlements-form-hover;
+          }
+
+          input[type="checkbox"]:checked + span::before {
+            background-color: $entitlements-form;
+          }
+        }
+      }
+
+      @media #{$desktop-and-above} {
+        > div > div.checkboxes > label {
+          flex-grow: 0;
+        }
+      }
+    }
+
+    .form-actions {
+      margin-top: 0;
+    }
+  }
+
+  .expandable {
+    border-top-color: $entitlements-accordian-border;
+
+    &:last-child {
+      border-bottom-color: $entitlements-accordian-border;
+      margin-bottom: 40px;
+    }
+
+    > .expandable-title-wrapper {
+      > .expandable-title {
+        background-color: $entitlements-accordian;
+        color: $text-color;
+      }
+    }
+
+    &.is-expanded {
+      > .expandable-title-wrapper > .expandable-title {
+        background-color: $entitlements-accordian;
+        color: $text-color;
+      }
+
+      > .content {
+        background-color: $entitlements-accordian;
+      }
+    }
+  }
+}

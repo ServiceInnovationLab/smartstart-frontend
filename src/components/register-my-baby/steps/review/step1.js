@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 import get from 'lodash/get'
-import makeMandatoryLabel from '../../hoc/make-mandatory-label'
-import renderTextarea from '../../fields/render-textarea'
-import renderFieldReview from '../../fields/render-review-field'
-import renderReviewValidation from '../../fields/render-review-validation'
+import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
+import renderTextarea from 'components/form/fields/render-textarea'
+import renderFieldReview from 'components/form/fields/render-review-field'
+import renderReviewValidation from 'components/form/fields/render-review-validation'
 import { formatAddress, formatDate } from './utils'
 import {
   sexes,
@@ -13,11 +13,12 @@ import {
   ethnicGroups,
   getOptionDisplay
 } from '../../options'
-import { requiredWithMessage, validCharRelax } from '../../validate'
+import { requiredWithMessage } from 'components/form/validators'
+import { validCharRelax } from '../../validate'
 import {
   REQUIRE_EXPLAINATION
 } from '../../validation-messages'
-import { maxLength } from '../../normalize'
+import { maxLength } from 'components/form/normalizers'
 import schema from '../schemas/step1'
 import getFieldReviewProps from './get-field-review-props'
 

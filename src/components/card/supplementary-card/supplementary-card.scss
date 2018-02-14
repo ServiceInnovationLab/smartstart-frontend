@@ -6,7 +6,7 @@
   margin-left: 0;
   padding: 0;
   min-height: 0;
-  border-top: 1px solid $supplimentary-accordian-border-color;
+  border-top: 1px solid $supplementary-accordian-border-color;
 
   @media #{$desktop-and-above} {
     margin-left: auto;
@@ -18,7 +18,7 @@
   }
 
   &:last-child {
-    border-bottom: 1px solid $supplimentary-accordian-border-color;
+    border-bottom: 1px solid $supplementary-accordian-border-color;
 
     @media print {
       border-bottom: $print-border;

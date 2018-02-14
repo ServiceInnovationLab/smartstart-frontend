@@ -40,6 +40,7 @@
     "copy-webpack-plugin": "~4.0.0",
     "css-loader": "~0.25.0",
     "d3": "~4.4.0",
+    "deep-map": "~1.5.0",
     "enzyme": "~2.5.1",
     "eslint": "~3.11.1",
     "eslint-config-standard": "~6.2.1",
@@ -96,7 +97,8 @@
       "PIWIK_SITE": 2,
       "PIWIK_INSTANCE": "http://localhost/mock-piwik/",
       "API_ENDPOINT": "/assets/snapshot-data.json",
-      "GOOGLE_API_KEY": "blahblahblah"
+      "GOOGLE_API_KEY": "blahblahblah",
+      "RAAP_API_KEY": "blahblahblah"
     },
     "moduleDirectories": [
       "src",

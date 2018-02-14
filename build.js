@@ -26,10 +26,13 @@ if (yargs.piwik) {
 if (yargs.google_api_key) {
   buildCommand = buildCommand + ' --google_api_key ' + yargs.google_api_key
 }
+if (yargs.raap_api_key) {
+  buildCommand = buildCommand + ' --raap_api_key ' + yargs.raap_api_key
+}
 commands.push(buildCommand)
 
 isGitClean().then(function (clean) {
-  if (clean) {
+  if (clean || yargs.f) {
     console.log('Kicking off webpack build.')
 
     commands.reduce(function (promise, cmd) {
@@ -49,6 +52,6 @@ isGitClean().then(function (clean) {
       console.log(err)
     })
   } else {
-    console.log('ERROR: Unable to build because git state not clean. Commit or stash your changes.')
+    console.log('ERROR: Unable to build because git state not clean. Commit or stash your changes, or use --f to force a build (dev only).')
   }
 })

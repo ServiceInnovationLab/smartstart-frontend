@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import renderFieldReview from '../../fields/render-review-field'
-import renderReviewValidation from '../../fields/render-review-validation'
+import renderFieldReview from 'components/form/fields/render-review-field'
+import renderReviewValidation from 'components/form/fields/render-review-validation'
 import { formatAddress } from './utils'
 import {
   yesNo,

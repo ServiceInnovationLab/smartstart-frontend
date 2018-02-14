@@ -16,11 +16,12 @@ import Step4 from './steps/step4'
 import Step5 from './steps/step5'
 import Step6 from './steps/step6'
 import Review from './steps/review/index'
-import Spinner from '../spinner/spinner'
+import Spinner from 'components/spinner/spinner'
+import scrollToFirstError from 'components/form/scroll-to-first-error'
 import { fullSubmit } from './submit'
-import { piwikTrackPost } from '../../actions/actions'
-import { fetchBirthFacilities, fetchCountries, rememberBroData, fetchBroData } from '../../actions/birth-registration'
-import { initialRegistrationFormState } from '../../store/reducers'
+import { piwikTrackPost } from 'actions/application'
+import { fetchBirthFacilities, fetchCountries, rememberBroData, fetchBroData } from 'actions/birth-registration'
+import { initialRegistrationFormState } from 'store/reducers/birth-registration'
 
 const stepByStepName = {
   'child-details': 1,
@@ -33,30 +34,6 @@ const stepByStepName = {
 }
 
 const stepNameByStep = invert(stepByStepName)
-
-const scrollToFirstError = () => {
-  const firstErrorNode = document.querySelector('.has-error')
-  const firstErrorInput = document.querySelector('.has-error input, .has-error select, .has-error textarea')
-
-  if (!firstErrorNode) {
-    return
-  }
-
-  const bodyRect = document.body.getBoundingClientRect()
-
-  let elemRect
-
-  if (firstErrorNode.parentNode.tagName === 'FIELDSET') {
-    elemRect = firstErrorNode.parentNode.getBoundingClientRect()
-  } else {
-    elemRect = firstErrorNode.getBoundingClientRect()
-  }
-
-  const offset = elemRect.top - bodyRect.top
-
-  animateScroll.scrollTo(offset, { smooth: true })
-  firstErrorInput.focus()
-}
 
 class RegisterMyBabyForm extends Component {
   constructor(props) {
@@ -265,7 +242,7 @@ class RegisterMyBabyForm extends Component {
     }
 
     return (
-      <div>
+      <div className='form'>
         <FormWizardProgress
           currentStep={step}
           isReviewing={isReviewing}

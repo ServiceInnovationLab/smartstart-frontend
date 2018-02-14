@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import Card from 'components/card/card' // we subclass this component
-import { piwikTrackPost } from 'actions/actions'
+import { piwikTrackPost } from 'actions/application'
 import ScrollableAnchor from 'react-scrollable-anchor'
 
 export class NonChronologicalCard extends Card {

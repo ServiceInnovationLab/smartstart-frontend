@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import times from 'lodash/times'
 import get from 'lodash/get'
-import makeFocusable from '../hoc/make-focusable'
-import Accordion from '../accordion'
+import makeFocusable from 'components/form/hoc/make-focusable'
+import Accordion from 'components/form/accordion'
 import SaveAsDraft from '../save-as-draft'
 import validate from './validation'
 import warn from '../warn'
 import schema from './schemas/step4'
-import getFieldProps from './get-field-props'
+import getFieldProps from 'components/form/get-field-props'
 
 class ParentRelationshipForm extends Component {
   renderSiblings(otherChildren) {

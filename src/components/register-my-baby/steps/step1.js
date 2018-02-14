@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import find from 'lodash/find'
 import get from 'lodash/get'
-import makeFocusable from '../hoc/make-focusable'
-import Accordion from '../accordion'
+import makeFocusable from 'components/form/hoc/make-focusable'
+import Accordion from 'components/form/accordion'
 import SaveAsDraft from '../save-as-draft'
-import { maxLength } from '../normalize'
+import { maxLength } from 'components/form/normalizers'
 import validate from './validation'
 import schema from './schemas/step1'
-import getFieldProps from './get-field-props'
+import getFieldProps from 'components/form/get-field-props'
 
 class ChildDetailsForm extends Component {
   constructor(props) {

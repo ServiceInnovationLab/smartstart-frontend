@@ -1,0 +1,68 @@
+@import 'variables';
+
+.entitlements-header {
+  background-color: $entitlements-background;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 40px;
+
+  @media #{$desktop-and-above} {
+    margin-bottom: 60px;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    background-image: url(/assets/img/header-reverse-curve.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+  }
+
+  .entitlements-header-inner {
+    max-width: $desktop-max-content-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+
+    p {
+      margin-bottom: 40px;
+    }
+
+    @media only screen and (min-width: #{$desktop-max-content-width}) {
+      padding: 15px 20px;
+    }
+
+    @media #{$desktop-and-above} {
+      margin-top: 40px;
+      padding-right: #{$indent * 2};
+      min-height: 350px;
+      background-image: url(/assets/img/illustrations/financial-help-header.png);
+      background-repeat: no-repeat;
+      background-position: right bottom;
+
+      h2 {
+        margin-top: 60px;
+      }
+    }
+
+    @media #{$high-res-desktop} {
+      background-image: url(/assets/img/illustrations/financial-help-header-highres.png);
+      background-size: contain;
+    }
+  }
+}
+
+.entitlements-page .section-heading {
+  color: $entitlements-subheadings;
+  border-left: 4px solid $entitlements-subheadings;
+  padding-left: 21px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 30px;
+  margin-top: 50px;
+}

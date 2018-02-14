@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
-import renderFieldReview from '../../fields/render-review-field'
-import renderSubFieldReview from '../../fields/render-review-subfield'
-import renderReviewValidation from '../../fields/render-review-validation'
+import renderFieldReview from 'components/form/fields/render-review-field'
+import renderSubFieldReview from 'components/form/fields/render-review-subfield'
+import renderReviewValidation from 'components/form/fields/render-review-validation'
 import { formatAddress, formatDate } from './utils'
-import renderWarning from '../../fields/render-warning'
+import renderWarning from 'components/form/fields/render-warning'
 import { renderEthnicGroupsValue } from './step1'
 import {
   yesNo,

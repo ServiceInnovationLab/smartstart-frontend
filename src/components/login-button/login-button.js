@@ -2,7 +2,7 @@ import './login-button.scss'
 
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { piwikTrackPost } from 'actions/actions'
+import { piwikTrackPost } from 'actions/application'
 
 class LoginButton extends Component {
   constructor (props) {

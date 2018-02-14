@@ -139,6 +139,7 @@ class Header extends Component {
             <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
             <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
             <Link to={'/services-near-me'} activeClassName='active'>Services near me</Link>
+            <Link to={'/financial-help'} activeClassName='active'>Financial help</Link>
             <Link to={'/news/baby-names'} activeClassName='active'>Top baby names</Link>
           </div>
         </nav>
@@ -147,6 +148,7 @@ class Header extends Component {
             <IndexLink to={'/'} activeClassName='active'>Home</IndexLink>
             <Link to={'/register-my-baby'} activeClassName='active'>Register your baby</Link>
             <Link to={'/services-near-me'} activeClassName='active'>Services near me</Link>
+            <Link to={'/financial-help'} activeClassName='active'>Financial help</Link>
             <Link to={'/news/baby-names'} activeClassName='active'>Top baby names</Link>
           </div>
         </nav>
