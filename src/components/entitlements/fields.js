@@ -2,6 +2,7 @@ import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
 import renderField from 'components/form/fields/render-field'
 import renderRadioGroup from 'components/form/fields/render-radio-group'
 import renderSelect from 'components/form/fields/render-select'
+import renderIncome from 'components/form/fields/render-income'
 import renderCheckboxGroup from 'components/form/fields/render-checkbox-group'
 import { maxLength } from 'components/form/normalizers'
 import { requiredWithMessage, numberWithMessage } from 'components/form/validators'
@@ -22,6 +23,13 @@ const relationshipOptions = [
 const employmentOptions = [
   { value: 'full-time', display: 'Yes'},
   { value: 'notfulltime', display: 'No'}  // not actually used but must not be ''
+]
+
+const frequencyOptions = [
+  { value: 'weekly', display: 'weekly'},
+  { value: 'fortnightly', display: '2-weekly'},
+  { value: 'monthly', display: 'monthly'},
+  { value: 'annually', display: 'yearly'}
 ]
 
 const numberOfChildren = [
@@ -308,24 +316,22 @@ export const fields = {
     normalize: maxLength(3)
   },
 
-  // TODO change up the components for these income fields
   'income.applicant': { // this is NOT a RaaP atom, we don't send it directly
     name: 'income.applicant',
-    component: renderField,
-    type: 'number',
+    component: renderIncome,
     label: makeMandatoryLabel(`What’s your current gross income?`),
     validate: [required, number],
-    normalize: maxLength(8)
+    normalize: maxLength(8),
+    options: frequencyOptions
   },
 
-  // TODO change up the components for these income fields
   'income.spouse': { // this is NOT a RaaP atom, we don't send it directly
     name: 'income.spouse',
-    component: renderField,
-    type: 'number',
+    component: renderIncome,
     label: makeMandatoryLabel(`What’s your partner’s current gross income?`),
     validate: [required, number],
-    normalize: maxLength(8)
+    normalize: maxLength(8),
+    options: frequencyOptions
   },
 
   'applicant.receivesIncomeTestedBenefit': {
