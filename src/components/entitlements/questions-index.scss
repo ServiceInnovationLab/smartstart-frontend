@@ -3,7 +3,7 @@
 
 .entitlements-page .unavailable-notice {
   @media only screen and (min-width: #{$desktop-max-content-width}) {
-    padding: 15px #{$indent * 2} 15px 0;
+    padding: 15px #{$indent * 2} 15px 20px;
   }
 }
 
@@ -23,7 +23,7 @@
       max-width: $desktop-max-content-width;
       margin-left: auto;
       margin-right: auto;
-      padding: 15px #{$indent * 2} 15px 0;
+      padding: 15px #{$indent * 2} 15px 20px;
     }
   }
 
@@ -52,6 +52,10 @@
     &:hover {
       border-color: darken($entitlements-form, 5%);
       background-color: darken($entitlements-form, 5%);
+    }
+
+    &:focus {
+      color: $background-color;
     }
   }
 
@@ -140,6 +144,10 @@
           flex-grow: 0;
         }
       }
+    }
+
+    .form-actions {
+      margin-top: 0;
     }
   }
 
