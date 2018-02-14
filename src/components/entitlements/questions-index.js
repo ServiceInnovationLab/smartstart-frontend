@@ -6,6 +6,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { fetchSchema, postToReasoner } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
 import Accordion from 'components/form/accordion'
+import scrollToFirstError from 'components/form/scroll-to-first-error'
 import getFieldProps from 'components/form/get-field-props'
 import fields from './fields'
 import validate from './validation'
@@ -30,6 +31,7 @@ class EntitlementsQuestions extends Component {
 
   submit (values) {
     const { schema, postToReasoner } = this.props
+    // TODO piwik event here?
     postToReasoner(transform(values, schema))
     this.props.router['push']('/financial-help/results')
   }
@@ -516,7 +518,8 @@ EntitlementsQuestions = reduxForm({
   form: 'entitlements',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
+  onSubmitFail: () => window.setTimeout(scrollToFirstError, 200)
 })(EntitlementsQuestions)
 
 export default connect(

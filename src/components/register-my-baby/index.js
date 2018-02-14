@@ -17,6 +17,7 @@ import Step5 from './steps/step5'
 import Step6 from './steps/step6'
 import Review from './steps/review/index'
 import Spinner from 'components/spinner/spinner'
+import scrollToFirstError from 'components/form/scroll-to-first-error'
 import { fullSubmit } from './submit'
 import { piwikTrackPost } from 'actions/application'
 import { fetchBirthFacilities, fetchCountries, rememberBroData, fetchBroData } from 'actions/birth-registration'
@@ -33,30 +34,6 @@ const stepByStepName = {
 }
 
 const stepNameByStep = invert(stepByStepName)
-
-const scrollToFirstError = () => {
-  const firstErrorNode = document.querySelector('.has-error')
-  const firstErrorInput = document.querySelector('.has-error input, .has-error select, .has-error textarea')
-
-  if (!firstErrorNode) {
-    return
-  }
-
-  const bodyRect = document.body.getBoundingClientRect()
-
-  let elemRect
-
-  if (firstErrorNode.parentNode.tagName === 'FIELDSET') {
-    elemRect = firstErrorNode.parentNode.getBoundingClientRect()
-  } else {
-    elemRect = firstErrorNode.getBoundingClientRect()
-  }
-
-  const offset = elemRect.top - bodyRect.top
-
-  animateScroll.scrollTo(offset, { smooth: true })
-  firstErrorInput.focus()
-}
 
 class RegisterMyBabyForm extends Component {
   constructor(props) {
