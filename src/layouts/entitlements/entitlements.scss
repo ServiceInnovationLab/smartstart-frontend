@@ -56,3 +56,13 @@
     }
   }
 }
+
+.entitlements-page .section-heading {
+  color: $entitlements-subheadings;
+  border-left: 4px solid $entitlements-subheadings;
+  padding-left: 21px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 30px;
+  margin-top: 50px;
+}

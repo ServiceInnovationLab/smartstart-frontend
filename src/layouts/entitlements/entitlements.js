@@ -18,7 +18,7 @@ class EntitlementsPage extends Component {
           <div className='entitlements-header'>
             <div className='entitlements-header-inner'>
               <h2>
-                See what financial help is available<br />
+                Tirohia ngā āwhina ā-pūtea ka taea<br />
                 <span className='english'>See what financial help is available</span>
               </h2>
               <p>Use this planning tool to see which benefits and payments you might be eligible for.</p>

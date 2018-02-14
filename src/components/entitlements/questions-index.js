@@ -85,7 +85,7 @@ class EntitlementsQuestions extends Component {
           <div className='section'>
           <div className='section-inner'>
             <h3 className='section-heading'>
-              Your background<br />
+              Tō tipuranga mai<br />
               <span className='english'>Your background</span>
             </h3>
 
@@ -129,7 +129,7 @@ class EntitlementsQuestions extends Component {
           <div className='section'>
           <div className='section-inner'>
             <h3 className='section-heading'>
-              Your children<br />
+              Ko āu tamariki<br />
               <span className='english'>Your children</span>
             </h3>
 
@@ -239,7 +239,7 @@ class EntitlementsQuestions extends Component {
           <div className='section'>
           <div className='section-inner'>
             <h3 className='section-heading'>
-              Your relationship to your children<br />
+              Tō hononga ki āu tamariki<br />
               <span className='english'>Your relationship to your children</span>
             </h3>
 
@@ -298,7 +298,7 @@ class EntitlementsQuestions extends Component {
           <div className='section'>
           <div className='section-inner'>
             <h3 className='section-heading'>
-              Work/Study<br />
+              Mahi/Ako<br />
               <span className='english'>Work/Study</span>
             </h3>
 
@@ -343,7 +343,7 @@ class EntitlementsQuestions extends Component {
           <div className='section'>
           <div className='section-inner'>
             <h3 className='section-heading'>
-              Income<br />
+              Whiwhinga Moni<br />
               <span className='english'>Income</span>
             </h3>
 
@@ -411,7 +411,7 @@ class EntitlementsQuestions extends Component {
           <div className='section'>
           <div className='section-inner'>
             <h3 className='section-heading'>
-              Accommodation<br />
+              Wāhi Noho<br />
               <span className='english'>Accommodation</span>
             </h3>
 

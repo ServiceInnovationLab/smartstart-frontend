@@ -86,20 +86,40 @@ class EntitlementsResults extends Component {
     // TODO error message for if the user hasn't actually supplied any question answers yet (came to page in error)
 
     return (
-      <div>
-        <h3>Results</h3>
+      <div className='entitlements-results'>
+        <p>The results shown below are only an indication of the benefits and payments you may be eligible for.</p>
+        <p>The estimate is based on:</p>
+        <ul>
+          <li>the anwers you provided to the questions;</li>
+          <li>rates on 14 February 2018</li>
+        </ul>
 
-        {permitted.length > 0 && <h4>Likely eligible</h4>}
+        {permitted.length > 0 &&
+          <h3 className='section-heading'>
+             Ākene pea, e māraurau ana koe ki te<br />
+            <span className='english'>You’re probably eligible for</span>
+          </h3>
+        }
         {permitted.map((benefit, index) =>
           <p key={'permitted-' + index}>{benefit}</p>
         )}
 
-        {maybe.length > 0 && <h4>Maybe eligible</h4>}
+        {maybe.length > 0 &&
+          <h3 className='section-heading'>
+             E māraurau ana pea koe ki te<br />
+            <span className='english'>You’re possibly eligible for</span>
+          </h3>
+        }
         {maybe.map((benefit, index) =>
           <p key={'maybe-' + index}>{benefit}</p>
         )}
 
-        {forbidden.length > 0 && <h4>Not eligible</h4>}
+        {forbidden.length > 0 &&
+          <h3 className='section-heading'>
+             Kāore pea iana koe e māraurau ana ki te<br />
+            <span className='english'>You’re probably not eligible for</span>
+          </h3>
+        }
         {forbidden.map((benefit, index) =>
           <p key={'forbidden-' + index}>{benefit}</p>
         )}
