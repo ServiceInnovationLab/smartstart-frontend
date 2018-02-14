@@ -137,6 +137,11 @@ const transform = (data, schema) => {
   if (data.applicant && data.applicant.isPrincipalCarerForProportion) {
     set(body, 'applicant.isPrincipalCarerForProportion', 33)
   }
+  // 3.u. assume applicant.IsStudyingFulltimeSecondarySchool is true if they are studying full time
+  // this ensures that Student Allowance will come back if the are in the right age range & have partner
+  if (data.applicant && data.applicant.isStudyingFullTime) {
+    set(body, 'applicant.IsStudyingFulltimeSecondarySchool', true)
+  }
 
 
   // 4.
