@@ -40,6 +40,10 @@
 
   &:nth-child(even) {
     background-color: $entitlements-form-bg;
+
+    + .form-actions {
+      margin-top: 60px;
+    }
   }
 }
 
