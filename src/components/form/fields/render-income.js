@@ -10,7 +10,7 @@ class IncomeField extends Component {
     super(props)
 
     this.state = {
-      amount: 0,
+      amount: '',
       frequency: 'weekly'
     }
 
