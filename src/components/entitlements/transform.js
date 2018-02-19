@@ -2,6 +2,19 @@ import deepMap from 'deep-map'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import unset from 'lodash/unset'
+import {
+  ChildCareSubsidy,
+  isCommunityServicesCard,
+  JobSeekerSupport,
+  SoleParentSupport,
+  AccommodationSupplement,
+  workingForFamiliesMinTaxCredit,
+  WorkingForFamiliesInWorkTaxCredit,
+  WorkingForFamiliesFamilyTaxCredit,
+  workingForFamiliesParentalTaxCredit,
+  SupportedLivingPayment,
+  YoungParentPayment
+} from './thresholds'
 
 // 1. change all strings to booleans, numbers etc
 // 2. if key is in schema, add to object to be sent
@@ -17,6 +30,26 @@ const transformType = (value) => {
     return parseInt(value, 10)
   }
   return value
+}
+
+const annualIncome = (incomeAndFrequency) => {
+  if (!incomeAndFrequency) return 0
+
+  let income = incomeAndFrequency[0]
+  let frequency = incomeAndFrequency[1]
+
+  switch (frequency) {
+    case 'weekly':
+      return income * 52
+    case 'fortnightly':
+      return income * 26
+    case 'monthly':
+      return income * 12
+    case 'annually':
+      return income
+    default:
+      return 0
+  }
 }
 
 const transform = (data, schema) => {
@@ -95,11 +128,27 @@ const transform = (data, schema) => {
     }
   }
   // 3.j. note that we DON'T send income.ofApplicantAndSpouse directly: instead we
-  // infer threshold.income.AccommodationSupplement based on income values
-  // TODO calculate here! for now just hard code to true
-  // TODO calculate if we meet other thresholds
-  // TODO only use spouse income if applicant.relationshipStatus !== 'single'
-  set(body, 'threshold.income.AccommodationSupplement', true)
+  // infer thresholds based on income values
+  let combinedIncome = 0
+  if (data.income && data.applicant) {
+    if (data.applicant.relationshipStatus === 'single') {
+      combinedIncome = annualIncome(data.income.applicant)
+    } else {
+      // if they have a partner it's required to provide their income
+      combinedIncome = annualIncome(data.income.applicant) + annualIncome(data.income.spouse)
+    }
+  }
+  set(body, 'threshold.income.ChildCareSubsidy', ChildCareSubsidy(combinedIncome, data.applicant.numberOfChildren))
+  set(body, 'threshold.isCommunityServicesCard', isCommunityServicesCard(combinedIncome))
+  set(body, 'threshold.income.JobSeekerSupport', JobSeekerSupport(combinedIncome))
+  set(body, 'threshold.income.SoleParentSupport', SoleParentSupport(combinedIncome))
+  set(body, 'threshold.income.AccommodationSupplement', AccommodationSupplement(combinedIncome))
+  set(body, 'threshold.income.workingForFamiliesMinTaxCredit', workingForFamiliesMinTaxCredit(combinedIncome))
+  set(body, 'threshold.income.WorkingForFamiliesInWorkTaxCredit', WorkingForFamiliesInWorkTaxCredit(combinedIncome, data.applicant.numberOfChildren))
+  set(body, 'threshold.income.WorkingForFamiliesFamilyTaxCredit', WorkingForFamiliesFamilyTaxCredit(combinedIncome, data.applicant.numberOfChildren))
+  set(body, 'threshold.income.workingForFamiliesParentalTaxCredit', workingForFamiliesParentalTaxCredit(combinedIncome, data.applicant.numberOfChildren))
+  set(body, 'threshold.income.SupportedLivingPayment', SupportedLivingPayment(combinedIncome, data.applicant.relationshipStatus !== 'single'))
+  set(body, 'threshold.income.YoungParentPayment', YoungParentPayment(combinedIncome))
   // 3.k. we don't provide any cash threshold values, so just set them to true
   set(body, 'threshold.cash.AccommodationSupplement', true)
   set(body, 'threshold.cash.HomeHelp', true)
