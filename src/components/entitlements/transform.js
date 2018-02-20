@@ -93,10 +93,11 @@ const transform = (data, schema) => {
       set(body, 'children.dependentsUnder14', 1)
     }
   }
-  // 3.e. infer children.overWFFcutoffAgeAndFinanciallyDependant
-  if (data.children && data.children.ages && data.children.ages.length && data.children.ages[data.children.ages.length - 1] > 15) {
-    if (data.children && !data.children.financiallyIndependant) {
-      set(body, 'children.overWFFcutoffAgeAndFinanciallyDependant', true)
+  // 3.e. infer children.allFinanciallyIndependent
+  if (data.children && data.children.ages && data.children.ages.length && data.children.ages[0] > 15) {
+    // ^ all of the children are 16 or older (first element in array is the youngest child)
+    if (data.children.financiallyIndependant) {
+      set(body, 'children.allFinanciallyIndependent', true)
     }
   }
   // 3.f. lower child.Age as needed if child.constantCareUnderSix
