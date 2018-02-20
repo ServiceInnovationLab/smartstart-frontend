@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { Link } from 'react-router'
+import { fetchMetadata } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
+import Benefit from 'components/entitlements/benefit'
 
 class EntitlementsResults extends Component {
   constructor (props) {
@@ -15,6 +17,10 @@ class EntitlementsResults extends Component {
     }
 
     this.assessBenefits = this.assessBenefits.bind(this)
+  }
+
+  componentWillMount () {
+    this.props.fetchMetadata()
   }
 
   componentDidMount () {
@@ -51,9 +57,9 @@ class EntitlementsResults extends Component {
               newForbidden.push(benefit)
             }
           }
-        // also create a seperate list of incomplete permitted ones
-        // this will have false positives - things that are 'CONCLUSIVE''FORBIDDEN'
-        // so the maybe list requires further filtering
+        // also create a seperate list of incomplete permitted ones - this will
+        // have false positives - things that are 'CONCLUSIVE''FORBIDDEN' or
+        // 'CONCLUSIVE''PERMITTED' so the maybes require further filtering later
         } else if (result.reasoningResult === 'INCOMPLETE') {
           if (result.goal && result.goal.modality === 'PERMITTED') {
             if (newMaybe.indexOf(benefit) === -1) {
@@ -64,8 +70,9 @@ class EntitlementsResults extends Component {
       })
     }
 
-    // remove any maybes that are in the forbidden list
+    // remove any maybes that are in the forbidden or permitted lists
     newMaybe = newMaybe.filter(benefit => newForbidden.indexOf(benefit) === -1)
+    newMaybe = newMaybe.filter(benefit => newPermitted.indexOf(benefit) === -1)
 
     this.setState({
       permitted: newPermitted,
@@ -75,15 +82,16 @@ class EntitlementsResults extends Component {
   }
 
   render () {
-    const { fetchingEligibility } = this.props
+    const { fetchingEligibility, fetchingMetadata, metadata } = this.props
     const { permitted, forbidden, maybe } = this.state
 
-    if (fetchingEligibility) {
+    if (fetchingEligibility || fetchingMetadata) {
       return <Spinner text="Please wait ..."/>
     }
 
     // TODO special error message for unable to recieve results
     // TODO error message for if the user hasn't actually supplied any question answers yet (came to page in error)
+    // TODO error message for note being eligible for anything
 
     return (
       <div className='entitlements-results'>
@@ -101,7 +109,7 @@ class EntitlementsResults extends Component {
           </h3>
         }
         {permitted.map((benefit, index) =>
-          <p key={'permitted-' + index}>{benefit}</p>
+          <Benefit key={'permitted-' + index} metadata={metadata[benefit]} />
         )}
 
         {maybe.length > 0 &&
@@ -111,18 +119,28 @@ class EntitlementsResults extends Component {
           </h3>
         }
         {maybe.map((benefit, index) =>
-          <p key={'maybe-' + index}>{benefit}</p>
+          <Benefit key={'maybe-' + index} id={benefit} metadata={metadata[benefit]} />
         )}
 
         {forbidden.length > 0 &&
-          <h3 className='section-heading'>
-             Kāore pea iana koe e māraurau ana ki te<br />
-            <span className='english'>You’re probably not eligible for</span>
-          </h3>
+          <div>
+            <h3 className='section-heading'>
+               Kāore pea iana koe e māraurau ana ki te<br />
+              <span className='english'>You’re probably not eligible for</span>
+            </h3>
+            <ul>
+              {forbidden.map((benefit, index) => {
+                if (metadata[benefit] && metadata[benefit].name && metadata[benefit].moreInformationLink) {
+                  return (
+                    <li key={'forbidden-' + index}>
+                      <a href={metadata[benefit].moreInformationLink} target='_blank' rel='noopener noreferrer'>{metadata[benefit].name}</a>
+                    </li>
+                  )
+                }
+              })}
+            </ul>
+          </div>
         }
-        {forbidden.map((benefit, index) =>
-          <p key={'forbidden-' + index}>{benefit}</p>
-        )}
 
         <Link to={'/financial-help/questions'} role="button" className="button">Change my answers</Link>
 
@@ -133,12 +151,22 @@ class EntitlementsResults extends Component {
 
 EntitlementsResults.propTypes = {
   fetchingEligibility: PropTypes.bool,
-  eligibility: PropTypes.object
+  eligibility: PropTypes.object,
+  fetchingMetadata: PropTypes.bool,
+  metadata: PropTypes.object,
+  fetchMetadata: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
   fetchingEligibility: get(state, 'entitlements.fetchingEligibility'),
-  eligibility: get(state, 'entitlements.eligibility')
+  eligibility: get(state, 'entitlements.eligibility'),
+  fetchingMetadata: get(state, 'entitlements.fetchingMetadata'),
+  metadata: get(state, 'entitlements.metadata')
 })
 
-export default connect(mapStateToProps)(EntitlementsResults)
+export default connect(
+  mapStateToProps,
+  {
+    fetchMetadata
+  }
+)(EntitlementsResults)

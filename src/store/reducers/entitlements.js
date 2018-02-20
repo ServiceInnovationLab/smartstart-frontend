@@ -4,14 +4,19 @@ import {
   FAILURE_SCHEMA,
   REQUEST_ELIGIBILITY,
   RECEIVE_ELIGIBILITY,
-  FAILURE_ELIGIBILITY
+  FAILURE_ELIGIBILITY,
+  REQUEST_METADATA,
+  RECEIVE_METADATA,
+  FAILURE_METADATA
 } from 'actions/entitlements'
 
 export default function entitlements (state = {
   fetchingSchema: false,
   schema: [],
   fetchingEligibility: false,
-  eligibility: {}
+  eligibility: {},
+  fetchingMetadata: false,
+  metadata: {}
 }, action) {
   switch (action.type) {
     case REQUEST_SCHEMA:
@@ -45,6 +50,22 @@ export default function entitlements (state = {
       return {
         ...state,
         fetchingEligibility: false
+      }
+    case REQUEST_METADATA:
+      return {
+        ...state,
+        fetchingMetadata: true
+      }
+    case RECEIVE_METADATA:
+      return {
+        ...state,
+        fetchingMetadata: false,
+        metadata: action.payload
+      }
+    case FAILURE_METADATA:
+      return {
+        ...state,
+        fetchingMetadata: false
       }
     default:
       return state
