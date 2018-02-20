@@ -7,6 +7,9 @@ export const FAILURE_SCHEMA = 'FAILURE_SCHEMA'
 export const REQUEST_ELIGIBILITY = 'REQUEST_ELIGIBILITY'
 export const RECEIVE_ELIGIBILITY = 'RECEIVE_ELIGIBILITY'
 export const FAILURE_ELIGIBILITY = 'FAILURE_ELIGIBILITY'
+export const REQUEST_METADATA = 'REQUEST_METADATA'
+export const RECEIVE_METADATA = 'RECEIVE_METADATA'
+export const FAILURE_METADATA = 'FAILURE_METADATA'
 
 function requestSchema() {
   return {
@@ -46,7 +49,25 @@ function failureEligibility() {
   }
 }
 
-// TODO do we actually need the schema?
+function requestMetadata() {
+  return {
+    type: REQUEST_METADATA
+  }
+}
+
+function receiveMetadata(payload) {
+  return {
+    type: RECEIVE_METADATA,
+    payload
+  }
+}
+
+function failureMetadata() {
+  return {
+    type: FAILURE_METADATA
+  }
+}
+
 export function fetchSchema() {
   return dispatch => {
     dispatch(requestSchema())
@@ -87,5 +108,22 @@ export function postToReasoner(body) {
     })
     .then(json => dispatch(receiveEligibility(json)))
     .catch(() => dispatch(failureEligibility()))
+  }
+}
+
+export function fetchMetadata() {
+  return dispatch => {
+    dispatch(requestMetadata())
+    return fetchWithRetry('/assets/benefits-metadata.json', {
+      retries: 3,
+      retryDelay: 500,
+      method: 'GET'
+    })
+    .then(checkStatus)
+    .then(response => {
+      return response.json()
+    })
+    .then(json => dispatch(receiveMetadata(json)))
+    .catch(() =>  dispatch(failureMetadata()))
   }
 }

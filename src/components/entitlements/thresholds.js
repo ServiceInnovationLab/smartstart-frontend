@@ -36,12 +36,12 @@ export function SoleParentSupport (income) {
 
 export function AccommodationSupplement (income) {
   // married, civil union or de facto couple, 1+ children in Area 1 (AKL)
-  return (income / 52) < 79144
+  return income < 79144
 }
 
 export function workingForFamiliesMinTaxCredit
  (income) {
-  return (income / 52) < 23816
+  return income < 23816
 }
 
 export function WorkingForFamiliesInWorkTaxCredit (income, numberOfChildren) {
@@ -64,7 +64,7 @@ export function WorkingForFamiliesInWorkTaxCredit (income, numberOfChildren) {
       if (income < 141043) return true
       break
     default: // 6+
-      if (income < 159404) return true
+      if (income < 159403) return true
   }
   return false
 }
