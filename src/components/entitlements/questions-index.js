@@ -252,7 +252,7 @@ class EntitlementsQuestions extends Component {
                 Am I the primary carer?
                 </Accordion.Toggle>
                 <Accordion.Content>
-                  <p>The primary carer is the person responsible for the day-to-day care of the children on a permanent basis. If you have a partner and you're both equally responsible for the care of your children, answer yes to this question.</p>
+                  <p>The primary carer is the person responsible for the day-to-day care of the children on a permanent basis. If you have a partner and you’re both equally responsible for the care of your children, answer yes to this question.</p>
                 </Accordion.Content>
               </Accordion>
             </div>
@@ -263,7 +263,7 @@ class EntitlementsQuestions extends Component {
                 What does full-time custody mean?
                 </Accordion.Toggle>
                 <Accordion.Content>
-                  <p>If you have full-time custody of your children it means that you don't have an arrangement to share custody with anyone else, e.g. an ex-partner or the child's grandparent.</p>
+                  <p>If you have full-time custody of your children it means that you don’t have an arrangement to share custody with anyone else, e.g. an ex-partner or the child’s grandparent.</p>
                 </Accordion.Content>
               </Accordion>
             </div>
@@ -448,8 +448,8 @@ class EntitlementsQuestions extends Component {
                       community housing providers, e.g. Housing New Zealand, city councils
                       and Salvation Army</p>
 
-                      <p>If you aren't sure whether you live in a social or community housing
-                      home, you'll need to check with your landlord.</p>
+                      <p>If you aren’t sure whether you live in a social or community housing
+                      home, you’ll need to check with your landlord.</p>
                     </Accordion.Content>
                   </Accordion>
                 </div>
