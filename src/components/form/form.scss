@@ -25,7 +25,8 @@
     margin: 0.5em 0;
   }
 
-  button {
+  button,
+  .button {
     background-color: $form-teal-dark;
     border-color: $form-teal-dark;
     border-radius: 5px;

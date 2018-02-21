@@ -14,6 +14,7 @@ export default function entitlements (state = {
   fetchingSchema: false,
   schema: [],
   fetchingEligibility: false,
+  eligibilityRequest: {},
   eligibility: {},
   fetchingMetadata: false,
   metadata: {}
@@ -38,6 +39,7 @@ export default function entitlements (state = {
     case REQUEST_ELIGIBILITY:
       return {
         ...state,
+        eligibilityRequest: action.payload,
         fetchingEligibility: true
       }
     case RECEIVE_ELIGIBILITY:

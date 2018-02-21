@@ -30,9 +30,10 @@ function failureSchema() {
   }
 }
 
-function requestEligibility() {
+function requestEligibility(payload) {
   return {
-    type: REQUEST_ELIGIBILITY
+    type: REQUEST_ELIGIBILITY,
+    payload
   }
 }
 
@@ -90,7 +91,7 @@ export function fetchSchema() {
 
 export function postToReasoner(body) {
   return dispatch => {
-    dispatch(requestEligibility())
+    dispatch(requestEligibility(body))
     return fetchWithRetry('https://nz.raap.d61.io/api/v0/domain/nz-entitlements-eligibility/reasoning/reason?criteria=draft', {
       retries: 3,
       retryDelay: 500,

@@ -353,7 +353,7 @@ export const fields = {
   'applicant.hasAccommodationCosts': {
     name: 'applicant.hasAccommodationCosts',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Do you have accomodation costs?`),
+    label: makeMandatoryLabel(`Do you have accommodation costs?`),
     validate: [required],
     options: booleanOptions
   },

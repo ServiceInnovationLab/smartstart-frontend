@@ -68,14 +68,14 @@ class EntitlementsQuestions extends Component {
     const numberOfChildren = this.props.numberOfChildren ? parseInt(this.props.numberOfChildren, 10) : 0
 
     if (fetchingSchema) {
-      return <Spinner text="Please wait ..."/>
+      return <Spinner text='Please wait ...'/>
     }
 
-    if(!schema || !schema.length) {
-      return <div className="unavailable-notice">
+    if (!schema || !schema.length) {
+      return <div className='unavailable-notice'>
         <h3>Sorry!</h3>
         <p>
-          Benefits eligibility is currently unavailable. Right now we're working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
+          Benefits eligibility is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
         </p>
       </div>
     }

@@ -1,0 +1,106 @@
+@import 'variables';
+
+.entitlements-results {
+
+  .section-heading {
+    margin-bottom: 40px;
+    margin-top: 40px;
+
+    @media #{$desktop-and-above} {
+      margin-bottom: 65px;
+      margin-top: 50px;
+    }
+  }
+
+  .entitlement-result {
+    position: relative;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid $form-border-color;
+
+    @media #{$desktop-and-above} {
+      padding-bottom: 45px;
+      margin-bottom: 45px;
+      padding-right: 200px;
+    }
+  }
+
+  .award-up-to {
+    @media #{$desktop-and-above} {
+      position: absolute;
+      top: -14px;
+      right: 0;
+    }
+
+    .description {
+      font-weight: bold;
+    }
+
+    .value {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .frequency {
+      @media #{$desktop-and-above} {
+        display: block;
+        text-align: right;
+        position: relative;
+        top: -7px;
+      }
+    }
+  }
+
+  .info-bullet {
+    padding-left: 30px;
+    position: relative;
+
+    a {
+      color: $text-color;
+    }
+
+    &.more-information {
+      margin-top: 28px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 28px;
+    }
+
+    &::before {
+      color: $entitlements-secondary;
+      font-family: 'icomoon' !important;
+      font-size: 20px;
+      line-height: 26px; // same as parent
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-weight: normal;
+      content: $icon-apply-online;
+    }
+
+    &.more-information::before {
+      content: $icon-exclamation;
+      transform: rotate(180deg);
+    }
+
+    &.medical-cert::before {
+      content: $icon-medical;
+    }
+
+    &.winz-appointment::before {
+      content: $icon-appointment;
+    }
+  }
+
+  .change-answers {
+    margin: 40px 0 0;
+    min-width: 100%;
+
+    @media #{$desktop-and-above} {
+      margin-top: 60px;
+      min-width: auto;
+    }
+  }
+}
