@@ -8,6 +8,7 @@ const validate = (values) => {
   // set up values that need to be used for conditions
   const isNZResident = get(values, 'applicant.isNZResident')
   const relationshipStatus = get(values, 'applicant.relationshipStatus')
+  const isInadequatelySupportedByPartner = get(values, 'applicant.isInadequatelySupportedByPartner')
   const childrenAmount = get(values, 'applicant.numberOfChildren')
   const numberOfChildren = childrenAmount ? parseInt(childrenAmount, 10) : 0
   const childrenAges = get(values, 'children.ages')
@@ -32,7 +33,7 @@ const validate = (values) => {
     check('applicant.hasSeriousDisability')(fields, values, errors)
   }
 
-  if (relationshipStatus && relationshipStatus !== 'single') {
+  if (relationshipStatus !== 'single') {
     check('applicant.isInadequatelySupportedByPartner')(fields, values, errors)
   }
 
@@ -111,6 +112,10 @@ const validate = (values) => {
     check('applicant.meetsPaidParentalLeaveEmployedRequirements')(fields, values, errors)
   }
 
+  if (relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true') {
+    check('partner.worksWeeklyHours')(fields, values, errors)
+  }
+
   // Income
 
   if (isNZResident === 'true') {
@@ -119,7 +124,7 @@ const validate = (values) => {
     check('applicant.holdsCommunityServicesCard')(fields, values, errors)
   }
 
-  if (relationshipStatus && relationshipStatus !== 'single') {
+  if (relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true') {
     check('income.spouse')(fields, values, errors)
   }
 

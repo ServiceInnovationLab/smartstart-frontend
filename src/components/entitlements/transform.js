@@ -132,7 +132,7 @@ const transform = (data, schema) => {
   // infer thresholds based on income values
   let combinedIncome = 0
   if (data.income && data.applicant) {
-    if (data.applicant.relationshipStatus === 'single') {
+    if (data.applicant.relationshipStatus === 'single' || data.applicant.isInadequatelySupportedByPartner) {
       combinedIncome = annualIncome(data.income.applicant)
     } else {
       // if they have a partner it's required to provide their income
@@ -170,7 +170,8 @@ const transform = (data, schema) => {
     if (
       typeof data.applicant.worksWeeklyHours !== "undefined" &&
       data.partner &&
-      typeof data.partner.worksWeeklyHours !== "undefined"
+      typeof data.partner.worksWeeklyHours !== "undefined" &&
+      !data.applicant.isInadequatelySupportedByPartner
     ) {
       set(body, 'couple.worksWeeklyHours', data.applicant.worksWeeklyHours + data.partner.worksWeeklyHours)
     } else if (typeof data.applicant.worksWeeklyHours !== "undefined") {
@@ -252,7 +253,11 @@ const transform = (data, schema) => {
   if (data.applicant && !data.applicant.hasAccommodationCosts) {
     unset(body, 'applicant.hasSocialHousing')
   }
-  // 4.n. delete any empty objects (there should always be something in applicant)
+  // 4.n. isInadequatelySupportedByPartner
+  if (data.applicant && data.applicant.isInadequatelySupportedByPartner) {
+    unset(body, 'partner.worksWeeklyHours')
+  }
+  // 4.o. delete any empty objects (there should always be something in applicant)
   if (body.parents && Object.keys(body.parents).length === 0) {
     unset(body, 'parents')
   }

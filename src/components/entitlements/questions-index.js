@@ -44,6 +44,7 @@ class EntitlementsQuestions extends Component {
       submitting,
       isNZResident,
       relationshipStatus,
+      isInadequatelySupportedByPartner,
       childrenAges,
       childHasDisability,
       requiresConstantCare,
@@ -338,7 +339,7 @@ class EntitlementsQuestions extends Component {
             {(workOrStudy === 'work' || workOrStudy === 'both') && expectingChild === 'true' &&
               <Field {...getFieldProps(fields, 'applicant.isStoppingWorkToCareForChild')} />
             }
-            { relationshipStatus && relationshipStatus !== 'single' &&
+            { relationshipStatus && relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' &&
               <Field {...getFieldProps(fields, 'partner.worksWeeklyHours')} />
             }
           </div>
@@ -375,7 +376,7 @@ class EntitlementsQuestions extends Component {
                 </Accordion.Content>
               </Accordion>
             </div>
-            { relationshipStatus && relationshipStatus !== 'single' &&
+            { relationshipStatus && relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' &&
               <Field {...getFieldProps(fields, 'income.spouse')} />
             }
             <Field {...getFieldProps(fields, 'applicant.receivesIncomeTestedBenefit')} />
@@ -485,6 +486,7 @@ EntitlementsQuestions.propTypes = {
   submitting: PropTypes.bool,
   isNZResident: PropTypes.string,
   relationshipStatus: PropTypes.string,
+  isInadequatelySupportedByPartner: PropTypes.string,
   numberOfChildren: PropTypes.string,
   childrenAges: PropTypes.array,
   childHasDisability: PropTypes.string,
@@ -505,6 +507,7 @@ const mapStateToProps = (state) => ({
   schema: get(state, 'entitlements.schema'),
   isNZResident: selector(state, 'applicant.isNZResident'),
   relationshipStatus: selector(state, 'applicant.relationshipStatus'),
+  isInadequatelySupportedByPartner: selector(state, 'applicant.isInadequatelySupportedByPartner'),
   numberOfChildren: selector(state, 'applicant.numberOfChildren'),
   childrenAges: selector(state, 'children.ages'),
   childHasDisability: selector(state, 'child.hasSeriousDisability'),
