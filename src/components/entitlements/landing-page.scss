@@ -9,6 +9,8 @@
   .welcome-action {
     background-color: $entitlements-form;
     border-color: $entitlements-form;
+    margin-left: 0;
+    margin-right: 0;
 
     &:hover {
       border-color: $welcome-button-bg-color-hover;
