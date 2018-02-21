@@ -162,7 +162,7 @@ export const fields = {
   'children.financiallyIndependant': {
     name: 'children.financiallyIndependant',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are any of your children aged 16 and over financially independent?`),
+    label: makeMandatoryLabel(`Are your children financially independent?`),
     validate: [required],
     options: booleanOptions
   },

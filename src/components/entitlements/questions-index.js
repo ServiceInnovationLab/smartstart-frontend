@@ -58,7 +58,7 @@ class EntitlementsQuestions extends Component {
     const overFifteens = !!(
       childrenAges &&
       childrenAges.length &&
-      (parseInt(childrenAges[childrenAges.length - 1], 10) === 18)
+      (parseInt(childrenAges[0], 10) === 18)
     )
     const underFives = !!(
       childrenAges &&

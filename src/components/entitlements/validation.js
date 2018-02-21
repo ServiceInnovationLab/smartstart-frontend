@@ -52,7 +52,7 @@ const validate = (values) => {
     check('child.hasSeriousDisability')(fields, values, errors)
   }
 
-  if (childrenAges && childrenAges.length && parseInt(childrenAges[childrenAges.length - 1], 10) === 18) {
+  if (childrenAges && childrenAges.length && parseInt(childrenAges[0], 10) === 18) {
     check('children.financiallyIndependant')(fields, values, errors)
   }
 
