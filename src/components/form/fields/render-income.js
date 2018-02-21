@@ -88,6 +88,7 @@ class IncomeField extends Component {
               className="currency-input"
               onChange={this.amountChange}
               onBlur={this.amountBlur}
+              onKeyDown={e => {if (e.which === 13) e.preventDefault()}}
             />
             <span className="styled-select">
               <select
