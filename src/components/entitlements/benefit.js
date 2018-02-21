@@ -9,26 +9,26 @@ const Benefit = props => {
   return (
     <div className='entitlement-result'>
       <h4>{metadata.name}</h4>
+      <p>{metadata.description}</p>
       {metadata.paymentValue &&
         <div className='award-up-to'>
-          <span className='description'>{metadata.paymentDescription}</span>
-          <span className='value'>{metadata.paymentValue}</span>
+          <span className='description'>{metadata.paymentDescription} </span>
+          <span className='value'>{metadata.paymentValue} </span>
           <span className='frequency'>{metadata.paymentFrequency}</span>
         </div>
       }
-      <p>{metadata.description}</p>
-      <p className='more-information'><a href={metadata.moreInformationLink} target='_blank' rel='noopener noreferrer'>More information</a></p>
+      <p className='more-information info-bullet'><a href={metadata.moreInformationLink} target='_blank' rel='noopener noreferrer'>More information</a></p>
       {metadata.applicationLink &&
-        <p className='apply-online'><a href={metadata.applicationLink} target='_blank' rel='noopener noreferrer'>Apply online</a></p>
+        <p className='apply-online info-bullet'><a href={metadata.applicationLink} target='_blank' rel='noopener noreferrer'>Apply online</a></p>
       }
       {metadata.WINZapplicationLink &&
-        <p className='apply-online'><a href='https://www.workandincome.govt.nz/about-work-and-income/contact-us/phone-numbers.html' target='_blank' rel='noopener noreferrer'>Contact Work and Income</a> to talk about your circumstances and they’ll explain how to apply.</p>
+        <p className='apply-online info-bullet'><a href='https://www.workandincome.govt.nz/about-work-and-income/contact-us/phone-numbers.html' target='_blank' rel='noopener noreferrer'>Contact Work and Income</a> to talk about your circumstances and they’ll explain how to apply.</p>
       }
       {metadata.WINZappointmentRequired &&
-        <p className='winz-appointment'>Attending an appoiontment with Work and Income is required as part of your application.</p>
+        <p className='winz-appointment info-bullet'>Attending an appoiontment with Work and Income is required as part of your application.</p>
       }
       {metadata.medicalCertRequired &&
-        <p className='medical-cert'>A medical certificate is required as part of your application.</p>
+        <p className='medical-cert info-bullet'>A medical certificate is required as part of your application.</p>
       }
       {metadata.notes &&
         <div>

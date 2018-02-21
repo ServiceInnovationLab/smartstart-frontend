@@ -1,4 +1,3 @@
-// this file is included directly from index.scss to prevent duplication
 @import 'variables';
 
 .entitlements-page .unavailable-notice {
@@ -49,7 +48,8 @@
 
 // colour overrides from standard $form-teal-dark form colours
 .form.eligibility {
-  button {
+  button,
+  .button {
     background-color: $entitlements-form;
     border-color: $entitlements-form;
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import { fetchMetadata } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
 import Benefit from 'components/entitlements/benefit'
+import './results.scss'
 
 class EntitlementsResults extends Component {
   constructor (props) {
@@ -142,7 +143,9 @@ class EntitlementsResults extends Component {
           </div>
         }
 
-        <Link to={'/financial-help/questions'} role="button" className="button">Change my answers</Link>
+        <div className='form eligibility'>
+          <Link to={'/financial-help/questions'} role="button" className="button change-answers">Change my answers</Link>
+        </div>
 
       </div>
     )
