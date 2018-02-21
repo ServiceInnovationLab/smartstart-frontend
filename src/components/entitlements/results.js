@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { Link } from 'react-router'
-import { fetchMetadata } from 'actions/entitlements'
+import { fetchMetadata, postToReasoner } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
 import Benefit from 'components/entitlements/benefit'
 import './results.scss'
@@ -17,6 +17,7 @@ class EntitlementsResults extends Component {
       maybe: []
     }
 
+    this.retry = this.retry.bind(this)
     this.assessBenefits = this.assessBenefits.bind(this)
   }
 
@@ -36,6 +37,10 @@ class EntitlementsResults extends Component {
     if (eligibility.benefit) {
       this.assessBenefits(eligibility.benefit)
     }
+  }
+
+  retry () {
+    this.props.postToReasoner(this.props.eligibilityRequest)
   }
 
   assessBenefits (benefits) {
@@ -83,16 +88,36 @@ class EntitlementsResults extends Component {
   }
 
   render () {
-    const { fetchingEligibility, fetchingMetadata, metadata } = this.props
+    const { fetchingEligibility, eligibilityRequest, eligibility, fetchingMetadata, metadata } = this.props
     const { permitted, forbidden, maybe } = this.state
 
     if (fetchingEligibility || fetchingMetadata) {
-      return <Spinner text="Please wait ..."/>
+      return <Spinner text='Please wait ...'/>
     }
 
-    // TODO special error message for unable to recieve results
-    // TODO error message for if the user hasn't actually supplied any question answers yet (came to page in error)
-    // TODO error message for note being eligible for anything
+    if ((!eligibility || Object.keys(eligibility).length === 0) && Object.keys(eligibilityRequest).length > 0) {
+      // no results and we do have question data - unable to connect to RaaP
+      return <div className='unavailable-notice'>
+        <h3>Sorry!</h3>
+        <p>
+          Benefits eligibility is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/results'} onClick={this.retry}>try again</Link> shortly.
+        </p>
+      </div>
+    }
+
+    if (Object.keys(eligibilityRequest).length === 0) {
+      // no question data - user refreshed or directly came to this page
+      return <div className='unavailable-notice entitlements-results'>
+        <h3>Oops!</h3>
+        <p>
+          It doesn’t look like we have any question information from you - did you accidentally refresh this page? Sorry, because we don’t store any of your information for privacy reasons you’ll need to <Link to={'/financial-help/questions'}>answer the questions again</Link>.
+        </p>
+
+        <div className='form eligibility'>
+          <Link to={'/financial-help/questions'} role="button" className="button change-answers">Go to the questions</Link>
+        </div>
+      </div>
+    }
 
     return (
       <div className='entitlements-results'>
@@ -122,6 +147,15 @@ class EntitlementsResults extends Component {
         {maybe.map((benefit, index) =>
           <Benefit key={'maybe-' + index} id={benefit} metadata={metadata[benefit]} />
         )}
+
+        {permitted.length === 0 && maybe.length === 0 &&
+          <div className='all-forbidden'>
+            <h3>Sorry!</h3>
+            <p>
+              We haven’t found any benefits that it seems like you might be eligible for. Perhaps you’d like to try <Link to={'/financial-help/questions'}>changing some of your answers</Link>?
+            </p>
+          </div>
+        }
 
         {forbidden.length > 0 &&
           <div>
@@ -155,14 +189,17 @@ class EntitlementsResults extends Component {
 EntitlementsResults.propTypes = {
   fetchingEligibility: PropTypes.bool,
   eligibility: PropTypes.object,
+  eligibilityRequest: PropTypes.object,
   fetchingMetadata: PropTypes.bool,
   metadata: PropTypes.object,
-  fetchMetadata: PropTypes.func
+  fetchMetadata: PropTypes.func,
+  postToReasoner: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
   fetchingEligibility: get(state, 'entitlements.fetchingEligibility'),
   eligibility: get(state, 'entitlements.eligibility'),
+  eligibilityRequest: get(state, 'entitlements.eligibilityRequest'),
   fetchingMetadata: get(state, 'entitlements.fetchingMetadata'),
   metadata: get(state, 'entitlements.metadata')
 })
@@ -170,6 +207,7 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   {
-    fetchMetadata
+    fetchMetadata,
+    postToReasoner
   }
 )(EntitlementsResults)
