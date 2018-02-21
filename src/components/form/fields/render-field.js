@@ -15,6 +15,7 @@ const renderField = ({ input, label, ariaLabel, placeholder, instructionText, ty
         aria-label={ariaLabel ? ariaLabel : null}
         aria-describedby={`${form}-${input.name}-desc`}
         onKeyDown={e => {if (e.which === 13) e.preventDefault()}}
+        onWheel={e => {if (`${form}-${input.name}` === document.activeElement.id) e.preventDefault() }}
       />
       <div id={`${form}-${input.name}-desc`}>
         { renderError({ meta: { touched, error } }) }

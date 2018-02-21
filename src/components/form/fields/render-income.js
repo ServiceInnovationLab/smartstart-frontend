@@ -89,6 +89,7 @@ class IncomeField extends Component {
               onChange={this.amountChange}
               onBlur={this.amountBlur}
               onKeyDown={e => {if (e.which === 13) e.preventDefault()}}
+              onWheel={e => {if (`${form}-${input.name}` === document.activeElement.id) e.preventDefault() }}
             />
             <span className="styled-select">
               <select
