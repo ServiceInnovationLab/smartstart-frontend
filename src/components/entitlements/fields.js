@@ -242,7 +242,7 @@ export const fields = {
   'applicant.isPrincipalCarerForOneYearFromApplicationDate': {
     name: 'applicant.isPrincipalCarerForOneYearFromApplicationDate',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Will the children you're not the birth, adoptive or step parent of, be staying in your care for more than 12 months?`),
+    label: makeMandatoryLabel(`Will the children you’re not the birth, adoptive or step parent of, be staying in your care for more than 12 months?`),
     validate: [required],
     options: booleanOptions
   },
@@ -259,7 +259,7 @@ export const fields = {
   'applicant.workOrStudy': {
     name: 'applicant.workOrStudy',
     component: renderSelect,
-    label: makeMandatoryLabel(`What's your work/study situation?`),
+    label: makeMandatoryLabel(`What’s your work/study situation?`),
     validate: [required],
     options: workOrStudyOptions
   },
@@ -301,7 +301,7 @@ export const fields = {
   'applicant.isStoppingWorkToCareForChild': {
     name: 'applicant.isStoppingWorkToCareForChild',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Will you stop working when your child is born or adopted?`),
+    label: makeMandatoryLabel(`Will you or your partner stop working when your child is born or adopted?`),
     validate: [required],
     options: booleanOptions
   },

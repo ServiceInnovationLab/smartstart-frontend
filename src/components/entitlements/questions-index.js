@@ -75,7 +75,7 @@ class EntitlementsQuestions extends Component {
       return <div className='unavailable-notice'>
         <h3>Sorry!</h3>
         <p>
-          Benefits eligibility is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
+          The financial help tool is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
         </p>
       </div>
     }
@@ -190,14 +190,16 @@ class EntitlementsQuestions extends Component {
                 { childHasDisability === 'true' &&
                   <div className='conditional-field'>
                     <Field {...getFieldProps(fields, 'child.requiresConstantCareAndAttention')} />
-                    <Accordion>
-                      <Accordion.Toggle>
-                      What does constant care and attention mean
-                      </Accordion.Toggle>
-                      <Accordion.Content>
-                        <p>This means a child that requires constant care and attention because of their disability, over and above that of a child of a similar age. It also means that they will be likely to need that care and attention for more than 12 months.</p>
-                      </Accordion.Content>
-                    </Accordion>
+                    <div className="expandable-group secondary">
+                      <Accordion>
+                        <Accordion.Toggle>
+                        What does constant care and attention mean
+                        </Accordion.Toggle>
+                        <Accordion.Content>
+                          <p>This means a child that requires constant care and attention because of their disability, over and above that of a child of a similar age. It also means that they will be likely to need that care and attention for more than 12 months.</p>
+                        </Accordion.Content>
+                      </Accordion>
+                    </div>
                     { requiresConstantCare === 'true' &&
                       <Field {...getFieldProps(fields, 'child.constantCareUnderSix')} />
                     }
@@ -252,7 +254,7 @@ class EntitlementsQuestions extends Component {
                 Am I the primary carer?
                 </Accordion.Toggle>
                 <Accordion.Content>
-                  <p>The primary carer is the person responsible for the day-to-day care of the children on a permanent basis. If you have a partner and you're both equally responsible for the care of your children, answer yes to this question.</p>
+                  <p>The primary carer is the person responsible for the day-to-day care of the children on a permanent basis. If you have a partner and you’re both equally responsible for the care of your children, answer yes to this question.</p>
                 </Accordion.Content>
               </Accordion>
             </div>
@@ -263,7 +265,7 @@ class EntitlementsQuestions extends Component {
                 What does full-time custody mean?
                 </Accordion.Toggle>
                 <Accordion.Content>
-                  <p>If you have full-time custody of your children it means that you don't have an arrangement to share custody with anyone else, e.g. an ex-partner or the child's grandparent.</p>
+                  <p>If you have full-time custody of your children it means that you don’t have an arrangement to share custody with anyone else, e.g. an ex-partner or the child’s grandparent.</p>
                 </Accordion.Content>
               </Accordion>
             </div>
@@ -280,14 +282,16 @@ class EntitlementsQuestions extends Component {
                   <Field {...getFieldProps(fields, 'children.birthParents')} />
                 }
                 {isPrincipalCarerForOneYearFromApplicationDate === 'true' &&
-                  <Accordion>
-                    <Accordion.Toggle>
-                    Why do you need to know this information?
-                    </Accordion.Toggle>
-                    <Accordion.Content>
-                      <p>This information is needed to be able to provide you with accurate results. The benefits and/or payments you may be entitled to depend on why the birth parents are unable to care for their child/children.</p>
-                    </Accordion.Content>
-                  </Accordion>
+                  <div className="expandable-group secondary">
+                    <Accordion>
+                      <Accordion.Toggle>
+                      Why do you need to know this information?
+                      </Accordion.Toggle>
+                      <Accordion.Content>
+                        <p>This information is needed to be able to provide you with accurate results. The benefits and/or payments you may be entitled to depend on why the birth parents are unable to care for their child/children.</p>
+                      </Accordion.Content>
+                    </Accordion>
+                  </div>
                 }
               </div>
             }
@@ -448,8 +452,8 @@ class EntitlementsQuestions extends Component {
                       community housing providers, e.g. Housing New Zealand, city councils
                       and Salvation Army</p>
 
-                      <p>If you aren't sure whether you live in a social or community housing
-                      home, you'll need to check with your landlord.</p>
+                      <p>If you aren’t sure whether you live in a social or community housing
+                      home, you’ll need to check with your landlord.</p>
                     </Accordion.Content>
                   </Accordion>
                 </div>
