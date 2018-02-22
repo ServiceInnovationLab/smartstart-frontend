@@ -53,7 +53,7 @@ class EntitlementsResults extends Component {
       benefits[benefit].forEach(result => {
         // only pull out conclusive results
         if (result.reasoningResult === 'CONCLUSIVE') {
-          if (result.goal && result.goal.modality === 'PERMITTED') {
+          if (result.goal && result.goal.modality === 'PERMITTED' && !result.goal.negated) {
             // only add to the permitted list if it's not there already
             if (newPermitted.indexOf(benefit) === -1) {
               newPermitted.push(benefit)
