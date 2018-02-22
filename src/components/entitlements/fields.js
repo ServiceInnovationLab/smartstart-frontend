@@ -162,7 +162,7 @@ export const fields = {
   'children.financiallyIndependant': {
     name: 'children.financiallyIndependant',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Are any of your children aged 16 and over financially independent?`),
+    label: makeMandatoryLabel(`Are your children financially independent?`),
     validate: [required],
     options: booleanOptions
   },
@@ -298,10 +298,10 @@ export const fields = {
     options: booleanOptions
   },
 
-  'applicant.isStoppingWorkToCareForChild': {
-    name: 'applicant.isStoppingWorkToCareForChild',
+  'applicant.doesPartnerWork': {
+    name: 'applicant.doesPartnerWork',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Will you or your partner stop working when your child is born or adopted?`),
+    label: makeMandatoryLabel(`Does your partner work?`),
     validate: [required],
     options: booleanOptions
   },
@@ -314,6 +314,14 @@ export const fields = {
     label: makeMandatoryLabel(`How many hours a week does your partner work?`),
     validate: [required, number],
     normalize: maxLength(3)
+  },
+
+  'applicant.isStoppingWorkToCareForChild': {
+    name: 'applicant.isStoppingWorkToCareForChild',
+    component: renderRadioGroup,
+    label: makeMandatoryLabel(`Will you or your partner stop working when your child is born or adopted?`),
+    validate: [required],
+    options: booleanOptions
   },
 
   'income.applicant': { // this is NOT a RaaP atom, we don't send it directly

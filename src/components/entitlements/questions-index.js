@@ -44,6 +44,7 @@ class EntitlementsQuestions extends Component {
       submitting,
       isNZResident,
       relationshipStatus,
+      isInadequatelySupportedByPartner,
       childrenAges,
       childHasDisability,
       requiresConstantCare,
@@ -53,12 +54,13 @@ class EntitlementsQuestions extends Component {
       isPrincipalCarerForOneYearFromApplicationDate,
       workOrStudy,
       expectingChild,
+      doesPartnerWork,
       hasAccommodationCosts
     } = this.props
     const overFifteens = !!(
       childrenAges &&
       childrenAges.length &&
-      (parseInt(childrenAges[childrenAges.length - 1], 10) === 18)
+      (parseInt(childrenAges[0], 10) === 18)
     )
     const underFives = !!(
       childrenAges &&
@@ -335,11 +337,14 @@ class EntitlementsQuestions extends Component {
               </Accordion>
             </div>
             }
+            { relationshipStatus && relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' &&
+              <Field {...getFieldProps(fields, 'applicant.doesPartnerWork')} />
+            }
+            { doesPartnerWork === 'true' &&
+              <Field {...getFieldProps(fields, 'partner.worksWeeklyHours')} />
+            }
             {(workOrStudy === 'work' || workOrStudy === 'both') && expectingChild === 'true' &&
               <Field {...getFieldProps(fields, 'applicant.isStoppingWorkToCareForChild')} />
-            }
-            { relationshipStatus && relationshipStatus !== 'single' &&
-              <Field {...getFieldProps(fields, 'partner.worksWeeklyHours')} />
             }
           </div>
           </div>
@@ -375,7 +380,7 @@ class EntitlementsQuestions extends Component {
                 </Accordion.Content>
               </Accordion>
             </div>
-            { relationshipStatus && relationshipStatus !== 'single' &&
+            { relationshipStatus && relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' &&
               <Field {...getFieldProps(fields, 'income.spouse')} />
             }
             <Field {...getFieldProps(fields, 'applicant.receivesIncomeTestedBenefit')} />
@@ -485,6 +490,7 @@ EntitlementsQuestions.propTypes = {
   submitting: PropTypes.bool,
   isNZResident: PropTypes.string,
   relationshipStatus: PropTypes.string,
+  isInadequatelySupportedByPartner: PropTypes.string,
   numberOfChildren: PropTypes.string,
   childrenAges: PropTypes.array,
   childHasDisability: PropTypes.string,
@@ -495,6 +501,7 @@ EntitlementsQuestions.propTypes = {
   isPrincipalCarerForOneYearFromApplicationDate: PropTypes.string,
   workOrStudy: PropTypes.string,
   expectingChild: PropTypes.string,
+  doesPartnerWork: PropTypes.string,
   hasAccommodationCosts: PropTypes.string
 }
 
@@ -505,6 +512,7 @@ const mapStateToProps = (state) => ({
   schema: get(state, 'entitlements.schema'),
   isNZResident: selector(state, 'applicant.isNZResident'),
   relationshipStatus: selector(state, 'applicant.relationshipStatus'),
+  isInadequatelySupportedByPartner: selector(state, 'applicant.isInadequatelySupportedByPartner'),
   numberOfChildren: selector(state, 'applicant.numberOfChildren'),
   childrenAges: selector(state, 'children.ages'),
   childHasDisability: selector(state, 'child.hasSeriousDisability'),
@@ -515,6 +523,7 @@ const mapStateToProps = (state) => ({
   isPrincipalCarerForOneYearFromApplicationDate: selector(state, 'applicant.isPrincipalCarerForOneYearFromApplicationDate'),
   workOrStudy: selector(state, 'applicant.workOrStudy'),
   expectingChild: selector(state, 'applicant.expectingChild'),
+  doesPartnerWork: selector(state, 'applicant.doesPartnerWork'),
   hasAccommodationCosts: selector(state, 'applicant.hasAccommodationCosts')
 })
 
