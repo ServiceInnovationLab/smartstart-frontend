@@ -321,7 +321,6 @@ export const fields = {
     component: renderIncome,
     label: makeMandatoryLabel(`What’s your current gross income?`),
     validate: [required, number],
-    normalize: maxLength(8),
     options: frequencyOptions
   },
 
@@ -330,7 +329,6 @@ export const fields = {
     component: renderIncome,
     label: makeMandatoryLabel(`What’s your partner’s current gross income?`),
     validate: [required, number],
-    normalize: maxLength(8),
     options: frequencyOptions
   },
 

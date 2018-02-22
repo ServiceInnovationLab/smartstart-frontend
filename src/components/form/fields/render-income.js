@@ -40,10 +40,11 @@ class IncomeField extends Component {
   }
 
   amountChange(event) {
+    let normalisedValue = event.target.value.substring(0,8)
     this.setState({
-      amount: event.target.value
+      amount: normalisedValue
     })
-    this.props.input.onChange([event.target.value, this.state.frequency])
+    this.props.input.onChange([normalisedValue, this.state.frequency])
   }
 
   frequencyChange(event) {
