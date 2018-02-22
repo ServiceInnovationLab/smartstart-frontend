@@ -245,10 +245,7 @@ const transform = (data, schema) => {
     unset(body, 'applicant.meetsPaidParentalLeaveEmployedRequirements')
   }
   // 4.l. isStoppingWorkToCareForChild
-  if (
-      (data.applicant && (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither')) ||
-      (data.applicant && data.applicant.relationshipStatus === 'single')
-    ) {
+  if (data.applicant && (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither')) {
     unset(body, 'applicant.isStoppingWorkToCareForChild')
   }
   // 4.m. hasSocialHousing
