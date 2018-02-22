@@ -21,6 +21,7 @@ const validate = (values) => {
   const isPrincipalCarerForOneYearFromApplicationDate = get(values, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
   const workOrStudy = get(values, 'applicant.workOrStudy')
   const expectingChild = get(values, 'applicant.expectingChild')
+  const doesPartnerWork = get(values, 'applicant.doesPartnerWork')
 
   // Your background
 
@@ -113,7 +114,15 @@ const validate = (values) => {
   }
 
   if (relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true') {
+    check('applicant.doesPartnerWork')(fields, values, errors)
+  }
+
+  if (doesPartnerWork === 'true') {
     check('partner.worksWeeklyHours')(fields, values, errors)
+  }
+
+  if (expectingChild === 'true' && (workOrStudy === 'work' || workOrStudy === 'both')) {
+    check('applicant.isStoppingWorkToCareForChild')(fields, values, errors)
   }
 
   // Income

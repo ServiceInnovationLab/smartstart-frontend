@@ -54,6 +54,7 @@ class EntitlementsQuestions extends Component {
       isPrincipalCarerForOneYearFromApplicationDate,
       workOrStudy,
       expectingChild,
+      doesPartnerWork,
       hasAccommodationCosts
     } = this.props
     const overFifteens = !!(
@@ -336,11 +337,14 @@ class EntitlementsQuestions extends Component {
               </Accordion>
             </div>
             }
+            { relationshipStatus && relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' &&
+              <Field {...getFieldProps(fields, 'applicant.doesPartnerWork')} />
+            }
+            { doesPartnerWork === 'true' &&
+              <Field {...getFieldProps(fields, 'partner.worksWeeklyHours')} />
+            }
             {(workOrStudy === 'work' || workOrStudy === 'both') && expectingChild === 'true' &&
               <Field {...getFieldProps(fields, 'applicant.isStoppingWorkToCareForChild')} />
-            }
-            { relationshipStatus && relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' &&
-              <Field {...getFieldProps(fields, 'partner.worksWeeklyHours')} />
             }
           </div>
           </div>
@@ -497,6 +501,7 @@ EntitlementsQuestions.propTypes = {
   isPrincipalCarerForOneYearFromApplicationDate: PropTypes.string,
   workOrStudy: PropTypes.string,
   expectingChild: PropTypes.string,
+  doesPartnerWork: PropTypes.string,
   hasAccommodationCosts: PropTypes.string
 }
 
@@ -518,6 +523,7 @@ const mapStateToProps = (state) => ({
   isPrincipalCarerForOneYearFromApplicationDate: selector(state, 'applicant.isPrincipalCarerForOneYearFromApplicationDate'),
   workOrStudy: selector(state, 'applicant.workOrStudy'),
   expectingChild: selector(state, 'applicant.expectingChild'),
+  doesPartnerWork: selector(state, 'applicant.doesPartnerWork'),
   hasAccommodationCosts: selector(state, 'applicant.hasAccommodationCosts')
 })
 

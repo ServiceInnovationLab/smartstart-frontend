@@ -168,15 +168,23 @@ const transform = (data, schema) => {
   // and set default 0 values if not already defined
   if (data.applicant && data.applicant.relationshipStatus !== 'single') {
     if (
+      data.applicant.relationshipStatus !== 'single' &&
       typeof data.applicant.worksWeeklyHours !== "undefined" &&
+      !data.applicant.isInadequatelySupportedByPartner &&
+      data.applicant.doesPartnerWork &&
       data.partner &&
-      typeof data.partner.worksWeeklyHours !== "undefined" &&
-      !data.applicant.isInadequatelySupportedByPartner
+      typeof data.partner.worksWeeklyHours !== "undefined"
     ) {
       set(body, 'couple.worksWeeklyHours', data.applicant.worksWeeklyHours + data.partner.worksWeeklyHours)
     } else if (typeof data.applicant.worksWeeklyHours !== "undefined") {
       set(body, 'couple.worksWeeklyHours', data.applicant.worksWeeklyHours)
-    } else if (typeof data.partner.worksWeeklyHours !== "undefined") {
+    } else if (
+      data.applicant.relationshipStatus !== 'single' &&
+      !data.applicant.isInadequatelySupportedByPartner &&
+      data.applicant.doesPartnerWork &&
+      data.partner &&
+      typeof data.partner.worksWeeklyHours !== "undefined"
+    ) {
       set(body, 'couple.worksWeeklyHours', data.partner.worksWeeklyHours)
     } else {
       set(body, 'applicant.worksWeeklyHours', 0)
@@ -257,7 +265,11 @@ const transform = (data, schema) => {
   if (data.applicant && data.applicant.isInadequatelySupportedByPartner) {
     unset(body, 'partner.worksWeeklyHours')
   }
-  // 4.o. delete any empty objects (there should always be something in applicant)
+  // 4.o. doesPartnerWork
+  if (data.applicant && !data.applicant.doesPartnerWork) {
+    unset(body, 'partner.worksWeeklyHours')
+  }
+  // 4.p. delete any empty objects (there should always be something in applicant)
   if (body.parents && Object.keys(body.parents).length === 0) {
     unset(body, 'parents')
   }
