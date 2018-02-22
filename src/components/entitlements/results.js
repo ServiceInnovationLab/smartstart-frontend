@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import { Link } from 'react-router'
 import { fetchMetadata, postToReasoner } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
+import Accordion from 'components/form/accordion'
 import Benefit from 'components/entitlements/benefit'
 import './results.scss'
 
@@ -100,7 +101,7 @@ class EntitlementsResults extends Component {
       return <div className='unavailable-notice'>
         <h3>Sorry!</h3>
         <p>
-          Benefits eligibility is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/results'} onClick={this.retry}>try again</Link> shortly.
+          The financial help tool is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/results'} onClick={this.retry}>try again</Link> shortly.
         </p>
       </div>
     }
@@ -108,25 +109,26 @@ class EntitlementsResults extends Component {
     if (Object.keys(eligibilityRequest).length === 0) {
       // no question data - user refreshed or directly came to this page
       return <div className='unavailable-notice entitlements-results'>
-        <h3>Oops!</h3>
-        <p>
-          It doesn’t look like we have any question information from you - did you accidentally refresh this page? Sorry, because we don’t store any of your information for privacy reasons you’ll need to <Link to={'/financial-help/questions'}>answer the questions again</Link>.
-        </p>
+        <h3>It looks like you haven’t answered any questions yet&hellip;</h3>
+        <p>If you refreshed this page or bookmarked it from a previous session your answers and results will have disappeared, as we don’t save any of your information for privacy reasons.</p>
+        <p>If you want to see what you might be eligible for, <Link to={'/financial-help/questions'}>please answer these questions</Link>.</p>
 
         <div className='form eligibility'>
-          <Link to={'/financial-help/questions'} role="button" className="button change-answers">Go to the questions</Link>
+          <Link to={'/financial-help/questions'} role="button" className="button change-answers">Answer questions</Link>
         </div>
       </div>
     }
 
     return (
       <div className='entitlements-results'>
-        <p>The results shown below are only an indication of the benefits and payments you may be eligible for.</p>
-        <p>The estimate is based on:</p>
-        <ul>
-          <li>the answers you provided to the questions;</li>
-          <li>rates on 14 February 2018</li>
-        </ul>
+        {permitted.length > 0 || maybe.length > 0 && <div>
+          <p>The results shown below are only an indication of the benefits and payments you may be eligible for.</p>
+          <p>The estimate is based on:</p>
+          <ul>
+            <li>the answers you provided to the questions;</li>
+            <li>rates on 14 February 2018</li>
+          </ul>
+        </div>}
 
         {permitted.length > 0 &&
           <h3 className='section-heading'>
@@ -149,11 +151,41 @@ class EntitlementsResults extends Component {
         )}
 
         {permitted.length === 0 && maybe.length === 0 &&
-          <div className='all-forbidden'>
-            <h3>Sorry!</h3>
+          <div className='all-forbidden form eligibility'>
+            <h3>It doesn’t look like you’re eligible&hellip;</h3>
             <p>
-              We haven’t found any benefits that it seems like you might be eligible for. Perhaps you’d like to try <Link to={'/financial-help/questions'}>changing some of your answers</Link>?
+              Based on your answers, it looks like you’re probably not eligible for any of the benefits and payments included in this tool. You can <Link to={'/financial-help/questions'}>change your answers</Link> if they don’t reflect your current situation or if your situation changes.
             </p>
+            <div className="expandable-group">
+              <Accordion>
+                <Accordion.Toggle>
+                Do you and your children need urgent financial help?
+                </Accordion.Toggle>
+                <Accordion.Content>
+                  <p>You can apply for the emergency benefit if you need urgent financial help and aren’t currently receiving any other benefits from Work and Income. The emergency benefit is a one-off payment that’s calculated based on your circumstances.</p>
+                  <p>You’ll need to call Work and Income to discuss your circumstances with them.</p>
+                  <p>Work and Income freephone: <a href='tel:0800559009'>0800 559 009</a></p>
+                  <h5>For other urgent help:</h5>
+                  <p>Foodbank New Zealand help families in need by providing food parcels and other services. </p>
+                  <p><a href='https://www.foodbank.co.nz/foodbanks' target='_blank' rel='noopener noreferrer'>Find a foodbank near you</a></p>
+                  <p>Citizens Advice Bureau has trained volunteers that will provide you with free and confidential information and guidance on where you can get urgent help in your local area.</p>
+                  <p>Citizens Advice Bureau freephone: <a href='tel:0800367222'>0800 367 222</a></p>
+                  <p><a href='http://www.cab.org.nz/acabnearyou/Pages/home.aspx'  target='_blank' rel='noopener noreferrer'>Find a Citizens Advice Bureau near you</a></p>
+
+                </Accordion.Content>
+              </Accordion>
+              <Accordion>
+                <Accordion.Toggle>
+                Am I eligible for any other benefits and payments?
+                </Accordion.Toggle>
+                <Accordion.Content>
+                  <p>This tool only covers 17 benefits and payments - there are other benefits and payments that you may be eligible for.</p>
+
+                  <p>You can use Work and Income’s ‘Check what you might get’ tool to see if you’re eligible for any other financial help.</p>
+                  <p><a href='https://www.workandincome.govt.nz/online-services/eligibility/index.html' target='_blank' rel='noopener noreferrer'>Check what you might get</a></p>
+                </Accordion.Content>
+              </Accordion>
+            </div>
           </div>
         }
 

@@ -301,7 +301,7 @@ export const fields = {
   'applicant.isStoppingWorkToCareForChild': {
     name: 'applicant.isStoppingWorkToCareForChild',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Will you stop working when your child is born or adopted?`),
+    label: makeMandatoryLabel(`Will you or your partner stop working when your child is born or adopted?`),
     validate: [required],
     options: booleanOptions
   },

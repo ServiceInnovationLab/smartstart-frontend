@@ -75,7 +75,7 @@ class EntitlementsQuestions extends Component {
       return <div className='unavailable-notice'>
         <h3>Sorry!</h3>
         <p>
-          Benefits eligibility is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
+          The financial help tool is currently unavailable. Right now we’re working on getting back online as soon as possible. Thank you for your patience - please <Link to={'/financial-help/questions'} onClick={this.retry}>try again</Link> shortly.
         </p>
       </div>
     }
