@@ -343,7 +343,7 @@ class EntitlementsQuestions extends Component {
             { doesPartnerWork === 'true' &&
               <Field {...getFieldProps(fields, 'partner.worksWeeklyHours')} />
             }
-            {(workOrStudy === 'work' || workOrStudy === 'both') && expectingChild === 'true' &&
+            {(workOrStudy === 'work' || workOrStudy === 'both' || doesPartnerWork === 'true') && expectingChild === 'true' &&
               <Field {...getFieldProps(fields, 'applicant.isStoppingWorkToCareForChild')} />
             }
           </div>

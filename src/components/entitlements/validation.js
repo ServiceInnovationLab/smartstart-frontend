@@ -121,7 +121,7 @@ const validate = (values) => {
     check('partner.worksWeeklyHours')(fields, values, errors)
   }
 
-  if (expectingChild === 'true' && (workOrStudy === 'work' || workOrStudy === 'both')) {
+  if (expectingChild === 'true' && (workOrStudy === 'work' || workOrStudy === 'both' || doesPartnerWork === 'true')) {
     check('applicant.isStoppingWorkToCareForChild')(fields, values, errors)
   }
 
