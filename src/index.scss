@@ -244,6 +244,10 @@ ul {
   p + & {
     margin-top: -10px; // tighten up spacing between to 6px
   }
+
+  a {
+    display: inline;
+  }
 }
 
 ol {
