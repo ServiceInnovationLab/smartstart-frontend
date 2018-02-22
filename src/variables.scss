@@ -148,7 +148,7 @@ $entitlements-secondary: #77a5d1;
 $entitlements-tertiary: #e3edf5;
 $entitlements-form-bg: #f1f6fa;
 $entitlements-form: $entitlements-primary;
-$entitlements-accordian: $entitlements-tertiary;
+$entitlements-accordian: darken($entitlements-tertiary, 5%);
 $entitlements-accordian-border: $entitlements-secondary;
 $entitlements-form-hover: $entitlements-tertiary;
 $entitlements-subheadings: $entitlements-primary;

@@ -124,7 +124,7 @@ class EntitlementsResults extends Component {
         <p>The results shown below are only an indication of the benefits and payments you may be eligible for.</p>
         <p>The estimate is based on:</p>
         <ul>
-          <li>the anwers you provided to the questions;</li>
+          <li>the answers you provided to the questions;</li>
           <li>rates on 14 February 2018</li>
         </ul>
 

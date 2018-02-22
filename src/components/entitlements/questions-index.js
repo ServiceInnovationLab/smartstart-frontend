@@ -190,14 +190,16 @@ class EntitlementsQuestions extends Component {
                 { childHasDisability === 'true' &&
                   <div className='conditional-field'>
                     <Field {...getFieldProps(fields, 'child.requiresConstantCareAndAttention')} />
-                    <Accordion>
-                      <Accordion.Toggle>
-                      What does constant care and attention mean
-                      </Accordion.Toggle>
-                      <Accordion.Content>
-                        <p>This means a child that requires constant care and attention because of their disability, over and above that of a child of a similar age. It also means that they will be likely to need that care and attention for more than 12 months.</p>
-                      </Accordion.Content>
-                    </Accordion>
+                    <div className="expandable-group secondary">
+                      <Accordion>
+                        <Accordion.Toggle>
+                        What does constant care and attention mean
+                        </Accordion.Toggle>
+                        <Accordion.Content>
+                          <p>This means a child that requires constant care and attention because of their disability, over and above that of a child of a similar age. It also means that they will be likely to need that care and attention for more than 12 months.</p>
+                        </Accordion.Content>
+                      </Accordion>
+                    </div>
                     { requiresConstantCare === 'true' &&
                       <Field {...getFieldProps(fields, 'child.constantCareUnderSix')} />
                     }
@@ -280,14 +282,16 @@ class EntitlementsQuestions extends Component {
                   <Field {...getFieldProps(fields, 'children.birthParents')} />
                 }
                 {isPrincipalCarerForOneYearFromApplicationDate === 'true' &&
-                  <Accordion>
-                    <Accordion.Toggle>
-                    Why do you need to know this information?
-                    </Accordion.Toggle>
-                    <Accordion.Content>
-                      <p>This information is needed to be able to provide you with accurate results. The benefits and/or payments you may be entitled to depend on why the birth parents are unable to care for their child/children.</p>
-                    </Accordion.Content>
-                  </Accordion>
+                  <div className="expandable-group secondary">
+                    <Accordion>
+                      <Accordion.Toggle>
+                      Why do you need to know this information?
+                      </Accordion.Toggle>
+                      <Accordion.Content>
+                        <p>This information is needed to be able to provide you with accurate results. The benefits and/or payments you may be entitled to depend on why the birth parents are unable to care for their child/children.</p>
+                      </Accordion.Content>
+                    </Accordion>
+                  </div>
                 }
               </div>
             }
