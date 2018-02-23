@@ -46,11 +46,11 @@ const validate = (values) => {
   }
 
   if (numberOfChildren > 2) {
-    check('applicant.needsDomesticSupport﻿')(fields, values, errors)
+    check('applicant.needsDomesticSupport')(fields, values, errors)
   }
 
   if (numberOfChildren > 0) {
-    check('children.ages﻿')(fields, values, errors)
+    check('children.ages')(fields, values, errors)
     check('child.hasSeriousDisability')(fields, values, errors)
   }
 

@@ -161,7 +161,7 @@ class EntitlementsQuestions extends Component {
             </div>
             { numberOfChildren > 2 &&
               <div className='conditional-field'>
-                <Field {...getFieldProps(fields, 'applicant.needsDomesticSupport﻿')} />
+                <Field {...getFieldProps(fields, 'applicant.needsDomesticSupport')} />
               </div>
             }
             { numberOfChildren > 0 &&
