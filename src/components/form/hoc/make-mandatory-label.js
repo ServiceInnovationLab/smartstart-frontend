@@ -9,8 +9,7 @@ export const makeMandatoryAriaLabel = label =>
 const makeMandatoryLabel = (label) =>
   <span>
     {label}
-    <span className="visuallyhidden">(required)</span>
+    <span className="visuallyhidden"> (required)</span>
   </span>
 
 export default makeMandatoryLabel
-
