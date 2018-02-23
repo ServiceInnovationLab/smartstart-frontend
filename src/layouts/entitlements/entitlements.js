@@ -21,7 +21,6 @@ class EntitlementsPage extends Component {
                 Tirohia ngā āwhina ā-pūtea ka taea<br />
                 <span className='english'>See what financial help is available</span>
               </h2>
-              <p>Use this planning tool to see which benefits and payments you might be eligible for.</p>
             </div>
           </div>
           <div id='content' className='plain-layout-page full-width entitlements-page'>

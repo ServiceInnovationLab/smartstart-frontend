@@ -312,7 +312,21 @@ class EntitlementsQuestions extends Component {
 
             <Field {...getFieldProps(fields, 'applicant.workOrStudy')} />
             {(workOrStudy === 'study' || workOrStudy === 'both') &&
-              <Field {...getFieldProps(fields, 'applicant.isStudyingFullTime')} />
+              <div className='component-grouping'>
+                <Field {...getFieldProps(fields, 'applicant.isStudyingFullTime')} />
+                <div className="expandable-group secondary">
+                  <Accordion>
+                    <Accordion.Toggle>
+                    How do I know if I’m studying full-time?
+                    </Accordion.Toggle>
+                    <Accordion.Content>
+                      <p>Each tertiary course has a value assigned to it called EFTS (equivalent full-time student). For a course to be approved as full-time, the length of that course must meet a certain EFTS value.</p>
+                      <p><a href='https://www.studylink.govt.nz/about-studylink/glossary/efts.html' target='_blank' rel='noopener noreferrer'>How EFTS works</a></p>
+                      <p>If you’re unsure about whether you’re studying full-time, check with your education provider.</p>
+                    </Accordion.Content>
+                  </Accordion>
+                </div>
+              </div>
             }
             {(workOrStudy === 'work' || workOrStudy === 'both') &&
               <div className='component-grouping'>
