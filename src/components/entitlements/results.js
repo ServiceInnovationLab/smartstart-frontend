@@ -171,7 +171,6 @@ class EntitlementsResults extends Component {
                   <p>Citizens Advice Bureau has trained volunteers that will provide you with free and confidential information and guidance on where you can get urgent help in your local area.</p>
                   <p>Citizens Advice Bureau freephone: <a href='tel:0800367222'>0800 367 222</a></p>
                   <p><a href='http://www.cab.org.nz/acabnearyou/Pages/home.aspx'  target='_blank' rel='noopener noreferrer'>Find a Citizens Advice Bureau near you</a></p>
-
                 </Accordion.Content>
               </Accordion>
               <Accordion>

@@ -142,8 +142,8 @@ export const fields = {
     validate: [required],
   },
 
-  'applicant.needsDomesticSupport﻿': {
-    name: 'applicant.needsDomesticSupport﻿',
+  'applicant.needsDomesticSupport': {
+    name: 'applicant.needsDomesticSupport',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Are any of your children twins, triplets etc?`),
     validate: [required],
