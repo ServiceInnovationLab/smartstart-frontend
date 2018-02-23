@@ -1,7 +1,7 @@
 // responsive breakpoints
 $extra-small-devices:  'only screen and (max-width: 390px)';
 $tablet-and-above:     'only screen and (min-width: 768px)';
-$tablet-only:          'only screen and (min-width: 768px and max-width: 991px)';
+$tablet-only:          'only screen and (min-width: 768px) and (max-width: 991px)';
 $desktop-and-above:    'only screen and (min-width: 992px)';
 $high-res:             'only screen and (min-resolution: 2dppx)';
 $high-res-desktop:     'only screen and (min-width: 992px) and (min-resolution: 2dppx)';
@@ -148,7 +148,7 @@ $entitlements-secondary: #77a5d1;
 $entitlements-tertiary: #e3edf5;
 $entitlements-form-bg: #f1f6fa;
 $entitlements-form: $entitlements-primary;
-$entitlements-accordian: darken($entitlements-tertiary, 5%);
+$entitlements-accordian: darken($entitlements-tertiary, 3%);
 $entitlements-accordian-border: $entitlements-secondary;
 $entitlements-form-hover: $entitlements-tertiary;
 $entitlements-subheadings: $entitlements-primary;
