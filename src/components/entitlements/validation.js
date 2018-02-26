@@ -117,11 +117,11 @@ const validate = (values) => {
     check('applicant.doesPartnerWork')(fields, values, errors)
   }
 
-  if (doesPartnerWork === 'true') {
+  if (relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' && doesPartnerWork === 'true') {
     check('partner.worksWeeklyHours')(fields, values, errors)
   }
 
-  if (expectingChild === 'true' && (workOrStudy === 'work' || workOrStudy === 'both' || doesPartnerWork === 'true')) {
+  if (expectingChild === 'true' && (workOrStudy === 'work' || workOrStudy === 'both' || (relationshipStatus !== 'single' && isInadequatelySupportedByPartner !== 'true' && doesPartnerWork === 'true'))) {
     check('applicant.isStoppingWorkToCareForChild')(fields, values, errors)
   }
 
