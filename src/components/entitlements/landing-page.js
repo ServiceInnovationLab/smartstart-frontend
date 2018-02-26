@@ -24,7 +24,7 @@ class EntitlementsLandingPage extends Component {
         </div>
 
         <ul>
-          <li>The information you enter is anonymous, it isn’t shared with anyone and we won’t save anything, even if you’re logged in to RealMe (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</li>
+          <li>The information you enter is anonymous, it isn’t shared with anyone and we won’t save anything, even if you’re logged in via RealMe (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</li>
           <li>This planning tool will only show you the maximum amounts you could receive – it won’t calculate amounts based on your situation.</li>
           <li>It’s intended for parents and expectant parents who are New Zealand citizens or residents.</li>
           <li>You can see what you might be eligible for based on your current or future situation.</li>
