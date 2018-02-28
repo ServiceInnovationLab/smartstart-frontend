@@ -97,7 +97,7 @@ class EntitlementsQuestions extends Component {
 
             { isNZResident === 'false' &&
               <div className='instruction'>
-                If you aren't a New Zealand citizen or resident, you aren't eligible for any of the benefits and payments covered by this tool.
+                If you aren’t a New Zealand citizen or resident, you’re probably not eligible for any of the benefits and payments covered by this tool.
               </div>
             }
 
