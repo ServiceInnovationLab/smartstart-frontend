@@ -161,6 +161,8 @@ const transform = (data, schema) => {
   // 3.n. if applicant answered yes to gaveBirthToThisChild set isParent to true also
   if (data.applicant && data.applicant.gaveBirthToThisChild) {
     set(body, 'applicant.isParent', true)
+  } else if (data.applicant && data.applicant.gaveBirthToThisChild === false) {
+    set(body, 'applicant.isParent', false)
   }
   // 3.o. we don't ask about preparing for employment (for jobseekers) so hardcode to true
   set(body, 'recipient.prepareForEmployment', true)
