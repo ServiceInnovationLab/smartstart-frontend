@@ -1,3 +1,4 @@
+import React from 'react'
 import makeMandatoryLabel from 'components/form/hoc/make-mandatory-label'
 import renderField from 'components/form/fields/render-field'
 import renderRadioGroup from 'components/form/fields/render-radio-group'
@@ -327,7 +328,7 @@ export const fields = {
   'income.applicant': { // this is NOT a RaaP atom, we don't send it directly
     name: 'income.applicant',
     component: renderIncome,
-    label: makeMandatoryLabel(`What’s your current gross income?`),
+    label: makeMandatoryLabel(<span>What’s your current gross income?<span className="visuallyhidden"> Enter a dollar amount and then select how frequently you recieve that amount.</span></span>),
     validate: [required, number],
     options: frequencyOptions
   },
@@ -335,7 +336,7 @@ export const fields = {
   'income.spouse': { // this is NOT a RaaP atom, we don't send it directly
     name: 'income.spouse',
     component: renderIncome,
-    label: makeMandatoryLabel(`What’s your partner’s current gross income?`),
+    label: makeMandatoryLabel(<span>What’s your partner’s current gross income?<span className="visuallyhidden"> Enter a dollar amount and then select how frequently they recieve that amount.</span></span>),
     validate: [required, number],
     options: frequencyOptions
   },
