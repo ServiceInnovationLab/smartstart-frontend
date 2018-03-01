@@ -10,10 +10,10 @@
     "lint": "./node_modules/.bin/eslint src",
     "coverage": "./node_modules/.bin/jest --coverage",
     "build": "node build.js",
-    "build:remotecontent": "node build.js --piwik 2 --endpoint https://www.govt.nz/BoacAPI/v1/all",
-    "start": "./node_modules/.bin/webpack-dev-server --inline --piwik 2 --endpoint /api/request/content/timeline",
-    "start:remotecontent": "./node_modules/.bin/webpack-dev-server --inline --piwik 2 --endpoint https://www.govt.nz/BoacAPI/v1/all",
-    "start:snapshot": "./node_modules/.bin/webpack-dev-server --inline --piwik 2 --endpoint /assets/snapshot-data.json"
+    "build:remotecontent": "node build.js --endpoint https://www.govt.nz/BoacAPI/v1/all",
+    "start": "./node_modules/.bin/webpack-dev-server --inline",
+    "start:snapshot": "./node_modules/.bin/webpack-dev-server --inline --endpoint /assets/snapshot-data.json",
+    "start:remotecontent": "./node_modules/.bin/webpack-dev-server --inline --endpoint https://www.govt.nz/BoacAPI/v1/all"
   },
   "keywords": [
     "react",
@@ -98,6 +98,7 @@
       "PIWIK_INSTANCE": "http://localhost/mock-piwik/",
       "API_ENDPOINT": "/assets/snapshot-data.json",
       "GOOGLE_API_KEY": "blahblahblah",
+      "RAAP_INSTANCE": "http://localhost/mock-raap/",
       "RAAP_API_KEY": "blahblahblah"
     },
     "moduleDirectories": [

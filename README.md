@@ -72,7 +72,7 @@ You can edit `local-config.js` to add your own API keys.
 
 #### Development workflow
 
-1. `npm start:remotecontent` will watch files for changes as you edit them locally.
+1. `npm start` will watch files for changes as you edit them locally.
 
 ## Testing and linting
 
@@ -118,6 +118,11 @@ For example for the govt.nz API endpoint:
 
 `npm run build -- --endpoint https://www.govt.nz/BoacAPI/v1/all`
 
+#### piwik_instance
+
+Location of your Piwik analytics instance. If not supplied, analytics API calls
+will just be sent to `/`.
+
 #### piwik
 
 This stipulates which Piwik site ID number to use. It should be a numeric value.
@@ -130,6 +135,11 @@ For example for the development servers Piwik ID number:
 
 API key for google maps/places. Normally supplied via configuration.
 
+#### raap_instance
+
+Location of your RaaP instance. If not supplied, RaaP API calls
+will just be sent to `/`.
+
 #### raap_api_key
 
 API key for NZ RaaP (used for the entitlements section). Normally supplied via
@@ -141,9 +151,9 @@ configuration.
 
 ### Building locally
 
-If you want to mimic the automated build process locally, there are two shortcut
-commands for common local configuration: `npm run build:snapshot` and `npm run
-build:remotecontent` which point to the local data snapshot and govt.nz's API
-respectively.
+If you want to mimic the automated build process locally, there is a shortcut
+command for a common local configuration: `npm run build:remotecontent` which
+points to govt.nz's API. Note that no other configuration is
+supplied, so some functionality will not be available.
 
 If your git tree is not clean, you can supply the --f flag to force a build.

@@ -23,11 +23,17 @@ if (yargs.endpoint) {
 if (yargs.piwik) {
   buildCommand = buildCommand + ' --piwik ' + yargs.piwik
 }
+if (yargs.piwik_instance) {
+  buildCommand = buildCommand + ' --piwik_instance ' + yargs.piwik_instance
+}
 if (yargs.google_api_key) {
   buildCommand = buildCommand + ' --google_api_key ' + yargs.google_api_key
 }
 if (yargs.raap_api_key) {
   buildCommand = buildCommand + ' --raap_api_key ' + yargs.raap_api_key
+}
+if (yargs.raap_instance) {
+  buildCommand = buildCommand + ' --raap_instance ' + yargs.raap_instance
 }
 commands.push(buildCommand)
 

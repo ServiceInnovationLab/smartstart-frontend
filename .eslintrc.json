@@ -17,16 +17,15 @@
         "plugin:react/recommended"
     ],
     "globals": {
-      "document": true,
-      "window": true,
       "fetch": true,
+      "process": true,
       "URLSearchParams": true,
       "API_ENDPOINT": true,
       "PIWIK_INSTANCE": true,
       "PIWIK_SITE": true,
-      "process": true,
       "GOOGLE_API_KEY": true,
-      "RAAP_API_KEY": true
+      "RAAP_API_KEY": true,
+      "RAAP_INSTANCE": true
     },
     "rules": {
       "no-class-assign": "off"
