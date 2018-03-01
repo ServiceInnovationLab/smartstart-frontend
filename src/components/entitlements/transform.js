@@ -161,6 +161,8 @@ const transform = (data, schema) => {
   // 3.n. if applicant answered yes to gaveBirthToThisChild set isParent to true also
   if (data.applicant && data.applicant.gaveBirthToThisChild) {
     set(body, 'applicant.isParent', true)
+  } else if (data.applicant && data.applicant.gaveBirthToThisChild === false) {
+    set(body, 'applicant.isParent', false)
   }
   // 3.o. we don't ask about preparing for employment (for jobseekers) so hardcode to true
   set(body, 'recipient.prepareForEmployment', true)
@@ -195,6 +197,10 @@ const transform = (data, schema) => {
   // 3.q. applicant.isPrincipalCarerForProportion needs to be expressed as a number
   if (data.applicant && data.applicant.isPrincipalCarerForProportion) {
     set(body, 'applicant.isPrincipalCarerForProportion', 33)
+  } else if (data.applicant && data.applicant.allChildrenInTheirFullTimeCare) {
+    set(body, 'applicant.isPrincipalCarerForProportion', 100)
+  } else {
+    set(body, 'applicant.isPrincipalCarerForProportion', 0)
   }
   // 3.u. assume applicant.IsStudyingFulltimeSecondarySchool is true if they are studying full time
   // this ensures that Student Allowance will come back if the are in the right age range & have partner
