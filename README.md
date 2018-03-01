@@ -1,12 +1,20 @@
 # smartstart-frontend
 
+[SmartStart](https://smartstart.services.govt.nz) provides step-by-step
+information and support to help users access the right services for them and
+their baby.
+
+This repository is the frontend. It users React, Redux and ES6. There is a
+separate repository for `smartstart-backend`, a Django application that provides
+user management and preferences.
+
 ## Folder structure
 
 - src `the uncompiled project codebase`
   - actions `redux actions and action creators`
   - assets `static files that get copied over unchanged - need to build to make available`
   - components `react components`
-  - containers `special parent react component that manages redux setup`
+  - containers `special parent react components that manage both redux setup and routes`
   - static-pages `standalone html error pages which are served directly by nginx`
   - layouts `page structures plus the header and footer`
   - store `redux data store setup and reducers`
@@ -25,22 +33,20 @@
 
 ### Catalyst dev env
 
+If you're not a Catalyst developer, see the [local
+development](#local-development) instructions below.
+
 1. Make sure you have a dedicated environment number assigned to you (e.g. dev09).
-- If not ask someone to set it up for you (ask the lead dev)
-- You will need to ensure that your debian package has been uploaded to the repository, sysops will take care of this.
+- If not ask someone to set it up for you (ask the lead dev).
+- Your user package must have been uploaded to the repository, see the new staff instructions on the wiki.
 2. Clone the ops repository from the [LEF ops
 repo](https://gitlab.catalyst.net.nz/lef/ops)
-3. Install your environment `./make_smartstart_environment`
-4. It would ask you for a vault password, in separate terminal run `ssh cat-prod-secret pview -d lefdev ansible-vault`
-- If you have access, you will see the password
-- If you don't have access, ask a sysadmin to be added to the `lefdev` group on `cat-prod-secret`
-5. Copy paste password to terminal with ansible script that asked for it
-If everything goes successfully, you should have your environment.
+3. Install your environment by following [the instructions](https://gitlab.catalyst.net.nz/lef/ops#setup-an-environment)
 
 #### Development workflow
 
 1. ssh to dev server `ssh ubuntu@frontend.dev[YOUR_ENV].smartstart.services.govt.nz`
-2. Run `run-dev`. It starts app on port 8080, watches files and automatically refreshes the browser.
+2. Run `run-dev`. It starts the app on port 8080, watches files and automatically refreshes the browser.
 
 You can do one of the following:
 1. Modify files directly on web server
@@ -53,7 +59,8 @@ The web page should automatically reload as you make changes.
 ### Local development
 
 You will be unable to use functionality which requires the SmartStart backend,
-e.g. logging in or using the BRO form.
+e.g. logging in or using the BRO form, unless you've separately set up a working
+`smartstart-backend` instance and a suitable reverse proxy.
 
 1. Clone the repository from https://gitlab.catalyst.net.nz/lef/smartstart-frontend
 2. If you don't already have Node installed, install Node version *8.x* by following the instructions at [https://nodejs.org/](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions) or as appropriate for your OS.
@@ -128,9 +135,9 @@ API key for google maps/places. Normally supplied via configuration.
 API key for NZ RaaP (used for the entitlements section). Normally supplied via
 configuration.
 
-#### A full example
+#### An example build command
 
-`npm run build -- --piwik 2 --endpoint /assets/snapshot-data.json`
+`npm run build -- --endpoint /assets/snapshot-data.json`
 
 ### Building locally
 
