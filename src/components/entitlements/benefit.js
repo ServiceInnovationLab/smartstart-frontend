@@ -25,7 +25,7 @@ const Benefit = props => {
         <p className='apply-online info-bullet'><a href='https://www.workandincome.govt.nz/about-work-and-income/contact-us/phone-numbers.html' target='_blank' rel='noopener noreferrer'>Contact Work and Income</a> to talk about your circumstances and they’ll explain how to apply.</p>
       }
       {metadata.WINZappointmentRequired &&
-        <p className='winz-appointment info-bullet'>Attending an appoiontment with Work and Income is required as part of your application.</p>
+        <p className='winz-appointment info-bullet'>Attending an appointment with Work and Income is required as part of your application.</p>
       }
       {metadata.medicalCertRequired &&
         <p className='medical-cert info-bullet'>A medical certificate is required as part of your application.</p>

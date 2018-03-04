@@ -23,7 +23,7 @@
       "paymentDescription": "for each child up to",
       "paymentValue": "$253",
       "paymentFrequency": "per week",
-      "notes": "You can only get this subsidy if your child is under 5 (or under 6 if they have a disability). | You should apply at least 3 to 4 weeks before you need the subsidy to start. | If you currently get 20 hours free ECE, you can't get the childcare subisdy for the same hours."
+      "notes": "You can only get this subsidy if your child is under 5 (or under 6 if they have a disability). | You should apply at least 3 to 4 weeks before you need the subsidy to start. | If you currently get 20 hours free ECE, you can't get the childcare subsidy for the same hours."
    },
    "isChildDisabilityAllowance": {
       "name": "Child Disability Allowance",
@@ -36,7 +36,7 @@
       "paymentDescription": "for each child",
       "paymentValue": "$47",
       "paymentFrequency": "per week",
-      "notes": "You can't get this allowance if the child already gets a benefit (expect for the Orphan's or Unsupported Child's Benefit). | If you're not already getting a benefit from Work and Income, a meeting will be required as part of this applciation."
+      "notes": "You can't get this allowance if the child already gets a benefit (expect for the Orphan's or Unsupported Child's Benefit). | If you're not already getting a benefit from Work and Income, a meeting will be required as part of this application."
    },
    "isCommunityServicesCard": {
       "name": "Community Services Card",
@@ -75,13 +75,13 @@
       "paymentDescription": "up to ",
       "paymentValue": "$379",
       "paymentFrequency": "per week",
-      "notes": "To get this benefit you must be willing to accept suitable work"
+      "notes": "To get this benefit you must be willing to accept suitable work."
    },
    "isOrphansBenefit": {
       "name": "Orphans Benefit",
       "description": "A Work and Income payment that helps carers supporting a child or young person whose parents have died or can't be found, or can’t look after them because they have a long-term illness or incapacity.",
       "moreInformationLink": "https://www.workandincome.govt.nz/products/a-z-benefits/orphans-benefit.html",
-      "applicationLink": " ",
+      "applicationLink": "",
       "WINZapplicationLink": true,
       "WINZappointmentRequired": true,
       "medicalCertRequired": false,
@@ -92,7 +92,7 @@
    },
    "isPaidParentalLeave": {
       "name": "Paid Parental Leave",
-      "description": "An Inland Revenue payment for eligible mothers and other primary carers, such as adoptive parents, to go towards the loss of income when they take parental leave or stop working to care fortheir newborn baby or a child under the age of six who is now in their care.",
+      "description": "An Inland Revenue payment for eligible mothers and other primary carers, such as adoptive parents, to go towards the loss of income when they take parental leave or stop working to care for their newborn baby or a child under the age of six who is now in their care.",
       "moreInformationLink": "http://www.ird.govt.nz/yoursituation-ind/parents/parents-paid-parental-leave.html",
       "applicationLink": "http://www.ird.govt.nz/forms-guides/number/forms-800-899/ir880-form-paid-parental-leave-app.html",
       "WINZapplicationLink": false,
@@ -153,7 +153,7 @@
       "paymentDescription": "up to ",
       "paymentValue": "$206",
       "paymentFrequency": "per week",
-      "notes": "If the child gets income from a trust, ACC, investments or their parents estate, it could affect your eligibility for this payent and the amount you get | If you apply, Work and Income will invite the parent/caregiver of the child to discuss the situation. "
+      "notes": "If the child gets income from a trust, ACC, investments or their parents estate, it could affect your eligibility for this payment and the amount you get. | If you apply, Work and Income will invite the parent/caregiver of the child to discuss the situation. "
    },
    "isWorkingForFamiliesFamilyTaxCredit": {
       "name": "Working for Families Family Tax Credit",
