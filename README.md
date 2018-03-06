@@ -4,7 +4,7 @@
 information and support to help users access the right services for them and
 their baby.
 
-This repository is the frontend. It users React, Redux and ES6. There is a
+This repository is the frontend. It uses React, Redux and ES6. There is a
 separate repository for `smartstart-backend`, a Django application that provides
 user management and preferences.
 
