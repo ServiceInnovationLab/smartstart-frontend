@@ -72,7 +72,7 @@ function failureMetadata() {
 export function fetchSchema() {
   return dispatch => {
     dispatch(requestSchema())
-    return fetchWithRetry('https://nz.raap.d61.io/api/v0/domain/nz-entitlements-eligibility/schema?criteria=draft', {
+    return fetchWithRetry(RAAP_INSTANCE + '/schema?criteria=draft', {
       retries: 3,
       retryDelay: 500,
       method: 'GET',
@@ -92,7 +92,7 @@ export function fetchSchema() {
 export function postToReasoner(body) {
   return dispatch => {
     dispatch(requestEligibility(body))
-    return fetchWithRetry('https://nz.raap.d61.io/api/v0/domain/nz-entitlements-eligibility/reasoning/reason?criteria=draft', {
+    return fetchWithRetry(RAAP_INSTANCE + '/reasoning/reason?criteria=draft', {
       retries: 3,
       retryDelay: 500,
       method: 'POST',

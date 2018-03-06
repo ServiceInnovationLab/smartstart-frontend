@@ -16,8 +16,6 @@ try {
   // continue with localConfig defined as {}
 }
 
-const piwikInstance = 'https://analytics.smartstart.services.govt.nz/piwik.php'
-
 const sassLoaders = [
   'css-loader',
   'postcss-loader',
@@ -29,7 +27,7 @@ const PATHS = {
   dist: path.join(__dirname, './dist')
 }
 
-let API_PATH, PIWIK_SITE, GOOGLE_API_KEY, RAAP_API_KEY
+let API_PATH, PIWIK_INSTANCE, PIWIK_SITE, GOOGLE_API_KEY, RAAP_INSTANCE, RAAP_API_KEY
 
 // determine which api endpoint to use
 if (yargs.endpoint) {
@@ -40,13 +38,23 @@ if (yargs.endpoint) {
   throw new Error('API endpoint not specified')
 }
 
-// determine which piwik site to use
+// determine piwik endpoint
+if (yargs.piwik_instance) {
+  PIWIK_INSTANCE = yargs.piwik_instance
+} else if (localConfig.piwik) {
+  PIWIK_INSTANCE = localConfig.piwik_instance
+} else {
+  // we want the site to be able to run locally without Piwik integration
+  PIWIK_INSTANCE = ''
+}
+
+// determine which piwik site ID to use
 if (yargs.piwik) {
   PIWIK_SITE = yargs.piwik
 } else if (localConfig.piwik) {
   PIWIK_SITE = localConfig.piwik
 } else {
-  throw new Error('Piwik site ID not specified')
+  PIWIK_SITE = null
 }
 
 // API for loading Google Maps JavaScript API
@@ -58,7 +66,16 @@ if (yargs.google_api_key) {
   GOOGLE_API_KEY = ''
 }
 
-// API for loading RaaP for entitlements queries
+// RaaP (entitlements) project URL
+if (yargs.raap_instance) {
+  RAAP_INSTANCE = yargs.raap_instance
+} else if (localConfig.raap_instance) {
+  RAAP_INSTANCE = localConfig.raap_instance
+} else {
+  RAAP_INSTANCE = ''
+}
+
+// API key for loading RaaP for entitlements queries
 if (yargs.google_api_key) {
   RAAP_API_KEY = yargs.raap_api_key
 } else if (localConfig.raap_api_key) {
@@ -153,8 +170,9 @@ switch (runCommand) {
           'process.env': {NODE_ENV: JSON.stringify('production')},
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
-          PIWIK_INSTANCE: JSON.stringify(piwikInstance),
+          PIWIK_INSTANCE: JSON.stringify(PIWIK_INSTANCE),
           GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY),
+          RAAP_INSTANCE: JSON.stringify(RAAP_INSTANCE),
           RAAP_API_KEY: JSON.stringify(RAAP_API_KEY)
         }),
         new webpack.optimize.DedupePlugin(),
@@ -205,8 +223,9 @@ switch (runCommand) {
           'process.env': {NODE_ENV: JSON.stringify('development')},
           API_ENDPOINT: JSON.stringify(API_PATH),
           PIWIK_SITE: JSON.stringify(PIWIK_SITE),
-          PIWIK_INSTANCE: JSON.stringify(piwikInstance),
+          PIWIK_INSTANCE: JSON.stringify(PIWIK_INSTANCE),
           GOOGLE_API_KEY: JSON.stringify(GOOGLE_API_KEY),
+          RAAP_INSTANCE: JSON.stringify(RAAP_INSTANCE),
           RAAP_API_KEY: JSON.stringify(RAAP_API_KEY)
         })
       ],

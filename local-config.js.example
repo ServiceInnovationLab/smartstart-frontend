@@ -1,8 +1,10 @@
 var config = {
-  endpoint: 'https://www.govt.nz/BoacAPI/v1/all',
-  piwik: null,
-  google_api_key: '',
-  raap_api_key: ''
+  endpoint: 'https://www.govt.nz/BoacAPI/v1/all',   // URL to timeline content API
+  piwik_instance: '',                               // URL to Piwik
+  piwik: null,                                      // Piwik site ID
+  google_api_key: '',                               // API key to use for Google Maps/Places
+  raap_instance: '',                                // URL to RaaP (entitlements) project
+  raap_api_key: ''                                  // API key to access RaaP api
 }
 
 module.exports = config
