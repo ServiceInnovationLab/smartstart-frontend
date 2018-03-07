@@ -207,6 +207,13 @@ const transform = (data, schema) => {
   if (data.applicant && data.applicant.isStudyingFullTime) {
     set(body, 'applicant.IsStudyingFulltimeSecondarySchool', true)
   }
+  // 3.r. set isStudyingFullTime and employmentStatus to false if don't work or study respectively
+  if (data.applicant && (data.applicant.workOrStudy === 'work' || data.applicant.workOrStudy === 'neither')) {
+    set(body, 'applicant.isStudyingFullTime', false)
+  }
+  if (data.applicant && (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither')) {
+    set(body, 'applicant.employmentStatus', 'notfulltime')
+  }
 
 
   // 4.
