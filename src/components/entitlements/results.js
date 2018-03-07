@@ -142,14 +142,9 @@ class EntitlementsResults extends Component {
 
     return (
       <div className='entitlements-results'>
-        {permitted.length > 0 || maybe.length > 0 && <div>
-          <p>The results shown below are only an indication of the benefits and payments you may be eligible for.</p>
-          <p>The estimate is based on:</p>
-          <ul>
-            <li>the answers you provided to the questions;</li>
-            <li>rates on 14 February 2018</li>
-          </ul>
-        </div>}
+        <p>The results provided are only an indication of what benefits and payments you may be eligible for. They are based on the information you entered and could differ from what you’re actually eligible for.</p>
+
+        <p>A decision about your eligibility will only be made when you apply and give more detailed information about your circumstances. Using this planning tool is not an application.</p>
 
         {permitted.length > 0 &&
           <h3 className='section-heading'>
