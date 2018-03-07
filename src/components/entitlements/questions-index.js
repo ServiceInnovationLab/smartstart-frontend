@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { Link } from 'react-router'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { piwikTrackPost } from 'actions/application'
 import { fetchSchema, postToReasoner } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
 import Accordion from 'components/form/accordion'
@@ -31,8 +32,13 @@ class EntitlementsQuestions extends Component {
 
   submit (values) {
     const { schema, postToReasoner } = this.props
-    // TODO piwik event here?
     postToReasoner(transform(values, schema))
+    const piwikEvent = {
+      'category': 'Financial help',
+      'action': 'Questions page - click submit',
+      'name': 'Submit my answers'
+    }
+    this.props.piwikTrackPost('Financial help', piwikEvent)
     this.props.router['push']('/financial-help/results')
   }
 
@@ -501,6 +507,7 @@ EntitlementsQuestions.propTypes = {
   schema: PropTypes.array,
   postToReasoner: PropTypes.func,
   handleSubmit: PropTypes.func,
+  piwikTrackPost: PropTypes.func,
   submitting: PropTypes.bool,
   isNZResident: PropTypes.string,
   relationshipStatus: PropTypes.string,
@@ -546,13 +553,22 @@ EntitlementsQuestions = reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate,
-  onSubmitFail: () => window.setTimeout(scrollToFirstError, 200)
+  onSubmitFail: (values, dispatch) => {
+    window.setTimeout(scrollToFirstError, 200)
+    const piwikEvent = {
+      'category': 'Financial help',
+      'action': 'Questions page - click submit (errors)',
+      'name': 'Submit my answers (errors)'
+    }
+    dispatch(piwikTrackPost('Financial help', piwikEvent))
+  }
 })(EntitlementsQuestions)
 
 export default connect(
   mapStateToProps,
   {
     fetchSchema,
-    postToReasoner
+    postToReasoner,
+    piwikTrackPost
   }
 )(EntitlementsQuestions)

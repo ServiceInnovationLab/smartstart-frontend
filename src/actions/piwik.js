@@ -3,6 +3,7 @@
  */
 
 import URLSearchParams from 'url-search-params' // polyfill
+import { piwikTrackPost } from 'actions/application'
 
 let piwikDefaults = {
   idsite: PIWIK_SITE,
@@ -40,9 +41,29 @@ export function createPiwikAction (action, id, cvar, event) {
 }
 
 export function piwikParams (params) {
-  var searchParams = new URLSearchParams()
+  let searchParams = new URLSearchParams()
   Object.keys(params).forEach((key) => {
     searchParams.append(key, params[key])
   })
   return '?' + searchParams.toString()
+}
+
+// Track outlinks via Piwik - used directly by components
+export function piwikOutlinkTrack (event, dispatch) {
+  if (event.target && event.target.tagName === 'A') {
+    let destination = event.target.getAttribute('href')
+    let newTab = event.target.getAttribute('target') === '_blank'
+
+    // track the event
+    dispatch(piwikTrackPost('Link', destination))
+
+    if (!newTab) {
+      event.preventDefault()
+
+      // match standard piwik outlink delay with a bonus 50 milliseconds
+      window.setTimeout(() => {
+        window.location = destination
+      }, 250)
+    }
+  }
 }

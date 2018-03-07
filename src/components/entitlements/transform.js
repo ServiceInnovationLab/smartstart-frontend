@@ -207,6 +207,13 @@ const transform = (data, schema) => {
   if (data.applicant && data.applicant.isStudyingFullTime) {
     set(body, 'applicant.IsStudyingFulltimeSecondarySchool', true)
   }
+  // 3.r. set isStudyingFullTime and employmentStatus to false if don't work or study respectively
+  if (data.applicant && (data.applicant.workOrStudy === 'work' || data.applicant.workOrStudy === 'neither')) {
+    set(body, 'applicant.isStudyingFullTime', false)
+  }
+  if (data.applicant && (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither')) {
+    set(body, 'applicant.employmentStatus', 'notfulltime')
+  }
 
 
   // 4.
@@ -279,7 +286,27 @@ const transform = (data, schema) => {
   if (data.applicant && !data.applicant.doesPartnerWork) {
     unset(body, 'partner.worksWeeklyHours')
   }
-  // 4.p. delete any empty objects (there should always be something in applicant)
+  // 4.p. numberOfChildren is 0
+  if (data.applicant && data.applicant.numberOfChildren === 0) {
+    unset(body, 'child.Age')
+    unset(body, 'child.isDependent')
+    unset(body, 'child.hasSeriousDisability')
+    unset(body, 'child.requiresConstantCareAndAttention')
+    unset(body, 'child.WeeklyECEHours')
+    unset(body, 'children.dependentsUnder14')
+    unset(body, 'children.allFinanciallyIndependent')
+    unset(body, 'applicant.isParent')
+    unset(body, 'applicant.isPrincipalCarer')
+    unset(body, 'applicant.isMaintainingChild')
+    unset(body, 'applicant.needsDomesticSupport')
+    unset(body, 'applicant.allChildrenInTheirFullTimeCare')
+    unset(body, 'applicant.isPrincipalCarerForProportion')
+    unset(body, 'applicant.gaveBirthToThisChild')
+    unset(body, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
+    unset(body, 'parents.areDeceasedMissingOrIncapable')
+    unset(body, 'parents.areUnableToProvideSufficientCare')
+  }
+  // 4.q. delete any empty objects (there should always be something in applicant)
   if (body.parents && Object.keys(body.parents).length === 0) {
     unset(body, 'parents')
   }
