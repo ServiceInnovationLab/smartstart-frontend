@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { piwikTrackPost } from 'actions/application'
 import Accordion from 'components/form/accordion'
 
 import './landing-page.scss'
@@ -13,7 +14,12 @@ class EntitlementsLandingPage extends Component {
   }
 
   getStartedClick() {
-    // TODO piwik event here?
+    const piwikEvent = {
+      'category': 'Financial help',
+      'action': 'Landing page - click next',
+      'name': 'Get started'
+    }
+    this.props.dispatch(piwikTrackPost('Financial help', piwikEvent))
   }
 
   render() {

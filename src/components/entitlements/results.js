@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { Link } from 'react-router'
+import { piwikTrackPost } from 'actions/application'
 import { fetchMetadata, postToReasoner } from 'actions/entitlements'
 import Spinner from 'components/spinner/spinner'
 import Accordion from 'components/form/accordion'
@@ -20,6 +21,8 @@ class EntitlementsResults extends Component {
 
     this.retry = this.retry.bind(this)
     this.assessBenefits = this.assessBenefits.bind(this)
+    this.changeAnswers = this.changeAnswers.bind(this)
+    this.changeAnswersNoData = this.changeAnswersNoData.bind(this)
   }
 
   componentWillMount () {
@@ -42,6 +45,24 @@ class EntitlementsResults extends Component {
 
   retry () {
     this.props.postToReasoner(this.props.eligibilityRequest)
+  }
+
+  changeAnswers () {
+    const piwikEvent = {
+      'category': 'Financial help',
+      'action': 'Results page - click back',
+      'name': 'Change my answers'
+    }
+    this.props.piwikTrackPost('Financial help', piwikEvent)
+  }
+
+  changeAnswersNoData () {
+    const piwikEvent = {
+      'category': 'Financial help',
+      'action': 'Results page - click back (no data)',
+      'name': 'Change my answers (no data)'
+    }
+    this.props.piwikTrackPost('Financial help', piwikEvent)
   }
 
   assessBenefits (benefits) {
@@ -114,7 +135,7 @@ class EntitlementsResults extends Component {
         <p>If you want to see what you might be eligible for, <Link to={'/financial-help/questions'}>please answer these questions</Link>.</p>
 
         <div className='form eligibility'>
-          <Link to={'/financial-help/questions'} role="button" className="button change-answers">Answer questions</Link>
+          <Link to={'/financial-help/questions'} onClick={this.changeAnswersNoData} role="button" className="button change-answers">Answer questions</Link>
         </div>
       </div>
     }
@@ -154,7 +175,7 @@ class EntitlementsResults extends Component {
           <div className='all-forbidden form eligibility'>
             <h3>It doesn’t look like you’re eligible&hellip;</h3>
             <p>
-              Based on your answers, it looks like you’re probably not eligible for any of the benefits and payments included in this tool. You can <Link to={'/financial-help/questions'}>change your answers</Link> if they don’t reflect your current situation or if your situation changes.
+              Based on your answers, it looks like you’re probably not eligible for any of the benefits and payments included in this tool. You can <Link to={'/financial-help/questions'} onClick={this.changeAnswers}>change your answers</Link> if they don’t reflect your current situation or if your situation changes.
             </p>
             <div className="expandable-group">
               <Accordion>
@@ -209,7 +230,7 @@ class EntitlementsResults extends Component {
         }
 
         <div className='form eligibility'>
-          <Link to={'/financial-help/questions'} role="button" className="button change-answers">Change my answers</Link>
+          <Link to={'/financial-help/questions'} onClick={this.changeAnswers} role="button" className="button change-answers">Change my answers</Link>
         </div>
 
       </div>
@@ -224,7 +245,8 @@ EntitlementsResults.propTypes = {
   fetchingMetadata: PropTypes.bool,
   metadata: PropTypes.object,
   fetchMetadata: PropTypes.func,
-  postToReasoner: PropTypes.func
+  postToReasoner: PropTypes.func,
+  piwikTrackPost: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
@@ -239,6 +261,7 @@ export default connect(
   mapStateToProps,
   {
     fetchMetadata,
-    postToReasoner
+    postToReasoner,
+    piwikTrackPost
   }
 )(EntitlementsResults)
