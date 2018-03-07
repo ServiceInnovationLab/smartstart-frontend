@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { piwikTrackPost } from 'actions/application'
+import { piwikOutlinkTrack } from 'actions/piwik'
 
 class Url extends Component {
   constructor (props) {
@@ -31,16 +31,7 @@ class Url extends Component {
   }
 
   linkClick (event) {
-    event.preventDefault()
-    const destination = this.link.getAttribute('href')
-
-    // track the event
-    this.props.dispatch(piwikTrackPost('Link', destination))
-
-    // match standard piwik outlink delay
-    window.setTimeout(() => {
-      window.location = destination
-    }, 200)
+    piwikOutlinkTrack(event, this.props.dispatch)
   }
 
   render () {
