@@ -238,35 +238,26 @@ const transform = (data, schema) => {
   if (data.child && !data.child.attendsECE) {
     unset(body, 'child.WeeklyECEHours')
   }
-  // 4.f. isPrincipalCarerForProportion
-  if (data.applicant && data.applicant.allChildrenInTheirFullTimeCare) {
-    unset(body, 'applicant.isPrincipalCarerForProportion')
-  }
-  // 4.g. isPrincipalCarerForOneYearFromApplicationDate and parents
+  // 4.f. isPrincipalCarerForOneYearFromApplicationDate and parents
   if (data.applicant && data.applicant.gaveBirthToThisChild) {
     unset(body, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
     unset(body, 'parents.areUnableToProvideSufficientCare')
     unset(body, 'parents.areDeceasedMissingOrIncapable')
   }
-  // 4.h. areUnableToProvideSufficientCare areDeceasedMissingOrIncapableThroughDisability
+  // 4.g. areUnableToProvideSufficientCare areDeceasedMissingOrIncapableThroughDisability
   if (data.applicant && !data.applicant.isPrincipalCarerForOneYearFromApplicationDate) {
     unset(body, 'parents.areUnableToProvideSufficientCare')
     unset(body, 'parents.areDeceasedMissingOrIncapable')
   }
-  // 4.i. isStudyingFullTime
-  if (data.applicant && (data.applicant.workOrStudy === 'work' || data.applicant.workOrStudy === 'neither')) {
-    unset(body, 'applicant.isStudyingFullTime')
-  }
-  // 4.j. employmentStatus and worksWeeklyHours
+  // 4.h. worksWeeklyHours
   if (data.applicant && (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither')) {
-    unset(body, 'applicant.employmentStatus')
     unset(body, 'applicant.worksWeeklyHours')
   }
-  // 4.k. meetsPaidParentalLeaveEmployedRequirements
+  // 4.i. meetsPaidParentalLeaveEmployedRequirements
   if (data.applicant && !data.applicant.expectingChild) {
     unset(body, 'applicant.meetsPaidParentalLeaveEmployedRequirements')
   }
-  // 4.l. isStoppingWorkToCareForChild
+  // 4.j. isStoppingWorkToCareForChild
   if (
       data.applicant &&
       (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither') &&
@@ -274,19 +265,19 @@ const transform = (data, schema) => {
     ) {
     unset(body, 'applicant.isStoppingWorkToCareForChild')
   }
-  // 4.m. hasSocialHousing
+  // 4.k. hasSocialHousing
   if (data.applicant && !data.applicant.hasAccommodationCosts) {
     unset(body, 'applicant.hasSocialHousing')
   }
-  // 4.n. isInadequatelySupportedByPartner
+  // 4.l. isInadequatelySupportedByPartner
   if (data.applicant && data.applicant.isInadequatelySupportedByPartner) {
     unset(body, 'partner.worksWeeklyHours')
   }
-  // 4.o. doesPartnerWork
+  // 4.m. doesPartnerWork
   if (data.applicant && !data.applicant.doesPartnerWork) {
     unset(body, 'partner.worksWeeklyHours')
   }
-  // 4.p. numberOfChildren is 0
+  // 4.n. numberOfChildren is 0
   if (data.applicant && data.applicant.numberOfChildren === 0) {
     unset(body, 'child.Age')
     unset(body, 'child.isDependent')
@@ -306,7 +297,7 @@ const transform = (data, schema) => {
     unset(body, 'parents.areDeceasedMissingOrIncapable')
     unset(body, 'parents.areUnableToProvideSufficientCare')
   }
-  // 4.q. delete any empty objects (there should always be something in applicant)
+  // 4.p. delete any empty objects (there should always be something in applicant)
   if (body.parents && Object.keys(body.parents).length === 0) {
     unset(body, 'parents')
   }
