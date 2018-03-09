@@ -195,7 +195,7 @@ export const fields = {
   'child.attendsECE': {
     name: 'child.attendsECE',
     component: renderRadioGroup,
-    label: makeMandatoryLabel(`Do any of your children go to a government-approved early childhood program?`),
+    label: makeMandatoryLabel(`Do any of your children go to a government-approved early childhood programme?`),
     validate: [required],
     options: booleanOptions
   },

@@ -220,10 +220,10 @@ class EntitlementsQuestions extends Component {
                     <div className="expandable-group secondary">
                       <Accordion>
                         <Accordion.Toggle>
-                        What’s an approved early childhood program?
+                        What’s an approved early childhood programme?
                         </Accordion.Toggle>
                         <Accordion.Content>
-                          <p>Approved early childhood programs include:</p>
+                          <p>Approved early childhood programmes include:</p>
 
                           <ul>
                             <li>kindergartens and preschools</li>
