@@ -142,9 +142,12 @@ class EntitlementsResults extends Component {
 
     return (
       <div className='entitlements-results'>
-        <p>The results provided are only an indication of what benefits and payments you may be eligible for. They are based on the information you entered and could differ from what you’re actually eligible for.</p>
+        {(permitted.length > 0 || maybe.length > 0) && <div>
+          <p>The results provided are only an indication of what benefits and payments you may be eligible for. They are based on the information you entered and could differ from what you’re actually eligible for.</p>
 
-        <p>A decision about your eligibility will only be made when you apply and give more detailed information about your circumstances. Using this planning tool is not an application.</p>
+          <p>A decision about your eligibility will only be made when you apply and give more detailed information about your circumstances. Using this planning tool is not an application.</p>
+        </div>
+        }
 
         {permitted.length > 0 &&
           <h3 className='section-heading'>
@@ -166,7 +169,7 @@ class EntitlementsResults extends Component {
           <Benefit key={'maybe-' + index} id={benefit} metadata={metadata[benefit]} />
         )}
 
-        {permitted.length === 0 && maybe.length === 0 &&
+        {(permitted.length === 0 && maybe.length === 0) &&
           <div className='all-forbidden form eligibility'>
             <h3>It doesn’t look like you’re eligible&hellip;</h3>
             <p>
