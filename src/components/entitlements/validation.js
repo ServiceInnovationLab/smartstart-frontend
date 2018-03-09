@@ -14,6 +14,7 @@ const validate = (values) => {
   const childrenAges = get(values, 'children.ages')
   const childHasDisability = get(values, 'child.hasSeriousDisability')
   const requiresConstantCare = get(values, 'child.requiresConstantCareAndAttention')
+  const constantCareUnderSix = get(values, 'child.constantCareUnderSix')
   const attendsECE = get(values, 'child.attendsECE')
   const hasAccommodationCosts = get(values, 'applicant.hasAccommodationCosts')
   const allChildrenInTheirFullTimeCare = get(values, 'applicant.allChildrenInTheirFullTimeCare')
@@ -66,8 +67,11 @@ const validate = (values) => {
     check('child.constantCareUnderSix')(fields, values, errors)
   }
 
-  if (childrenAges && childrenAges.length && parseInt(childrenAges[0], 10) < 5) {
-    check('child.attendECE')(fields, values, errors)
+  if (
+      (childrenAges && childrenAges.length && parseInt(childrenAges[0], 10) < 5) ||
+      (constantCareUnderSix === 'true')
+     ) {
+    check('child.attendsECE')(fields, values, errors)
   }
 
   if (attendsECE === 'true') {
