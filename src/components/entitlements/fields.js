@@ -127,8 +127,8 @@ export const fields = {
     options: booleanOptions
   },
 
-  'applicant.expectingChild': {
-    name: 'applicant.expectingChild',
+  'applicant.gaveBirthToThisChild': {
+    name: 'applicant.gaveBirthToThisChild',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Are you expecting a baby or planning to adopt a child?`),
     validate: [required],
@@ -232,8 +232,8 @@ export const fields = {
     options: booleanOptions
   },
 
-  'applicant.gaveBirthToThisChild': {
-    name: 'applicant.gaveBirthToThisChild',
+  'applicant.isParent': {
+    name: 'applicant.isParent',
     component: renderRadioGroup,
     label: makeMandatoryLabel(`Are you the birth, adoptive or step parent of all of your children?`),
     validate: [required],

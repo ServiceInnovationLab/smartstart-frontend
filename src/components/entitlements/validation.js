@@ -18,10 +18,10 @@ const validate = (values) => {
   const attendsECE = get(values, 'child.attendsECE')
   const hasAccommodationCosts = get(values, 'applicant.hasAccommodationCosts')
   const allChildrenInTheirFullTimeCare = get(values, 'applicant.allChildrenInTheirFullTimeCare')
-  const gaveBirthToThisChild = get(values, 'applicant.gaveBirthToThisChild')
+  const isParent = get(values, 'applicant.isParent')
   const isPrincipalCarerForOneYearFromApplicationDate = get(values, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
   const workOrStudy = get(values, 'applicant.workOrStudy')
-  const expectingChild = get(values, 'applicant.expectingChild')
+  const expectingChild = get(values, 'applicant.gaveBirthToThisChild')
   const doesPartnerWork = get(values, 'applicant.doesPartnerWork')
 
   // Your background
@@ -42,7 +42,7 @@ const validate = (values) => {
   // Your children
 
   if (isNZResident === 'true') {
-    check('applicant.expectingChild')(fields, values, errors)
+    check('applicant.gaveBirthToThisChild')(fields, values, errors)
     check('applicant.numberOfChildren')(fields, values, errors)
   }
 
@@ -83,14 +83,14 @@ const validate = (values) => {
   if (numberOfChildren > 0) {
     check('applicant.isPrincipalCarer')(fields, values, errors)
     check('applicant.allChildrenInTheirFullTimeCare')(fields, values, errors)
-    check('applicant.gaveBirthToThisChild')(fields, values, errors)
+    check('applicant.isParent')(fields, values, errors)
   }
 
   if (allChildrenInTheirFullTimeCare === 'false') {
     check('applicant.isPrincipalCarerForProportion')(fields, values, errors)
   }
 
-  if (gaveBirthToThisChild === 'false') {
+  if (isParent === 'false') {
     check('applicant.isPrincipalCarerForOneYearFromApplicationDate')(fields, values, errors)
   }
 
