@@ -27,7 +27,7 @@ export function isCommunityServicesCard (income) {
 }
 
 export function JobSeekerSupport (income) {
-  return (income / 52) < 570
+  return (income / 52) < 622
 }
 
 export function SoleParentSupport (income) {
