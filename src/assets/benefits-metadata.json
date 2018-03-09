@@ -25,7 +25,7 @@
       "paymentFrequency": "per week",
       "notes": "You can only get this subsidy if your child is under 5 (or under 6 if they have a disability). | You should apply at least 3 to 4 weeks before you need the subsidy to start. | If you currently get 20 hours free ECE, you can't get the childcare subsidy for the same hours."
    },
-   "isChildDisabilityAllowance": {
+   "ChildDisabilityAllowance": {
       "name": "Child Disability Allowance",
       "description": "A Work and Income payment made to the main carer of a child or young person with a serious disability. It is paid in recognition of the extra care and attention needed for that child.",
       "moreInformationLink": "https://www.workandincome.govt.nz/products/a-z-benefits/child-disability-allowance.html",

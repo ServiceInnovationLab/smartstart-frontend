@@ -413,12 +413,12 @@ class EntitlementsQuestions extends Component {
                   <p>For tax purposes, an income-tested benefit or payment means any one of the following:</p>
 
                   <ul>
-                    <li>emergency benefit</li>
-                    <li>jobseeker support</li>
-                    <li>sole parent support</li>
-                    <li>supported living payment</li>
-                    <li>youth parent payment</li>
-                    <li>youth payment.</li>
+                    <li>Emergency Benefit</li>
+                    <li>Jobseeker Support</li>
+                    <li>Sole Parent Support</li>
+                    <li>Supported Living Payment</li>
+                    <li>Young Parent Payment</li>
+                    <li>Youth Payment.</li>
                   </ul>
                 </Accordion.Content>
               </Accordion>
