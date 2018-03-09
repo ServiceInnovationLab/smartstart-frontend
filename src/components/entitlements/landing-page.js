@@ -30,7 +30,7 @@ class EntitlementsLandingPage extends Component {
         </div>
 
         <ul>
-          <li>The information you enter is anonymous, it isn’t shared with anyone and we won’t save anything, even if you’re logged in via RealMe (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</li>
+          <li>The information you enter is anonymous, it isn’t shared with anyone and we won’t save anything, even if you’re logged in with RealMe (see <Link to={'/your-privacy/'}>our privacy policy</Link>).</li>
           <li>This planning tool will only show you the maximum amounts you could receive – it won’t calculate amounts based on your situation.</li>
           <li>It’s intended for parents, expectant parents and caregivers, who are New Zealand citizens or residents.</li>
           <li>You can see what you might be eligible for based on your current or future situation.</li>
@@ -47,7 +47,7 @@ class EntitlementsLandingPage extends Component {
               <p>The benefits and payments included in this planning tool are provided by Work and Income and Inland Revenue. It doesn’t include all benefits and payments available in New Zealand.</p>
               <ul>
                 <li>Accommodation Supplement</li>
-                <li>Child Care Subsidy</li>
+                <li>Childcare Subsidy</li>
                 <li>Child Disability Allowance</li>
                 <li>Community Services Card</li>
                 <li>Home Help</li>

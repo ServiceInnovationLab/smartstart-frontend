@@ -158,15 +158,9 @@ const transform = (data, schema) => {
   set(body, 'child.hasMedicalCertification', true)
   // 3.m. we don't ask about the applicant having recieved parental leave in the past, hard code to false
   set(body, 'applicant.hasReceivedPaidParentalLeavePayment', false)
-  // 3.n. if applicant answered yes to gaveBirthToThisChild set isParent to true also
-  if (data.applicant && data.applicant.gaveBirthToThisChild) {
-    set(body, 'applicant.isParent', true)
-  } else if (data.applicant && data.applicant.gaveBirthToThisChild === false) {
-    set(body, 'applicant.isParent', false)
-  }
-  // 3.o. we don't ask about preparing for employment (for jobseekers) so hardcode to true
+  // 3.n. we don't ask about preparing for employment (for jobseekers) so hardcode to true
   set(body, 'recipient.prepareForEmployment', true)
-  // 3.p. combine weekly hours into couple.worksWeeklyHours if applicant.relationshipStatus !== 'single'
+  // 3.o. combine weekly hours into couple.worksWeeklyHours if applicant.relationshipStatus !== 'single'
   // and set default 0 values if not already defined
   if (data.applicant && data.applicant.relationshipStatus !== 'single') {
     if (
@@ -194,7 +188,7 @@ const transform = (data, schema) => {
       set(body, 'couple.worksWeeklyHours', 0)
     }
   }
-  // 3.q. applicant.isPrincipalCarerForProportion needs to be expressed as a number
+  // 3.p. applicant.isPrincipalCarerForProportion needs to be expressed as a number
   if (data.applicant && data.applicant.isPrincipalCarerForProportion) {
     set(body, 'applicant.isPrincipalCarerForProportion', 33)
   } else if (data.applicant && data.applicant.allChildrenInTheirFullTimeCare) {
@@ -202,7 +196,7 @@ const transform = (data, schema) => {
   } else {
     set(body, 'applicant.isPrincipalCarerForProportion', 0)
   }
-  // 3.u. assume applicant.IsStudyingFulltimeSecondarySchool is true if they are studying full time
+  // 3.q. assume applicant.IsStudyingFulltimeSecondarySchool is true if they are studying full time
   // this ensures that Student Allowance will come back if the are in the right age range & have partner
   if (data.applicant && data.applicant.isStudyingFullTime) {
     set(body, 'applicant.IsStudyingFulltimeSecondarySchool', true)
@@ -239,7 +233,7 @@ const transform = (data, schema) => {
     unset(body, 'child.WeeklyECEHours')
   }
   // 4.f. isPrincipalCarerForOneYearFromApplicationDate and parents
-  if (data.applicant && data.applicant.gaveBirthToThisChild) {
+  if (data.applicant && data.applicant.isParent) {
     unset(body, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
     unset(body, 'parents.areUnableToProvideSufficientCare')
     unset(body, 'parents.areDeceasedMissingOrIncapable')
@@ -253,11 +247,12 @@ const transform = (data, schema) => {
   if (data.applicant && (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither')) {
     unset(body, 'applicant.worksWeeklyHours')
   }
-  // 4.i. meetsPaidParentalLeaveEmployedRequirements
-  if (data.applicant && !data.applicant.expectingChild) {
+  // 4.i. meetsPaidParentalLeaveEmployedRequirements and isStoppingWorkToCareForChild
+  if (data.applicant && !data.applicant.gaveBirthToThisChild) {
     unset(body, 'applicant.meetsPaidParentalLeaveEmployedRequirements')
+    unset(body, 'applicant.isStoppingWorkToCareForChild')
   }
-  // 4.j. isStoppingWorkToCareForChild
+  // 4.j. isStoppingWorkToCareForChild if they don't work
   if (
       data.applicant &&
       (data.applicant.workOrStudy === 'study' || data.applicant.workOrStudy === 'neither') &&
@@ -292,7 +287,7 @@ const transform = (data, schema) => {
     unset(body, 'applicant.needsDomesticSupport')
     unset(body, 'applicant.allChildrenInTheirFullTimeCare')
     unset(body, 'applicant.isPrincipalCarerForProportion')
-    unset(body, 'applicant.gaveBirthToThisChild')
+    unset(body, 'applicant.isParent')
     unset(body, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')
     unset(body, 'parents.areDeceasedMissingOrIncapable')
     unset(body, 'parents.areUnableToProvideSufficientCare')

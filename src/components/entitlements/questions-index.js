@@ -54,9 +54,10 @@ class EntitlementsQuestions extends Component {
       childrenAges,
       childHasDisability,
       requiresConstantCare,
+      constantCareUnderSix,
       attendsECE,
       allChildrenInTheirFullTimeCare,
-      gaveBirthToThisChild,
+      isParent,
       isPrincipalCarerForOneYearFromApplicationDate,
       workOrStudy,
       expectingChild,
@@ -143,7 +144,7 @@ class EntitlementsQuestions extends Component {
               <span className='english'>Your children</span>
             </h3>
 
-            <Field {...getFieldProps(fields, 'applicant.expectingChild')} />
+            <Field {...getFieldProps(fields, 'applicant.gaveBirthToThisChild')} />
             <Field {...getFieldProps(fields, 'applicant.numberOfChildren')} />
             <div className="expandable-group secondary">
               <Accordion>
@@ -213,30 +214,30 @@ class EntitlementsQuestions extends Component {
                     }
                   </div>
                 }
-                { underFives &&
-                  <Field {...getFieldProps(fields, 'child.attendsECE')} />
-                }
-                { underFives &&
-                  <div className="expandable-group secondary">
-                    <Accordion>
-                      <Accordion.Toggle>
-                      What’s an approved early childhood program?
-                      </Accordion.Toggle>
-                      <Accordion.Content>
-                        <p>Approved early childhood programs include:</p>
+                { (underFives || (childHasDisability === 'true' && requiresConstantCare === 'true' && constantCareUnderSix === 'true')) &&
+                  <div className='component-grouping'>
+                    <Field {...getFieldProps(fields, 'child.attendsECE')} />
+                    <div className="expandable-group secondary">
+                      <Accordion>
+                        <Accordion.Toggle>
+                        What’s an approved early childhood programme?
+                        </Accordion.Toggle>
+                        <Accordion.Content>
+                          <p>Approved early childhood programmes include:</p>
 
-                        <ul>
-                          <li>kindergartens and preschools</li>
-                          <li>childcare centres and creches</li>
-                          <li>playcentres and playgroups</li>
-                          <li>Kohanga Reo, Punanga Reo, Aoga and other programmes with a language and culture focus</li>
-                          <li>approved home-based care.</li>
-                        </ul>
-                      </Accordion.Content>
-                    </Accordion>
+                          <ul>
+                            <li>kindergartens and preschools</li>
+                            <li>childcare centres and creches</li>
+                            <li>playcentres and playgroups</li>
+                            <li>Kohanga Reo, Punanga Reo, Aoga and other programmes with a language and culture focus</li>
+                            <li>approved home-based care.</li>
+                          </ul>
+                        </Accordion.Content>
+                      </Accordion>
+                    </div>
                   </div>
                 }
-                { underFives && attendsECE === 'true' &&
+                { (underFives || (childHasDisability === 'true' && requiresConstantCare === 'true' && constantCareUnderSix === 'true')) && attendsECE === 'true' &&
                   <div className='conditional-field'>
                     <Field {...getFieldProps(fields, 'child.WeeklyECEHours')} />
                   </div>
@@ -282,8 +283,8 @@ class EntitlementsQuestions extends Component {
                 <Field {...getFieldProps(fields, 'applicant.isPrincipalCarerForProportion')} />
               </div>
             }
-            <Field {...getFieldProps(fields, 'applicant.gaveBirthToThisChild')} />
-            {gaveBirthToThisChild === 'false' &&
+            <Field {...getFieldProps(fields, 'applicant.isParent')} />
+            {isParent === 'false' &&
               <div className='conditional-field'>
                 <Field {...getFieldProps(fields, 'applicant.isPrincipalCarerForOneYearFromApplicationDate')} />
                 {isPrincipalCarerForOneYearFromApplicationDate === 'true' &&
@@ -516,9 +517,10 @@ EntitlementsQuestions.propTypes = {
   childrenAges: PropTypes.array,
   childHasDisability: PropTypes.string,
   requiresConstantCare: PropTypes.string,
+  constantCareUnderSix: PropTypes.string,
   attendsECE: PropTypes.string,
   allChildrenInTheirFullTimeCare: PropTypes.string,
-  gaveBirthToThisChild: PropTypes.string,
+  isParent: PropTypes.string,
   isPrincipalCarerForOneYearFromApplicationDate: PropTypes.string,
   workOrStudy: PropTypes.string,
   expectingChild: PropTypes.string,
@@ -538,12 +540,13 @@ const mapStateToProps = (state) => ({
   childrenAges: selector(state, 'children.ages'),
   childHasDisability: selector(state, 'child.hasSeriousDisability'),
   requiresConstantCare: selector(state, 'child.requiresConstantCareAndAttention'),
+  constantCareUnderSix: selector(state, 'child.constantCareUnderSix'),
   attendsECE: selector(state, 'child.attendsECE'),
   allChildrenInTheirFullTimeCare: selector(state, 'applicant.allChildrenInTheirFullTimeCare'),
-  gaveBirthToThisChild: selector(state, 'applicant.gaveBirthToThisChild'),
+  isParent: selector(state, 'applicant.isParent'),
   isPrincipalCarerForOneYearFromApplicationDate: selector(state, 'applicant.isPrincipalCarerForOneYearFromApplicationDate'),
   workOrStudy: selector(state, 'applicant.workOrStudy'),
-  expectingChild: selector(state, 'applicant.expectingChild'),
+  expectingChild: selector(state, 'applicant.gaveBirthToThisChild'),
   doesPartnerWork: selector(state, 'applicant.doesPartnerWork'),
   hasAccommodationCosts: selector(state, 'applicant.hasAccommodationCosts')
 })
