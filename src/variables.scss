@@ -45,7 +45,7 @@ $font-family-headers: $font-family-base;
 $header-background-color: $realme-dark-blue;
 $header-border-color: #9ea6ae;
 $header-error-color: $error-background;
-$header-subtle-dropshadow: inset 0px 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
+$header-subtle-dropshadow: inset 0 12px 10px -5px rgba(0,0,0,0.1); // actually inset drop on following elements
 
 // settings panel
 $settings-elements-bg-color: $muted-blue;

@@ -18,7 +18,7 @@
     font-size: 1em;
     background: none;
     color: $text-color;
-    border-width: 0px;
+    border-width: 0;
     margin-bottom: 10px;
     margin-right: 20px;
     padding: 0 5px;
@@ -37,7 +37,7 @@
       border-bottom: 1px solid white;
       &:hover {
         border-bottom: 1px solid $text-color;
-        border-radius: 0px;
+        border-radius: 0;
       }
 
     }
